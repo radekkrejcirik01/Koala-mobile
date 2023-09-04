@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { getRequest, postRequest } from '@utils/Axios/Axios.service';
 import {
@@ -12,9 +12,11 @@ import { SupportNotificationPostInterface } from '@interfaces/post/Post.interfac
 import { ReducerProps } from '@store/index/index.props';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import { NotificationItem } from '@components/notifications/NotificationItem/NotificationItem';
+import { setUnseenNotifications } from '@store/NotificationsReducer';
 
 export const NotificationsScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
+    const dispatch = useDispatch();
 
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
@@ -29,6 +31,8 @@ export const NotificationsScreen = (): JSX.Element => {
         getRequest<ResponseNotificationsGetInterface>(endpoint).subscribe(
             (response: ResponseNotificationsGetInterface) => {
                 if (response?.status) {
+                    dispatch(setUnseenNotifications(0));
+
                     if (!lastId) {
                         setNotifications(response.data);
                         return;

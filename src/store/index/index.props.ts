@@ -1,6 +1,7 @@
 export interface ReducerProps {
     user: User;
     newAccount: NewAccount;
+    notifications: Notifications;
 }
 
 export interface User {
@@ -15,4 +16,8 @@ export interface User {
 export interface NewAccount {
     name: string;
     username: string;
+}
+
+export interface Notifications {
+    unseenNotifications: number;
 }

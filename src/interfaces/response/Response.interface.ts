@@ -38,3 +38,9 @@ export interface ResponseHistoryGetInterface {
     message: string;
     data?: HistoryInterface[];
 }
+
+export interface ResponseUnseenNotificationsGetInterface {
+    status: string;
+    message: string;
+    unseenNotifications?: number;
+}

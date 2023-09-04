@@ -18,12 +18,9 @@ import { Modal } from '@components/general/Modal/Modal';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
 import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
-import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { ProfileModalScreen } from '@components/home/ProfileModalScreen/ProfileModalScreen';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
+import { NotificationsHeader } from '@components/home/NotificationsHeader/NotificationsHeader';
 
 export const HomeScreen = (): JSX.Element => {
     const { name, profilePhoto } = useSelector(
@@ -33,7 +30,6 @@ export const HomeScreen = (): JSX.Element => {
     useMessaging();
     useNavigation();
     const navigation = useDefaultNavigation();
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
     const { bottom } = useSafeAreaInsets();
     const { modalVisible, showModal, hideModal } = useModal();
     const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
@@ -42,10 +38,6 @@ export const HomeScreen = (): JSX.Element => {
         setModalContent(<ProfileModalScreen />);
         showModal();
     }, [showModal]);
-
-    const openNotifications = useCallback(() => {
-        navigateTo(AccountStackNavigatorEnum.NotificationsScreen);
-    }, [navigateTo]);
 
     useEffect(() => {
         navigation.setOptions({
@@ -59,20 +51,9 @@ export const HomeScreen = (): JSX.Element => {
                     />
                 </TouchableOpacity>
             ),
-            headerRight: () => (
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={openNotifications}
-                >
-                    <Icon
-                        name={IconEnum.MAIL}
-                        size={26}
-                        style={HomeScreenStyle.marginRight}
-                    />
-                </TouchableOpacity>
-            )
+            headerRight: () => <NotificationsHeader />
         });
-    }, [name, navigation, openNotifications, openProfile, profilePhoto]);
+    }, [name, navigation, openProfile, profilePhoto]);
 
     const data: RecordItem[] = [
         {
