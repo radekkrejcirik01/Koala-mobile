@@ -14,6 +14,7 @@
 		468579ABD6B183E9A9B4C389 /* Pods_Koala.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FC7D473E26A05329E14C06 /* Pods_Koala.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		BA4319AC2AA23D0C007F2C65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4319AB2AA23D0C007F2C65 /* GoogleService-Info.plist */; };
+		BA8267B72AA654B000BDDF33 /* koala.png in Resources */ = {isa = PBXBuildFile; fileRef = BA8267B62AA654B000BDDF33 /* koala.png */; };
 		D4E7001CAC53A0D1042BDF5C /* Pods_Koala_KoalaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64F74183C6A8F6439CE42BB5 /* Pods_Koala_KoalaTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-Koala-KoalaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Koala-KoalaTests.release.xcconfig"; path = "Target Support Files/Pods-Koala-KoalaTests/Pods-Koala-KoalaTests.release.xcconfig"; sourceTree = "<group>"; };
 		BA4319A82AA2175E007F2C65 /* Koala.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Koala.entitlements; path = Koala/Koala.entitlements; sourceTree = "<group>"; };
 		BA4319AB2AA23D0C007F2C65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA8267B62AA654B000BDDF33 /* koala.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = koala.png; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 		13B07FAE1A68108700A75B9A /* Koala */ = {
 			isa = PBXGroup;
 			children = (
+				BA8267B62AA654B000BDDF33 /* koala.png */,
 				BA4319A82AA2175E007F2C65 /* Koala.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -248,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA8267B72AA654B000BDDF33 /* koala.png in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BA4319AC2AA23D0C007F2C65 /* GoogleService-Info.plist in Resources */,
