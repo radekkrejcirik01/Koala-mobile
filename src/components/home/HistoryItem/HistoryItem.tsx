@@ -9,6 +9,10 @@ import { HistoryItemStyle } from '@components/home/HistoryItem/HistoryItem.style
 export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
 
+    function getReceiversNamesText(names: string[]): string {
+        return names?.join(', ');
+    }
+
     return (
         <TouchableOpacity activeOpacity={1} style={HistoryItemStyle.container}>
             <ProfilePhoto name={name} size={40} />
@@ -19,7 +23,9 @@ export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {
                     </Text>
                     <Text>{item.time}</Text>
                 </View>
-                <Text>Sent to {item.receiverName}</Text>
+                <Text>
+                    Sent to {getReceiversNamesText(item?.receiversNames)}
+                </Text>
             </View>
         </TouchableOpacity>
     );

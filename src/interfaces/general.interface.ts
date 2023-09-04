@@ -14,9 +14,7 @@ export interface NotificationInterface {
 
 export interface HistoryInterface {
     id: number;
-    sender: string;
-    receiverName: string[];
+    receiversNames: string[];
     message: string;
-    type: string;
     time: number;
 }
