@@ -10,14 +10,32 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE,
         alignItems: 'center'
     },
+    accountButtonView: {
+        marginRight: 20,
+        alignSelf: 'flex-end'
+    },
+    accountButtonText: {
+        color: COLORS.BUTTON_BLUE,
+        textAlign: 'right',
+        fontWeight: '500'
+    },
     nameText: {
         marginTop: 10,
         fontSize: 25,
         fontWeight: 'bold'
     },
-    historyView: {
-        flex: 1,
+    accountView: {
         width: '100%',
+        flex: 1,
+        paddingLeft: 20,
+        justifyContent: 'flex-end'
+    },
+    deleteAccountText: {
+        fontWeight: '600'
+    },
+    historyView: {
+        width: '100%',
+        flex: 1,
         paddingTop: 20,
         paddingHorizontal: 15
     },

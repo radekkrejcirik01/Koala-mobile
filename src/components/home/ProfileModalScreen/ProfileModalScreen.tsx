@@ -1,22 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ProfileModalScreenStyle } from '@components/home/ProfileModalScreen/ProfileModalScreen.style';
-import { getRequest } from '@utils/Axios/Axios.service';
-import { ResponseHistoryGetInterface } from '@interfaces/response/Response.interface';
+import { deleteRequest, getRequest } from '@utils/Axios/Axios.service';
+import {
+    ResponseHistoryGetInterface,
+    ResponseInterface
+} from '@interfaces/response/Response.interface';
 import { HistoryInterface } from '@interfaces/general.interface';
 import { HistoryItem } from '@components/home/HistoryItem/HistoryItem';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
+import { resetUserState } from '@store/UserReducer';
 
 export const ProfileModalScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
+    const dispatch = useDispatch();
 
-    const { top } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
 
     const [history, setHistory] = useState<HistoryInterface[]>([]);
+    const [showAccount, setShowAccount] = useState<boolean>(false);
 
     const loadHistory = useCallback((lastId?: number) => {
         let endpoint = 'history';
@@ -57,6 +65,20 @@ export const ProfileModalScreen = (): JSX.Element => {
         }
     }, [history, loadHistory]);
 
+    const deleteAccount = () => {
+        deleteRequest<ResponseInterface>('account').subscribe(
+            (response: ResponseInterface) => {
+                if (response?.status) {
+                    dispatch(resetUserState());
+                    PersistStorage.setItem(
+                        PersistStorageKeys.TOKEN,
+                        ''
+                    ).catch();
+                }
+            }
+        );
+    };
+
     return (
         <View
             style={[
@@ -66,24 +88,66 @@ export const ProfileModalScreen = (): JSX.Element => {
                 }
             ]}
         >
+            <TouchableOpacity
+                onPress={() => setShowAccount(!showAccount)}
+                style={ProfileModalScreenStyle.accountButtonView}
+            >
+                <Text style={ProfileModalScreenStyle.accountButtonText}>
+                    {showAccount ? 'History' : 'Account'}
+                </Text>
+            </TouchableOpacity>
             <ProfilePhoto name={name} size={80} />
             <Text style={ProfileModalScreenStyle.nameText}>{name}</Text>
-            <View style={ProfileModalScreenStyle.historyView}>
-                <Text style={ProfileModalScreenStyle.historyTitleText}>
-                    History
-                </Text>
-                <FlashList
-                    data={history}
-                    renderItem={renderItem}
-                    estimatedItemSize={80}
-                    keyExtractor={(item) => item.id.toString()}
-                    showsVerticalScrollIndicator={false}
-                    onEndReached={onEndReached}
-                    contentContainerStyle={
-                        ProfileModalScreenStyle.historyListContainer
-                    }
-                />
-            </View>
+            {showAccount ? (
+                <View
+                    style={[
+                        ProfileModalScreenStyle.accountView,
+                        { paddingBottom: bottom + 40 }
+                    ]}
+                >
+                    <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={() => {
+                            Alert.alert(
+                                'Are you sure you want to delete account?',
+                                '',
+                                [
+                                    {
+                                        text: 'Cancel',
+                                        style: 'cancel'
+                                    },
+                                    {
+                                        text: 'Confirm',
+                                        onPress: deleteAccount,
+                                        style: 'destructive'
+                                    }
+                                ]
+                            );
+                        }}
+                    >
+                        <Text style={ProfileModalScreenStyle.deleteAccountText}>
+                            Delete account
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            ) : (
+                <View style={ProfileModalScreenStyle.historyView}>
+                    <Text style={ProfileModalScreenStyle.historyTitleText}>
+                        History
+                    </Text>
+                    <FlashList
+                        data={history}
+                        renderItem={renderItem}
+                        estimatedItemSize={80}
+                        keyExtractor={(item) => item.id.toString()}
+                        showsVerticalScrollIndicator={false}
+                        onEndReached={onEndReached}
+                        contentContainerStyle={
+                            ProfileModalScreenStyle.historyListContainer
+                        }
+                    />
+                </View>
+            )}
         </View>
     );
 };
