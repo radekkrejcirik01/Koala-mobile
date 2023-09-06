@@ -1,4 +1,4 @@
-package com.koala;
+package app.com.koala;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

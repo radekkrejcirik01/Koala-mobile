@@ -63,6 +63,11 @@ export const FriendsModalScreen = (): JSX.Element => {
             receiver: username
         }).subscribe((response: ResponseInterface) => {
             if (response?.status) {
+                if (response?.message) {
+                    Alert.alert(response.message);
+                    return;
+                }
+
                 loadFriends();
                 setTimeout(() => {
                     setShowRequests(false);

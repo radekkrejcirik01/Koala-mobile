@@ -5,7 +5,7 @@ export const ThirdScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 40,
-        justifyContent: 'center'
+        justifyContent: 'space-evenly'
     },
     title: {
         marginTop: '40%',
@@ -23,7 +23,6 @@ export const ThirdScreenStyle = StyleSheet.create({
     },
     buttonView: {
         height: 50,
-        marginTop: '80%',
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center',

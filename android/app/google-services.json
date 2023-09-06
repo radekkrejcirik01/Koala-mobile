@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "322953781154",
+    "project_id": "koala-4f4a5",
+    "storage_bucket": "koala-4f4a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322953781154:android:39b18ab4b4aaa13e37dcfb",
+        "android_client_info": {
+          "package_name": "app.com.koala"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322953781154-5fvucqtlf8ed6n7b0186u2aruf8lcmqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn1vQGQciR8YazyYblvkbRE-9XCBZRbXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322953781154-5fvucqtlf8ed6n7b0186u2aruf8lcmqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "322953781154-7bmbbn9g43bs55k9lb4tv25ov79a3cu8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.koala"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

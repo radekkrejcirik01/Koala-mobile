@@ -1,5 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+    Alert,
+    KeyboardAvoidingView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
@@ -10,7 +17,6 @@ import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PreloadService } from '@utils/general/PreloadService';
 import { ReducerProps } from '@store/index/index.props';
 import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.style';
-import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 
 export const FourthScreen = (): JSX.Element => {
     const { name, username } = useSelector(
@@ -50,14 +56,18 @@ export const FourthScreen = (): JSX.Element => {
 
     return (
         <View style={FourthScreenStyle.container}>
-            <Text style={FourthScreenStyle.title}>Confirm with password</Text>
-            <TextInput
-                autoFocus
-                autoCorrect={false}
-                autoCapitalize="none"
-                onChangeText={setPassword}
-                style={FourthScreenStyle.input}
-            />
+            <View>
+                <Text style={FourthScreenStyle.title}>
+                    Confirm with password
+                </Text>
+                <TextInput
+                    autoFocus
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    onChangeText={setPassword}
+                    style={FourthScreenStyle.input}
+                />
+            </View>
             <KeyboardAvoidingView>
                 <TouchableOpacity
                     onPress={createAccount}

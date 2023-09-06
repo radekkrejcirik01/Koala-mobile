@@ -1,4 +1,4 @@
-package com.koala;
+package app.com.koala;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
