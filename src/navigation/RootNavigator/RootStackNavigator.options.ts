@@ -5,7 +5,8 @@ export const NavigatorScreenOptions: StackNavigationOptions = {
     transitionSpec: {
         open: transitionConfig,
         close: transitionConfig
-    }
+    },
+    headerTitleAlign: 'center'
 };
 
 export const NoHeader: StackNavigationOptions = {
