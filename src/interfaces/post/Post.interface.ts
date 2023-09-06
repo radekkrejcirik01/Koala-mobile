@@ -23,6 +23,7 @@ export interface EmotionNotificationPostInterface {
 }
 
 export interface SupportNotificationPostInterface {
+    id: number;
     receiver: string;
     name: string;
     message: string;

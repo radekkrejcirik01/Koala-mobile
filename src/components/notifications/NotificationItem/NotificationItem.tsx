@@ -8,7 +8,7 @@ export const NotificationItem = ({
     item,
     onSendSupport
 }: NotificationItemProps): JSX.Element => {
-    const [liked, setLiked] = useState<boolean>(false);
+    const [liked, setLiked] = useState<boolean>(!!item?.liked);
 
     return (
         <View style={NotificationItemStyle.container}>
@@ -27,6 +27,7 @@ export const NotificationItem = ({
             {item.type === 'emotion' && (
                 <TouchableOpacity
                     activeOpacity={0.7}
+                    disabled={liked}
                     onPress={() => {
                         setLiked(true);
                         onSendSupport();

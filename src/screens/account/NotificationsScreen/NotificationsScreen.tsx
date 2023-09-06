@@ -22,41 +22,45 @@ export const NotificationsScreen = (): JSX.Element => {
         []
     );
 
-    const loadNotifications = useCallback((lastId?: number) => {
-        let endpoint = 'notifications';
-        if (lastId) {
-            endpoint += `/${lastId}`;
-        }
+    const loadNotifications = useCallback(
+        (lastId?: number) => {
+            let endpoint = 'notifications';
+            if (lastId) {
+                endpoint += `/${lastId}`;
+            }
 
-        getRequest<ResponseNotificationsGetInterface>(endpoint).subscribe(
-            (response: ResponseNotificationsGetInterface) => {
-                if (response?.status) {
-                    dispatch(setUnseenNotifications(0));
+            getRequest<ResponseNotificationsGetInterface>(endpoint).subscribe(
+                (response: ResponseNotificationsGetInterface) => {
+                    if (response?.status) {
+                        dispatch(setUnseenNotifications(0));
 
-                    if (!lastId) {
-                        setNotifications(response.data);
-                        return;
-                    }
+                        if (!lastId) {
+                            setNotifications(response.data);
+                            return;
+                        }
 
-                    if (lastId && !!response?.data?.length) {
-                        setNotifications((value) =>
-                            value.concat(response.data)
-                        );
+                        if (lastId && !!response?.data?.length) {
+                            setNotifications((value) =>
+                                value.concat(response.data)
+                            );
+                        }
                     }
                 }
-            }
-        );
-    }, []);
+            );
+        },
+        [dispatch]
+    );
 
     useEffect(() => {
         loadNotifications();
     }, [loadNotifications]);
 
     const sendSupport = useCallback(
-        (receiver: string, message: string) => {
+        (id: number, receiver: string, message: string) => {
             postRequest<ResponseInterface, SupportNotificationPostInterface>(
                 'support-notification',
                 {
+                    id,
                     receiver,
                     name,
                     message
@@ -74,7 +78,9 @@ export const NotificationsScreen = (): JSX.Element => {
         ({ item }: ListRenderItemInfo<NotificationInterface>): JSX.Element => (
             <NotificationItem
                 item={item}
-                onSendSupport={() => sendSupport(item.sender, item.message)}
+                onSendSupport={() =>
+                    sendSupport(item.id, item.sender, item.message)
+                }
             />
         ),
         [sendSupport]

@@ -9,6 +9,7 @@ export interface NotificationInterface {
     name: string;
     message: string;
     type: string;
+    liked?: number;
     time: number;
 }
 
