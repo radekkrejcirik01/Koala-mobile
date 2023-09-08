@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+    Alert,
+    Platform,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { FriendsModalScreenStyle } from '@components/home/FriendsModalScreen/FriendsModalScreen.style';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import {
@@ -89,7 +96,10 @@ export const FriendsModalScreen = (): JSX.Element => {
                     onChangeText={setInviteUsername}
                     style={FriendsModalScreenStyle.input}
                 />
-                <KeyboardAvoidingView>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+                    keyboardVerticalOffset={15}
+                >
                     <TouchableOpacity
                         onPress={sendInvite}
                         style={FriendsModalScreenStyle.sendButtonView}

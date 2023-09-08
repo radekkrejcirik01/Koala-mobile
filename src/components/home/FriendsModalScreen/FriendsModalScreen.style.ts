@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const FriendsModalScreenStyle = StyleSheet.create({
     container: {
-        height: '35%',
+        height: '32%',
         paddingTop: 15,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,

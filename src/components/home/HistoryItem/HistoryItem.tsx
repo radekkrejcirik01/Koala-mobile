@@ -5,6 +5,7 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { HistoryItemProps } from '@components/home/HistoryItem/HistoryItem.props';
 import { ReducerProps } from '@store/index/index.props';
 import { HistoryItemStyle } from '@components/home/HistoryItem/HistoryItem.style';
+import { getLocalTimeFromUTCUnix } from '@functions/getLocalTimeFromUTCUnix';
 
 export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
@@ -21,7 +22,7 @@ export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {
                     <Text style={HistoryItemStyle.messageText}>
                         {item.message}
                     </Text>
-                    <Text>{item.time}</Text>
+                    <Text>{getLocalTimeFromUTCUnix(item?.time)}</Text>
                 </View>
                 <Text>
                     Sent to {getReceiversNamesText(item?.receiversNames)}

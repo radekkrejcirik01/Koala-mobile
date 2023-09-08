@@ -41,6 +41,18 @@ export const ShareModalScreenStyle = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap'
     },
+    addButtonView: {
+        margin: 4,
+        width: 45,
+        height: 45,
+        borderRadius: 40,
+        backgroundColor: COLORS.LIGHTGRAY,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    addButtonText: {
+        color: COLORS.WHITE
+    },
     shareButtonView: {
         marginTop: 20,
         marginHorizontal: 20,
@@ -53,5 +65,9 @@ export const ShareModalScreenStyle = StyleSheet.create({
         fontSize: 20,
         color: COLORS.WHITE,
         fontWeight: 'bold'
+    },
+    noAddedDescription: {
+        marginTop: 15,
+        color: COLORS.BUTTON_BLUE
     }
 });

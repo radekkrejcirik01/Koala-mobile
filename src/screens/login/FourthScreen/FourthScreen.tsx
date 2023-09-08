@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import {
     Alert,
     KeyboardAvoidingView,
+    Platform,
     Text,
     TextInput,
     TouchableOpacity,
@@ -68,7 +69,10 @@ export const FourthScreen = (): JSX.Element => {
                     style={FourthScreenStyle.input}
                 />
             </View>
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+                keyboardVerticalOffset={15}
+            >
                 <TouchableOpacity
                     onPress={createAccount}
                     style={FourthScreenStyle.buttonView}

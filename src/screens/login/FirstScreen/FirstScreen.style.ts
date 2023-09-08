@@ -23,7 +23,7 @@ export const FirstScreenStyle = StyleSheet.create({
     },
     buttonView: {
         width: '100%',
-        height: 50,
+        height: 45,
         marginTop: '80%',
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE,

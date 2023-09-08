@@ -165,10 +165,21 @@ export const HomeScreen = (): JSX.Element => {
 
     const onItemPress = useCallback(
         (item: RecordItem) => {
-            setModalContent(<ShareModalScreen item={item} />);
+            setModalContent(
+                <ShareModalScreen
+                    item={item}
+                    onAddFriendPress={() => {
+                        hideModal();
+                        setModalContent(<FriendsModalScreen />);
+                        setTimeout(() => {
+                            showModal();
+                        }, 100);
+                    }}
+                />
+            );
             showModal();
         },
-        [showModal]
+        [hideModal, showModal]
     );
 
     const onFriendsPress = () => {
@@ -200,7 +211,7 @@ export const HomeScreen = (): JSX.Element => {
                 style={[
                     HomeScreenStyle.friendsButtonView,
                     {
-                        bottom
+                        bottom: bottom || 10
                     }
                 ]}
             >

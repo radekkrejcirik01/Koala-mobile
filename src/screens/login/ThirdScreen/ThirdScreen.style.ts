@@ -22,7 +22,7 @@ export const ThirdScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     buttonView: {
-        height: 50,
+        height: 45,
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center',

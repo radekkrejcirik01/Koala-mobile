@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import {
     Alert,
     KeyboardAvoidingView,
+    Platform,
     Text,
     TextInput,
     TouchableOpacity,
@@ -44,7 +45,10 @@ export const SecondScreen = (): JSX.Element => {
                     style={SecondScreenStyle.input}
                 />
             </View>
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+                keyboardVerticalOffset={15}
+            >
                 <TouchableOpacity
                     onPress={onPressNext}
                     style={SecondScreenStyle.buttonView}

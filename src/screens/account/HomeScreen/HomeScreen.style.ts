@@ -37,10 +37,11 @@ export const HomeScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     friendsButtonView: {
-        paddingVertical: 15,
+        height: 45,
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     friendsButtonText: {
         color: COLORS.WHITE,
