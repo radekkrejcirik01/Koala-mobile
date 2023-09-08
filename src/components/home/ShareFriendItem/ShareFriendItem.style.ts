@@ -7,7 +7,7 @@ export const ShareFriendItemStyle = StyleSheet.create({
         alignItems: 'center'
     },
     profilePhoto: {
-        borderWidth: 2,
+        borderWidth: 2.5,
         borderColor: COLORS.TRANSPARENT
     }
 });

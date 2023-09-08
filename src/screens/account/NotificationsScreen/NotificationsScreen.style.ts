@@ -6,5 +6,9 @@ export const NotificationsScreenStyle = StyleSheet.create({
     },
     listContainer: {
         paddingBottom: 50
+    },
+    listemptyText: {
+        marginTop: 100,
+        alignSelf: 'center'
     }
 });

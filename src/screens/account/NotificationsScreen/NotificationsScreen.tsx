@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { getRequest, postRequest } from '@utils/Axios/Axios.service';
@@ -101,6 +101,11 @@ export const NotificationsScreen = (): JSX.Element => {
                 keyExtractor={(item) => item.id.toString()}
                 onEndReached={onEndReached}
                 contentContainerStyle={NotificationsScreenStyle.listContainer}
+                ListEmptyComponent={
+                    <Text style={NotificationsScreenStyle.listemptyText}>
+                        No notifications yet
+                    </Text>
+                }
             />
         </View>
     );

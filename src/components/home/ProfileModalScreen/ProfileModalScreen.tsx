@@ -145,6 +145,11 @@ export const ProfileModalScreen = (): JSX.Element => {
                         contentContainerStyle={
                             ProfileModalScreenStyle.historyListContainer
                         }
+                        ListEmptyComponent={
+                            <Text style={ProfileModalScreenStyle.listemptyText}>
+                                No data tracked yet
+                            </Text>
+                        }
                     />
                 </View>
             )}

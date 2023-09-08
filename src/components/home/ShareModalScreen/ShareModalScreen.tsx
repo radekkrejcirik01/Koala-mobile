@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
@@ -13,6 +13,7 @@ import {
 } from '@interfaces/response/Response.interface';
 import { EmotionNotificationPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
+import COLORS from '@constants/COLORS';
 
 export const ShareModalScreen = ({
     item,
@@ -24,6 +25,7 @@ export const ShareModalScreen = ({
 
     const [loaded, setLoaded] = useState<boolean>(false);
     const [friends, setFriends] = useState<UserInterface[]>([]);
+    const [sending, setSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
 
     const selectedFriends = useRef<string[]>([]);
@@ -51,6 +53,7 @@ export const ShareModalScreen = ({
 
     const onSend = () => {
         if (selectedFriends.current?.length) {
+            setSending(true);
             postRequest<ResponseInterface, EmotionNotificationPostInterface>(
                 'emotion-notification',
                 {
@@ -60,6 +63,7 @@ export const ShareModalScreen = ({
                 }
             ).subscribe((response: ResponseInterface) => {
                 if (response?.status) {
+                    setSending(false);
                     setSent(true);
                 }
             });
@@ -83,15 +87,31 @@ export const ShareModalScreen = ({
                     <Text style={ShareModalScreenStyle.tipsTitleText}>
                         Quick tips:
                     </Text>
-                    <Text style={ShareModalScreenStyle.marginTop10}>
-                        👉 {item.tip1}
-                    </Text>
-                    <Text style={ShareModalScreenStyle.marginTop5}>
-                        👉 {item.tip2}
-                    </Text>
+                    <View
+                        style={[
+                            ShareModalScreenStyle.marginTop10,
+                            ShareModalScreenStyle.row
+                        ]}
+                    >
+                        <Text>👉</Text>
+                        <Text style={ShareModalScreenStyle.marginLeft2}>
+                            {item.tip1}
+                        </Text>
+                    </View>
+                    <View
+                        style={[
+                            ShareModalScreenStyle.marginTop5,
+                            ShareModalScreenStyle.row
+                        ]}
+                    >
+                        <Text>👉</Text>
+                        <Text style={ShareModalScreenStyle.marginLeft2}>
+                            {item.tip2}
+                        </Text>
+                    </View>
                 </View>
                 <View style={ShareModalScreenStyle.sendContainer}>
-                    {loaded && (
+                    {loaded ? (
                         <View style={ShareModalScreenStyle.selectView}>
                             {friends?.length
                                 ? friends?.map((value) => (
@@ -126,41 +146,39 @@ export const ShareModalScreen = ({
                                       </TouchableOpacity>
                                   ))}
                         </View>
+                    ) : (
+                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
                     )}
-                    {loaded && (
-                        <>
-                            {friends?.length ? (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
-                                    disabled={sent}
-                                    onPress={onSend}
+                    {friends?.length ? (
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            disabled={sent}
+                            onPress={onSend}
+                            style={ShareModalScreenStyle.shareButtonView}
+                        >
+                            {sending ? (
+                                <ActivityIndicator color={COLORS.WHITE} />
+                            ) : (
+                                <Text
                                     style={
-                                        ShareModalScreenStyle.shareButtonView
+                                        ShareModalScreenStyle.shareButtonText
                                     }
                                 >
-                                    <Text
-                                        style={
-                                            ShareModalScreenStyle.shareButtonText
-                                        }
-                                    >
-                                        Share
-                                    </Text>
-                                </TouchableOpacity>
-                            ) : (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
-                                    onPress={onAddFriendPress}
-                                >
-                                    <Text
-                                        style={
-                                            ShareModalScreenStyle.noAddedDescription
-                                        }
-                                    >
-                                        Add friends to share
-                                    </Text>
-                                </TouchableOpacity>
+                                    {sent ? 'Sent' : 'Share'}
+                                </Text>
                             )}
-                        </>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            onPress={onAddFriendPress}
+                        >
+                            <Text
+                                style={ShareModalScreenStyle.noAddedDescription}
+                            >
+                                Add friends to share
+                            </Text>
+                        </TouchableOpacity>
                     )}
                 </View>
             </View>

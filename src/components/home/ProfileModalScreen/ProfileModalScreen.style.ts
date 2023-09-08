@@ -45,5 +45,9 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     historyListContainer: {
         paddingTop: 10,
         paddingBottom: 50
+    },
+    listemptyText: {
+        marginTop: 100,
+        alignSelf: 'center'
     }
 });

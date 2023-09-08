@@ -19,16 +19,23 @@ export const ShareModalScreenStyle = StyleSheet.create({
     },
     tipsView: {
         flex: 1,
-        paddingLeft: 20
+        paddingLeft: 20,
+        paddingRight: 50
     },
     tipsTitleText: {
         fontWeight: 'bold'
+    },
+    row: {
+        flexDirection: 'row'
     },
     marginTop10: {
         marginTop: 10
     },
     marginTop5: {
         marginTop: 5
+    },
+    marginLeft2: {
+        marginLeft: 2
     },
     sendContainer: {
         marginRight: 25,
@@ -54,12 +61,14 @@ export const ShareModalScreenStyle = StyleSheet.create({
         color: COLORS.WHITE
     },
     shareButtonView: {
+        width: 110,
+        height: 45,
         marginTop: 20,
         marginHorizontal: 20,
-        paddingVertical: 12,
-        paddingHorizontal: 30,
-        borderRadius: 20,
-        backgroundColor: COLORS.BUTTON_BLUE
+        borderRadius: 18,
+        backgroundColor: COLORS.BUTTON_BLUE,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     shareButtonText: {
         fontSize: 20,
