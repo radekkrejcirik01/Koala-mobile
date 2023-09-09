@@ -46,8 +46,10 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 50
     },
-    listemptyText: {
+    listEmptyText: {
         marginTop: 100,
-        alignSelf: 'center'
+        fontSize: 16,
+        alignSelf: 'center',
+        fontWeight: '500'
     }
 });

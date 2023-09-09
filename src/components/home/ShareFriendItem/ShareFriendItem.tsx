@@ -27,10 +27,10 @@ export const ShareFriendItem = ({
                 size={45}
                 style={[
                     ShareFriendItemStyle.profilePhoto,
-                    selected && {
-                        borderColor: COLORS.BUTTON_BLUE
-                    },
-                    sent && selected && { borderColor: COLORS.MAIN_GREEN }
+                    selected &&
+                        !sent && {
+                            borderColor: COLORS.BUTTON_BLUE
+                        }
                 ]}
             />
             <Text>{item.name}</Text>

@@ -8,7 +8,6 @@ export const SecondScreenStyle = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     title: {
-        marginTop: '40%',
         fontSize: 20,
         fontWeight: 'bold'
     },
@@ -29,6 +28,7 @@ export const SecondScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonText: {
+        fontSize: 16,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     }

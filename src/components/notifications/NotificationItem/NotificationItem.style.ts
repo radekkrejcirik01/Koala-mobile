@@ -3,33 +3,42 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItemStyle = StyleSheet.create({
     container: {
-        marginVertical: 10,
-        paddingHorizontal: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    row: {
-        flexDirection: 'row'
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        borderBottomWidth: 0.5,
+        borderBottomColor: COLORS.LIGHTGRAY
     },
     paddingLeft: {
         paddingLeft: 8
     },
     titleText: {
-        fontWeight: '500'
+        marginTop: 5,
+        fontSize: 15,
+        fontWeight: '600'
+    },
+    messageText: {
+        marginTop: 2,
+        fontSize: 15
+    },
+    supportView: {
+        paddingTop: 20,
+        alignItems: 'center'
     },
     likeButtonView: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 60,
+        height: 60,
+        borderRadius: 40,
         backgroundColor: COLORS.WHITE,
         alignItems: 'center',
         justifyContent: 'center'
     },
     fontSize22: {
-        fontSize: 22
+        fontSize: 28
     },
     fontSize16: {
-        fontSize: 16
+        fontSize: 22
+    },
+    marginTop8: {
+        marginTop: 8
     }
 });

@@ -102,7 +102,7 @@ export const NotificationsScreen = (): JSX.Element => {
                 onEndReached={onEndReached}
                 contentContainerStyle={NotificationsScreenStyle.listContainer}
                 ListEmptyComponent={
-                    <Text style={NotificationsScreenStyle.listemptyText}>
+                    <Text style={NotificationsScreenStyle.listEmptyText}>
                         No notifications yet
                     </Text>
                 }

@@ -44,6 +44,7 @@ export const HomeScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     friendsButtonText: {
+        fontSize: 16,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     },

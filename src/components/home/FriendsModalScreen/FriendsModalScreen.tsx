@@ -21,6 +21,7 @@ import {
 import { InvitePostInterface } from '@interfaces/post/Post.interface';
 import { UserInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
+import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 
 export const FriendsModalScreen = (): JSX.Element => {
     const [friends, setFriends] = useState<UserInterface[]>([]);
@@ -117,48 +118,57 @@ export const FriendsModalScreen = (): JSX.Element => {
         return (
             <View style={FriendsModalScreenStyle.container}>
                 <Text style={FriendsModalScreenStyle.titleText}>
-                    Friends requests
+                    Friend requests
                 </Text>
-                <View style={FriendsModalScreenStyle.friendRequestsView}>
-                    {friendRequests?.map((value) => (
-                        <View
-                            key={value.username}
-                            style={
-                                FriendsModalScreenStyle.friendRequestItemView
-                            }
-                        >
+                {friendRequests?.length ? (
+                    <View style={FriendsModalScreenStyle.friendRequestsView}>
+                        {friendRequests?.map((value) => (
                             <View
+                                key={value.username}
                                 style={
-                                    FriendsModalScreenStyle.friendRequestItemContent
+                                    FriendsModalScreenStyle.friendRequestItemView
                                 }
                             >
-                                <ProfilePhoto name={value.username} size={40} />
-                                <Text
+                                <View
                                     style={
-                                        FriendsModalScreenStyle.friendRequestItemUsernameText
+                                        FriendsModalScreenStyle.friendRequestItemContent
                                     }
                                 >
-                                    {value.username}
-                                </Text>
+                                    <ProfilePhoto
+                                        name={value.username}
+                                        size={45}
+                                    />
+                                    <Text
+                                        style={
+                                            FriendsModalScreenStyle.friendRequestItemUsernameText
+                                        }
+                                    >
+                                        {value.username}
+                                    </Text>
+                                </View>
+                                <TouchableOpacity
+                                    activeOpacity={0.9}
+                                    onPress={() => acceptInvite(value.username)}
+                                    style={
+                                        FriendsModalScreenStyle.friendRequestItemAcceptButtonView
+                                    }
+                                >
+                                    <Text
+                                        style={
+                                            FriendsModalScreenStyle.friendRequestItemAcceptButtonText
+                                        }
+                                    >
+                                        Accept
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => acceptInvite(value.username)}
-                                style={
-                                    FriendsModalScreenStyle.friendRequestItemAcceptButtonView
-                                }
-                            >
-                                <Text
-                                    style={
-                                        FriendsModalScreenStyle.friendRequestItemAcceptButtonText
-                                    }
-                                >
-                                    Accept
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                    ))}
-                </View>
+                        ))}
+                    </View>
+                ) : (
+                    <Text style={NotificationsScreenStyle.listEmptyText}>
+                        No friend requests at the moment
+                    </Text>
+                )}
             </View>
         );
     }
@@ -175,8 +185,10 @@ export const FriendsModalScreen = (): JSX.Element => {
             <View style={FriendsModalScreenStyle.profilesView}>
                 {friends?.length > 0 ? (
                     <View style={FriendsModalScreenStyle.profileView}>
-                        <ProfilePhoto name={friends[0].name} size={70} />
-                        <Text>{friends[0].name}</Text>
+                        <ProfilePhoto name={friends[0].name} size={75} />
+                        <Text style={FriendsModalScreenStyle.nameText}>
+                            {friends[0].name}
+                        </Text>
                     </View>
                 ) : (
                     <TouchableOpacity
@@ -188,8 +200,10 @@ export const FriendsModalScreen = (): JSX.Element => {
                 )}
                 {friends?.length > 1 ? (
                     <View style={FriendsModalScreenStyle.profileView}>
-                        <ProfilePhoto name={friends[1].name} size={70} />
-                        <Text>{friends[1].name}</Text>
+                        <ProfilePhoto name={friends[1].name} size={75} />
+                        <Text style={FriendsModalScreenStyle.nameText}>
+                            {friends[1].name}
+                        </Text>
                     </View>
                 ) : (
                     <TouchableOpacity
@@ -201,8 +215,10 @@ export const FriendsModalScreen = (): JSX.Element => {
                 )}
                 {friends?.length > 2 ? (
                     <View style={FriendsModalScreenStyle.profileView}>
-                        <ProfilePhoto name={friends[2].name} size={70} />
-                        <Text>{friends[2].name}</Text>
+                        <ProfilePhoto name={friends[2].name} size={75} />
+                        <Text style={FriendsModalScreenStyle.nameText}>
+                            {friends[2].name}
+                        </Text>
                     </View>
                 ) : (
                     <TouchableOpacity

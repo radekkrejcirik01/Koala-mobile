@@ -7,8 +7,10 @@ export const NotificationsScreenStyle = StyleSheet.create({
     listContainer: {
         paddingBottom: 50
     },
-    listemptyText: {
+    listEmptyText: {
         marginTop: 100,
-        alignSelf: 'center'
+        fontSize: 16,
+        alignSelf: 'center',
+        fontWeight: '500'
     }
 });

@@ -146,7 +146,7 @@ export const ProfileModalScreen = (): JSX.Element => {
                             ProfileModalScreenStyle.historyListContainer
                         }
                         ListEmptyComponent={
-                            <Text style={ProfileModalScreenStyle.listemptyText}>
+                            <Text style={ProfileModalScreenStyle.listEmptyText}>
                                 No data tracked yet
                             </Text>
                         }

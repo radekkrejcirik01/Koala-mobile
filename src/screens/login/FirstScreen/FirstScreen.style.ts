@@ -31,6 +31,7 @@ export const FirstScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonText: {
+        fontSize: 16,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     }
