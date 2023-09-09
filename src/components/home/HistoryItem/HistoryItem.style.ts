@@ -14,6 +14,7 @@ export const HistoryItemStyle = StyleSheet.create({
         justifyContent: 'space-between'
     },
     messageText: {
+        flex: 1,
         marginRight: 20,
         fontWeight: '500'
     }
