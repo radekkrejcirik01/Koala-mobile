@@ -15,6 +15,7 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     accountButtonText: {
+        fontSize: 16,
         color: COLORS.BUTTON_BLUE,
         textAlign: 'right',
         fontWeight: '500'
@@ -31,6 +32,7 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     deleteAccountText: {
+        fontSize: 16,
         fontWeight: '600'
     },
     historyView: {
