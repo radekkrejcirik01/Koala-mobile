@@ -10,6 +10,8 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { SecondScreen } from '@screens/login/SecondScreen/SecondScreen';
 import { ThirdScreen } from '@screens/login/ThirdScreen/ThirdScreen';
 import { FourthScreen } from '@screens/login/FourthScreen/FourthScreen';
+import { PrivacyPolicyScreen } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen';
+import { PrivacyPolicyOptions } from '@navigation/StackNavigators/login/LoginStackNavigator.options';
 
 const Login = createStackNavigator<ParamListBase>();
 
@@ -34,6 +36,11 @@ export const LoginStackNavigator = (): JSX.Element => (
             name={LoginStackNavigatorEnum.FourthScreen}
             component={FourthScreen}
             options={NoHeader}
+        />
+        <Login.Screen
+            name={LoginStackNavigatorEnum.PrivacyPolicyScreen}
+            component={PrivacyPolicyScreen}
+            options={PrivacyPolicyOptions}
         />
     </Login.Navigator>
 );

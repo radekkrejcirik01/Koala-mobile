@@ -1,8 +1,8 @@
 import { StackNavigationOptions } from '@react-navigation/stack';
+import COLORS from '@constants/COLORS';
 
-export const RegistrationTitle: StackNavigationOptions = {
-    title: 'New account'
-};
-export const PrivacyTitle: StackNavigationOptions = {
-    title: 'Privacy policy'
+export const PrivacyPolicyOptions: StackNavigationOptions = {
+    title: 'Privacy policy',
+    headerBackTitleVisible: false,
+    headerTintColor: COLORS.BLACK
 };

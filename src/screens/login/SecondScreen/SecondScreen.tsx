@@ -50,6 +50,7 @@ export const SecondScreen = (): JSX.Element => {
                 keyboardVerticalOffset={15}
             >
                 <TouchableOpacity
+                    activeOpacity={0.9}
                     onPress={onPressNext}
                     style={SecondScreenStyle.buttonView}
                 >

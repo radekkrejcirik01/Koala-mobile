@@ -49,6 +49,7 @@ export const ThirdScreen = (): JSX.Element => {
                 keyboardVerticalOffset={15}
             >
                 <TouchableOpacity
+                    activeOpacity={0.9}
                     onPress={onPressNext}
                     style={ThirdScreenStyle.buttonView}
                 >

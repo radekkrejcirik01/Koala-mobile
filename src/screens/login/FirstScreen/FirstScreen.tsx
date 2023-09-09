@@ -20,6 +20,7 @@ export const FirstScreen = (): JSX.Element => {
                 Let your friends know
             </Text>
             <TouchableOpacity
+                activeOpacity={0.9}
                 onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
                 style={FirstScreenStyle.buttonView}
             >
