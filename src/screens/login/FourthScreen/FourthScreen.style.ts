@@ -20,6 +20,12 @@ export const FourthScreenStyle = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold'
     },
+    margin5: {
+        margin: 5
+    },
+    privacyPolicyText: {
+        color: COLORS.BLACK_100
+    },
     buttonView: {
         height: 45,
         borderRadius: 10,

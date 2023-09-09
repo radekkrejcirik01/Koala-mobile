@@ -80,9 +80,9 @@ export const FourthScreen = (): JSX.Element => {
                 <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={openPrivacyPolicy}
-                    style={{ margin: 5 }}
+                    style={FourthScreenStyle.margin5}
                 >
-                    <Text>
+                    <Text style={FourthScreenStyle.privacyPolicyText}>
                         By creating account you agree with our privacy policy
                     </Text>
                 </TouchableOpacity>
