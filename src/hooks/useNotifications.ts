@@ -1,43 +1,20 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import messaging, {
     FirebaseMessagingTypes
 } from '@react-native-firebase/messaging';
-import { NavigationContainerRefWithCurrent } from '@react-navigation/native';
+import { NotificationsService } from '@utils/general/NotificationsService';
 
-export const useNotifications = (
-    navigationRef: NavigationContainerRefWithCurrent<ReactNavigation.RootParamList>
-): { initNotification: () => void } => {
-    const initNotification = useCallback(
-        () =>
-            messaging()
-                .getInitialNotification()
-                .then((remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-                    if (remoteMessage) {
-                    }
-                }),
-        []
-    );
-
+export const useNotifications = () => {
     useEffect(
         () =>
-            // On open notification from background state
-            messaging().onNotificationOpenedApp(
+            // On in app notification
+            messaging().onMessage(
                 (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
                     if (remoteMessage) {
+                        NotificationsService.getUnseenNotifications();
                     }
                 }
             ),
         []
     );
-
-    useEffect(
-        () =>
-            // On in app notification
-            messaging().onMessage(
-                (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {}
-            ),
-        []
-    );
-
-    return { initNotification };
 };

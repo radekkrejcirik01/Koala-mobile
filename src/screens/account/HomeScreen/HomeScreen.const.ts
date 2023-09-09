@@ -23,18 +23,18 @@ export const DATA: RecordItem[] = [
         tip2: 'Take a whole day off'
     },
     {
-        id: 4,
-        emotion: 'Hungry',
-        description: 'I am hungry',
-        tip1: 'Eat 😀',
-        tip2: 'Have a snack'
-    },
-    {
         id: 5,
         emotion: 'Tired',
         description: 'I am so tired',
         tip1: 'Take a nap 😴🛌',
         tip2: 'Take a break, day off, week off'
+    },
+    {
+        id: 4,
+        emotion: 'Morning anxiety',
+        description: 'I woke up with an anxiety, it physically hurts',
+        tip1: 'A morning walk outside with fresh air is greatly helpful',
+        tip2: 'Change whatever can cause the anxiety, if it is a job, quit it, there is no tolerance for anxiety caused by 9-5 in this house'
     },
     {
         id: 6,
@@ -75,7 +75,7 @@ export const DATA: RecordItem[] = [
         id: 14,
         emotion: `Can't eat`,
         description: `I can't eat`,
-        tip1: 'Having a piece of tasty fruit is soo good and healing',
+        tip1: 'Having a piece of a fruit is soo good and healing',
         tip2: 'Talk about it with person you trust the best'
     },
     {

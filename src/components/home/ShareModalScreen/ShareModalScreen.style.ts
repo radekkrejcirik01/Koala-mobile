@@ -4,24 +4,23 @@ import COLORS from '@constants/COLORS';
 export const ShareModalScreenStyle = StyleSheet.create({
     container: {
         minHeight: '40%',
+        paddingHorizontal: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
     },
     messageText: {
         marginTop: 20,
-        marginLeft: 20,
         fontSize: 24,
         fontWeight: 'bold'
     },
     content: {
-        flex: 1,
+        flexGrow: 1,
         paddingTop: 25,
         flexDirection: 'row'
     },
     tipsView: {
         flex: 1,
-        paddingLeft: 20,
         paddingRight: 50
     },
     tipsTitleText: {
@@ -40,7 +39,7 @@ export const ShareModalScreenStyle = StyleSheet.create({
         marginLeft: 2
     },
     sendContainer: {
-        width: '50%',
+        width: '45%',
         alignItems: 'center',
         justifyContent: 'center'
     },
