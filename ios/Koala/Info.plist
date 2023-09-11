@@ -43,7 +43,6 @@
 	<string>Allow access to photos to upload photos from your library</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>bluetooth-peripheral</string>
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
