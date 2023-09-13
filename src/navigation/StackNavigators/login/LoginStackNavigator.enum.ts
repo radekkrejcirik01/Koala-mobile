@@ -3,5 +3,6 @@ export enum LoginStackNavigatorEnum {
     SecondScreen = 'SecondScreen',
     ThirdScreen = 'ThirdScreen',
     FourthScreen = 'FourthScreen',
+    LoginScreen = 'LoginScreen',
     PrivacyPolicyScreen = 'PrivacyPolicyScreen'
 }

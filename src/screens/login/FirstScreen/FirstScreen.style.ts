@@ -4,6 +4,7 @@ import COLORS from '@constants/COLORS';
 export const FirstScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: '20%',
         paddingHorizontal: 40,
         justifyContent: 'center',
         alignItems: 'center'
@@ -21,7 +22,7 @@ export const FirstScreenStyle = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-    buttonView: {
+    startButtonView: {
         width: '100%',
         height: 45,
         marginTop: '80%',
@@ -30,9 +31,16 @@ export const FirstScreenStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    buttonText: {
+    startButtonText: {
         fontSize: 16,
         color: COLORS.WHITE,
         fontWeight: 'bold'
+    },
+    loginButtonView: {
+        marginTop: '20%'
+    },
+    loginButtonText: {
+        fontSize: 16,
+        fontWeight: '600'
     }
 });

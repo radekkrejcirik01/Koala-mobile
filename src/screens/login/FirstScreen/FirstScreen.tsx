@@ -22,9 +22,18 @@ export const FirstScreen = (): JSX.Element => {
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
-                style={FirstScreenStyle.buttonView}
+                style={FirstScreenStyle.startButtonView}
             >
-                <Text style={FirstScreenStyle.buttonText}>{`Let's go`}</Text>
+                <Text
+                    style={FirstScreenStyle.startButtonText}
+                >{`Let's start`}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => navigateTo(LoginStackNavigatorEnum.LoginScreen)}
+                style={FirstScreenStyle.loginButtonView}
+            >
+                <Text style={FirstScreenStyle.loginButtonText}>Login</Text>
             </TouchableOpacity>
         </View>
     );

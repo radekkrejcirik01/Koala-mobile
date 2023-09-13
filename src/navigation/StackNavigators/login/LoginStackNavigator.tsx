@@ -12,6 +12,7 @@ import { ThirdScreen } from '@screens/login/ThirdScreen/ThirdScreen';
 import { FourthScreen } from '@screens/login/FourthScreen/FourthScreen';
 import { PrivacyPolicyScreen } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen';
 import { PrivacyPolicyOptions } from '@navigation/StackNavigators/login/LoginStackNavigator.options';
+import { LoginScreen } from '@screens/login/LoginScreen/LoginScreen';
 
 const Login = createStackNavigator<ParamListBase>();
 
@@ -35,6 +36,11 @@ export const LoginStackNavigator = (): JSX.Element => (
         <Login.Screen
             name={LoginStackNavigatorEnum.FourthScreen}
             component={FourthScreen}
+            options={NoHeader}
+        />
+        <Login.Screen
+            name={LoginStackNavigatorEnum.LoginScreen}
+            component={LoginScreen}
             options={NoHeader}
         />
         <Login.Screen
