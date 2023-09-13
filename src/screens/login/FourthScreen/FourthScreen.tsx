@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import {
+    ActivityIndicator,
     Alert,
     KeyboardAvoidingView,
     Platform,
@@ -21,6 +22,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
+import COLORS from '@constants/COLORS';
 
 export const FourthScreen = (): JSX.Element => {
     const { name, username } = useSelector(
@@ -31,6 +33,7 @@ export const FourthScreen = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
     const [password, setPassword] = useState<string>();
+    const [posting, setPosting] = useState<boolean>(false);
 
     const createAccount = useCallback(() => {
         if (!password) {
@@ -38,11 +41,15 @@ export const FourthScreen = (): JSX.Element => {
             return;
         }
 
+        setPosting(true);
+
         postRequest<AuthResponseInterface, UserPostInterface>('user', {
             name,
             username,
             password
         }).subscribe((response: AuthResponseInterface) => {
+            setPosting(false);
+
             if (response?.status) {
                 if (response?.message?.includes('exists')) {
                     Alert.alert('User with this username already exists');
@@ -96,9 +103,13 @@ export const FourthScreen = (): JSX.Element => {
                     onPress={createAccount}
                     style={FourthScreenStyle.buttonView}
                 >
-                    <Text style={FourthScreenStyle.buttonText}>
-                        Finish account
-                    </Text>
+                    {posting ? (
+                        <ActivityIndicator color={COLORS.WHITE} />
+                    ) : (
+                        <Text style={FourthScreenStyle.buttonText}>
+                            Finish account
+                        </Text>
+                    )}
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         </View>

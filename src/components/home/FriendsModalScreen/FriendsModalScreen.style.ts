@@ -60,13 +60,14 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     sendButtonView: {
+        height: 45,
+        width: 120,
         marginTop: 40,
-        marginHorizontal: 20,
-        paddingVertical: 12,
-        paddingHorizontal: 30,
         borderRadius: 20,
         backgroundColor: COLORS.BUTTON_BLUE,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     sendButtonText: {
         fontSize: 20,
@@ -92,9 +93,12 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: '500'
     },
     friendRequestItemAcceptButtonView: {
-        padding: 8,
+        height: 30,
+        width: 60,
         borderRadius: 12,
-        backgroundColor: COLORS.BUTTON_BLUE
+        backgroundColor: COLORS.BUTTON_BLUE,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     friendRequestItemAcceptButtonText: {
         color: COLORS.WHITE,

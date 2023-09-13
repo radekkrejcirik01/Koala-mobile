@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+    ActivityIndicator,
     Alert,
     Platform,
     Text,
@@ -22,6 +23,7 @@ import { InvitePostInterface } from '@interfaces/post/Post.interface';
 import { UserInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
+import COLORS from '@constants/COLORS';
 
 export const FriendsModalScreen = (): JSX.Element => {
     const [friends, setFriends] = useState<UserInterface[]>([]);
@@ -29,6 +31,7 @@ export const FriendsModalScreen = (): JSX.Element => {
     const [inviteUsername, setInviteUsername] = useState<string>();
     const [showRequests, setShowRequests] = useState<boolean>(false);
     const [friendRequests, setFriendRequests] = useState<UserInterface[]>([]);
+    const [posting, setPosting] = useState<boolean>(false);
 
     const getFriendRequests = () => {
         getRequest<ResponseFriendsGetInterface>('friend-requests').subscribe(
@@ -56,20 +59,27 @@ export const FriendsModalScreen = (): JSX.Element => {
     }, [loadFriends]);
 
     const sendInvite = useCallback(() => {
+        setPosting(true);
+
         postRequest<ResponseInterface, InvitePostInterface>('invite', {
             receiver: inviteUsername
         }).subscribe((response: ResponseInterface) => {
+            setPosting(false);
+
             if (response?.status) {
                 Alert.alert(response.message);
-                setAdding(false);
             }
         });
     }, [inviteUsername]);
 
     const acceptInvite = (username: string) => {
+        setPosting(true);
+
         putRequest<ResponseInterface, InvitePostInterface>('invite', {
             receiver: username
         }).subscribe((response: ResponseInterface) => {
+            setPosting(false);
+
             if (response?.status) {
                 if (response?.message) {
                     Alert.alert(response.message);
@@ -102,12 +112,20 @@ export const FriendsModalScreen = (): JSX.Element => {
                     keyboardVerticalOffset={15}
                 >
                     <TouchableOpacity
+                        activeOpacity={0.9}
+                        disabled={!inviteUsername}
                         onPress={sendInvite}
                         style={FriendsModalScreenStyle.sendButtonView}
                     >
-                        <Text style={FriendsModalScreenStyle.sendButtonText}>
-                            Send
-                        </Text>
+                        {posting ? (
+                            <ActivityIndicator color={COLORS.WHITE} />
+                        ) : (
+                            <Text
+                                style={FriendsModalScreenStyle.sendButtonText}
+                            >
+                                Send
+                            </Text>
+                        )}
                     </TouchableOpacity>
                 </KeyboardAvoidingView>
             </View>
@@ -153,13 +171,20 @@ export const FriendsModalScreen = (): JSX.Element => {
                                         FriendsModalScreenStyle.friendRequestItemAcceptButtonView
                                     }
                                 >
-                                    <Text
-                                        style={
-                                            FriendsModalScreenStyle.friendRequestItemAcceptButtonText
-                                        }
-                                    >
-                                        Accept
-                                    </Text>
+                                    {posting ? (
+                                        <ActivityIndicator
+                                            color={COLORS.WHITE}
+                                            size="small"
+                                        />
+                                    ) : (
+                                        <Text
+                                            style={
+                                                FriendsModalScreenStyle.friendRequestItemAcceptButtonText
+                                            }
+                                        >
+                                            Accept
+                                        </Text>
+                                    )}
                                 </TouchableOpacity>
                             </View>
                         ))}
