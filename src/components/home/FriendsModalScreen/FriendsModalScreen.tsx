@@ -24,6 +24,8 @@ import { UserInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import COLORS from '@constants/COLORS';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const FriendsModalScreen = (): JSX.Element => {
     const [friends, setFriends] = useState<UserInterface[]>([]);
@@ -232,9 +234,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                                 onPress={() => setAdding(true)}
                                 style={FriendsModalScreenStyle.addView}
                             >
-                                <Text style={FriendsModalScreenStyle.addText}>
-                                    Add
-                                </Text>
+                                <Icon name={IconEnum.PLUS} size={14} />
                             </TouchableOpacity>
                         )}
                         {friends?.length > 1 ? (
@@ -253,9 +253,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                                 onPress={() => setAdding(true)}
                                 style={FriendsModalScreenStyle.addView}
                             >
-                                <Text style={FriendsModalScreenStyle.addText}>
-                                    Add
-                                </Text>
+                                <Icon name={IconEnum.PLUS} size={14} />
                             </TouchableOpacity>
                         )}
                         {friends?.length > 2 ? (
@@ -274,9 +272,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                                 onPress={() => setAdding(true)}
                                 style={FriendsModalScreenStyle.addView}
                             >
-                                <Text style={FriendsModalScreenStyle.addText}>
-                                    Add
-                                </Text>
+                                <Icon name={IconEnum.PLUS} size={14} />
                             </TouchableOpacity>
                         )}
                     </>
@@ -287,6 +283,11 @@ export const FriendsModalScreen = (): JSX.Element => {
                     />
                 )}
             </View>
+            {loaded && !friends?.length && (
+                <Text style={{ marginTop: '8%', alignSelf: 'center' }}>
+                    Add max 3 friends for sharing
+                </Text>
+            )}
         </View>
     );
 };

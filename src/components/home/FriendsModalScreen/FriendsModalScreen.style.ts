@@ -31,12 +31,13 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 40,
-        backgroundColor: COLORS.LIGHTGRAY,
+        borderWidth: 2,
+        borderColor: COLORS.LIGHTGRAY,
         alignItems: 'center',
         justifyContent: 'center'
     },
     addText: {
-        fontSize: 16,
+        fontSize: 30,
         color: COLORS.WHITE,
         fontWeight: '600'
     },

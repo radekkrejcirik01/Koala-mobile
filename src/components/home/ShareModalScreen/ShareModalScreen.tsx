@@ -14,6 +14,8 @@ import {
 import { EmotionNotificationPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
 import COLORS from '@constants/COLORS';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const ShareModalScreen = ({
     item,
@@ -145,13 +147,10 @@ export const ShareModalScreen = ({
                                                   ShareModalScreenStyle.addButtonView
                                               }
                                           >
-                                              <Text
-                                                  style={
-                                                      ShareModalScreenStyle.addButtonText
-                                                  }
-                                              >
-                                                  Add
-                                              </Text>
+                                              <Icon
+                                                  name={IconEnum.PLUS}
+                                                  size={12}
+                                              />
                                           </TouchableOpacity>
                                       ))}
                             </View>

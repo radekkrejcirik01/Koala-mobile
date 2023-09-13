@@ -54,12 +54,10 @@ export const ShareModalScreenStyle = StyleSheet.create({
         width: 45,
         height: 45,
         borderRadius: 40,
-        backgroundColor: COLORS.LIGHTGRAY,
+        borderWidth: 2,
+        borderColor: COLORS.LIGHTGRAY,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    addButtonText: {
-        color: COLORS.WHITE
     },
     shareButtonView: {
         width: 110,
