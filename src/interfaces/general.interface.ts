@@ -13,7 +13,7 @@ export interface NotificationInterface {
     time: number;
 }
 
-export interface HistoryInterface {
+export interface TrackInterface {
     id: number;
     receiversNames: string[];
     message: string;

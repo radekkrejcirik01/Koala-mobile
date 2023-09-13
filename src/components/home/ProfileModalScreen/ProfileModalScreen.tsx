@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Alert,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -11,11 +17,12 @@ import {
     ResponseHistoryGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { HistoryInterface } from '@interfaces/general.interface';
-import { HistoryItem } from '@components/home/HistoryItem/HistoryItem';
+import { TrackInterface } from '@interfaces/general.interface';
+import { TrackItem } from '@components/home/TrackItem/TrackItem';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { resetUserState } from '@store/UserReducer';
+import COLORS from '@constants/COLORS';
 
 export const ProfileModalScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
@@ -23,11 +30,12 @@ export const ProfileModalScreen = (): JSX.Element => {
 
     const { top, bottom } = useSafeAreaInsets();
 
-    const [history, setHistory] = useState<HistoryInterface[]>([]);
+    const [track, setTrack] = useState<TrackInterface[]>([]);
+    const [loaded, setLoaded] = useState<boolean>(false);
     const [showAccount, setShowAccount] = useState<boolean>(false);
 
-    const loadHistory = useCallback((lastId?: number) => {
-        let endpoint = 'history';
+    const loadTrack = useCallback((lastId?: number) => {
+        let endpoint = 'track';
         if (lastId) {
             endpoint += `/${lastId}`;
         }
@@ -36,34 +44,41 @@ export const ProfileModalScreen = (): JSX.Element => {
             (response: ResponseHistoryGetInterface) => {
                 if (response?.status) {
                     if (!lastId) {
-                        setHistory(response.data);
+                        setTrack(response.data);
+
+                        setLoaded(true);
                         return;
                     }
 
                     if (lastId && !!response?.data?.length) {
-                        setHistory((value) => value.concat(response.data));
+                        setTrack((value) => value.concat(response.data));
                     }
+
+                    setLoaded(true);
                 }
             }
         );
     }, []);
 
     useEffect(() => {
-        loadHistory();
-    }, [loadHistory]);
+        // 300 ms modal opening time
+        setTimeout(() => {
+            loadTrack();
+        }, 300);
+    }, [loadTrack]);
 
     const renderItem = useCallback(
-        ({ item }: ListRenderItemInfo<HistoryInterface>): JSX.Element => (
-            <HistoryItem item={item} />
+        ({ item }: ListRenderItemInfo<TrackInterface>): JSX.Element => (
+            <TrackItem item={item} />
         ),
         []
     );
 
     const onEndReached = useCallback(() => {
-        if (history?.length >= 20) {
-            loadHistory(history[history?.length - 1].id);
+        if (track?.length >= 20) {
+            loadTrack(track[track?.length - 1].id);
         }
-    }, [history, loadHistory]);
+    }, [track, loadTrack]);
 
     const deleteAccount = () => {
         deleteRequest<ResponseInterface>('account').subscribe(
@@ -133,10 +148,10 @@ export const ProfileModalScreen = (): JSX.Element => {
             ) : (
                 <View style={ProfileModalScreenStyle.historyView}>
                     <Text style={ProfileModalScreenStyle.historyTitleText}>
-                        History
+                        Track
                     </Text>
                     <FlashList
-                        data={history}
+                        data={track}
                         renderItem={renderItem}
                         estimatedItemSize={80}
                         keyExtractor={(item) => item.id.toString()}
@@ -146,9 +161,22 @@ export const ProfileModalScreen = (): JSX.Element => {
                             ProfileModalScreenStyle.historyListContainer
                         }
                         ListEmptyComponent={
-                            <Text style={ProfileModalScreenStyle.listEmptyText}>
-                                No data tracked yet
-                            </Text>
+                            loaded ? (
+                                <Text
+                                    style={
+                                        ProfileModalScreenStyle.listEmptyText
+                                    }
+                                >
+                                    No data tracked yet
+                                </Text>
+                            ) : (
+                                <ActivityIndicator
+                                    color={COLORS.BUTTON_BLUE}
+                                    style={
+                                        ProfileModalScreenStyle.activityIndicator
+                                    }
+                                />
+                            )
                         }
                     />
                 </View>

@@ -27,6 +27,7 @@ import COLORS from '@constants/COLORS';
 
 export const FriendsModalScreen = (): JSX.Element => {
     const [friends, setFriends] = useState<UserInterface[]>([]);
+    const [loaded, setLoaded] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
     const [inviteUsername, setInviteUsername] = useState<string>();
     const [showRequests, setShowRequests] = useState<boolean>(false);
@@ -49,13 +50,18 @@ export const FriendsModalScreen = (): JSX.Element => {
                 if (response?.status) {
                     setFriends(response?.data);
                     getFriendRequests();
+
+                    setLoaded(true);
                 }
             }
         );
     }, []);
 
     useEffect(() => {
-        loadFriends();
+        // 300 ms modal opening time
+        setTimeout(() => {
+            loadFriends();
+        }, 300);
     }, [loadFriends]);
 
     const sendInvite = useCallback(() => {
@@ -208,50 +214,77 @@ export const FriendsModalScreen = (): JSX.Element => {
                 </Text>
             </TouchableOpacity>
             <View style={FriendsModalScreenStyle.profilesView}>
-                {friends?.length > 0 ? (
-                    <View style={FriendsModalScreenStyle.profileView}>
-                        <ProfilePhoto name={friends[0].name} size={75} />
-                        <Text style={FriendsModalScreenStyle.nameText}>
-                            {friends[0].name}
-                        </Text>
-                    </View>
+                {loaded ? (
+                    <>
+                        {friends?.length > 0 ? (
+                            <View style={FriendsModalScreenStyle.profileView}>
+                                <ProfilePhoto
+                                    name={friends[0].name}
+                                    size={75}
+                                />
+                                <Text style={FriendsModalScreenStyle.nameText}>
+                                    {friends[0].name}
+                                </Text>
+                            </View>
+                        ) : (
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => setAdding(true)}
+                                style={FriendsModalScreenStyle.addView}
+                            >
+                                <Text style={FriendsModalScreenStyle.addText}>
+                                    Add
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                        {friends?.length > 1 ? (
+                            <View style={FriendsModalScreenStyle.profileView}>
+                                <ProfilePhoto
+                                    name={friends[1].name}
+                                    size={75}
+                                />
+                                <Text style={FriendsModalScreenStyle.nameText}>
+                                    {friends[1].name}
+                                </Text>
+                            </View>
+                        ) : (
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => setAdding(true)}
+                                style={FriendsModalScreenStyle.addView}
+                            >
+                                <Text style={FriendsModalScreenStyle.addText}>
+                                    Add
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                        {friends?.length > 2 ? (
+                            <View style={FriendsModalScreenStyle.profileView}>
+                                <ProfilePhoto
+                                    name={friends[2].name}
+                                    size={75}
+                                />
+                                <Text style={FriendsModalScreenStyle.nameText}>
+                                    {friends[2].name}
+                                </Text>
+                            </View>
+                        ) : (
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => setAdding(true)}
+                                style={FriendsModalScreenStyle.addView}
+                            >
+                                <Text style={FriendsModalScreenStyle.addText}>
+                                    Add
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                    </>
                 ) : (
-                    <TouchableOpacity
-                        onPress={() => setAdding(true)}
-                        style={FriendsModalScreenStyle.addView}
-                    >
-                        <Text style={FriendsModalScreenStyle.addText}>Add</Text>
-                    </TouchableOpacity>
-                )}
-                {friends?.length > 1 ? (
-                    <View style={FriendsModalScreenStyle.profileView}>
-                        <ProfilePhoto name={friends[1].name} size={75} />
-                        <Text style={FriendsModalScreenStyle.nameText}>
-                            {friends[1].name}
-                        </Text>
-                    </View>
-                ) : (
-                    <TouchableOpacity
-                        onPress={() => setAdding(true)}
-                        style={FriendsModalScreenStyle.addView}
-                    >
-                        <Text style={FriendsModalScreenStyle.addText}>Add</Text>
-                    </TouchableOpacity>
-                )}
-                {friends?.length > 2 ? (
-                    <View style={FriendsModalScreenStyle.profileView}>
-                        <ProfilePhoto name={friends[2].name} size={75} />
-                        <Text style={FriendsModalScreenStyle.nameText}>
-                            {friends[2].name}
-                        </Text>
-                    </View>
-                ) : (
-                    <TouchableOpacity
-                        onPress={() => setAdding(true)}
-                        style={FriendsModalScreenStyle.addView}
-                    >
-                        <Text style={FriendsModalScreenStyle.addText}>Add</Text>
-                    </TouchableOpacity>
+                    <ActivityIndicator
+                        color={COLORS.BUTTON_BLUE}
+                        style={FriendsModalScreenStyle.activityIndicator}
+                    />
                 )}
             </View>
         </View>

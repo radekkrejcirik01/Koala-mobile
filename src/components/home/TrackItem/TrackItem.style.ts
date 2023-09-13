@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-export const HistoryItemStyle = StyleSheet.create({
+export const TrackItemStyle = StyleSheet.create({
     container: {
         marginVertical: 8,
         flexDirection: 'row'
     },
     textsView: {
-        flex: 1,
-        paddingLeft: 8
+        flex: 1
     },
     rowView: {
         flexDirection: 'row',

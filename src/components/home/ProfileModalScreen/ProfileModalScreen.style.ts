@@ -15,7 +15,6 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     accountButtonText: {
-        fontSize: 16,
         color: COLORS.BUTTON_BLUE,
         textAlign: 'right',
         fontWeight: '500'
@@ -53,5 +52,8 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         fontSize: 16,
         alignSelf: 'center',
         fontWeight: '500'
+    },
+    activityIndicator: {
+        marginTop: 100
     }
 });

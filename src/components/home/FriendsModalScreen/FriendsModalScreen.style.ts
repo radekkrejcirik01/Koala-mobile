@@ -20,7 +20,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     profilesView: {
-        marginTop: '20%',
+        marginTop: '15%',
         flexDirection: 'row',
         justifyContent: 'space-evenly'
     },
@@ -41,7 +41,11 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     nameText: {
+        marginTop: 5,
         fontWeight: '500'
+    },
+    activityIndicator: {
+        marginTop: '10%'
     },
     inviteContainer: {
         paddingVertical: 15,

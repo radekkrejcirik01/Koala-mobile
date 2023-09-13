@@ -30,15 +30,23 @@ export const ShareModalScreen = ({
 
     const selectedFriends = useRef<string[]>([]);
 
-    useEffect(() => {
+    const loadFriends = () => {
         getRequest<ResponseFriendsGetInterface>('friends').subscribe(
             (response: ResponseFriendsGetInterface) => {
                 if (response?.status) {
                     setFriends(response?.data);
+
                     setLoaded(true);
                 }
             }
         );
+    };
+
+    useEffect(() => {
+        // 300 ms open modal time
+        setTimeout(() => {
+            loadFriends();
+        }, 300);
     }, []);
 
     const onFriendSelect = (username: string) => {
