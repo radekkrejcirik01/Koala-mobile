@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { Badge } from '@components/general/Badge/Badge';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -24,11 +23,7 @@ export const NotificationsHeader = (): JSX.Element => {
                 navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
             }
         >
-            <Icon
-                name={IconEnum.MAIL}
-                size={26}
-                style={HomeScreenStyle.marginRight}
-            />
+            <Icon name={IconEnum.MAIL} size={26} />
             <Badge value={unseenNotifications} />
         </TouchableOpacity>
     );

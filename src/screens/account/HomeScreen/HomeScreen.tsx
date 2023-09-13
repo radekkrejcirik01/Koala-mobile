@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     Keyboard,
     ScrollView,
@@ -6,8 +6,6 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { useNavigation as useDefaultNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useModal } from '@hooks/useModal';
 import { useMessaging } from '@hooks/useMessaging';
@@ -16,22 +14,15 @@ import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { RecordItem } from '@screens/account/HomeScreen/HomeScreen.props';
 import { Modal } from '@components/general/Modal/Modal';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
-import { ReducerProps } from '@store/index/index.props';
-import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ProfileModalScreen } from '@components/home/ProfileModalScreen/ProfileModalScreen';
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
-import { NotificationsHeader } from '@components/home/NotificationsHeader/NotificationsHeader';
 import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
+import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
 
 export const HomeScreen = (): JSX.Element => {
-    const { name, profilePhoto } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
-
     useMessaging();
     useNotifications();
-    const navigation = useDefaultNavigation();
-    const { bottom } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
     const { modalVisible, showModal, hideModal } = useModal();
     const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
@@ -39,22 +30,6 @@ export const HomeScreen = (): JSX.Element => {
         setModalContent(<ProfileModalScreen />);
         showModal();
     }, [showModal]);
-
-    useEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <TouchableOpacity activeOpacity={0.9} onPress={openProfile}>
-                    <ProfilePhoto
-                        name={name}
-                        photo={profilePhoto}
-                        size={40}
-                        style={HomeScreenStyle.marginLeft}
-                    />
-                </TouchableOpacity>
-            ),
-            headerRight: () => <NotificationsHeader />
-        });
-    }, [name, navigation, openProfile, profilePhoto]);
 
     const onItemPress = useCallback(
         (item: RecordItem) => {
@@ -81,8 +56,9 @@ export const HomeScreen = (): JSX.Element => {
     };
 
     return (
-        <View style={HomeScreenStyle.container}>
+        <View style={[HomeScreenStyle.container, { paddingTop: top }]}>
             <ScrollView contentContainerStyle={HomeScreenStyle.scrollView}>
+                <HomeScreenHeader onProfilePress={openProfile} />
                 <View style={HomeScreenStyle.contentView}>
                     {DATA.map((item) => (
                         <TouchableOpacity

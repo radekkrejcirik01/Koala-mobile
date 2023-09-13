@@ -2,21 +2,16 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const HomeScreenStyle = StyleSheet.create({
-    marginLeft: {
-        marginLeft: 15
-    },
-    marginRight: {
-        marginRight: 15
-    },
     container: {
         flex: 1,
         paddingHorizontal: 20
     },
     scrollView: {
-        paddingTop: 100
+        paddingTop: 20
     },
     contentView: {
         flex: 1,
+        paddingTop: '20%',
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
