@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const TrackItemStyle = StyleSheet.create({
     container: {
-        marginVertical: 8,
+        paddingVertical: 8,
         flexDirection: 'row'
     },
     textsView: {

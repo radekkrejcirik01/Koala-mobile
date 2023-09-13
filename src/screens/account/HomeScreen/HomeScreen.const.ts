@@ -46,7 +46,7 @@ export const DATA: RecordItem[] = [
     {
         id: 7,
         emotion: 'Exhausted',
-        description: 'I am exhausted',
+        description: 'I am extremely exhausted',
         tip1: 'Little walk is always helpful',
         tip2: 'Have a chat with coworker about not important stuff'
     },
@@ -54,7 +54,7 @@ export const DATA: RecordItem[] = [
         id: 8,
         emotion: 'Angry',
         description: '🤬😤🤬🤬😡😡😤😤🤬',
-        tip1: `Say 'Fuck' 10 times in row`,
+        tip1: `Say 'Fuck' 10 times in a row`,
         tip2: 'Call you friend and spill the tea'
     },
     {

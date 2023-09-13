@@ -108,7 +108,7 @@ export const ProfileModalScreen = (): JSX.Element => {
                 style={ProfileModalScreenStyle.accountButtonView}
             >
                 <Text style={ProfileModalScreenStyle.accountButtonText}>
-                    {showAccount ? 'History' : 'Account'}
+                    {showAccount ? 'Track' : 'Account'}
                 </Text>
             </TouchableOpacity>
             <ProfilePhoto name={name} size={80} />
@@ -147,9 +147,6 @@ export const ProfileModalScreen = (): JSX.Element => {
                 </View>
             ) : (
                 <View style={ProfileModalScreenStyle.historyView}>
-                    <Text style={ProfileModalScreenStyle.historyTitleText}>
-                        Track
-                    </Text>
                     <FlashList
                         data={track}
                         renderItem={renderItem}

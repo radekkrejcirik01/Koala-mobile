@@ -37,14 +37,10 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     historyView: {
         width: '100%',
         flex: 1,
-        paddingTop: 20,
-        paddingHorizontal: 15
-    },
-    historyTitleText: {
-        fontWeight: 'bold'
+        paddingTop: 40,
+        paddingHorizontal: 20
     },
     historyListContainer: {
-        paddingTop: 10,
         paddingBottom: 50
     },
     listEmptyText: {

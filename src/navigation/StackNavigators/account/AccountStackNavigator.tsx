@@ -8,7 +8,7 @@ import {
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { HomeScreen } from '@screens/account/HomeScreen/HomeScreen';
 import { NotificationsScreen } from '@screens/account/NotificationsScreen/NotificationsScreen';
-import COLORS from '@constants/COLORS';
+import { NotificationsOptions } from '@navigation/StackNavigators/account/AccountStackNavigator.options';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -22,11 +22,7 @@ export const AccountStackNavigator = (): JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.NotificationsScreen}
             component={NotificationsScreen}
-            options={{
-                title: 'Notifications',
-                headerTintColor: COLORS.BLACK,
-                headerBackTitleVisible: false
-            }}
+            options={NotificationsOptions}
         />
     </Account.Navigator>
 );

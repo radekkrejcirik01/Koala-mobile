@@ -20,7 +20,7 @@ export const Modal = ({
         onSwipeComplete={onClose}
         avoidKeyboard
         propagateSwipe
-        backdropOpacity={0.3}
+        backdropOpacity={0.2}
         style={ModalStyle.container}
         {...props}
     >

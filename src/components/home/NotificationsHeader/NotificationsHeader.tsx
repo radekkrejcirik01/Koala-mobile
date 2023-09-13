@@ -8,6 +8,7 @@ import { Badge } from '@components/general/Badge/Badge';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { ReducerProps } from '@store/index/index.props';
+import { NotificationsHeaderStyle } from '@components/home/NotificationsHeader/NotificationsHeader.style';
 
 export const NotificationsHeader = (): JSX.Element => {
     const { unseenNotifications } = useSelector(
@@ -22,6 +23,7 @@ export const NotificationsHeader = (): JSX.Element => {
             onPress={() =>
                 navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
             }
+            style={NotificationsHeaderStyle.container}
         >
             <Icon name={IconEnum.MAIL} size={26} />
             <Badge value={unseenNotifications} />
