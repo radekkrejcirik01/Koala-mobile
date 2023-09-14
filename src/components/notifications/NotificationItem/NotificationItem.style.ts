@@ -5,7 +5,7 @@ export const NotificationItemStyle = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 0.2,
         borderBottomColor: COLORS.LIGHTGRAY
     },
     paddingLeft: {

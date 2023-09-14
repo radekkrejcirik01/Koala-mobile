@@ -47,7 +47,7 @@ export const DATA: RecordItem[] = [
         id: 7,
         emotion: 'Tired',
         description: 'I am so f tired',
-        tip1: 'Take that nap 🛌😴',
+        tip1: 'Take that nap 😴🛌',
         tip2: 'Take a break, day off, week off'
     },
     {

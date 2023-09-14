@@ -22,7 +22,7 @@ export const NotificationItem = ({
                 {item.name}
                 {item.type === 'emotion'
                     ? ' is sharing'
-                    : ' is sending support! ❤️‍🩹'}
+                    : ' is sending support ❤️‍🩹'}
             </Text>
             <Text style={NotificationItemStyle.messageText}>
                 {item.message}
@@ -47,7 +47,7 @@ export const NotificationItem = ({
                     </TouchableOpacity>
                     <Text style={NotificationItemStyle.marginTop8}>
                         {liked
-                            ? `${item.name} received your support!`
+                            ? `${item.name} received your support`
                             : 'Send support'}
                     </Text>
                 </View>
