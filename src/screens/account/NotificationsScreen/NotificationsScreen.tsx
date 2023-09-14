@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { getRequest, postRequest } from '@utils/Axios/Axios.service';
 import {
@@ -13,10 +14,13 @@ import { ReducerProps } from '@store/index/index.props';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import { NotificationItem } from '@components/notifications/NotificationItem/NotificationItem';
 import { setUnseenNotifications } from '@store/NotificationsReducer';
+import { NotificationsScreenHeader } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader';
 
 export const NotificationsScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
     const dispatch = useDispatch();
+
+    const { top } = useSafeAreaInsets();
 
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
@@ -93,7 +97,8 @@ export const NotificationsScreen = (): JSX.Element => {
     }, [loadNotifications, notifications]);
 
     return (
-        <View style={NotificationsScreenStyle.container}>
+        <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
+            <NotificationsScreenHeader />
             <FlashList
                 data={notifications}
                 renderItem={renderItem}

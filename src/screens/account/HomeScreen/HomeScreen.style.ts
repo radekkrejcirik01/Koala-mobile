@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const HomeScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 20
+        paddingHorizontal: 10
     },
     scrollView: {
         paddingTop: 20

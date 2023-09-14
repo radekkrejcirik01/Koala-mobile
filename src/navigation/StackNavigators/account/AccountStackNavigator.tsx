@@ -8,7 +8,6 @@ import {
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { HomeScreen } from '@screens/account/HomeScreen/HomeScreen';
 import { NotificationsScreen } from '@screens/account/NotificationsScreen/NotificationsScreen';
-import { NotificationsOptions } from '@navigation/StackNavigators/account/AccountStackNavigator.options';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -22,7 +21,7 @@ export const AccountStackNavigator = (): JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.NotificationsScreen}
             component={NotificationsScreen}
-            options={NotificationsOptions}
+            options={NoHeader}
         />
     </Account.Navigator>
 );

@@ -2,9 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export const NotificationsScreenStyle = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 10
     },
     listContainer: {
+        paddingTop: 20,
         paddingBottom: 50
     },
     listEmptyText: {
