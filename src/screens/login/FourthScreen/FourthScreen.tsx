@@ -52,7 +52,7 @@ export const FourthScreen = (): JSX.Element => {
 
             if (response?.status) {
                 if (response?.message?.includes('exists')) {
-                    Alert.alert('User with this username already exists');
+                    Alert.alert('This username is already taken');
                 } else {
                     dispatch(setUserToken(response?.token));
 
