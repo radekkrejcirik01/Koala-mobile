@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { FriendsModalScreenStyle } from '@components/home/FriendsModalScreen/FriendsModalScreen.style';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import {
@@ -26,8 +27,11 @@ import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/N
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { ReducerProps } from '@store/index/index.props';
 
 export const FriendsModalScreen = (): JSX.Element => {
+    const { username } = useSelector((state: ReducerProps) => state.user.user);
+
     const [friends, setFriends] = useState<UserInterface[]>([]);
     const [loaded, setLoaded] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
@@ -80,11 +84,11 @@ export const FriendsModalScreen = (): JSX.Element => {
         });
     }, [inviteUsername]);
 
-    const acceptInvite = (username: string) => {
+    const acceptInvite = (user: string) => {
         setPosting(true);
 
         putRequest<ResponseInterface, InvitePostInterface>('invite', {
-            receiver: username
+            receiver: user
         }).subscribe((response: ResponseInterface) => {
             setPosting(false);
 
@@ -112,6 +116,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                     autoFocus
                     autoCorrect={false}
                     autoCapitalize="none"
+                    placeholder="username"
                     onChangeText={setInviteUsername}
                     style={FriendsModalScreenStyle.input}
                 />
@@ -283,9 +288,9 @@ export const FriendsModalScreen = (): JSX.Element => {
                     />
                 )}
             </View>
-            {loaded && !friends?.length && (
-                <Text style={{ marginTop: '8%', alignSelf: 'center' }}>
-                    Add max 3 friends for sharing
+            {loaded && (
+                <Text style={FriendsModalScreenStyle.usernameDescriptionText}>
+                    Your username is {username}
                 </Text>
             )}
         </View>

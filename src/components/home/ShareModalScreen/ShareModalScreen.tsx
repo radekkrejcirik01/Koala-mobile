@@ -27,6 +27,7 @@ export const ShareModalScreen = ({
 
     const [loaded, setLoaded] = useState<boolean>(false);
     const [friends, setFriends] = useState<UserInterface[]>([]);
+    const [shareDisabled, setShareDisabled] = useState<boolean>(true);
     const [sending, setSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
 
@@ -37,7 +38,6 @@ export const ShareModalScreen = ({
             (response: ResponseFriendsGetInterface) => {
                 if (response?.status) {
                     setFriends(response?.data);
-
                     setLoaded(true);
                 }
             }
@@ -59,6 +59,8 @@ export const ShareModalScreen = ({
         } else {
             selectedFriends.current.push(username);
         }
+
+        setShareDisabled(!selectedFriends.current?.length);
     };
 
     const onSend = () => {
@@ -157,7 +159,7 @@ export const ShareModalScreen = ({
                             {friends?.length ? (
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    disabled={sent}
+                                    disabled={shareDisabled || sent}
                                     onPress={onSend}
                                     style={
                                         ShareModalScreenStyle.shareButtonView

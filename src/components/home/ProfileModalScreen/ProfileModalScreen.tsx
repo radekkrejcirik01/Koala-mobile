@@ -25,7 +25,9 @@ import { resetUserState } from '@store/UserReducer';
 import COLORS from '@constants/COLORS';
 
 export const ProfileModalScreen = (): JSX.Element => {
-    const { name } = useSelector((state: ReducerProps) => state.user.user);
+    const { username, name } = useSelector(
+        (state: ReducerProps) => state.user.user
+    );
     const dispatch = useDispatch();
 
     const { top, bottom } = useSafeAreaInsets();
@@ -113,6 +115,7 @@ export const ProfileModalScreen = (): JSX.Element => {
             </TouchableOpacity>
             <ProfilePhoto name={name} size={80} />
             <Text style={ProfileModalScreenStyle.nameText}>{name}</Text>
+            <Text style={ProfileModalScreenStyle.usernameText}>{username}</Text>
             {showAccount ? (
                 <View
                     style={[

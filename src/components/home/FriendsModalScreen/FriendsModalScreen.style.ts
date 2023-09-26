@@ -108,5 +108,9 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     friendRequestItemAcceptButtonText: {
         color: COLORS.WHITE,
         fontWeight: 'bold'
+    },
+    usernameDescriptionText: {
+        marginTop: '10%',
+        alignSelf: 'center'
     }
 });
