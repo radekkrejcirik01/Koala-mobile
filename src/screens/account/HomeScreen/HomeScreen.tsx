@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useModal } from '@hooks/useModal';
-import { useMessaging } from '@hooks/useMessaging';
 import { useNotifications } from '@hooks/useNotifications';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { RecordItem } from '@screens/account/HomeScreen/HomeScreen.props';
@@ -20,7 +19,6 @@ import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
 import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
 
 export const HomeScreen = (): JSX.Element => {
-    useMessaging();
     useNotifications();
     const { top, bottom } = useSafeAreaInsets();
     const { modalVisible, showModal, hideModal } = useModal();

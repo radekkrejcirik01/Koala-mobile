@@ -28,6 +28,7 @@ import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ReducerProps } from '@store/index/index.props';
+import { MessagingService } from '@utils/general/MessagingService';
 
 export const FriendsModalScreen = (): JSX.Element => {
     const { username } = useSelector((state: ReducerProps) => state.user.user);
@@ -67,6 +68,7 @@ export const FriendsModalScreen = (): JSX.Element => {
         // 300 ms modal opening time
         setTimeout(() => {
             loadFriends();
+            MessagingService.initMessaging().catch();
         }, 300);
     }, [loadFriends]);
 
