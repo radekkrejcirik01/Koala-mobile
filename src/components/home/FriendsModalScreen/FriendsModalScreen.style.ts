@@ -31,7 +31,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 40,
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: COLORS.LIGHTGRAY,
         alignItems: 'center',
         justifyContent: 'center'
@@ -111,6 +111,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     usernameDescriptionText: {
         marginTop: '10%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontWeight: '500'
     }
 });

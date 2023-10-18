@@ -48,10 +48,10 @@ export const HomeScreen = (): JSX.Element => {
         [hideModal, showModal]
     );
 
-    const onFriendsPress = () => {
+    const onFriendsPress = useCallback(() => {
         setModalContent(<FriendsModalScreen />);
         showModal();
-    };
+    }, [showModal]);
 
     return (
         <View
@@ -61,7 +61,10 @@ export const HomeScreen = (): JSX.Element => {
             ]}
         >
             <HomeScreenHeader onProfilePress={openProfile} />
-            <ScrollView contentContainerStyle={HomeScreenStyle.scrollView}>
+            <ScrollView
+                contentContainerStyle={HomeScreenStyle.scrollViewContainer}
+                style={HomeScreenStyle.scrollView}
+            >
                 <View style={HomeScreenStyle.contentView}>
                     {DATA.map((item) => (
                         <TouchableOpacity

@@ -20,7 +20,7 @@ export const NotificationsScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
     const dispatch = useDispatch();
 
-    const { top } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
 
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
@@ -97,7 +97,12 @@ export const NotificationsScreen = (): JSX.Element => {
     }, [loadNotifications, notifications]);
 
     return (
-        <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
+        <View
+            style={[
+                NotificationsScreenStyle.container,
+                { paddingTop: top, paddingBottom: bottom }
+            ]}
+        >
             <NotificationsScreenHeader />
             <FlashList
                 data={notifications}
@@ -106,6 +111,7 @@ export const NotificationsScreen = (): JSX.Element => {
                 keyExtractor={(item) => item.id.toString()}
                 onEndReached={onEndReached}
                 contentContainerStyle={NotificationsScreenStyle.listContainer}
+                showsVerticalScrollIndicator={false}
                 ListEmptyComponent={
                     <Text style={NotificationsScreenStyle.listEmptyText}>
                         No notifications yet

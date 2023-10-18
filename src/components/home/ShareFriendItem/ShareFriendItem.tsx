@@ -24,7 +24,7 @@ export const ShareFriendItem = ({
         >
             <ProfilePhoto
                 name={item.name}
-                size={45}
+                size={50}
                 style={[
                     ShareFriendItemStyle.profilePhoto,
                     selected &&

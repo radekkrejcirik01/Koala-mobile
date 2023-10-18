@@ -19,7 +19,7 @@ export const ProfilePhoto = ({
     <TouchableOpacity
         disabled={!onPhotoPress}
         onPress={onPhotoPress}
-        style={[{ borderRadius: 40 }, style]}
+        style={[ProfilePhotoStyle.container, style]}
     >
         {photo ? (
             <FastImage

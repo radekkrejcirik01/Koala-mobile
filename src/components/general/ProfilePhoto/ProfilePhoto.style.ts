@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ProfilePhotoStyle = StyleSheet.create({
+    container: {
+        borderRadius: 40
+    },
     image: {
         borderRadius: 40
     },
