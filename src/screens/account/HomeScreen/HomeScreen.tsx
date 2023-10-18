@@ -54,9 +54,14 @@ export const HomeScreen = (): JSX.Element => {
     };
 
     return (
-        <View style={[HomeScreenStyle.container, { paddingTop: top }]}>
+        <View
+            style={[
+                HomeScreenStyle.container,
+                { paddingTop: top + 20, paddingBottom: bottom || 10 }
+            ]}
+        >
+            <HomeScreenHeader onProfilePress={openProfile} />
             <ScrollView contentContainerStyle={HomeScreenStyle.scrollView}>
-                <HomeScreenHeader onProfilePress={openProfile} />
                 <View style={HomeScreenStyle.contentView}>
                     {DATA.map((item) => (
                         <TouchableOpacity
@@ -75,12 +80,7 @@ export const HomeScreen = (): JSX.Element => {
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={onFriendsPress}
-                style={[
-                    HomeScreenStyle.friendsButtonView,
-                    {
-                        bottom: bottom || 10
-                    }
-                ]}
+                style={HomeScreenStyle.friendsButtonView}
             >
                 <Text style={HomeScreenStyle.friendsButtonText}>Friends</Text>
             </TouchableOpacity>
