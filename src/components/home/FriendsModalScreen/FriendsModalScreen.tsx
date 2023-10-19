@@ -9,6 +9,7 @@ import {
     View
 } from 'react-native';
 import { useSelector } from 'react-redux';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FriendsModalScreenStyle } from '@components/home/FriendsModalScreen/FriendsModalScreen.style';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import {
@@ -32,6 +33,8 @@ import { MessagingService } from '@utils/general/MessagingService';
 
 export const FriendsModalScreen = (): JSX.Element => {
     const { username } = useSelector((state: ReducerProps) => state.user.user);
+
+    const { bottom } = useSafeAreaInsets();
 
     const [friends, setFriends] = useState<UserInterface[]>([]);
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -149,7 +152,12 @@ export const FriendsModalScreen = (): JSX.Element => {
 
     if (showRequests) {
         return (
-            <View style={FriendsModalScreenStyle.container}>
+            <View
+                style={[
+                    FriendsModalScreenStyle.container,
+                    FriendsModalScreenStyle.flexStart
+                ]}
+            >
                 <Text style={FriendsModalScreenStyle.titleText}>
                     Friend requests
                 </Text>
@@ -214,14 +222,22 @@ export const FriendsModalScreen = (): JSX.Element => {
     }
 
     return (
-        <View style={FriendsModalScreenStyle.container}>
-            <Text style={FriendsModalScreenStyle.titleText}>Friends</Text>
-            <TouchableOpacity onPress={() => setShowRequests(true)}>
-                <Text style={FriendsModalScreenStyle.requestsText}>
-                    Requests{' '}
-                    {!!friendRequests?.length && `(${friendRequests?.length})`}
-                </Text>
-            </TouchableOpacity>
+        <View
+            style={[
+                FriendsModalScreenStyle.container,
+                { paddingBottom: bottom + 15 }
+            ]}
+        >
+            <View>
+                <Text style={FriendsModalScreenStyle.titleText}>Friends</Text>
+                <TouchableOpacity onPress={() => setShowRequests(true)}>
+                    <Text style={FriendsModalScreenStyle.requestsText}>
+                        Requests{' '}
+                        {!!friendRequests?.length &&
+                            `(${friendRequests?.length})`}
+                    </Text>
+                </TouchableOpacity>
+            </View>
             <View style={FriendsModalScreenStyle.profilesView}>
                 {loaded ? (
                     <>

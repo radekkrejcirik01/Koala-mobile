@@ -7,7 +7,11 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         paddingTop: 15,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        justifyContent: 'space-between',
         backgroundColor: COLORS.WHITE
+    },
+    flexStart: {
+        justifyContent: 'flex-start'
     },
     titleText: {
         fontSize: 16,
@@ -20,7 +24,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     profilesView: {
-        marginTop: '15%',
         flexDirection: 'row',
         justifyContent: 'space-evenly'
     },
@@ -110,7 +113,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     usernameDescriptionText: {
-        marginTop: '10%',
         alignSelf: 'center',
         fontWeight: '500'
     }

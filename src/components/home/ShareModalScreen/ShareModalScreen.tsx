@@ -134,7 +134,7 @@ export const ShareModalScreen = ({
                                                   name: value.name,
                                                   username: value.username
                                               }}
-                                              onPress={() =>
+                                              onSelect={() =>
                                                   onFriendSelect(value.username)
                                               }
                                               sent={sent}

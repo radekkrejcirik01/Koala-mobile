@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ShareFriendItemProps } from '@components/home/ShareFriendItem/ShareFriendItem.props';
@@ -7,24 +7,26 @@ import { ShareFriendItemStyle } from '@components/home/ShareFriendItem/ShareFrie
 
 export const ShareFriendItem = ({
     item,
-    onPress,
+    onSelect,
     sent
 }: ShareFriendItemProps): JSX.Element => {
     const [selected, setSelected] = useState<boolean>(false);
+
+    const onPress = useCallback(() => {
+        setSelected((value) => !value);
+        onSelect();
+    }, [onSelect]);
 
     return (
         <TouchableOpacity
             activeOpacity={1}
             disabled={sent}
-            onPress={() => {
-                setSelected(!selected);
-                onPress();
-            }}
+            onPress={onPress}
             style={ShareFriendItemStyle.container}
         >
             <ProfilePhoto
                 name={item.name}
-                size={50}
+                size={45}
                 style={[
                     ShareFriendItemStyle.profilePhoto,
                     selected &&
