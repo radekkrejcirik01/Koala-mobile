@@ -14,7 +14,7 @@ export const NotificationItemStyle = StyleSheet.create({
     titleText: {
         marginTop: 5,
         fontSize: 15,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     messageText: {
         marginTop: 2,

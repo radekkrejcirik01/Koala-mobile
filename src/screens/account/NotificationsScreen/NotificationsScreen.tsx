@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -15,6 +15,7 @@ import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/N
 import { NotificationItem } from '@components/notifications/NotificationItem/NotificationItem';
 import { setUnseenNotifications } from '@store/NotificationsReducer';
 import { NotificationsScreenHeader } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader';
+import COLORS from '@constants/COLORS';
 
 export const NotificationsScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
@@ -25,6 +26,7 @@ export const NotificationsScreen = (): JSX.Element => {
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
     );
+    const [loaded, setLoaded] = useState<boolean>(false);
 
     const loadNotifications = useCallback(
         (lastId?: number) => {
@@ -49,6 +51,8 @@ export const NotificationsScreen = (): JSX.Element => {
                             );
                         }
                     }
+
+                    setLoaded(true);
                 }
             );
         },
@@ -113,9 +117,16 @@ export const NotificationsScreen = (): JSX.Element => {
                 contentContainerStyle={NotificationsScreenStyle.listContainer}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={
-                    <Text style={NotificationsScreenStyle.listEmptyText}>
-                        No notifications yet
-                    </Text>
+                    loaded ? (
+                        <Text style={NotificationsScreenStyle.listEmptyText}>
+                            No notifications yet
+                        </Text>
+                    ) : (
+                        <ActivityIndicator
+                            color={COLORS.BUTTON_BLUE}
+                            style={NotificationsScreenStyle.activityIndicator}
+                        />
+                    )
                 }
             />
         </View>
