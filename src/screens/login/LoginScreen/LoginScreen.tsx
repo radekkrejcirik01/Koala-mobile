@@ -2,6 +2,7 @@ import React, { JSX, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     ActivityIndicator,
+    Alert,
     KeyboardAvoidingView,
     Platform,
     Text,
@@ -44,6 +45,8 @@ export const LoginScreen = (): JSX.Element => {
                 ).catch();
 
                 PreloadService.loadUserObject();
+            } else {
+                Alert.alert('Incorrect credentials');
             }
         });
     }, [dispatch, password, username]);
