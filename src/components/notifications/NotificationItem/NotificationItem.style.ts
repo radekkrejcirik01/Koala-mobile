@@ -21,7 +21,7 @@ export const NotificationItemStyle = StyleSheet.create({
         fontSize: 15
     },
     supportView: {
-        paddingTop: 10,
+        paddingTop: 15,
         alignItems: 'center'
     },
     likeButtonView: {
@@ -32,11 +32,11 @@ export const NotificationItemStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    fontSize22: {
-        fontSize: 28
+    fontSize26: {
+        fontSize: 26
     },
-    fontSize16: {
-        fontSize: 22
+    fontSize20: {
+        fontSize: 20
     },
     marginTop8: {
         marginTop: 8

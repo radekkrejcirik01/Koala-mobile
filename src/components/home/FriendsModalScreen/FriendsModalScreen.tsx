@@ -229,7 +229,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                             <View style={FriendsModalScreenStyle.profileView}>
                                 <ProfilePhoto
                                     name={friends[0].name}
-                                    size={75}
+                                    size={65}
                                 />
                                 <Text style={FriendsModalScreenStyle.nameText}>
                                     {friends[0].name}
@@ -248,7 +248,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                             <View style={FriendsModalScreenStyle.profileView}>
                                 <ProfilePhoto
                                     name={friends[1].name}
-                                    size={75}
+                                    size={65}
                                 />
                                 <Text style={FriendsModalScreenStyle.nameText}>
                                     {friends[1].name}
@@ -267,7 +267,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                             <View style={FriendsModalScreenStyle.profileView}>
                                 <ProfilePhoto
                                     name={friends[2].name}
-                                    size={75}
+                                    size={65}
                                 />
                                 <Text style={FriendsModalScreenStyle.nameText}>
                                     {friends[2].name}

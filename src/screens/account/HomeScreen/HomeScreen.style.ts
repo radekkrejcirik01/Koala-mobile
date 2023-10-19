@@ -11,7 +11,8 @@ export const HomeScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     scrollView: {
-        marginTop: 10
+        marginTop: 10,
+        paddingBottom: '10%'
     },
     contentView: {
         flexDirection: 'row',

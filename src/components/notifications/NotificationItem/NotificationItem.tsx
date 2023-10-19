@@ -38,8 +38,8 @@ export const NotificationItem = ({
                         <Text
                             style={
                                 liked
-                                    ? NotificationItemStyle.fontSize16
-                                    : NotificationItemStyle.fontSize22
+                                    ? NotificationItemStyle.fontSize20
+                                    : NotificationItemStyle.fontSize26
                             }
                         >
                             {liked ? '❤️‍' : '♡'}

@@ -28,8 +28,8 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         alignItems: 'center'
     },
     addView: {
-        width: 75,
-        height: 75,
+        width: 65,
+        height: 65,
         borderRadius: 40,
         borderWidth: 3,
         borderColor: COLORS.LIGHTGRAY,
