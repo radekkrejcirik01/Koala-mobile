@@ -42,6 +42,8 @@ export const NotificationsScreen = (): JSX.Element => {
 
                         if (!lastId) {
                             setNotifications(response.data);
+
+                            setLoaded(true);
                             return;
                         }
 
