@@ -30,12 +30,17 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     accountView: {
         width: '100%',
         flex: 1,
+        paddingTop: 20,
         paddingLeft: 20,
-        justifyContent: 'flex-end'
+        justifyContent: 'space-between'
     },
     deleteAccountText: {
         fontSize: 16,
-        fontWeight: '600'
+        fontWeight: '500'
+    },
+    logoutText: {
+        fontSize: 16,
+        fontWeight: '500'
     },
     historyView: {
         width: '100%',

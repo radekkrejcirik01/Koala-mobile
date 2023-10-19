@@ -82,7 +82,7 @@ export const ProfileModalScreen = (): JSX.Element => {
         }
     }, [track, loadTrack]);
 
-    const deleteAccount = () => {
+    const deleteAccount = useCallback(() => {
         deleteRequest<ResponseInterface>('account').subscribe(
             (response: ResponseInterface) => {
                 if (response?.status) {
@@ -94,7 +94,35 @@ export const ProfileModalScreen = (): JSX.Element => {
                 }
             }
         );
-    };
+    }, [dispatch]);
+
+    const onPressDeleteAccount = useCallback(() => {
+        Alert.alert('Are you sure you want to delete account?', '', [
+            {
+                text: 'Cancel',
+                style: 'cancel'
+            },
+            {
+                text: 'Confirm',
+                onPress: deleteAccount,
+                style: 'destructive'
+            }
+        ]);
+    }, [deleteAccount]);
+
+    const logout = useCallback(() => {
+        deleteRequest<ResponseInterface>('device').subscribe(
+            (response: ResponseInterface) => {
+                if (response?.status) {
+                    dispatch(resetUserState());
+                    PersistStorage.setItem(
+                        PersistStorageKeys.TOKEN,
+                        ''
+                    ).catch();
+                }
+            }
+        );
+    }, [dispatch]);
 
     return (
         <View
@@ -125,26 +153,15 @@ export const ProfileModalScreen = (): JSX.Element => {
                 >
                     <TouchableOpacity
                         activeOpacity={0.9}
-                        onPress={() => {
-                            Alert.alert(
-                                'Are you sure you want to delete account?',
-                                '',
-                                [
-                                    {
-                                        text: 'Cancel',
-                                        style: 'cancel'
-                                    },
-                                    {
-                                        text: 'Confirm',
-                                        onPress: deleteAccount,
-                                        style: 'destructive'
-                                    }
-                                ]
-                            );
-                        }}
+                        onPress={onPressDeleteAccount}
                     >
                         <Text style={ProfileModalScreenStyle.deleteAccountText}>
                             Delete account
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.9} onPress={logout}>
+                        <Text style={ProfileModalScreenStyle.logoutText}>
+                            Logout
                         </Text>
                     </TouchableOpacity>
                 </View>

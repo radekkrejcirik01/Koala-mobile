@@ -80,7 +80,7 @@ export const LoginScreen = (): JSX.Element => {
                     {posting ? (
                         <ActivityIndicator color={COLORS.WHITE} />
                     ) : (
-                        <Text style={LoginScreenStyle.buttonText}>Next</Text>
+                        <Text style={LoginScreenStyle.buttonText}>Login</Text>
                     )}
                 </TouchableOpacity>
             </KeyboardAvoidingView>
