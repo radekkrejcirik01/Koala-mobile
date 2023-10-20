@@ -36,16 +36,22 @@ export const NotificationItem = ({
                         style={NotificationItemStyle.likeButtonView}
                     >
                         <Text
-                            style={
+                            style={[
                                 liked
                                     ? NotificationItemStyle.fontSize20
-                                    : NotificationItemStyle.fontSize26
-                            }
+                                    : NotificationItemStyle.fontSize26,
+                                NotificationItemStyle.colorBlack
+                            ]}
                         >
                             {liked ? '❤️‍' : '♡'}
                         </Text>
                     </TouchableOpacity>
-                    <Text style={NotificationItemStyle.marginTop8}>
+                    <Text
+                        style={[
+                            NotificationItemStyle.marginTop8,
+                            NotificationItemStyle.colorBlack
+                        ]}
+                    >
                         {liked
                             ? `${item.name} received your support`
                             : 'Send support'}

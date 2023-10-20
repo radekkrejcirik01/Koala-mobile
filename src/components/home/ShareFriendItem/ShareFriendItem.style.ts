@@ -9,5 +9,8 @@ export const ShareFriendItemStyle = StyleSheet.create({
     profilePhoto: {
         borderWidth: 2.5,
         borderColor: COLORS.TRANSPARENT
+    },
+    nameText: {
+        color: COLORS.BLACK
     }
 });

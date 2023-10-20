@@ -35,7 +35,7 @@ export const ShareFriendItem = ({
                         }
                 ]}
             />
-            <Text>{item.name}</Text>
+            <Text style={ShareFriendItemStyle.nameText}>{item.name}</Text>
         </TouchableOpacity>
     );
 };

@@ -15,11 +15,13 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 16,
+        color: COLORS.BLACK,
         alignSelf: 'center',
         fontWeight: '600'
     },
     requestsText: {
         marginRight: 15,
+        color: COLORS.BLACK,
         alignSelf: 'flex-end',
         fontWeight: '600'
     },
@@ -46,6 +48,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     nameText: {
         marginTop: 5,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     activityIndicator: {
@@ -63,6 +66,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         marginHorizontal: '10%',
         borderRadius: 20,
         fontSize: 20,
+        color: COLORS.BLACK,
         backgroundColor: COLORS.LIGHTGRAY,
         textAlign: 'center',
         fontWeight: 'bold'
@@ -98,6 +102,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     friendRequestItemUsernameText: {
         marginLeft: 5,
         fontSize: 16,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     friendRequestItemAcceptButtonView: {
@@ -113,6 +118,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     usernameDescriptionText: {
+        color: COLORS.BLACK,
         alignSelf: 'center',
         fontWeight: '500'
     }

@@ -15,11 +15,13 @@ export const FirstScreenStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 26,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     descriptionText: {
         marginTop: 10,
         fontSize: 20,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     startButtonView: {
@@ -41,6 +43,7 @@ export const FirstScreenStyle = StyleSheet.create({
     },
     loginButtonText: {
         fontSize: 16,
+        color: COLORS.BLACK,
         fontWeight: '600'
     }
 });

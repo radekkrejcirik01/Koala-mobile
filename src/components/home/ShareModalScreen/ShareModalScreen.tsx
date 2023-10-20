@@ -105,8 +105,13 @@ export const ShareModalScreen = ({
                             ShareModalScreenStyle.row
                         ]}
                     >
-                        <Text>👉</Text>
-                        <Text style={ShareModalScreenStyle.marginLeft2}>
+                        <Text style={ShareModalScreenStyle.colorBlack}>👉</Text>
+                        <Text
+                            style={[
+                                ShareModalScreenStyle.marginLeft2,
+                                ShareModalScreenStyle.colorBlack
+                            ]}
+                        >
                             {item.tip1}
                         </Text>
                     </View>
@@ -116,8 +121,13 @@ export const ShareModalScreen = ({
                             ShareModalScreenStyle.row
                         ]}
                     >
-                        <Text>👉</Text>
-                        <Text style={ShareModalScreenStyle.marginLeft2}>
+                        <Text style={ShareModalScreenStyle.colorBlack}>👉</Text>
+                        <Text
+                            style={[
+                                ShareModalScreenStyle.marginLeft2,
+                                ShareModalScreenStyle.colorBlack
+                            ]}
+                        >
                             {item.tip2}
                         </Text>
                     </View>

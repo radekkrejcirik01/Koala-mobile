@@ -12,6 +12,7 @@ export const ShareModalScreenStyle = StyleSheet.create({
     messageText: {
         marginTop: 20,
         fontSize: 24,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     content: {
@@ -24,6 +25,7 @@ export const ShareModalScreenStyle = StyleSheet.create({
         paddingRight: 50
     },
     tipsTitleText: {
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     row: {
@@ -37,6 +39,9 @@ export const ShareModalScreenStyle = StyleSheet.create({
     },
     marginLeft2: {
         marginLeft: 2
+    },
+    colorBlack: {
+        color: COLORS.BLACK
     },
     sendContainer: {
         width: '45%',

@@ -14,11 +14,13 @@ export const NotificationItemStyle = StyleSheet.create({
     titleText: {
         marginTop: 5,
         fontSize: 15,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     messageText: {
         marginTop: 2,
-        fontSize: 15
+        fontSize: 15,
+        color: COLORS.BLACK
     },
     supportView: {
         paddingTop: 15,
@@ -40,5 +42,8 @@ export const NotificationItemStyle = StyleSheet.create({
     },
     marginTop8: {
         marginTop: 8
+    },
+    colorBlack: {
+        color: COLORS.BLACK
     }
 });

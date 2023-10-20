@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const TrackItemStyle = StyleSheet.create({
     container: {
@@ -15,6 +16,10 @@ export const TrackItemStyle = StyleSheet.create({
     messageText: {
         flex: 1,
         marginRight: 20,
+        color: COLORS.BLACK,
         fontWeight: '500'
+    },
+    colorBlack: {
+        color: COLORS.BLACK
     }
 });

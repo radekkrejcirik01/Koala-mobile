@@ -7,7 +7,7 @@ export const getLocalTimeFromUTCUnix = (time: number): string => {
     const today = moment().format('MM-DD');
     const yesterday = moment().subtract(1, 'days').format('MM-DD');
 
-    const localDate = moment(local).format('MM-DD');
+    const localDate = moment(local).format('DD. M.');
     const localHour = moment(local).format('HH:mm');
 
     if (localDate === today) {
