@@ -21,7 +21,7 @@ export const NotificationsScreen = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
     const dispatch = useDispatch();
 
-    const { top, bottom } = useSafeAreaInsets();
+    const { top } = useSafeAreaInsets();
 
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
@@ -103,12 +103,7 @@ export const NotificationsScreen = (): JSX.Element => {
     }, [loadNotifications, notifications]);
 
     return (
-        <View
-            style={[
-                NotificationsScreenStyle.container,
-                { paddingTop: top, paddingBottom: bottom }
-            ]}
-        >
+        <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
             <NotificationsScreenHeader />
             <FlashList
                 data={notifications}
