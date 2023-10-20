@@ -51,9 +51,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         color: COLORS.BLACK,
         fontWeight: '500'
     },
-    activityIndicator: {
-        marginTop: '10%'
-    },
     inviteContainer: {
         paddingVertical: 15,
         borderTopLeftRadius: 20,

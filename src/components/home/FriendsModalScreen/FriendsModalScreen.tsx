@@ -238,79 +238,63 @@ export const FriendsModalScreen = (): JSX.Element => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={FriendsModalScreenStyle.profilesView}>
-                {loaded ? (
-                    <>
-                        {friends?.length > 0 ? (
-                            <View style={FriendsModalScreenStyle.profileView}>
-                                <ProfilePhoto
-                                    name={friends[0].name}
-                                    size={65}
-                                />
-                                <Text style={FriendsModalScreenStyle.nameText}>
-                                    {friends[0].name}
-                                </Text>
-                            </View>
-                        ) : (
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => setAdding(true)}
-                                style={FriendsModalScreenStyle.addView}
-                            >
-                                <Icon name={IconEnum.PLUS} size={14} />
-                            </TouchableOpacity>
-                        )}
-                        {friends?.length > 1 ? (
-                            <View style={FriendsModalScreenStyle.profileView}>
-                                <ProfilePhoto
-                                    name={friends[1].name}
-                                    size={65}
-                                />
-                                <Text style={FriendsModalScreenStyle.nameText}>
-                                    {friends[1].name}
-                                </Text>
-                            </View>
-                        ) : (
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => setAdding(true)}
-                                style={FriendsModalScreenStyle.addView}
-                            >
-                                <Icon name={IconEnum.PLUS} size={14} />
-                            </TouchableOpacity>
-                        )}
-                        {friends?.length > 2 ? (
-                            <View style={FriendsModalScreenStyle.profileView}>
-                                <ProfilePhoto
-                                    name={friends[2].name}
-                                    size={65}
-                                />
-                                <Text style={FriendsModalScreenStyle.nameText}>
-                                    {friends[2].name}
-                                </Text>
-                            </View>
-                        ) : (
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => setAdding(true)}
-                                style={FriendsModalScreenStyle.addView}
-                            >
-                                <Icon name={IconEnum.PLUS} size={14} />
-                            </TouchableOpacity>
-                        )}
-                    </>
-                ) : (
-                    <ActivityIndicator
-                        color={COLORS.BUTTON_BLUE}
-                        style={FriendsModalScreenStyle.activityIndicator}
-                    />
-                )}
-            </View>
-            {loaded && (
-                <Text style={FriendsModalScreenStyle.usernameDescriptionText}>
-                    Your username is {username}
-                </Text>
+            {loaded ? (
+                <View style={FriendsModalScreenStyle.profilesView}>
+                    {friends?.length > 0 ? (
+                        <View style={FriendsModalScreenStyle.profileView}>
+                            <ProfilePhoto name={friends[0].name} size={65} />
+                            <Text style={FriendsModalScreenStyle.nameText}>
+                                {friends[0].name}
+                            </Text>
+                        </View>
+                    ) : (
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            onPress={() => setAdding(true)}
+                            style={FriendsModalScreenStyle.addView}
+                        >
+                            <Icon name={IconEnum.PLUS} size={14} />
+                        </TouchableOpacity>
+                    )}
+                    {friends?.length > 1 ? (
+                        <View style={FriendsModalScreenStyle.profileView}>
+                            <ProfilePhoto name={friends[1].name} size={65} />
+                            <Text style={FriendsModalScreenStyle.nameText}>
+                                {friends[1].name}
+                            </Text>
+                        </View>
+                    ) : (
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            onPress={() => setAdding(true)}
+                            style={FriendsModalScreenStyle.addView}
+                        >
+                            <Icon name={IconEnum.PLUS} size={14} />
+                        </TouchableOpacity>
+                    )}
+                    {friends?.length > 2 ? (
+                        <View style={FriendsModalScreenStyle.profileView}>
+                            <ProfilePhoto name={friends[2].name} size={65} />
+                            <Text style={FriendsModalScreenStyle.nameText}>
+                                {friends[2].name}
+                            </Text>
+                        </View>
+                    ) : (
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            onPress={() => setAdding(true)}
+                            style={FriendsModalScreenStyle.addView}
+                        >
+                            <Icon name={IconEnum.PLUS} size={14} />
+                        </TouchableOpacity>
+                    )}
+                </View>
+            ) : (
+                <ActivityIndicator color={COLORS.BUTTON_BLUE} />
             )}
+            <Text style={FriendsModalScreenStyle.usernameDescriptionText}>
+                Your username is {username}
+            </Text>
         </View>
     );
 };
