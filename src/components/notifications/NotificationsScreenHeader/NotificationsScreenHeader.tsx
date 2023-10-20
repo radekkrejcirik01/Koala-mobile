@@ -17,7 +17,7 @@ export const NotificationsScreenHeader = (): JSX.Element => {
                 <Icon name={IconEnum.BACK_BLUE} size={24} />
             </TouchableOpacity>
             <Text style={NotificationsScreenHeaderStyle.titleText}>
-                Notifications
+                Sharing
             </Text>
         </View>
     );

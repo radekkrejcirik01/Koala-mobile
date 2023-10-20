@@ -1,3 +1,5 @@
+import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
+
 export interface UserInterface {
     name: string;
     username: string;
@@ -8,7 +10,7 @@ export interface NotificationInterface {
     sender: string;
     name: string;
     message: string;
-    type: string;
+    type: NotificationItemEnum;
     liked?: number;
     time: number;
 }

@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
-import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
+import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
+import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 
 export const NotificationItem = ({
     item,
@@ -15,19 +16,27 @@ export const NotificationItem = ({
         onSendSupport();
     }, [onSendSupport]);
 
+    function getTitle(type: NotificationItemEnum): string {
+        if (type === NotificationItemEnum.EmotionNotificationType) {
+            return ' is sharing';
+        }
+        if (type === NotificationItemEnum.SupportNotificationType) {
+            return ' is sending support ❤️‍';
+        }
+        return '';
+    }
+
     return (
         <View style={NotificationItemStyle.container}>
             <ProfilePhoto name={item.name} size={40} />
             <Text style={NotificationItemStyle.titleText}>
                 {item.name}
-                {item.type === 'emotion'
-                    ? ' is sharing'
-                    : ' is sending support ❤️‍'}
+                {getTitle(item.type)}
             </Text>
             <Text style={NotificationItemStyle.messageText}>
                 {item.message}
             </Text>
-            {item.type === 'emotion' && (
+            {item.type === NotificationItemEnum.EmotionNotificationType && (
                 <View style={NotificationItemStyle.supportView}>
                     <TouchableOpacity
                         activeOpacity={0.7}
