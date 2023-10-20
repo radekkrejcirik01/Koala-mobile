@@ -121,7 +121,7 @@ export const NotificationsScreen = (): JSX.Element => {
                 ListEmptyComponent={
                     loaded ? (
                         <Text style={NotificationsScreenStyle.listEmptyText}>
-                            No notifications yet
+                            Nothing shared yet
                         </Text>
                     ) : (
                         <ActivityIndicator
