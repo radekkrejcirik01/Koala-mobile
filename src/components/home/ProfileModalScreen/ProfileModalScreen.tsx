@@ -138,7 +138,7 @@ export const ProfileModalScreen = (): JSX.Element => {
                 style={ProfileModalScreenStyle.accountButtonView}
             >
                 <Text style={ProfileModalScreenStyle.accountButtonText}>
-                    {showAccount ? 'Track' : 'Account'}
+                    {showAccount ? 'History' : 'Account'}
                 </Text>
             </TouchableOpacity>
             <ProfilePhoto name={name} size={80} />

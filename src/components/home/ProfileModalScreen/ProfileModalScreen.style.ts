@@ -15,6 +15,7 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     accountButtonText: {
+        fontSize: 16,
         color: COLORS.BUTTON_BLUE,
         textAlign: 'right',
         fontWeight: '500'
