@@ -3,10 +3,15 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItemStyle = StyleSheet.create({
     container: {
+        marginBottom: 5,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderBottomWidth: 0.2,
         borderBottomColor: COLORS.LIGHTGRAY
+    },
+    newItem: {
+        borderRadius: 20,
+        backgroundColor: 'lightblue'
     },
     paddingLeft: {
         paddingLeft: 8

@@ -27,7 +27,12 @@ export const NotificationItem = ({
     }
 
     return (
-        <View style={NotificationItemStyle.container}>
+        <View
+            style={[
+                NotificationItemStyle.container,
+                !item?.seen && NotificationItemStyle.newItem
+            ]}
+        >
             <ProfilePhoto name={item.name} size={40} />
             <Text style={NotificationItemStyle.titleText}>
                 {item.name}

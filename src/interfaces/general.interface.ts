@@ -13,6 +13,7 @@ export interface NotificationInterface {
     type: NotificationItemEnum;
     liked?: number;
     time: number;
+    seen: number;
 }
 
 export interface TrackInterface {
