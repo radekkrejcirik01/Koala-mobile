@@ -16,10 +16,12 @@ export const TrackItemStyle = StyleSheet.create({
     messageText: {
         flex: 1,
         marginRight: 20,
+        fontSize: 15,
         color: COLORS.BLACK,
         fontWeight: '500'
     },
-    colorBlack: {
-        color: COLORS.BLACK
+    text: {
+        fontSize: 15,
+        color: COLORS.GRAY_200
     }
 });

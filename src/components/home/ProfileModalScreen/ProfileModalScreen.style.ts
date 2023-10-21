@@ -27,8 +27,8 @@ export const ProfileModalScreenStyle = StyleSheet.create({
         fontWeight: '500'
     },
     usernameText: {
-        color: COLORS.BLACK,
-        fontSize: 18
+        fontSize: 18,
+        color: COLORS.GRAY_200
     },
     accountView: {
         width: '100%',

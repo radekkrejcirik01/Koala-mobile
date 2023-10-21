@@ -25,7 +25,7 @@ export const NotificationItemStyle = StyleSheet.create({
     messageText: {
         marginTop: 2,
         fontSize: 15,
-        color: COLORS.BLACK
+        color: COLORS.GRAY_200
     },
     supportView: {
         paddingTop: 15,

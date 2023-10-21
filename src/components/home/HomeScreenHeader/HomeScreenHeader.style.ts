@@ -12,7 +12,7 @@ export const HomeScreenHeaderStyle = StyleSheet.create({
         alignItems: 'center'
     },
     profileButtonView: {
-        marginRight: 15
+        marginHorizontal: 10
     },
     homeTitleText: {
         fontSize: 30,
