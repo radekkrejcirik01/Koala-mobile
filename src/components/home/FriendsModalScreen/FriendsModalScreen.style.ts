@@ -29,28 +29,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly'
     },
-    profileView: {
-        alignItems: 'center'
-    },
-    addView: {
-        width: 65,
-        height: 65,
-        borderRadius: 40,
-        borderWidth: 3,
-        borderColor: COLORS.LIGHTGRAY,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    addText: {
-        fontSize: 30,
-        color: COLORS.WHITE,
-        fontWeight: '600'
-    },
-    nameText: {
-        marginTop: 5,
-        color: COLORS.BLACK,
-        fontWeight: '500'
-    },
     inviteContainer: {
         paddingVertical: 15,
         borderTopLeftRadius: 20,
@@ -85,34 +63,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     friendRequestsView: {
         marginTop: 15
-    },
-    friendRequestItemView: {
-        marginHorizontal: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    friendRequestItemContent: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    friendRequestItemUsernameText: {
-        marginLeft: 5,
-        fontSize: 16,
-        color: COLORS.BLACK,
-        fontWeight: '500'
-    },
-    friendRequestItemAcceptButtonView: {
-        height: 30,
-        width: 60,
-        borderRadius: 12,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    friendRequestItemAcceptButtonText: {
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
     },
     usernameDescriptionText: {
         color: COLORS.BLACK,
