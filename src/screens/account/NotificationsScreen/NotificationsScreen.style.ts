@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const NotificationsScreenStyle = StyleSheet.create({
     container: {
@@ -6,12 +7,12 @@ export const NotificationsScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     listContainer: {
-        paddingTop: 5,
+        paddingTop: 10,
         paddingBottom: 50
     },
     listEmptyText: {
         marginTop: 100,
-        fontSize: 16,
+        color: COLORS.GRAY_200,
         alignSelf: 'center',
         fontWeight: '500'
     },

@@ -28,6 +28,7 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     },
     usernameText: {
         fontSize: 18,
+        marginBottom: 20,
         color: COLORS.GRAY_200
     },
     accountView: {
@@ -50,15 +51,15 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     historyView: {
         width: '100%',
         flex: 1,
-        paddingTop: 40,
         paddingHorizontal: 20
     },
     historyListContainer: {
+        paddingTop: 20,
         paddingBottom: 50
     },
     listEmptyText: {
         marginTop: 100,
-        fontSize: 16,
+        color: COLORS.GRAY_200,
         alignSelf: 'center',
         fontWeight: '500'
     },

@@ -21,7 +21,6 @@ export const TrackItemStyle = StyleSheet.create({
         fontWeight: '500'
     },
     text: {
-        fontSize: 15,
         color: COLORS.GRAY_200
     }
 });

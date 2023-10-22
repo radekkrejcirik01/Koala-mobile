@@ -23,7 +23,6 @@ import {
 import { InvitePostInterface } from '@interfaces/post/Post.interface';
 import { UserInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
-import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import COLORS from '@constants/COLORS';
 import { ReducerProps } from '@store/index/index.props';
 import { MessagingService } from '@utils/general/MessagingService';
@@ -174,7 +173,7 @@ export const FriendsModalScreen = (): JSX.Element => {
                         ))}
                     </View>
                 ) : (
-                    <Text style={NotificationsScreenStyle.listEmptyText}>
+                    <Text style={FriendsModalScreenStyle.listEmptyText}>
                         No friend requests at the moment
                     </Text>
                 )}

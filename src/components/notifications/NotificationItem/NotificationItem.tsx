@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
@@ -9,12 +9,18 @@ export const NotificationItem = ({
     item,
     onSendSupport
 }: NotificationItemProps): JSX.Element => {
-    const [liked, setLiked] = useState<boolean>(!!item?.liked);
+    const [liked, setLiked] = useState<boolean>();
+
+    useEffect(() => {
+        setLiked(!!item?.liked);
+    }, [item?.liked]);
 
     const sendSupport = useCallback(() => {
         setLiked(true);
         onSendSupport();
     }, [onSendSupport]);
+
+    const unseen = useMemo((): boolean => !item?.seen, [item?.seen]);
 
     function getTitle(type: NotificationItemEnum): string {
         if (type === NotificationItemEnum.EmotionNotificationType) {
@@ -27,18 +33,21 @@ export const NotificationItem = ({
     }
 
     return (
-        <View
-            style={[
-                NotificationItemStyle.container,
-                !item?.seen && NotificationItemStyle.newItem
-            ]}
-        >
-            <ProfilePhoto name={item.name} size={40} />
+        <View style={NotificationItemStyle.container}>
+            <View style={NotificationItemStyle.profileView}>
+                {unseen && <View style={NotificationItemStyle.newItem} />}
+                <ProfilePhoto name={item.name} size={40} />
+            </View>
             <Text style={NotificationItemStyle.titleText}>
                 {item.name}
                 {getTitle(item.type)}
             </Text>
-            <Text style={NotificationItemStyle.messageText}>
+            <Text
+                style={[
+                    NotificationItemStyle.messageText,
+                    unseen && NotificationItemStyle.colorBlack
+                ]}
+            >
                 {item.message}
             </Text>
             {item.type === NotificationItemEnum.EmotionNotificationType && (

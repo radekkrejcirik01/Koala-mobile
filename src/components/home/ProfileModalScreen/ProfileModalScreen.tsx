@@ -134,7 +134,7 @@ export const ProfileModalScreen = (): JSX.Element => {
             ]}
         >
             <TouchableOpacity
-                onPress={() => setShowAccount(!showAccount)}
+                onPress={() => setShowAccount((prevState) => !prevState)}
                 style={ProfileModalScreenStyle.accountButtonView}
             >
                 <Text style={ProfileModalScreenStyle.accountButtonText}>

@@ -4,14 +4,21 @@ import COLORS from '@constants/COLORS';
 export const NotificationItemStyle = StyleSheet.create({
     container: {
         marginBottom: 5,
-        paddingVertical: 10,
+        paddingBottom: 20,
         paddingHorizontal: 20,
         borderBottomWidth: 0.2,
         borderBottomColor: COLORS.LIGHTGRAY
     },
+    profileView: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
     newItem: {
-        borderRadius: 20,
-        backgroundColor: 'lightblue'
+        height: 10,
+        width: 10,
+        marginRight: 8,
+        borderRadius: 10,
+        backgroundColor: COLORS.BUTTON_BLUE
     },
     paddingLeft: {
         paddingLeft: 8

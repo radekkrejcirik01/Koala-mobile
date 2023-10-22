@@ -64,8 +64,14 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     friendRequestsView: {
         marginTop: 15
     },
+    listEmptyText: {
+        marginTop: 100,
+        color: COLORS.GRAY_200,
+        alignSelf: 'center',
+        fontWeight: '500'
+    },
     usernameDescriptionText: {
-        color: COLORS.BLACK,
+        color: COLORS.GRAY_200,
         alignSelf: 'center',
         fontWeight: '500'
     }
