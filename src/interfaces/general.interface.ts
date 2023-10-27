@@ -1,6 +1,7 @@
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 export interface UserInterface {
+    id?: number;
     name: string;
     username: string;
 }

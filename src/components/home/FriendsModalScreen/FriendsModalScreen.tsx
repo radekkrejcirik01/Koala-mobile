@@ -10,8 +10,10 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import { FriendsModalScreenStyle } from '@components/home/FriendsModalScreen/FriendsModalScreen.style';
 import {
+    deleteRequest,
     getRequest,
     postRequest,
     putRequest
@@ -33,6 +35,7 @@ export const FriendsModalScreen = (): JSX.Element => {
     const { username } = useSelector((state: ReducerProps) => state.user.user);
 
     const { bottom } = useSafeAreaInsets();
+    const { showActionSheetWithOptions } = useActionSheet();
 
     const [friends, setFriends] = useState<UserInterface[]>([]);
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -108,6 +111,54 @@ export const FriendsModalScreen = (): JSX.Element => {
             }
         });
     };
+
+    const removeFriend = useCallback(
+        (id: number) => {
+            deleteRequest<ResponseInterface>(`friend/${id}`).subscribe(
+                (response: ResponseInterface) => {
+                    if (response?.status) {
+                        loadFriends();
+                    }
+                }
+            );
+        },
+        [loadFriends]
+    );
+
+    const openFriendActions = useCallback(
+        (id: number, name: string) => {
+            const options = ['Remove friend', 'Cancel'];
+
+            showActionSheetWithOptions(
+                {
+                    options,
+                    cancelButtonIndex: 1,
+                    userInterfaceStyle: 'light',
+                    title: name
+                },
+                (selectedIndex: number) => {
+                    if (selectedIndex === 0) {
+                        removeFriend(id);
+                    }
+                }
+            );
+        },
+        [removeFriend, showActionSheetWithOptions]
+    );
+
+    const onFriendPress = useCallback(
+        (id: number, name: string) => {
+            openFriendActions(id, name);
+        },
+        [openFriendActions]
+    );
+
+    const onFriendLongPress = useCallback(
+        (id: number, name: string) => {
+            openFriendActions(id, name);
+        },
+        [openFriendActions]
+    );
 
     if (adding) {
         return (
@@ -203,14 +254,32 @@ export const FriendsModalScreen = (): JSX.Element => {
                     <FriendItem
                         name={!!friends?.length && friends[0]?.name}
                         onAddPress={() => setAdding(true)}
+                        onPress={() =>
+                            onFriendPress(friends[0]?.id, friends[0]?.name)
+                        }
+                        onLongPress={() =>
+                            onFriendLongPress(friends[0]?.id, friends[0]?.name)
+                        }
                     />
                     <FriendItem
                         name={!!friends?.length && friends[1]?.name}
                         onAddPress={() => setAdding(true)}
+                        onPress={() =>
+                            onFriendPress(friends[1]?.id, friends[1]?.name)
+                        }
+                        onLongPress={() =>
+                            onFriendLongPress(friends[1]?.id, friends[1]?.name)
+                        }
                     />
                     <FriendItem
                         name={!!friends?.length && friends[2]?.name}
                         onAddPress={() => setAdding(true)}
+                        onPress={() =>
+                            onFriendPress(friends[2]?.id, friends[2]?.name)
+                        }
+                        onLongPress={() =>
+                            onFriendLongPress(friends[2]?.id, friends[2]?.name)
+                        }
                     />
                 </View>
             ) : (

@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { FriendItemProps } from '@components/friends/FriendItem/FriendItem.props';
 import { FriendItemStyle } from '@components/friends/FriendItem/FriendItem.style';
@@ -8,13 +8,20 @@ import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const FriendItem = ({
     name,
-    onAddPress
+    onAddPress,
+    onPress,
+    onLongPress
 }: FriendItemProps): JSX.Element =>
     name ? (
-        <View style={FriendItemStyle.container}>
+        <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={FriendItemStyle.container}
+        >
             <ProfilePhoto name={name} size={65} />
             <Text style={FriendItemStyle.nameText}>{name}</Text>
-        </View>
+        </TouchableOpacity>
     ) : (
         <TouchableOpacity
             activeOpacity={0.9}
