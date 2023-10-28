@@ -54,7 +54,6 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     tipInput: {
         height: 50,
         marginTop: 10,
-        paddingTop: 10,
         paddingHorizontal: 15,
         borderRadius: 20,
         fontSize: 16,

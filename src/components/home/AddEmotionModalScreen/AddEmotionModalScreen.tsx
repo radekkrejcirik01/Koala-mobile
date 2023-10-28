@@ -69,19 +69,21 @@ export const AddEmotionModalScreen = ({
                     style={AddEmotionModalScreenStyle.messageInput}
                     multiline
                 />
-                <Text style={AddEmotionModalScreenStyle.tipText}>Can help</Text>
+                <Text style={AddEmotionModalScreenStyle.tipText}>
+                    Can help 1
+                </Text>
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip1}
                     style={AddEmotionModalScreenStyle.tipInput}
-                    multiline
                 />
-                <Text style={AddEmotionModalScreenStyle.tipText}>Can help</Text>
+                <Text style={AddEmotionModalScreenStyle.tipText}>
+                    Can help 2
+                </Text>
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip2}
                     style={AddEmotionModalScreenStyle.tipInput}
-                    multiline
                 />
             </ScrollView>
             <View style={AddEmotionModalScreenStyle.addContainer}>
