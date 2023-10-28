@@ -5,7 +5,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        paddingTop: '5%',
+        paddingTop: '10%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
@@ -14,7 +14,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         paddingBottom: 50
     },
     emotionText: {
-        fontSize: 18,
+        fontSize: 16,
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
@@ -23,14 +23,14 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         marginTop: 10,
         paddingHorizontal: 15,
         borderRadius: 20,
-        fontSize: 20,
-        color: COLORS.BLACK,
+        fontSize: 16,
+        color: COLORS.GRAY_300,
         backgroundColor: COLORS.LIGHTGRAY,
-        fontWeight: 'bold'
+        fontWeight: '500'
     },
     messageText: {
         marginTop: 10,
-        fontSize: 18,
+        fontSize: 16,
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
@@ -40,10 +40,10 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         paddingTop: 10,
         paddingHorizontal: 15,
         borderRadius: 20,
-        fontSize: 20,
-        color: COLORS.BLACK,
+        fontSize: 16,
+        color: COLORS.GRAY_300,
         backgroundColor: COLORS.LIGHTGRAY,
-        fontWeight: 'bold'
+        fontWeight: '500'
     },
     tipText: {
         marginTop: 10,
@@ -52,13 +52,13 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         fontWeight: '500'
     },
     tipInput: {
-        height: 60,
+        height: 50,
         marginTop: 10,
         paddingTop: 10,
         paddingHorizontal: 15,
         borderRadius: 20,
-        fontSize: 18,
-        color: COLORS.BLACK,
+        fontSize: 16,
+        color: COLORS.GRAY_300,
         backgroundColor: COLORS.LIGHTGRAY,
         fontWeight: '500'
     },

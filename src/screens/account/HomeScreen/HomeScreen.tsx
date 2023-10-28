@@ -116,17 +116,22 @@ export const HomeScreen = (): JSX.Element => {
         [removeEmotion, showActionSheetWithOptions]
     );
 
+    const hideModalAndKeyboard = useCallback(() => {
+        Keyboard.dismiss();
+        hideModal();
+    }, [hideModal]);
+
     const onAddItemPress = useCallback(() => {
         setModalContent(
             <AddEmotionModalScreen
                 onAdded={() => {
                     loadEmotions();
-                    hideModal();
+                    hideModalAndKeyboard();
                 }}
             />
         );
         showModal();
-    }, [hideModal, loadEmotions, showModal]);
+    }, [hideModalAndKeyboard, loadEmotions, showModal]);
 
     const onFriendsPress = useCallback(() => {
         setModalContent(<FriendsModalScreen />);
@@ -152,6 +157,7 @@ export const HomeScreen = (): JSX.Element => {
                             activeOpacity={0.9}
                             onPress={() => onItemPress(item)}
                             onLongPress={() => onItemLongPress(item)}
+                            delayLongPress={150}
                             style={HomeScreenStyle.buttonView}
                         >
                             <Text style={HomeScreenStyle.buttonText}>
@@ -178,10 +184,7 @@ export const HomeScreen = (): JSX.Element => {
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
-                onClose={() => {
-                    hideModal();
-                    Keyboard.dismiss();
-                }}
+                onClose={hideModalAndKeyboard}
                 style={HomeScreenStyle.modal}
             />
         </View>

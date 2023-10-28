@@ -17,6 +17,7 @@ export const FriendItem = ({
             activeOpacity={0.9}
             onPress={onPress}
             onLongPress={onLongPress}
+            delayLongPress={150}
             style={FriendItemStyle.container}
         >
             <ProfilePhoto name={name} size={65} />
