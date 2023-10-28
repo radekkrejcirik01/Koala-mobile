@@ -134,9 +134,15 @@ export const HomeScreen = (): JSX.Element => {
     }, [hideModalAndKeyboard, loadEmotions, showModal]);
 
     const onFriendsPress = useCallback(() => {
-        setModalContent(<FriendsModalScreen />);
+        setModalContent(
+            <FriendsModalScreen
+                onActionSheetOpened={() => {
+                    hideModalAndKeyboard();
+                }}
+            />
+        );
         showModal();
-    }, [showModal]);
+    }, [hideModalAndKeyboard, showModal]);
 
     return (
         <View

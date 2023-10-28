@@ -30,8 +30,11 @@ import { ReducerProps } from '@store/index/index.props';
 import { MessagingService } from '@utils/general/MessagingService';
 import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { FriendRequestItem } from '@components/friends/FriendRequestItem/FriendRequestItem';
+import { FriendsModalScreenProps } from '@components/home/FriendsModalScreen/FriendsModalScreen.props';
 
-export const FriendsModalScreen = (): JSX.Element => {
+export const FriendsModalScreen = ({
+    onActionSheetOpened
+}: FriendsModalScreenProps): JSX.Element => {
     const { username } = useSelector((state: ReducerProps) => state.user.user);
 
     const { bottom } = useSafeAreaInsets();
@@ -142,8 +145,11 @@ export const FriendsModalScreen = (): JSX.Element => {
                     }
                 }
             );
+            if (onActionSheetOpened && Platform.OS !== 'ios') {
+                onActionSheetOpened();
+            }
         },
-        [removeFriend, showActionSheetWithOptions]
+        [onActionSheetOpened, removeFriend, showActionSheetWithOptions]
     );
 
     const onFriendPress = useCallback(
