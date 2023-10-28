@@ -1,6 +1,7 @@
 import {
-    HistoryInterface,
+    EmotionInterface,
     NotificationInterface,
+    TrackInterface,
     UserInterface
 } from '@interfaces/general.interface';
 
@@ -19,6 +20,7 @@ export interface ResponseUserGetInterface {
     status: string;
     message: string;
     data?: UserInterface;
+    emotions?: EmotionInterface[];
 }
 
 export interface ResponseFriendsGetInterface {
@@ -36,11 +38,17 @@ export interface ResponseNotificationsGetInterface {
 export interface ResponseHistoryGetInterface {
     status: string;
     message: string;
-    data?: HistoryInterface[];
+    data?: TrackInterface[];
 }
 
 export interface ResponseUnseenNotificationsGetInterface {
     status: string;
     message: string;
     unseenNotifications?: number;
+}
+
+export interface ResponseEmotionsGetInterface {
+    status: string;
+    message: string;
+    data: EmotionInterface[];
 }

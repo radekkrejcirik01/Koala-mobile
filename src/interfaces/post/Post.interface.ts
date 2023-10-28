@@ -16,6 +16,13 @@ export interface DevicePostInterface {
     deviceToken: string;
 }
 
+export interface EmotionPostInterface {
+    emotion: string;
+    message: string;
+    tip1: string;
+    tip2: string;
+}
+
 export interface EmotionNotificationPostInterface {
     receivers: string[];
     name: string;

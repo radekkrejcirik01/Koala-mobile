@@ -71,7 +71,7 @@ export const ShareModalScreen = ({
                 {
                     receivers: selectedFriends.current,
                     name,
-                    message: item.description
+                    message: item.message
                 }
             ).subscribe((response: ResponseInterface) => {
                 if (response?.status) {
@@ -92,46 +92,56 @@ export const ShareModalScreen = ({
             ]}
         >
             <Text style={ShareModalScreenStyle.messageText}>
-                {item.description}
+                {item.message}
             </Text>
             <View style={ShareModalScreenStyle.content}>
-                <View style={ShareModalScreenStyle.tipsView}>
-                    <Text style={ShareModalScreenStyle.tipsTitleText}>
-                        Can help:
-                    </Text>
-                    <View
-                        style={[
-                            ShareModalScreenStyle.marginTop10,
-                            ShareModalScreenStyle.row
-                        ]}
-                    >
-                        <Text style={ShareModalScreenStyle.colorBlack}>👉</Text>
-                        <Text
-                            style={[
-                                ShareModalScreenStyle.marginLeft2,
-                                ShareModalScreenStyle.colorBlack
-                            ]}
-                        >
-                            {item.tip1}
+                {(!!item?.tip1 || !!item?.tip2) && (
+                    <View style={ShareModalScreenStyle.tipsView}>
+                        <Text style={ShareModalScreenStyle.tipsTitleText}>
+                            Can help:
                         </Text>
+                        {!!item?.tip1 && (
+                            <View
+                                style={[
+                                    ShareModalScreenStyle.marginTop10,
+                                    ShareModalScreenStyle.row
+                                ]}
+                            >
+                                <Text style={ShareModalScreenStyle.colorBlack}>
+                                    👉
+                                </Text>
+                                <Text
+                                    style={[
+                                        ShareModalScreenStyle.marginLeft2,
+                                        ShareModalScreenStyle.colorBlack
+                                    ]}
+                                >
+                                    {item.tip1}
+                                </Text>
+                            </View>
+                        )}
+                        {!!item?.tip2 && (
+                            <View
+                                style={[
+                                    ShareModalScreenStyle.marginTop5,
+                                    ShareModalScreenStyle.row
+                                ]}
+                            >
+                                <Text style={ShareModalScreenStyle.colorBlack}>
+                                    👉
+                                </Text>
+                                <Text
+                                    style={[
+                                        ShareModalScreenStyle.marginLeft2,
+                                        ShareModalScreenStyle.colorBlack
+                                    ]}
+                                >
+                                    {item.tip2}
+                                </Text>
+                            </View>
+                        )}
                     </View>
-                    <View
-                        style={[
-                            ShareModalScreenStyle.marginTop5,
-                            ShareModalScreenStyle.row
-                        ]}
-                    >
-                        <Text style={ShareModalScreenStyle.colorBlack}>👉</Text>
-                        <Text
-                            style={[
-                                ShareModalScreenStyle.marginLeft2,
-                                ShareModalScreenStyle.colorBlack
-                            ]}
-                        >
-                            {item.tip2}
-                        </Text>
-                    </View>
-                </View>
+                )}
                 <View style={ShareModalScreenStyle.sendContainer}>
                     {loaded ? (
                         <>

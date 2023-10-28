@@ -21,6 +21,7 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     buttonView: {
         margin: 5,
+        maxHeight: 60,
         paddingVertical: 10,
         paddingHorizontal: 12,
         borderWidth: 2,

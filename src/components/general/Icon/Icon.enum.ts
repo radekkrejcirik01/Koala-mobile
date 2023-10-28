@@ -34,6 +34,7 @@ import Sent from '@assets/webp/Sent.webp';
 import SentBlue from '@assets/webp/SentBlue.webp';
 import SentRead from '@assets/webp/SentRead.webp';
 import Settings from '@assets/webp/Settings.webp';
+import Trash from '@assets/webp/Trash.webp';
 import Tune from '@assets/webp/Tune.webp';
 import Unlock from '@assets/webp/Unlock.webp';
 
@@ -74,6 +75,7 @@ export enum IconEnum {
     SENT_READ = 'SentRead',
     SENT = 'Sent',
     SETTINGS = 'Settings',
+    TRASH = 'TRASH',
     TUNE = 'Tune',
     UNLOCK = 'Unlock'
 }
@@ -115,6 +117,7 @@ export const ICONS = {
     [IconEnum.SENT_READ]: SentRead,
     [IconEnum.SENT]: Sent,
     [IconEnum.SETTINGS]: Settings,
+    [IconEnum.TRASH]: Trash,
     [IconEnum.TUNE]: Tune,
     [IconEnum.UNLOCK]: Unlock
 };

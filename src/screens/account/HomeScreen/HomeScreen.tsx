@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     Keyboard,
     ScrollView,
@@ -7,30 +7,59 @@ import {
     View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useModal } from '@hooks/useModal';
 import { useNotifications } from '@hooks/useNotifications';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
-import { RecordItem } from '@screens/account/HomeScreen/HomeScreen.props';
 import { Modal } from '@components/general/Modal/Modal';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
 import { ProfileModalScreen } from '@components/home/ProfileModalScreen/ProfileModalScreen';
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
-import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
 import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
+import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
+import { ReducerProps } from '@store/index/index.props';
+import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
+import { EmotionInterface } from '@interfaces/general.interface';
+import { deleteRequest, getRequest } from '@utils/Axios/Axios.service';
+import {
+    ResponseEmotionsGetInterface,
+    ResponseInterface
+} from '@interfaces/response/Response.interface';
 
 export const HomeScreen = (): JSX.Element => {
+    const { emotions } = useSelector((state: ReducerProps) => state.user);
+
     useNotifications();
     const { top, bottom } = useSafeAreaInsets();
+    const { showActionSheetWithOptions } = useActionSheet();
     const { modalVisible, showModal, hideModal } = useModal();
+
     const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
+
+    const [data, setData] = useState<EmotionInterface[]>([]);
+
+    useEffect(() => {
+        setData([...DATA, ...(emotions || [])]);
+    }, [emotions]);
 
     const openProfile = useCallback(() => {
         setModalContent(<ProfileModalScreen />);
         showModal();
     }, [showModal]);
 
+    const loadEmotions = useCallback(() => {
+        getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
+            (response: ResponseEmotionsGetInterface) => {
+                if (response?.status) {
+                    setData([...DATA, ...(response?.data || [])]);
+                }
+            }
+        );
+    }, []);
+
     const onItemPress = useCallback(
-        (item: RecordItem) => {
+        (item: EmotionInterface) => {
             setModalContent(
                 <ShareModalScreen
                     item={item}
@@ -47,6 +76,57 @@ export const HomeScreen = (): JSX.Element => {
         },
         [hideModal, showModal]
     );
+
+    const removeEmotion = useCallback(
+        (id: number) => {
+            deleteRequest<ResponseInterface>(`emotion/${id}`).subscribe(
+                (response: ResponseInterface) => {
+                    if (response?.status) {
+                        loadEmotions();
+                    }
+                }
+            );
+        },
+        [loadEmotions]
+    );
+
+    const onItemLongPress = useCallback(
+        (item: EmotionInterface) => {
+            // Enable removing only custom emotions
+            if (!item?.isCustom) {
+                return;
+            }
+
+            const options = ['Remove emotion', 'Cancel'];
+
+            showActionSheetWithOptions(
+                {
+                    options,
+                    cancelButtonIndex: 1,
+                    userInterfaceStyle: 'light',
+                    title: item?.emotion
+                },
+                (selectedIndex: number) => {
+                    if (selectedIndex === 0) {
+                        removeEmotion(item.id);
+                    }
+                }
+            );
+        },
+        [removeEmotion, showActionSheetWithOptions]
+    );
+
+    const onAddItemPress = useCallback(() => {
+        setModalContent(
+            <AddEmotionModalScreen
+                onAdded={() => {
+                    loadEmotions();
+                    hideModal();
+                }}
+            />
+        );
+        showModal();
+    }, [hideModal, loadEmotions, showModal]);
 
     const onFriendsPress = useCallback(() => {
         setModalContent(<FriendsModalScreen />);
@@ -66,11 +146,12 @@ export const HomeScreen = (): JSX.Element => {
                 style={HomeScreenStyle.scrollView}
             >
                 <View style={HomeScreenStyle.contentView}>
-                    {DATA.map((item) => (
+                    {data.map((item) => (
                         <TouchableOpacity
                             key={item.id}
                             activeOpacity={0.9}
                             onPress={() => onItemPress(item)}
+                            onLongPress={() => onItemLongPress(item)}
                             style={HomeScreenStyle.buttonView}
                         >
                             <Text style={HomeScreenStyle.buttonText}>
@@ -78,6 +159,13 @@ export const HomeScreen = (): JSX.Element => {
                             </Text>
                         </TouchableOpacity>
                     ))}
+                    <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={onAddItemPress}
+                        style={HomeScreenStyle.buttonView}
+                    >
+                        <Text style={HomeScreenStyle.buttonText}>Add +</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
             <TouchableOpacity

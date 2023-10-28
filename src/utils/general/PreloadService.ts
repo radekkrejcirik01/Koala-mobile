@@ -2,7 +2,11 @@ import SplashScreen from 'react-native-splash-screen';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import store from '@store/index/index';
-import { setUserStateAction, setUserToken } from '@store/UserReducer';
+import {
+    setUserEmotionsStateAction,
+    setUserStateAction,
+    setUserToken
+} from '@store/UserReducer';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseUserGetInterface } from '@interfaces/response/Response.interface';
 
@@ -23,6 +27,9 @@ class PreloadServiceSingleton {
             (response: ResponseUserGetInterface) => {
                 if (response?.status) {
                     store.dispatch(setUserStateAction(response.data));
+                    store.dispatch(
+                        setUserEmotionsStateAction(response.emotions)
+                    );
                 }
                 SplashScreen.hide();
             }

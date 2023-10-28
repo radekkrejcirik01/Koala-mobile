@@ -18,7 +18,8 @@ export const ShareModalScreenStyle = StyleSheet.create({
     content: {
         flexGrow: 1,
         paddingTop: 25,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     tipsView: {
         flex: 1,

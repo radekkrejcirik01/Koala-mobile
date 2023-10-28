@@ -1,6 +1,6 @@
-import { RecordItem } from '@screens/account/HomeScreen/HomeScreen.props';
+import { EmotionInterface } from '@interfaces/general.interface';
 
 export interface ShareModalScreenProps {
-    item: RecordItem;
+    item: EmotionInterface;
     onAddFriendPress: () => void;
 }
