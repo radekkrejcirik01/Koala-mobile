@@ -258,7 +258,7 @@ export const FriendsModalScreen = ({
                 </TouchableOpacity>
             </View>
             {loaded ? (
-                <View style={FriendsModalScreenStyle.profilesView}>
+                <View style={FriendsModalScreenStyle.profilesContainer}>
                     {[...Array(5)].map((value, index) => (
                         <View
                             key={value + index.toString()}
