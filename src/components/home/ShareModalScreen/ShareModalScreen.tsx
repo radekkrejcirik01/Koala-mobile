@@ -146,35 +146,63 @@ export const ShareModalScreen = ({
                     {loaded ? (
                         <>
                             <View style={ShareModalScreenStyle.selectView}>
-                                {friends?.length
-                                    ? friends?.map((value) => (
-                                          <ShareFriendItem
-                                              key={value.username}
-                                              item={{
-                                                  name: value.name,
-                                                  username: value.username
-                                              }}
-                                              onSelect={() =>
-                                                  onFriendSelect(value.username)
-                                              }
-                                              sent={sent}
-                                          />
-                                      ))
-                                    : [...Array(3)].map((value, index) => (
-                                          <TouchableOpacity
-                                              key={value + index.toString()}
-                                              activeOpacity={0.9}
-                                              onPress={onAddFriendPress}
-                                              style={
-                                                  ShareModalScreenStyle.addButtonView
-                                              }
-                                          >
-                                              <Icon
-                                                  name={IconEnum.PLUS}
-                                                  size={12}
-                                              />
-                                          </TouchableOpacity>
-                                      ))}
+                                {friends?.length ? (
+                                    friends?.map((value, index) => {
+                                        // Center third item in the middle
+                                        if (
+                                            friends?.length === 5 &&
+                                            index === 2
+                                        ) {
+                                            return (
+                                                <View
+                                                    key={value.username}
+                                                    style={
+                                                        ShareModalScreenStyle.middleView
+                                                    }
+                                                >
+                                                    <ShareFriendItem
+                                                        item={{
+                                                            name: value.name,
+                                                            username:
+                                                                value.username
+                                                        }}
+                                                        onSelect={() =>
+                                                            onFriendSelect(
+                                                                value.username
+                                                            )
+                                                        }
+                                                        sent={sent}
+                                                    />
+                                                </View>
+                                            );
+                                        }
+                                        return (
+                                            <ShareFriendItem
+                                                key={value.username}
+                                                item={{
+                                                    name: value.name,
+                                                    username: value.username
+                                                }}
+                                                onSelect={() =>
+                                                    onFriendSelect(
+                                                        value.username
+                                                    )
+                                                }
+                                                sent={sent}
+                                            />
+                                        );
+                                    })
+                                ) : (
+                                    <TouchableOpacity
+                                        activeOpacity={0.9}
+                                        onPress={onAddFriendPress}
+                                        style={
+                                            ShareModalScreenStyle.addButtonView
+                                        }
+                                    >
+                                        <Icon name={IconEnum.PLUS} size={12} />
+                                    </TouchableOpacity>
+                                )}
                             </View>
                             {friends?.length ? (
                                 <TouchableOpacity

@@ -31,6 +31,8 @@ import { MessagingService } from '@utils/general/MessagingService';
 import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { FriendRequestItem } from '@components/friends/FriendRequestItem/FriendRequestItem';
 import { FriendsModalScreenProps } from '@components/home/FriendsModalScreen/FriendsModalScreen.props';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const FriendsModalScreen = ({
     onActionSheetOpened
@@ -257,36 +259,38 @@ export const FriendsModalScreen = ({
             </View>
             {loaded ? (
                 <View style={FriendsModalScreenStyle.profilesView}>
-                    <FriendItem
-                        name={!!friends?.length && friends[0]?.name}
-                        onAddPress={() => setAdding(true)}
-                        onPress={() =>
-                            onFriendPress(friends[0]?.id, friends[0]?.name)
-                        }
-                        onLongPress={() =>
-                            onFriendLongPress(friends[0]?.id, friends[0]?.name)
-                        }
-                    />
-                    <FriendItem
-                        name={!!friends?.length && friends[1]?.name}
-                        onAddPress={() => setAdding(true)}
-                        onPress={() =>
-                            onFriendPress(friends[1]?.id, friends[1]?.name)
-                        }
-                        onLongPress={() =>
-                            onFriendLongPress(friends[1]?.id, friends[1]?.name)
-                        }
-                    />
-                    <FriendItem
-                        name={!!friends?.length && friends[2]?.name}
-                        onAddPress={() => setAdding(true)}
-                        onPress={() =>
-                            onFriendPress(friends[2]?.id, friends[2]?.name)
-                        }
-                        onLongPress={() =>
-                            onFriendLongPress(friends[2]?.id, friends[2]?.name)
-                        }
-                    />
+                    {[...Array(5)].map((value, index) => (
+                        <View
+                            key={value + index.toString()}
+                            style={FriendsModalScreenStyle.profileView}
+                        >
+                            {!!friends?.length && friends[index] ? (
+                                <FriendItem
+                                    name={friends[index]?.name}
+                                    onPress={() =>
+                                        onFriendPress(
+                                            friends[index]?.id,
+                                            friends[index]?.name
+                                        )
+                                    }
+                                    onLongPress={() =>
+                                        onFriendLongPress(
+                                            friends[index]?.id,
+                                            friends[index]?.name
+                                        )
+                                    }
+                                />
+                            ) : (
+                                <TouchableOpacity
+                                    activeOpacity={0.9}
+                                    onPress={() => setAdding(true)}
+                                    style={FriendsModalScreenStyle.addView}
+                                >
+                                    <Icon name={IconEnum.PLUS} size={14} />
+                                </TouchableOpacity>
+                            )}
+                        </View>
+                    ))}
                 </View>
             ) : (
                 <ActivityIndicator color={COLORS.BUTTON_BLUE} />

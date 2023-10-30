@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const FriendsModalScreenStyle = StyleSheet.create({
     container: {
-        height: '40%',
+        height: '42%',
         paddingTop: 15,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -26,8 +26,25 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     profilesView: {
+        paddingHorizontal: 40,
         flexDirection: 'row',
-        justifyContent: 'space-evenly'
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    profileView: {
+        height: 85,
+        marginHorizontal: 10,
+        marginBottom: 10
+    },
+    addView: {
+        width: 65,
+        height: 65,
+        borderRadius: 40,
+        borderWidth: 3,
+        borderColor: COLORS.LIGHTGRAY,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     inviteContainer: {
         paddingVertical: 15,
