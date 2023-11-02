@@ -233,6 +233,7 @@ export const ShareModalScreen = ({
                                     onPress={onAddFriendPress}
                                 >
                                     <Text
+                                        adjustsFontSizeToFit
                                         style={
                                             ShareModalScreenStyle.noAddedDescription
                                         }

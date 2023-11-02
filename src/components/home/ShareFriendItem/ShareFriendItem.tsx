@@ -35,7 +35,9 @@ export const ShareFriendItem = ({
                         }
                 ]}
             />
-            <Text style={ShareFriendItemStyle.nameText}>{item.name}</Text>
+            <Text adjustsFontSizeToFit style={ShareFriendItemStyle.nameText}>
+                {item.name}
+            </Text>
         </TouchableOpacity>
     );
 };

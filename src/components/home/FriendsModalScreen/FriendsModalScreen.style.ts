@@ -26,7 +26,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     profilesContainer: {
-        maxWidth: 300,
+        maxWidth: 350,
         alignSelf: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -35,7 +35,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     profileView: {
         height: 85,
-        marginHorizontal: 10,
+        marginHorizontal: 20,
         marginBottom: 10
     },
     addView: {
