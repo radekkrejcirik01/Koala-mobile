@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
@@ -7,33 +7,26 @@ import { NotificationItemProps } from '@components/notifications/NotificationIte
 
 export const NotificationItem = ({
     item,
-    onSendSupport
+    onPress
 }: NotificationItemProps): JSX.Element => {
-    const [liked, setLiked] = useState<boolean>();
-
-    useEffect(() => {
-        setLiked(!!item?.liked);
-    }, [item?.liked]);
-
-    const sendSupport = useCallback(() => {
-        setLiked(true);
-        onSendSupport();
-    }, [onSendSupport]);
-
     const unseen = useMemo((): boolean => !item?.seen, [item?.seen]);
 
     function getTitle(type: NotificationItemEnum): string {
         if (type === NotificationItemEnum.EmotionNotificationType) {
             return ' is sharing';
         }
-        if (type === NotificationItemEnum.SupportNotificationType) {
-            return ' is sending support ❤️‍';
+        if (type === NotificationItemEnum.MessageNotificationType) {
+            return ' is sending message';
         }
         return '';
     }
 
     return (
-        <View style={NotificationItemStyle.container}>
+        <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onPress}
+            style={NotificationItemStyle.container}
+        >
             <View style={NotificationItemStyle.profileView}>
                 {unseen && <View style={NotificationItemStyle.newItem} />}
                 <ProfilePhoto name={item.name} size={40} />
@@ -50,37 +43,6 @@ export const NotificationItem = ({
             >
                 {item.message}
             </Text>
-            {item.type === NotificationItemEnum.EmotionNotificationType && (
-                <View style={NotificationItemStyle.supportView}>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        disabled={liked}
-                        onPress={sendSupport}
-                        style={NotificationItemStyle.likeButtonView}
-                    >
-                        <Text
-                            style={[
-                                liked
-                                    ? NotificationItemStyle.fontSize20
-                                    : NotificationItemStyle.fontSize26,
-                                NotificationItemStyle.colorBlack
-                            ]}
-                        >
-                            {liked ? '❤️‍' : '♡'}
-                        </Text>
-                    </TouchableOpacity>
-                    <Text
-                        style={[
-                            NotificationItemStyle.marginTop8,
-                            NotificationItemStyle.colorBlack
-                        ]}
-                    >
-                        {liked
-                            ? `${item.name} received your support`
-                            : 'Send support'}
-                    </Text>
-                </View>
-            )}
-        </View>
+        </TouchableOpacity>
     );
 };

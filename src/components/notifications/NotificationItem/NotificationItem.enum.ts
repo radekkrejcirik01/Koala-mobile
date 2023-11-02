@@ -1,4 +1,4 @@
 export enum NotificationItemEnum {
     EmotionNotificationType = 'emotion',
-    SupportNotificationType = 'support'
+    MessageNotificationType = 'message'
 }

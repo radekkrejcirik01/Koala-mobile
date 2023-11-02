@@ -1,27 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
-import { getRequest, postRequest } from '@utils/Axios/Axios.service';
-import {
-    ResponseInterface,
-    ResponseNotificationsGetInterface
-} from '@interfaces/response/Response.interface';
+import { useNavigation } from '@hooks/useNavigation';
+import { getRequest } from '@utils/Axios/Axios.service';
+import { ResponseNotificationsGetInterface } from '@interfaces/response/Response.interface';
 import { NotificationInterface } from '@interfaces/general.interface';
-import { SupportNotificationPostInterface } from '@interfaces/post/Post.interface';
-import { ReducerProps } from '@store/index/index.props';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import { NotificationItem } from '@components/notifications/NotificationItem/NotificationItem';
 import { setUnseenNotifications } from '@store/NotificationsReducer';
 import { NotificationsScreenHeader } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader';
 import COLORS from '@constants/COLORS';
+import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 
 export const NotificationsScreen = (): JSX.Element => {
-    const { name } = useSelector((state: ReducerProps) => state.user.user);
     const dispatch = useDispatch();
 
     const { top } = useSafeAreaInsets();
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
@@ -65,35 +63,20 @@ export const NotificationsScreen = (): JSX.Element => {
         loadNotifications();
     }, [loadNotifications]);
 
-    const sendSupport = useCallback(
-        (id: number, receiver: string, message: string) => {
-            postRequest<ResponseInterface, SupportNotificationPostInterface>(
-                'support-notification',
-                {
-                    id,
-                    receiver,
-                    name,
-                    message
-                }
-            ).subscribe((response: ResponseInterface) => {
-                if (response?.status) {
-                    // Alert.alert(response?.message);
-                }
-            });
-        },
-        [name]
-    );
-
     const renderItem = useCallback(
         ({ item }: ListRenderItemInfo<NotificationInterface>): JSX.Element => (
             <NotificationItem
                 item={item}
-                onSendSupport={() =>
-                    sendSupport(item.id, item.sender, item.message)
+                onPress={() =>
+                    navigateTo(AccountStackNavigatorEnum.RespondScreen, {
+                        name: item.name,
+                        username: item.sender,
+                        message: item.message
+                    })
                 }
             />
         ),
-        [sendSupport]
+        [navigateTo]
     );
 
     const onEndReached = useCallback(() => {
