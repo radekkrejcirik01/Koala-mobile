@@ -6,16 +6,19 @@ export const RespondScreenStyle = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10
     },
+    scrollViewContainer: {
+        paddingTop: 20,
+        paddingHorizontal: 10
+    },
     messageText: {
-        marginTop: 15,
-        marginLeft: 10,
-        marginRight: '10%',
+        maxWidth: '80%',
+        paddingBottom: 10,
         fontSize: 26,
         fontWeight: '600'
     },
     responseText: {
-        marginTop: 15,
-        fontSize: 20,
+        marginTop: 8,
+        fontSize: 22,
         marginRight: 15,
         maxWidth: '75%',
         fontWeight: '600',
@@ -23,17 +26,21 @@ export const RespondScreenStyle = StyleSheet.create({
         textAlign: 'right'
     },
     inputView: {
-        width: '95%',
-        paddingVertical: 10,
-        paddingHorizontal: 15,
+        width: '98%',
+        minHeight: 45,
+        paddingLeft: 15,
+        paddingRight: 10,
         borderRadius: 20,
-        backgroundColor: COLORS.WHITE,
+        borderWidth: 2,
+        borderColor: COLORS.BUTTON_BLUE,
         alignSelf: 'center',
         flexDirection: 'row',
         alignItems: 'center'
     },
     input: {
         flex: 1,
-        paddingRight: 20
+        paddingRight: 20,
+        paddingBottom: 5,
+        fontSize: 16
     }
 });

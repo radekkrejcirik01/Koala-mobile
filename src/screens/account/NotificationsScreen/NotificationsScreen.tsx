@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useNavigation } from '@hooks/useNavigation';
 import { getRequest } from '@utils/Axios/Axios.service';
@@ -59,9 +60,7 @@ export const NotificationsScreen = (): JSX.Element => {
         [dispatch]
     );
 
-    useEffect(() => {
-        loadNotifications();
-    }, [loadNotifications]);
+    useFocusEffect(loadNotifications);
 
     const renderItem = useCallback(
         ({ item }: ListRenderItemInfo<NotificationInterface>): JSX.Element => (
@@ -69,6 +68,7 @@ export const NotificationsScreen = (): JSX.Element => {
                 item={item}
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.RespondScreen, {
+                        id: item.id,
                         name: item.name,
                         username: item.sender,
                         message: item.message

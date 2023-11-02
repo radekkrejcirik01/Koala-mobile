@@ -15,9 +15,6 @@ export const NotificationItem = ({
         if (type === NotificationItemEnum.EmotionNotificationType) {
             return ' is sharing';
         }
-        if (type === NotificationItemEnum.MessageNotificationType) {
-            return ' is sending message';
-        }
         return '';
     }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     KeyboardAvoidingView,
@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
-import { postRequest } from '@utils/Axios/Axios.service';
+import { postRequest, putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { MessageNotificationPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
@@ -23,7 +23,7 @@ import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
-    const { name, username, message } = route.params;
+    const { id, name, username, message } = route.params;
 
     const { name: userName } = useSelector(
         (state: ReducerProps) => state.user.user
@@ -34,6 +34,14 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     const [respondMessage, setRespondMessage] = useState<string>();
     const [messages, setMessages] = useState<string[]>([]);
     const [sending, setSending] = useState<boolean>(false);
+
+    const updateSeenNotification = useCallback(() => {
+        putRequest<ResponseInterface, never>(`notification/${id}`).subscribe();
+    }, [id]);
+
+    useEffect(() => {
+        updateSeenNotification();
+    }, [updateSeenNotification]);
 
     const send = useCallback(() => {
         setSending(true);
@@ -63,7 +71,9 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             ]}
         >
             <RespondScreenHeader name={name} />
-            <ScrollView>
+            <ScrollView
+                contentContainerStyle={RespondScreenStyle.scrollViewContainer}
+            >
                 <Text style={RespondScreenStyle.messageText}>{message}</Text>
                 {messages?.map((value, index) => (
                     <Text
@@ -76,7 +86,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             </ScrollView>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                keyboardVerticalOffset={15}
+                keyboardVerticalOffset={10}
             >
                 <View style={RespondScreenStyle.inputView}>
                     <TextInput
@@ -84,6 +94,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                         multiline
                         value={respondMessage}
                         onChangeText={setRespondMessage}
+                        selectionColor={COLORS.BUTTON_BLUE}
                         style={RespondScreenStyle.input}
                     />
                     {sending ? (
@@ -93,7 +104,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                             disabled={!respondMessage}
                             onPress={send}
                         >
-                            <Icon name={IconEnum.SEND} size={22} />
+                            <Icon name={IconEnum.SEND} size={28} />
                         </TouchableOpacity>
                     )}
                 </View>

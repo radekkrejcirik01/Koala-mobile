@@ -14,19 +14,15 @@ export const RespondScreenHeader = ({
 
     return (
         <View style={RespondScreenHeaderStyle.container}>
-            <View style={RespondScreenHeaderStyle.backContainer}>
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={() => navigation.goBack()}
-                >
-                    <Icon name={IconEnum.BACK_BLUE} size={24} />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => navigation.goBack()}
+            >
+                <Icon name={IconEnum.BACK_BLUE} size={22} />
+            </TouchableOpacity>
             <View style={RespondScreenHeaderStyle.nameContainer}>
+                <ProfilePhoto name={name} size={38} />
                 <Text style={RespondScreenHeaderStyle.nameText}>{name}</Text>
-            </View>
-            <View style={RespondScreenHeaderStyle.profileContainer}>
-                <ProfilePhoto name={name} size={34} />
             </View>
         </View>
     );
