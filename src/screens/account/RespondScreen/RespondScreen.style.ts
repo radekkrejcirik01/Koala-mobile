@@ -11,14 +11,14 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingBottom: '100%'
     },
     messageText: {
-        maxWidth: '60%',
+        maxWidth: '65%',
         marginTop: 12,
         fontSize: 22,
         color: COLORS.BLACK,
         fontWeight: '600'
     },
     responseText: {
-        maxWidth: '60%',
+        maxWidth: '65%',
         marginTop: 12,
         fontSize: 22,
         color: COLORS.BLACK,
