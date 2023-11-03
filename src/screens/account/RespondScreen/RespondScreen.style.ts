@@ -33,6 +33,7 @@ export const RespondScreenStyle = StyleSheet.create({
     inputView: {
         width: '98%',
         minHeight: 45,
+        paddingVertical: 4,
         paddingHorizontal: 15,
         borderRadius: 20,
         borderWidth: 2,
@@ -44,7 +45,8 @@ export const RespondScreenStyle = StyleSheet.create({
     input: {
         flex: 1,
         paddingRight: 20,
-        paddingBottom: 5,
+        paddingTop: 0, // overwrite default value
+        paddingBottom: 0, // overwrite default value
         fontSize: 16,
         color: COLORS.BLACK
     }

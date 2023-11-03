@@ -95,9 +95,9 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={RespondScreenStyle.scrollViewContainer}
             >
-                {conversation?.map((value, index) => (
+                {conversation?.map((value) => (
                     <Text
-                        key={value + index.toString()}
+                        key={value.id}
                         style={
                             value?.sender === username
                                 ? RespondScreenStyle.messageText
