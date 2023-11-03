@@ -71,7 +71,7 @@ export const NotificationsScreen = (): JSX.Element => {
                         id: item.id,
                         name: item.name,
                         username: item.sender,
-                        message: item.message
+                        conversationId: item?.conversationId
                     })
                 }
             />

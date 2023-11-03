@@ -15,6 +15,14 @@ export interface NotificationInterface {
     liked?: number;
     time: number;
     seen: number;
+    conversationId?: number;
+}
+
+export interface ConversationInterface {
+    id: number;
+    sender: string;
+    receiver: string;
+    message: string;
 }
 
 export interface TrackInterface {

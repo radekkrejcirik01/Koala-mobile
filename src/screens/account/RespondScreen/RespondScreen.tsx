@@ -14,16 +14,24 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
-import { postRequest, putRequest } from '@utils/Axios/Axios.service';
-import { ResponseInterface } from '@interfaces/response/Response.interface';
+import {
+    getRequest,
+    postRequest,
+    putRequest
+} from '@utils/Axios/Axios.service';
+import {
+    ResponseConversationGetInterface,
+    ResponseInterface
+} from '@interfaces/response/Response.interface';
 import { MessageNotificationPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { ConversationInterface } from '@interfaces/general.interface';
 
 export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
-    const { id, name, username, message } = route.params;
+    const { id, name, username, conversationId } = route.params;
 
     const { name: userName } = useSelector(
         (state: ReducerProps) => state.user.user
@@ -31,17 +39,28 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     const { top, bottom } = useSafeAreaInsets();
 
-    const [respondMessage, setRespondMessage] = useState<string>();
-    const [messages, setMessages] = useState<string[]>([]);
+    const [message, setMessage] = useState<string>();
+    const [conversation, setConversation] = useState<ConversationInterface[]>();
     const [sending, setSending] = useState<boolean>(false);
+
+    const getConversation = useCallback(() => {
+        getRequest<ResponseConversationGetInterface>(
+            `conversation/${conversationId || id}`
+        ).subscribe((response: ResponseConversationGetInterface) => {
+            if (response?.status) {
+                setConversation(response?.data);
+            }
+        });
+    }, [conversationId, id]);
 
     const updateSeenNotification = useCallback(() => {
         putRequest<ResponseInterface, never>(`notification/${id}`).subscribe();
     }, [id]);
 
     useEffect(() => {
+        getConversation();
         updateSeenNotification();
-    }, [updateSeenNotification]);
+    }, [getConversation, updateSeenNotification]);
 
     const send = useCallback(() => {
         setSending(true);
@@ -51,62 +70,68 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             {
                 receiver: username,
                 name: userName,
-                message: respondMessage
+                message,
+                conversationId: conversationId || id
             }
         ).subscribe((response: ResponseInterface) => {
             setSending(false);
 
             if (response?.status) {
-                setMessages((prevState) => prevState.concat(respondMessage));
-                setRespondMessage('');
+                setMessage('');
+                getConversation();
             }
         });
-    }, [respondMessage, userName, username]);
+    }, [conversationId, getConversation, id, message, userName, username]);
 
     return (
         <View
             style={[
                 RespondScreenStyle.container,
-                { paddingTop: top, paddingBottom: bottom + 10 }
+                { paddingTop: top, paddingBottom: bottom + 5 }
             ]}
         >
             <RespondScreenHeader name={name} />
             <ScrollView
+                showsVerticalScrollIndicator={false}
                 contentContainerStyle={RespondScreenStyle.scrollViewContainer}
             >
-                <Text style={RespondScreenStyle.messageText}>{message}</Text>
-                {messages?.map((value, index) => (
+                {conversation?.map((value, index) => (
                     <Text
                         key={value + index.toString()}
-                        style={RespondScreenStyle.responseText}
+                        style={
+                            value?.sender === username
+                                ? RespondScreenStyle.messageText
+                                : RespondScreenStyle.responseText
+                        }
                     >
-                        {value}
+                        {value?.message}
                     </Text>
                 ))}
             </ScrollView>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                keyboardVerticalOffset={10}
             >
-                <View style={RespondScreenStyle.inputView}>
-                    <TextInput
-                        autoCorrect={false}
-                        multiline
-                        value={respondMessage}
-                        onChangeText={setRespondMessage}
-                        selectionColor={COLORS.BUTTON_BLUE}
-                        style={RespondScreenStyle.input}
-                    />
-                    {sending ? (
-                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-                    ) : (
-                        <TouchableOpacity
-                            disabled={!respondMessage}
-                            onPress={send}
-                        >
-                            <Icon name={IconEnum.SEND} size={28} />
-                        </TouchableOpacity>
-                    )}
+                <View style={RespondScreenStyle.inputContainer}>
+                    <View style={RespondScreenStyle.inputView}>
+                        <TextInput
+                            autoCorrect={false}
+                            multiline
+                            value={message}
+                            onChangeText={setMessage}
+                            selectionColor={COLORS.BUTTON_BLUE}
+                            style={RespondScreenStyle.input}
+                        />
+                        {sending ? (
+                            <ActivityIndicator color={COLORS.BUTTON_BLUE} />
+                        ) : (
+                            <TouchableOpacity
+                                disabled={!message}
+                                onPress={send}
+                            >
+                                <Icon name={IconEnum.SEND} size={26} />
+                            </TouchableOpacity>
+                        )}
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         </View>

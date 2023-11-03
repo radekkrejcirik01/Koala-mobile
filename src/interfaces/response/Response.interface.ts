@@ -1,4 +1,5 @@
 import {
+    ConversationInterface,
     EmotionInterface,
     NotificationInterface,
     TrackInterface,
@@ -33,6 +34,12 @@ export interface ResponseNotificationsGetInterface {
     status: string;
     message: string;
     data?: NotificationInterface[];
+}
+
+export interface ResponseConversationGetInterface {
+    status: string;
+    message: string;
+    data?: ConversationInterface[];
 }
 
 export interface ResponseHistoryGetInterface {

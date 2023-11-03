@@ -7,7 +7,7 @@ export interface RespondScreenProps {
                 id: number;
                 name: string;
                 username: string;
-                message: string;
+                conversationId?: number;
             };
         },
         'params'

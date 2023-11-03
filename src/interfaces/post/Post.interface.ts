@@ -33,4 +33,5 @@ export interface MessageNotificationPostInterface {
     receiver: string;
     name: string;
     message: string;
+    conversationId: number;
 }

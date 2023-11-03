@@ -8,7 +8,8 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     scrollViewContainer: {
         paddingTop: 20,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        paddingBottom: '75%'
     },
     messageText: {
         maxWidth: '80%',
@@ -26,14 +27,16 @@ export const RespondScreenStyle = StyleSheet.create({
         alignSelf: 'flex-end',
         textAlign: 'right'
     },
+    inputContainer: {
+        paddingVertical: 5,
+        backgroundColor: 'whitesmoke'
+    },
     inputView: {
         width: '98%',
         minHeight: 45,
-        paddingLeft: 15,
-        paddingRight: 10,
+        paddingHorizontal: 15,
         borderRadius: 20,
-        borderWidth: 2,
-        borderColor: COLORS.BUTTON_BLUE,
+        backgroundColor: COLORS.WHITE,
         alignSelf: 'center',
         flexDirection: 'row',
         alignItems: 'center'
