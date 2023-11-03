@@ -7,22 +7,21 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     scrollViewContainer: {
-        paddingTop: 20,
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         paddingBottom: '75%'
     },
     messageText: {
-        maxWidth: '80%',
-        paddingBottom: 10,
-        fontSize: 26,
+        maxWidth: '60%',
+        marginTop: 12,
+        fontSize: 22,
         color: COLORS.BLACK,
         fontWeight: '600'
     },
     responseText: {
-        marginTop: 8,
+        maxWidth: '60%',
+        marginTop: 12,
         fontSize: 22,
         color: COLORS.BLACK,
-        maxWidth: '75%',
         fontWeight: '600',
         alignSelf: 'flex-end',
         textAlign: 'right'
@@ -36,7 +35,8 @@ export const RespondScreenStyle = StyleSheet.create({
         minHeight: 45,
         paddingHorizontal: 15,
         borderRadius: 20,
-        backgroundColor: COLORS.WHITE,
+        borderWidth: 2,
+        borderColor: COLORS.LIGHTGRAY,
         alignSelf: 'center',
         flexDirection: 'row',
         alignItems: 'center'

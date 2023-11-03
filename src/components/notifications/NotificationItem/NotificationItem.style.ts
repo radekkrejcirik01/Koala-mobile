@@ -20,9 +20,6 @@ export const NotificationItemStyle = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE
     },
-    paddingLeft: {
-        paddingLeft: 8
-    },
     titleText: {
         marginTop: 5,
         fontSize: 15,
@@ -34,29 +31,8 @@ export const NotificationItemStyle = StyleSheet.create({
         fontSize: 15,
         color: COLORS.GRAY_200
     },
-    supportView: {
-        paddingTop: 15,
-        alignItems: 'center'
-    },
-    likeButtonView: {
-        width: 60,
-        height: 60,
-        borderRadius: 40,
-        backgroundColor: COLORS.WHITE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    fontSize26: {
-        fontSize: 26
-    },
-    fontSize20: {
-        fontSize: 20
-    },
-    marginTop8: {
-        marginTop: 8
-    },
     unseenText: {
-        fontWeight: 'bold',
-        color: COLORS.BLACK
+        color: COLORS.BLACK,
+        fontWeight: '500'
     }
 });

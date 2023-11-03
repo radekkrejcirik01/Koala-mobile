@@ -118,6 +118,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                             multiline
                             value={message}
                             onChangeText={setMessage}
+                            placeholder="Message..."
                             selectionColor={COLORS.BUTTON_BLUE}
                             style={RespondScreenStyle.input}
                         />
