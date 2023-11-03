@@ -35,7 +35,7 @@ export const NotificationItem = ({
             <Text
                 style={[
                     NotificationItemStyle.messageText,
-                    unseen && NotificationItemStyle.colorBlack
+                    unseen && NotificationItemStyle.unseenText
                 ]}
             >
                 {item.message}

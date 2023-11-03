@@ -55,7 +55,8 @@ export const NotificationItemStyle = StyleSheet.create({
     marginTop8: {
         marginTop: 8
     },
-    colorBlack: {
+    unseenText: {
+        fontWeight: 'bold',
         color: COLORS.BLACK
     }
 });
