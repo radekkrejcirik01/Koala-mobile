@@ -8,7 +8,7 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     scrollViewContainer: {
         paddingHorizontal: 15,
-        paddingBottom: '75%'
+        paddingBottom: '100%'
     },
     messageText: {
         maxWidth: '60%',
