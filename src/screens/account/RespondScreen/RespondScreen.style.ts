@@ -6,9 +6,6 @@ export const RespondScreenStyle = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10
     },
-    activityIndicator: {
-        marginTop: 100
-    },
     scrollViewContainer: {
         paddingHorizontal: 15,
         paddingBottom: 300
@@ -29,12 +26,17 @@ export const RespondScreenStyle = StyleSheet.create({
         alignSelf: 'flex-end',
         textAlign: 'right'
     },
+    heartMessageText: {
+        fontSize: 45
+    },
     inputContainer: {
         paddingVertical: 5,
-        backgroundColor: 'whitesmoke'
+        backgroundColor: 'whitesmoke',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     inputView: {
-        width: '98%',
+        flex: 1,
         minHeight: 45,
         paddingVertical: 4,
         paddingHorizontal: 15,
@@ -52,5 +54,12 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingBottom: 0, // overwrite default value
         fontSize: 16,
         color: COLORS.BLACK_50
+    },
+    heartView: {
+        marginLeft: 15,
+        marginRight: 10
+    },
+    heartText: {
+        fontSize: 26
     }
 });

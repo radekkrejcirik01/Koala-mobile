@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
@@ -33,7 +32,7 @@ import { ConversationInterface } from '@interfaces/general.interface';
 export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     const { id, name, username, conversationId } = route.params;
 
-    const { name: userName } = useSelector(
+    const { name: userName, username: userUsername } = useSelector(
         (state: ReducerProps) => state.user.user
     );
 
@@ -41,18 +40,13 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     const [message, setMessage] = useState<string>();
     const [conversation, setConversation] = useState<ConversationInterface[]>();
-    const [loading, setLoading] = useState<boolean>(false);
-    const [sending, setSending] = useState<boolean>(false);
 
     const getConversation = useCallback(() => {
-        setLoading(true);
-
         getRequest<ResponseConversationGetInterface>(
             `conversation/${conversationId || id}`
         ).subscribe((response: ResponseConversationGetInterface) => {
             if (response?.status) {
                 setConversation(response?.data);
-                setLoading(false);
             }
         });
     }, [conversationId, id]);
@@ -66,26 +60,47 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         updateSeenNotification();
     }, [getConversation, updateSeenNotification]);
 
-    const send = useCallback(() => {
-        setSending(true);
-
-        postRequest<ResponseInterface, MessageNotificationPostInterface>(
-            'message-notification',
-            {
-                receiver: username,
-                name: userName,
-                message,
-                conversationId: conversationId || id
-            }
-        ).subscribe((response: ResponseInterface) => {
-            setSending(false);
-
-            if (response?.status) {
+    const send = useCallback(
+        (text?: string) => {
+            // Clear only if sending message
+            if (!text) {
                 setMessage('');
-                getConversation();
             }
-        });
-    }, [conversationId, getConversation, id, message, userName, username]);
+
+            setConversation((prevState) =>
+                prevState.concat({
+                    id: prevState[prevState?.length - 1].id + 1,
+                    sender: userUsername,
+                    receiver: '',
+                    message: text || message
+                })
+            );
+
+            postRequest<ResponseInterface, MessageNotificationPostInterface>(
+                'message-notification',
+                {
+                    receiver: username,
+                    name: userName,
+                    message: text || message,
+                    conversationId: conversationId || id
+                }
+            ).subscribe();
+        },
+        [conversationId, id, message, userName, userUsername, username]
+    );
+
+    const isInbound = useCallback(
+        (sender: string): boolean => sender === username,
+        [username]
+    );
+
+    function isHeart(text: string): boolean {
+        return text === '❤️';
+    }
+
+    const onPressHeart = useCallback(() => {
+        send('❤️');
+    }, [send]);
 
     return (
         <View
@@ -99,25 +114,20 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={RespondScreenStyle.scrollViewContainer}
             >
-                {loading ? (
-                    <ActivityIndicator
-                        color={COLORS.BUTTON_BLUE}
-                        style={RespondScreenStyle.activityIndicator}
-                    />
-                ) : (
-                    conversation?.map((value) => (
-                        <Text
-                            key={value.id}
-                            style={
-                                value?.sender === username
-                                    ? RespondScreenStyle.inboundText
-                                    : RespondScreenStyle.outboundText
-                            }
-                        >
-                            {value?.message}
-                        </Text>
-                    ))
-                )}
+                {conversation?.map((value) => (
+                    <Text
+                        key={value.id}
+                        style={[
+                            isInbound(value?.sender)
+                                ? RespondScreenStyle.inboundText
+                                : RespondScreenStyle.outboundText,
+                            isHeart(value?.message) &&
+                                RespondScreenStyle.heartMessageText
+                        ]}
+                    >
+                        {value?.message}
+                    </Text>
+                ))}
             </ScrollView>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
@@ -133,17 +143,20 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                             selectionColor={COLORS.BUTTON_BLUE}
                             style={RespondScreenStyle.input}
                         />
-                        {sending ? (
-                            <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-                        ) : (
-                            <TouchableOpacity
-                                disabled={!message}
-                                onPress={send}
-                            >
-                                <Icon name={IconEnum.SEND} size={26} />
-                            </TouchableOpacity>
-                        )}
+                        <TouchableOpacity
+                            disabled={!message}
+                            onPress={() => send()}
+                        >
+                            <Icon name={IconEnum.SEND} size={26} />
+                        </TouchableOpacity>
                     </View>
+                    <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={onPressHeart}
+                        style={RespondScreenStyle.heartView}
+                    >
+                        <Text style={RespondScreenStyle.heartText}>❤️</Text>
+                    </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
         </View>
