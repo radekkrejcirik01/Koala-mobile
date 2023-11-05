@@ -71,6 +71,7 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingBottom: 2
     },
     heartText: {
+        color: COLORS.BLACK_50,
         fontSize: 25
     }
 });
