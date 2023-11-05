@@ -7,19 +7,19 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     scrollViewContainer: {
-        paddingHorizontal: 15,
-        paddingBottom: 300
+        paddingHorizontal: 5,
+        paddingBottom: 250
     },
     inboundText: {
-        maxWidth: '65%',
-        marginTop: 12,
+        maxWidth: '72%',
+        marginTop: 14,
         fontSize: 22,
         color: COLORS.BLACK_50,
         fontWeight: '600'
     },
     outboundText: {
-        maxWidth: '65%',
-        marginTop: 12,
+        maxWidth: '72%',
+        marginTop: 14,
         fontSize: 22,
         color: COLORS.BLACK_50,
         fontWeight: '600',
@@ -27,7 +27,17 @@ export const RespondScreenStyle = StyleSheet.create({
         textAlign: 'right'
     },
     heartMessageText: {
-        fontSize: 45
+        fontSize: 40
+    },
+    supportView: {
+        marginVertical: 10,
+        marginHorizontal: '15%'
+    },
+    supportText: {
+        textAlign: 'center',
+        fontSize: 18,
+        color: COLORS.BLACK_50,
+        fontWeight: '600'
     },
     inputContainer: {
         paddingVertical: 5,
@@ -37,7 +47,7 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     inputView: {
         flex: 1,
-        minHeight: 45,
+        minHeight: 42,
         paddingVertical: 4,
         paddingHorizontal: 15,
         borderRadius: 20,
@@ -56,10 +66,11 @@ export const RespondScreenStyle = StyleSheet.create({
         color: COLORS.BLACK_50
     },
     heartView: {
-        marginLeft: 15,
-        marginRight: 10
+        marginLeft: 10,
+        marginRight: 8,
+        paddingBottom: 2
     },
     heartText: {
-        fontSize: 26
+        fontSize: 25
     }
 });

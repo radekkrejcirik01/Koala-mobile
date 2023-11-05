@@ -3,8 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItemStyle = StyleSheet.create({
     container: {
-        marginBottom: 5,
-        paddingVertical: 5,
+        paddingVertical: 10,
         paddingHorizontal: 20,
         borderBottomWidth: 0.2,
         borderBottomColor: COLORS.LIGHTGRAY
@@ -32,7 +31,6 @@ export const NotificationItemStyle = StyleSheet.create({
         color: COLORS.GRAY_200
     },
     unseenText: {
-        color: COLORS.BLACK,
         fontWeight: '500'
     }
 });

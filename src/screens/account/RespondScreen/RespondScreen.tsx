@@ -98,6 +98,12 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         return text === '❤️';
     }
 
+    const onPressSupport = useCallback(() => {
+        send(
+            `Sending support ❤️ I am always here, you can tell me more if you want`
+        );
+    }, [send]);
+
     const onPressHeart = useCallback(() => {
         send('❤️');
     }, [send]);
@@ -132,6 +138,17 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             >
+                {conversation?.length === 1 && (
+                    <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={onPressSupport}
+                        style={RespondScreenStyle.supportView}
+                    >
+                        <Text style={RespondScreenStyle.supportText}>
+                            {`Sending support ❤️\nI am always here, you can tell me more if you want`}
+                        </Text>
+                    </TouchableOpacity>
+                )}
                 <View style={RespondScreenStyle.inputContainer}>
                     <View style={RespondScreenStyle.inputView}>
                         <TextInput
