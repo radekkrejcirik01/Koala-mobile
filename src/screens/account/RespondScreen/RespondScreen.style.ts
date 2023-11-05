@@ -6,22 +6,25 @@ export const RespondScreenStyle = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10
     },
+    activityIndicator: {
+        marginTop: 100
+    },
     scrollViewContainer: {
         paddingHorizontal: 15,
-        paddingBottom: '100%'
+        paddingBottom: 300
     },
-    messageText: {
+    inboundText: {
         maxWidth: '65%',
         marginTop: 12,
         fontSize: 22,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '600'
     },
-    responseText: {
+    outboundText: {
         maxWidth: '65%',
         marginTop: 12,
         fontSize: 22,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '600',
         alignSelf: 'flex-end',
         textAlign: 'right'
@@ -48,6 +51,6 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingTop: 0, // overwrite default value
         paddingBottom: 0, // overwrite default value
         fontSize: 16,
-        color: COLORS.BLACK
+        color: COLORS.BLACK_50
     }
 });

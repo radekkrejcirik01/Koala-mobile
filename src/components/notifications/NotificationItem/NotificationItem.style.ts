@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const NotificationItemStyle = StyleSheet.create({
     container: {
         marginBottom: 5,
-        paddingBottom: 20,
+        paddingVertical: 5,
         paddingHorizontal: 20,
         borderBottomWidth: 0.2,
         borderBottomColor: COLORS.LIGHTGRAY

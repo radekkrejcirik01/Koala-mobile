@@ -41,14 +41,18 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     const [message, setMessage] = useState<string>();
     const [conversation, setConversation] = useState<ConversationInterface[]>();
+    const [loading, setLoading] = useState<boolean>(false);
     const [sending, setSending] = useState<boolean>(false);
 
     const getConversation = useCallback(() => {
+        setLoading(true);
+
         getRequest<ResponseConversationGetInterface>(
             `conversation/${conversationId || id}`
         ).subscribe((response: ResponseConversationGetInterface) => {
             if (response?.status) {
                 setConversation(response?.data);
+                setLoading(false);
             }
         });
     }, [conversationId, id]);
@@ -95,18 +99,25 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={RespondScreenStyle.scrollViewContainer}
             >
-                {conversation?.map((value) => (
-                    <Text
-                        key={value.id}
-                        style={
-                            value?.sender === username
-                                ? RespondScreenStyle.messageText
-                                : RespondScreenStyle.responseText
-                        }
-                    >
-                        {value?.message}
-                    </Text>
-                ))}
+                {loading ? (
+                    <ActivityIndicator
+                        color={COLORS.BUTTON_BLUE}
+                        style={RespondScreenStyle.activityIndicator}
+                    />
+                ) : (
+                    conversation?.map((value) => (
+                        <Text
+                            key={value.id}
+                            style={
+                                value?.sender === username
+                                    ? RespondScreenStyle.inboundText
+                                    : RespondScreenStyle.outboundText
+                            }
+                        >
+                            {value?.message}
+                        </Text>
+                    ))
+                )}
             </ScrollView>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
