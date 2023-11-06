@@ -99,9 +99,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     }
 
     const onPressSupport = useCallback(() => {
-        send(
-            `Sending support ❤️ I am always here, you can tell me more if you want`
-        );
+        send('Sending support ❤️');
     }, [send]);
 
     const onPressHeart = useCallback(() => {
@@ -145,7 +143,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                         style={RespondScreenStyle.supportView}
                     >
                         <Text style={RespondScreenStyle.supportText}>
-                            {`Sending support ❤️\nI am always here, you can tell me more if you want`}
+                            Sending support ❤️
                         </Text>
                     </TouchableOpacity>
                 )}

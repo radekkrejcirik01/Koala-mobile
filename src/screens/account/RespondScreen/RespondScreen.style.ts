@@ -7,18 +7,18 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     scrollViewContainer: {
-        paddingHorizontal: 5,
+        paddingHorizontal: 10,
         paddingBottom: 250
     },
     inboundText: {
-        maxWidth: '72%',
+        maxWidth: '60%',
         marginTop: 14,
         fontSize: 22,
         color: COLORS.BLACK_50,
         fontWeight: '600'
     },
     outboundText: {
-        maxWidth: '72%',
+        maxWidth: '60%',
         marginTop: 14,
         fontSize: 22,
         color: COLORS.BLACK_50,
@@ -30,13 +30,13 @@ export const RespondScreenStyle = StyleSheet.create({
         fontSize: 40
     },
     supportView: {
-        marginVertical: 10,
-        marginHorizontal: '15%'
+        paddingTop: 10,
+        paddingBottom: 20
     },
     supportText: {
-        textAlign: 'center',
-        fontSize: 18,
+        fontSize: 20,
         color: COLORS.BLACK_50,
+        textAlign: 'center',
         fontWeight: '600'
     },
     inputContainer: {
