@@ -68,11 +68,6 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     const send = useCallback(
         (text?: string) => {
-            // Clear only if sending message
-            if (!text) {
-                setMessage('');
-            }
-
             setConversation((prevState) =>
                 prevState.concat({
                     id: prevState[prevState?.length - 1].id + 1,
@@ -108,10 +103,6 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     const onPressSupport = useCallback(() => {
         send('Sending support ❤️');
-    }, [send]);
-
-    const onPressHeart = useCallback(() => {
-        send('❤️');
     }, [send]);
 
     return (
@@ -170,18 +161,14 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                         />
                         <TouchableOpacity
                             disabled={!message}
-                            onPress={() => send()}
+                            onPress={() => {
+                                send();
+                                setMessage('');
+                            }}
                         >
                             <Icon name={IconEnum.SEND} size={26} />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
-                        activeOpacity={0.9}
-                        onPress={onPressHeart}
-                        style={RespondScreenStyle.heartView}
-                    >
-                        <Text style={RespondScreenStyle.heartText}>❤️</Text>
-                    </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
         </View>

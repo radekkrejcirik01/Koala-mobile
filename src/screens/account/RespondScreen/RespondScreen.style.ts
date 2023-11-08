@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const RespondScreenStyle = StyleSheet.create({
@@ -8,7 +8,7 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     scrollViewContainer: {
         paddingHorizontal: 10,
-        paddingBottom: 300
+        paddingBottom: Platform.OS === 'ios' ? 300 : 100
     },
     inboundText: {
         maxWidth: '60%',
@@ -41,9 +41,9 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     inputContainer: {
         paddingVertical: 5,
+        paddingHorizontal: 5,
         backgroundColor: 'whitesmoke',
-        flexDirection: 'row',
-        alignItems: 'center'
+        flexDirection: 'row'
     },
     inputView: {
         flex: 1,
@@ -53,7 +53,6 @@ export const RespondScreenStyle = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 2,
         borderColor: COLORS.LIGHTGRAY,
-        alignSelf: 'center',
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -64,14 +63,5 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingBottom: 0, // overwrite default value
         fontSize: 16,
         color: COLORS.BLACK_50
-    },
-    heartView: {
-        marginLeft: 10,
-        marginRight: 8,
-        paddingBottom: 2
-    },
-    heartText: {
-        color: COLORS.BLACK_50,
-        fontSize: 25
     }
 });
