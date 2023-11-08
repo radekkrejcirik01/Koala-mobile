@@ -12,7 +12,6 @@ export interface NotificationInterface {
     name: string;
     message: string;
     type: NotificationItemEnum;
-    liked?: number;
     time: number;
     seen: number;
     conversationId?: number;
