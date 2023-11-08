@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
@@ -41,6 +41,12 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     const [message, setMessage] = useState<string>();
     const [conversation, setConversation] = useState<ConversationInterface[]>();
 
+    const scrollViewRef = useRef(null);
+
+    const scrollToEnd = (animated: boolean) => {
+        scrollViewRef?.current?.scrollToEnd({ animated });
+    };
+
     const getConversation = useCallback(() => {
         getRequest<ResponseConversationGetInterface>(
             `conversation/${conversationId || id}`
@@ -75,6 +81,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                     message: text || message
                 })
             );
+
+            scrollToEnd(true);
 
             postRequest<ResponseInterface, MessageNotificationPostInterface>(
                 'message-notification',
@@ -115,6 +123,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         >
             <RespondScreenHeader name={name} />
             <ScrollView
+                ref={scrollViewRef}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={RespondScreenStyle.scrollViewContainer}
             >
@@ -152,6 +161,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                         <TextInput
                             autoCorrect={false}
                             multiline
+                            onFocus={() => scrollToEnd(true)}
                             value={message}
                             onChangeText={setMessage}
                             placeholder="Message..."
