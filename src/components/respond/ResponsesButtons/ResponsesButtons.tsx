@@ -18,7 +18,15 @@ export const ResponsesButtons = ({ onPressButton }: ResponsesButtonsProps) => {
         },
         {
             id: 3,
-            message: '❤️'
+            message: 'What happened?'
+        },
+        {
+            id: 4,
+            message: 'You got this!'
+        },
+        {
+            id: 5,
+            message: 'Can I do something?'
         }
     ];
 

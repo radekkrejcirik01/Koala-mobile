@@ -3,21 +3,23 @@ import COLORS from '@constants/COLORS';
 
 export const ResponsesButtonsStyle = StyleSheet.create({
     container: {
+        backgroundColor: 'whitesmoke',
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
     },
     buttonView: {
-        margin: 4,
-        minWidth: 60,
-        padding: 10,
+        minWidth: 75,
+        marginVertical: 4,
+        marginHorizontal: 2,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
         borderRadius: 20,
-        borderWidth: 2,
-        borderColor: COLORS.LIGHTGRAY,
+        backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center'
     },
     buttonText: {
-        color: COLORS.BLACK_50,
-        fontWeight: '500'
+        color: COLORS.WHITE,
+        fontWeight: '600'
     }
 });

@@ -3,11 +3,10 @@ import COLORS from '@constants/COLORS';
 
 export const RespondScreenStyle = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingHorizontal: 10
+        flex: 1
     },
     scrollViewContainer: {
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         paddingBottom: Platform.OS === 'ios' ? 300 : 100
     },
     inboundText: {
@@ -30,6 +29,7 @@ export const RespondScreenStyle = StyleSheet.create({
         fontSize: 40
     },
     inputContainer: {
+        marginHorizontal: 4,
         paddingVertical: 5,
         paddingHorizontal: 5,
         backgroundColor: 'whitesmoke',
@@ -39,7 +39,8 @@ export const RespondScreenStyle = StyleSheet.create({
         flex: 1,
         minHeight: 42,
         paddingVertical: 4,
-        paddingHorizontal: 15,
+        paddingLeft: 15,
+        paddingRight: 10,
         borderRadius: 20,
         borderWidth: 2,
         borderColor: COLORS.LIGHTGRAY,

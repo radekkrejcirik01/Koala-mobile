@@ -40,7 +40,9 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     const { top, bottom } = useSafeAreaInsets();
 
     const [message, setMessage] = useState<string>();
-    const [conversation, setConversation] = useState<ConversationInterface[]>();
+    const [conversation, setConversation] = useState<ConversationInterface[]>(
+        []
+    );
 
     const scrollViewRef = useRef(null);
 
@@ -109,6 +111,12 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         [send]
     );
 
+    const isButtons = useCallback((): boolean => {
+        const num = conversation?.filter((e) => e.sender === username);
+
+        return num?.length < 2;
+    }, [conversation, username]);
+
     return (
         <View
             style={[
@@ -140,7 +148,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             >
-                {conversation?.length <= 4 && (
+                {isButtons() && !!conversation?.length && (
                     <ResponsesButtons onPressButton={onPressResponseButton} />
                 )}
                 <View style={RespondScreenStyle.inputContainer}>
@@ -164,7 +172,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                                 setMessage('');
                             }}
                         >
-                            <Icon name={IconEnum.SEND} size={26} />
+                            <Icon name={IconEnum.SEND} size={27} />
                         </TouchableOpacity>
                     </View>
                 </View>
