@@ -28,6 +28,7 @@ import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ConversationInterface } from '@interfaces/general.interface';
+import { ResponsesButtons } from '@components/respond/ResponsesButtons/ResponsesButtons';
 
 export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     const { id, name, username, conversationId } = route.params;
@@ -101,9 +102,12 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         return text === '❤️';
     }
 
-    const onPressSupport = useCallback(() => {
-        send('Sending support ❤️');
-    }, [send]);
+    const onPressResponseButton = useCallback(
+        (value: string) => {
+            send(value);
+        },
+        [send]
+    );
 
     return (
         <View
@@ -136,16 +140,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             >
-                {conversation?.length === 1 && (
-                    <TouchableOpacity
-                        activeOpacity={0.9}
-                        onPress={onPressSupport}
-                        style={RespondScreenStyle.supportView}
-                    >
-                        <Text style={RespondScreenStyle.supportText}>
-                            Sending support ❤️
-                        </Text>
-                    </TouchableOpacity>
+                {conversation?.length <= 4 && (
+                    <ResponsesButtons onPressButton={onPressResponseButton} />
                 )}
                 <View style={RespondScreenStyle.inputContainer}>
                     <View style={RespondScreenStyle.inputView}>
@@ -160,7 +156,9 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                             style={RespondScreenStyle.input}
                         />
                         <TouchableOpacity
+                            activeOpacity={0.9}
                             disabled={!message}
+                            hitSlop={10}
                             onPress={() => {
                                 send();
                                 setMessage('');
