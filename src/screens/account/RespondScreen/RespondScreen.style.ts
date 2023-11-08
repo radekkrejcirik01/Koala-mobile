@@ -29,16 +29,6 @@ export const RespondScreenStyle = StyleSheet.create({
     heartMessageText: {
         fontSize: 40
     },
-    supportView: {
-        paddingTop: 10,
-        paddingBottom: 20
-    },
-    supportText: {
-        fontSize: 20,
-        color: COLORS.BLACK_50,
-        textAlign: 'center',
-        fontWeight: '600'
-    },
     inputContainer: {
         paddingVertical: 5,
         paddingHorizontal: 5,
