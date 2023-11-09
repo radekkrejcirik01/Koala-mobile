@@ -153,6 +153,7 @@ export const HomeScreen = (): JSX.Element => {
         >
             <HomeScreenHeader onProfilePress={openProfile} />
             <ScrollView
+                showsVerticalScrollIndicator={false}
                 contentContainerStyle={HomeScreenStyle.scrollViewContainer}
                 style={HomeScreenStyle.scrollView}
             >
