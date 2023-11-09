@@ -7,12 +7,13 @@ export const HomeScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     scrollViewContainer: {
-        paddingBottom: 120
+        flexGrow: 1,
+        paddingBottom: 50,
+        justifyContent: 'center'
     },
     scrollView: {
-        marginTop: 10,
-        marginBottom: 10,
-        paddingTop: 40
+        marginVertical: 10,
+        paddingTop: 20
     },
     contentView: {
         flexDirection: 'row',
