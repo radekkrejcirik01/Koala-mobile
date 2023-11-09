@@ -111,10 +111,20 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         [send]
     );
 
-    const isButtons = useCallback((): boolean => {
-        const num = conversation?.filter((e) => e.sender === username);
+    // Show response buttons only if number of received messages is 1
+    // and first message is shared emotion from friend
+    const showResponseButtons = useCallback((): boolean => {
+        if (conversation?.length) {
+            if (conversation[0]?.sender !== username) {
+                return false;
+            }
 
-        return num?.length < 2;
+            const receivedMessages = conversation?.filter(
+                (e: ConversationInterface) => e?.sender === username
+            );
+            return receivedMessages?.length === 1;
+        }
+        return false;
     }, [conversation, username]);
 
     return (
@@ -148,7 +158,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             >
-                {isButtons() && !!conversation?.length && (
+                {showResponseButtons() && (
                     <ResponsesButtons onPressButton={onPressResponseButton} />
                 )}
                 <View style={RespondScreenStyle.inputContainer}>
