@@ -13,7 +13,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
-import { getRequest, postRequest } from '@utils/Axios/Axios.service';
+import {
+    getRequest,
+    postRequest,
+    putRequest
+} from '@utils/Axios/Axios.service';
 import {
     ResponseConversationGetInterface,
     ResponseInterface
@@ -56,9 +60,16 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         });
     }, [conversationId, id]);
 
+    const updateSeenNotification = useCallback(() => {
+        putRequest<ResponseInterface, never>(
+            `notification/${conversationId || id}`
+        ).subscribe();
+    }, [conversationId, id]);
+
     useEffect(() => {
         getConversation();
-    }, [getConversation]);
+        updateSeenNotification();
+    }, [getConversation, updateSeenNotification]);
 
     const send = useCallback(
         (text?: string) => {
