@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ResponsesButtonsStyle = StyleSheet.create({
     container: {
+        paddingHorizontal: 10,
         backgroundColor: 'whitesmoke',
         flexDirection: 'row',
         flexWrap: 'wrap',
