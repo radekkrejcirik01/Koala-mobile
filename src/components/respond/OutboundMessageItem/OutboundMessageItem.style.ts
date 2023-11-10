@@ -7,7 +7,9 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     },
     timeText: {
         marginLeft: 15,
-        paddingTop: 5,
+        paddingTop: 2,
+        fontSize: 12,
+        color: COLORS.GRAY_200,
         alignSelf: 'center'
     },
     messageText: {
