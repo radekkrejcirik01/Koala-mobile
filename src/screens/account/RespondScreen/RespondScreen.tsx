@@ -60,7 +60,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         });
     }, [conversationId, id]);
 
-    const updateSeenNotification = useCallback(() => {
+    const updateSeenMessages = useCallback(() => {
         putRequest<ResponseInterface, never>(
             `notification/${conversationId || id}`
         ).subscribe();
@@ -68,8 +68,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     useEffect(() => {
         getConversation();
-        updateSeenNotification();
-    }, [getConversation, updateSeenNotification]);
+        updateSeenMessages();
+    }, [getConversation, updateSeenMessages]);
 
     const send = useCallback(
         (text?: string) => {
