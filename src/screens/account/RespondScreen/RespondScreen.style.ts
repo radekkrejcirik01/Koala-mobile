@@ -25,7 +25,7 @@ export const RespondScreenStyle = StyleSheet.create({
         alignSelf: 'flex-end',
         textAlign: 'right'
     },
-    heartMessageText: {
+    largeText: {
         fontSize: 40
     },
     inputContainer: {

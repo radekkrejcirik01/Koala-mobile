@@ -91,8 +91,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         [username]
     );
 
-    function isHeart(text: string): boolean {
-        return text === '❤️';
+    function isLarge(text: string): boolean {
+        return text?.length <= 3;
     }
 
     const onPressResponseButton = useCallback(
@@ -138,8 +138,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                             isInbound(value?.sender)
                                 ? RespondScreenStyle.inboundText
                                 : RespondScreenStyle.outboundText,
-                            isHeart(value?.message) &&
-                                RespondScreenStyle.heartMessageText
+                            isLarge(value?.message) &&
+                                RespondScreenStyle.largeText
                         ]}
                     >
                         {value?.message}
