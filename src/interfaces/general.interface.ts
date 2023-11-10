@@ -22,6 +22,7 @@ export interface ConversationInterface {
     sender: string;
     receiver: string;
     message: string;
+    time: number;
 }
 
 export interface TrackInterface {

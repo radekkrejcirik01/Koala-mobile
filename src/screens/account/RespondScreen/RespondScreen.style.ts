@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const RespondScreenStyle = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'whitesmoke'
     },
     scrollViewContainer: {
         paddingHorizontal: 20,

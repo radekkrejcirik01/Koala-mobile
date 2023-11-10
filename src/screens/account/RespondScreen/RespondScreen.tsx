@@ -3,13 +3,13 @@ import {
     KeyboardAvoidingView,
     Platform,
     ScrollView,
-    Text,
     TextInput,
     TouchableOpacity,
     View
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import moment from 'moment';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
@@ -29,6 +29,8 @@ import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ResponsesButtons } from '@components/respond/ResponsesButtons/ResponsesButtons';
+import { InboundMessageItem } from '@components/respond/InboundMessageItem/InboundMessageItem';
+import { OutboundMessageItem } from '@components/respond/OutboundMessageItem/OutboundMessageItem';
 
 export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
     const { id, name, username, conversationId } = route.params;
@@ -78,7 +80,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                     id: prevState[prevState?.length - 1].id + 1,
                     sender: userUsername,
                     receiver: '',
-                    message: text || message
+                    message: text || message,
+                    time: moment().unix()
                 })
             );
 
@@ -101,10 +104,6 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         (sender: string): boolean => sender === username,
         [username]
     );
-
-    function isLarge(text: string): boolean {
-        return text?.length <= 3;
-    }
 
     const onPressResponseButton = useCallback(
         (value: string) => {
@@ -142,20 +141,17 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={RespondScreenStyle.scrollViewContainer}
             >
-                {conversation?.map((value) => (
-                    <Text
-                        key={value.id}
-                        style={[
-                            isInbound(value?.sender)
-                                ? RespondScreenStyle.inboundText
-                                : RespondScreenStyle.outboundText,
-                            isLarge(value?.message) &&
-                                RespondScreenStyle.largeText
-                        ]}
-                    >
-                        {value?.message}
-                    </Text>
-                ))}
+                {conversation?.map((value) =>
+                    isInbound(value.sender) ? (
+                        <InboundMessageItem key={value.id} time={value.time}>
+                            {value.message}
+                        </InboundMessageItem>
+                    ) : (
+                        <OutboundMessageItem key={value.id} time={value.time}>
+                            {value.message}
+                        </OutboundMessageItem>
+                    )
+                )}
             </ScrollView>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
