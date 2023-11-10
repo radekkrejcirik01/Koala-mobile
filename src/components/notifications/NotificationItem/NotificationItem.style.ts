@@ -5,10 +5,15 @@ export const NotificationItemStyle = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderBottomWidth: 0.2,
+        borderBottomWidth: 0.4,
         borderBottomColor: COLORS.LIGHTGRAY
     },
     profileView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    centerView: {
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -18,6 +23,9 @@ export const NotificationItemStyle = StyleSheet.create({
         marginRight: 8,
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE
+    },
+    timeText: {
+        color: COLORS.GRAY_200
     },
     titleText: {
         marginTop: 5,

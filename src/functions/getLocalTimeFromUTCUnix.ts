@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const getLocalTimeFromUTCUnix = (time: number): string => {
+export function getLocalTimeFromUTCUnix(time: number): string {
     const stillUtc = moment.utc(moment.unix(Number(time)));
     const local = moment(stillUtc).local().format('YYYY-MM-DD HH:mm:ss');
 
@@ -17,4 +17,4 @@ export const getLocalTimeFromUTCUnix = (time: number): string => {
         return `Yesterday ${localHour}`;
     }
     return `${localDate} ${localHour}`;
-};
+}

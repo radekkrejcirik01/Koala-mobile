@@ -4,6 +4,7 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
+import { getFromNowUnixTime } from '@functions/getFromNowUnixTime';
 
 export const NotificationItem = ({
     item,
@@ -25,8 +26,13 @@ export const NotificationItem = ({
             style={NotificationItemStyle.container}
         >
             <View style={NotificationItemStyle.profileView}>
-                {unseen && <View style={NotificationItemStyle.newItem} />}
-                <ProfilePhoto name={item.name} size={40} />
+                <View style={NotificationItemStyle.centerView}>
+                    {unseen && <View style={NotificationItemStyle.newItem} />}
+                    <ProfilePhoto name={item.name} size={40} />
+                </View>
+                <Text style={NotificationItemStyle.timeText}>
+                    {getFromNowUnixTime(item.time)}
+                </Text>
             </View>
             <Text style={NotificationItemStyle.titleText}>
                 {item.name}
