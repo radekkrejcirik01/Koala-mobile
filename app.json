@@ -1,4 +1,8 @@
 {
   "name": "Koala",
-  "displayName": "Koala"
+  "displayName": "Koala",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-5349310424076196~8277140375",
+    "ios_app_id": "ca-app-pub-5349310424076196~7190207849"
+  }
 }
