@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const FriendRequestItemStyle = StyleSheet.create({
+export const InviteItemStyle = StyleSheet.create({
     container: {
         marginHorizontal: 20,
         marginBottom: 10,

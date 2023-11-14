@@ -1,6 +1,6 @@
 import { InviteInterface } from '@interfaces/general.interface';
 
-export interface FriendRequestItemProps {
+export interface InviteItemProps {
     item: InviteInterface;
     posting: boolean;
     onAcceptInvite: () => void;

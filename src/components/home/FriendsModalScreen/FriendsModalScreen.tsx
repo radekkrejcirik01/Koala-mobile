@@ -30,7 +30,7 @@ import COLORS from '@constants/COLORS';
 import { ReducerProps } from '@store/index/index.props';
 import { MessagingService } from '@utils/general/MessagingService';
 import { FriendItem } from '@components/friends/FriendItem/FriendItem';
-import { FriendRequestItem } from '@components/friends/FriendRequestItem/FriendRequestItem';
+import { InviteItem } from '@components/friends/InviteItem/InviteItem';
 import { FriendsModalScreenProps } from '@components/home/FriendsModalScreen/FriendsModalScreen.props';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
@@ -232,7 +232,7 @@ export const FriendsModalScreen = ({
                 {invites?.length ? (
                     <View style={FriendsModalScreenStyle.friendRequestsView}>
                         {invites?.map((value: InviteInterface) => (
-                            <FriendRequestItem
+                            <InviteItem
                                 key={value.username}
                                 item={value}
                                 posting={posting}

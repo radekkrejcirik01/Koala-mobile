@@ -1,43 +1,39 @@
 import React, { JSX } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
-import { FriendRequestItemProps } from '@components/friends/FriendRequestItem/FriendRequestItem.props';
+import { InviteItemProps } from '@components/friends/InviteItem/InviteItem.props';
 import COLORS from '@constants/COLORS';
-import { FriendRequestItemStyle } from '@components/friends/FriendRequestItem/FriendRequestItem.style';
+import { InviteItemStyle } from '@components/friends/InviteItem/InviteItem.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 
-export const FriendRequestItem = ({
+export const InviteItem = ({
     item,
     posting,
     onAcceptInvite,
     onRemove
-}: FriendRequestItemProps): JSX.Element => (
-    <View style={FriendRequestItemStyle.container}>
-        <View style={FriendRequestItemStyle.content}>
+}: InviteItemProps): JSX.Element => (
+    <View style={InviteItemStyle.container}>
+        <View style={InviteItemStyle.content}>
             <ProfilePhoto name={item.username} size={40} />
-            <Text style={FriendRequestItemStyle.usernameText}>
-                {item.username}
-            </Text>
+            <Text style={InviteItemStyle.usernameText}>{item.username}</Text>
         </View>
-        <View style={FriendRequestItemStyle.buttonsContainer}>
+        <View style={InviteItemStyle.buttonsContainer}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={onAcceptInvite}
-                style={FriendRequestItemStyle.acceptButtonView}
+                style={InviteItemStyle.acceptButtonView}
             >
                 {posting ? (
                     <ActivityIndicator color={COLORS.WHITE} size="small" />
                 ) : (
-                    <Text style={FriendRequestItemStyle.acceptButtonText}>
-                        Accept
-                    </Text>
+                    <Text style={InviteItemStyle.acceptButtonText}>Accept</Text>
                 )}
             </TouchableOpacity>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={onRemove}
-                style={FriendRequestItemStyle.removeButtonView}
+                style={InviteItemStyle.removeButtonView}
             >
                 <Icon name={IconEnum.CLEAN} size={22} />
             </TouchableOpacity>
