@@ -21,7 +21,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     requestsText: {
         marginRight: 15,
-        color: COLORS.BLACK,
+        color: COLORS.GRAY_200,
         alignSelf: 'flex-end',
         fontWeight: '600'
     },

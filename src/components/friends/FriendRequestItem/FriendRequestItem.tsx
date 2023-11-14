@@ -12,7 +12,7 @@ export const FriendRequestItem = ({
 }: FriendRequestItemProps): JSX.Element => (
     <View style={FriendRequestItemStyle.container}>
         <View style={FriendRequestItemStyle.content}>
-            <ProfilePhoto name={item.username} size={45} />
+            <ProfilePhoto name={item.username} size={40} />
             <Text style={FriendRequestItemStyle.usernameText}>
                 {item.username}
             </Text>

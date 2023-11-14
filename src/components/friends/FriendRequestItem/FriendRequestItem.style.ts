@@ -4,6 +4,7 @@ import COLORS from '@constants/COLORS';
 export const FriendRequestItemStyle = StyleSheet.create({
     container: {
         marginHorizontal: 20,
+        marginBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
