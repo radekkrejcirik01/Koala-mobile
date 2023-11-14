@@ -6,6 +6,11 @@ export interface UserInterface {
     username: string;
 }
 
+export interface InviteInterface {
+    id: number;
+    username: string;
+}
+
 export interface NotificationInterface {
     id: number;
     sender: string;

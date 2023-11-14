@@ -4,11 +4,14 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { FriendRequestItemProps } from '@components/friends/FriendRequestItem/FriendRequestItem.props';
 import COLORS from '@constants/COLORS';
 import { FriendRequestItemStyle } from '@components/friends/FriendRequestItem/FriendRequestItem.style';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const FriendRequestItem = ({
     item,
     posting,
-    onAcceptInvite
+    onAcceptInvite,
+    onRemove
 }: FriendRequestItemProps): JSX.Element => (
     <View style={FriendRequestItemStyle.container}>
         <View style={FriendRequestItemStyle.content}>
@@ -17,18 +20,27 @@ export const FriendRequestItem = ({
                 {item.username}
             </Text>
         </View>
-        <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={onAcceptInvite}
-            style={FriendRequestItemStyle.acceptButtonView}
-        >
-            {posting ? (
-                <ActivityIndicator color={COLORS.WHITE} size="small" />
-            ) : (
-                <Text style={FriendRequestItemStyle.acceptButtonText}>
-                    Accept
-                </Text>
-            )}
-        </TouchableOpacity>
+        <View style={FriendRequestItemStyle.buttonsContainer}>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={onAcceptInvite}
+                style={FriendRequestItemStyle.acceptButtonView}
+            >
+                {posting ? (
+                    <ActivityIndicator color={COLORS.WHITE} size="small" />
+                ) : (
+                    <Text style={FriendRequestItemStyle.acceptButtonText}>
+                        Accept
+                    </Text>
+                )}
+            </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={onRemove}
+                style={FriendRequestItemStyle.removeButtonView}
+            >
+                <Icon name={IconEnum.CLEAN} size={22} />
+            </TouchableOpacity>
+        </View>
     </View>
 );

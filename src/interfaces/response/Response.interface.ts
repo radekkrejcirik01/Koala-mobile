@@ -1,6 +1,7 @@
 import {
     ConversationInterface,
     EmotionInterface,
+    InviteInterface,
     NotificationInterface,
     TrackInterface,
     UserInterface
@@ -28,6 +29,12 @@ export interface ResponseFriendsGetInterface {
     status: string;
     message: string;
     data?: UserInterface[];
+}
+
+export interface ResponseInvitesGetInterface {
+    status: string;
+    message: string;
+    data?: InviteInterface[];
 }
 
 export interface ResponseNotificationsGetInterface {

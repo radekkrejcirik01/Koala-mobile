@@ -19,6 +19,10 @@ export const FriendRequestItemStyle = StyleSheet.create({
         color: COLORS.BLACK,
         fontWeight: '500'
     },
+    buttonsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
     acceptButtonView: {
         height: 35,
         width: 70,
@@ -30,5 +34,8 @@ export const FriendRequestItemStyle = StyleSheet.create({
     acceptButtonText: {
         color: COLORS.WHITE,
         fontWeight: 'bold'
+    },
+    removeButtonView: {
+        marginLeft: 12
     }
 });

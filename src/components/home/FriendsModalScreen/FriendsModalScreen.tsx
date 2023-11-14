@@ -20,10 +20,11 @@ import {
 } from '@utils/Axios/Axios.service';
 import {
     ResponseFriendsGetInterface,
-    ResponseInterface
+    ResponseInterface,
+    ResponseInvitesGetInterface
 } from '@interfaces/response/Response.interface';
 import { InvitePostInterface } from '@interfaces/post/Post.interface';
-import { UserInterface } from '@interfaces/general.interface';
+import { InviteInterface, UserInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import COLORS from '@constants/COLORS';
 import { ReducerProps } from '@store/index/index.props';
@@ -47,14 +48,14 @@ export const FriendsModalScreen = ({
     const [adding, setAdding] = useState<boolean>(false);
     const [inviteUsername, setInviteUsername] = useState<string>();
     const [showRequests, setShowRequests] = useState<boolean>(false);
-    const [friendRequests, setFriendRequests] = useState<UserInterface[]>([]);
+    const [invites, setInvites] = useState<InviteInterface[]>([]);
     const [posting, setPosting] = useState<boolean>(false);
 
-    const getFriendRequests = () => {
-        getRequest<ResponseFriendsGetInterface>('friend-requests').subscribe(
-            (response: ResponseFriendsGetInterface) => {
+    const getInvites = () => {
+        getRequest<ResponseInvitesGetInterface>('invites').subscribe(
+            (response: ResponseInvitesGetInterface) => {
                 if (response?.status) {
-                    setFriendRequests(response?.data);
+                    setInvites(response?.data);
                 }
             }
         );
@@ -65,7 +66,7 @@ export const FriendsModalScreen = ({
             (response: ResponseFriendsGetInterface) => {
                 if (response?.status) {
                     setFriends(response?.data);
-                    getFriendRequests();
+                    getInvites();
 
                     setLoaded(true);
                 }
@@ -115,6 +116,16 @@ export const FriendsModalScreen = ({
                 }, 400);
             }
         });
+    };
+
+    const removeInvite = (id: number) => {
+        deleteRequest<ResponseInterface>(`invite/${id}`).subscribe(
+            (response: ResponseInterface) => {
+                if (response?.status) {
+                    getInvites();
+                }
+            }
+        );
     };
 
     const removeFriend = useCallback(
@@ -218,9 +229,9 @@ export const FriendsModalScreen = ({
                 <Text style={FriendsModalScreenStyle.titleText}>
                     Friend requests
                 </Text>
-                {friendRequests?.length ? (
+                {invites?.length ? (
                     <View style={FriendsModalScreenStyle.friendRequestsView}>
-                        {friendRequests?.map((value) => (
+                        {invites?.map((value: InviteInterface) => (
                             <FriendRequestItem
                                 key={value.username}
                                 item={value}
@@ -228,6 +239,7 @@ export const FriendsModalScreen = ({
                                 onAcceptInvite={() =>
                                     acceptInvite(value.username)
                                 }
+                                onRemove={() => removeInvite(value.id)}
                             />
                         ))}
                     </View>
@@ -251,9 +263,7 @@ export const FriendsModalScreen = ({
                 <Text style={FriendsModalScreenStyle.titleText}>Friends</Text>
                 <TouchableOpacity onPress={() => setShowRequests(true)}>
                     <Text style={FriendsModalScreenStyle.requestsText}>
-                        Requests{' '}
-                        {!!friendRequests?.length &&
-                            `(${friendRequests?.length})`}
+                        Requests {!!invites?.length && `(${invites?.length})`}
                     </Text>
                 </TouchableOpacity>
             </View>
