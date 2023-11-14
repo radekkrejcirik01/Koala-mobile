@@ -20,6 +20,7 @@ export const NotificationsHeader = (): JSX.Element => {
     return (
         <TouchableOpacity
             activeOpacity={0.9}
+            hitSlop={10}
             onPress={() =>
                 navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
             }

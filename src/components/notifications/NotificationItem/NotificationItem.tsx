@@ -38,12 +38,7 @@ export const NotificationItem = ({
                 {item.name}
                 {getTitle(item.type)}
             </Text>
-            <Text
-                style={[
-                    NotificationItemStyle.messageText,
-                    unseen && NotificationItemStyle.unseenText
-                ]}
-            >
+            <Text style={NotificationItemStyle.messageText}>
                 {item.message}
             </Text>
         </TouchableOpacity>

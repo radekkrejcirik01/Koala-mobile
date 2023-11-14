@@ -209,9 +209,12 @@ export const ShareModalScreen = ({
                                     activeOpacity={0.9}
                                     disabled={shareDisabled || sent}
                                     onPress={onSend}
-                                    style={
-                                        ShareModalScreenStyle.shareButtonView
-                                    }
+                                    style={[
+                                        ShareModalScreenStyle.shareButtonView,
+                                        shareDisabled && {
+                                            opacity: 0.7
+                                        }
+                                    ]}
                                 >
                                     {sending ? (
                                         <ActivityIndicator

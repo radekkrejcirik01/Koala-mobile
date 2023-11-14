@@ -19,6 +19,7 @@ export const HomeScreenHeader = ({
             <View style={HomeScreenHeaderStyle.rowCenter}>
                 <TouchableOpacity
                     activeOpacity={0.9}
+                    hitSlop={10}
                     onPress={onProfilePress}
                     style={HomeScreenHeaderStyle.profileButtonView}
                 >
