@@ -269,7 +269,7 @@ export const FriendsModalScreen = ({
             </View>
             {loaded ? (
                 <View style={FriendsModalScreenStyle.profilesContainer}>
-                    {[...Array(5)].map((value, index) => (
+                    {[...Array(8)].map((value, index) => (
                         <View
                             key={value + index.toString()}
                             style={FriendsModalScreenStyle.profileView}

@@ -55,9 +55,6 @@ export const ShareModalScreenStyle = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap'
     },
-    middleView: {
-        marginHorizontal: 20
-    },
     addButtonView: {
         margin: 4,
         width: 45,

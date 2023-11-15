@@ -16,7 +16,7 @@ export const FriendItem = ({
         delayLongPress={150}
         style={FriendItemStyle.container}
     >
-        <ProfilePhoto name={name} size={65} />
+        <ProfilePhoto name={name} size={60} />
         <Text style={FriendItemStyle.nameText}>{name}</Text>
     </TouchableOpacity>
 );
