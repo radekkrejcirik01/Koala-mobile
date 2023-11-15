@@ -13,11 +13,7 @@ import moment from 'moment';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
-import {
-    getRequest,
-    postRequest,
-    putRequest
-} from '@utils/Axios/Axios.service';
+import { getRequest, postRequest } from '@utils/Axios/Axios.service';
 import {
     ResponseConversationGetInterface,
     ResponseInterface
@@ -62,16 +58,9 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         });
     }, [conversationId, id]);
 
-    const updateSeenMessages = useCallback(() => {
-        putRequest<ResponseInterface, never>(
-            `notification/${conversationId || id}`
-        ).subscribe();
-    }, [conversationId, id]);
-
     useEffect(() => {
         getConversation();
-        updateSeenMessages();
-    }, [getConversation, updateSeenMessages]);
+    }, [getConversation]);
 
     const send = useCallback(
         (text?: string) => {
