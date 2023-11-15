@@ -179,9 +179,8 @@ export const ShareModalScreen = ({
                                     onPress={onSend}
                                     style={[
                                         ShareModalScreenStyle.shareButtonView,
-                                        shareDisabled && {
-                                            opacity: 0.7
-                                        }
+                                        shareDisabled &&
+                                            ShareModalScreenStyle.disabled
                                     ]}
                                 >
                                     {sending ? (
