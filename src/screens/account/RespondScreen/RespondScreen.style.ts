@@ -30,7 +30,6 @@ export const RespondScreenStyle = StyleSheet.create({
         fontSize: 40
     },
     inputContainer: {
-        marginHorizontal: 4,
         paddingVertical: 5,
         paddingHorizontal: 5,
         backgroundColor: 'whitesmoke',
