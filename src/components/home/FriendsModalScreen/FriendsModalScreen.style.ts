@@ -19,7 +19,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         alignSelf: 'center',
         fontWeight: '600'
     },
-    requestsText: {
+    invitesText: {
         marginRight: 15,
         color: COLORS.GRAY_200,
         alignSelf: 'flex-end',
@@ -79,7 +79,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         color: COLORS.WHITE,
         fontWeight: 'bold'
     },
-    friendRequestsView: {
+    friendInvitesView: {
         marginTop: 15
     },
     listEmptyText: {

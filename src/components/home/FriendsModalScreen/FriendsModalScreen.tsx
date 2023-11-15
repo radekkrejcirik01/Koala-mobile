@@ -47,7 +47,7 @@ export const FriendsModalScreen = ({
     const [loaded, setLoaded] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
     const [inviteUsername, setInviteUsername] = useState<string>();
-    const [showRequests, setShowRequests] = useState<boolean>(false);
+    const [showInvites, setShowInvites] = useState<boolean>(false);
     const [invites, setInvites] = useState<InviteInterface[]>([]);
     const [posting, setPosting] = useState<boolean>(false);
 
@@ -112,7 +112,7 @@ export const FriendsModalScreen = ({
 
                 loadFriends();
                 setTimeout(() => {
-                    setShowRequests(false);
+                    setShowInvites(false);
                 }, 400);
             }
         });
@@ -218,7 +218,7 @@ export const FriendsModalScreen = ({
         );
     }
 
-    if (showRequests) {
+    if (showInvites) {
         return (
             <View
                 style={[
@@ -227,10 +227,10 @@ export const FriendsModalScreen = ({
                 ]}
             >
                 <Text style={FriendsModalScreenStyle.titleText}>
-                    Friend requests
+                    Friend invites
                 </Text>
                 {invites?.length ? (
-                    <View style={FriendsModalScreenStyle.friendRequestsView}>
+                    <View style={FriendsModalScreenStyle.friendInvitesView}>
                         {invites?.map((value: InviteInterface) => (
                             <InviteItem
                                 key={value.username}
@@ -245,7 +245,7 @@ export const FriendsModalScreen = ({
                     </View>
                 ) : (
                     <Text style={FriendsModalScreenStyle.listEmptyText}>
-                        No friend requests at the moment
+                        No friend invites at the moment
                     </Text>
                 )}
             </View>
@@ -261,9 +261,9 @@ export const FriendsModalScreen = ({
         >
             <View>
                 <Text style={FriendsModalScreenStyle.titleText}>Friends</Text>
-                <TouchableOpacity onPress={() => setShowRequests(true)}>
-                    <Text style={FriendsModalScreenStyle.requestsText}>
-                        Requests {!!invites?.length && `(${invites?.length})`}
+                <TouchableOpacity onPress={() => setShowInvites(true)}>
+                    <Text style={FriendsModalScreenStyle.invitesText}>
+                        Invites {!!invites?.length && `(${invites?.length})`}
                     </Text>
                 </TouchableOpacity>
             </View>
