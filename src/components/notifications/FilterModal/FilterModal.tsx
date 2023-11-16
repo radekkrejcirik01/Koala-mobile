@@ -75,10 +75,7 @@ export const FilterModal = ({
                             )}
                         </>
                     ) : (
-                        <ActivityIndicator
-                            color={COLORS.BUTTON_BLUE}
-                            style={FilterModalStyle.activityIndicator}
-                        />
+                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
                     )}
                 </View>
                 {isFiltered && !!friends?.length && (
