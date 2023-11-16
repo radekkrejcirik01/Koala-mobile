@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const FilterModalStyle = StyleSheet.create({
     container: {
         width: '100%',
-        minHeight: '25%',
+        minHeight: '35%',
         padding: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -38,7 +38,7 @@ export const FilterModalStyle = StyleSheet.create({
         fontWeight: '500'
     },
     filterText: {
-        marginTop: 15,
+        marginTop: 25,
         color: COLORS.BUTTON_BLUE
     }
 });

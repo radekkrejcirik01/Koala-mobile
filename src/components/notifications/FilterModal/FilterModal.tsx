@@ -40,12 +40,9 @@ export const FilterModal = ({
 
     return (
         <View
-            style={[
-                FilterModalStyle.container,
-                { paddingBottom: bottom || 20 }
-            ]}
+            style={[FilterModalStyle.container, { paddingBottom: bottom + 20 }]}
         >
-            <Text style={FilterModalStyle.titleText}>Filter</Text>
+            <Text style={FilterModalStyle.titleText}>From:</Text>
             <View style={FilterModalStyle.contentView}>
                 <View style={FilterModalStyle.friendsContainer}>
                     {loaded ? (
