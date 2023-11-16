@@ -117,11 +117,11 @@ export const NotificationsScreen = (): JSX.Element => {
                     <View style={NotificationsScreenStyle.adContainer}>
                         <BannerAd
                             size={BannerAdSize.BANNER}
-                            unitId="ca-app-pub-5349310424076196/5267833651"
+                            unitId="ca-app-pub-5349310424076196/6963897007"
                             onAdFailedToLoad={() => setShowAd(false)}
                         />
                         <Text style={NotificationsScreenStyle.adText}>
-                            Ad for paying the server bills.
+                            Ad to pay the server bills.
                         </Text>
                     </View>
                 )}
