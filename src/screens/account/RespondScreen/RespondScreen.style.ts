@@ -8,7 +8,7 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     scrollViewContainer: {
         paddingLeft: 20,
-        paddingRight: 15,
+        paddingRight: 10,
         paddingBottom: Platform.OS === 'ios' ? 300 : 100
     },
     inboundText: {

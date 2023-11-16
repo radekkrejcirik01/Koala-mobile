@@ -204,6 +204,7 @@ export const NotificationsScreen = (): JSX.Element => {
                 isVisible={modalVisible}
                 content={
                     <FilterModal
+                        isFiltered={!!filterName}
                         onFriendPress={filterByUsername}
                         onClearFilter={onClearFilter}
                     />

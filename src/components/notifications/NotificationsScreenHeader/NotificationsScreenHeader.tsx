@@ -1,4 +1,4 @@
-import React, { JSX, useMemo } from 'react';
+import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NotificationsScreenHeaderStyle } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader.style';
@@ -11,13 +11,6 @@ export const NotificationsScreenHeader = ({
     filterName
 }: NotificationsScreenHeaderProps): JSX.Element => {
     const navigation = useNavigation();
-
-    const filterText = useMemo(() => {
-        if (filterName) {
-            return `Filter - ${filterName}`;
-        }
-        return 'Filter';
-    }, [filterName]);
 
     return (
         <View style={NotificationsScreenHeaderStyle.container}>
@@ -38,7 +31,7 @@ export const NotificationsScreenHeader = ({
                 onPress={onFilterPress}
             >
                 <Text style={NotificationsScreenHeaderStyle.filterText}>
-                    {filterText}
+                    {filterName || 'Filter'}
                 </Text>
             </TouchableOpacity>
         </View>

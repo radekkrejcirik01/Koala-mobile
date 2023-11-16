@@ -10,6 +10,7 @@ import COLORS from '@constants/COLORS';
 import { FilterModalProps } from '@components/notifications/FilterModal/FilterModal.props';
 
 export const FilterModal = ({
+    isFiltered,
     onFriendPress,
     onClearFilter
 }: FilterModalProps): JSX.Element => {
@@ -58,7 +59,13 @@ export const FilterModal = ({
                                             name={value.name}
                                             size={55}
                                         />
-                                        <Text>{value.name}</Text>
+                                        <Text
+                                            style={
+                                                FilterModalStyle.friendItemNameText
+                                            }
+                                        >
+                                            {value.name}
+                                        </Text>
                                     </TouchableOpacity>
                                 ))
                             ) : (
@@ -68,11 +75,14 @@ export const FilterModal = ({
                             )}
                         </>
                     ) : (
-                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
+                        <ActivityIndicator
+                            color={COLORS.BUTTON_BLUE}
+                            style={FilterModalStyle.activityIndicator}
+                        />
                     )}
                 </View>
-                {!!friends?.length && (
-                    <TouchableOpacity onPress={onClearFilter}>
+                {isFiltered && !!friends?.length && (
+                    <TouchableOpacity hitSlop={10} onPress={onClearFilter}>
                         <Text style={FilterModalStyle.filterText}>
                             Clear filter
                         </Text>

@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const FilterModalStyle = StyleSheet.create({
     container: {
         width: '100%',
-        height: '40%',
+        height: '38%',
         padding: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -16,9 +16,8 @@ export const FilterModalStyle = StyleSheet.create({
         fontWeight: '600'
     },
     contentView: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
+        paddingTop: 10,
+        alignItems: 'center'
     },
     friendsContainer: {
         flexDirection: 'row',
@@ -29,11 +28,18 @@ export const FilterModalStyle = StyleSheet.create({
         margin: 10,
         alignItems: 'center'
     },
+    friendItemNameText: {
+        marginTop: 2
+    },
     emptyFriendsText: {
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
+    activityIndicator: {
+        marginTop: 100
+    },
     filterText: {
+        marginTop: 15,
         color: COLORS.BUTTON_BLUE
     }
 });
