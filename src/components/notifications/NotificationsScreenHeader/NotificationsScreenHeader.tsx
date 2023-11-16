@@ -1,24 +1,46 @@
-import React, { JSX } from 'react';
+import React, { JSX, useMemo } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NotificationsScreenHeaderStyle } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { NotificationsScreenHeaderProps } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader.props';
 
-export const NotificationsScreenHeader = (): JSX.Element => {
+export const NotificationsScreenHeader = ({
+    onFilterPress,
+    filterName
+}: NotificationsScreenHeaderProps): JSX.Element => {
     const navigation = useNavigation();
+
+    const filterText = useMemo(() => {
+        if (filterName) {
+            return `Filter - ${filterName}`;
+        }
+        return 'Filter';
+    }, [filterName]);
 
     return (
         <View style={NotificationsScreenHeaderStyle.container}>
+            <View style={NotificationsScreenHeaderStyle.centerView}>
+                <TouchableOpacity
+                    activeOpacity={0.9}
+                    onPress={() => navigation.goBack()}
+                >
+                    <Icon name={IconEnum.BACK_BLUE} size={24} />
+                </TouchableOpacity>
+                <Text style={NotificationsScreenHeaderStyle.titleText}>
+                    Sharing
+                </Text>
+            </View>
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => navigation.goBack()}
+                hitSlop={10}
+                onPress={onFilterPress}
             >
-                <Icon name={IconEnum.BACK_BLUE} size={24} />
+                <Text style={NotificationsScreenHeaderStyle.filterText}>
+                    {filterText}
+                </Text>
             </TouchableOpacity>
-            <Text style={NotificationsScreenHeaderStyle.titleText}>
-                Sharing
-            </Text>
         </View>
     );
 };

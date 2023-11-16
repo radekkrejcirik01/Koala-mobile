@@ -26,5 +26,9 @@ export const NotificationsScreenStyle = StyleSheet.create({
     adText: {
         color: COLORS.GRAY_200,
         alignSelf: 'center'
+    },
+    modal: {
+        margin: 0,
+        justifyContent: 'flex-end'
     }
 });

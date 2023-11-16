@@ -6,6 +6,11 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 5,
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    centerView: {
+        flexDirection: 'row',
         alignItems: 'center'
     },
     titleText: {
@@ -13,5 +18,10 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
         fontSize: 30,
         color: COLORS.BLACK_50,
         fontWeight: 'bold'
+    },
+    filterText: {
+        marginRight: 5,
+        fontSize: 15,
+        color: COLORS.BUTTON_BLUE
     }
 });
