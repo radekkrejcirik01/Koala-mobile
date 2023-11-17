@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Alert,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
@@ -27,7 +33,6 @@ export const ShareModalScreen = ({
 
     const [loaded, setLoaded] = useState<boolean>(false);
     const [friends, setFriends] = useState<UserInterface[]>([]);
-    const [shareDisabled, setShareDisabled] = useState<boolean>(true);
     const [sending, setSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
 
@@ -59,8 +64,6 @@ export const ShareModalScreen = ({
         } else {
             selectedFriends.current.push(username);
         }
-
-        setShareDisabled(!selectedFriends.current?.length);
     };
 
     const onSend = () => {
@@ -79,6 +82,8 @@ export const ShareModalScreen = ({
                     setSent(true);
                 }
             });
+        } else {
+            Alert.alert('Please select a friend first');
         }
     };
 
@@ -175,13 +180,11 @@ export const ShareModalScreen = ({
                             {friends?.length ? (
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    disabled={shareDisabled || sent}
+                                    disabled={sent}
                                     onPress={onSend}
-                                    style={[
-                                        ShareModalScreenStyle.shareButtonView,
-                                        shareDisabled &&
-                                            ShareModalScreenStyle.disabled
-                                    ]}
+                                    style={
+                                        ShareModalScreenStyle.shareButtonView
+                                    }
                                 >
                                     {sending ? (
                                         <ActivityIndicator

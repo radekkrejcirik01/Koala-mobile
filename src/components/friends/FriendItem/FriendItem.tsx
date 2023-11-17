@@ -11,6 +11,7 @@ export const FriendItem = ({
     name,
     onPress,
     onLongPress,
+    size,
     style
 }: FriendItemProps): JSX.Element => (
     <TouchableOpacity
@@ -20,8 +21,10 @@ export const FriendItem = ({
         delayLongPress={150}
         style={[FriendItemStyle.container, style]}
     >
-        <ProfilePhoto name={name} size={55} />
-        <Text style={FriendItemStyle.nameText}>{name}</Text>
+        <ProfilePhoto name={name} size={size} />
+        <Text adjustsFontSizeToFit style={FriendItemStyle.nameText}>
+            {name}
+        </Text>
     </TouchableOpacity>
 );
 

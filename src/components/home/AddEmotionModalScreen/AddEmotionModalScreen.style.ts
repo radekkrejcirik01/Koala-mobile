@@ -4,8 +4,8 @@ import COLORS from '@constants/COLORS';
 export const AddEmotionModalScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 20,
         paddingHorizontal: 20,
-        paddingTop: '10%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
@@ -15,7 +15,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     },
     emotionText: {
         fontSize: 16,
-        color: COLORS.GRAY_200,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     emotionInput: {
@@ -31,7 +31,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     messageText: {
         marginTop: 10,
         fontSize: 16,
-        color: COLORS.GRAY_200,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     messageInput: {
@@ -47,8 +47,8 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     },
     tipText: {
         marginTop: 10,
-        fontSize: 16,
-        color: COLORS.GRAY_200,
+        fontSize: 15,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     tipInput: {

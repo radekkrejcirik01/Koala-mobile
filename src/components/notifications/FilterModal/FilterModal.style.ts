@@ -4,40 +4,38 @@ import COLORS from '@constants/COLORS';
 export const FilterModalStyle = StyleSheet.create({
     container: {
         width: '100%',
-        height: '38%',
-        paddingTop: 20,
+        height: '34%',
+        paddingTop: 15,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE,
         justifyContent: 'space-between'
     },
     titleText: {
-        marginLeft: 25,
-        fontSize: 22,
-        color: COLORS.BLACK_50,
+        fontSize: 16,
+        color: COLORS.BLACK,
+        alignSelf: 'center',
         fontWeight: '600'
     },
     friendsContainer: {
-        paddingTop: 5,
-        paddingHorizontal: 20,
+        paddingHorizontal: 50,
         flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        justifyContent: 'center'
     },
     friendItem: {
-        margin: 10
+        marginVertical: 5,
+        marginHorizontal: 10
     },
     emptyFriendsText: {
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
-    activityIndicator: {
-        marginTop: 80
-    },
     filterTextButton: {
         alignSelf: 'center'
     },
     filterText: {
+        fontSize: 15,
         color: COLORS.BUTTON_BLUE
     }
 });

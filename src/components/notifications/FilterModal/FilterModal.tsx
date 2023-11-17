@@ -41,37 +41,30 @@ export const FilterModal = ({
         <View
             style={[FilterModalStyle.container, { paddingBottom: bottom + 10 }]}
         >
-            <View>
-                <Text style={FilterModalStyle.titleText}>Filter by</Text>
-                {loaded ? (
-                    <View style={FilterModalStyle.friendsContainer}>
-                        {friends?.length ? (
-                            friends?.map((value) => (
-                                <FriendItem
-                                    key={value.id}
-                                    name={value.name}
-                                    onPress={() =>
-                                        onFriendPress(value.id, value.name)
-                                    }
-                                    onLongPress={() =>
-                                        onFriendPress(value.id, value.name)
-                                    }
-                                    style={FilterModalStyle.friendItem}
-                                />
-                            ))
-                        ) : (
-                            <Text style={FilterModalStyle.emptyFriendsText}>
-                                No friends added yet
-                            </Text>
-                        )}
-                    </View>
-                ) : (
-                    <ActivityIndicator
-                        color={COLORS.BUTTON_BLUE}
-                        style={FilterModalStyle.activityIndicator}
-                    />
-                )}
-            </View>
+            <Text style={FilterModalStyle.titleText}>Filter by</Text>
+            {loaded ? (
+                <View style={FilterModalStyle.friendsContainer}>
+                    {friends?.length ? (
+                        friends?.map((value) => (
+                            <FriendItem
+                                key={value.id}
+                                name={value.name}
+                                onPress={() =>
+                                    onFriendPress(value.id, value.name)
+                                }
+                                size={42}
+                                style={FilterModalStyle.friendItem}
+                            />
+                        ))
+                    ) : (
+                        <Text style={FilterModalStyle.emptyFriendsText}>
+                            No friends added yet
+                        </Text>
+                    )}
+                </View>
+            ) : (
+                <ActivityIndicator color={COLORS.BUTTON_BLUE} />
+            )}
             <TouchableOpacity
                 hitSlop={10}
                 onPress={onClearFilter}

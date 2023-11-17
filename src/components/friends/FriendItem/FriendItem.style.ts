@@ -7,6 +7,6 @@ export const FriendItemStyle = StyleSheet.create({
     },
     nameText: {
         marginTop: 2,
-        color: COLORS.BLACK_50
+        color: COLORS.BLACK
     }
 });

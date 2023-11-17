@@ -289,6 +289,7 @@ export const FriendsModalScreen = ({
                                             friends[index]?.name
                                         )
                                     }
+                                    size={55}
                                 />
                             ) : (
                                 <TouchableOpacity

@@ -59,6 +59,7 @@ export const AddEmotionModalScreen = ({
                     autoCorrect={false}
                     onChangeText={setEmotion}
                     placeholder="e.g. Overthinking"
+                    placeholderTextColor={COLORS.GRAY_200}
                     style={AddEmotionModalScreenStyle.emotionInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.messageText}>
@@ -69,6 +70,7 @@ export const AddEmotionModalScreen = ({
                     onChangeText={setEmotionMessage}
                     multiline
                     placeholder="e.g. I CANT STOP OVERTHINKING"
+                    placeholderTextColor={COLORS.GRAY_200}
                     style={AddEmotionModalScreenStyle.messageInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.tipText}>
@@ -78,6 +80,7 @@ export const AddEmotionModalScreen = ({
                     autoCorrect={false}
                     onChangeText={setTip1}
                     placeholder="e.g. Put on headphones and be delulu"
+                    placeholderTextColor={COLORS.GRAY_200}
                     style={AddEmotionModalScreenStyle.tipInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.tipText}>
@@ -87,6 +90,7 @@ export const AddEmotionModalScreen = ({
                     autoCorrect={false}
                     onChangeText={setTip2}
                     placeholder="e.g. Change environment"
+                    placeholderTextColor={COLORS.GRAY_200}
                     style={AddEmotionModalScreenStyle.tipInput}
                 />
             </ScrollView>
