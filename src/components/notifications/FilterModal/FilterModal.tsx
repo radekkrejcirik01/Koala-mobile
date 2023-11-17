@@ -4,13 +4,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { UserInterface } from '@interfaces/general.interface';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseFriendsGetInterface } from '@interfaces/response/Response.interface';
-import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { FilterModalStyle } from '@components/notifications/FilterModal/FilterModal.style';
 import COLORS from '@constants/COLORS';
 import { FilterModalProps } from '@components/notifications/FilterModal/FilterModal.props';
+import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 
 export const FilterModal = ({
-    isFiltered,
     onFriendPress,
     onClearFilter
 }: FilterModalProps): JSX.Element => {
@@ -40,54 +39,46 @@ export const FilterModal = ({
 
     return (
         <View
-            style={[FilterModalStyle.container, { paddingBottom: bottom + 20 }]}
+            style={[FilterModalStyle.container, { paddingBottom: bottom + 10 }]}
         >
-            <Text style={FilterModalStyle.titleText}>From:</Text>
-            <View style={FilterModalStyle.contentView}>
-                <View style={FilterModalStyle.friendsContainer}>
-                    {loaded ? (
-                        <>
-                            {friends?.length ? (
-                                friends?.map((value) => (
-                                    <TouchableOpacity
-                                        key={value.id}
-                                        activeOpacity={0.9}
-                                        onPress={() =>
-                                            onFriendPress(value.id, value.name)
-                                        }
-                                        style={FilterModalStyle.friendItemView}
-                                    >
-                                        <ProfilePhoto
-                                            name={value.name}
-                                            size={55}
-                                        />
-                                        <Text
-                                            style={
-                                                FilterModalStyle.friendItemNameText
-                                            }
-                                        >
-                                            {value.name}
-                                        </Text>
-                                    </TouchableOpacity>
-                                ))
-                            ) : (
-                                <Text style={FilterModalStyle.emptyFriendsText}>
-                                    No friends added yet
-                                </Text>
-                            )}
-                        </>
-                    ) : (
-                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-                    )}
-                </View>
-                {isFiltered && !!friends?.length && (
-                    <TouchableOpacity hitSlop={10} onPress={onClearFilter}>
-                        <Text style={FilterModalStyle.filterText}>
-                            Clear filter
-                        </Text>
-                    </TouchableOpacity>
+            <View>
+                <Text style={FilterModalStyle.titleText}>Filter by</Text>
+                {loaded ? (
+                    <View style={FilterModalStyle.friendsContainer}>
+                        {friends?.length ? (
+                            friends?.map((value) => (
+                                <FriendItem
+                                    key={value.id}
+                                    name={value.name}
+                                    onPress={() =>
+                                        onFriendPress(value.id, value.name)
+                                    }
+                                    onLongPress={() =>
+                                        onFriendPress(value.id, value.name)
+                                    }
+                                    style={FilterModalStyle.friendItem}
+                                />
+                            ))
+                        ) : (
+                            <Text style={FilterModalStyle.emptyFriendsText}>
+                                No friends added yet
+                            </Text>
+                        )}
+                    </View>
+                ) : (
+                    <ActivityIndicator
+                        color={COLORS.BUTTON_BLUE}
+                        style={FilterModalStyle.activityIndicator}
+                    />
                 )}
             </View>
+            <TouchableOpacity
+                hitSlop={10}
+                onPress={onClearFilter}
+                style={FilterModalStyle.filterTextButton}
+            >
+                <Text style={FilterModalStyle.filterText}>Clear filter</Text>
+            </TouchableOpacity>
         </View>
     );
 };

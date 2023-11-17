@@ -38,8 +38,8 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         marginBottom: 10
     },
     addView: {
-        width: 60,
-        height: 60,
+        width: 55,
+        height: 55,
         borderRadius: 40,
         borderWidth: 3,
         borderColor: COLORS.LIGHTGRAY,
