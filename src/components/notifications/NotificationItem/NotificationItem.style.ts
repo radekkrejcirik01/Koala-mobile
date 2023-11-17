@@ -31,12 +31,13 @@ export const NotificationItemStyle = StyleSheet.create({
     titleText: {
         marginTop: 5,
         fontSize: 16,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '600'
     },
     messageText: {
         marginTop: 2,
         fontSize: 15,
-        color: COLORS.GRAY_200
+        color: COLORS.GRAY_200,
+        fontWeight: '500'
     }
 });

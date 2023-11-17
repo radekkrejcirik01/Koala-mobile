@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const TrackItemStyle = StyleSheet.create({
     container: {
-        paddingVertical: 8,
+        paddingVertical: 10,
         flexDirection: 'row'
     },
     textsView: {
@@ -16,11 +16,16 @@ export const TrackItemStyle = StyleSheet.create({
     messageText: {
         flex: 1,
         marginRight: 20,
-        fontSize: 15,
-        color: COLORS.BLACK,
-        fontWeight: '500'
+        fontSize: 16,
+        color: COLORS.BLACK_50,
+        fontWeight: '600'
     },
-    text: {
+    timeText: {
         color: COLORS.GRAY_200
+    },
+    sharedToText: {
+        fontSize: 15,
+        color: COLORS.GRAY_200,
+        fontWeight: '500'
     }
 });

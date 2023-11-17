@@ -34,7 +34,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     },
     profileView: {
         height: 85,
-        marginHorizontal: 10,
+        marginHorizontal: 12,
         marginBottom: 10
     },
     addView: {

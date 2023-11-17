@@ -23,7 +23,7 @@ export const HomeScreenHeader = ({
                     onPress={onProfilePress}
                     style={HomeScreenHeaderStyle.profileButtonView}
                 >
-                    <ProfilePhoto name={name} photo={profilePhoto} size={40} />
+                    <ProfilePhoto name={name} photo={profilePhoto} size={42} />
                 </TouchableOpacity>
                 <Text style={HomeScreenHeaderStyle.homeTitleText}>Home</Text>
             </View>

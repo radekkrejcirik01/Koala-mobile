@@ -16,11 +16,11 @@ export const TrackItem = ({ item }: TrackItemProps): JSX.Element => {
                     <Text style={TrackItemStyle.messageText}>
                         {item.message}
                     </Text>
-                    <Text style={TrackItemStyle.text}>
+                    <Text style={TrackItemStyle.timeText}>
                         {getLocalTimeFromUTCUnix(item?.time)}
                     </Text>
                 </View>
-                <Text style={TrackItemStyle.text}>
+                <Text style={TrackItemStyle.sharedToText}>
                     shared to {getReceiversNamesText(item?.receiversNames)}
                 </Text>
             </View>

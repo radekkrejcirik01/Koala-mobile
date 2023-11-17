@@ -23,13 +23,14 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     nameText: {
         marginTop: 10,
         fontSize: 25,
-        color: COLORS.BLACK,
-        fontWeight: '500'
+        color: COLORS.BLACK_50,
+        fontWeight: '600'
     },
     usernameText: {
         fontSize: 18,
         marginBottom: 20,
-        color: COLORS.GRAY_200
+        color: COLORS.GRAY_200,
+        fontWeight: '500'
     },
     accountView: {
         width: '100%',
@@ -40,12 +41,12 @@ export const ProfileModalScreenStyle = StyleSheet.create({
     },
     deleteAccountText: {
         fontSize: 16,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     logoutText: {
         fontSize: 16,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     historyView: {
