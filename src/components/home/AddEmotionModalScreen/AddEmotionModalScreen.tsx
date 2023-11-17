@@ -58,6 +58,7 @@ export const AddEmotionModalScreen = ({
                     autoFocus
                     autoCorrect={false}
                     onChangeText={setEmotion}
+                    placeholder="e.g. Overthinking"
                     style={AddEmotionModalScreenStyle.emotionInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.messageText}>
@@ -66,8 +67,9 @@ export const AddEmotionModalScreen = ({
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setEmotionMessage}
-                    style={AddEmotionModalScreenStyle.messageInput}
                     multiline
+                    placeholder="e.g. I CANT STOP OVERTHINKING"
+                    style={AddEmotionModalScreenStyle.messageInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.tipText}>
                     Can help 1
@@ -75,6 +77,7 @@ export const AddEmotionModalScreen = ({
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip1}
+                    placeholder="e.g. Put on headphones and be delulu"
                     style={AddEmotionModalScreenStyle.tipInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.tipText}>
@@ -83,6 +86,7 @@ export const AddEmotionModalScreen = ({
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip2}
+                    placeholder="e.g. Change environment"
                     style={AddEmotionModalScreenStyle.tipInput}
                 />
             </ScrollView>
