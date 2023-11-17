@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const FilterModalStyle = StyleSheet.create({
     container: {
         width: '100%',
-        height: '34%',
+        height: '35%',
         paddingTop: 15,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,

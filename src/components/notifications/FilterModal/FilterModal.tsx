@@ -52,7 +52,7 @@ export const FilterModal = ({
                                 onPress={() =>
                                     onFriendPress(value.id, value.name)
                                 }
-                                size={42}
+                                size={50}
                                 style={FilterModalStyle.friendItem}
                             />
                         ))
