@@ -75,11 +75,8 @@ export const FriendsModalScreen = ({
     }, []);
 
     useEffect(() => {
-        // 300 ms modal opening time
-        setTimeout(() => {
-            loadFriends();
-            MessagingService.initMessaging().catch();
-        }, 300);
+        loadFriends();
+        MessagingService.initMessaging().catch();
     }, [loadFriends]);
 
     const sendInvite = useCallback(() => {

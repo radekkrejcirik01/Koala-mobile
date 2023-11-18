@@ -50,10 +50,7 @@ export const ShareModalScreen = ({
     };
 
     useEffect(() => {
-        // 300 ms open modal time
-        setTimeout(() => {
-            loadFriends();
-        }, 300);
+        loadFriends();
     }, []);
 
     const onFriendSelect = (username: string) => {

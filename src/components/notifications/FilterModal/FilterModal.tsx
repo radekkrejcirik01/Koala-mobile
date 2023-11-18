@@ -31,10 +31,7 @@ export const FilterModal = ({
     };
 
     useEffect(() => {
-        // 300 ms modal opening time
-        setTimeout(() => {
-            getFriends();
-        }, 300);
+        getFriends();
     }, []);
 
     return (

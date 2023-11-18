@@ -63,10 +63,10 @@ export const ProfileModalScreen = (): JSX.Element => {
     }, []);
 
     useEffect(() => {
-        // 300 ms modal opening time
+        // 200 ms opening time
         setTimeout(() => {
             loadTrack();
-        }, 300);
+        }, 200);
     }, [loadTrack]);
 
     const renderItem = useCallback(
