@@ -30,7 +30,7 @@ export interface ConversationInterface {
     time: number;
 }
 
-export interface TrackInterface {
+export interface HistoryInterface {
     id: number;
     receiversNames: string[];
     message: string;

@@ -14,7 +14,6 @@ import { useNotifications } from '@hooks/useNotifications';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { Modal } from '@components/general/Modal/Modal';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
-import { ProfileModalScreen } from '@components/home/ProfileModalScreen/ProfileModalScreen';
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
 import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
@@ -27,7 +26,7 @@ import {
     ResponseInterface
 } from '@interfaces/response/Response.interface';
 
-export const HomeScreen = (): JSX.Element => {
+export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
 
     useNotifications();
@@ -35,18 +34,13 @@ export const HomeScreen = (): JSX.Element => {
     const { showActionSheetWithOptions } = useActionSheet();
     const { modalVisible, showModal, hideModal } = useModal();
 
-    const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
+    const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
 
     const [data, setData] = useState<EmotionInterface[]>([]);
 
     useEffect(() => {
         setData([...DATA, ...(emotions || [])]);
     }, [emotions]);
-
-    const openProfile = useCallback(() => {
-        setModalContent(<ProfileModalScreen />);
-        showModal();
-    }, [showModal]);
 
     const loadEmotions = useCallback(() => {
         getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
@@ -151,7 +145,7 @@ export const HomeScreen = (): JSX.Element => {
                 { paddingTop: top + 20, paddingBottom: bottom || 10 }
             ]}
         >
-            <HomeScreenHeader onProfilePress={openProfile} />
+            <HomeScreenHeader />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={HomeScreenStyle.scrollViewContainer}

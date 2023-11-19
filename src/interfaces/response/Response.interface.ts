@@ -1,9 +1,9 @@
 import {
     ConversationInterface,
     EmotionInterface,
+    HistoryInterface,
     InviteInterface,
     NotificationInterface,
-    TrackInterface,
     UserInterface
 } from '@interfaces/general.interface';
 
@@ -52,7 +52,7 @@ export interface ResponseConversationGetInterface {
 export interface ResponseHistoryGetInterface {
     status: string;
     message: string;
-    data?: TrackInterface[];
+    data?: HistoryInterface[];
 }
 
 export interface ResponseUnseenNotificationsGetInterface {

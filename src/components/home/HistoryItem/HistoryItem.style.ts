@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const TrackItemStyle = StyleSheet.create({
+export const HistoryItemStyle = StyleSheet.create({
     container: {
         paddingVertical: 10,
         flexDirection: 'row'
