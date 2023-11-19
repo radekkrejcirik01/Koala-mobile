@@ -22,11 +22,11 @@ export const ProfileScreenStyle = StyleSheet.create({
     },
     nameText: {
         fontSize: 25,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '600'
     },
     usernameText: {
-        fontSize: 18,
+        fontSize: 16,
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
@@ -35,13 +35,16 @@ export const ProfileScreenStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE
     },
     buttonView: {
-        paddingVertical: 10,
+        paddingVertical: 12,
         paddingHorizontal: 15,
+        borderBottomWidth: 0.4,
+        borderBottomColor: COLORS.LIGHTGRAY,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     buttonText: {
         fontSize: 16,
+        color: COLORS.BLACK_50,
         fontWeight: 'bold'
     },
     versionText: {

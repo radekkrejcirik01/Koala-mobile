@@ -50,7 +50,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                         <Text style={ProfileScreenStyle.buttonText}>
                             Account
                         </Text>
-                        <Icon name={IconEnum.BACK_BLUE_RIGHT} size={20} />
+                        <Icon name={IconEnum.BACK_BLUE_RIGHT} size={18} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
@@ -64,7 +64,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                         <Text style={ProfileScreenStyle.buttonText}>
                             Sharing history
                         </Text>
-                        <Icon name={IconEnum.BACK_BLUE_RIGHT} size={20} />
+                        <Icon name={IconEnum.BACK_BLUE_RIGHT} size={18} />
                     </TouchableOpacity>
                 </View>
             </ScrollView>
