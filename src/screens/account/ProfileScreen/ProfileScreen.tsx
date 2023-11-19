@@ -11,17 +11,23 @@ import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
     const { username, name } = useSelector(
         (state: ReducerProps) => state.user.user
     );
 
-    const { top } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     return (
-        <View style={[ProfileScreenStyle.container, { paddingTop: top + 10 }]}>
+        <View
+            style={[
+                ProfileScreenStyle.container,
+                { paddingTop: top + 10, paddingBottom: bottom || 10 }
+            ]}
+        >
             <ScreenHeader title="Profile" />
             <ScrollView>
                 <View style={ProfileScreenStyle.profileContainer}>
@@ -62,6 +68,9 @@ export const ProfileScreen = (): React.JSX.Element => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            <Text style={ProfileScreenStyle.versionText}>
+                Version {version}
+            </Text>
         </View>
     );
 };

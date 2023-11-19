@@ -242,7 +242,7 @@ export const FriendsModalScreen = ({
                     </View>
                 ) : (
                     <Text style={FriendsModalScreenStyle.listEmptyText}>
-                        No friend invites at the moment
+                        No invites at the moment
                     </Text>
                 )}
             </View>

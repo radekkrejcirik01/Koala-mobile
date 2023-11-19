@@ -17,7 +17,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         fontSize: 16,
         color: COLORS.BLACK,
         alignSelf: 'center',
-        fontWeight: '600'
+        fontWeight: 'bold'
     },
     invitesText: {
         marginRight: 15,
