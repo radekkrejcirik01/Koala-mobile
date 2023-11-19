@@ -28,7 +28,9 @@ import { ResponsesButtons } from '@components/respond/ResponsesButtons/Responses
 import { InboundMessageItem } from '@components/respond/InboundMessageItem/InboundMessageItem';
 import { OutboundMessageItem } from '@components/respond/OutboundMessageItem/OutboundMessageItem';
 
-export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
+export const RespondScreen = ({
+    route
+}: RespondScreenProps): React.JSX.Element => {
     const { id, name, username, conversationId } = route.params;
 
     const { name: userName, username: userUsername } = useSelector(
@@ -44,8 +46,8 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
 
     const scrollViewRef = useRef(null);
 
-    const scrollToEnd = (animated: boolean) => {
-        scrollViewRef?.current?.scrollToEnd({ animated });
+    const scrollToEnd = () => {
+        scrollViewRef?.current?.scrollToEnd({ animated: true });
     };
 
     const getConversation = useCallback(() => {
@@ -54,6 +56,13 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         ).subscribe((response: ResponseConversationGetInterface) => {
             if (response?.status) {
                 setConversation(response?.data);
+
+                // Scroll to bottom when conversation has more than 15 messages
+                if (response?.data?.length > 15) {
+                    setTimeout(() => {
+                        scrollToEnd();
+                    }, 100);
+                }
             }
         });
     }, [conversationId, id]);
@@ -74,7 +83,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                 })
             );
 
-            scrollToEnd(true);
+            scrollToEnd();
 
             postRequest<ResponseInterface, MessageNotificationPostInterface>(
                 'message-notification',
@@ -117,6 +126,11 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
         return false;
     }, [conversation, username]);
 
+    const onPressSend = useCallback(() => {
+        send();
+        setMessage('');
+    }, [send]);
+
     return (
         <View
             style={[
@@ -153,7 +167,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                         <TextInput
                             autoCorrect={false}
                             multiline
-                            onFocus={() => scrollToEnd(true)}
+                            onFocus={scrollToEnd}
                             value={message}
                             onChangeText={setMessage}
                             placeholder="Message..."
@@ -164,10 +178,7 @@ export const RespondScreen = ({ route }: RespondScreenProps): JSX.Element => {
                             activeOpacity={0.9}
                             disabled={!message}
                             hitSlop={10}
-                            onPress={() => {
-                                send();
-                                setMessage('');
-                            }}
+                            onPress={onPressSend}
                         >
                             <Icon name={IconEnum.SEND} size={27} />
                         </TouchableOpacity>
