@@ -76,7 +76,7 @@ export const AccountScreen = (): React.JSX.Element => {
                         </Text>
                     </TouchableOpacity>
                     <Text style={AccountScreenStyle.descriptionText}>
-                        By deleting account you will loose all your messages and
+                        By deleting account you will lose all your messages and
                         sharing history.
                     </Text>
                 </View>
