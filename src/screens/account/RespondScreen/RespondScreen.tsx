@@ -55,7 +55,7 @@ export const RespondScreen = ({
 
     // Helper function to check reaction buttons visibility
     // Return true when first messages is inbound and number of inbound messages is 1
-    const showReactionButtons = useCallback(
+    const checkReactionButtons = useCallback(
         (data: ConversationInterface[]) => {
             const receivedMessages = data?.filter(
                 (e: ConversationInterface) => e?.sender === username
@@ -76,15 +76,15 @@ export const RespondScreen = ({
                 const data = response?.data;
 
                 setConversation(data);
-                setReactionButtons(showReactionButtons(data));
+                setReactionButtons(checkReactionButtons(data));
 
-                // Scroll to bottom when conversation has more than 15 messages
+                // Scroll to bottom when conversation has more than 10 messages
                 if (data?.length >= 10) {
                     scrollToEnd();
                 }
             }
         });
-    }, [conversationId, id, showReactionButtons]);
+    }, [checkReactionButtons, conversationId, id]);
 
     useEffect(() => {
         getConversation();
