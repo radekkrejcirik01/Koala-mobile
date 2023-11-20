@@ -25,7 +25,7 @@ export const HomeScreenStyle = StyleSheet.create({
         maxHeight: 60,
         paddingVertical: 10,
         paddingHorizontal: 12,
-        borderWidth: 1.5,
+        borderWidth: 1.8,
         borderColor: COLORS.BLACK,
         backgroundColor: COLORS.WHITE,
         borderRadius: 25
