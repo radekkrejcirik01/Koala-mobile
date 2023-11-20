@@ -9,7 +9,8 @@ export const AccountScreenStyle = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingVertical: 25,
+        paddingTop: 50,
+        paddingBottom: 25,
         justifyContent: 'space-between'
     },
     buttonView: {
@@ -23,7 +24,7 @@ export const AccountScreenStyle = StyleSheet.create({
     buttonText: {
         fontSize: 16,
         color: COLORS.BLACK_50,
-        fontWeight: 'bold'
+        fontWeight: '600'
     },
     descriptionText: {
         marginTop: 5,

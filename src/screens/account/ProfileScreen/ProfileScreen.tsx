@@ -68,9 +68,8 @@ export const ProfileScreen = (): React.JSX.Element => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-            <Text style={ProfileScreenStyle.versionText}>
-                Version {version}
-            </Text>
+            <Text style={ProfileScreenStyle.text}>Made to help</Text>
+            <Text style={ProfileScreenStyle.text}>Version {version}</Text>
         </View>
     );
 };
