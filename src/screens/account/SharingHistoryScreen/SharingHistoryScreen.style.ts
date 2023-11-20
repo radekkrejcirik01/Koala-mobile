@@ -8,7 +8,7 @@ export const SharingHistoryScreenStyle = StyleSheet.create({
         paddingRight: 20
     },
     historyListContainer: {
-        paddingVertical: 50
+        paddingVertical: 25
     },
     listEmptyText: {
         marginTop: 100,

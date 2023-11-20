@@ -9,7 +9,7 @@ export const AccountScreenStyle = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingTop: 50,
+        paddingTop: 25,
         paddingBottom: 25,
         justifyContent: 'space-between'
     },
