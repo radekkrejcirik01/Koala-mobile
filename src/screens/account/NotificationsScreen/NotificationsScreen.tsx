@@ -1,10 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { ActivityIndicator, Platform, Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
-import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { getRequest } from '@utils/Axios/Axios.service';
@@ -32,7 +31,6 @@ export const NotificationsScreen = (): JSX.Element => {
     );
     const [filterName, setFilterName] = useState<string>();
     const [loaded, setLoaded] = useState<boolean>(false);
-    const [showAd, setShowAd] = useState<boolean>(true);
 
     const filterUserId = useRef<number>();
 
@@ -186,20 +184,6 @@ export const NotificationsScreen = (): JSX.Element => {
                     )
                 }
             />
-            {Platform.OS === 'android' &&
-                notifications?.length > 10 &&
-                showAd && (
-                    <View style={NotificationsScreenStyle.adContainer}>
-                        <BannerAd
-                            size={BannerAdSize.BANNER}
-                            unitId="ca-app-pub-5349310424076196/6963897007"
-                            onAdFailedToLoad={() => setShowAd(false)}
-                        />
-                        <Text style={NotificationsScreenStyle.adText}>
-                            Ad to pay the server bills.
-                        </Text>
-                    </View>
-                )}
             <Modal
                 isVisible={modalVisible}
                 content={
