@@ -50,7 +50,7 @@ export const RespondScreen = ({
     const scrollToEnd = () => {
         setTimeout(() => {
             scrollViewRef?.current?.scrollToEnd({ animated: true });
-        }, 100);
+        }, 50);
     };
 
     // Helper function to check reaction buttons visibility
@@ -79,7 +79,7 @@ export const RespondScreen = ({
                 setReactionButtons(showReactionButtons(data));
 
                 // Scroll to bottom when conversation has more than 15 messages
-                if (data?.length > 15) {
+                if (data?.length >= 10) {
                     scrollToEnd();
                 }
             }
