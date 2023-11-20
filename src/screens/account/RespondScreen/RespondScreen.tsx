@@ -24,7 +24,7 @@ import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ConversationInterface } from '@interfaces/general.interface';
-import { ResponsesButtons } from '@components/respond/ResponsesButtons/ResponsesButtons';
+import { ReactionButtons } from '@components/respond/ReactionButtons/ReactionButtons';
 import { InboundMessageItem } from '@components/respond/InboundMessageItem/InboundMessageItem';
 import { OutboundMessageItem } from '@components/respond/OutboundMessageItem/OutboundMessageItem';
 
@@ -43,29 +43,48 @@ export const RespondScreen = ({
     const [conversation, setConversation] = useState<ConversationInterface[]>(
         []
     );
+    const [reactionButtons, setReactionButtons] = useState<boolean>(false);
 
     const scrollViewRef = useRef(null);
 
     const scrollToEnd = () => {
-        scrollViewRef?.current?.scrollToEnd({ animated: true });
+        setTimeout(() => {
+            scrollViewRef?.current?.scrollToEnd({ animated: true });
+        }, 100);
     };
+
+    // Helper function to check reaction buttons visibility
+    // Return true when first messages is inbound and number of inbound messages is 1
+    const showReactionButtons = useCallback(
+        (data: ConversationInterface[]) => {
+            const receivedMessages = data?.filter(
+                (e: ConversationInterface) => e?.sender === username
+            );
+
+            return (
+                data[0]?.sender === username && receivedMessages?.length === 1
+            );
+        },
+        [username]
+    );
 
     const getConversation = useCallback(() => {
         getRequest<ResponseConversationGetInterface>(
             `conversation/${conversationId || id}`
         ).subscribe((response: ResponseConversationGetInterface) => {
-            if (response?.status) {
-                setConversation(response?.data);
+            if (response?.status && !!response?.data?.length) {
+                const data = response?.data;
+
+                setConversation(data);
+                setReactionButtons(showReactionButtons(data));
 
                 // Scroll to bottom when conversation has more than 15 messages
-                if (response?.data?.length > 15) {
-                    setTimeout(() => {
-                        scrollToEnd();
-                    }, 100);
+                if (data?.length > 15) {
+                    scrollToEnd();
                 }
             }
         });
-    }, [conversationId, id]);
+    }, [conversationId, id, showReactionButtons]);
 
     useEffect(() => {
         getConversation();
@@ -82,8 +101,6 @@ export const RespondScreen = ({
                     time: moment().unix()
                 })
             );
-
-            scrollToEnd();
 
             postRequest<ResponseInterface, MessageNotificationPostInterface>(
                 'message-notification',
@@ -103,32 +120,18 @@ export const RespondScreen = ({
         [username]
     );
 
-    const onPressResponseButton = useCallback(
+    const onPressReaction = useCallback(
         (value: string) => {
             send(value);
         },
         [send]
     );
 
-    // Show response buttons only if number of received messages is 1
-    // and first message is shared emotion from friend
-    const showResponseButtons = useCallback((): boolean => {
-        if (conversation?.length) {
-            if (conversation[0]?.sender !== username) {
-                return false;
-            }
-
-            const receivedMessages = conversation?.filter(
-                (e: ConversationInterface) => e?.sender === username
-            );
-            return receivedMessages?.length === 1;
-        }
-        return false;
-    }, [conversation, username]);
-
     const onPressSend = useCallback(() => {
         send();
         setMessage('');
+
+        scrollToEnd();
     }, [send]);
 
     return (
@@ -159,8 +162,8 @@ export const RespondScreen = ({
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             >
-                {showResponseButtons() && (
-                    <ResponsesButtons onPressButton={onPressResponseButton} />
+                {reactionButtons && (
+                    <ReactionButtons onPressReaction={onPressReaction} />
                 )}
                 <View style={RespondScreenStyle.inputContainer}>
                     <View style={RespondScreenStyle.inputView}>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import {
-    ResponseButtonInterface,
-    ResponsesButtonsProps
-} from '@components/respond/ResponsesButtons/ResponsesButtons.props';
-import { ResponsesButtonsStyle } from '@components/respond/ResponsesButtons/ResponsesButtons.style';
+    ReactionButtonInterface,
+    ReactionButtonsProps
+} from '@components/respond/ReactionButtons/ReactionButtons.props';
+import { ReactionButtonsStyle } from '@components/respond/ReactionButtons/ReactionButtons.style';
 
-export const ResponsesButtons = ({ onPressButton }: ResponsesButtonsProps) => {
-    const list: ResponseButtonInterface[] = [
+export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
+    const list: ReactionButtonInterface[] = [
         {
             id: 1,
             message: 'Sending support ❤️'
@@ -31,15 +31,15 @@ export const ResponsesButtons = ({ onPressButton }: ResponsesButtonsProps) => {
     ];
 
     return (
-        <View style={ResponsesButtonsStyle.container}>
+        <View style={ReactionButtonsStyle.container}>
             {list.map((value) => (
                 <TouchableOpacity
                     key={value.id}
                     activeOpacity={0.9}
-                    onPress={() => onPressButton(value.message)}
-                    style={ResponsesButtonsStyle.buttonView}
+                    onPress={() => onPressReaction(value.message)}
+                    style={ReactionButtonsStyle.buttonView}
                 >
-                    <Text style={ResponsesButtonsStyle.buttonText}>
+                    <Text style={ReactionButtonsStyle.buttonText}>
                         {value.message}
                     </Text>
                 </TouchableOpacity>

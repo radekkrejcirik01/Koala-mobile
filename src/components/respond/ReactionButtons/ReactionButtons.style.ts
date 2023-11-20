@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ResponsesButtonsStyle = StyleSheet.create({
+export const ReactionButtonsStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
         backgroundColor: 'whitesmoke',
