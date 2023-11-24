@@ -4,11 +4,14 @@ import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { DevicePostInterface } from '@interfaces/post/Post.interface';
+import store from '@store/index/index';
 
 class MessagingServiceClass {
     private registerDevice = (fcmToken: string) => {
         postRequest<ResponseInterface, DevicePostInterface>('device', {
-            deviceToken: fcmToken
+            deviceToken: fcmToken,
+            userId: store.getState().user.user.id,
+            platform: Platform.OS
         }).subscribe();
     };
 

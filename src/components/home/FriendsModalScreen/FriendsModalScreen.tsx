@@ -28,7 +28,6 @@ import { InviteInterface, UserInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import COLORS from '@constants/COLORS';
 import { ReducerProps } from '@store/index/index.props';
-import { MessagingService } from '@utils/general/MessagingService';
 import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { InviteItem } from '@components/friends/InviteItem/InviteItem';
 import { FriendsModalScreenProps } from '@components/home/FriendsModalScreen/FriendsModalScreen.props';
@@ -76,7 +75,6 @@ export const FriendsModalScreen = ({
 
     useEffect(() => {
         loadFriends();
-        MessagingService.initMessaging().catch();
     }, [loadFriends]);
 
     const sendInvite = useCallback(() => {

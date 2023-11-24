@@ -9,6 +9,7 @@ export interface ReducerProps {
 export interface User {
     token: string;
     user: {
+        id: number;
         name: string;
         username: string;
         profilePhoto: string;

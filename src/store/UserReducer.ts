@@ -4,6 +4,7 @@ import { User } from '@store/index/index.props';
 const initialState: User = {
     token: null,
     user: {
+        id: null,
         name: null,
         username: null,
         profilePhoto: null
