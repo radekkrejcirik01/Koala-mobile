@@ -3,6 +3,7 @@ import BackBlueRight from '@assets/webp/BackBlueRight.webp';
 import Clean from '@assets/webp/Clean.webp';
 import Mail from '@assets/webp/Mail.webp';
 import Menu from '@assets/webp/Menu.webp';
+import Reply from '@assets/webp/Reply.webp';
 import Plus from '@assets/webp/Plus.webp';
 import Send from '@assets/webp/Send.webp';
 
@@ -12,6 +13,7 @@ export enum IconEnum {
     CLEAN = 'Clean',
     MAIL = 'Mail',
     MENU = 'Menu',
+    REPLY = 'Reply',
     PLUS = 'Plus',
     SEND = 'Send'
 }
@@ -22,6 +24,7 @@ export const ICONS = {
     [IconEnum.CLEAN]: Clean,
     [IconEnum.MENU]: Menu,
     [IconEnum.MAIL]: Mail,
+    [IconEnum.REPLY]: Reply,
     [IconEnum.PLUS]: Plus,
     [IconEnum.SEND]: Send
 };

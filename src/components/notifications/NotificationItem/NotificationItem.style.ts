@@ -39,5 +39,15 @@ export const NotificationItemStyle = StyleSheet.create({
         fontSize: 15,
         color: COLORS.GRAY_200,
         fontWeight: '500'
+    },
+    replyView: {
+        alignSelf: 'flex-end'
+    },
+    replyIcon: {
+        transform: [{ rotate: '180deg' }]
+    },
+    replyText: {
+        color: COLORS.GRAY_200,
+        fontWeight: '500'
     }
 });

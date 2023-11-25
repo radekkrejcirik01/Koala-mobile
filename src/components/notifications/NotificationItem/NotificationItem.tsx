@@ -5,6 +5,8 @@ import { NotificationItemEnum } from '@components/notifications/NotificationItem
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getFromNowUnixTime } from '@functions/getFromNowUnixTime';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const NotificationItem = ({
     item,
@@ -41,6 +43,18 @@ export const NotificationItem = ({
             <Text style={NotificationItemStyle.messageText}>
                 {item.message}
             </Text>
+            {!!item?.emotion && (
+                <View style={NotificationItemStyle.replyView}>
+                    <Icon
+                        name={IconEnum.REPLY}
+                        size={24}
+                        style={NotificationItemStyle.replyIcon}
+                    />
+                    <Text style={NotificationItemStyle.replyText}>
+                        {item?.emotion}
+                    </Text>
+                </View>
+            )}
         </TouchableOpacity>
     );
 };
