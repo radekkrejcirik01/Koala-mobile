@@ -51,7 +51,7 @@ export const AddEmotionModalScreen = ({
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={AddEmotionModalScreenStyle.listContainer}
             >
-                <Text style={AddEmotionModalScreenStyle.emotionText}>
+                <Text style={AddEmotionModalScreenStyle.titleText}>
                     Emotion
                 </Text>
                 <TextInput
@@ -61,7 +61,7 @@ export const AddEmotionModalScreen = ({
                     placeholder="Overthinking"
                     style={AddEmotionModalScreenStyle.emotionInput}
                 />
-                <Text style={AddEmotionModalScreenStyle.messageText}>
+                <Text style={AddEmotionModalScreenStyle.titleText}>
                     Message
                 </Text>
                 <TextInput
@@ -71,8 +71,11 @@ export const AddEmotionModalScreen = ({
                     placeholder="I CANT STOP OVERTHINKING"
                     style={AddEmotionModalScreenStyle.messageInput}
                 />
-                <Text style={AddEmotionModalScreenStyle.tipText}>
-                    Can help 1
+                <Text style={AddEmotionModalScreenStyle.messageDescriptionText}>
+                    Your friend will see this message.
+                </Text>
+                <Text style={AddEmotionModalScreenStyle.titleText}>
+                    What helps
                 </Text>
                 <TextInput
                     autoCorrect={false}
@@ -80,9 +83,6 @@ export const AddEmotionModalScreen = ({
                     placeholder="Put on headphones and be delulu"
                     style={AddEmotionModalScreenStyle.tipInput}
                 />
-                <Text style={AddEmotionModalScreenStyle.tipText}>
-                    Can help 2
-                </Text>
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip2}
@@ -101,7 +101,7 @@ export const AddEmotionModalScreen = ({
                         <ActivityIndicator color={COLORS.WHITE} />
                     ) : (
                         <Text style={AddEmotionModalScreenStyle.addText}>
-                            Add
+                            Save it
                         </Text>
                     )}
                 </TouchableOpacity>

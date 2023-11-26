@@ -13,9 +13,8 @@ export const ProfileScreenStyle = StyleSheet.create({
         justifyContent: 'space-between'
     },
     profileContainer: {
-        paddingTop: 50,
+        paddingVertical: 20,
         paddingLeft: 10,
-        paddingBottom: 20,
         flexDirection: 'row'
     },
     profileNamesView: {
@@ -33,7 +32,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     },
     buttonsContainer: {
         borderRadius: 10,
-        backgroundColor: COLORS.WHITE
+        backgroundColor: 'whitesmoke'
     },
     buttonView: {
         paddingVertical: 12,

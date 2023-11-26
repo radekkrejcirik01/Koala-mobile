@@ -4,7 +4,8 @@ import COLORS from '@constants/COLORS';
 export const ReactionButtonsStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
-        backgroundColor: 'whitesmoke',
+        paddingBottom: 4,
+        backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'

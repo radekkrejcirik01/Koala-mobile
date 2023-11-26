@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const RespondScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'whitesmoke'
+        backgroundColor: COLORS.WHITE
     },
     scrollViewContainer: {
         paddingLeft: 20,
@@ -32,14 +32,13 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     inputContainer: {
         paddingBottom: 5,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE,
         flexDirection: 'row'
     },
     inputView: {
         flex: 1,
         minHeight: 42,
-        marginLeft: 4,
-        marginRight: 2,
+        marginHorizontal: 6,
         paddingVertical: 4,
         paddingLeft: 15,
         paddingRight: 10,

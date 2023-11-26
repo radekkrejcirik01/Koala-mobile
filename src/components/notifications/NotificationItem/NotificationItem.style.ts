@@ -6,7 +6,7 @@ export const NotificationItemStyle = StyleSheet.create({
         paddingVertical: 10,
         paddingLeft: 15,
         paddingRight: 10,
-        borderBottomWidth: 0.4,
+        borderBottomWidth: 0.2,
         borderBottomColor: COLORS.LIGHTGRAY
     },
     profileView: {

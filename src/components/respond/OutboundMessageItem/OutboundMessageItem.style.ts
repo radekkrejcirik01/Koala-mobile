@@ -17,7 +17,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         minWidth: 100,
         fontSize: 22,
         color: COLORS.BLACK_50,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE,
         alignSelf: 'flex-end',
         textAlign: 'right',
         fontWeight: '600'

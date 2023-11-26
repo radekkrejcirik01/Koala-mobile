@@ -5,6 +5,7 @@ export const RespondScreenHeaderStyle = StyleSheet.create({
     container: {
         paddingTop: 10,
         paddingHorizontal: 10,
+        paddingBottom: 4,
         flexDirection: 'row',
         alignItems: 'center'
     },

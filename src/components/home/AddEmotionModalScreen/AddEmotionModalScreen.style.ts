@@ -13,8 +13,9 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     listContainer: {
         paddingBottom: 50
     },
-    emotionText: {
-        fontSize: 16,
+    titleText: {
+        marginTop: 10,
+        fontSize: 15,
         color: COLORS.BLACK_50,
         fontWeight: '500'
     },
@@ -24,14 +25,8 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 20,
         fontSize: 16,
-        color: COLORS.GRAY_300,
-        backgroundColor: COLORS.LIGHTGRAY,
-        fontWeight: '500'
-    },
-    messageText: {
-        marginTop: 10,
-        fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.GRAY_200,
+        backgroundColor: 'whitesmoke',
         fontWeight: '500'
     },
     messageInput: {
@@ -41,15 +36,12 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 20,
         fontSize: 16,
-        color: COLORS.GRAY_300,
-        backgroundColor: COLORS.LIGHTGRAY,
+        color: COLORS.GRAY_200,
+        backgroundColor: 'whitesmoke',
         fontWeight: '500'
     },
-    tipText: {
-        marginTop: 10,
-        fontSize: 15,
-        color: COLORS.BLACK_50,
-        fontWeight: '500'
+    messageDescriptionText: {
+        fontSize: 12
     },
     tipInput: {
         height: 50,
@@ -57,12 +49,12 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 20,
         fontSize: 16,
-        color: COLORS.GRAY_300,
-        backgroundColor: COLORS.LIGHTGRAY,
+        color: COLORS.GRAY_200,
+        backgroundColor: 'whitesmoke',
         fontWeight: '500'
     },
     addContainer: {
-        bottom: 10,
+        bottom: 5,
         padding: 10,
         borderRadius: 30,
         backgroundColor: COLORS.WHITE,
@@ -73,14 +65,14 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     },
     addView: {
         height: 45,
-        width: 120,
-        borderRadius: 20,
+        width: 110,
+        borderRadius: 18,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center',
         justifyContent: 'center'
     },
     addText: {
-        fontSize: 20,
+        fontSize: 18,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     }

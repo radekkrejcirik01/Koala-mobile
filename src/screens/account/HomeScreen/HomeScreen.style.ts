@@ -4,8 +4,7 @@ import COLORS from '@constants/COLORS';
 export const HomeScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 15,
-        backgroundColor: COLORS.WHITE
+        paddingHorizontal: 15
     },
     scrollViewContainer: {
         flexGrow: 1,
@@ -27,10 +26,10 @@ export const HomeScreenStyle = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         borderRadius: 25,
-        backgroundColor: 'whitesmoke'
+        backgroundColor: 'hsl(0, 0%, 94%)'
     },
     buttonText: {
-        fontSize: 17,
+        fontSize: 16.5,
         color: COLORS.BLACK_50,
         fontWeight: '600'
     },
