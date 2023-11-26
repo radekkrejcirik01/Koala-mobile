@@ -36,6 +36,7 @@ export const FilterModalStyle = StyleSheet.create({
     },
     filterText: {
         fontSize: 15,
-        color: COLORS.BUTTON_BLUE
+        color: COLORS.BUTTON_BLUE,
+        fontWeight: '600'
     }
 });

@@ -59,7 +59,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         borderRadius: 20,
         fontSize: 20,
         color: COLORS.BLACK,
-        backgroundColor: COLORS.LIGHTGRAY,
+        backgroundColor: 'whitesmoke',
         textAlign: 'center',
         fontWeight: 'bold'
     },

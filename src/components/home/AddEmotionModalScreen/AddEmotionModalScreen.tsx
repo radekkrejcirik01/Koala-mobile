@@ -74,9 +74,7 @@ export const AddEmotionModalScreen = ({
                 <Text style={AddEmotionModalScreenStyle.messageDescriptionText}>
                     Your friend will see this message.
                 </Text>
-                <Text style={AddEmotionModalScreenStyle.titleText}>
-                    What helps
-                </Text>
+                <Text style={AddEmotionModalScreenStyle.titleText}>Helps</Text>
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip1}

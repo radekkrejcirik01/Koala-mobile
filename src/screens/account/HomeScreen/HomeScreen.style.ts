@@ -26,7 +26,7 @@ export const HomeScreenStyle = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         borderRadius: 25,
-        backgroundColor: 'hsl(0, 0%, 94%)'
+        backgroundColor: 'hsl(0, 0%, 95%)'
     },
     buttonText: {
         fontSize: 16.5,
