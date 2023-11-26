@@ -15,7 +15,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     },
     titleText: {
         marginTop: 10,
-        fontSize: 15,
+        fontSize: 16,
         color: COLORS.BLACK_50,
         fontWeight: '600'
     },
@@ -41,8 +41,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         fontWeight: '500'
     },
     messageDescriptionText: {
-        fontSize: 12,
-        fontWeight: '500'
+        fontSize: 12
     },
     tipInput: {
         height: 50,

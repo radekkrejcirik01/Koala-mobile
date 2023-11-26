@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const InboundMessageItemStyle = StyleSheet.create({
     container: {
-        marginTop: 12
+        marginTop: 14
     },
     timeText: {
         marginRight: 10,

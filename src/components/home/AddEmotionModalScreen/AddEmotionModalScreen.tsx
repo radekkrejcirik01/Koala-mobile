@@ -72,7 +72,7 @@ export const AddEmotionModalScreen = ({
                     style={AddEmotionModalScreenStyle.messageInput}
                 />
                 <Text style={AddEmotionModalScreenStyle.messageDescriptionText}>
-                    Your friend will see this message.
+                    Message to send to your friends
                 </Text>
                 <Text style={AddEmotionModalScreenStyle.titleText}>Helps</Text>
                 <TextInput
