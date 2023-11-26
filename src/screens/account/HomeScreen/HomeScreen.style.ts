@@ -35,7 +35,7 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     friendsButtonView: {
         height: 45,
-        marginHorizontal: 10,
+        marginHorizontal: 5,
         borderRadius: 10,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center',

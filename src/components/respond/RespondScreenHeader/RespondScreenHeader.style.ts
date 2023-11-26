@@ -15,8 +15,8 @@ export const RespondScreenHeaderStyle = StyleSheet.create({
         alignItems: 'center'
     },
     nameText: {
-        marginLeft: 8,
-        fontSize: 20,
+        marginLeft: 6,
+        fontSize: 18,
         color: COLORS.BLACK_50,
         fontWeight: 'bold'
     }
