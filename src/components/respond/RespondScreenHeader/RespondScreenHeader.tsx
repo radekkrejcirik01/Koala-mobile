@@ -18,7 +18,7 @@ export const RespondScreenHeader = ({
                 activeOpacity={0.9}
                 onPress={() => navigation.goBack()}
             >
-                <Icon name={IconEnum.BACK_BLUE} size={22} />
+                <Icon name={IconEnum.BACK_BLUE} size={24} />
             </TouchableOpacity>
             <View style={RespondScreenHeaderStyle.nameContainer}>
                 <ProfilePhoto name={name} size={40} />
