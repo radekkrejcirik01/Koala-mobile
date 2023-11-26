@@ -142,7 +142,7 @@ export const HomeScreen = (): React.JSX.Element => {
         <View
             style={[
                 HomeScreenStyle.container,
-                { paddingTop: top + 30, paddingBottom: bottom || 10 }
+                { paddingTop: top + 20, paddingBottom: bottom || 10 }
             ]}
         >
             <HomeScreenHeader />

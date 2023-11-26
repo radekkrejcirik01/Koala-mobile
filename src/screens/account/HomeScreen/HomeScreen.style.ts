@@ -25,11 +25,12 @@ export const HomeScreenStyle = StyleSheet.create({
         maxHeight: 60,
         paddingVertical: 10,
         paddingHorizontal: 12,
+        borderWidth: 2,
         borderRadius: 25,
-        backgroundColor: 'hsl(0, 0%, 95%)'
+        borderColor: COLORS.LIGHTGRAY
     },
     buttonText: {
-        fontSize: 16.5,
+        fontSize: 16,
         color: COLORS.BLACK_50,
         fontWeight: '600'
     },
