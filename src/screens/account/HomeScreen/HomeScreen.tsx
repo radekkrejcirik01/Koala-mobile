@@ -142,7 +142,7 @@ export const HomeScreen = (): React.JSX.Element => {
         <View
             style={[
                 HomeScreenStyle.container,
-                { paddingTop: top + 20, paddingBottom: bottom || 10 }
+                { paddingTop: top + 30, paddingBottom: bottom || 10 }
             ]}
         >
             <HomeScreenHeader />
@@ -155,7 +155,7 @@ export const HomeScreen = (): React.JSX.Element => {
                     {data.map((item) => (
                         <TouchableOpacity
                             key={item.id}
-                            activeOpacity={0.9}
+                            activeOpacity={0.7}
                             onPress={() => onItemPress(item)}
                             onLongPress={() => onItemLongPress(item)}
                             delayLongPress={150}

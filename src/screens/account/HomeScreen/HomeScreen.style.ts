@@ -4,7 +4,8 @@ import COLORS from '@constants/COLORS';
 export const HomeScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 10
+        paddingHorizontal: 15,
+        backgroundColor: COLORS.WHITE
     },
     scrollViewContainer: {
         flexGrow: 1,
@@ -12,7 +13,7 @@ export const HomeScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     scrollView: {
-        marginVertical: 10,
+        marginBottom: 10,
         paddingTop: 20
     },
     contentView: {
@@ -25,14 +26,12 @@ export const HomeScreenStyle = StyleSheet.create({
         maxHeight: 60,
         paddingVertical: 10,
         paddingHorizontal: 12,
-        borderWidth: 1.8,
-        borderColor: COLORS.BLACK,
-        backgroundColor: COLORS.WHITE,
-        borderRadius: 25
+        borderRadius: 25,
+        backgroundColor: 'whitesmoke'
     },
     buttonText: {
-        fontSize: 16,
-        color: COLORS.BLACK,
+        fontSize: 17,
+        color: COLORS.BLACK_50,
         fontWeight: '600'
     },
     friendsButtonView: {
