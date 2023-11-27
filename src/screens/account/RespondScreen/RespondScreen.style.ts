@@ -7,7 +7,8 @@ export const RespondScreenStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE
     },
     scrollViewContainer: {
-        paddingHorizontal: 15,
+        paddingLeft: 15,
+        paddingRight: 10,
         paddingBottom: Platform.OS === 'ios' ? 280 : 100
     },
     inboundText: {
@@ -37,8 +38,8 @@ export const RespondScreenStyle = StyleSheet.create({
     inputView: {
         flex: 1,
         minHeight: 42,
-        marginLeft: 6,
-        marginRight: 4,
+        marginLeft: 4,
+        marginRight: 2,
         paddingVertical: 4,
         paddingLeft: 15,
         paddingRight: 10,

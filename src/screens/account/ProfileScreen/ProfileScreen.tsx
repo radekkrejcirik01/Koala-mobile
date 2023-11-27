@@ -69,7 +69,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                 </View>
             </ScrollView>
             <Text style={ProfileScreenStyle.text}>Made to help ❤️</Text>
-            <Text style={ProfileScreenStyle.text}>v{version}</Text>
+            <Text style={ProfileScreenStyle.text}>{version}</Text>
         </View>
     );
 };

@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ShareModalScreenStyle = StyleSheet.create({
     container: {
-        minHeight: '45%',
+        minHeight: '50%',
         paddingHorizontal: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
