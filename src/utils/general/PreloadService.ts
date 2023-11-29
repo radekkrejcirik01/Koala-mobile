@@ -9,7 +9,6 @@ import {
 } from '@store/UserReducer';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseUserGetInterface } from '@interfaces/response/Response.interface';
-import { MessagingService } from '@utils/general/MessagingService';
 
 class PreloadServiceSingleton {
     init = async () => {
@@ -33,10 +32,6 @@ class PreloadServiceSingleton {
                     );
 
                     SplashScreen.hide();
-
-                    setTimeout(() => {
-                        MessagingService.initMessaging().catch();
-                    }, 2000);
                 }
             }
         );

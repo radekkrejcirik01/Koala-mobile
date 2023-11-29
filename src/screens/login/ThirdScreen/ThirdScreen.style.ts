@@ -18,7 +18,7 @@ export const ThirdScreenStyle = StyleSheet.create({
         borderRadius: 10,
         fontSize: 20,
         color: COLORS.BLACK,
-        backgroundColor: COLORS.WHITE,
+        backgroundColor: 'whitesmoke',
         textAlign: 'center',
         fontWeight: 'bold'
     },

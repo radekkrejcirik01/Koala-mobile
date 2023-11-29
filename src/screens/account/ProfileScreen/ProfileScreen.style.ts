@@ -48,7 +48,7 @@ export const ProfileScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     text: {
-        marginTop: 4,
+        marginTop: 5,
         color: COLORS.GRAY_200,
         alignSelf: 'center'
     }

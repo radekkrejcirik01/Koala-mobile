@@ -25,6 +25,7 @@ import {
     ResponseEmotionsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
+import { MessagingService } from '@utils/general/MessagingService';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -37,6 +38,12 @@ export const HomeScreen = (): React.JSX.Element => {
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
 
     const [data, setData] = useState<EmotionInterface[]>([]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            MessagingService.initMessaging().catch();
+        }, 1000);
+    }, []);
 
     useEffect(() => {
         setData([...DATA, ...(emotions || [])]);
