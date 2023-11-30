@@ -11,6 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import moment from 'moment';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
@@ -136,6 +137,8 @@ export const RespondScreen = ({
     const onMessageLongPress = useCallback((item: ConversationInterface) => {
         inputRef.current.focus();
         setReplyMessage(item.message);
+
+        ReactNativeHapticFeedback.trigger('impactMedium');
     }, []);
 
     const onPressReaction = useCallback(
@@ -204,7 +207,7 @@ export const RespondScreen = ({
                                 onPress={() => setReplyMessage('')}
                                 style={RespondScreenStyle.dismissButtonView}
                             >
-                                <Icon name={IconEnum.CLEAN} size={22} />
+                                <Icon name={IconEnum.CLEAN} size={20} />
                             </TouchableOpacity>
                         </View>
                         <Text style={RespondScreenStyle.replyMessageText}>

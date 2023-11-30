@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import {
     GestureHandlerRootView,
     Swipeable
@@ -28,9 +28,11 @@ export const InboundMessageItem = ({
                 )}
             >
                 {!!replyMessage && (
-                    <Text style={InboundMessageItemStyle.replyMessageText}>
-                        {replyMessage}
-                    </Text>
+                    <View style={InboundMessageItemStyle.replyMessageView}>
+                        <Text style={InboundMessageItemStyle.replyMessageText}>
+                            {replyMessage}
+                        </Text>
+                    </View>
                 )}
                 <TouchableOpacity
                     activeOpacity={1}

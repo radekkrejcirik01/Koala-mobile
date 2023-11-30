@@ -12,12 +12,20 @@ export const InboundMessageItemStyle = StyleSheet.create({
         color: COLORS.GRAY_200,
         alignSelf: 'center'
     },
-    replyMessageText: {
+    replyMessageView: {
         maxWidth: '60%',
         minWidth: 100,
-        opacity: 0.7,
-        backgroundColor: COLORS.WHITE,
-        fontWeight: '500'
+        marginTop: 4,
+        marginBottom: 2,
+        paddingVertical: 8,
+        paddingHorizontal: 10,
+        borderRadius: 12,
+        backgroundColor: '#00000009',
+        alignSelf: 'flex-start'
+    },
+    replyMessageText: {
+        color: COLORS.BLACK_50,
+        fontWeight: '600'
     },
     messageText: {
         maxWidth: '60%',
