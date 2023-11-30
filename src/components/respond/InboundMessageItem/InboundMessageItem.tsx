@@ -37,7 +37,6 @@ export const InboundMessageItem = ({
                     delayLongPress={150}
                     onLongPress={onLongPress}
                 >
-                    {!!replyMessage && <Text>{replyMessage}</Text>}
                     <Text
                         style={[
                             InboundMessageItemStyle.messageText,

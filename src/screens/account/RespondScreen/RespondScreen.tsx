@@ -204,9 +204,7 @@ export const RespondScreen = ({
                                 onPress={() => setReplyMessage('')}
                                 style={RespondScreenStyle.dismissButtonView}
                             >
-                                <Text style={RespondScreenStyle.dismissText}>
-                                    Dismiss
-                                </Text>
+                                <Icon name={IconEnum.CLEAN} size={22} />
                             </TouchableOpacity>
                         </View>
                         <Text style={RespondScreenStyle.replyMessageText}>
