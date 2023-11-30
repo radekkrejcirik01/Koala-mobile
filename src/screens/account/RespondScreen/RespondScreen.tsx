@@ -3,6 +3,7 @@ import {
     KeyboardAvoidingView,
     Platform,
     ScrollView,
+    Text,
     TextInput,
     TouchableOpacity,
     View
@@ -44,8 +45,10 @@ export const RespondScreen = ({
         []
     );
     const [reactionButtons, setReactionButtons] = useState<boolean>(false);
+    const [replyMessage, setReplyMessage] = useState<string>();
 
     const scrollViewRef = useRef(null);
+    const inputRef = useRef(null);
 
     const scrollToEnd = () => {
         setTimeout(() => {
@@ -98,7 +101,8 @@ export const RespondScreen = ({
                     sender: userUsername,
                     receiver: '',
                     message: text || message,
-                    time: moment().unix()
+                    time: moment().unix(),
+                    replyMessage
                 })
             );
 
@@ -108,17 +112,31 @@ export const RespondScreen = ({
                     receiver: username,
                     name: userName,
                     message: text || message,
-                    conversationId: conversationId || id
+                    conversationId: conversationId || id,
+                    replyMessage
                 }
             ).subscribe();
         },
-        [conversationId, id, message, userName, userUsername, username]
+        [
+            conversationId,
+            id,
+            message,
+            replyMessage,
+            userName,
+            userUsername,
+            username
+        ]
     );
 
     const isInbound = useCallback(
         (sender: string): boolean => sender === username,
         [username]
     );
+
+    const onMessageLongPress = useCallback((item: ConversationInterface) => {
+        inputRef.current.focus();
+        setReplyMessage(item.message);
+    }, []);
 
     const onPressReaction = useCallback(
         (value: string) => {
@@ -130,6 +148,7 @@ export const RespondScreen = ({
     const onPressSend = useCallback(() => {
         send();
         setMessage('');
+        setReplyMessage('');
 
         scrollToEnd();
     }, [send]);
@@ -149,11 +168,21 @@ export const RespondScreen = ({
             >
                 {conversation?.map((value) =>
                     isInbound(value.sender) ? (
-                        <InboundMessageItem key={value.id} time={value.time}>
+                        <InboundMessageItem
+                            key={value.id}
+                            onLongPress={() => onMessageLongPress(value)}
+                            time={value.time}
+                            replyMessage={value?.replyMessage}
+                        >
                             {value.message}
                         </InboundMessageItem>
                     ) : (
-                        <OutboundMessageItem key={value.id} time={value.time}>
+                        <OutboundMessageItem
+                            onLongPress={() => onMessageLongPress(value)}
+                            key={value.id}
+                            time={value.time}
+                            replyMessage={value?.replyMessage}
+                        >
                             {value.message}
                         </OutboundMessageItem>
                     )
@@ -165,9 +194,30 @@ export const RespondScreen = ({
                 {reactionButtons && (
                     <ReactionButtons onPressReaction={onPressReaction} />
                 )}
+                {!!replyMessage && (
+                    <View style={RespondScreenStyle.replyMessageContainer}>
+                        <View style={RespondScreenStyle.replyingToContainer}>
+                            <Text style={RespondScreenStyle.replyingToText}>
+                                Replying to
+                            </Text>
+                            <TouchableOpacity
+                                onPress={() => setReplyMessage('')}
+                                style={RespondScreenStyle.dismissButtonView}
+                            >
+                                <Text style={RespondScreenStyle.dismissText}>
+                                    Dismiss
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={RespondScreenStyle.replyMessageText}>
+                            {replyMessage}
+                        </Text>
+                    </View>
+                )}
                 <View style={RespondScreenStyle.inputContainer}>
                     <View style={RespondScreenStyle.inputView}>
                         <TextInput
+                            ref={inputRef}
                             autoCorrect={false}
                             multiline
                             onFocus={scrollToEnd}

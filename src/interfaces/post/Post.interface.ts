@@ -36,4 +36,5 @@ export interface MessageNotificationPostInterface {
     name: string;
     message: string;
     conversationId: number;
+    replyMessage?: string;
 }

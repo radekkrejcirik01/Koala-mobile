@@ -12,6 +12,14 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         color: COLORS.GRAY_200,
         alignSelf: 'center'
     },
+    replyMessageText: {
+        maxWidth: '60%',
+        minWidth: 100,
+        opacity: 0.7,
+        backgroundColor: COLORS.WHITE,
+        alignSelf: 'flex-end',
+        fontWeight: '500'
+    },
     messageText: {
         maxWidth: '60%',
         minWidth: 100,

@@ -29,6 +29,7 @@ export interface ConversationInterface {
     receiver: string;
     message: string;
     time: number;
+    replyMessage?: string;
 }
 
 export interface HistoryInterface {

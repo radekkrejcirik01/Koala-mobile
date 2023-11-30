@@ -11,24 +11,36 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: Platform.OS === 'ios' ? 280 : 100
     },
-    inboundText: {
-        maxWidth: '60%',
-        marginTop: 14,
-        fontSize: 22,
-        color: COLORS.BLACK_50,
-        fontWeight: '600'
+    replyMessageContainer: {
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 10,
+        borderTopWidth: 1,
+        borderTopColor: COLORS.LIGHTGRAY
     },
-    outboundText: {
-        maxWidth: '60%',
-        marginTop: 14,
-        fontSize: 22,
-        color: COLORS.BLACK_50,
-        fontWeight: '600',
-        alignSelf: 'flex-end',
-        textAlign: 'right'
+    replyingToContainer: {
+        paddingVertical: 6,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
-    largeText: {
-        fontSize: 40
+    replyingToText: {
+        fontWeight: '500'
+    },
+    dismissButtonView: {
+        paddingVertical: 4,
+        paddingHorizontal: 6,
+        borderRadius: 10,
+        backgroundColor: COLORS.BUTTON_BLUE,
+        alignSelf: 'flex-end'
+    },
+    dismissText: {
+        fontSize: 12,
+        color: COLORS.WHITE,
+        fontWeight: 'bold'
+    },
+    replyMessageText: {
+        fontSize: 16,
+        fontWeight: '500'
     },
     inputContainer: {
         paddingBottom: 5,

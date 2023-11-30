@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import {
     GestureHandlerRootView,
     Swipeable
@@ -10,8 +10,10 @@ import { getMessageTime } from '@functions/getMessageTime';
 
 export const OutboundMessageItem = ({
     children,
-    time
-}: OutboundMessageItemProps): JSX.Element => {
+    onLongPress,
+    time,
+    replyMessage
+}: OutboundMessageItemProps): React.JSX.Element => {
     function isLarge(text: string): boolean {
         return text?.length <= 3;
     }
@@ -25,14 +27,26 @@ export const OutboundMessageItem = ({
                     </Text>
                 )}
             >
-                <Text
-                    style={[
-                        OutboundMessageItemStyle.messageText,
-                        isLarge(children) && OutboundMessageItemStyle.largeText
-                    ]}
+                {!!replyMessage && (
+                    <Text style={OutboundMessageItemStyle.replyMessageText}>
+                        {replyMessage}
+                    </Text>
+                )}
+                <TouchableOpacity
+                    activeOpacity={1}
+                    delayLongPress={150}
+                    onLongPress={onLongPress}
                 >
-                    {children}
-                </Text>
+                    <Text
+                        style={[
+                            OutboundMessageItemStyle.messageText,
+                            isLarge(children) &&
+                                OutboundMessageItemStyle.largeText
+                        ]}
+                    >
+                        {children}
+                    </Text>
+                </TouchableOpacity>
             </Swipeable>
         </GestureHandlerRootView>
     );
