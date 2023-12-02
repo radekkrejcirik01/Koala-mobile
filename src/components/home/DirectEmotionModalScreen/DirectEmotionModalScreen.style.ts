@@ -4,25 +4,25 @@ import COLORS from '@constants/COLORS';
 export const DirectEmotionModalScreenStyle = StyleSheet.create({
     container: {
         minHeight: '48%',
-        paddingHorizontal: 20,
+        paddingTop: 10,
+        paddingHorizontal: 10,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
     },
     input: {
-        marginTop: 20,
         paddingTop: 10,
         paddingHorizontal: 10,
-        height: 65,
         borderRadius: 15,
+        fontSize: 24,
         color: COLORS.BLACK,
         textAlignVertical: 'top',
-        backgroundColor: 'whitesmoke',
         fontWeight: 'bold'
     },
     content: {
         flexGrow: 1,
-        paddingTop: 15,
+        paddingTop: 20,
+        paddingHorizontal: 10,
         flexDirection: 'row',
         justifyContent: 'center'
     },
@@ -32,7 +32,7 @@ export const DirectEmotionModalScreenStyle = StyleSheet.create({
     },
     supportText: {
         color: COLORS.BLACK,
-        fontWeight: '600'
+        fontWeight: 'bold'
     },
     sendContainer: {
         width: '45%',

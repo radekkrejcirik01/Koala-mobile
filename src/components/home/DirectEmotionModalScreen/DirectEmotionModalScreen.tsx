@@ -96,13 +96,15 @@ export const DirectEmotionModalScreen = ({
             style={[
                 DirectEmotionModalScreenStyle.container,
                 {
-                    paddingBottom: bottom + 10
+                    paddingBottom: bottom || 10
                 }
             ]}
         >
             <TextInput
                 multiline
-                placeholder="THE EMOTION"
+                placeholder="Message"
+                autoFocus
+                autoCorrect={false}
                 onChangeText={setMessage}
                 selectionColor={COLORS.BUTTON_BLUE}
                 style={DirectEmotionModalScreenStyle.input}

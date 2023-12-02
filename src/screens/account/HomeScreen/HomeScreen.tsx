@@ -205,7 +205,7 @@ export const HomeScreen = (): React.JSX.Element => {
                     style={HomeScreenStyle.directEmotionButtonView}
                 >
                     <Text style={HomeScreenStyle.directEmotionText}>
-                        Direct Emotion
+                        Direct sharing
                     </Text>
                     <Icon
                         name={IconEnum.DIRECT}
