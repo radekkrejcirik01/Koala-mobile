@@ -26,6 +26,9 @@ import {
     ResponseInterface
 } from '@interfaces/response/Response.interface';
 import { MessagingService } from '@utils/general/MessagingService';
+import { DirectEmotionModalScreen } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -134,6 +137,21 @@ export const HomeScreen = (): React.JSX.Element => {
         showModal();
     }, [hideModalAndKeyboard, loadEmotions, showModal]);
 
+    const onDirectEmotionPress = useCallback(() => {
+        setModalContent(
+            <DirectEmotionModalScreen
+                onAddFriendPress={() => {
+                    hideModal();
+                    setModalContent(<FriendsModalScreen />);
+                    setTimeout(() => {
+                        showModal();
+                    }, 100);
+                }}
+            />
+        );
+        showModal();
+    }, [hideModal, showModal]);
+
     const onFriendsPress = useCallback(() => {
         setModalContent(
             <FriendsModalScreen
@@ -174,13 +192,27 @@ export const HomeScreen = (): React.JSX.Element => {
                         </TouchableOpacity>
                     ))}
                     <TouchableOpacity
-                        activeOpacity={0.9}
+                        activeOpacity={0.7}
                         onPress={onAddItemPress}
                         style={HomeScreenStyle.buttonView}
                     >
                         <Text style={HomeScreenStyle.buttonText}>Add +</Text>
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={onDirectEmotionPress}
+                    style={HomeScreenStyle.directEmotionButtonView}
+                >
+                    <Text style={HomeScreenStyle.directEmotionText}>
+                        Direct Emotion
+                    </Text>
+                    <Icon
+                        name={IconEnum.DIRECT}
+                        size={15}
+                        style={HomeScreenStyle.directIcon}
+                    />
+                </TouchableOpacity>
             </ScrollView>
             <TouchableOpacity
                 activeOpacity={0.9}

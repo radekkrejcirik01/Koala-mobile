@@ -9,7 +9,8 @@ export const HomeScreenStyle = StyleSheet.create({
     scrollViewContainer: {
         flexGrow: 1,
         paddingBottom: 50,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     scrollView: {
         marginBottom: 10,
@@ -33,6 +34,17 @@ export const HomeScreenStyle = StyleSheet.create({
         fontSize: 16,
         color: COLORS.BLACK_50,
         fontWeight: '600'
+    },
+    directEmotionButtonView: {
+        marginTop: 30,
+        flexDirection: 'row'
+    },
+    directEmotionText: {
+        color: COLORS.BUTTON_BLUE,
+        fontWeight: '500'
+    },
+    directIcon: {
+        marginLeft: 5
     },
     friendsButtonView: {
         height: 45,
