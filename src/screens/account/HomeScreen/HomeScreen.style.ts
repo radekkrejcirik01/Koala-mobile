@@ -14,7 +14,7 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     scrollView: {
         marginBottom: 10,
-        paddingTop: 20
+        paddingTop: 50
     },
     contentView: {
         flexDirection: 'row',
@@ -36,7 +36,7 @@ export const HomeScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     directEmotionButtonView: {
-        marginTop: 30,
+        marginTop: 20,
         flexDirection: 'row'
     },
     directEmotionText: {

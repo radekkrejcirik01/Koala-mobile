@@ -201,6 +201,7 @@ export const HomeScreen = (): React.JSX.Element => {
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.7}
+                    hitSlop={10}
                     onPress={onDirectEmotionPress}
                     style={HomeScreenStyle.directEmotionButtonView}
                 >

@@ -32,7 +32,7 @@ export const DirectEmotionModalScreenStyle = StyleSheet.create({
     },
     supportText: {
         color: COLORS.BLACK,
-        fontWeight: 'bold'
+        fontWeight: '600'
     },
     sendContainer: {
         width: '45%',

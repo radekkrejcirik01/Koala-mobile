@@ -102,7 +102,7 @@ export const DirectEmotionModalScreen = ({
         >
             <TextInput
                 multiline
-                placeholder="Message"
+                placeholder="Message..."
                 autoFocus
                 autoCorrect={false}
                 onChangeText={setMessage}
