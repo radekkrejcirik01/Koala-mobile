@@ -15,7 +15,11 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
 import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
 import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
-import { getRequest, postRequest } from '@utils/Axios/Axios.service';
+import {
+    getRequest,
+    postRequest,
+    putRequest
+} from '@utils/Axios/Axios.service';
 import {
     ResponseConversationGetInterface,
     ResponseInterface
@@ -72,6 +76,12 @@ export const RespondScreen = ({
         [username]
     );
 
+    const updateSeenNotification = useCallback(() => {
+        putRequest<ResponseInterface, never>(
+            `notification/${conversationId || id}`
+        ).subscribe();
+    }, [conversationId, id]);
+
     const getConversation = useCallback(() => {
         getRequest<ResponseConversationGetInterface>(
             `conversation/${conversationId || id}`
@@ -82,13 +92,15 @@ export const RespondScreen = ({
                 setConversation(data);
                 setReactionButtons(checkReactionButtons(data));
 
+                updateSeenNotification();
+
                 // Scroll to bottom when conversation has more than 10 messages
                 if (data?.length >= 10) {
                     scrollToEnd();
                 }
             }
         });
-    }, [checkReactionButtons, conversationId, id]);
+    }, [checkReactionButtons, conversationId, id, updateSeenNotification]);
 
     useEffect(() => {
         getConversation();
