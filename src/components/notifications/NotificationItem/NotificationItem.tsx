@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
@@ -14,6 +14,13 @@ export const NotificationItem = ({
 }: NotificationItemProps): JSX.Element => {
     const unseen = useMemo((): boolean => !item?.seen, [item?.seen]);
 
+    const [pressed, setPressed] = useState<boolean>(false);
+
+    const press = useCallback(() => {
+        onPress();
+        setPressed(true);
+    }, [onPress]);
+
     function getTitle(type: NotificationItemEnum): string {
         if (type === NotificationItemEnum.EmotionNotificationType) {
             return ' is sharing';
@@ -24,12 +31,14 @@ export const NotificationItem = ({
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={onPress}
+            onPress={press}
             style={NotificationItemStyle.container}
         >
             <View style={NotificationItemStyle.profileView}>
                 <View style={NotificationItemStyle.centerView}>
-                    {unseen && <View style={NotificationItemStyle.newItem} />}
+                    {unseen && !pressed && (
+                        <View style={NotificationItemStyle.newItem} />
+                    )}
                     <ProfilePhoto name={item.name} size={40} />
                 </View>
                 <Text style={NotificationItemStyle.timeText}>

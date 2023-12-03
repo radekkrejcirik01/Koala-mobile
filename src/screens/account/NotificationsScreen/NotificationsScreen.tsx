@@ -1,8 +1,7 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
@@ -19,7 +18,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { Modal } from '@components/general/Modal/Modal';
 import { FilterModal } from '@components/notifications/FilterModal/FilterModal';
 
-export const NotificationsScreen = (): JSX.Element => {
+export const NotificationsScreen = (): React.JSX.Element => {
     const dispatch = useDispatch();
 
     const { top } = useSafeAreaInsets();
@@ -94,15 +93,13 @@ export const NotificationsScreen = (): JSX.Element => {
         []
     );
 
-    useFocusEffect(
-        useCallback(() => {
-            if (filterUserId.current) {
-                loadFilteredNotifications(filterUserId.current);
-            } else {
-                loadNotifications();
-            }
-        }, [loadFilteredNotifications, loadNotifications])
-    );
+    useEffect(() => {
+        if (filterUserId.current) {
+            loadFilteredNotifications(filterUserId.current);
+        } else {
+            loadNotifications();
+        }
+    }, [loadFilteredNotifications, loadNotifications]);
 
     const onFilterPress = () => {
         showModal();
@@ -128,7 +125,9 @@ export const NotificationsScreen = (): JSX.Element => {
     }, [hideModal, loadNotifications]);
 
     const renderItem = useCallback(
-        ({ item }: ListRenderItemInfo<NotificationInterface>): JSX.Element => (
+        ({
+            item
+        }: ListRenderItemInfo<NotificationInterface>): React.JSX.Element => (
             <NotificationItem
                 item={item}
                 onPress={() =>
