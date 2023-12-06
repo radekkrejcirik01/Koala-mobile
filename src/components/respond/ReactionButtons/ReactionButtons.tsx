@@ -18,11 +18,11 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
         },
         {
             id: 3,
-            message: 'What happened?'
+            message: 'You got this!'
         },
         {
             id: 4,
-            message: 'You got this!'
+            message: 'What happened?'
         },
         {
             id: 5,

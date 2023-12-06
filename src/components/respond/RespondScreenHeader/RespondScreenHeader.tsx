@@ -8,7 +8,8 @@ import { RespondScreenHeaderProps } from '@components/respond/RespondScreenHeade
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 
 export const RespondScreenHeader = ({
-    name
+    name,
+    username
 }: RespondScreenHeaderProps): JSX.Element => {
     const navigation = useNavigation();
 
@@ -20,9 +21,16 @@ export const RespondScreenHeader = ({
             >
                 <Icon name={IconEnum.BACK_BLUE} size={24} />
             </TouchableOpacity>
-            <View style={RespondScreenHeaderStyle.nameContainer}>
+            <View style={RespondScreenHeaderStyle.contentContainer}>
                 <ProfilePhoto name={name} size={40} />
-                <Text style={RespondScreenHeaderStyle.nameText}>{name}</Text>
+                <View style={RespondScreenHeaderStyle.nameContainer}>
+                    <Text style={RespondScreenHeaderStyle.nameText}>
+                        {name}
+                    </Text>
+                    <Text style={RespondScreenHeaderStyle.usernameText}>
+                        {username}
+                    </Text>
+                </View>
             </View>
         </View>
     );

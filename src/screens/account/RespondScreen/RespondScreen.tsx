@@ -175,7 +175,7 @@ export const RespondScreen = ({
                 { paddingTop: top, paddingBottom: bottom + 5 }
             ]}
         >
-            <RespondScreenHeader name={name} />
+            <RespondScreenHeader name={name} username={username} />
             <ScrollView
                 ref={scrollViewRef}
                 showsVerticalScrollIndicator={false}

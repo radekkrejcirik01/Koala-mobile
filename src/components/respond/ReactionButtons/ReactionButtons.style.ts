@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const ReactionButtonsStyle = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
         paddingBottom: 4,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
@@ -14,8 +13,8 @@ export const ReactionButtonsStyle = StyleSheet.create({
         minWidth: 75,
         marginVertical: 4,
         marginHorizontal: 2,
-        paddingVertical: 10,
-        paddingHorizontal: 12,
+        paddingVertical: 9,
+        paddingHorizontal: 10,
         borderRadius: 20,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center'
