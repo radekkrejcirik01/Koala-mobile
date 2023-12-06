@@ -40,8 +40,9 @@ export const HomeScreenStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     directEmotionText: {
+        fontSize: 15,
         color: COLORS.BUTTON_BLUE,
-        fontWeight: '500'
+        fontWeight: '600'
     },
     directIcon: {
         marginLeft: 5

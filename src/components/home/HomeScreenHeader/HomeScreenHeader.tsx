@@ -27,7 +27,7 @@ export const HomeScreenHeader = (): JSX.Element => {
                     }
                     style={HomeScreenHeaderStyle.profileButtonView}
                 >
-                    <ProfilePhoto name={name} photo={profilePhoto} size={42} />
+                    <ProfilePhoto name={name} photo={profilePhoto} size={46} />
                 </TouchableOpacity>
                 <Text style={HomeScreenHeaderStyle.homeTitleText}>Home</Text>
             </View>

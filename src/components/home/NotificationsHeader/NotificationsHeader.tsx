@@ -26,7 +26,7 @@ export const NotificationsHeader = (): JSX.Element => {
             }
             style={NotificationsHeaderStyle.container}
         >
-            <Icon name={IconEnum.MAIL} size={26} />
+            <Icon name={IconEnum.MAIL} size={27} />
             <Badge value={unseenNotifications} />
         </TouchableOpacity>
     );
