@@ -3,7 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsScreenHeaderStyle = StyleSheet.create({
     container: {
-        paddingTop: 10,
+        padding: 10,
+        paddingLeft: 5,
+        paddingBottom: 5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
@@ -15,18 +17,15 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
     titleText: {
         marginLeft: 10,
         fontSize: 30,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     filterButtonView: {
-        marginRight: 10,
-        paddingVertical: 4,
-        paddingHorizontal: 10,
-        borderRadius: 20,
-        backgroundColor: '#00000010'
+        marginRight: 5
     },
     filterText: {
-        color: COLORS.BUTTON_BLUE,
+        fontSize: 16,
+        color: COLORS.GRAY_200,
         fontWeight: '600'
     }
 });

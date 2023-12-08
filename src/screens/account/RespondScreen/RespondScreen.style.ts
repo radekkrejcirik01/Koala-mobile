@@ -33,7 +33,7 @@ export const RespondScreenStyle = StyleSheet.create({
     replyMessageText: {
         marginTop: 2,
         fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     inputContainer: {
@@ -61,6 +61,6 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingTop: 0, // overwrite default value
         paddingBottom: 0, // overwrite default value
         fontSize: 16,
-        color: COLORS.BLACK_50
+        color: COLORS.BLACK
     }
 });

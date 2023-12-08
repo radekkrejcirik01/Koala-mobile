@@ -15,8 +15,8 @@ export const HomeScreenHeaderStyle = StyleSheet.create({
         marginHorizontal: 10
     },
     homeTitleText: {
-        fontSize: 36,
-        color: COLORS.BLACK_50,
+        fontSize: 34,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     }
 });

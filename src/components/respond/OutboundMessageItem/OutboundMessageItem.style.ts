@@ -19,19 +19,20 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         marginBottom: 2,
         paddingVertical: 8,
         paddingHorizontal: 10,
-        borderRadius: 12,
-        backgroundColor: '#00000009',
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: COLORS.LIGHTGRAY,
         alignSelf: 'flex-end'
     },
     replyMessageText: {
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '600'
     },
     messageText: {
         maxWidth: '60%',
         minWidth: 100,
         fontSize: 22,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         backgroundColor: COLORS.WHITE,
         alignSelf: 'flex-end',
         textAlign: 'right',

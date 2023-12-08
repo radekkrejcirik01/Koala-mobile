@@ -22,7 +22,7 @@ export const NotificationsScreenHeader = ({
                     <Icon name={IconEnum.BACK_BLUE} size={24} />
                 </TouchableOpacity>
                 <Text style={NotificationsScreenHeaderStyle.titleText}>
-                    Sharing
+                    Supporting
                 </Text>
             </View>
             <TouchableOpacity

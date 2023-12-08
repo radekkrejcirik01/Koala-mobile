@@ -167,14 +167,14 @@ export const HomeScreen = (): React.JSX.Element => {
         <View
             style={[
                 HomeScreenStyle.container,
-                { paddingTop: top + 40, paddingBottom: bottom || 10 }
+                { paddingTop: top + 20, paddingBottom: bottom || 10 }
             ]}
         >
             <HomeScreenHeader />
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={HomeScreenStyle.scrollViewContainer}
                 style={HomeScreenStyle.scrollView}
+                contentContainerStyle={HomeScreenStyle.scrollViewContainer}
             >
                 <View style={HomeScreenStyle.contentView}>
                     {data.map((item) => (
@@ -201,7 +201,7 @@ export const HomeScreen = (): React.JSX.Element => {
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    hitSlop={10}
+                    hitSlop={20}
                     onPress={onDirectEmotionPress}
                     style={HomeScreenStyle.directEmotionButtonView}
                 >

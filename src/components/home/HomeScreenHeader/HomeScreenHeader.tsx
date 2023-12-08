@@ -21,13 +21,13 @@ export const HomeScreenHeader = (): JSX.Element => {
             <View style={HomeScreenHeaderStyle.rowCenter}>
                 <TouchableOpacity
                     activeOpacity={0.9}
-                    hitSlop={10}
+                    hitSlop={20}
                     onPress={() =>
                         navigateTo(AccountStackNavigatorEnum.ProfileScreen)
                     }
                     style={HomeScreenHeaderStyle.profileButtonView}
                 >
-                    <ProfilePhoto name={name} photo={profilePhoto} size={46} />
+                    <ProfilePhoto name={name} photo={profilePhoto} size={42} />
                 </TouchableOpacity>
                 <Text style={HomeScreenHeaderStyle.homeTitleText}>Home</Text>
             </View>

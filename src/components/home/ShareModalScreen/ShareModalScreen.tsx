@@ -100,7 +100,7 @@ export const ShareModalScreen = ({
                 {(!!item?.tip1 || !!item?.tip2) && (
                     <View style={ShareModalScreenStyle.tipsView}>
                         <Text style={ShareModalScreenStyle.tipsTitleText}>
-                            Can help:
+                            Is helping:
                         </Text>
                         {!!item?.tip1 && (
                             <View

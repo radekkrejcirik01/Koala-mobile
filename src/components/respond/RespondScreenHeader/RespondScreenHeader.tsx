@@ -22,15 +22,8 @@ export const RespondScreenHeader = ({
                 <Icon name={IconEnum.BACK_BLUE} size={24} />
             </TouchableOpacity>
             <View style={RespondScreenHeaderStyle.contentContainer}>
-                <ProfilePhoto name={name} size={40} />
-                <View style={RespondScreenHeaderStyle.nameContainer}>
-                    <Text style={RespondScreenHeaderStyle.nameText}>
-                        {name}
-                    </Text>
-                    <Text style={RespondScreenHeaderStyle.usernameText}>
-                        {username}
-                    </Text>
-                </View>
+                <ProfilePhoto name={name} size={42} />
+                <Text style={RespondScreenHeaderStyle.nameText}>{name}</Text>
             </View>
         </View>
     );

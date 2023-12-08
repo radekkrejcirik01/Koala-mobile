@@ -6,15 +6,14 @@ export const HomeScreenStyle = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10
     },
+    scrollView: {
+        marginBottom: 10
+    },
     scrollViewContainer: {
         flexGrow: 1,
         paddingBottom: 50,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    scrollView: {
-        marginBottom: 10,
-        paddingTop: 50
     },
     contentView: {
         flexDirection: 'row',
@@ -32,7 +31,7 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '600'
     },
     directEmotionButtonView: {

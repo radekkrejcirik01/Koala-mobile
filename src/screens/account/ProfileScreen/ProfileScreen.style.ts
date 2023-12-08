@@ -44,7 +44,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '600'
     },
     text: {

@@ -13,8 +13,7 @@ export const ReactionButtonsStyle = StyleSheet.create({
         minWidth: 75,
         marginVertical: 4,
         marginHorizontal: 2,
-        paddingVertical: 9,
-        paddingHorizontal: 10,
+        padding: 10,
         borderRadius: 20,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center'

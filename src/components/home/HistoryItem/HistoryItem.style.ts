@@ -17,7 +17,7 @@ export const HistoryItemStyle = StyleSheet.create({
         flex: 1,
         marginRight: 20,
         fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '600'
     },
     timeText: {
