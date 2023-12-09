@@ -77,7 +77,7 @@ export const ShareModalScreen = ({
                     message: item.message
                 }
             ).subscribe((response: ResponseInterface) => {
-                if (response?.status) {
+                if (response?.status === 'success') {
                     setSending(false);
                     setSent(true);
                 }

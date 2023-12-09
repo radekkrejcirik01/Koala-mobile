@@ -46,7 +46,7 @@ export const RespondScreenStyle = StyleSheet.create({
         minHeight: 42,
         marginLeft: 4,
         marginRight: 2,
-        paddingVertical: 4,
+        paddingVertical: 2,
         paddingLeft: 12,
         paddingRight: 10,
         borderRadius: 20,
@@ -62,5 +62,13 @@ export const RespondScreenStyle = StyleSheet.create({
         paddingBottom: 0, // overwrite default value
         fontSize: 16,
         color: COLORS.BLACK
+    },
+    sendButtonView: {
+        padding: 5,
+        borderRadius: 20,
+        backgroundColor: COLORS.BUTTON_BLUE
+    },
+    sendButtonIcon: {
+        right: -1
     }
 });

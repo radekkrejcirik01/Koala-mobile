@@ -242,7 +242,7 @@ export const RespondScreen = ({
                             onFocus={scrollToEnd}
                             value={message}
                             onChangeText={setMessage}
-                            placeholder="Message..."
+                            placeholder={`Message ${name}`}
                             selectionColor={COLORS.BUTTON_BLUE}
                             style={RespondScreenStyle.input}
                         />
@@ -251,8 +251,13 @@ export const RespondScreen = ({
                             disabled={!message}
                             hitSlop={10}
                             onPress={onPressSend}
+                            style={RespondScreenStyle.sendButtonView}
                         >
-                            <Icon name={IconEnum.SEND} size={27} />
+                            <Icon
+                                name={IconEnum.SEND}
+                                size={20}
+                                style={RespondScreenStyle.sendButtonIcon}
+                            />
                         </TouchableOpacity>
                     </View>
                 </View>
