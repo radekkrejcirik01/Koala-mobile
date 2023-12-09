@@ -37,11 +37,13 @@ import { OutboundMessageItem } from '@components/respond/OutboundMessageItem/Out
 export const RespondScreen = ({
     route
 }: RespondScreenProps): React.JSX.Element => {
-    const { id, name, username, conversationId } = route.params;
+    const { id, senderId, name, username, conversationId } = route.params;
 
-    const { name: userName, username: userUsername } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
+    const {
+        id: userId,
+        name: userName,
+        username: userUsername
+    } = useSelector((state: ReducerProps) => state.user.user);
 
     const { top, bottom } = useSafeAreaInsets();
 
@@ -122,6 +124,8 @@ export const RespondScreen = ({
             postRequest<ResponseInterface, MessageNotificationPostInterface>(
                 'message-notification',
                 {
+                    senderId: userId,
+                    receiverId: senderId,
                     receiver: username,
                     name: userName,
                     message: text || message,
@@ -135,6 +139,8 @@ export const RespondScreen = ({
             id,
             message,
             replyMessage,
+            senderId,
+            userId,
             userName,
             userUsername,
             username

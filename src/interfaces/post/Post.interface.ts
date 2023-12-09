@@ -26,12 +26,15 @@ export interface EmotionPostInterface {
 }
 
 export interface EmotionNotificationPostInterface {
-    receivers: string[];
+    senderId: number;
+    receiversIds: number[];
     name: string;
     message: string;
 }
 
 export interface MessageNotificationPostInterface {
+    senderId: number;
+    receiverId: number;
     receiver: string;
     name: string;
     message: string;

@@ -133,8 +133,9 @@ export const NotificationsScreen = (): React.JSX.Element => {
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.RespondScreen, {
                         id: item.id,
+                        senderId: item?.senderId,
                         name: item.name,
-                        username: item.sender,
+                        username: item?.sender,
                         conversationId: item?.conversationId
                     })
                 }

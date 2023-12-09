@@ -26,8 +26,10 @@ import { IconEnum } from '@components/general/Icon/Icon.enum';
 export const ShareModalScreen = ({
     item,
     onAddFriendPress
-}: ShareModalScreenProps): JSX.Element => {
-    const { name } = useSelector((state: ReducerProps) => state.user.user);
+}: ShareModalScreenProps): React.JSX.Element => {
+    const { id: userId, name } = useSelector(
+        (state: ReducerProps) => state.user.user
+    );
 
     const { bottom } = useSafeAreaInsets();
 
@@ -36,7 +38,7 @@ export const ShareModalScreen = ({
     const [sending, setSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
 
-    const selectedFriends = useRef<string[]>([]);
+    const selectedFriends = useRef<number[]>([]);
 
     const loadFriends = () => {
         getRequest<ResponseFriendsGetInterface>('friends').subscribe(
@@ -53,13 +55,13 @@ export const ShareModalScreen = ({
         loadFriends();
     }, []);
 
-    const onFriendSelect = (username: string) => {
-        if (selectedFriends?.current.includes(username)) {
+    const onFriendSelect = (id: number) => {
+        if (selectedFriends?.current.includes(id)) {
             selectedFriends.current = selectedFriends.current.filter(
-                (value) => value !== username
+                (value) => value !== id
             );
         } else {
-            selectedFriends.current.push(username);
+            selectedFriends.current.push(id);
         }
     };
 
@@ -69,7 +71,8 @@ export const ShareModalScreen = ({
             postRequest<ResponseInterface, EmotionNotificationPostInterface>(
                 'emotion-notification',
                 {
-                    receivers: selectedFriends.current,
+                    senderId: userId,
+                    receiversIds: selectedFriends.current,
                     name,
                     message: item.message
                 }
@@ -157,7 +160,7 @@ export const ShareModalScreen = ({
                                                 username: value.username
                                             }}
                                             onSelect={() =>
-                                                onFriendSelect(value.username)
+                                                onFriendSelect(value.id)
                                             }
                                             sent={sent}
                                         />

@@ -5,6 +5,7 @@ export interface RespondScreenProps {
         {
             params: {
                 id: number;
+                senderId: number;
                 name: string;
                 username: string;
                 conversationId?: number;

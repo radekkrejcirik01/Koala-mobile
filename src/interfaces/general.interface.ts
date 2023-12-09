@@ -13,7 +13,8 @@ export interface InviteInterface {
 
 export interface NotificationInterface {
     id: number;
-    sender: string;
+    senderId?: number;
+    sender?: string;
     name: string;
     message: string;
     type: NotificationItemEnum;
