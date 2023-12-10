@@ -75,9 +75,6 @@ export const ShareModalScreenStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    disabled: {
-        opacity: 0.7
-    },
     shareButtonText: {
         fontSize: 20,
         color: COLORS.WHITE,

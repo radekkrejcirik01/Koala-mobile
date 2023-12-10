@@ -20,9 +20,6 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
         color: COLORS.BLACK,
         fontWeight: 'bold'
     },
-    filterButtonView: {
-        marginRight: 5
-    },
     filterText: {
         fontSize: 16,
         color: COLORS.GRAY_200,

@@ -7,13 +7,9 @@ export const HomeScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     scrollView: {
-        paddingTop: 10,
-        marginBottom: 10
+        paddingTop: 90
     },
     scrollViewContainer: {
-        flexGrow: 1,
-        paddingBottom: 50,
-        justifyContent: 'center',
         alignItems: 'center'
     },
     contentView: {
@@ -22,13 +18,12 @@ export const HomeScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonView: {
-        margin: 4,
+        margin: 5,
         maxHeight: 60,
-        paddingVertical: 10,
-        paddingHorizontal: 12,
-        borderWidth: 2.5,
+        paddingVertical: 12,
+        paddingHorizontal: 14,
         borderRadius: 25,
-        borderColor: COLORS.LIGHTGRAY
+        backgroundColor: '#00000010'
     },
     buttonText: {
         fontSize: 16,
@@ -36,7 +31,7 @@ export const HomeScreenStyle = StyleSheet.create({
         fontWeight: '600'
     },
     directEmotionButtonView: {
-        marginTop: 20,
+        marginTop: 50,
         flexDirection: 'row'
     },
     directEmotionText: {
@@ -46,19 +41,6 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     directIcon: {
         marginLeft: 5
-    },
-    friendsButtonView: {
-        height: 45,
-        marginHorizontal: 5,
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    friendsButtonText: {
-        fontSize: 16,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
     },
     modal: {
         margin: 0,

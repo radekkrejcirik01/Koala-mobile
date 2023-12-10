@@ -122,31 +122,31 @@ export const DirectEmotionModalScreen = ({
                             <View
                                 style={DirectEmotionModalScreenStyle.selectView}
                             >
-                                {friends?.length ? (
-                                    friends?.map((value) => (
-                                        <ShareFriendItem
-                                            key={value.username}
-                                            item={{
-                                                name: value.name,
-                                                username: value.username
-                                            }}
-                                            onSelect={() =>
-                                                onFriendSelect(value.id)
-                                            }
-                                            sent={sent}
-                                        />
-                                    ))
-                                ) : (
-                                    <TouchableOpacity
-                                        activeOpacity={0.9}
-                                        onPress={onAddFriendPress}
-                                        style={
-                                            DirectEmotionModalScreenStyle.addButtonView
-                                        }
-                                    >
-                                        <Icon name={IconEnum.PLUS} size={12} />
-                                    </TouchableOpacity>
-                                )}
+                                <>
+                                    {friends?.length &&
+                                        friends?.map((value) => (
+                                            <ShareFriendItem
+                                                key={value.username}
+                                                item={{
+                                                    name: value.name,
+                                                    username: value.username
+                                                }}
+                                                onSelect={() =>
+                                                    onFriendSelect(value.id)
+                                                }
+                                                sent={sent}
+                                            />
+                                        ))}
+                                </>
+                                <TouchableOpacity
+                                    activeOpacity={0.9}
+                                    onPress={onAddFriendPress}
+                                    style={
+                                        DirectEmotionModalScreenStyle.addButtonView
+                                    }
+                                >
+                                    <Icon name={IconEnum.PLUS} size={12} />
+                                </TouchableOpacity>
                             </View>
                             {friends?.length ? (
                                 <TouchableOpacity

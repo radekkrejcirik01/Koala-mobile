@@ -7,12 +7,13 @@ export const HomeScreenHeaderStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-    rowCenter: {
-        flexDirection: 'row',
-        alignItems: 'center'
+    row: {
+        flexDirection: 'row'
     },
-    profileButtonView: {
-        marginHorizontal: 10
+    emojiText: {
+        marginLeft: 15,
+        marginRight: 5,
+        fontSize: 32
     },
     homeTitleText: {
         fontSize: 34,

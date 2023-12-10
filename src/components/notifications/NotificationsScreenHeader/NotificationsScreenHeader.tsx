@@ -29,7 +29,6 @@ export const NotificationsScreenHeader = ({
                 activeOpacity={0.9}
                 hitSlop={10}
                 onPress={onFilterPress}
-                style={NotificationsScreenHeaderStyle.filterButtonView}
             >
                 <Text style={NotificationsScreenHeaderStyle.filterText}>
                     {filterName || 'Filter'}

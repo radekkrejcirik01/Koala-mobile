@@ -34,7 +34,7 @@ export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
 
     useNotifications();
-    const { top, bottom } = useSafeAreaInsets();
+    const { top } = useSafeAreaInsets();
     const { showActionSheetWithOptions } = useActionSheet();
     const { modalVisible, showModal, hideModal } = useModal();
 
@@ -152,24 +152,8 @@ export const HomeScreen = (): React.JSX.Element => {
         showModal();
     }, [hideModal, showModal]);
 
-    const onFriendsPress = useCallback(() => {
-        setModalContent(
-            <FriendsModalScreen
-                onActionSheetOpened={() => {
-                    hideModalAndKeyboard();
-                }}
-            />
-        );
-        showModal();
-    }, [hideModalAndKeyboard, showModal]);
-
     return (
-        <View
-            style={[
-                HomeScreenStyle.container,
-                { paddingTop: top + 20, paddingBottom: bottom || 10 }
-            ]}
-        >
+        <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
             <HomeScreenHeader />
             <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -215,13 +199,6 @@ export const HomeScreen = (): React.JSX.Element => {
                     />
                 </TouchableOpacity>
             </ScrollView>
-            <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={onFriendsPress}
-                style={HomeScreenStyle.friendsButtonView}
-            >
-                <Text style={HomeScreenStyle.friendsButtonText}>Friends</Text>
-            </TouchableOpacity>
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
