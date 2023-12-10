@@ -10,6 +10,7 @@ export const HomeScreenStyle = StyleSheet.create({
         paddingTop: 90
     },
     scrollViewContainer: {
+        paddingBottom: 120,
         alignItems: 'center'
     },
     contentView: {

@@ -45,7 +45,7 @@ export const HomeScreen = (): React.JSX.Element => {
     useEffect(() => {
         setTimeout(() => {
             MessagingService.initMessaging().catch();
-        }, 1000);
+        }, 2500);
     }, []);
 
     useEffect(() => {

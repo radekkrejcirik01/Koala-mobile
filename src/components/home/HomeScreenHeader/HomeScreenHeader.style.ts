@@ -13,7 +13,8 @@ export const HomeScreenHeaderStyle = StyleSheet.create({
     emojiText: {
         marginLeft: 15,
         marginRight: 5,
-        fontSize: 32
+        fontSize: 32,
+        color: COLORS.BLACK
     },
     homeTitleText: {
         fontSize: 34,
