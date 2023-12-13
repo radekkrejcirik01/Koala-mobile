@@ -17,6 +17,7 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { Modal } from '@components/general/Modal/Modal';
 import { FilterModal } from '@components/notifications/FilterModal/FilterModal';
+import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 export const NotificationsScreen = (): React.JSX.Element => {
     const dispatch = useDispatch();
@@ -136,7 +137,10 @@ export const NotificationsScreen = (): React.JSX.Element => {
                         senderId: item?.senderId,
                         name: item.name,
                         username: item?.sender,
-                        conversationId: item?.conversationId
+                        conversationId: item?.conversationId,
+                        isStatusReply:
+                            item?.type ===
+                            NotificationItemEnum.StatusReplyNotificationType
                     })
                 }
             />

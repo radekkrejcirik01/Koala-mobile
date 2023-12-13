@@ -14,8 +14,6 @@ export const InboundMessageItemStyle = StyleSheet.create({
     },
     replyMessageView: {
         maxWidth: '60%',
-        minWidth: 100,
-        marginTop: 4,
         marginBottom: 2,
         paddingVertical: 8,
         paddingHorizontal: 10,

@@ -26,13 +26,14 @@ export const NotificationItemStyle = StyleSheet.create({
         backgroundColor: COLORS.BUTTON_BLUE
     },
     timeText: {
-        color: COLORS.GRAY_200
+        color: COLORS.GRAY_200,
+        fontWeight: '500'
     },
     titleText: {
         marginTop: 5,
         fontSize: 16,
         color: COLORS.BLACK,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     messageText: {
         marginTop: 2,

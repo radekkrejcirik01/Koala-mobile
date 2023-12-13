@@ -37,7 +37,8 @@ import { OutboundMessageItem } from '@components/respond/OutboundMessageItem/Out
 export const RespondScreen = ({
     route
 }: RespondScreenProps): React.JSX.Element => {
-    const { id, senderId, name, username, conversationId } = route.params;
+    const { id, senderId, name, username, conversationId, isStatusReply } =
+        route.params;
 
     const {
         id: userId,
@@ -67,6 +68,10 @@ export const RespondScreen = ({
     // Return true when first messages is inbound and number of inbound messages is 1
     const checkReactionButtons = useCallback(
         (data: ConversationInterface[]) => {
+            if (isStatusReply) {
+                return false;
+            }
+
             const receivedMessages = data?.filter(
                 (e: ConversationInterface) => e?.sender === username
             );
@@ -75,7 +80,7 @@ export const RespondScreen = ({
                 data[0]?.sender === username && receivedMessages?.length === 1
             );
         },
-        [username]
+        [isStatusReply, username]
     );
 
     const updateSeenNotification = useCallback(() => {

@@ -25,6 +25,9 @@ export const NotificationItem = ({
         if (type === NotificationItemEnum.EmotionNotificationType) {
             return ' is sharing';
         }
+        if (type === NotificationItemEnum.StatusReplyNotificationType) {
+            return ' is replying to status';
+        }
         return '';
     }
 
@@ -52,7 +55,7 @@ export const NotificationItem = ({
             <Text style={NotificationItemStyle.messageText}>
                 {item.message}
             </Text>
-            {!!item?.emotion && (
+            {(!!item?.emotion || !!item?.expression) && (
                 <View style={NotificationItemStyle.replyView}>
                     <Icon
                         name={IconEnum.REPLY}
@@ -60,7 +63,7 @@ export const NotificationItem = ({
                         style={NotificationItemStyle.replyIcon}
                     />
                     <Text style={NotificationItemStyle.replyText}>
-                        {item?.emotion}
+                        {item?.emotion || item?.expression}
                     </Text>
                 </View>
             )}

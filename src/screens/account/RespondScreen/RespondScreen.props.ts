@@ -9,6 +9,7 @@ export interface RespondScreenProps {
                 name: string;
                 username: string;
                 conversationId?: number;
+                isStatusReply: boolean;
             };
         },
         'params'

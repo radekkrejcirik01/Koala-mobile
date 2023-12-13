@@ -22,6 +22,7 @@ export interface NotificationInterface {
     seen: number;
     conversationId?: number;
     emotion?: string;
+    expression?: string;
 }
 
 export interface ConversationInterface {
