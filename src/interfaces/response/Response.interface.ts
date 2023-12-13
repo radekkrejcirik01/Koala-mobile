@@ -1,6 +1,7 @@
 import {
     ConversationInterface,
     EmotionInterface,
+    ExpressionDataInterface,
     HistoryInterface,
     InviteInterface,
     NotificationInterface,
@@ -65,4 +66,11 @@ export interface ResponseEmotionsGetInterface {
     status: string;
     message: string;
     data: EmotionInterface[];
+}
+
+export interface ResponseExpressionsGetInterface {
+    status: string;
+    message: string;
+    data: ExpressionDataInterface[];
+    expression: string;
 }

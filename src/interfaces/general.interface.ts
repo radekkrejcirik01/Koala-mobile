@@ -48,3 +48,10 @@ export interface EmotionInterface {
     tip2?: string;
     isCustom?: boolean;
 }
+
+export interface ExpressionDataInterface {
+    id: number;
+    userId: number;
+    name: string;
+    expression: string;
+}

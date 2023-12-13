@@ -32,6 +32,14 @@ export interface EmotionNotificationPostInterface {
     message: string;
 }
 
+export interface StatusReplyNotificationPostInterface {
+    senderId: number;
+    receiverId: number;
+    name: string;
+    message: string;
+    replyExpression: string;
+}
+
 export interface MessageNotificationPostInterface {
     senderId: number;
     receiverId: number;
@@ -40,4 +48,9 @@ export interface MessageNotificationPostInterface {
     message: string;
     conversationId: number;
     replyMessage?: string;
+}
+
+export interface ExpressionPostInterface {
+    userId: number;
+    expression: string;
 }

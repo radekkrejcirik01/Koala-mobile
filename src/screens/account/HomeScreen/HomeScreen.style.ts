@@ -3,11 +3,36 @@ import COLORS from '@constants/COLORS';
 
 export const HomeScreenStyle = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingHorizontal: 10
+        flex: 1
+    },
+    expressionsScrollView: {
+        marginTop: 15,
+        paddingLeft: 20,
+        flexDirection: 'row'
+    },
+    statusButtonView: {
+        paddingVertical: 8,
+        paddingHorizontal: 10,
+        borderRadius: 20,
+        backgroundColor: '#00000010',
+        alignItems: 'center',
+        alignSelf: 'flex-start'
+    },
+    width70: {
+        width: 70
+    },
+    statusButtonText: {
+        fontWeight: '500'
+    },
+    friendStatusButtonView: {
+        marginLeft: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 8,
+        borderRadius: 20,
+        backgroundColor: '#00000010'
     },
     scrollView: {
-        paddingTop: 90
+        paddingTop: 60
     },
     scrollViewContainer: {
         paddingBottom: 120,
@@ -29,7 +54,7 @@ export const HomeScreenStyle = StyleSheet.create({
     buttonText: {
         fontSize: 16,
         color: COLORS.BLACK,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     directEmotionButtonView: {
         marginTop: 50,

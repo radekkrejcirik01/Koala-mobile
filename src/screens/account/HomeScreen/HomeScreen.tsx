@@ -9,6 +9,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useFocusEffect } from '@react-navigation/native';
 import { useModal } from '@hooks/useModal';
 import { useNotifications } from '@hooks/useNotifications';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
@@ -19,16 +20,22 @@ import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHe
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { ReducerProps } from '@store/index/index.props';
 import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
-import { EmotionInterface } from '@interfaces/general.interface';
+import {
+    EmotionInterface,
+    ExpressionDataInterface
+} from '@interfaces/general.interface';
 import { deleteRequest, getRequest } from '@utils/Axios/Axios.service';
 import {
     ResponseEmotionsGetInterface,
+    ResponseExpressionsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
 import { MessagingService } from '@utils/general/MessagingService';
 import { DirectEmotionModalScreen } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
+import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -41,6 +48,10 @@ export const HomeScreen = (): React.JSX.Element => {
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
 
     const [data, setData] = useState<EmotionInterface[]>([]);
+    const [status, setStatus] = useState<string>();
+    const [expressions, setExpressions] = useState<ExpressionDataInterface[]>(
+        []
+    );
 
     useEffect(() => {
         setTimeout(() => {
@@ -61,6 +72,42 @@ export const HomeScreen = (): React.JSX.Element => {
             }
         );
     }, []);
+
+    const loadExpressions = useCallback(() => {
+        getRequest<ResponseExpressionsGetInterface>('expressions').subscribe(
+            (response: ResponseExpressionsGetInterface) => {
+                if (response?.status) {
+                    setStatus(response?.expression);
+                    setExpressions(response?.data);
+                }
+            }
+        );
+    }, []);
+
+    useFocusEffect(loadExpressions);
+
+    const onStatusPress = useCallback(() => {
+        setModalContent(
+            <StatusModalScreen
+                onPostPress={() => {
+                    hideModal();
+
+                    setTimeout(() => {
+                        loadExpressions();
+                    }, 500);
+                }}
+            />
+        );
+        showModal();
+    }, [hideModal, loadExpressions, showModal]);
+
+    const onStatusReply = useCallback(
+        (item: ExpressionDataInterface) => {
+            setModalContent(<StatusReplyModalScreen item={item} />);
+            showModal();
+        },
+        [showModal]
+    );
 
     const onItemPress = useCallback(
         (item: EmotionInterface) => {
@@ -155,6 +202,38 @@ export const HomeScreen = (): React.JSX.Element => {
     return (
         <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
             <HomeScreenHeader />
+            <ScrollView
+                horizontal
+                style={HomeScreenStyle.expressionsScrollView}
+            >
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    hitSlop={10}
+                    onPress={onStatusPress}
+                    style={[
+                        HomeScreenStyle.statusButtonView,
+                        status && HomeScreenStyle.width70
+                    ]}
+                >
+                    <Text style={HomeScreenStyle.statusButtonText}>
+                        {status || 'Your status'}
+                    </Text>
+                </TouchableOpacity>
+                {!!expressions &&
+                    expressions.map((value) => (
+                        <TouchableOpacity
+                            key={value.userId + value.expression}
+                            activeOpacity={0.7}
+                            hitSlop={10}
+                            onPress={() => onStatusReply(value)}
+                            style={HomeScreenStyle.friendStatusButtonView}
+                        >
+                            <Text style={HomeScreenStyle.statusButtonText}>
+                                {value.name} {value.expression}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+            </ScrollView>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={HomeScreenStyle.scrollView}

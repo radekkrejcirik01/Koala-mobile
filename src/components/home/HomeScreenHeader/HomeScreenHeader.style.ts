@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const HomeScreenHeaderStyle = StyleSheet.create({
     container: {
+        paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
