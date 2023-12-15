@@ -183,7 +183,7 @@ export const RespondScreen = ({
         <View
             style={[
                 RespondScreenStyle.container,
-                { paddingTop: top || 10, paddingBottom: bottom + 5 }
+                { paddingTop: top || 10, paddingBottom: bottom || 5 }
             ]}
         >
             <RespondScreenHeader name={name} userId={senderId} />

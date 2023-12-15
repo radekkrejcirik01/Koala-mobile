@@ -13,7 +13,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     replyMessageView: {
-        maxWidth: '60%',
+        maxWidth: '70%',
         marginBottom: 2,
         paddingVertical: 8,
         paddingHorizontal: 10,
@@ -27,7 +27,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         fontWeight: '600'
     },
     messageText: {
-        maxWidth: '60%',
+        maxWidth: '70%',
         minWidth: 100,
         fontSize: 24,
         color: COLORS.BLACK_50,

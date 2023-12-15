@@ -9,10 +9,10 @@ export const ReactionButtonsStyle = StyleSheet.create({
         flexWrap: 'wrap'
     },
     buttonView: {
-        minWidth: 75,
-        marginVertical: 4,
-        marginHorizontal: 2,
-        padding: 10,
+        minWidth: 70,
+        margin: 2,
+        paddingVertical: 8,
+        paddingHorizontal: 10,
         borderRadius: 20,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignItems: 'center'

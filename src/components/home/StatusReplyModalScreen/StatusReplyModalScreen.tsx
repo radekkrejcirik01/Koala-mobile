@@ -42,7 +42,7 @@ export const StatusReplyModalScreen = ({
     return (
         <View style={StatusReplyModalScreenStyle.container}>
             <Text style={StatusReplyModalScreenStyle.titleText}>
-                Replying to {item.expression}
+                {`Replying to ${item.name}'s ${item.expression}`}
             </Text>
             <View style={StatusReplyModalScreenStyle.inputContainer}>
                 <View style={StatusReplyModalScreenStyle.inputView}>

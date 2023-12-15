@@ -7,7 +7,7 @@ export const RespondScreenStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE
     },
     scrollViewContainer: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 25,
         paddingBottom: Platform.OS === 'ios' ? 280 : 100
     },
     replyMessageContainer: {

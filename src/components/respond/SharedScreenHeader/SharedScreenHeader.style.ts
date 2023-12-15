@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const SharedScreenHeaderStyle = StyleSheet.create({
     container: {
@@ -8,6 +9,7 @@ export const SharedScreenHeaderStyle = StyleSheet.create({
     titleText: {
         marginLeft: 10,
         fontSize: 24,
+        color: COLORS.BLACK,
         fontWeight: '600'
     }
 });
