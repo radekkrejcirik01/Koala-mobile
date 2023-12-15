@@ -29,8 +29,8 @@ export const InboundMessageItemStyle = StyleSheet.create({
     messageText: {
         maxWidth: '60%',
         minWidth: 100,
-        fontSize: 22,
-        color: COLORS.BLACK,
+        fontSize: 24,
+        color: COLORS.BLACK_50,
         backgroundColor: COLORS.WHITE,
         fontWeight: '600'
     },

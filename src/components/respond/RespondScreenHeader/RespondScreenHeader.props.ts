@@ -1,4 +1,4 @@
 export interface RespondScreenHeaderProps {
     name: string;
-    username: string;
+    userId: number;
 }

@@ -12,6 +12,7 @@ import { RespondScreen } from '@screens/account/RespondScreen/RespondScreen';
 import { ProfileScreen } from '@screens/account/ProfileScreen/ProfileScreen';
 import { AccountScreen } from '@screens/account/AccountScreen/AccountScreen';
 import { SharingHistoryScreen } from '@screens/account/SharingHistoryScreen/SharingHistoryScreen';
+import { SharedScreen } from '@screens/account/SharedScreen/SharedScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -43,6 +44,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.RespondScreen}
             component={RespondScreen}
+            options={NoHeader}
+        />
+        <Account.Screen
+            name={AccountStackNavigatorEnum.SharedScreen}
+            component={SharedScreen}
             options={NoHeader}
         />
         <Account.Screen

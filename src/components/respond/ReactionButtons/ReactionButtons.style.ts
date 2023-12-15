@@ -3,11 +3,10 @@ import COLORS from '@constants/COLORS';
 
 export const ReactionButtonsStyle = StyleSheet.create({
     container: {
-        paddingBottom: 4,
+        paddingLeft: 5,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center'
+        flexWrap: 'wrap'
     },
     buttonView: {
         minWidth: 75,

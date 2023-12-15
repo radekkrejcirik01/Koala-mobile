@@ -4,5 +4,6 @@ export enum AccountStackNavigatorEnum {
     NotificationsScreen = 'NotificationsScreen',
     ProfileScreen = 'ProfileScreen',
     RespondScreen = 'RespondScreen',
+    SharedScreen = 'SharedScreen',
     SharingHistoryScreen = 'SharingHistoryScreen'
 }

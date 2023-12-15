@@ -186,7 +186,7 @@ export const RespondScreen = ({
                 { paddingTop: top || 10, paddingBottom: bottom + 5 }
             ]}
         >
-            <RespondScreenHeader name={name} username={username} />
+            <RespondScreenHeader name={name} userId={senderId} />
             <ScrollView
                 ref={scrollViewRef}
                 showsVerticalScrollIndicator={false}
@@ -217,9 +217,6 @@ export const RespondScreen = ({
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             >
-                {reactionButtons && (
-                    <ReactionButtons onPressReaction={onPressReaction} />
-                )}
                 {!!replyMessage && (
                     <View style={RespondScreenStyle.replyMessageContainer}>
                         <View style={RespondScreenStyle.replyingToContainer}>
@@ -247,7 +244,7 @@ export const RespondScreen = ({
                             onFocus={scrollToEnd}
                             value={message}
                             onChangeText={setMessage}
-                            placeholder={`Message ${name}`}
+                            placeholder="Message"
                             selectionColor={COLORS.BUTTON_BLUE}
                             style={RespondScreenStyle.input}
                         />
@@ -267,6 +264,9 @@ export const RespondScreen = ({
                     </View>
                 </View>
             </KeyboardAvoidingView>
+            {reactionButtons && (
+                <ReactionButtons onPressReaction={onPressReaction} />
+            )}
         </View>
     );
 };

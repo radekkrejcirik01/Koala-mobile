@@ -6,10 +6,15 @@ export const RespondScreenHeaderStyle = StyleSheet.create({
         paddingHorizontal: 12,
         paddingBottom: 4,
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    centerRow: {
+        flexDirection: 'row',
         alignItems: 'center'
     },
     contentContainer: {
-        marginLeft: 20,
+        marginLeft: 10,
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -17,6 +22,10 @@ export const RespondScreenHeaderStyle = StyleSheet.create({
         marginLeft: 8,
         fontSize: 18,
         color: COLORS.BLACK,
-        fontWeight: 'bold'
+        fontWeight: '600'
+    },
+    sharedButtonView: {
+        marginRight: 10,
+        marginBottom: 5
     }
 });
