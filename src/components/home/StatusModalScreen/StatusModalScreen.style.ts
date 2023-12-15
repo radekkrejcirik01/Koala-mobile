@@ -13,10 +13,11 @@ export const StatusModalScreenStyle = StyleSheet.create({
         marginTop: 20,
         fontSize: 24,
         color: COLORS.BLACK,
-        fontWeight: 'bold'
+        fontWeight: '600'
     },
     descriptionText: {
         marginTop: 5,
+        color: COLORS.BLACK,
         fontSize: 12
     },
     expressionsContainer: {
@@ -28,9 +29,11 @@ export const StatusModalScreenStyle = StyleSheet.create({
     expressionButtonView: {
         margin: 20,
         padding: 15,
+        borderRadius: 10,
         backgroundColor: 'whitesmoke'
     },
     expressionButtonText: {
+        color: COLORS.BLACK,
         fontSize: 30
     },
     clearStatusButtonView: {

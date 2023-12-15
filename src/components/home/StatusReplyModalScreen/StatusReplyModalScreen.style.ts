@@ -3,8 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const StatusReplyModalScreenStyle = StyleSheet.create({
     container: {
-        paddingVertical: 20,
+        paddingTop: 20,
         paddingHorizontal: 15,
+        paddingBottom: 25,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
@@ -12,7 +13,7 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
     titleText: {
         fontSize: 24,
         color: COLORS.BLACK,
-        fontWeight: 'bold'
+        fontWeight: '600'
     },
     inputContainer: {
         marginTop: 20,
@@ -21,13 +22,13 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
     },
     inputView: {
         flex: 1,
-        minHeight: 80,
-        paddingVertical: 10,
+        minHeight: 100,
+        paddingTop: 10,
+        paddingBottom: 8,
         paddingLeft: 12,
-        paddingRight: 10,
+        paddingRight: 8,
         borderRadius: 20,
-        borderWidth: 2,
-        borderColor: COLORS.LIGHTGRAY,
+        backgroundColor: 'whitesmoke',
         flexDirection: 'row'
     },
     input: {
@@ -46,5 +47,12 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
     },
     sendIcon: {
         right: -1
+    },
+    sentText: {
+        marginRight: 2,
+        marginBottom: 2,
+        fontSize: 20,
+        color: COLORS.BLACK,
+        alignSelf: 'flex-end'
     }
 });

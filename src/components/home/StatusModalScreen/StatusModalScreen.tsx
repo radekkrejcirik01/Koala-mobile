@@ -90,7 +90,7 @@ export const StatusModalScreen = ({
             style={[
                 StatusModalScreenStyle.container,
                 {
-                    paddingBottom: bottom + 10
+                    paddingBottom: bottom + 20
                 }
             ]}
         >

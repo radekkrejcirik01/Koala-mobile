@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+    AppState,
     Keyboard,
+    Platform,
     ScrollView,
     Text,
     TouchableOpacity,
@@ -9,7 +11,6 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import { useFocusEffect } from '@react-navigation/native';
 import { useModal } from '@hooks/useModal';
 import { useNotifications } from '@hooks/useNotifications';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
@@ -36,6 +37,8 @@ import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
+import { NotificationsService } from '@utils/general/NotificationsService';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -84,7 +87,24 @@ export const HomeScreen = (): React.JSX.Element => {
         );
     }, []);
 
-    useFocusEffect(loadExpressions);
+    useEffect(() => {
+        const subscription = AppState.addEventListener(
+            'change',
+            (nextAppState) => {
+                if (nextAppState === 'active') {
+                    NotificationsService.getUnseenNotifications();
+                    loadExpressions();
+                    if (Platform.OS === 'ios') {
+                        PushNotificationIOS.setApplicationIconBadgeNumber(0);
+                    }
+                }
+            }
+        );
+
+        return () => {
+            subscription.remove();
+        };
+    }, [loadExpressions]);
 
     const onStatusPress = useCallback(() => {
         setModalContent(
@@ -210,13 +230,10 @@ export const HomeScreen = (): React.JSX.Element => {
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onStatusPress}
-                    style={[
-                        HomeScreenStyle.statusButtonView,
-                        status && HomeScreenStyle.width70
-                    ]}
+                    style={HomeScreenStyle.statusButtonView}
                 >
                     <Text style={HomeScreenStyle.statusButtonText}>
-                        {status || 'Your status'}
+                        {status || 'Status'}
                     </Text>
                 </TouchableOpacity>
                 {!!expressions &&

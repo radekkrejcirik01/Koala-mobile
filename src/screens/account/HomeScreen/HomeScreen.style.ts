@@ -11,25 +11,25 @@ export const HomeScreenStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     statusButtonView: {
-        paddingVertical: 8,
-        paddingHorizontal: 10,
+        width: 75,
+        paddingVertical: 10,
         borderRadius: 20,
         backgroundColor: '#00000010',
         alignItems: 'center',
         alignSelf: 'flex-start'
     },
-    width70: {
-        width: 70
-    },
     statusButtonText: {
+        fontSize: 16,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     friendStatusButtonView: {
         marginLeft: 5,
         paddingVertical: 10,
-        paddingHorizontal: 8,
+        paddingHorizontal: 10,
         borderRadius: 20,
-        backgroundColor: '#00000010'
+        backgroundColor: '#00000010',
+        alignSelf: 'flex-start'
     },
     scrollView: {
         paddingTop: 60

@@ -20,6 +20,8 @@ export const StatusReplyModalScreen = ({
 
     const [message, setMessage] = useState<string>();
 
+    const [sent, setSent] = useState<boolean>(false);
+
     const reply = useCallback(() => {
         postRequest<ResponseInterface, StatusReplyNotificationPostInterface>(
             'status-reply-notification',
@@ -30,7 +32,11 @@ export const StatusReplyModalScreen = ({
                 message,
                 replyExpression: item.expression
             }
-        ).subscribe();
+        ).subscribe((response: ResponseInterface) => {
+            if (response?.status === 'success') {
+                setSent(true);
+            }
+        });
     }, [item.expression, item.userId, message, name, userId]);
 
     return (
@@ -50,22 +56,28 @@ export const StatusReplyModalScreen = ({
                         selectionColor={COLORS.BUTTON_BLUE}
                         style={StatusReplyModalScreenStyle.input}
                     />
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        disabled={!message}
-                        hitSlop={10}
-                        onPress={() => {
-                            reply();
-                            setMessage('');
-                        }}
-                        style={StatusReplyModalScreenStyle.sendIconView}
-                    >
-                        <Icon
-                            name={IconEnum.SEND}
-                            size={20}
-                            style={StatusReplyModalScreenStyle.sendIcon}
-                        />
-                    </TouchableOpacity>
+                    {sent ? (
+                        <Text style={StatusReplyModalScreenStyle.sentText}>
+                            ✅
+                        </Text>
+                    ) : (
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            disabled={!message}
+                            hitSlop={10}
+                            onPress={() => {
+                                reply();
+                                setMessage('');
+                            }}
+                            style={StatusReplyModalScreenStyle.sendIconView}
+                        >
+                            <Icon
+                                name={IconEnum.SEND}
+                                size={20}
+                                style={StatusReplyModalScreenStyle.sendIcon}
+                            />
+                        </TouchableOpacity>
+                    )}
                 </View>
             </View>
         </View>
