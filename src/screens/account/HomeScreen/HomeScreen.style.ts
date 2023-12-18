@@ -12,7 +12,7 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     statusButtonView: {
         width: 75,
-        paddingVertical: 10,
+        paddingVertical: 8,
         borderRadius: 20,
         backgroundColor: '#00000010',
         alignItems: 'center',
@@ -25,7 +25,7 @@ export const HomeScreenStyle = StyleSheet.create({
     },
     friendStatusButtonView: {
         marginLeft: 5,
-        paddingVertical: 10,
+        paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 20,
         backgroundColor: '#00000010',

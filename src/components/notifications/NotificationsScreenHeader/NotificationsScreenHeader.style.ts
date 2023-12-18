@@ -23,6 +23,6 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
     filterText: {
         fontSize: 16,
         color: COLORS.GRAY_200,
-        fontWeight: '600'
+        fontWeight: '500'
     }
 });
