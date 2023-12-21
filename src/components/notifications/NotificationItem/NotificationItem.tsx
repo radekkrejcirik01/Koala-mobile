@@ -4,14 +4,11 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
-import { getFromNowUnixTime } from '@functions/getFromNowUnixTime';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const NotificationItem = ({
     item,
     onPress
-}: NotificationItemProps): JSX.Element => {
+}: NotificationItemProps): React.JSX.Element => {
     const unseen = useMemo((): boolean => !item?.seen, [item?.seen]);
 
     const [pressed, setPressed] = useState<boolean>(false);
@@ -31,42 +28,38 @@ export const NotificationItem = ({
         return '';
     }
 
+    const isNew = useMemo((): boolean => unseen && !pressed, [pressed, unseen]);
+
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={press}
+            onPressIn={press}
             style={NotificationItemStyle.container}
         >
             <View style={NotificationItemStyle.profileView}>
                 <View style={NotificationItemStyle.centerView}>
-                    {unseen && !pressed && (
-                        <View style={NotificationItemStyle.newItem} />
-                    )}
-                    <ProfilePhoto name={item.name} size={40} />
-                </View>
-                <Text style={NotificationItemStyle.timeText}>
-                    {getFromNowUnixTime(item.time)}
-                </Text>
-            </View>
-            <Text style={NotificationItemStyle.titleText}>
-                {item.name}
-                {getTitle(item.type)}
-            </Text>
-            <Text style={NotificationItemStyle.messageText}>
-                {item.message}
-            </Text>
-            {(!!item?.emotion || !!item?.expression) && (
-                <View style={NotificationItemStyle.replyView}>
-                    <Icon
-                        name={IconEnum.REPLY}
-                        size={24}
-                        style={NotificationItemStyle.replyIcon}
+                    <ProfilePhoto
+                        name={item.name}
+                        size={48}
+                        acronymStyle={NotificationItemStyle.profilePhoto}
                     />
-                    <Text style={NotificationItemStyle.replyText}>
-                        {item?.emotion || item?.expression}
-                    </Text>
+                    <View style={NotificationItemStyle.contentView}>
+                        <Text style={NotificationItemStyle.titleText}>
+                            {item.name}
+                            {getTitle(item.type)}
+                        </Text>
+                        <Text
+                            style={[
+                                NotificationItemStyle.messageText,
+                                isNew && NotificationItemStyle.bold
+                            ]}
+                        >
+                            {item.message}
+                        </Text>
+                    </View>
+                    {isNew && <View style={NotificationItemStyle.newItem} />}
                 </View>
-            )}
+            </View>
         </TouchableOpacity>
     );
 };

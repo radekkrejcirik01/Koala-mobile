@@ -14,7 +14,8 @@ export const ProfilePhoto = ({
     size,
     textBackgroundColor,
     onPhotoPress,
-    style
+    style,
+    acronymStyle
 }: ProfilePhotoProps): JSX.Element => (
     <TouchableOpacity
         disabled={!onPhotoPress}
@@ -42,7 +43,8 @@ export const ProfilePhoto = ({
                         height: size,
                         width: size,
                         backgroundColor: textBackgroundColor || COLORS.LIGHTGRAY
-                    }
+                    },
+                    acronymStyle
                 ]}
             >
                 <Text

@@ -4,12 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NotificationsScreenHeaderStyle } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { NotificationsScreenHeaderProps } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader.props';
 
-export const NotificationsScreenHeader = ({
-    onFilterPress,
-    filterName
-}: NotificationsScreenHeaderProps): JSX.Element => {
+export const NotificationsScreenHeader = (): JSX.Element => {
     const navigation = useNavigation();
 
     return (
@@ -25,15 +21,6 @@ export const NotificationsScreenHeader = ({
                     Supporting
                 </Text>
             </View>
-            <TouchableOpacity
-                activeOpacity={0.9}
-                hitSlop={10}
-                onPress={onFilterPress}
-            >
-                <Text style={NotificationsScreenHeaderStyle.filterText}>
-                    {filterName || 'Filter'}
-                </Text>
-            </TouchableOpacity>
         </View>
     );
 };

@@ -7,6 +7,7 @@ export interface ProfilePhotoProps {
     onPhotoPress?: () => void;
     textBackgroundColor?: string;
     style?: StyleProp<ViewStyle>;
+    acronymStyle?: StyleProp<ViewStyle>;
 }
 
 export const ProfilePhotoDefaultProps: Omit<

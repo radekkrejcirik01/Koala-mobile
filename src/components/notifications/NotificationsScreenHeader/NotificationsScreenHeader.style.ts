@@ -19,10 +19,5 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
         fontSize: 30,
         color: COLORS.BLACK,
         fontWeight: 'bold'
-    },
-    filterText: {
-        fontSize: 16,
-        color: COLORS.GRAY_200,
-        fontWeight: '500'
     }
 });

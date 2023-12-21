@@ -17,17 +17,5 @@ export const NotificationsScreenStyle = StyleSheet.create({
     },
     activityIndicator: {
         marginTop: 100
-    },
-    adContainer: {
-        marginTop: 10,
-        alignItems: 'center'
-    },
-    adText: {
-        color: COLORS.GRAY_200,
-        alignSelf: 'center'
-    },
-    modal: {
-        margin: 0,
-        justifyContent: 'flex-end'
     }
 });

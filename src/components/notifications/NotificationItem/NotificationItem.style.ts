@@ -3,37 +3,27 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItemStyle = StyleSheet.create({
     container: {
-        paddingVertical: 10,
-        paddingLeft: 15,
-        paddingRight: 10,
-        borderBottomWidth: 0.2,
-        borderBottomColor: COLORS.LIGHTGRAY
+        padding: 15
     },
     profileView: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        alignItems: 'center'
     },
     centerView: {
         flexDirection: 'row',
         alignItems: 'center'
     },
-    newItem: {
-        height: 10,
-        width: 10,
-        marginRight: 8,
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE
+    profilePhoto: {
+        borderRadius: 20
     },
-    timeText: {
-        color: COLORS.GRAY_200,
-        fontWeight: '500'
+    contentView: {
+        flex: 1,
+        marginLeft: 10
     },
     titleText: {
-        marginTop: 5,
         fontSize: 16,
         color: COLORS.BLACK,
-        fontWeight: '500'
+        fontWeight: '600'
     },
     messageText: {
         marginTop: 2,
@@ -41,14 +31,13 @@ export const NotificationItemStyle = StyleSheet.create({
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
-    replyView: {
-        alignSelf: 'flex-end'
+    bold: {
+        fontWeight: 'bold'
     },
-    replyIcon: {
-        transform: [{ rotate: '180deg' }]
-    },
-    replyText: {
-        color: COLORS.GRAY_200,
-        fontWeight: '500'
+    newItem: {
+        height: 11,
+        width: 11,
+        borderRadius: 10,
+        backgroundColor: COLORS.BUTTON_BLUE
     }
 });

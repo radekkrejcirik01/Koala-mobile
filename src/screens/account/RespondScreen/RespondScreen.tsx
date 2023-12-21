@@ -161,7 +161,7 @@ export const RespondScreen = ({
         inputRef.current.focus();
         setReplyMessage(item.message);
 
-        ReactNativeHapticFeedback.trigger('impactMedium');
+        ReactNativeHapticFeedback.trigger('impactLight');
     }, []);
 
     const onPressReaction = useCallback(
@@ -236,7 +236,12 @@ export const RespondScreen = ({
                     </View>
                 )}
                 <View style={RespondScreenStyle.inputContainer}>
-                    <View style={RespondScreenStyle.inputView}>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        hitSlop={10}
+                        onPress={() => inputRef.current.focus()}
+                        style={RespondScreenStyle.inputView}
+                    >
                         <TextInput
                             ref={inputRef}
                             autoCorrect={false}
@@ -244,7 +249,7 @@ export const RespondScreen = ({
                             onFocus={scrollToEnd}
                             value={message}
                             onChangeText={setMessage}
-                            placeholder="Message"
+                            placeholder="Message..."
                             selectionColor={COLORS.BUTTON_BLUE}
                             style={RespondScreenStyle.input}
                         />
@@ -261,7 +266,7 @@ export const RespondScreen = ({
                                 style={RespondScreenStyle.sendButtonIcon}
                             />
                         </TouchableOpacity>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
             {reactionButtons && (
