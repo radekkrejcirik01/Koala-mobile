@@ -33,8 +33,5 @@ export const InboundMessageItemStyle = StyleSheet.create({
         color: COLORS.BLACK_50,
         backgroundColor: COLORS.WHITE,
         fontWeight: '600'
-    },
-    largeText: {
-        fontSize: 40
     }
 });

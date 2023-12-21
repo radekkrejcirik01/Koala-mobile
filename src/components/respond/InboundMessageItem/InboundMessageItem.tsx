@@ -13,43 +13,31 @@ export const InboundMessageItem = ({
     onLongPress,
     time,
     replyMessage
-}: InboundMessageItemProps): React.JSX.Element => {
-    function isLarge(text: string): boolean {
-        return text?.length <= 3;
-    }
-
-    return (
-        <GestureHandlerRootView style={InboundMessageItemStyle.container}>
-            <Swipeable
-                renderLeftActions={() => (
-                    <Text style={InboundMessageItemStyle.timeText}>
-                        {getMessageTime(time)}
+}: InboundMessageItemProps): React.JSX.Element => (
+    <GestureHandlerRootView style={InboundMessageItemStyle.container}>
+        <Swipeable
+            renderLeftActions={() => (
+                <Text style={InboundMessageItemStyle.timeText}>
+                    {getMessageTime(time)}
+                </Text>
+            )}
+        >
+            {!!replyMessage && (
+                <View style={InboundMessageItemStyle.replyMessageView}>
+                    <Text style={InboundMessageItemStyle.replyMessageText}>
+                        {replyMessage}
                     </Text>
-                )}
+                </View>
+            )}
+            <TouchableOpacity
+                activeOpacity={1}
+                delayLongPress={150}
+                onLongPress={onLongPress}
             >
-                {!!replyMessage && (
-                    <View style={InboundMessageItemStyle.replyMessageView}>
-                        <Text style={InboundMessageItemStyle.replyMessageText}>
-                            {replyMessage}
-                        </Text>
-                    </View>
-                )}
-                <TouchableOpacity
-                    activeOpacity={1}
-                    delayLongPress={150}
-                    onLongPress={onLongPress}
-                >
-                    <Text
-                        style={[
-                            InboundMessageItemStyle.messageText,
-                            isLarge(children) &&
-                                InboundMessageItemStyle.largeText
-                        ]}
-                    >
-                        {children}
-                    </Text>
-                </TouchableOpacity>
-            </Swipeable>
-        </GestureHandlerRootView>
-    );
-};
+                <Text style={InboundMessageItemStyle.messageText}>
+                    {children}
+                </Text>
+            </TouchableOpacity>
+        </Swipeable>
+    </GestureHandlerRootView>
+);
