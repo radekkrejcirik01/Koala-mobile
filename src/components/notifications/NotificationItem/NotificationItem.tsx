@@ -4,6 +4,7 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
+import { getHourUnixTime } from '@functions/getHourUnixTime';
 
 export const NotificationItem = ({
     item,
@@ -33,14 +34,14 @@ export const NotificationItem = ({
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPressIn={press}
+            onPress={press}
             style={NotificationItemStyle.container}
         >
             <View style={NotificationItemStyle.profileView}>
                 <View style={NotificationItemStyle.centerView}>
                     <ProfilePhoto
                         name={item.name}
-                        size={48}
+                        size={50}
                         acronymStyle={NotificationItemStyle.profilePhoto}
                     />
                     <View style={NotificationItemStyle.contentView}>
@@ -48,13 +49,8 @@ export const NotificationItem = ({
                             {item.name}
                             {getTitle(item.type)}
                         </Text>
-                        <Text
-                            style={[
-                                NotificationItemStyle.messageText,
-                                isNew && NotificationItemStyle.bold
-                            ]}
-                        >
-                            {item.message}
+                        <Text style={NotificationItemStyle.messageText}>
+                            {item.message} ∙ {getHourUnixTime(item?.time)}
                         </Text>
                     </View>
                     {isNew && <View style={NotificationItemStyle.newItem} />}

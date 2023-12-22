@@ -7,6 +7,7 @@ export const NotificationsScreenStyle = StyleSheet.create({
         paddingHorizontal: 10
     },
     listContainer: {
+        paddingTop: 10,
         paddingBottom: 50
     },
     listEmptyText: {
@@ -17,5 +18,9 @@ export const NotificationsScreenStyle = StyleSheet.create({
     },
     activityIndicator: {
         marginTop: 100
+    },
+    modal: {
+        margin: 0,
+        justifyContent: 'flex-end'
     }
 });

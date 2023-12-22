@@ -3,7 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItemStyle = StyleSheet.create({
     container: {
-        padding: 15
+        paddingVertical: 14,
+        paddingLeft: 10,
+        paddingRight: 15
     },
     profileView: {
         flexDirection: 'row',
@@ -18,7 +20,7 @@ export const NotificationItemStyle = StyleSheet.create({
     },
     contentView: {
         flex: 1,
-        marginLeft: 10
+        marginLeft: 12
     },
     titleText: {
         fontSize: 16,
@@ -26,13 +28,9 @@ export const NotificationItemStyle = StyleSheet.create({
         fontWeight: '600'
     },
     messageText: {
-        marginTop: 2,
         fontSize: 15,
         color: COLORS.GRAY_200,
         fontWeight: '500'
-    },
-    bold: {
-        fontWeight: 'bold'
     },
     newItem: {
         height: 11,

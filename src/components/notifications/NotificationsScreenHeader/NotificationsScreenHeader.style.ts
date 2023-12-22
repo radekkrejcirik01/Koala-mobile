@@ -3,9 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsScreenHeaderStyle = StyleSheet.create({
     container: {
-        padding: 10,
-        paddingLeft: 5,
-        paddingBottom: 5,
+        paddingTop: 10,
+        paddingHorizontal: 5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
@@ -19,5 +18,8 @@ export const NotificationsScreenHeaderStyle = StyleSheet.create({
         fontSize: 30,
         color: COLORS.BLACK,
         fontWeight: 'bold'
+    },
+    emojiText: {
+        fontSize: 28
     }
 });

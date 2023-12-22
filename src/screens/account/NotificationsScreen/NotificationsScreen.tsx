@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { ActivityIndicator, Keyboard, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useNavigation } from '@hooks/useNavigation';
+import { useModal } from '@hooks/useModal';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseNotificationsGetInterface } from '@interfaces/response/Response.interface';
 import { NotificationInterface } from '@interfaces/general.interface';
@@ -15,17 +17,21 @@ import COLORS from '@constants/COLORS';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
+import { Modal } from '@components/general/Modal/Modal';
+import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
 
 export const NotificationsScreen = (): React.JSX.Element => {
     const dispatch = useDispatch();
 
     const { top } = useSafeAreaInsets();
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+    const { modalVisible, showModal, hideModal } = useModal();
 
     const [notifications, setNotifications] = useState<NotificationInterface[]>(
         []
     );
     const [loaded, setLoaded] = useState<boolean>(false);
+    const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
 
     const loadNotifications = useCallback(
         (lastId?: number) => {
@@ -60,9 +66,18 @@ export const NotificationsScreen = (): React.JSX.Element => {
         [dispatch]
     );
 
-    useEffect(() => {
-        loadNotifications();
-    }, [loadNotifications]);
+    useFocusEffect(loadNotifications);
+
+    const addFriends = useCallback(() => {
+        hideModal();
+        setModalContent(<FriendsModalScreen />);
+        showModal();
+    }, [hideModal, showModal]);
+
+    const hideModalAndKeyboard = useCallback(() => {
+        Keyboard.dismiss();
+        hideModal();
+    }, [hideModal]);
 
     const renderItem = useCallback(
         ({
@@ -95,7 +110,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
 
     return (
         <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
-            <NotificationsScreenHeader />
+            <NotificationsScreenHeader onPlusPress={addFriends} />
             <FlashList
                 data={notifications}
                 renderItem={renderItem}
@@ -116,6 +131,12 @@ export const NotificationsScreen = (): React.JSX.Element => {
                         />
                     )
                 }
+            />
+            <Modal
+                isVisible={modalVisible}
+                content={modalContent}
+                onClose={hideModalAndKeyboard}
+                style={NotificationsScreenStyle.modal}
             />
         </View>
     );
