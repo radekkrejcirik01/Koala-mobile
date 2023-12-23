@@ -16,7 +16,7 @@ export const NotificationItemStyle = StyleSheet.create({
         alignItems: 'center'
     },
     profilePhoto: {
-        borderRadius: 20
+        borderRadius: 22
     },
     contentView: {
         flex: 1,
