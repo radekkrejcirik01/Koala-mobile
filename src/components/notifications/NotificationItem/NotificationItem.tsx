@@ -41,7 +41,7 @@ export const NotificationItem = ({
                 <View style={NotificationItemStyle.centerView}>
                     <ProfilePhoto
                         name={item.name}
-                        size={50}
+                        size={48}
                         acronymStyle={NotificationItemStyle.profilePhoto}
                     />
                     <View style={NotificationItemStyle.contentView}>

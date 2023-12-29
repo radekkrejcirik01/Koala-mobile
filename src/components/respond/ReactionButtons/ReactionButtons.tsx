@@ -27,6 +27,10 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
         {
             id: 5,
             message: 'Can I do something?'
+        },
+        {
+            id: 6,
+            message: '😞'
         }
     ];
 

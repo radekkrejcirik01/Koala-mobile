@@ -262,7 +262,7 @@ export const RespondScreen = ({
                         >
                             <Icon
                                 name={IconEnum.SEND}
-                                size={20}
+                                size={22}
                                 style={RespondScreenStyle.sendButtonIcon}
                             />
                         </TouchableOpacity>

@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ReactionButtonsStyle = StyleSheet.create({
     container: {
-        paddingLeft: 5,
+        paddingLeft: 6,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
         flexWrap: 'wrap'
@@ -11,7 +11,7 @@ export const ReactionButtonsStyle = StyleSheet.create({
     buttonView: {
         minWidth: 70,
         margin: 2,
-        paddingVertical: 8,
+        paddingVertical: 9,
         paddingHorizontal: 10,
         borderRadius: 20,
         backgroundColor: COLORS.BUTTON_BLUE,

@@ -4,7 +4,8 @@ import COLORS from '@constants/COLORS';
 export const NotificationsScreenHeaderStyle = StyleSheet.create({
     container: {
         paddingTop: 10,
-        paddingHorizontal: 5,
+        paddingLeft: 5,
+        paddingRight: 8,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'

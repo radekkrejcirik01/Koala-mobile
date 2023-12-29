@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const OutboundMessageItemStyle = StyleSheet.create({
     container: {
-        marginTop: 14
+        marginTop: 12,
+        paddingRight: 25
     },
     timeText: {
         marginLeft: 15,
@@ -13,7 +14,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     replyMessageView: {
-        maxWidth: '70%',
+        maxWidth: '80%',
         marginBottom: 2,
         paddingVertical: 8,
         paddingHorizontal: 10,
@@ -27,13 +28,16 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         fontWeight: '600'
     },
     messageText: {
-        maxWidth: '70%',
+        maxWidth: '80%',
         minWidth: 100,
-        fontSize: 24,
+        fontSize: 23,
         color: COLORS.BLACK_50,
         backgroundColor: COLORS.WHITE,
         alignSelf: 'flex-end',
         textAlign: 'right',
         fontWeight: '600'
+    },
+    largeText: {
+        fontSize: 38
     }
 });
