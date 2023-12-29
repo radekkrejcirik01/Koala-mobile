@@ -39,6 +39,7 @@ export const HomeScreenStyle = StyleSheet.create({
         alignItems: 'center'
     },
     contentView: {
+        paddingHorizontal: 15,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
