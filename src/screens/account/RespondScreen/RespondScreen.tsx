@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import messaging, {
+    FirebaseMessagingTypes
+} from '@react-native-firebase/messaging';
 import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
@@ -89,29 +92,45 @@ export const RespondScreen = ({
         ).subscribe();
     }, [conversationId, id]);
 
-    const getConversation = useCallback(() => {
-        getRequest<ResponseConversationGetInterface>(
-            `conversation/${conversationId || id}`
-        ).subscribe((response: ResponseConversationGetInterface) => {
-            if (response?.status && !!response?.data?.length) {
-                const data = response?.data;
+    const getConversation = useCallback(
+        (scroll = true) => {
+            getRequest<ResponseConversationGetInterface>(
+                `conversation/${conversationId || id}`
+            ).subscribe((response: ResponseConversationGetInterface) => {
+                if (response?.status && !!response?.data?.length) {
+                    const data = response?.data;
 
-                setConversation(data);
-                setReactionButtons(checkReactionButtons(data));
+                    setConversation(data);
+                    setReactionButtons(checkReactionButtons(data));
 
-                updateSeenNotification();
+                    updateSeenNotification();
 
-                // Scroll to bottom when conversation has more than 10 messages
-                if (data?.length >= 10) {
-                    scrollToEnd();
+                    // Scroll to bottom when conversation has more than 10 messages
+                    if (data?.length >= 10 && scroll) {
+                        scrollToEnd();
+                    }
                 }
-            }
-        });
-    }, [checkReactionButtons, conversationId, id, updateSeenNotification]);
+            });
+        },
+        [checkReactionButtons, conversationId, id, updateSeenNotification]
+    );
 
     useEffect(() => {
         getConversation();
     }, [getConversation]);
+
+    useEffect(
+        () =>
+            // On new message
+            messaging().onMessage(
+                (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
+                    if (remoteMessage) {
+                        getConversation(false);
+                    }
+                }
+            ),
+        [getConversation]
+    );
 
     const send = useCallback(
         (text?: string) => {
@@ -235,6 +254,9 @@ export const RespondScreen = ({
                         </Text>
                     </View>
                 )}
+                {reactionButtons && (
+                    <ReactionButtons onPressReaction={onPressReaction} />
+                )}
                 <View style={RespondScreenStyle.inputContainer}>
                     <TouchableOpacity
                         activeOpacity={1}
@@ -269,9 +291,6 @@ export const RespondScreen = ({
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
-            {reactionButtons && (
-                <ReactionButtons onPressReaction={onPressReaction} />
-            )}
         </View>
     );
 };

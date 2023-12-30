@@ -3,8 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const OutboundMessageItemStyle = StyleSheet.create({
     container: {
-        marginTop: 12,
-        paddingRight: 25
+        marginTop: 12
     },
     timeText: {
         marginLeft: 15,

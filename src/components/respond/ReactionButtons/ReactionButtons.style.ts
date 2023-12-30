@@ -10,15 +10,15 @@ export const ReactionButtonsStyle = StyleSheet.create({
     },
     buttonView: {
         minWidth: 70,
-        margin: 2,
-        paddingVertical: 9,
-        paddingHorizontal: 10,
+        marginHorizontal: 2,
+        marginBottom: 4,
+        padding: 10,
         borderRadius: 20,
-        backgroundColor: COLORS.BUTTON_BLUE,
+        backgroundColor: '#00000010',
         alignItems: 'center'
     },
     buttonText: {
-        color: COLORS.WHITE,
-        fontWeight: '600'
+        color: COLORS.BLACK_50,
+        fontWeight: '500'
     }
 });
