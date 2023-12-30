@@ -41,7 +41,7 @@ export const RespondScreenStyle = StyleSheet.create({
     },
     inputView: {
         flex: 1,
-        minHeight: 45,
+        minHeight: 44,
         marginLeft: 6,
         marginRight: 4,
         paddingVertical: 4,

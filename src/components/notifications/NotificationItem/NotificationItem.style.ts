@@ -29,8 +29,7 @@ export const NotificationItemStyle = StyleSheet.create({
     },
     messageText: {
         fontSize: 15,
-        color: COLORS.GRAY_200,
-        fontWeight: '500'
+        color: COLORS.GRAY_200
     },
     newItem: {
         height: 11,
