@@ -11,6 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useModal } from '@hooks/useModal';
 import { useNotifications } from '@hooks/useNotifications';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
@@ -38,7 +39,7 @@ import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
 import { NotificationsService } from '@utils/general/NotificationsService';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -238,17 +239,12 @@ export const HomeScreen = (): React.JSX.Element => {
                 </TouchableOpacity>
                 {!!expressions &&
                     expressions.map((value) => (
-                        <TouchableOpacity
-                            key={value.userId + value.expression}
-                            activeOpacity={0.7}
-                            hitSlop={10}
+                        <ExpressionItem
+                            key={value.userId}
                             onPress={() => onStatusReply(value)}
-                            style={HomeScreenStyle.friendStatusButtonView}
-                        >
-                            <Text style={HomeScreenStyle.statusButtonText}>
-                                {value.name} {value.expression}
-                            </Text>
-                        </TouchableOpacity>
+                            name={value?.name}
+                            expression={value?.expression}
+                        />
                     ))}
             </ScrollView>
             <ScrollView
