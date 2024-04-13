@@ -10,6 +10,7 @@ import {
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseUserGetInterface } from '@interfaces/response/Response.interface';
 import { MessagingService } from '@utils/general/MessagingService';
+import { NotificationsService } from '@utils/general/NotificationsService';
 
 class PreloadServiceSingleton {
     init = async () => {
@@ -36,6 +37,7 @@ class PreloadServiceSingleton {
                         await BootSplash.hide({ fade: true });
                     }
 
+                    NotificationsService.getUnseenNotifications();
                     MessagingService.initMessaging().catch();
                 }
             }

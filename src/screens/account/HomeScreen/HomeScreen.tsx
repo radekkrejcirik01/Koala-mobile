@@ -82,22 +82,7 @@ export const HomeScreen = (): React.JSX.Element => {
     }, []);
 
     useEffect(() => {
-        const subscription = AppState.addEventListener(
-            'change',
-            (nextAppState) => {
-                if (nextAppState === 'active') {
-                    NotificationsService.getUnseenNotifications();
-                    loadExpressions();
-                    if (Platform.OS === 'ios') {
-                        PushNotificationIOS.setApplicationIconBadgeNumber(0);
-                    }
-                }
-            }
-        );
-
-        return () => {
-            subscription.remove();
-        };
+        loadExpressions();
     }, [loadExpressions]);
 
     const onStatusPress = useCallback(() => {
@@ -212,6 +197,25 @@ export const HomeScreen = (): React.JSX.Element => {
         );
         showModal();
     }, [hideModal, showModal]);
+
+    useEffect(() => {
+        const subscription = AppState.addEventListener(
+            'change',
+            (nextAppState) => {
+                if (nextAppState === 'active') {
+                    loadExpressions();
+                    NotificationsService.getUnseenNotifications();
+                    if (Platform.OS === 'ios') {
+                        PushNotificationIOS.setApplicationIconBadgeNumber(0);
+                    }
+                }
+            }
+        );
+
+        return () => {
+            subscription.remove();
+        };
+    }, [loadExpressions]);
 
     return (
         <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
