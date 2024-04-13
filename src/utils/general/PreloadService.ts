@@ -1,4 +1,4 @@
-import SplashScreen from 'react-native-splash-screen';
+import BootSplash from 'react-native-bootsplash';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import store from '@store/index/index';
@@ -9,6 +9,7 @@ import {
 } from '@store/UserReducer';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseUserGetInterface } from '@interfaces/response/Response.interface';
+import { MessagingService } from '@utils/general/MessagingService';
 
 class PreloadServiceSingleton {
     init = async () => {
@@ -16,22 +17,26 @@ class PreloadServiceSingleton {
         store.dispatch(setUserToken(token));
 
         if (token) {
-            this.loadUserObject();
+            this.loadUserObject(true);
         } else {
-            SplashScreen.hide();
+            await BootSplash.hide({ fade: true });
         }
     };
 
-    public loadUserObject = () => {
+    public loadUserObject = (launching = false) => {
         getRequest<ResponseUserGetInterface>('user').subscribe(
-            (response: ResponseUserGetInterface) => {
+            async (response: ResponseUserGetInterface) => {
                 if (response?.status) {
                     store.dispatch(setUserStateAction(response.data));
                     store.dispatch(
                         setUserEmotionsStateAction(response.emotions)
                     );
 
-                    SplashScreen.hide();
+                    if (launching) {
+                        await BootSplash.hide({ fade: true });
+                    }
+
+                    MessagingService.initMessaging().catch();
                 }
             }
         );

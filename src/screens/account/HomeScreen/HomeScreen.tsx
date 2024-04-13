@@ -32,7 +32,6 @@ import {
     ResponseExpressionsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { MessagingService } from '@utils/general/MessagingService';
 import { DirectEmotionModalScreen } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
@@ -56,12 +55,6 @@ export const HomeScreen = (): React.JSX.Element => {
     const [expressions, setExpressions] = useState<ExpressionDataInterface[]>(
         []
     );
-
-    useEffect(() => {
-        setTimeout(() => {
-            MessagingService.initMessaging().catch();
-        }, 2500);
-    }, []);
 
     useEffect(() => {
         setData([...DATA, ...(emotions || [])]);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -8,7 +8,9 @@ import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
 
 const App = () => {
-    PreloadService.init().catch();
+    useEffect(() => {
+        PreloadService.init().catch();
+    }, []);
 
     return (
         <ActionSheetProvider>

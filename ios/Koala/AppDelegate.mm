@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
-#import "RNSplashScreen.h"
+#import "RNBootSplash.h"
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -16,8 +16,6 @@
   self.initialProps = @{};
   
   [super application:application didFinishLaunchingWithOptions:launchOptions];
-    
-  [RNSplashScreen show];
 
   return YES;
 }
@@ -29,6 +27,15 @@
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+// ⬇️ Add this before file @end (when bridgeless is disabled)
+- (UIView *)createRootViewWithBridge:(RCTBridge *)bridge
+                          moduleName:(NSString *)moduleName
+                           initProps:(NSDictionary *)initProps {
+  UIView *rootView = [super createRootViewWithBridge:bridge moduleName:moduleName initProps:initProps];
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
+  return rootView;
 }
 
 @end
