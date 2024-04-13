@@ -39,6 +39,7 @@ import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModa
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
+import { MessagingService } from '@utils/general/MessagingService';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -204,7 +205,9 @@ export const HomeScreen = (): React.JSX.Element => {
             (nextAppState) => {
                 if (nextAppState === 'active') {
                     loadExpressions();
+
                     NotificationsService.getUnseenNotifications();
+                    MessagingService.initMessaging().catch();
                     if (Platform.OS === 'ios') {
                         PushNotificationIOS.setApplicationIconBadgeNumber(0);
                     }
