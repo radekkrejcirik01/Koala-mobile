@@ -38,8 +38,8 @@ import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
 import { NotificationsService } from '@utils/general/NotificationsService';
-import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
 import { MessagingService } from '@utils/general/MessagingService';
+import { ExpressionsList } from '@components/home/ExpressionsList/ExpressionsList';
 
 export const HomeScreen = (): React.JSX.Element => {
     const { emotions } = useSelector((state: ReducerProps) => state.user);
@@ -223,30 +223,12 @@ export const HomeScreen = (): React.JSX.Element => {
     return (
         <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
             <HomeScreenHeader />
-            <ScrollView
-                horizontal
-                style={HomeScreenStyle.expressionsScrollView}
-            >
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    hitSlop={10}
-                    onPress={onStatusPress}
-                    style={HomeScreenStyle.statusButtonView}
-                >
-                    <Text style={HomeScreenStyle.statusButtonText}>
-                        {status || 'Status'}
-                    </Text>
-                </TouchableOpacity>
-                {!!expressions &&
-                    expressions.map((value) => (
-                        <ExpressionItem
-                            key={value.userId}
-                            onPress={() => onStatusReply(value)}
-                            name={value?.name}
-                            expression={value?.expression}
-                        />
-                    ))}
-            </ScrollView>
+            <ExpressionsList
+                data={expressions}
+                status={status}
+                onStatusPress={onStatusPress}
+                onStatusReply={onStatusReply}
+            />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={HomeScreenStyle.scrollView}

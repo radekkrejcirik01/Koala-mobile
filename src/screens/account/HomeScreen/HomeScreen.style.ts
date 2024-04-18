@@ -5,24 +5,6 @@ export const HomeScreenStyle = StyleSheet.create({
     container: {
         flex: 1
     },
-    expressionsScrollView: {
-        marginTop: 15,
-        paddingLeft: 20,
-        flexDirection: 'row'
-    },
-    statusButtonView: {
-        width: 75,
-        paddingVertical: 8,
-        borderRadius: 20,
-        backgroundColor: '#00000010',
-        alignItems: 'center',
-        alignSelf: 'flex-start'
-    },
-    statusButtonText: {
-        fontSize: 16,
-        color: COLORS.BLACK,
-        fontWeight: '500'
-    },
     friendStatusButtonView: {
         marginLeft: 5,
         paddingVertical: 8,
