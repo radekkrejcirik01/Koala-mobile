@@ -4,18 +4,21 @@ import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { DevicePostInterface } from '@interfaces/post/Post.interface';
+import store from '@store/index/index';
 
 class MessagingServiceClass {
-    private userId: number;
-
     private fcmToken: string;
 
     private registerDevice = () => {
-        postRequest<ResponseInterface, DevicePostInterface>('device', {
-            deviceToken: this.fcmToken,
-            userId: this.userId,
-            platform: Platform.OS
-        }).subscribe();
+        const userId = store.getState().user.user.id;
+
+        if (userId) {
+            postRequest<ResponseInterface, DevicePostInterface>('device', {
+                deviceToken: this.fcmToken,
+                userId,
+                platform: Platform.OS
+            }).subscribe();
+        }
     };
 
     private getDeviceToken = async () => {
@@ -41,13 +44,9 @@ class MessagingServiceClass {
         this.onTokenRefresh();
     };
 
-    public initMessaging = async (userId?: number) => {
+    public initMessaging = async () => {
         if (Platform.OS === 'ios') {
             const status = await messaging().requestPermission();
-
-            if (userId) {
-                this.userId = userId;
-            }
 
             if (status === 1) {
                 this.getToken();
