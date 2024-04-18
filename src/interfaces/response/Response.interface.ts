@@ -23,7 +23,6 @@ export interface ResponseUserGetInterface {
     status: string;
     message: string;
     data?: UserInterface;
-    emotions?: EmotionInterface[];
 }
 
 export interface ResponseFriendsGetInterface {

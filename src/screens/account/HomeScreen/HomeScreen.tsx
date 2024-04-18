@@ -9,7 +9,6 @@ import {
     View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useModal } from '@hooks/useModal';
@@ -20,7 +19,6 @@ import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalSc
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
 import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
-import { ReducerProps } from '@store/index/index.props';
 import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
 import {
     EmotionInterface,
@@ -42,8 +40,6 @@ import { MessagingService } from '@utils/general/MessagingService';
 import { ExpressionsList } from '@components/home/ExpressionsList/ExpressionsList';
 
 export const HomeScreen = (): React.JSX.Element => {
-    const { emotions } = useSelector((state: ReducerProps) => state.user);
-
     useNotifications();
     const { top } = useSafeAreaInsets();
     const { showActionSheetWithOptions } = useActionSheet();
@@ -57,20 +53,6 @@ export const HomeScreen = (): React.JSX.Element => {
         []
     );
 
-    useEffect(() => {
-        setData([...DATA, ...(emotions || [])]);
-    }, [emotions]);
-
-    const loadEmotions = useCallback(() => {
-        getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
-            (response: ResponseEmotionsGetInterface) => {
-                if (response?.status) {
-                    setData([...DATA, ...(response?.data || [])]);
-                }
-            }
-        );
-    }, []);
-
     const loadExpressions = useCallback(() => {
         getRequest<ResponseExpressionsGetInterface>('expressions').subscribe(
             (response: ResponseExpressionsGetInterface) => {
@@ -82,9 +64,20 @@ export const HomeScreen = (): React.JSX.Element => {
         );
     }, []);
 
+    const loadEmotions = useCallback(() => {
+        getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
+            (response: ResponseEmotionsGetInterface) => {
+                if (response?.status) {
+                    setData([...DATA, ...(response?.data || [])]);
+                }
+            }
+        );
+    }, []);
+
     useEffect(() => {
         loadExpressions();
-    }, [loadExpressions]);
+        loadEmotions();
+    }, [loadEmotions, loadExpressions]);
 
     const onStatusPress = useCallback(() => {
         setModalContent(
