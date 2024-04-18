@@ -4,13 +4,16 @@ import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { DevicePostInterface } from '@interfaces/post/Post.interface';
-import store from '@store/index/index';
 
 class MessagingServiceClass {
-    private registerDevice = (fcmToken: string) => {
+    private userId: number;
+
+    private fcmToken: string;
+
+    private registerDevice = () => {
         postRequest<ResponseInterface, DevicePostInterface>('device', {
-            deviceToken: fcmToken,
-            userId: store.getState().user.user.id,
+            deviceToken: this.fcmToken,
+            userId: this.userId,
             platform: Platform.OS
         }).subscribe();
     };
@@ -18,14 +21,18 @@ class MessagingServiceClass {
     private getDeviceToken = async () => {
         await messaging()
             .getToken()
-            .then((fcmToken: string) => {
-                this.registerDevice(fcmToken);
+            .then((token: string) => {
+                this.fcmToken = token;
+
+                this.registerDevice();
             });
     };
 
     private onTokenRefresh = () => {
-        messaging().onTokenRefresh((fcmToken: string) => {
-            this.registerDevice(fcmToken);
+        messaging().onTokenRefresh((token: string) => {
+            this.fcmToken = token;
+
+            this.registerDevice();
         });
     };
 
@@ -34,9 +41,13 @@ class MessagingServiceClass {
         this.onTokenRefresh();
     };
 
-    public initMessaging = async () => {
+    public initMessaging = async (userId?: number) => {
         if (Platform.OS === 'ios') {
             const status = await messaging().requestPermission();
+
+            if (userId) {
+                this.userId = userId;
+            }
 
             if (status === 1) {
                 this.getToken();

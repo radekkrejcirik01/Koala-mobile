@@ -38,7 +38,7 @@ class PreloadServiceSingleton {
                     }
 
                     NotificationsService.getUnseenNotifications();
-                    MessagingService.initMessaging().catch();
+                    MessagingService.initMessaging(response.data?.id).catch();
                 }
             }
         );
