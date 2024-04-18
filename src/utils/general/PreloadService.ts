@@ -24,14 +24,14 @@ class PreloadServiceSingleton {
         getRequest<ResponseUserGetInterface>('user').subscribe(
             async (response: ResponseUserGetInterface) => {
                 if (response?.status) {
-                    store.dispatch(setUserStateAction(response.data));
+                    const user = response.data;
 
+                    store.dispatch(setUserStateAction(user));
+                    NotificationsService.getUnseenNotifications();
                     if (launching) {
                         await BootSplash.hide({ fade: true });
                     }
-
-                    NotificationsService.getUnseenNotifications();
-                    MessagingService.initMessaging(response.data?.id).catch();
+                    MessagingService.initMessaging(user?.id).catch();
                 }
             }
         );
