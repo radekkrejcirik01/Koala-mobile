@@ -11,7 +11,7 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE
     },
     titleText: {
-        fontSize: 24,
+        fontSize: 22,
         color: COLORS.BLACK,
         fontWeight: '500'
     },

@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ExpressionsListStyle = StyleSheet.create({
     scrollView: {
+        height: 38,
         marginTop: 15,
         paddingLeft: 20,
         flexDirection: 'row'
@@ -12,11 +13,9 @@ export const ExpressionsListStyle = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#00000010',
         alignItems: 'center',
-        alignSelf: 'flex-start'
+        justifyContent: 'center'
     },
     statusButtonText: {
-        paddingVertical: 8,
-        paddingHorizontal: 10,
         fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'
