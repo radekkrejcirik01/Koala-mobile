@@ -2,11 +2,11 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ReactionButtonsStyle = StyleSheet.create({
+    scrollView: {
+        backgroundColor: COLORS.WHITE
+    },
     container: {
-        paddingLeft: 6,
-        backgroundColor: COLORS.WHITE,
-        flexDirection: 'row',
-        flexWrap: 'wrap'
+        paddingHorizontal: 6
     },
     buttonView: {
         minWidth: 70,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import {
     ReactionButtonInterface,
     ReactionButtonsProps
@@ -35,7 +35,12 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
     ];
 
     return (
-        <View style={ReactionButtonsStyle.container}>
+        <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={ReactionButtonsStyle.scrollView}
+            contentContainerStyle={ReactionButtonsStyle.container}
+        >
             {list.map((value) => (
                 <TouchableOpacity
                     key={value.id}
@@ -48,6 +53,6 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
                     </Text>
                 </TouchableOpacity>
             ))}
-        </View>
+        </ScrollView>
     );
 };

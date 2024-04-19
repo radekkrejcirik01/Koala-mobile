@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ExpressionsStyle = StyleSheet.create({
     scrollView: {
+        height: 38,
         maxHeight: 38,
         marginTop: 15,
         paddingLeft: 20

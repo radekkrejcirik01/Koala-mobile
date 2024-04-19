@@ -119,6 +119,12 @@ export const RespondScreen = ({
         getConversation();
     }, [getConversation]);
 
+    useEffect(() => {
+        if (reactionButtons) {
+            inputRef.current.focus();
+        }
+    }, [reactionButtons]);
+
     useEffect(
         () =>
             // On new message
