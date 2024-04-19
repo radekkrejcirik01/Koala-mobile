@@ -94,38 +94,38 @@ export const MESSAGES: EmotionInterface[] = [
     },
     {
         id: 14,
+        emotion: 'Today is ass',
+        message: 'Today is ass, sucks, fucking terrible',
+        tip1: 'Call your friend and tell them everything',
+        tip2: 'Have your guilty pleasure, whatever it is'
+    },
+    {
+        id: 15,
         emotion: 'Sad',
         message: 'I am just sad',
         tip1: 'Listening to your favorite music',
         tip2: 'Watching tiktoks'
     },
     {
-        id: 15,
+        id: 16,
         emotion: 'Overwhelmed',
         message: 'My head is overwhelmed',
         tip1: 'Focus only on one important thing',
         tip2: 'Ask for a help, it is not shameful'
     },
     {
-        id: 16,
+        id: 17,
         emotion: `Can't get up`,
         message: `I can't get up from my bed`,
         tip1: `Staying as long you need, it is okay`,
         tip2: 'Think about coffee you can have if you get up ☕️'
     },
     {
-        id: 17,
+        id: 18,
         emotion: 'Existential crisis',
         message: 'I have an existential crisis',
         tip1: `Focus on one skill you enjoy the best. If you don't have one yet put finding it as purpose. It will turn the life into happy place and money will come with it`,
         tip2: 'Travel, seriously, it opens world you have no idea that exists'
-    },
-    {
-        id: 18,
-        emotion: 'Today is ass',
-        message: 'Today is ass, sucks, fucking terrible',
-        tip1: 'Call your friend and tell them everything',
-        tip2: 'Have your guilty pleasure, whatever it is'
     },
     {
         id: 19,

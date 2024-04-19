@@ -3,10 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const ExpressionsStyle = StyleSheet.create({
     scrollView: {
-        height: 38,
+        maxHeight: 38,
         marginTop: 15,
-        paddingLeft: 20,
-        flexDirection: 'row'
+        paddingLeft: 20
     },
     statusButtonView: {
         width: 75,
