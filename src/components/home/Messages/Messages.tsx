@@ -16,13 +16,13 @@ import {
     ResponseEmotionsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
 import { DirectEmotionModalScreen } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
+import { MESSAGES } from '@components/home/Messages/Messages.const';
 
 export const Messages = (): React.JSX.Element => {
     const { showActionSheetWithOptions } = useActionSheet();
@@ -35,7 +35,7 @@ export const Messages = (): React.JSX.Element => {
         getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
             (response: ResponseEmotionsGetInterface) => {
                 if (response?.status) {
-                    setMessages([...DATA, ...(response?.data || [])]);
+                    setMessages([...MESSAGES, ...(response?.data || [])]);
                 }
             }
         );

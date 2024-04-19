@@ -1,6 +1,6 @@
 import { EmotionInterface } from '@interfaces/general.interface';
 
-export const DATA: EmotionInterface[] = [
+export const MESSAGES: EmotionInterface[] = [
     {
         id: 1,
         emotion: 'Anxiety attack',
@@ -53,7 +53,7 @@ export const DATA: EmotionInterface[] = [
     {
         id: 8,
         emotion: 'Social anxiety',
-        message: `There is too much people around me and I don't like it`,
+        message: `There is too many people around me and I don't like it`,
         tip1: 'Put on headphones and pretend you are somewhere else',
         tip2: 'Remember that everybody are thinking only about themselves'
     },
@@ -73,69 +73,62 @@ export const DATA: EmotionInterface[] = [
     },
     {
         id: 11,
-        emotion: 'Want to cry',
-        message: 'I want to cry',
-        tip1: `Cry, it's so okay`,
-        tip2: 'Go through your photo gallery'
+        emotion: 'Overthinking',
+        message: 'I am overthinking',
+        tip1: 'Remember how many times you were wrong when you were overthinking',
+        tip2: `Remember how many time you were right and it didn't matter at the end`
     },
     {
         id: 12,
-        emotion: 'Crying',
-        message: 'I am crying',
-        tip1: `Keep crying, it's so okay`,
-        tip2: 'Go through your photo gallery'
-    },
-    {
-        id: 13,
         emotion: 'Want go home',
         message: 'I WANT TO GO HOME',
         tip1: 'Put your headphones on and pretend you are somewhere else',
         tip2: 'Think of how you will reward yourself when you finally come home'
     },
     {
-        id: 14,
+        id: 13,
         emotion: `Can't eat`,
         message: `I can't eat`,
         tip1: 'Having a piece of a fruit is soo good and healing',
         tip2: 'Talk about it with person you trust the best'
     },
     {
-        id: 15,
+        id: 14,
         emotion: 'Sad',
         message: 'I am just sad',
         tip1: 'Listening to your favorite music',
         tip2: 'Watching tiktoks'
     },
     {
-        id: 16,
+        id: 15,
         emotion: 'Overwhelmed',
         message: 'My head is overwhelmed',
         tip1: 'Focus only on one important thing',
         tip2: 'Ask for a help, it is not shameful'
     },
     {
-        id: 17,
+        id: 16,
         emotion: `Can't get up`,
         message: `I can't get up from my bed`,
         tip1: `Staying as long you need, it is okay`,
         tip2: 'Think about coffee you can have if you get up ☕️'
     },
     {
-        id: 18,
+        id: 17,
         emotion: 'Existential crisis',
         message: 'I have an existential crisis',
         tip1: `Focus on one skill you enjoy the best. If you don't have one yet put finding it as purpose. It will turn the life into happy place and money will come with it`,
         tip2: 'Travel, seriously, it opens world you have no idea that exists'
     },
     {
-        id: 19,
+        id: 18,
         emotion: 'Today is ass',
         message: 'Today is ass, sucks, fucking terrible',
         tip1: 'Call your friend and tell them everything',
         tip2: 'Have your guilty pleasure, whatever it is'
     },
     {
-        id: 20,
+        id: 19,
         emotion: `Can't sleep`,
         message: `I can't fucking sleep`,
         tip1: `Think about anything but how you can't sleep`,
