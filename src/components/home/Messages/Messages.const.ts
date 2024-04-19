@@ -87,17 +87,17 @@ export const MESSAGES: EmotionInterface[] = [
     },
     {
         id: 13,
-        emotion: `Can't eat`,
-        message: `I can't eat`,
-        tip1: 'Having a piece of a fruit is soo good and healing',
-        tip2: 'Talk about it with person you trust the best'
-    },
-    {
-        id: 14,
         emotion: 'Today is ass',
         message: 'Today is ass, sucks, fucking terrible',
         tip1: 'Call your friend and tell them everything',
         tip2: 'Have your guilty pleasure, whatever it is'
+    },
+    {
+        id: 14,
+        emotion: `Can't eat`,
+        message: `I can't eat`,
+        tip1: 'Having a piece of a fruit is soo good and healing',
+        tip2: 'Talk about it with person you trust the best'
     },
     {
         id: 15,
@@ -115,17 +115,17 @@ export const MESSAGES: EmotionInterface[] = [
     },
     {
         id: 17,
-        emotion: `Can't get up`,
-        message: `I can't get up from my bed`,
-        tip1: `Staying as long you need, it is okay`,
-        tip2: 'Think about coffee you can have if you get up ☕️'
-    },
-    {
-        id: 18,
         emotion: 'Existential crisis',
         message: 'I have an existential crisis',
         tip1: `Focus on one skill you enjoy the best. If you don't have one yet put finding it as purpose. It will turn the life into happy place and money will come with it`,
         tip2: 'Travel, seriously, it opens world you have no idea that exists'
+    },
+    {
+        id: 18,
+        emotion: `Can't get up`,
+        message: `I can't get up from my bed`,
+        tip1: `Staying as long you need, it is okay`,
+        tip2: 'Think about coffee you can have if you get up ☕️'
     },
     {
         id: 19,
