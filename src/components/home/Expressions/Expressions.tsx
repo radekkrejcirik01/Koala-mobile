@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Keyboard, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { useModal } from '@hooks/useModal';
+import { useAppState } from '@hooks/useAppState';
 import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
 import { ExpressionsStyle } from '@components/home/Expressions/Expressions.style';
 import { ExpressionDataInterface } from '@interfaces/general.interface';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseExpressionsGetInterface } from '@interfaces/response/Response.interface';
-import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { Modal } from '@components/general/Modal/Modal';
 import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
@@ -30,6 +30,8 @@ export const Expressions = (): React.JSX.Element => {
             }
         );
     }, []);
+
+    useAppState(loadExpressions);
 
     useEffect(() => {
         loadExpressions();
@@ -90,7 +92,7 @@ export const Expressions = (): React.JSX.Element => {
                 isVisible={modalVisible}
                 content={modalContent}
                 onClose={hideModalAndKeyboard}
-                style={HomeScreenStyle.modal}
+                style={ExpressionsStyle.modal}
             />
         </>
     );

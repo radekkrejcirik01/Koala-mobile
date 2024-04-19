@@ -19,5 +19,9 @@ export const ExpressionsStyle = StyleSheet.create({
         fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'
+    },
+    modal: {
+        margin: 0,
+        justifyContent: 'flex-end'
     }
 });
