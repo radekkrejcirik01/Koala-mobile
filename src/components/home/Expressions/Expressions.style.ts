@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ExpressionsListStyle = StyleSheet.create({
+export const ExpressionsStyle = StyleSheet.create({
     scrollView: {
         height: 38,
         marginTop: 15,

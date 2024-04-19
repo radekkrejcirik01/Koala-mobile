@@ -20,24 +20,18 @@ import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsM
 import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { DATA } from '@screens/account/HomeScreen/HomeScreen.const';
-import {
-    EmotionInterface,
-    ExpressionDataInterface
-} from '@interfaces/general.interface';
+import { EmotionInterface } from '@interfaces/general.interface';
 import { deleteRequest, getRequest } from '@utils/Axios/Axios.service';
 import {
     ResponseEmotionsGetInterface,
-    ResponseExpressionsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
 import { DirectEmotionModalScreen } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
-import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
-import { ExpressionsList } from '@components/home/ExpressionsList/ExpressionsList';
+import { Expressions } from '@components/home/Expressions/Expressions';
 
 export const HomeScreen = (): React.JSX.Element => {
     useNotifications();
@@ -48,21 +42,6 @@ export const HomeScreen = (): React.JSX.Element => {
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
 
     const [data, setData] = useState<EmotionInterface[]>([]);
-    const [status, setStatus] = useState<string>();
-    const [expressions, setExpressions] = useState<ExpressionDataInterface[]>(
-        []
-    );
-
-    const loadExpressions = useCallback(() => {
-        getRequest<ResponseExpressionsGetInterface>('expressions').subscribe(
-            (response: ResponseExpressionsGetInterface) => {
-                if (response?.status) {
-                    setStatus(response?.expression);
-                    setExpressions(response?.data);
-                }
-            }
-        );
-    }, []);
 
     const loadEmotions = useCallback(() => {
         getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
@@ -75,32 +54,8 @@ export const HomeScreen = (): React.JSX.Element => {
     }, []);
 
     useEffect(() => {
-        loadExpressions();
         loadEmotions();
-    }, [loadEmotions, loadExpressions]);
-
-    const onStatusPress = useCallback(() => {
-        setModalContent(
-            <StatusModalScreen
-                onPostPress={() => {
-                    hideModal();
-
-                    setTimeout(() => {
-                        loadExpressions();
-                    }, 500);
-                }}
-            />
-        );
-        showModal();
-    }, [hideModal, loadExpressions, showModal]);
-
-    const onStatusReply = useCallback(
-        (item: ExpressionDataInterface) => {
-            setModalContent(<StatusReplyModalScreen item={item} />);
-            showModal();
-        },
-        [showModal]
-    );
+    }, [loadEmotions]);
 
     const onItemPress = useCallback(
         (item: EmotionInterface) => {
@@ -197,8 +152,6 @@ export const HomeScreen = (): React.JSX.Element => {
             'change',
             (nextAppState) => {
                 if (nextAppState === 'active') {
-                    loadExpressions();
-
                     NotificationsService.getUnseenNotifications();
                     MessagingService.initMessaging().catch();
                     if (Platform.OS === 'ios') {
@@ -211,17 +164,12 @@ export const HomeScreen = (): React.JSX.Element => {
         return () => {
             subscription.remove();
         };
-    }, [loadExpressions]);
+    }, []);
 
     return (
         <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
             <HomeScreenHeader />
-            <ExpressionsList
-                data={expressions}
-                status={status}
-                onStatusPress={onStatusPress}
-                onStatusReply={onStatusReply}
-            />
+            <Expressions />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={HomeScreenStyle.scrollView}
