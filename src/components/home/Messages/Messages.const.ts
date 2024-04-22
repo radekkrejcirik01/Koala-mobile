@@ -76,7 +76,7 @@ export const MESSAGES: EmotionInterface[] = [
         emotion: 'Overthinking',
         message: 'I am overthinking',
         tip1: 'Remember how many times you were wrong when you were overthinking',
-        tip2: `Remember how many time you were right and it didn't matter at the end`
+        tip2: `Remember how many times you were right and it didn't matter at the end`
     },
     {
         id: 12,
