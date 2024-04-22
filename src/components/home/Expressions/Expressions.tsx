@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Keyboard, ScrollView, Text, TouchableOpacity } from 'react-native';
+import {
+    Keyboard,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { useModal } from '@hooks/useModal';
 import { useAppState } from '@hooks/useAppState';
 import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
@@ -66,7 +72,7 @@ export const Expressions = (): React.JSX.Element => {
     }, [hideModal]);
 
     return (
-        <>
+        <View style={ExpressionsStyle.container}>
             <ScrollView horizontal style={ExpressionsStyle.scrollView}>
                 <TouchableOpacity
                     activeOpacity={0.7}
@@ -94,6 +100,6 @@ export const Expressions = (): React.JSX.Element => {
                 onClose={hideModalAndKeyboard}
                 style={ExpressionsStyle.modal}
             />
-        </>
+        </View>
     );
 };

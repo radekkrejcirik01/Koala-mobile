@@ -2,14 +2,15 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ExpressionsStyle = StyleSheet.create({
+    container: {
+        paddingTop: 15
+    },
     scrollView: {
-        height: 38,
-        maxHeight: 38,
-        marginTop: 15,
         paddingLeft: 20
     },
     statusButtonView: {
         width: 75,
+        paddingVertical: 10,
         borderRadius: 20,
         backgroundColor: '#00000010',
         alignItems: 'center',
