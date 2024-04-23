@@ -15,10 +15,7 @@ export const FirstScreen = (): JSX.Element => {
                 source={require('@assets/images/koala.png')}
                 style={FirstScreenStyle.image}
             />
-            <Text style={FirstScreenStyle.titleText}>Koala</Text>
-            <Text style={FirstScreenStyle.descriptionText}>
-                Let your friends know
-            </Text>
+            <Text style={FirstScreenStyle.titleText}>Koala Messenger</Text>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
@@ -29,6 +26,7 @@ export const FirstScreen = (): JSX.Element => {
                 >{`Let's start`}</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                hitSlop={15}
                 activeOpacity={0.9}
                 onPress={() => navigateTo(LoginStackNavigatorEnum.LoginScreen)}
                 style={FirstScreenStyle.loginButtonView}

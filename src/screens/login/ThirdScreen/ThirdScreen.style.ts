@@ -15,11 +15,11 @@ export const ThirdScreenStyle = StyleSheet.create({
     input: {
         height: 50,
         marginTop: 20,
+        paddingLeft: 15,
         borderRadius: 10,
         fontSize: 20,
         color: COLORS.BLACK,
         backgroundColor: 'whitesmoke',
-        textAlign: 'center',
         fontWeight: 'bold'
     },
     buttonView: {

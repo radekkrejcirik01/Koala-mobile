@@ -79,8 +79,8 @@ android {
         applicationId "app.com.koala"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 106
-        versionName "2.8.5"
+        versionCode 109
+        versionName "2.8.6"
     }
     signingConfigs {
         debug {

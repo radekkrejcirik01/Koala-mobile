@@ -18,12 +18,6 @@ export const FirstScreenStyle = StyleSheet.create({
         color: COLORS.BLACK,
         fontWeight: 'bold'
     },
-    descriptionText: {
-        marginTop: 10,
-        fontSize: 20,
-        color: COLORS.BLACK,
-        fontWeight: 'bold'
-    },
     startButtonView: {
         width: '100%',
         height: 45,
