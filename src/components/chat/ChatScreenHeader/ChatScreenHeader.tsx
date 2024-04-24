@@ -3,31 +3,29 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { RespondScreenHeaderStyle } from '@components/respond/RespondScreenHeader/RespondScreenHeader.style';
-import { RespondScreenHeaderProps } from '@components/respond/RespondScreenHeader/RespondScreenHeader.props';
+import { ChatScreenHeaderStyle } from '@components/chat/ChatScreenHeader/ChatScreenHeader.style';
+import { ChatScreenHeaderProps } from '@components/chat/ChatScreenHeader/ChatScreenHeader.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 
-export const RespondScreenHeader = ({
+export const ChatScreenHeader = ({
     name,
     userId
-}: RespondScreenHeaderProps): JSX.Element => {
+}: ChatScreenHeaderProps): JSX.Element => {
     const { navigateBack, navigateTo } = useNavigation(
         RootStackNavigatorEnum.AccountStack
     );
 
     return (
-        <View style={RespondScreenHeaderStyle.container}>
-            <View style={RespondScreenHeaderStyle.centerRow}>
+        <View style={ChatScreenHeaderStyle.container}>
+            <View style={ChatScreenHeaderStyle.centerRow}>
                 <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
                     <Icon name={IconEnum.BACK_BLUE} size={24} />
                 </TouchableOpacity>
-                <View style={RespondScreenHeaderStyle.contentContainer}>
+                <View style={ChatScreenHeaderStyle.contentContainer}>
                     <ProfilePhoto name={name} size={42} />
-                    <Text style={RespondScreenHeaderStyle.nameText}>
-                        {name}
-                    </Text>
+                    <Text style={ChatScreenHeaderStyle.nameText}>{name}</Text>
                 </View>
             </View>
             <TouchableOpacity
@@ -38,7 +36,7 @@ export const RespondScreenHeader = ({
                         receiverId: userId
                     })
                 }
-                style={RespondScreenHeaderStyle.sharedButtonView}
+                style={ChatScreenHeaderStyle.sharedButtonView}
             >
                 <Icon name={IconEnum.REPLY} size={28} />
             </TouchableOpacity>

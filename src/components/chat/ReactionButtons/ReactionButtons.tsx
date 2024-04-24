@@ -3,8 +3,8 @@ import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import {
     ReactionButtonInterface,
     ReactionButtonsProps
-} from '@components/respond/ReactionButtons/ReactionButtons.props';
-import { ReactionButtonsStyle } from '@components/respond/ReactionButtons/ReactionButtons.style';
+} from '@components/chat/ReactionButtons/ReactionButtons.props';
+import { ReactionButtonsStyle } from '@components/chat/ReactionButtons/ReactionButtons.style';
 
 export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
     const list: ReactionButtonInterface[] = [

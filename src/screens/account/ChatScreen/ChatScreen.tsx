@@ -1,13 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
@@ -15,9 +7,9 @@ import messaging, {
 } from '@react-native-firebase/messaging';
 import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { RespondScreenHeader } from '@components/respond/RespondScreenHeader/RespondScreenHeader';
-import { RespondScreenStyle } from '@screens/account/RespondScreen/RespondScreen.style';
-import { RespondScreenProps } from '@screens/account/RespondScreen/RespondScreen.props';
+import { ChatScreenHeader } from '@components/chat/ChatScreenHeader/ChatScreenHeader';
+import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
+import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
 import {
     getRequest,
     postRequest,
@@ -29,17 +21,11 @@ import {
 } from '@interfaces/response/Response.interface';
 import { MessageNotificationPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
-import COLORS from '@constants/COLORS';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ConversationInterface } from '@interfaces/general.interface';
-import { ReactionButtons } from '@components/respond/ReactionButtons/ReactionButtons';
-import { InboundMessageItem } from '@components/respond/InboundMessageItem/InboundMessageItem';
-import { OutboundMessageItem } from '@components/respond/OutboundMessageItem/OutboundMessageItem';
+import { ChatList } from '@components/chat/ChatList/ChatList';
+import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 
-export const RespondScreen = ({
-    route
-}: RespondScreenProps): React.JSX.Element => {
+export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const { id, senderId, name, username, conversationId, isStatusReply } =
         route.params;
 
@@ -177,11 +163,6 @@ export const RespondScreen = ({
         ]
     );
 
-    const isInbound = useCallback(
-        (sender: string): boolean => sender === username,
-        [username]
-    );
-
     const onMessageLongPress = useCallback((item: ConversationInterface) => {
         inputRef.current.focus();
         setReplyMessage(item.message);
@@ -207,96 +188,26 @@ export const RespondScreen = ({
     return (
         <View
             style={[
-                RespondScreenStyle.container,
+                ChatScreenStyle.container,
                 { paddingTop: top || 10, paddingBottom: bottom || 5 }
             ]}
         >
-            <RespondScreenHeader name={name} userId={senderId} />
-            <ScrollView
-                ref={scrollViewRef}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={RespondScreenStyle.scrollViewContainer}
-            >
-                {conversation?.map((value) =>
-                    isInbound(value.sender) ? (
-                        <InboundMessageItem
-                            key={value.id}
-                            onLongPress={() => onMessageLongPress(value)}
-                            time={value.time}
-                            replyMessage={value?.replyMessage}
-                        >
-                            {value.message}
-                        </InboundMessageItem>
-                    ) : (
-                        <OutboundMessageItem
-                            onLongPress={() => onMessageLongPress(value)}
-                            key={value.id}
-                            time={value.time}
-                            replyMessage={value?.replyMessage}
-                        >
-                            {value.message}
-                        </OutboundMessageItem>
-                    )
-                )}
-            </ScrollView>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-            >
-                {!!replyMessage && (
-                    <View style={RespondScreenStyle.replyMessageContainer}>
-                        <View style={RespondScreenStyle.replyingToContainer}>
-                            <Text style={RespondScreenStyle.replyingToText}>
-                                Replying to
-                            </Text>
-                            <TouchableOpacity
-                                onPress={() => setReplyMessage('')}
-                                style={RespondScreenStyle.dismissButtonView}
-                            >
-                                <Icon name={IconEnum.CLEAN} size={20} />
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={RespondScreenStyle.replyMessageText}>
-                            {replyMessage}
-                        </Text>
-                    </View>
-                )}
-                {reactionButtons && (
-                    <ReactionButtons onPressReaction={onPressReaction} />
-                )}
-                <View style={RespondScreenStyle.inputContainer}>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        hitSlop={10}
-                        onPress={() => inputRef.current.focus()}
-                        style={RespondScreenStyle.inputView}
-                    >
-                        <TextInput
-                            ref={inputRef}
-                            autoCorrect={false}
-                            multiline
-                            onFocus={scrollToEnd}
-                            value={message}
-                            onChangeText={setMessage}
-                            placeholder="Message..."
-                            selectionColor={COLORS.BUTTON_BLUE}
-                            style={RespondScreenStyle.input}
-                        />
-                        <TouchableOpacity
-                            activeOpacity={0.9}
-                            disabled={!message}
-                            hitSlop={10}
-                            onPress={onPressSend}
-                            style={RespondScreenStyle.sendButtonView}
-                        >
-                            <Icon
-                                name={IconEnum.SEND}
-                                size={22}
-                                style={RespondScreenStyle.sendButtonIcon}
-                            />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-                </View>
-            </KeyboardAvoidingView>
+            <ChatScreenHeader name={name} userId={senderId} />
+            <ChatList
+                conversation={conversation}
+                onMessageLongPress={onMessageLongPress}
+            />
+            <ChatInput
+                message={message}
+                onChangeText={setMessage}
+                onPressSend={onPressSend}
+                onPressReaction={onPressReaction}
+                replyMessage={replyMessage}
+                inputRef={inputRef}
+                onFocus={scrollToEnd}
+                onDismissReply={() => setReplyMessage('')}
+                showReactionsButtons={!!reactionButtons}
+            />
         </View>
     );
 };

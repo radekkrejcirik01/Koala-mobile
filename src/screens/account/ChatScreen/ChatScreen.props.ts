@@ -1,6 +1,6 @@
 import { RouteProp } from '@react-navigation/native';
 
-export interface RespondScreenProps {
+export interface ChatScreenProps {
     route: RouteProp<
         {
             params: {

@@ -4,16 +4,16 @@ import {
     GestureHandlerRootView,
     Swipeable
 } from 'react-native-gesture-handler';
-import { OutboundMessageItemProps } from '@components/respond/OutboundMessageItem/OutboundMessageItem.props';
-import { OutboundMessageItemStyle } from '@components/respond/OutboundMessageItem/OutboundMessageItem.style';
+import { InboundMessageItemProps } from '@components/chat/InboundMessageItem/InboundMessageItem.props';
+import { InboundMessageItemStyle } from '@components/chat/InboundMessageItem/InboundMessageItem.style';
 import { getMessageTime } from '@functions/getMessageTime';
 
-export const OutboundMessageItem = ({
+export const InboundMessageItem = ({
     children,
     onLongPress,
     time,
     replyMessage
-}: OutboundMessageItemProps): React.JSX.Element => {
+}: InboundMessageItemProps): React.JSX.Element => {
     function isEmojiOnly(str: string): boolean {
         const emojiRegex = /^(?:[\p{Emoji}\p{Mark}\p{Zs}\u{200D}])*$/u;
 
@@ -21,17 +21,17 @@ export const OutboundMessageItem = ({
     }
 
     return (
-        <GestureHandlerRootView style={OutboundMessageItemStyle.container}>
+        <GestureHandlerRootView style={InboundMessageItemStyle.container}>
             <Swipeable
-                renderRightActions={() => (
-                    <Text style={OutboundMessageItemStyle.timeText}>
+                renderLeftActions={() => (
+                    <Text style={InboundMessageItemStyle.timeText}>
                         {getMessageTime(time)}
                     </Text>
                 )}
             >
                 {!!replyMessage && (
-                    <View style={OutboundMessageItemStyle.replyMessageView}>
-                        <Text style={OutboundMessageItemStyle.replyMessageText}>
+                    <View style={InboundMessageItemStyle.replyMessageView}>
+                        <Text style={InboundMessageItemStyle.replyMessageText}>
                             {replyMessage}
                         </Text>
                     </View>
@@ -43,9 +43,9 @@ export const OutboundMessageItem = ({
                 >
                     <Text
                         style={[
-                            OutboundMessageItemStyle.messageText,
+                            InboundMessageItemStyle.messageText,
                             isEmojiOnly(children) &&
-                                OutboundMessageItemStyle.largeText
+                                InboundMessageItemStyle.largeText
                         ]}
                     >
                         {children}

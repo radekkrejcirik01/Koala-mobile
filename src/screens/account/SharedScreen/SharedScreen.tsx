@@ -7,9 +7,9 @@ import { HistoryInterface } from '@interfaces/general.interface';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseHistoryGetInterface } from '@interfaces/response/Response.interface';
 import { SharedScreenProps } from '@screens/account/SharedScreen/SharedScreen.props';
-import { SharedItem } from '@components/respond/SharedItem/SharedItem';
+import { SharedItem } from '@components/chat/SharedItem/SharedItem';
 import { SharedScreenStyle } from '@screens/account/SharedScreen/SharedScreen.style';
-import { SharedScreenHeader } from '@components/respond/SharedScreenHeader/SharedScreenHeader';
+import { SharedScreenHeader } from '@components/chat/SharedScreenHeader/SharedScreenHeader';
 
 export const SharedScreen = ({ route }: SharedScreenProps): JSX.Element => {
     const { receiverId } = route.params;

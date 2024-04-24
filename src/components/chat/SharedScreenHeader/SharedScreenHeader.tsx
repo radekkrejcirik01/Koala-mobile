@@ -4,7 +4,7 @@ import { useNavigation } from '@hooks/useNavigation';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
-import { SharedScreenHeaderStyle } from '@components/respond/SharedScreenHeader/SharedScreenHeader.style';
+import { SharedScreenHeaderStyle } from '@components/chat/SharedScreenHeader/SharedScreenHeader.style';
 
 export const SharedScreenHeader = (): React.JSX.Element => {
     const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);

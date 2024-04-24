@@ -86,7 +86,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
             <NotificationItem
                 item={item}
                 onPress={() =>
-                    navigateTo(AccountStackNavigatorEnum.RespondScreen, {
+                    navigateTo(AccountStackNavigatorEnum.ChatScreen, {
                         id: item.id,
                         senderId: item?.senderId,
                         name: item.name,

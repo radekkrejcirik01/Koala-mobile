@@ -1,15 +1,7 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const RespondScreenStyle = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: COLORS.WHITE
-    },
-    scrollViewContainer: {
-        paddingHorizontal: 25,
-        paddingBottom: Platform.OS === 'ios' ? 280 : 100
-    },
+export const ChatInputStyle = StyleSheet.create({
     replyMessageContainer: {
         paddingVertical: 5,
         paddingLeft: 20,
