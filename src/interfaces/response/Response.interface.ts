@@ -73,3 +73,9 @@ export interface ResponseExpressionsGetInterface {
     data: ExpressionDataInterface[];
     expression: string;
 }
+
+export interface ResponseRecordingPostInterface {
+    status: string;
+    message: string;
+    url: string;
+}

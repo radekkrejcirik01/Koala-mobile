@@ -37,12 +37,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
     const { top, bottom } = useSafeAreaInsets();
 
-    const [message, setMessage] = useState<string>();
+    const [message, setMessage] = useState<string>('');
     const [conversation, setConversation] = useState<ConversationInterface[]>(
         []
     );
     const [reactionButtons, setReactionButtons] = useState<boolean>(false);
-    const [replyMessage, setReplyMessage] = useState<string>();
+    const [replyMessage, setReplyMessage] = useState<string>('');
+    const [audioMessageUrl, setAudioMessageUrl] = useState<string>('');
 
     const scrollViewRef = useRef(null);
     const inputRef = useRef(null);
@@ -146,11 +147,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     name: userName,
                     message: text || message,
                     conversationId: conversationId || id,
-                    replyMessage
+                    replyMessage,
+                    audioMessage: text ? '' : audioMessageUrl
                 }
             ).subscribe();
         },
         [
+            audioMessageUrl,
             conversationId,
             id,
             message,
@@ -181,6 +184,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         send();
         setMessage('');
         setReplyMessage('');
+        setAudioMessageUrl('');
 
         scrollToEnd();
     }, [send]);
@@ -202,6 +206,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 onChangeText={setMessage}
                 onPressSend={onPressSend}
                 onPressReaction={onPressReaction}
+                onAudioMessageUrl={setAudioMessageUrl}
                 replyMessage={replyMessage}
                 inputRef={inputRef}
                 onFocus={scrollToEnd}

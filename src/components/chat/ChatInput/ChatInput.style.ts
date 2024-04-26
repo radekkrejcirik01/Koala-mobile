@@ -59,5 +59,11 @@ export const ChatInputStyle = StyleSheet.create({
     },
     sendButtonIcon: {
         right: -1
+    },
+    microphoneButtonView: {
+        paddingLeft: 5,
+        paddingRight: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

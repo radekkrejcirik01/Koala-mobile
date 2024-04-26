@@ -4,9 +4,11 @@ import Clean from '@assets/webp/Clean.webp';
 import Direct from '@assets/webp/Direct.webp';
 import Mail from '@assets/webp/Mail.webp';
 import Menu from '@assets/webp/Menu.webp';
+import Microphone from '@assets/webp/Microphone.webp';
 import Reply from '@assets/webp/Reply.webp';
 import Plus from '@assets/webp/Plus.webp';
 import Send from '@assets/webp/Send.webp';
+import Stop from '@assets/webp/Stop.webp';
 
 export enum IconEnum {
     BACK_BLUE = 'BackBlue',
@@ -15,9 +17,11 @@ export enum IconEnum {
     DIRECT = 'Direct',
     MAIL = 'Mail',
     MENU = 'Menu',
+    MICROPHONE = 'Microphone',
     REPLY = 'Reply',
     PLUS = 'Plus',
-    SEND = 'Send'
+    SEND = 'Send',
+    STOP = 'Stop'
 }
 
 export const ICONS = {
@@ -26,8 +30,10 @@ export const ICONS = {
     [IconEnum.CLEAN]: Clean,
     [IconEnum.DIRECT]: Direct,
     [IconEnum.MENU]: Menu,
+    [IconEnum.MICROPHONE]: Microphone,
     [IconEnum.MAIL]: Mail,
     [IconEnum.REPLY]: Reply,
     [IconEnum.PLUS]: Plus,
-    [IconEnum.SEND]: Send
+    [IconEnum.SEND]: Send,
+    [IconEnum.STOP]: Stop
 };

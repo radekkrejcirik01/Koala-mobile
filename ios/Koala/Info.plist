@@ -41,6 +41,8 @@
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to photos to upload photos from your library</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Allow access to microphone</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
