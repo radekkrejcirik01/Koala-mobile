@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { RecordingTimer } from '@components/chat/RecrodingTimer/RecordingTimer';
+import { Easing, Text, TouchableOpacity, View } from 'react-native';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { useTimer } from '@hooks/useTimer';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { RecordingInputStyle } from '@components/chat/RecordingInput/RecordingInput.style';
 import { RecordingInputProps } from '@components/chat/RecordingInput/RecordingInput.props';
+import COLORS from '@constants/COLORS';
 
 export const RecordingInput = ({
     onStopRecording,
@@ -14,24 +16,24 @@ export const RecordingInput = ({
 }: RecordingInputProps): React.JSX.Element => {
     const [stopped, setStopped] = useState<boolean>(false);
 
-    const timerRef = useRef(null);
+    const progressAnimationRef = useRef(null);
 
     useEffect(() => {
-        timerRef.current.startTimer();
+        progressAnimationRef?.current?.animate(100, 15000, Easing.quad);
     }, []);
 
     const stop = useCallback(() => {
         onStopRecording();
 
         setStopped(true);
-
-        timerRef.current.stopTimer();
     }, [onStopRecording]);
+
+    useTimer(15, stop, !stopped);
 
     return (
         <View style={RecordingInputStyle.container}>
             <View style={RecordingInputStyle.centerRow}>
-                {stopped && (
+                {stopped ? (
                     <TouchableOpacity
                         activeOpacity={0.9}
                         hitSlop={10}
@@ -39,13 +41,23 @@ export const RecordingInput = ({
                     >
                         <Icon name={IconEnum.CLEAN} size={24} />
                     </TouchableOpacity>
+                ) : (
+                    <AnimatedCircularProgress
+                        ref={progressAnimationRef}
+                        size={30}
+                        width={5}
+                        fill={100}
+                        rotation={0}
+                        tintColor={COLORS.BUTTON_BLUE}
+                        backgroundColor={COLORS.WHITE}
+                    />
                 )}
-                <RecordingTimer ref={timerRef} onLimitExceeded={stop} />
                 <TouchableOpacity
                     activeOpacity={0.9}
                     hitSlop={10}
                     disabled={!stopped}
                     onPress={onPressPlay}
+                    style={RecordingInputStyle.titleText}
                 >
                     <Text>{stopped ? 'Play message' : 'Recording...'}</Text>
                 </TouchableOpacity>
