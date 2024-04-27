@@ -3,5 +3,4 @@ export interface RecordingInputProps {
     onPressSend: () => void;
     onPressPlay: () => void;
     onPressClean: () => void;
-    sendDisabled: boolean;
 }

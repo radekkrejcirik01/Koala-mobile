@@ -7,6 +7,7 @@ import messaging, {
 } from '@react-native-firebase/messaging';
 import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import fs from 'react-native-fs';
 import { ChatScreenHeader } from '@components/chat/ChatScreenHeader/ChatScreenHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
@@ -43,7 +44,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     );
     const [reactionButtons, setReactionButtons] = useState<boolean>(false);
     const [replyMessage, setReplyMessage] = useState<string>('');
-    const [audioMessageUrl, setAudioMessageUrl] = useState<string>('');
+    const [audioRecord, setAudioRecord] = useState<string>('');
 
     const scrollViewRef = useRef(null);
     const inputRef = useRef(null);
@@ -126,7 +127,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     );
 
     const send = useCallback(
-        (text?: string) => {
+        async (text?: string) => {
             setConversation((prevState) =>
                 prevState.concat({
                     id: prevState[prevState?.length - 1].id + 1,
@@ -138,6 +139,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 })
             );
 
+            let base64Buffer;
+            if (audioRecord) {
+                base64Buffer = await fs.readFile(audioRecord, 'base64');
+            }
+
             postRequest<ResponseInterface, MessageNotificationPostInterface>(
                 'message-notification',
                 {
@@ -148,12 +154,12 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     message: text || message,
                     conversationId: conversationId || id,
                     replyMessage,
-                    audioMessage: text ? '' : audioMessageUrl
+                    audioBuffer: text ? '' : base64Buffer
                 }
             ).subscribe();
         },
         [
-            audioMessageUrl,
+            audioRecord,
             conversationId,
             id,
             message,
@@ -175,16 +181,16 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
     const onPressReaction = useCallback(
         (value: string) => {
-            send(value);
+            send(value).catch();
         },
         [send]
     );
 
     const onPressSend = useCallback(() => {
-        send();
+        send().catch();
         setMessage('');
         setReplyMessage('');
-        setAudioMessageUrl('');
+        setAudioRecord('');
 
         scrollToEnd();
     }, [send]);
@@ -206,7 +212,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 onChangeText={setMessage}
                 onPressSend={onPressSend}
                 onPressReaction={onPressReaction}
-                onAudioMessageUrl={setAudioMessageUrl}
+                onAudioRecord={setAudioRecord}
                 replyMessage={replyMessage}
                 inputRef={inputRef}
                 onFocus={scrollToEnd}

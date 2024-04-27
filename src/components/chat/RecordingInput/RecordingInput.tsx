@@ -10,8 +10,7 @@ export const RecordingInput = ({
     onStopRecording,
     onPressSend,
     onPressPlay,
-    onPressClean,
-    sendDisabled
+    onPressClean
 }: RecordingInputProps): React.JSX.Element => {
     const [stopped, setStopped] = useState<boolean>(false);
 
@@ -36,7 +35,6 @@ export const RecordingInput = ({
                     <TouchableOpacity
                         activeOpacity={0.9}
                         hitSlop={10}
-                        disabled={sendDisabled}
                         onPress={onPressClean}
                     >
                         <Icon name={IconEnum.CLEAN} size={24} />
@@ -56,7 +54,6 @@ export const RecordingInput = ({
                 <TouchableOpacity
                     activeOpacity={0.9}
                     hitSlop={10}
-                    disabled={sendDisabled}
                     onPress={onPressSend}
                     style={RecordingInputStyle.sendButtonView}
                 >

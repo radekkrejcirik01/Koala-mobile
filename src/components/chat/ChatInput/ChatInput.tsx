@@ -15,9 +15,6 @@ import { ReactionButtons } from '@components/chat/ReactionButtons/ReactionButton
 import { ChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
 import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
-import { postRequest } from '@utils/Axios/Axios.service';
-import { ResponseRecordingPostInterface } from '@interfaces/response/Response.interface';
-import { RecordingPostInterface } from '@interfaces/post/Post.interface';
 import { RecordingInput } from '@components/chat/RecordingInput/RecordingInput';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
@@ -27,7 +24,7 @@ export const ChatInput = ({
     onChangeText,
     onPressSend,
     onPressReaction,
-    onAudioMessageUrl,
+    onAudioRecord,
     replyMessage,
     inputRef,
     onFocus,
@@ -36,7 +33,6 @@ export const ChatInput = ({
 }: ChatInputProps): React.JSX.Element => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [record, setRecord] = useState<string>();
-    const [audioUploaded, setAudioUploaded] = useState<boolean>(false);
 
     const startRecording = useCallback(async () => {
         setIsRecording(true);
@@ -50,8 +46,9 @@ export const ChatInput = ({
 
         audioRecorderPlayer.addRecordBackListener(() => {});
 
+        onAudioRecord(uri);
         setRecord(uri);
-    }, []);
+    }, [onAudioRecord]);
 
     const stopRecord = async () => {
         await audioRecorderPlayer.stopRecorder();
@@ -59,31 +56,14 @@ export const ChatInput = ({
         audioRecorderPlayer.removeRecordBackListener();
     };
 
-    const uploadRecord = useCallback(async () => {
-        const base64Buffer = await fs.readFile(record, 'base64');
-
-        postRequest<ResponseRecordingPostInterface, RecordingPostInterface>(
-            'recording',
-            {
-                buffer: base64Buffer,
-                platform: Platform.OS
-            }
-        ).subscribe(async (response) => {
-            onAudioMessageUrl(response.url);
-            setAudioUploaded(true);
-        });
-    }, [onAudioMessageUrl, record]);
-
     const stopRecording = useCallback(() => {
         stopRecord().catch();
-        uploadRecord().catch();
-    }, [uploadRecord]);
+    }, []);
 
     const sendVoiceMessage = useCallback(() => {
         onPressSend();
 
         setIsRecording(false);
-        setAudioUploaded(false);
     }, [onPressSend]);
 
     const playRecord = useCallback(async () => {
@@ -91,12 +71,11 @@ export const ChatInput = ({
     }, [record]);
 
     const cleanRecording = useCallback(() => {
-        onAudioMessageUrl('');
+        onAudioRecord('');
 
         setIsRecording(false);
         setRecord(null);
-        setAudioUploaded(false);
-    }, [onAudioMessageUrl]);
+    }, [onAudioRecord]);
 
     return (
         <KeyboardAvoidingView
@@ -130,7 +109,6 @@ export const ChatInput = ({
                         onPressSend={sendVoiceMessage}
                         onPressPlay={playRecord}
                         onPressClean={cleanRecording}
-                        sendDisabled={!audioUploaded}
                     />
                 ) : (
                     <TouchableOpacity

@@ -3,4 +3,6 @@ export interface OutboundMessageItemProps {
     onLongPress: () => void;
     time: number;
     replyMessage: string;
+    audioMessage: string;
+    onPlayAudioMessage: () => void;
 }

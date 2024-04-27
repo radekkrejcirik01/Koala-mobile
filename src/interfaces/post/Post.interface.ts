@@ -48,7 +48,7 @@ export interface MessageNotificationPostInterface {
     message: string;
     conversationId: number;
     replyMessage?: string;
-    audioMessage?: string;
+    audioBuffer?: string;
 }
 
 export interface ExpressionPostInterface {

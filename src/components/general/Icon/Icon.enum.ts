@@ -6,6 +6,7 @@ import Mail from '@assets/webp/Mail.webp';
 import Menu from '@assets/webp/Menu.webp';
 import Microphone from '@assets/webp/Microphone.webp';
 import Reply from '@assets/webp/Reply.webp';
+import Play from '@assets/webp/Play.webp';
 import Plus from '@assets/webp/Plus.webp';
 import Send from '@assets/webp/Send.webp';
 import Stop from '@assets/webp/Stop.webp';
@@ -19,6 +20,7 @@ export enum IconEnum {
     MENU = 'Menu',
     MICROPHONE = 'Microphone',
     REPLY = 'Reply',
+    PLAY = 'Play',
     PLUS = 'Plus',
     SEND = 'Send',
     STOP = 'Stop'
@@ -33,6 +35,7 @@ export const ICONS = {
     [IconEnum.MICROPHONE]: Microphone,
     [IconEnum.MAIL]: Mail,
     [IconEnum.REPLY]: Reply,
+    [IconEnum.PLAY]: Play,
     [IconEnum.PLUS]: Plus,
     [IconEnum.SEND]: Send,
     [IconEnum.STOP]: Stop

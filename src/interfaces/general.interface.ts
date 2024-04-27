@@ -32,6 +32,7 @@ export interface ConversationInterface {
     message: string;
     time: number;
     replyMessage?: string;
+    audioMessage?: string;
 }
 
 export interface HistoryInterface {
