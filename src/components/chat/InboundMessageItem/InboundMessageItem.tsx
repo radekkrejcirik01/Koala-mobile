@@ -6,13 +6,16 @@ import {
 } from 'react-native-gesture-handler';
 import { InboundMessageItemProps } from '@components/chat/InboundMessageItem/InboundMessageItem.props';
 import { InboundMessageItemStyle } from '@components/chat/InboundMessageItem/InboundMessageItem.style';
+import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
 import { getMessageTime } from '@functions/getMessageTime';
 
 export const InboundMessageItem = ({
     children,
     onLongPress,
     time,
-    replyMessage
+    replyMessage,
+    isAudioMessage,
+    onPlayAudioMessage
 }: InboundMessageItemProps): React.JSX.Element => {
     function isEmojiOnly(str: string): boolean {
         const emojiRegex = /^(?:[\p{Emoji}\p{Mark}\p{Zs}\u{200D}])*$/u;
@@ -35,6 +38,9 @@ export const InboundMessageItem = ({
                             {replyMessage}
                         </Text>
                     </View>
+                )}
+                {isAudioMessage && (
+                    <AudioMessageItem onPlayAudioMessage={onPlayAudioMessage} />
                 )}
                 <TouchableOpacity
                     activeOpacity={1}

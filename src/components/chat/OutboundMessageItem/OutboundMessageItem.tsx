@@ -6,17 +6,15 @@ import {
 } from 'react-native-gesture-handler';
 import { OutboundMessageItemProps } from '@components/chat/OutboundMessageItem/OutboundMessageItem.props';
 import { OutboundMessageItemStyle } from '@components/chat/OutboundMessageItem/OutboundMessageItem.style';
+import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
 import { getMessageTime } from '@functions/getMessageTime';
-import COLORS from '@constants/COLORS';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const OutboundMessageItem = ({
     children,
     onLongPress,
     time,
     replyMessage,
-    audioMessage,
+    isAudioMessage,
     onPlayAudioMessage
 }: OutboundMessageItemProps): React.JSX.Element => {
     function isEmojiOnly(str: string): boolean {
@@ -41,40 +39,11 @@ export const OutboundMessageItem = ({
                         </Text>
                     </View>
                 )}
-                {!!audioMessage && (
-                    <View
-                        style={{
-                            width: '60%',
-                            height: 50,
-                            marginBottom: 2,
-                            paddingVertical: 8,
-                            paddingHorizontal: 10,
-                            borderRadius: 20,
-                            borderWidth: 2,
-                            borderColor: COLORS.LIGHTGRAY,
-                            flexDirection: 'row',
-                            alignSelf: 'flex-end',
-                            alignItems: 'center',
-                            justifyContent: 'space-between'
-                        }}
-                    >
-                        <Text
-                            style={{
-                                color: COLORS.BLACK,
-                                fontWeight: '600'
-                            }}
-                        >
-                            🎤 Audio message
-                        </Text>
-                        <TouchableOpacity
-                            activeOpacity={0.9}
-                            hitSlop={10}
-                            onPress={onPlayAudioMessage}
-                            style={{ marginRight: 5 }}
-                        >
-                            <Icon name={IconEnum.PLAY} size={26} />
-                        </TouchableOpacity>
-                    </View>
+                {isAudioMessage && (
+                    <AudioMessageItem
+                        onPlayAudioMessage={onPlayAudioMessage}
+                        outbound
+                    />
                 )}
                 <TouchableOpacity
                     activeOpacity={1}

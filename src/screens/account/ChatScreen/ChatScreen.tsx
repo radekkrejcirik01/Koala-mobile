@@ -135,7 +135,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     receiver: '',
                     message: text || message,
                     time: moment().unix(),
-                    replyMessage
+                    replyMessage,
+                    audioMessage: audioRecord
                 })
             );
 
