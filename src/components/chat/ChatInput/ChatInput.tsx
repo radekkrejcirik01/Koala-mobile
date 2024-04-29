@@ -16,6 +16,7 @@ import { ChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
 import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
 import { RecordingInput } from '@components/chat/RecordingInput/RecordingInput';
+import { checkAndroidRecordingPermission } from '@functions/checkAndroidRecordingPermission';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
@@ -35,6 +36,8 @@ export const ChatInput = ({
     const [record, setRecord] = useState<string>();
 
     const startRecording = useCallback(async () => {
+        await checkAndroidRecordingPermission();
+
         setIsRecording(true);
 
         const path = Platform.select({
