@@ -1,6 +1,6 @@
-import React, { JSX, useCallback, useState } from 'react';
+import React, { JSX, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import TrackPlayer, { Event, State } from 'react-native-track-player';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import {
@@ -8,19 +8,35 @@ import {
     AudioMessageItemProps
 } from '@components/chat/AudioMessageItem/AudioMessageItem.props';
 import { AudioMessageItemStyle } from '@components/chat/AudioMessageItem/AudioMessageItem.style';
-import COLORS from '@constants/COLORS';
 
 export const AudioMessageItem = ({
-    onPlayAudioMessage,
+    audioMessage,
     outbound
 }: AudioMessageItemProps): JSX.Element => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-    const play = useCallback(() => {
-        onPlayAudioMessage();
+    const play = async () => {
+        await TrackPlayer.add({
+            url: audioMessage,
+            title: '🎤 Voice Message'
+        });
+
+        await TrackPlayer.play();
 
         setIsPlaying(true);
-    }, [onPlayAudioMessage]);
+
+        TrackPlayer.addEventListener(Event.PlaybackState, ({ state }) => {
+            if (state === State.Ended) {
+                setIsPlaying(false);
+            }
+        });
+    };
+
+    const stop = async () => {
+        await TrackPlayer.reset();
+
+        setIsPlaying(false);
+    };
 
     return (
         <View
@@ -31,16 +47,14 @@ export const AudioMessageItem = ({
         >
             <Text style={AudioMessageItemStyle.text}>🎤 Audio message</Text>
             {isPlaying ? (
-                <AnimatedCircularProgress
-                    size={30}
-                    width={5}
-                    fill={100}
-                    rotation={0}
-                    duration={5000}
-                    tintColor={COLORS.BUTTON_BLUE}
-                    backgroundColor={COLORS.WHITE}
-                    onAnimationComplete={() => setIsPlaying(false)}
-                />
+                <TouchableOpacity
+                    activeOpacity={0.9}
+                    hitSlop={10}
+                    onPress={stop}
+                    style={AudioMessageItemStyle.icon}
+                >
+                    <Icon name={IconEnum.STOP} size={26} />
+                </TouchableOpacity>
             ) : (
                 <TouchableOpacity
                     activeOpacity={0.9}

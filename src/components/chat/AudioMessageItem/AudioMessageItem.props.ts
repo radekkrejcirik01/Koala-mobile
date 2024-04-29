@@ -1,11 +1,11 @@
 export interface AudioMessageItemProps {
-    onPlayAudioMessage: () => void;
+    audioMessage: string;
     outbound?: boolean;
 }
 
 export const AudioMessageItemDefaultProps: Omit<
     AudioMessageItemProps,
-    'onPlayAudioMessage'
+    'audioMessage'
 > = {
     outbound: false
 };

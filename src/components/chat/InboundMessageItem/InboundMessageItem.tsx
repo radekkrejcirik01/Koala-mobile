@@ -14,8 +14,7 @@ export const InboundMessageItem = ({
     onLongPress,
     time,
     replyMessage,
-    isAudioMessage,
-    onPlayAudioMessage
+    audioMessage
 }: InboundMessageItemProps): React.JSX.Element => {
     function isEmojiOnly(str: string): boolean {
         const emojiRegex = /^(?:[\p{Emoji}\p{Mark}\p{Zs}\u{200D}])*$/u;
@@ -39,8 +38,8 @@ export const InboundMessageItem = ({
                         </Text>
                     </View>
                 )}
-                {isAudioMessage && (
-                    <AudioMessageItem onPlayAudioMessage={onPlayAudioMessage} />
+                {!!audioMessage && (
+                    <AudioMessageItem audioMessage={audioMessage} />
                 )}
                 <TouchableOpacity
                     activeOpacity={1}

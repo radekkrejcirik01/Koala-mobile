@@ -20,8 +20,6 @@ export const ChatList = ({
         [username]
     );
 
-    const playAudioMessage = (url: string) => {};
-
     return (
         <ScrollView
             ref={scrollViewRef}
@@ -35,10 +33,7 @@ export const ChatList = ({
                         onLongPress={() => onMessageLongPress(value)}
                         time={value.time}
                         replyMessage={value?.replyMessage}
-                        isAudioMessage={!!value?.audioMessage}
-                        onPlayAudioMessage={() =>
-                            playAudioMessage(value?.audioMessage)
-                        }
+                        audioMessage={value?.audioMessage}
                     >
                         {value.message}
                     </InboundMessageItem>
@@ -48,10 +43,7 @@ export const ChatList = ({
                         key={value.id}
                         time={value.time}
                         replyMessage={value?.replyMessage}
-                        isAudioMessage={!!value?.audioMessage}
-                        onPlayAudioMessage={() =>
-                            playAudioMessage(value?.audioMessage)
-                        }
+                        audioMessage={value?.audioMessage}
                     >
                         {value.message}
                     </OutboundMessageItem>
