@@ -11,6 +11,7 @@ export const AudioMessageItemStyle = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 2,
         borderColor: COLORS.LIGHTGRAY,
+        backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
         alignSelf: 'flex-start',
         alignItems: 'center',

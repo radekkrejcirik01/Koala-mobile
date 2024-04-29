@@ -38,24 +38,25 @@ export const InboundMessageItem = ({
                         </Text>
                     </View>
                 )}
-                {!!audioMessage && (
+                {audioMessage ? (
                     <AudioMessageItem audioMessage={audioMessage} />
-                )}
-                <TouchableOpacity
-                    activeOpacity={1}
-                    delayLongPress={150}
-                    onLongPress={onLongPress}
-                >
-                    <Text
-                        style={[
-                            InboundMessageItemStyle.messageText,
-                            isEmojiOnly(children) &&
-                                InboundMessageItemStyle.largeText
-                        ]}
+                ) : (
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        delayLongPress={150}
+                        onLongPress={onLongPress}
                     >
-                        {children}
-                    </Text>
-                </TouchableOpacity>
+                        <Text
+                            style={[
+                                InboundMessageItemStyle.messageText,
+                                isEmojiOnly(children) &&
+                                    InboundMessageItemStyle.largeText
+                            ]}
+                        >
+                            {children}
+                        </Text>
+                    </TouchableOpacity>
+                )}
             </Swipeable>
         </GestureHandlerRootView>
     );

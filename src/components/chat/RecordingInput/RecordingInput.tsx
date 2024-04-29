@@ -39,7 +39,7 @@ export const RecordingInput = ({
                         hitSlop={10}
                         onPress={onPressClean}
                     >
-                        <Icon name={IconEnum.CLEAN} size={24} />
+                        <Text>🗑️</Text>
                     </TouchableOpacity>
                 ) : (
                     <AnimatedCircularProgress
@@ -57,14 +57,16 @@ export const RecordingInput = ({
                     hitSlop={10}
                     disabled={!stopped}
                     onPress={onPressPlay}
-                    style={RecordingInputStyle.titleText}
+                    style={RecordingInputStyle.titleView}
                 >
-                    <Text>{stopped ? 'Play message' : 'Recording...'}</Text>
+                    <Text style={RecordingInputStyle.titleText}>
+                        {stopped ? 'Voice message 🎧' : 'Listening...'}
+                    </Text>
                 </TouchableOpacity>
             </View>
             {stopped ? (
                 <TouchableOpacity
-                    activeOpacity={0.9}
+                    activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onPressSend}
                     style={RecordingInputStyle.sendButtonView}

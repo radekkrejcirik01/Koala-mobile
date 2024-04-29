@@ -129,7 +129,7 @@ export const ChatInput = ({
                             style={ChatInputStyle.input}
                         />
                         <TouchableOpacity
-                            activeOpacity={0.9}
+                            activeOpacity={0.7}
                             disabled={!message}
                             hitSlop={10}
                             onPress={onPressSend}

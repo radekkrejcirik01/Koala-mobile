@@ -19,8 +19,11 @@ export const RecordingInputStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    titleText: {
+    titleView: {
         marginLeft: 10
+    },
+    titleText: {
+        fontWeight: '500'
     },
     sendButtonView: {
         padding: 5,

@@ -107,12 +107,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         getConversation();
     }, [getConversation]);
 
-    useEffect(() => {
-        if (reactionButtons) {
-            inputRef.current.focus();
-        }
-    }, [reactionButtons]);
-
     useEffect(
         () =>
             // On new message

@@ -45,7 +45,7 @@ export const AudioMessageItem = ({
                 outbound && AudioMessageItemStyle.outbound
             ]}
         >
-            <Text style={AudioMessageItemStyle.text}>🎤 Audio message</Text>
+            <Text style={AudioMessageItemStyle.text}>🎤 Voice message</Text>
             {isPlaying ? (
                 <TouchableOpacity
                     activeOpacity={0.9}
