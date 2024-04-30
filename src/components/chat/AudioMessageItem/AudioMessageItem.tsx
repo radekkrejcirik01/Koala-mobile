@@ -1,6 +1,6 @@
-import React, { JSX, useState } from 'react';
+import React, { JSX, useCallback, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import TrackPlayer, { Event, State } from 'react-native-track-player';
+import Sound from 'react-native-sound';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import {
@@ -14,29 +14,30 @@ export const AudioMessageItem = ({
     outbound
 }: AudioMessageItemProps): JSX.Element => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [sound, setSound] = useState<Sound>();
 
-    const play = async () => {
-        await TrackPlayer.add({
-            url: audioMessage,
-            title: '🎤 Voice Message'
-        });
-
-        await TrackPlayer.play();
-
+    const play = useCallback(async () => {
         setIsPlaying(true);
-
-        TrackPlayer.addEventListener(Event.PlaybackState, ({ state }) => {
-            if (state === State.Ended) {
+        const voiceMessage = new Sound(audioMessage, null, (error) => {
+            if (error) {
                 setIsPlaying(false);
+                return;
             }
+
+            setSound(voiceMessage);
+            voiceMessage.play(() => {
+                setIsPlaying(false);
+                voiceMessage.release();
+            });
         });
-    };
+    }, [audioMessage]);
 
-    const stop = async () => {
-        await TrackPlayer.reset();
-
+    const stop = useCallback(async () => {
         setIsPlaying(false);
-    };
+        sound.stop(() => {
+            setSound(null);
+        });
+    }, [sound]);
 
     return (
         <View
