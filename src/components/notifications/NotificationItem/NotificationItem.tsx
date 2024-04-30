@@ -29,6 +29,13 @@ export const NotificationItem = ({
         return '';
     }
 
+    function getMessage(message: string, type: NotificationItemEnum): string {
+        if (type === NotificationItemEnum.VoiceMessageNotificationType) {
+            return '🎤 Voice Message';
+        }
+        return message;
+    }
+
     const isNew = useMemo((): boolean => unseen && !pressed, [pressed, unseen]);
 
     return (
@@ -50,7 +57,8 @@ export const NotificationItem = ({
                             {getTitle(item.type)}
                         </Text>
                         <Text style={NotificationItemStyle.messageText}>
-                            {item.message} ∙ {getHourUnixTime(item?.time)}
+                            {getMessage(item?.message, item.type)} ∙{' '}
+                            {getHourUnixTime(item?.time)}
                         </Text>
                     </View>
                     {isNew && <View style={NotificationItemStyle.newItem} />}
