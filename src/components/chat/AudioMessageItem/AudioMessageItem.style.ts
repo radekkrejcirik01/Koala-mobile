@@ -10,7 +10,7 @@ export const AudioMessageItemStyle = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 20,
         borderWidth: 2,
-        borderColor: COLORS.LIGHTGRAY,
+        borderColor: COLORS.BUTTON_BLUE,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
         alignSelf: 'flex-start',
