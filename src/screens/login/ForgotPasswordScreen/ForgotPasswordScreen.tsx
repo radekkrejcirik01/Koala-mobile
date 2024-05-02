@@ -66,8 +66,8 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
                 style={ForgotPasswordScreenStyle.input}
             />
             <Text style={ForgotPasswordScreenStyle.inputTitleText}>
-                Safety confirmation:{'\n'}Type names of all your friends this
-                account had.
+                Safety confirmation{'\n'}Type names of all your friends this
+                account had
             </Text>
             <TextInput
                 autoCorrect={false}
