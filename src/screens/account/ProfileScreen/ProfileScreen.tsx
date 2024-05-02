@@ -68,7 +68,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-            <Text style={ProfileScreenStyle.text}>Made to help ❤️</Text>
+            <Text style={ProfileScreenStyle.text}>Made to help</Text>
             <Text style={ProfileScreenStyle.text}>version {version}</Text>
         </View>
     );

@@ -18,7 +18,7 @@ export const HomeScreenHeader = (): JSX.Element => {
             <View style={HomeScreenHeaderStyle.row}>
                 <Text style={HomeScreenHeaderStyle.emojiText}>🌱</Text>
                 <TouchableOpacity
-                    activeOpacity={0.9}
+                    activeOpacity={0.7}
                     hitSlop={20}
                     onPress={() =>
                         navigateTo(AccountStackNavigatorEnum.ProfileScreen)
