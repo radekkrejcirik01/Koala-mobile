@@ -9,11 +9,12 @@ export const AccountScreenStyle = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingTop: 25,
+        paddingTop: 5,
         paddingBottom: 25,
         justifyContent: 'space-between'
     },
     buttonView: {
+        marginTop: 20,
         paddingVertical: 12,
         paddingHorizontal: 15,
         borderRadius: 10,

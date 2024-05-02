@@ -8,6 +8,11 @@ export interface LoginPostInterface {
     password: string;
 }
 
+export interface ChangePasswordPostInterface {
+    oldPassword: string;
+    newPassword: string;
+}
+
 export interface InvitePostInterface {
     receiver: string;
 }

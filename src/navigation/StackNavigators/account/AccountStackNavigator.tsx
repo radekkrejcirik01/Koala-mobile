@@ -13,6 +13,7 @@ import { ProfileScreen } from '@screens/account/ProfileScreen/ProfileScreen';
 import { AccountScreen } from '@screens/account/AccountScreen/AccountScreen';
 import { SharingHistoryScreen } from '@screens/account/SharingHistoryScreen/SharingHistoryScreen';
 import { SharedScreen } from '@screens/account/SharedScreen/SharedScreen';
+import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -39,6 +40,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.ProfileScreen}
             component={ProfileScreen}
+            options={NoHeader}
+        />
+        <Account.Screen
+            name={AccountStackNavigatorEnum.ChangePasswordScreen}
+            component={ChangePasswordScreen}
             options={NoHeader}
         />
         <Account.Screen

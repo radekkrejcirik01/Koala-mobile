@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@hooks/useNavigation';
 import { deleteRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { resetUserState } from '@store/UserReducer';
@@ -9,10 +10,13 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 
 export const AccountScreen = (): React.JSX.Element => {
     const dispatch = useDispatch();
     const { top, bottom } = useSafeAreaInsets();
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     const deleteAccount = useCallback(() => {
         deleteRequest<ResponseInterface>('account').subscribe(
@@ -41,6 +45,10 @@ export const AccountScreen = (): React.JSX.Element => {
             }
         ]);
     }, [deleteAccount]);
+
+    const onPressChangePassword = useCallback(() => {
+        navigateTo(AccountStackNavigatorEnum.ChangePasswordScreen);
+    }, [navigateTo]);
 
     const logout = useCallback(() => {
         deleteRequest<ResponseInterface>('device').subscribe(
@@ -79,6 +87,15 @@ export const AccountScreen = (): React.JSX.Element => {
                         By deleting account you will lose all your messages and
                         sharing history.
                     </Text>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={onPressChangePassword}
+                        style={AccountScreenStyle.buttonView}
+                    >
+                        <Text style={AccountScreenStyle.buttonText}>
+                            Change password
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.7}
