@@ -6,3 +6,9 @@ export const PrivacyPolicyOptions: StackNavigationOptions = {
     headerBackTitleVisible: false,
     headerTintColor: COLORS.BLACK
 };
+
+export const ForgotPasswordOptions: StackNavigationOptions = {
+    title: 'Forgot password',
+    headerBackTitleVisible: false,
+    headerTintColor: COLORS.BLACK
+};

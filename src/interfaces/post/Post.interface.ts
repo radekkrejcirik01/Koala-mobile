@@ -65,3 +65,9 @@ export interface RecordingPostInterface {
     buffer: string;
     platform: string;
 }
+
+export interface PasswordResetPostInterface {
+    username: string;
+    email: string;
+    friends: string;
+}

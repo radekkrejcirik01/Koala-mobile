@@ -11,8 +11,12 @@ import { SecondScreen } from '@screens/login/SecondScreen/SecondScreen';
 import { ThirdScreen } from '@screens/login/ThirdScreen/ThirdScreen';
 import { FourthScreen } from '@screens/login/FourthScreen/FourthScreen';
 import { PrivacyPolicyScreen } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen';
-import { PrivacyPolicyOptions } from '@navigation/StackNavigators/login/LoginStackNavigator.options';
+import {
+    ForgotPasswordOptions,
+    PrivacyPolicyOptions
+} from '@navigation/StackNavigators/login/LoginStackNavigator.options';
 import { LoginScreen } from '@screens/login/LoginScreen/LoginScreen';
+import { ForgotPasswordScreen } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen';
 
 const Login = createStackNavigator<ParamListBase>();
 
@@ -47,6 +51,11 @@ export const LoginStackNavigator = (): JSX.Element => (
             name={LoginStackNavigatorEnum.PrivacyPolicyScreen}
             component={PrivacyPolicyScreen}
             options={PrivacyPolicyOptions}
+        />
+        <Login.Screen
+            name={LoginStackNavigatorEnum.ForgotPasswordScreen}
+            component={ForgotPasswordScreen}
+            options={ForgotPasswordOptions}
         />
     </Login.Navigator>
 );

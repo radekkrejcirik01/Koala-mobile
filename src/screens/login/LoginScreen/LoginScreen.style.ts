@@ -28,5 +28,13 @@ export const LoginScreenStyle = StyleSheet.create({
         fontSize: 16,
         color: COLORS.WHITE,
         fontWeight: 'bold'
+    },
+    forgotPasswordView: {
+        marginTop: 25,
+        alignSelf: 'center'
+    },
+    forgotPasswordText: {
+        color: COLORS.BUTTON_BLUE,
+        fontWeight: '500'
     }
 });

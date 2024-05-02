@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import { useNavigation } from '@hooks/useNavigation';
 import { LoginScreenStyle } from '@screens/login/LoginScreen/LoginScreen.style';
 import COLORS from '@constants/COLORS';
 import { postRequest } from '@utils/Axios/Axios.service';
@@ -19,9 +20,12 @@ import { setUserToken } from '@store/UserReducer';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PreloadService } from '@utils/general/PreloadService';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 
 export const LoginScreen = (): JSX.Element => {
     const dispatch = useDispatch();
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
     const [username, setUsername] = useState<string>();
     const [password, setPassword] = useState<string>();
@@ -51,6 +55,10 @@ export const LoginScreen = (): JSX.Element => {
         });
     }, [dispatch, password, username]);
 
+    const onPressForgotPassword = useCallback(() => {
+        navigateTo(LoginStackNavigatorEnum.ForgotPasswordScreen);
+    }, [navigateTo]);
+
     return (
         <View style={LoginScreenStyle.container}>
             <View>
@@ -71,22 +79,35 @@ export const LoginScreen = (): JSX.Element => {
                     style={LoginScreenStyle.input}
                 />
             </View>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                keyboardVerticalOffset={15}
-            >
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={login}
-                    style={LoginScreenStyle.buttonView}
+            <View>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+                    keyboardVerticalOffset={15}
                 >
-                    {posting ? (
-                        <ActivityIndicator color={COLORS.WHITE} />
-                    ) : (
-                        <Text style={LoginScreenStyle.buttonText}>Login</Text>
-                    )}
+                    <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={login}
+                        style={LoginScreenStyle.buttonView}
+                    >
+                        {posting ? (
+                            <ActivityIndicator color={COLORS.WHITE} />
+                        ) : (
+                            <Text style={LoginScreenStyle.buttonText}>
+                                Login
+                            </Text>
+                        )}
+                    </TouchableOpacity>
+                </KeyboardAvoidingView>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={onPressForgotPassword}
+                    style={LoginScreenStyle.forgotPasswordView}
+                >
+                    <Text style={LoginScreenStyle.forgotPasswordText}>
+                        Forgot my password
+                    </Text>
                 </TouchableOpacity>
-            </KeyboardAvoidingView>
+            </View>
         </View>
     );
 };
