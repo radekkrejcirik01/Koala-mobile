@@ -36,7 +36,7 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
 
             if (response?.status) {
                 Alert.alert(
-                    'Success ✅ You will receive new password within 24 hours'
+                    'Success ✅\nNew password is coming within 24 hours on your email'
                 );
                 setUsername('');
                 setEmail('');

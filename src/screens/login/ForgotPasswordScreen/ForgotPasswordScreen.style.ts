@@ -8,6 +8,7 @@ export const ForgotPasswordScreenStyle = StyleSheet.create({
     },
     inputTitleText: {
         marginTop: 20,
+        marginBottom: 10,
         color: COLORS.BLACK,
         fontWeight: '500'
     },
@@ -22,7 +23,7 @@ export const ForgotPasswordScreenStyle = StyleSheet.create({
     },
     textArea: {
         height: 120,
-        paddingTop: 15,
+        paddingTop: 10,
         paddingHorizontal: 10,
         borderRadius: 10,
         fontSize: 16,
@@ -33,7 +34,7 @@ export const ForgotPasswordScreenStyle = StyleSheet.create({
     buttonView: {
         height: 45,
         width: 110,
-        marginTop: 50,
+        marginTop: 25,
         borderRadius: 18,
         backgroundColor: COLORS.BUTTON_BLUE,
         alignSelf: 'center',

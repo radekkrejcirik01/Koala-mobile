@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 import {
     ActivityIndicator,
     Alert,
-    KeyboardAvoidingView,
-    Platform,
     Text,
     TextInput,
     TouchableOpacity,
@@ -61,53 +59,42 @@ export const LoginScreen = (): JSX.Element => {
 
     return (
         <View style={LoginScreenStyle.container}>
-            <View>
-                <TextInput
-                    autoFocus
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    onChangeText={setUsername}
-                    placeholder="Username"
-                    style={LoginScreenStyle.input}
-                />
-                <TextInput
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    onChangeText={setPassword}
-                    placeholder="Password"
-                    secureTextEntry
-                    style={LoginScreenStyle.input}
-                />
-            </View>
-            <View>
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                    keyboardVerticalOffset={15}
-                >
-                    <TouchableOpacity
-                        activeOpacity={0.9}
-                        onPress={login}
-                        style={LoginScreenStyle.buttonView}
-                    >
-                        {posting ? (
-                            <ActivityIndicator color={COLORS.WHITE} />
-                        ) : (
-                            <Text style={LoginScreenStyle.buttonText}>
-                                Login
-                            </Text>
-                        )}
-                    </TouchableOpacity>
-                </KeyboardAvoidingView>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={onPressForgotPassword}
-                    style={LoginScreenStyle.forgotPasswordView}
-                >
-                    <Text style={LoginScreenStyle.forgotPasswordText}>
-                        Forgot my password
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            <TextInput
+                autoFocus
+                autoCorrect={false}
+                autoCapitalize="none"
+                onChangeText={setUsername}
+                placeholder="Username"
+                style={LoginScreenStyle.input}
+            />
+            <TextInput
+                autoCorrect={false}
+                autoCapitalize="none"
+                onChangeText={setPassword}
+                placeholder="Password"
+                secureTextEntry
+                style={LoginScreenStyle.input}
+            />
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={login}
+                style={LoginScreenStyle.buttonView}
+            >
+                {posting ? (
+                    <ActivityIndicator color={COLORS.WHITE} />
+                ) : (
+                    <Text style={LoginScreenStyle.buttonText}>Login</Text>
+                )}
+            </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={onPressForgotPassword}
+                style={LoginScreenStyle.forgotPasswordView}
+            >
+                <Text style={LoginScreenStyle.forgotPasswordText}>
+                    Forgot my password
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };
