@@ -12,6 +12,7 @@ export const ChangePasswordScreenStyle = StyleSheet.create({
     },
     inputTitleText: {
         marginTop: 15,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     input: {
