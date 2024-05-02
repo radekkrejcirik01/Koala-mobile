@@ -36,7 +36,8 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
 
             if (response?.status) {
                 Alert.alert(
-                    'Success ✅\nNew password is coming within 24 hours on your email'
+                    'Success ✅',
+                    'New password is coming within 24 hours on your email'
                 );
                 setUsername('');
                 setEmail('');
@@ -74,8 +75,7 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
                 autoCapitalize="none"
                 value={friends}
                 onChangeText={setFriends}
-                multiline
-                style={ForgotPasswordScreenStyle.textArea}
+                style={ForgotPasswordScreenStyle.input}
             />
             <TouchableOpacity
                 activeOpacity={0.9}
