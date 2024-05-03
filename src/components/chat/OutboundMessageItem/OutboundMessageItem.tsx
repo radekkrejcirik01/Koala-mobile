@@ -30,6 +30,10 @@ export const OutboundMessageItem = ({
                         {getMessageTime(time)}
                     </Text>
                 )}
+                containerStyle={OutboundMessageItemStyle.contentContainer}
+                childrenContainerStyle={
+                    OutboundMessageItemStyle.childrenContainer
+                }
             >
                 {!!replyMessage && (
                     <View style={OutboundMessageItemStyle.replyMessageView}>

@@ -197,8 +197,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 { paddingTop: top || 10, paddingBottom: bottom || 5 }
             ]}
         >
-            <ChatScreenHeader name={name} userId={senderId} />
+            <ChatScreenHeader id={senderId} username={username} name={name} />
             <ChatList
+                name={name}
                 conversation={conversation}
                 onMessageLongPress={onMessageLongPress}
             />

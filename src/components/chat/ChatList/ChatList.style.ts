@@ -2,7 +2,9 @@ import { Platform, StyleSheet } from 'react-native';
 
 export const ChatListStyle = StyleSheet.create({
     container: {
-        paddingHorizontal: 25,
+        paddingLeft: 15,
+        paddingRight: 10,
+        paddingTop: 15,
         paddingBottom: Platform.OS === 'ios' ? 280 : 100
     }
 });

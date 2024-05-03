@@ -3,14 +3,12 @@ import COLORS from '@constants/COLORS';
 
 export const AudioMessageItemStyle = StyleSheet.create({
     view: {
-        width: '60%',
-        height: 50,
-        marginBottom: 2,
+        height: 55,
         paddingVertical: 8,
-        paddingHorizontal: 10,
-        borderRadius: 20,
+        paddingHorizontal: 12,
+        borderRadius: 22,
         borderWidth: 2,
-        borderColor: COLORS.BUTTON_BLUE,
+        borderColor: COLORS.LIGHTGRAY,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
         alignSelf: 'flex-start',
@@ -25,6 +23,6 @@ export const AudioMessageItemStyle = StyleSheet.create({
         fontWeight: '600'
     },
     icon: {
-        marginRight: 5
+        marginLeft: 15
     }
 });

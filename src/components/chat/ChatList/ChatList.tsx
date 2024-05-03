@@ -8,6 +8,7 @@ import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 
 export const ChatList = ({
+    name,
     conversation,
     onMessageLongPress
 }: ChatListProps): React.JSX.Element => {
@@ -26,14 +27,18 @@ export const ChatList = ({
             showsVerticalScrollIndicator={false}
             contentContainerStyle={ChatListStyle.container}
         >
-            {conversation?.map((value) =>
+            {conversation?.map((value, index) =>
                 isInbound(value.receiver) ? (
                     <InboundMessageItem
                         key={value.id}
+                        name={name}
                         onLongPress={() => onMessageLongPress(value)}
                         time={value.time}
                         replyMessage={value?.replyMessage}
                         audioMessage={value?.audioMessage}
+                        isLast={
+                            value?.sender !== conversation[index + 1]?.sender
+                        }
                     >
                         {value.message}
                     </InboundMessageItem>

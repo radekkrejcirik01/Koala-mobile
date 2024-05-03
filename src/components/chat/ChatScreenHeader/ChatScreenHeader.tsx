@@ -10,8 +10,9 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 
 export const ChatScreenHeader = ({
-    name,
-    userId
+    id,
+    username,
+    name
 }: ChatScreenHeaderProps): JSX.Element => {
     const { navigateBack, navigateTo } = useNavigation(
         RootStackNavigatorEnum.AccountStack
@@ -21,11 +22,18 @@ export const ChatScreenHeader = ({
         <View style={ChatScreenHeaderStyle.container}>
             <View style={ChatScreenHeaderStyle.centerRow}>
                 <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
-                    <Icon name={IconEnum.BACK_BLUE} size={24} />
+                    <Icon name={IconEnum.BACK_BLUE} size={22} />
                 </TouchableOpacity>
                 <View style={ChatScreenHeaderStyle.contentContainer}>
                     <ProfilePhoto name={name} size={42} />
-                    <Text style={ChatScreenHeaderStyle.nameText}>{name}</Text>
+                    <View style={ChatScreenHeaderStyle.namesView}>
+                        <Text style={ChatScreenHeaderStyle.nameText}>
+                            {name}
+                        </Text>
+                        <Text style={ChatScreenHeaderStyle.usernameText}>
+                            💬 {username}
+                        </Text>
+                    </View>
                 </View>
             </View>
             <TouchableOpacity
@@ -33,7 +41,7 @@ export const ChatScreenHeader = ({
                 hitSlop={10}
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.SharedScreen, {
-                        receiverId: userId
+                        receiverId: id
                     })
                 }
                 style={ChatScreenHeaderStyle.sharedButtonView}

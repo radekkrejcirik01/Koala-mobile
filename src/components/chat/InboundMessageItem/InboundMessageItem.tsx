@@ -8,13 +8,16 @@ import { InboundMessageItemProps } from '@components/chat/InboundMessageItem/Inb
 import { InboundMessageItemStyle } from '@components/chat/InboundMessageItem/InboundMessageItem.style';
 import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
 import { getMessageTime } from '@functions/getMessageTime';
+import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 
 export const InboundMessageItem = ({
+    name,
     children,
     onLongPress,
     time,
     replyMessage,
-    audioMessage
+    audioMessage,
+    isLast
 }: InboundMessageItemProps): React.JSX.Element => {
     function isEmojiOnly(str: string): boolean {
         const emojiRegex = /^(?:[\p{Emoji}\p{Mark}\p{Zs}\u{200D}])*$/u;
@@ -23,13 +26,32 @@ export const InboundMessageItem = ({
     }
 
     return (
-        <GestureHandlerRootView style={InboundMessageItemStyle.container}>
+        <GestureHandlerRootView
+            style={[
+                InboundMessageItemStyle.container,
+                isLast && InboundMessageItemStyle.marginBottom
+            ]}
+        >
+            {isLast ? (
+                <ProfilePhoto
+                    name={name}
+                    size={32}
+                    acronymStyle={InboundMessageItemStyle.acronym}
+                    style={InboundMessageItemStyle.alignSelf}
+                />
+            ) : (
+                <View style={InboundMessageItemStyle.emptyView} />
+            )}
             <Swipeable
                 renderLeftActions={() => (
                     <Text style={InboundMessageItemStyle.timeText}>
                         {getMessageTime(time)}
                     </Text>
                 )}
+                containerStyle={InboundMessageItemStyle.contentContainer}
+                childrenContainerStyle={
+                    InboundMessageItemStyle.childrenContainer
+                }
             >
                 {!!replyMessage && (
                     <View style={InboundMessageItemStyle.replyMessageView}>

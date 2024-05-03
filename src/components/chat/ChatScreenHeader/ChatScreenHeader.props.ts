@@ -1,4 +1,5 @@
 export interface ChatScreenHeaderProps {
+    id: number;
+    username: string;
     name: string;
-    userId: number;
 }
