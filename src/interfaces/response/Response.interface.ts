@@ -25,6 +25,12 @@ export interface ResponseUserGetInterface {
     data?: UserInterface;
 }
 
+export interface ResponseLastOnlineGetInterface {
+    status: string;
+    message: string;
+    time?: number;
+}
+
 export interface ResponseFriendsGetInterface {
     status: string;
     message: string;

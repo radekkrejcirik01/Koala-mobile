@@ -1,9 +1,8 @@
 import moment from 'moment';
 
-export function getHourUnixTime(unix: number): string {
-    const stillUtc = moment.utc(moment.unix(Number(unix)));
-    const local = moment(stillUtc).local().format('YYYY-MM-DD HH:mm:ss');
-    const localHour = moment(local).format('HH:mm');
+export function getHourUnixTime(time: number): string {
+    const unix = moment.unix(time);
+    const local = moment(unix).format('YYYY-MM-DD HH:mm:ss');
 
-    return localHour;
+    return moment(local).format('HH:mm');
 }

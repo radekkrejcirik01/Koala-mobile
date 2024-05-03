@@ -5,7 +5,7 @@ export const ChatScreenHeaderStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         paddingBottom: 5,
-        borderBottomWidth: 0.2,
+        borderBottomWidth: 0.18,
         borderBottomColor: COLORS.LIGHTGRAY,
         flexDirection: 'row',
         alignItems: 'center',
@@ -20,6 +20,9 @@ export const ChatScreenHeaderStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
+    acronym: {
+        borderRadius: 19
+    },
     namesView: {
         marginLeft: 8
     },
@@ -33,7 +36,6 @@ export const ChatScreenHeaderStyle = StyleSheet.create({
         color: COLORS.GRAY_200
     },
     sharedButtonView: {
-        marginRight: 5,
         marginBottom: 5
     }
 });

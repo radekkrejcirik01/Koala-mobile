@@ -10,6 +10,7 @@ import { Expressions } from '@components/home/Expressions/Expressions';
 import { Messages } from '@components/home/Messages/Messages';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
+import { OnlineService } from '@utils/general/OnlineService';
 
 export const HomeScreen = (): React.JSX.Element => {
     useNotifications();
@@ -18,6 +19,7 @@ export const HomeScreen = (): React.JSX.Element => {
     useAppState(() => {
         NotificationsService.getUnseenNotifications();
         MessagingService.initMessaging().catch();
+        OnlineService.update();
         if (Platform.OS === 'ios') {
             PushNotificationIOS.setApplicationIconBadgeNumber(0);
         }

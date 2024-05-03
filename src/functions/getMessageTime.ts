@@ -1,8 +1,8 @@
 import moment from 'moment';
 
 export function getMessageTime(time: number): string {
-    const stillUtc = moment.utc(moment.unix(Number(time)));
-    const local = moment(stillUtc).local().format('YYYY-MM-DD HH:mm:ss');
+    const unix = moment.unix(time);
+    const local = moment(unix).format('YYYY-MM-DD HH:mm:ss');
 
     const today = moment().format('D. M.');
 

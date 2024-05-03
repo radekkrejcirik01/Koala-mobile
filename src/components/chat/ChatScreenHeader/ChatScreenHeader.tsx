@@ -1,6 +1,7 @@
-import React, { JSX } from 'react';
+import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
+import { useAppState } from '@hooks/useAppState';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ChatScreenHeaderStyle } from '@components/chat/ChatScreenHeader/ChatScreenHeader.style';
@@ -8,6 +9,9 @@ import { ChatScreenHeaderProps } from '@components/chat/ChatScreenHeader/ChatScr
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { getRequest } from '@utils/Axios/Axios.service';
+import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
+import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 
 export const ChatScreenHeader = ({
     id,
@@ -18,6 +22,30 @@ export const ChatScreenHeader = ({
         RootStackNavigatorEnum.AccountStack
     );
 
+    const [showUsername, setShowUsername] = useState<boolean>(true);
+    const [lastOnline, setLastOnline] = useState<number>(0);
+
+    const getLastOnlineTime = useCallback(() => {
+        getRequest<ResponseLastOnlineGetInterface>(
+            `last-online/${id}`
+        ).subscribe((response: ResponseLastOnlineGetInterface) => {
+            if (response?.status && !!response?.time) {
+                setShowUsername(false);
+                setLastOnline(response?.time);
+
+                setTimeout(() => {
+                    setShowUsername(true);
+                }, 7000);
+            }
+        });
+    }, [id]);
+
+    useAppState(getLastOnlineTime);
+
+    useEffect(() => {
+        getLastOnlineTime();
+    }, [getLastOnlineTime]);
+
     return (
         <View style={ChatScreenHeaderStyle.container}>
             <View style={ChatScreenHeaderStyle.centerRow}>
@@ -25,13 +53,20 @@ export const ChatScreenHeader = ({
                     <Icon name={IconEnum.BACK_BLUE} size={22} />
                 </TouchableOpacity>
                 <View style={ChatScreenHeaderStyle.contentContainer}>
-                    <ProfilePhoto name={name} size={42} />
+                    <ProfilePhoto
+                        name={name}
+                        size={42}
+                        acronymStyle={ChatScreenHeaderStyle.acronym}
+                    />
                     <View style={ChatScreenHeaderStyle.namesView}>
                         <Text style={ChatScreenHeaderStyle.nameText}>
                             {name}
                         </Text>
                         <Text style={ChatScreenHeaderStyle.usernameText}>
-                            💬 {username}
+                            💬{' '}
+                            {showUsername
+                                ? username
+                                : getChatOnlineStatus(lastOnline)}
                         </Text>
                     </View>
                 </View>
