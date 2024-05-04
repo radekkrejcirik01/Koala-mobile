@@ -35,11 +35,12 @@ export const ChatInputStyle = StyleSheet.create({
     },
     inputView: {
         flex: 1,
-        minHeight: 44,
+        minHeight: 42,
         marginLeft: 6,
         marginRight: 4,
         paddingVertical: 4,
-        paddingHorizontal: 14,
+        paddingLeft: 14,
+        paddingRight: 10,
         borderRadius: 20,
         backgroundColor: 'whitesmoke',
         flexDirection: 'row',
@@ -47,7 +48,7 @@ export const ChatInputStyle = StyleSheet.create({
     },
     input: {
         flex: 1,
-        paddingLeft: 10,
+        paddingLeft: 2,
         paddingRight: 20,
         paddingTop: 0, // overwrite default value
         paddingBottom: 0, // overwrite default value
@@ -63,6 +64,7 @@ export const ChatInputStyle = StyleSheet.create({
         right: -1
     },
     microphoneButtonView: {
+        marginRight: 8,
         alignItems: 'center',
         justifyContent: 'center'
     }

@@ -63,7 +63,7 @@ export const ChatScreenHeader = ({
                             {name}
                         </Text>
                         <Text style={ChatScreenHeaderStyle.usernameText}>
-                            💬{' '}
+                            🪴{' '}
                             {showUsername
                                 ? username
                                 : getChatOnlineStatus(lastOnline)}

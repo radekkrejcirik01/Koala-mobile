@@ -4,11 +4,12 @@ import COLORS from '@constants/COLORS';
 export const RecordingInputStyle = StyleSheet.create({
     container: {
         flex: 1,
-        minHeight: 44,
+        minHeight: 42,
         marginLeft: 6,
         marginRight: 4,
         paddingVertical: 4,
-        paddingHorizontal: 14,
+        paddingLeft: 14,
+        paddingRight: 10,
         borderRadius: 20,
         backgroundColor: 'whitesmoke',
         flexDirection: 'row',

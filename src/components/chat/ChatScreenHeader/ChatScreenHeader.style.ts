@@ -5,7 +5,7 @@ export const ChatScreenHeaderStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         paddingBottom: 5,
-        borderBottomWidth: 0.18,
+        borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: COLORS.LIGHTGRAY,
         flexDirection: 'row',
         alignItems: 'center',
