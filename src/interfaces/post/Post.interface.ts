@@ -30,28 +30,21 @@ export interface EmotionPostInterface {
     tip2: string;
 }
 
-export interface EmotionNotificationPostInterface {
-    senderId: number;
-    receiversIds: number[];
-    name: string;
+export interface EmotionMessagePostInterface {
+    ids: number[];
     message: string;
 }
 
-export interface StatusReplyNotificationPostInterface {
-    senderId: number;
+export interface StatusReplyMessagePostInterface {
     receiverId: number;
-    name: string;
     message: string;
     replyExpression: string;
 }
 
-export interface MessageNotificationPostInterface {
-    senderId: number;
-    receiverId: number;
-    receiver: string;
-    name: string;
-    message: string;
+export interface MessagePostInterface {
     conversationId: number;
+    receiverId: number;
+    message: string;
     replyMessage?: string;
     audioBuffer?: string;
 }
@@ -59,11 +52,6 @@ export interface MessageNotificationPostInterface {
 export interface ExpressionPostInterface {
     userId: number;
     expression: string;
-}
-
-export interface RecordingPostInterface {
-    buffer: string;
-    platform: string;
 }
 
 export interface PasswordResetPostInterface {

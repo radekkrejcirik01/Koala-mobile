@@ -20,7 +20,7 @@ import {
     ResponseConversationGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { MessageNotificationPostInterface } from '@interfaces/post/Post.interface';
+import { MessagePostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
@@ -30,11 +30,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const { id, senderId, name, username, conversationId, isStatusReply } =
         route.params;
 
-    const {
-        id: userId,
-        name: userName,
-        username: userUsername
-    } = useSelector((state: ReducerProps) => state.user.user);
+    const { username: userUsername } = useSelector(
+        (state: ReducerProps) => state.user.user
+    );
 
     const { top, bottom } = useSafeAreaInsets();
 
@@ -139,19 +137,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 base64Buffer = await fs.readFile(audioRecord, 'base64');
             }
 
-            postRequest<ResponseInterface, MessageNotificationPostInterface>(
-                'message-notification',
-                {
-                    senderId: userId,
-                    receiverId: senderId,
-                    receiver: username,
-                    name: userName,
-                    message: text || message,
-                    conversationId: conversationId || id,
-                    replyMessage,
-                    audioBuffer: text ? '' : base64Buffer
-                }
-            ).subscribe();
+            postRequest<ResponseInterface, MessagePostInterface>('message', {
+                conversationId: conversationId || id,
+                receiverId: senderId,
+                message: text || message,
+                replyMessage,
+                audioBuffer: text ? '' : base64Buffer
+            }).subscribe();
         },
         [
             audioRecord,
@@ -160,10 +152,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             message,
             replyMessage,
             senderId,
-            userId,
-            userName,
-            userUsername,
-            username
+            userUsername
         ]
     );
 

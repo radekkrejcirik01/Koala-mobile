@@ -1,10 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
-import { StatusReplyNotificationPostInterface } from '@interfaces/post/Post.interface';
-import { ReducerProps } from '@store/index/index.props';
+import { StatusReplyMessagePostInterface } from '@interfaces/post/Post.interface';
 import { StatusReplyModalScreenProps } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen.props';
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
@@ -14,21 +12,14 @@ import { StatusReplyModalScreenStyle } from '@components/home/StatusReplyModalSc
 export const StatusReplyModalScreen = ({
     item
 }: StatusReplyModalScreenProps): React.JSX.Element => {
-    const { id: userId, name } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
-
     const [message, setMessage] = useState<string>();
-
     const [sent, setSent] = useState<boolean>(false);
 
     const reply = useCallback(() => {
-        postRequest<ResponseInterface, StatusReplyNotificationPostInterface>(
-            'status-reply-notification',
+        postRequest<ResponseInterface, StatusReplyMessagePostInterface>(
+            'status-reply-message',
             {
-                senderId: userId,
                 receiverId: item.userId,
-                name,
                 message,
                 replyExpression: item.expression
             }
@@ -37,7 +28,7 @@ export const StatusReplyModalScreen = ({
                 setSent(true);
             }
         });
-    }, [item.expression, item.userId, message, name, userId]);
+    }, [item.expression, item.userId, message]);
 
     return (
         <View style={StatusReplyModalScreenStyle.container}>

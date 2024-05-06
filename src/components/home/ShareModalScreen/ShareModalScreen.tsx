@@ -6,7 +6,6 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
 import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
@@ -17,8 +16,7 @@ import {
     ResponseFriendsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { EmotionNotificationPostInterface } from '@interfaces/post/Post.interface';
-import { ReducerProps } from '@store/index/index.props';
+import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
@@ -27,10 +25,6 @@ export const ShareModalScreen = ({
     item,
     onAddFriendPress
 }: ShareModalScreenProps): React.JSX.Element => {
-    const { id: userId, name } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
-
     const { bottom } = useSafeAreaInsets();
 
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -68,12 +62,10 @@ export const ShareModalScreen = ({
     const onSend = () => {
         if (selectedFriends.current?.length) {
             setSending(true);
-            postRequest<ResponseInterface, EmotionNotificationPostInterface>(
-                'emotion-notification',
+            postRequest<ResponseInterface, EmotionMessagePostInterface>(
+                'emotion-message',
                 {
-                    senderId: userId,
-                    receiversIds: selectedFriends.current,
-                    name,
+                    ids: selectedFriends.current,
                     message: item.message
                 }
             ).subscribe((response: ResponseInterface) => {

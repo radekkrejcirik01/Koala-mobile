@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
 import { UserInterface } from '@interfaces/general.interface';
@@ -16,8 +15,7 @@ import {
     ResponseFriendsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { EmotionNotificationPostInterface } from '@interfaces/post/Post.interface';
-import { ReducerProps } from '@store/index/index.props';
+import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
@@ -27,10 +25,6 @@ import { DirectEmotionModalScreenStyle } from '@components/home/DirectEmotionMod
 export const DirectEmotionModalScreen = ({
     onAddFriendPress
 }: DirectEmotionModalScreenProps): React.JSX.Element => {
-    const { id: userId, name } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
-
     const { bottom } = useSafeAreaInsets();
 
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -71,19 +65,17 @@ export const DirectEmotionModalScreen = ({
             Alert.alert('Please write a message first');
             return;
         }
-
         if (!selectedFriends.current?.length) {
             Alert.alert('Please select a friend first');
             return;
         }
 
         setSending(true);
-        postRequest<ResponseInterface, EmotionNotificationPostInterface>(
-            'emotion-notification',
+
+        postRequest<ResponseInterface, EmotionMessagePostInterface>(
+            'emotion-message',
             {
-                senderId: userId,
-                receiversIds: selectedFriends.current,
-                name,
+                ids: selectedFriends.current,
                 message
             }
         ).subscribe((response: ResponseInterface) => {
@@ -92,7 +84,7 @@ export const DirectEmotionModalScreen = ({
                 setSent(true);
             }
         });
-    }, [message, name, userId]);
+    }, [message]);
 
     return (
         <View
