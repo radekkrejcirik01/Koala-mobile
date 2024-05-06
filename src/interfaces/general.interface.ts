@@ -21,8 +21,6 @@ export interface NotificationInterface {
     time: number;
     seen: number;
     conversationId?: number;
-    emotion?: string;
-    expression?: string;
 }
 
 export interface ConversationInterface {
