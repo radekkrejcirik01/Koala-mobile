@@ -12,13 +12,13 @@ export const ChatList = ({
     conversation,
     onMessageLongPress
 }: ChatListProps): React.JSX.Element => {
-    const { username } = useSelector((state: ReducerProps) => state.user.user);
+    const { id } = useSelector((state: ReducerProps) => state.user.user);
 
     const scrollViewRef = useRef(null);
 
-    const isInbound = useCallback(
-        (receiver: string): boolean => receiver === username,
-        [username]
+    const isOutbound = useCallback(
+        (senderId: number): boolean => senderId === id,
+        [id]
     );
 
     return (
@@ -28,21 +28,7 @@ export const ChatList = ({
             contentContainerStyle={ChatListStyle.container}
         >
             {conversation?.map((value, index) =>
-                isInbound(value.receiver) ? (
-                    <InboundMessageItem
-                        key={value.id}
-                        name={name}
-                        onLongPress={() => onMessageLongPress(value)}
-                        time={value.time}
-                        replyMessage={value?.replyMessage}
-                        audioMessage={value?.audioMessage}
-                        isLast={
-                            value?.sender !== conversation[index + 1]?.sender
-                        }
-                    >
-                        {value.message}
-                    </InboundMessageItem>
-                ) : (
+                isOutbound(value.senderId) ? (
                     <OutboundMessageItem
                         onLongPress={() => onMessageLongPress(value)}
                         key={value.id}
@@ -52,6 +38,21 @@ export const ChatList = ({
                     >
                         {value.message}
                     </OutboundMessageItem>
+                ) : (
+                    <InboundMessageItem
+                        key={value.id}
+                        name={name}
+                        onLongPress={() => onMessageLongPress(value)}
+                        time={value.time}
+                        replyMessage={value?.replyMessage}
+                        audioMessage={value?.audioMessage}
+                        isLast={
+                            value?.senderId !==
+                            conversation[index + 1]?.senderId
+                        }
+                    >
+                        {value.message}
+                    </InboundMessageItem>
                 )
             )}
         </ScrollView>

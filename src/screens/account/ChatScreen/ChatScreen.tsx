@@ -30,7 +30,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const { id, senderId, name, username, conversationId, isStatusReply } =
         route.params;
 
-    const { username: userUsername } = useSelector(
+    const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
     );
 
@@ -60,16 +60,16 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             if (isStatusReply) {
                 return false;
             }
+            if (data[0]?.senderId === userId) {
+                return false;
+            }
 
             const receivedMessages = data?.filter(
-                (e: ConversationInterface) => e?.sender === username
+                (e: ConversationInterface) => e?.senderId !== userId
             );
-
-            return (
-                data[0]?.sender === username && receivedMessages?.length === 1
-            );
+            return receivedMessages?.length === 1;
         },
-        [isStatusReply, username]
+        [isStatusReply, userId]
     );
 
     const updateSeenNotification = useCallback(() => {
@@ -123,8 +123,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             setConversation((prevState) =>
                 prevState.concat({
                     id: prevState[prevState?.length - 1].id + 1,
-                    sender: userUsername,
-                    receiver: '',
+                    senderId: userId,
                     message: text || message,
                     time: moment().unix(),
                     replyMessage,
@@ -152,7 +151,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             message,
             replyMessage,
             senderId,
-            userUsername
+            userId
         ]
     );
 

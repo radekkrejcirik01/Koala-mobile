@@ -25,8 +25,7 @@ export interface NotificationInterface {
 
 export interface ConversationInterface {
     id: number;
-    sender: string;
-    receiver: string;
+    senderId: number;
     message: string;
     time: number;
     replyMessage?: string;
