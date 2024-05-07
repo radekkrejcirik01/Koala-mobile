@@ -30,7 +30,7 @@ export const StatusModalScreenStyle = StyleSheet.create({
         margin: 20,
         padding: 15,
         borderRadius: 10,
-        backgroundColor: 'whitesmoke'
+        backgroundColor: COLORS.WHITE_100
     },
     expressionButtonText: {
         color: COLORS.BLACK,

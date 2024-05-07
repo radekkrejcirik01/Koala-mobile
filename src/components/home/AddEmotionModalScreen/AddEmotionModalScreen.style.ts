@@ -26,7 +26,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         borderRadius: 20,
         fontSize: 16,
         color: COLORS.GRAY_200,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         fontWeight: '500'
     },
     messageInput: {
@@ -37,7 +37,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         borderRadius: 20,
         fontSize: 16,
         color: COLORS.GRAY_200,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         fontWeight: '500'
     },
     messageDescriptionText: {
@@ -50,7 +50,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         borderRadius: 20,
         fontSize: 16,
         color: COLORS.GRAY_200,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         fontWeight: '500'
     },
     addContainer: {

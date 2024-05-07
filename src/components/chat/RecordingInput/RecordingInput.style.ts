@@ -11,7 +11,7 @@ export const RecordingInputStyle = StyleSheet.create({
         paddingLeft: 14,
         paddingRight: 10,
         borderRadius: 20,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'

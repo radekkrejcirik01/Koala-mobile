@@ -20,7 +20,7 @@ export const AccountScreenStyle = StyleSheet.create({
         borderRadius: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: 'whitesmoke'
+        backgroundColor: COLORS.WHITE_100
     },
     buttonText: {
         fontSize: 16,

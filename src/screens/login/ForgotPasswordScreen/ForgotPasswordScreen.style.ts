@@ -18,7 +18,7 @@ export const ForgotPasswordScreenStyle = StyleSheet.create({
         borderRadius: 10,
         fontSize: 16,
         color: COLORS.GRAY_200,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         fontWeight: '500'
     },
     buttonView: {

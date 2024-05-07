@@ -19,7 +19,7 @@ export const FourthScreenStyle = StyleSheet.create({
         borderRadius: 10,
         fontSize: 20,
         color: COLORS.BLACK,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         fontWeight: 'bold'
     },
     margin5: {

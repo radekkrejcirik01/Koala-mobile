@@ -28,7 +28,7 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
         paddingLeft: 12,
         paddingRight: 8,
         borderRadius: 20,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         flexDirection: 'row'
     },
     input: {

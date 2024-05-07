@@ -14,7 +14,7 @@ export const LoginScreenStyle = StyleSheet.create({
         borderRadius: 10,
         fontSize: 16,
         color: COLORS.BLACK,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLORS.WHITE_100,
         fontWeight: 'bold'
     },
     buttonView: {

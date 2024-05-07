@@ -32,7 +32,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     },
     buttonsContainer: {
         borderRadius: 10,
-        backgroundColor: 'whitesmoke'
+        backgroundColor: COLORS.WHITE_100
     },
     buttonView: {
         paddingVertical: 12,

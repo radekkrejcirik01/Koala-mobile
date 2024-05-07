@@ -1,16 +1,7 @@
 export default {
     RED: '#FF0000',
-    MAIN_RED: '#ff5555',
-    MAIN_RED_100: '#ff5050',
-    MAIN_BLUE: '#634bed',
-    MAIN_WHITE: '#ffd9b3',
-    MAIN_WHITE_100: '#ffb366',
-    MAIN_BROWN: '#cc6600',
-    MAIN_BLUE_100: '#735def',
-    MAIN_ORANGE: '#ff8c1a',
-    MAIN_GREEN: '#00b300',
-    MESSAGE_BLUE: '#3366ff',
     WHITE: '#ffffff',
+    WHITE_100: 'whitesmoke',
     GRAY_100: '#262626',
     GRAY_200: '#8c8c8c',
     GRAY_300: '#0d0d0d',
@@ -26,13 +17,5 @@ export default {
     BLACK_100: '#4d4d4d',
     BLACK_200: '#262626',
     BLACK_300: '#1a1a1a',
-    BUTTON_BLUE: '#0099ff',
-    PASTEL_PURPLE: '#A275E3',
-    PASTEL_PURPLE_100: '#c6aaee',
-    PASTEL_ORANGE: '#FF9D76',
-    PASTEL_ORANGE_100: '#ffc8b3',
-    PASTEL_BLUE: '#7692E4',
-    PASTEL_BLUE_100: '#aabbee',
-    PASTEL_RED: '#FD5959',
-    PASTEL_RED_100: '#fe9a9a'
+    BUTTON_BLUE: '#0099ff'
 };
