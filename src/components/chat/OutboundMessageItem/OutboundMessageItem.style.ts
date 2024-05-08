@@ -3,24 +3,24 @@ import COLORS from '@constants/COLORS';
 
 export const OutboundMessageItemStyle = StyleSheet.create({
     container: {
-        maxWidth: '80%',
         minHeight: 32,
         marginTop: 5,
         backgroundColor: COLORS.WHITE,
-        alignSelf: 'flex-end',
         flexDirection: 'row',
         alignItems: 'center'
     },
     contentContainer: {
+        alignItems: 'flex-end',
         flex: 1
     },
     childrenContainer: {
+        maxWidth: '70%',
         paddingRight: 5,
         backgroundColor: COLORS.WHITE
     },
     timeText: {
         marginRight: 5,
-        marginLeft: 15,
+        marginLeft: 10,
         paddingBottom: 5,
         fontSize: 12,
         color: COLORS.GRAY_200,
@@ -45,7 +45,6 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         marginBottom: 2,
         color: COLORS.BLACK_50,
         backgroundColor: COLORS.WHITE,
-        textAlign: 'right',
         fontWeight: '600'
     },
     largeText: {

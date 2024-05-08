@@ -48,6 +48,7 @@ export const OutboundMessageItem = ({
                     <TouchableOpacity
                         activeOpacity={1}
                         delayLongPress={150}
+                        hitSlop={10}
                         onLongPress={onLongPress}
                     >
                         <Text

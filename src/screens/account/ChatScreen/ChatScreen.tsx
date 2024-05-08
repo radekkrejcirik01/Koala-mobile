@@ -8,6 +8,7 @@ import messaging, {
 import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import fs from 'react-native-fs';
+import { useAppState } from '@hooks/useAppState';
 import { ChatScreenHeader } from '@components/chat/ChatScreenHeader/ChatScreenHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
@@ -117,6 +118,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             ),
         [getConversation]
     );
+
+    useAppState(() => getConversation(false));
 
     const send = useCallback(
         async (text?: string) => {

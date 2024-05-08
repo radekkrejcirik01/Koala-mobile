@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const InboundMessageItemStyle = StyleSheet.create({
     container: {
-        maxWidth: '80%',
         marginTop: 5,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row',
@@ -27,12 +26,13 @@ export const InboundMessageItemStyle = StyleSheet.create({
         marginLeft: 5
     },
     childrenContainer: {
+        maxWidth: '70%',
         paddingLeft: 5,
         backgroundColor: COLORS.WHITE
     },
     timeText: {
         marginLeft: 5,
-        marginRight: 15,
+        marginRight: 10,
         paddingBottom: 5,
         fontSize: 12,
         color: COLORS.GRAY_200,

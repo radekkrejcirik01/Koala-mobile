@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsScreenHeaderStyle = StyleSheet.create({
     container: {
-        paddingTop: 10,
+        paddingVertical: 10,
         paddingLeft: 5,
         paddingRight: 8,
         flexDirection: 'row',
