@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback } from 'react';
 import { ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props';
@@ -8,13 +8,12 @@ import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 
 export const ChatList = ({
+    scrollViewRef,
     name,
     conversation,
     onMessageLongPress
 }: ChatListProps): React.JSX.Element => {
     const { id } = useSelector((state: ReducerProps) => state.user.user);
-
-    const scrollViewRef = useRef(null);
 
     const isOutbound = useCallback(
         (senderId: number): boolean => senderId === id,

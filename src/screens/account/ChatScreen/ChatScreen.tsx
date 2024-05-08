@@ -235,6 +235,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         >
             <ChatScreenHeader id={senderId} username={username} name={name} />
             <ChatList
+                scrollViewRef={scrollViewRef}
                 name={name}
                 conversation={conversation}
                 onMessageLongPress={onMessageLongPress}
