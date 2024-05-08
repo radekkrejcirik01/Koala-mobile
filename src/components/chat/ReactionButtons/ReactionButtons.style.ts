@@ -6,12 +6,16 @@ export const ReactionButtonsStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE
     },
     container: {
-        paddingHorizontal: 6
+        paddingHorizontal: 50,
+        paddingBottom: 25,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     },
     buttonView: {
         minWidth: 70,
+        marginVertical: 4,
         marginHorizontal: 2,
-        marginBottom: 4,
         padding: 10,
         borderRadius: 20,
         backgroundColor: '#00000010',
@@ -20,5 +24,17 @@ export const ReactionButtonsStyle = StyleSheet.create({
     buttonText: {
         color: COLORS.BLACK_50,
         fontWeight: '500'
+    },
+    addView: {
+        width: '100%',
+        marginTop: 20,
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+    addText: {
+        color: COLORS.BUTTON_BLUE
+    },
+    activityIndicator: {
+        marginBottom: 100
     }
 });

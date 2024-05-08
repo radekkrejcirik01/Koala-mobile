@@ -7,6 +7,7 @@ import {
     NotificationInterface,
     UserInterface
 } from '@interfaces/general.interface';
+import { ReactionButtonInterface } from '@components/chat/ReactionButtons/ReactionButtons.props';
 
 export interface ResponseInterface {
     status: string;
@@ -84,4 +85,10 @@ export interface ResponseRecordingPostInterface {
     status: string;
     message: string;
     url: string;
+}
+
+export interface ResponseRepliesGetInterface {
+    status: string;
+    message: string;
+    data: ReactionButtonInterface[];
 }

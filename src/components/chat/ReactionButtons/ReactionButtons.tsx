@@ -1,51 +1,127 @@
-import React from 'react';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+    ActivityIndicator,
+    Alert,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
+import { useSelector } from 'react-redux';
 import {
     ReactionButtonInterface,
     ReactionButtonsProps
 } from '@components/chat/ReactionButtons/ReactionButtons.props';
 import { ReactionButtonsStyle } from '@components/chat/ReactionButtons/ReactionButtons.style';
+import {
+    deleteRequest,
+    getRequest,
+    postRequest
+} from '@utils/Axios/Axios.service';
+import {
+    ResponseInterface,
+    ResponseRepliesGetInterface
+} from '@interfaces/response/Response.interface';
+import { ReplyPostInterface } from '@interfaces/post/Post.interface';
+import { ReducerProps } from '@store/index/index.props';
+import { REPLIES } from '@components/chat/ReactionButtons/ReactionButtons.const';
+import COLORS from '@constants/COLORS';
 
 export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
-    const list: ReactionButtonInterface[] = [
-        {
-            id: 1,
-            message: 'Sending support ❤️'
+    const { id: userId } = useSelector(
+        (state: ReducerProps) => state.user.user
+    );
+
+    const [replies, setReplies] = useState<ReactionButtonInterface[]>([]);
+    const [loaded, setLoad] = useState<boolean>(false);
+
+    const getReplies = useCallback(() => {
+        getRequest<ResponseRepliesGetInterface>(`replies/${userId}`).subscribe(
+            (response: ResponseRepliesGetInterface) => {
+                setLoad(true);
+
+                if (response?.status && !!response?.data?.length) {
+                    setReplies([...REPLIES, ...response?.data]);
+                } else {
+                    setReplies(REPLIES);
+                }
+            }
+        );
+    }, [userId]);
+
+    useEffect(() => {
+        getReplies();
+    }, [getReplies]);
+
+    const add = useCallback(() => {
+        Alert.prompt(
+            'Add reply',
+            '',
+            (value: string) => {
+                postRequest<ResponseInterface, ReplyPostInterface>('reply', {
+                    message: value
+                }).subscribe((response) => {
+                    if (response?.status) {
+                        getReplies();
+                    }
+                });
+            },
+            undefined,
+            ''
+        );
+    }, [getReplies]);
+
+    const remove = useCallback(
+        (item: ReactionButtonInterface) => {
+            if (item.id <= 6) {
+                return;
+            }
+
+            Alert.alert(item.message, '', [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Remove reply',
+                    onPress: () => {
+                        deleteRequest<ResponseInterface>(
+                            `reply/${item.id}`
+                        ).subscribe((response: ResponseInterface) => {
+                            if (response?.status) {
+                                getReplies();
+                            }
+                        });
+                    },
+                    style: 'destructive'
+                }
+            ]);
         },
-        {
-            id: 2,
-            message: 'I am here 🫶'
-        },
-        {
-            id: 3,
-            message: 'You got this!'
-        },
-        {
-            id: 4,
-            message: 'What happened?'
-        },
-        {
-            id: 5,
-            message: 'Can I do something?'
-        },
-        {
-            id: 6,
-            message: '😞'
-        }
-    ];
+        [getReplies]
+    );
+
+    if (!loaded) {
+        return (
+            <ActivityIndicator
+                color={COLORS.BUTTON_BLUE}
+                style={ReactionButtonsStyle.activityIndicator}
+            />
+        );
+    }
 
     return (
         <ScrollView
-            horizontal
             showsHorizontalScrollIndicator={false}
             style={ReactionButtonsStyle.scrollView}
             contentContainerStyle={ReactionButtonsStyle.container}
         >
-            {list.map((value) => (
+            {replies?.map((value, index) => (
                 <TouchableOpacity
-                    key={value.id}
+                    key={value.id + index.toString()}
                     activeOpacity={0.9}
+                    delayLongPress={150}
                     onPress={() => onPressReaction(value.message)}
+                    onLongPress={() => remove(value)}
                     style={ReactionButtonsStyle.buttonView}
                 >
                     <Text style={ReactionButtonsStyle.buttonText}>
@@ -53,6 +129,15 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
                     </Text>
                 </TouchableOpacity>
             ))}
+            <View style={ReactionButtonsStyle.addView}>
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={add}
+                    hitSlop={10}
+                >
+                    <Text style={ReactionButtonsStyle.addText}>Add +</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };

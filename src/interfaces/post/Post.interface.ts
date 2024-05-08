@@ -59,3 +59,7 @@ export interface PasswordResetPostInterface {
     email: string;
     friends: string;
 }
+
+export interface ReplyPostInterface {
+    message: string;
+}
