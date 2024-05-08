@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
@@ -13,6 +13,7 @@ import { ChatScreenHeader } from '@components/chat/ChatScreenHeader/ChatScreenHe
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
 import {
+    deleteRequest,
     getRequest,
     postRequest,
     putRequest
@@ -44,6 +45,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const [reactionButtons, setReactionButtons] = useState<boolean>(false);
     const [replyMessage, setReplyMessage] = useState<string>('');
     const [audioRecord, setAudioRecord] = useState<string>('');
+    const [loaded, setLoaded] = useState<boolean>();
 
     const scrollViewRef = useRef(null);
     const inputRef = useRef(null);
@@ -81,6 +83,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
     const getConversation = useCallback(
         (scroll = true) => {
+            setLoaded(false);
             getRequest<ResponseConversationGetInterface>(
                 `conversation/${conversationId || id}`
             ).subscribe((response: ResponseConversationGetInterface) => {
@@ -96,6 +99,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     if (data?.length >= 10 && scroll) {
                         scrollToEnd();
                     }
+
+                    setLoaded(true);
                 }
             });
         },
@@ -139,17 +144,23 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 base64Buffer = await fs.readFile(audioRecord, 'base64');
             }
 
+            setLoaded(false);
             postRequest<ResponseInterface, MessagePostInterface>('message', {
                 conversationId: conversationId || id,
                 receiverId: senderId,
                 message: text || message,
                 replyMessage,
                 audioBuffer: text ? '' : base64Buffer
-            }).subscribe();
+            }).subscribe((response) => {
+                if (response?.status) {
+                    getConversation(false);
+                }
+            });
         },
         [
             audioRecord,
             conversationId,
+            getConversation,
             id,
             message,
             replyMessage,
@@ -158,12 +169,46 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         ]
     );
 
-    const onMessageLongPress = useCallback((item: ConversationInterface) => {
-        inputRef.current.focus();
-        setReplyMessage(item.message);
+    const deleteMessage = useCallback(
+        (messageId: number) => {
+            if (!loaded) {
+                return;
+            }
 
-        ReactNativeHapticFeedback.trigger('impactLight');
-    }, []);
+            deleteRequest<ResponseInterface>(`message/${messageId}`).subscribe(
+                (response: ResponseInterface) => {
+                    if (response?.status) {
+                        getConversation(false);
+                    }
+                }
+            );
+        },
+        [getConversation, loaded]
+    );
+
+    const onMessageLongPress = useCallback(
+        (item: ConversationInterface) => {
+            ReactNativeHapticFeedback.trigger('impactLight');
+
+            if (item?.senderId === userId) {
+                Alert.alert(item.message || '🎤 Voice message', '', [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel'
+                    },
+                    {
+                        text: 'Delete for everybody',
+                        onPress: () => deleteMessage(item.id),
+                        style: 'destructive'
+                    }
+                ]);
+            } else {
+                inputRef.current.focus();
+                setReplyMessage(item.message);
+            }
+        },
+        [deleteMessage, userId]
+    );
 
     const onPressReaction = useCallback(
         (value: string) => {

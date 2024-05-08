@@ -42,15 +42,18 @@ export const OutboundMessageItem = ({
                         </Text>
                     </View>
                 )}
-                {audioMessage ? (
-                    <AudioMessageItem audioMessage={audioMessage} outbound />
-                ) : (
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        delayLongPress={150}
-                        hitSlop={10}
-                        onLongPress={onLongPress}
-                    >
+                <TouchableOpacity
+                    activeOpacity={1}
+                    delayLongPress={150}
+                    hitSlop={10}
+                    onLongPress={onLongPress}
+                >
+                    {audioMessage ? (
+                        <AudioMessageItem
+                            audioMessage={audioMessage}
+                            outbound
+                        />
+                    ) : (
                         <Text
                             style={[
                                 OutboundMessageItemStyle.messageText,
@@ -60,8 +63,8 @@ export const OutboundMessageItem = ({
                         >
                             {children}
                         </Text>
-                    </TouchableOpacity>
-                )}
+                    )}
+                </TouchableOpacity>
             </Swipeable>
         </GestureHandlerRootView>
     );
