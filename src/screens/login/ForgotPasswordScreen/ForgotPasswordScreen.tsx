@@ -63,6 +63,7 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
                 autoCorrect={false}
                 autoCapitalize="none"
                 value={email}
+                keyboardType="email-address"
                 onChangeText={setEmail}
                 style={ForgotPasswordScreenStyle.input}
             />
