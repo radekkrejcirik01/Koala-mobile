@@ -8,6 +8,7 @@ import {
     View
 } from 'react-native';
 import { useSelector } from 'react-redux';
+import { usePrompt } from '@hooks/usePrompt';
 import {
     ReactionButtonInterface,
     ReactionButtonsProps
@@ -26,11 +27,14 @@ import { ReplyPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
 import { REPLIES } from '@components/chat/ReactionButtons/ReactionButtons.const';
 import COLORS from '@constants/COLORS';
+import { Prompt } from '@components/general/Prompt/Prompt';
 
 export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
     );
+
+    const { promptVisible, showPrompt, hidePrompt } = usePrompt();
 
     const [replies, setReplies] = useState<ReactionButtonInterface[]>([]);
     const [loaded, setLoad] = useState<boolean>(false);
@@ -53,23 +57,18 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
         getReplies();
     }, [getReplies]);
 
-    const add = useCallback(() => {
-        Alert.prompt(
-            'Add reply',
-            '',
-            (value: string) => {
-                postRequest<ResponseInterface, ReplyPostInterface>('reply', {
-                    message: value
-                }).subscribe((response) => {
-                    if (response?.status) {
-                        getReplies();
-                    }
-                });
-            },
-            undefined,
-            ''
-        );
-    }, [getReplies]);
+    const add = useCallback(
+        (value: string) => {
+            postRequest<ResponseInterface, ReplyPostInterface>('reply', {
+                message: value
+            }).subscribe((response) => {
+                if (response?.status) {
+                    getReplies();
+                }
+            });
+        },
+        [getReplies]
+    );
 
     const remove = useCallback(
         (item: ReactionButtonInterface) => {
@@ -132,12 +131,18 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
             <View style={ReactionButtonsStyle.addView}>
                 <TouchableOpacity
                     activeOpacity={0.5}
-                    onPress={add}
+                    onPress={showPrompt}
                     hitSlop={10}
                 >
                     <Text style={ReactionButtonsStyle.addText}>Add +</Text>
                 </TouchableOpacity>
             </View>
+            <Prompt
+                title="Add reply"
+                isVisible={promptVisible}
+                onPressOk={add}
+                onClose={hidePrompt}
+            />
         </ScrollView>
     );
 };
