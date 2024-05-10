@@ -1,5 +1,6 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -7,10 +8,17 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { FirstIntroductionScreenStyle } from '@screens/login/FirstIntroductionScreen/FirstIntroductionScreen.style';
 
 export const FirstIntroductionScreen = (): JSX.Element => {
+    const { top } = useSafeAreaInsets();
+
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
     return (
-        <View style={FirstIntroductionScreenStyle.container}>
+        <View
+            style={[
+                FirstIntroductionScreenStyle.container,
+                { paddingTop: top + 50 }
+            ]}
+        >
             <Text style={FirstIntroductionScreenStyle.title}>
                 What can you do with Koala? 😴
             </Text>

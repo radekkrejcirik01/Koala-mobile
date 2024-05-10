@@ -1,5 +1,6 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -7,10 +8,17 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { SecondIntroductionScreenStyle } from '@screens/login/SecondIntroductionScreen/SecondIntroductionScreen.style';
 
 export const SecondIntroductionScreen = (): JSX.Element => {
+    const { top } = useSafeAreaInsets();
+
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
     return (
-        <View style={SecondIntroductionScreenStyle.container}>
+        <View
+            style={[
+                SecondIntroductionScreenStyle.container,
+                { paddingTop: top + 50 }
+            ]}
+        >
             <Text style={SecondIntroductionScreenStyle.title}>
                 How can friends reply?
             </Text>

@@ -4,17 +4,18 @@ import COLORS from '@constants/COLORS';
 export const SecondIntroductionScreenStyle = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 100,
         paddingHorizontal: 20
     },
     title: {
         fontSize: 22,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     description: {
         marginTop: 20,
         paddingRight: 35,
         fontSize: 15,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     image: {
