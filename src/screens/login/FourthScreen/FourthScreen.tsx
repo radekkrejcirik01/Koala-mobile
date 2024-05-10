@@ -75,7 +75,7 @@ export const FourthScreen = (): JSX.Element => {
         <View style={FourthScreenStyle.container}>
             <View>
                 <Text style={FourthScreenStyle.title}>
-                    Confirm with password
+                    Finish with safe password
                 </Text>
                 <TextInput
                     autoFocus
@@ -107,7 +107,7 @@ export const FourthScreen = (): JSX.Element => {
                         <ActivityIndicator color={COLORS.WHITE} />
                     ) : (
                         <Text style={FourthScreenStyle.buttonText}>
-                            Finish account
+                            Create account
                         </Text>
                     )}
                 </TouchableOpacity>

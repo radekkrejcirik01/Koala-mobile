@@ -35,7 +35,7 @@ export const ThirdScreen = (): JSX.Element => {
     return (
         <View style={ThirdScreenStyle.container}>
             <View>
-                <Text style={ThirdScreenStyle.title}>Username</Text>
+                <Text style={ThirdScreenStyle.title}>Your username</Text>
                 <TextInput
                     autoFocus
                     autoCorrect={false}

@@ -18,7 +18,9 @@ export const FirstScreen = (): JSX.Element => {
             <Text style={FirstScreenStyle.titleText}>Koala Messenger</Text>
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
+                onPress={() =>
+                    navigateTo(LoginStackNavigatorEnum.FirstIntroductionScreen)
+                }
                 style={FirstScreenStyle.startButtonView}
             >
                 <Text

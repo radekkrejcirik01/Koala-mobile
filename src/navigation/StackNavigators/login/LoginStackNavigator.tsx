@@ -17,6 +17,8 @@ import {
 } from '@navigation/StackNavigators/login/LoginStackNavigator.options';
 import { LoginScreen } from '@screens/login/LoginScreen/LoginScreen';
 import { ForgotPasswordScreen } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen';
+import { FirstIntroductionScreen } from '@screens/login/FirstIntroductionScreen/FirstIntroductionScreen';
+import { SecondIntroductionScreen } from '@screens/login/SecondIntroductionScreen/SecondIntroductionScreen';
 
 const Login = createStackNavigator<ParamListBase>();
 
@@ -25,6 +27,16 @@ export const LoginStackNavigator = (): JSX.Element => (
         <Login.Screen
             name={LoginStackNavigatorEnum.FirstScreen}
             component={FirstScreen}
+            options={NoHeader}
+        />
+        <Login.Screen
+            name={LoginStackNavigatorEnum.FirstIntroductionScreen}
+            component={FirstIntroductionScreen}
+            options={NoHeader}
+        />
+        <Login.Screen
+            name={LoginStackNavigatorEnum.SecondIntroductionScreen}
+            component={SecondIntroductionScreen}
             options={NoHeader}
         />
         <Login.Screen

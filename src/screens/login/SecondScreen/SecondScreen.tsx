@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { JSX, useCallback, useState } from 'react';
 import {
     Alert,
     KeyboardAvoidingView,
@@ -35,7 +35,9 @@ export const SecondScreen = (): JSX.Element => {
     return (
         <View style={SecondScreenStyle.container}>
             <View>
-                <Text style={SecondScreenStyle.title}>Name</Text>
+                <Text style={SecondScreenStyle.title}>
+                    {`Let's start with your name 🌱`}
+                </Text>
                 <TextInput
                     autoFocus
                     autoCorrect={false}
