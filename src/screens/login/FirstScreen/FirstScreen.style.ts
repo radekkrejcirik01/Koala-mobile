@@ -18,19 +18,8 @@ export const FirstScreenStyle = StyleSheet.create({
         color: COLORS.BLACK,
         fontWeight: 'bold'
     },
-    startButtonView: {
-        width: '100%',
-        height: 45,
-        marginTop: '80%',
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    startButtonText: {
-        fontSize: 16,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
+    startButton: {
+        marginTop: '80%'
     },
     loginButtonView: {
         marginTop: '20%'

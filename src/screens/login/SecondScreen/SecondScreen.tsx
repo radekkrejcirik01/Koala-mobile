@@ -5,7 +5,6 @@ import {
     Platform,
     Text,
     TextInput,
-    TouchableOpacity,
     View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -14,6 +13,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { setNameAction } from '@store/NewAccountReducer';
 import { SecondScreenStyle } from '@screens/login/SecondScreen/SecondScreen.style';
+import { Button } from '@components/general/Button/Button';
 
 export const SecondScreen = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -49,13 +49,7 @@ export const SecondScreen = (): JSX.Element => {
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
                 keyboardVerticalOffset={15}
             >
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={onPressNext}
-                    style={SecondScreenStyle.buttonView}
-                >
-                    <Text style={SecondScreenStyle.buttonText}>Next</Text>
-                </TouchableOpacity>
+                <Button title="Next" onPress={onPressNext} />
             </KeyboardAvoidingView>
         </View>
     );

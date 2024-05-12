@@ -5,7 +5,6 @@ import {
     Platform,
     Text,
     TextInput,
-    TouchableOpacity,
     View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -14,6 +13,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { setUsernameAction } from '@store/NewAccountReducer';
 import { ThirdScreenStyle } from '@screens/login/ThirdScreen/ThirdScreen.style';
+import { Button } from '@components/general/Button/Button';
 
 export const ThirdScreen = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -48,13 +48,7 @@ export const ThirdScreen = (): JSX.Element => {
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
                 keyboardVerticalOffset={15}
             >
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={onPressNext}
-                    style={ThirdScreenStyle.buttonView}
-                >
-                    <Text style={ThirdScreenStyle.buttonText}>Next</Text>
-                </TouchableOpacity>
+                <Button title="Next" onPress={onPressNext} />
             </KeyboardAvoidingView>
         </View>
     );

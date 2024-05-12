@@ -21,17 +21,5 @@ export const SecondScreenStyle = StyleSheet.create({
         color: COLORS.BLACK,
         backgroundColor: COLORS.WHITE_100,
         fontWeight: 'bold'
-    },
-    buttonView: {
-        height: 45,
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonText: {
-        fontSize: 16,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
     }
 });

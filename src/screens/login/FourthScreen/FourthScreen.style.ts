@@ -28,17 +28,5 @@ export const FourthScreenStyle = StyleSheet.create({
     privacyPolicyText: {
         fontSize: 12,
         color: COLORS.BLACK_100
-    },
-    buttonView: {
-        height: 45,
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonText: {
-        fontSize: 16,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
     }
 });

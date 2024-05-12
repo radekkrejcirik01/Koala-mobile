@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import {
-    ActivityIndicator,
     Alert,
     KeyboardAvoidingView,
     Platform,
@@ -22,7 +21,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
-import COLORS from '@constants/COLORS';
+import { Button } from '@components/general/Button/Button';
 
 export const FourthScreen = (): JSX.Element => {
     const { name, username } = useSelector(
@@ -98,19 +97,11 @@ export const FourthScreen = (): JSX.Element => {
                 behavior={Platform.OS === 'ios' ? 'position' : 'height'}
                 keyboardVerticalOffset={15}
             >
-                <TouchableOpacity
-                    activeOpacity={0.9}
+                <Button
+                    title="Create account"
                     onPress={createAccount}
-                    style={FourthScreenStyle.buttonView}
-                >
-                    {posting ? (
-                        <ActivityIndicator color={COLORS.WHITE} />
-                    ) : (
-                        <Text style={FourthScreenStyle.buttonText}>
-                            Create account
-                        </Text>
-                    )}
-                </TouchableOpacity>
+                    posting={posting}
+                />
             </KeyboardAvoidingView>
         </View>
     );

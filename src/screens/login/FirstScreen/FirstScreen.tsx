@@ -5,6 +5,7 @@ import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { FirstScreenStyle } from '@screens/login/FirstScreen/FirstScreen.style';
+import { Button } from '@components/general/Button/Button';
 
 export const FirstScreen = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
@@ -16,17 +17,13 @@ export const FirstScreen = (): JSX.Element => {
                 style={FirstScreenStyle.image}
             />
             <Text style={FirstScreenStyle.titleText}>Koala Messenger</Text>
-            <TouchableOpacity
-                activeOpacity={0.9}
+            <Button
+                title={`Let's start`}
                 onPress={() =>
                     navigateTo(LoginStackNavigatorEnum.FirstIntroductionScreen)
                 }
-                style={FirstScreenStyle.startButtonView}
-            >
-                <Text
-                    style={FirstScreenStyle.startButtonText}
-                >{`Let's start`}</Text>
-            </TouchableOpacity>
+                style={FirstScreenStyle.startButton}
+            />
             <TouchableOpacity
                 hitSlop={15}
                 activeOpacity={0.9}

@@ -1,11 +1,12 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { SecondIntroductionScreenStyle } from '@screens/login/SecondIntroductionScreen/SecondIntroductionScreen.style';
+import { Button } from '@components/general/Button/Button';
 
 export const SecondIntroductionScreen = (): JSX.Element => {
     const { top } = useSafeAreaInsets();
@@ -31,15 +32,11 @@ export const SecondIntroductionScreen = (): JSX.Element => {
                 style={SecondIntroductionScreenStyle.image}
                 resizeMode="contain"
             />
-            <TouchableOpacity
-                activeOpacity={0.9}
+            <Button
+                title="Got it!"
                 onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
                 style={SecondIntroductionScreenStyle.buttonView}
-            >
-                <Text style={SecondIntroductionScreenStyle.buttonText}>
-                    Got it!
-                </Text>
-            </TouchableOpacity>
+            />
         </View>
     );
 };

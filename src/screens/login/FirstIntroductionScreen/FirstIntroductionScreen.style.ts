@@ -24,17 +24,6 @@ export const FirstIntroductionScreenStyle = StyleSheet.create({
         height: 250
     },
     buttonView: {
-        width: '100%',
-        height: 45,
-        marginTop: '30%',
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonText: {
-        fontSize: 16,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
+        marginTop: '30%'
     }
 });

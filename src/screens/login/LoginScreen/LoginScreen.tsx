@@ -1,16 +1,8 @@
 import React, { JSX, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-    ActivityIndicator,
-    Alert,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { LoginScreenStyle } from '@screens/login/LoginScreen/LoginScreen.style';
-import COLORS from '@constants/COLORS';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
 import { LoginPostInterface } from '@interfaces/post/Post.interface';
@@ -20,6 +12,7 @@ import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PreloadService } from '@utils/general/PreloadService';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
+import { Button } from '@components/general/Button/Button';
 
 export const LoginScreen = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -75,17 +68,12 @@ export const LoginScreen = (): JSX.Element => {
                 secureTextEntry
                 style={LoginScreenStyle.input}
             />
-            <TouchableOpacity
-                activeOpacity={0.9}
+            <Button
+                title="Login"
                 onPress={login}
+                posting={posting}
                 style={LoginScreenStyle.buttonView}
-            >
-                {posting ? (
-                    <ActivityIndicator color={COLORS.WHITE} />
-                ) : (
-                    <Text style={LoginScreenStyle.buttonText}>Login</Text>
-                )}
-            </TouchableOpacity>
+            />
             <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={onPressForgotPassword}

@@ -18,17 +18,7 @@ export const LoginScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     buttonView: {
-        height: 45,
-        marginTop: 50,
-        borderRadius: 10,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonText: {
-        fontSize: 16,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
+        marginTop: 50
     },
     forgotPasswordView: {
         marginTop: 25,
