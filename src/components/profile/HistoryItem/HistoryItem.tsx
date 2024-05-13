@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { HistoryItemProps } from '@components/home/HistoryItem/HistoryItem.props';
-import { HistoryItemStyle } from '@components/home/HistoryItem/HistoryItem.style';
+import { HistoryItemProps } from '@components/profile/HistoryItem/HistoryItem.props';
+import { HistoryItemStyle } from '@components/profile/HistoryItem/HistoryItem.style';
 import { getLocalTimeFromUTCUnix } from '@functions/getLocalTimeFromUTCUnix';
 
 export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {

@@ -5,7 +5,7 @@ import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { SharingHistoryScreenStyle } from '@screens/account/SharingHistoryScreen/SharingHistoryScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { HistoryInterface } from '@interfaces/general.interface';
-import { HistoryItem } from '@components/home/HistoryItem/HistoryItem';
+import { HistoryItem } from '@components/profile/HistoryItem/HistoryItem';
 import { ResponseHistoryGetInterface } from '@interfaces/response/Response.interface';
 import { getRequest } from '@utils/Axios/Axios.service';
 import COLORS from '@constants/COLORS';
