@@ -44,15 +44,8 @@ export const DirectEmotionModalScreenStyle = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap'
     },
-    addButtonView: {
-        margin: 4,
-        width: 45,
-        height: 45,
-        borderRadius: 40,
-        borderWidth: 2,
-        borderColor: COLORS.LIGHTGRAY,
-        alignItems: 'center',
-        justifyContent: 'center'
+    addFriendButton: {
+        margin: 4
     },
     shareButtonView: {
         width: 110,

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { JSX, useEffect, useRef, useState } from 'react';
 import {
     ActivityIndicator,
     Alert,
@@ -18,13 +18,13 @@ import {
 } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { CanHelp } from '@components/home/CanHelp/CanHelp';
+import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
 
 export const ShareModalScreen = ({
     item,
     onAddFriendPress
-}: ShareModalScreenProps): React.JSX.Element => {
+}: ShareModalScreenProps): JSX.Element => {
     const { bottom } = useSafeAreaInsets();
 
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -92,53 +92,7 @@ export const ShareModalScreen = ({
                 {item.message}
             </Text>
             <View style={ShareModalScreenStyle.content}>
-                {(!!item?.tip1 || !!item?.tip2) && (
-                    <View style={ShareModalScreenStyle.tipsView}>
-                        <Text style={ShareModalScreenStyle.tipsTitleText}>
-                            Can help:
-                        </Text>
-                        {!!item?.tip1 && (
-                            <View
-                                style={[
-                                    ShareModalScreenStyle.marginTop10,
-                                    ShareModalScreenStyle.row
-                                ]}
-                            >
-                                <Text style={ShareModalScreenStyle.colorBlack}>
-                                    👉
-                                </Text>
-                                <Text
-                                    style={[
-                                        ShareModalScreenStyle.marginLeft2,
-                                        ShareModalScreenStyle.colorBlack
-                                    ]}
-                                >
-                                    {item.tip1}
-                                </Text>
-                            </View>
-                        )}
-                        {!!item?.tip2 && (
-                            <View
-                                style={[
-                                    ShareModalScreenStyle.marginTop5,
-                                    ShareModalScreenStyle.row
-                                ]}
-                            >
-                                <Text style={ShareModalScreenStyle.colorBlack}>
-                                    👉
-                                </Text>
-                                <Text
-                                    style={[
-                                        ShareModalScreenStyle.marginLeft2,
-                                        ShareModalScreenStyle.colorBlack
-                                    ]}
-                                >
-                                    {item.tip2}
-                                </Text>
-                            </View>
-                        )}
-                    </View>
-                )}
+                <CanHelp tip1={item?.tip1} tip2={item?.tip2} />
                 <View style={ShareModalScreenStyle.sendContainer}>
                     {loaded ? (
                         <>
@@ -159,13 +113,13 @@ export const ShareModalScreen = ({
                                             />
                                         ))}
                                 </>
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
+                                <AddFriendButton
+                                    size={45}
                                     onPress={onAddFriendPress}
-                                    style={ShareModalScreenStyle.addButtonView}
-                                >
-                                    <Icon name={IconEnum.PLUS} size={12} />
-                                </TouchableOpacity>
+                                    style={
+                                        ShareModalScreenStyle.addFriendButton
+                                    }
+                                />
                             </View>
                             {friends?.length ? (
                                 <TouchableOpacity

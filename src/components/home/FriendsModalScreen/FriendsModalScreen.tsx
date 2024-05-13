@@ -31,8 +31,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { InviteItem } from '@components/friends/InviteItem/InviteItem';
 import { FriendsModalScreenProps } from '@components/home/FriendsModalScreen/FriendsModalScreen.props';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
 
 export const FriendsModalScreen = ({
     onActionSheetOpened
@@ -287,13 +286,10 @@ export const FriendsModalScreen = ({
                                     size={55}
                                 />
                             ) : (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
+                                <AddFriendButton
+                                    size={55}
                                     onPress={() => setAdding(true)}
-                                    style={FriendsModalScreenStyle.addView}
-                                >
-                                    <Icon name={IconEnum.PLUS} size={14} />
-                                </TouchableOpacity>
+                                />
                             )}
                         </View>
                     ))}

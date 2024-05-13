@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { JSX, useCallback, useEffect, useRef, useState } from 'react';
 import {
     ActivityIndicator,
     Alert,
@@ -17,14 +17,13 @@ import {
 } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { DirectEmotionModalScreenProps } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.props';
 import { DirectEmotionModalScreenStyle } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.style';
+import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
 
 export const DirectEmotionModalScreen = ({
     onAddFriendPress
-}: DirectEmotionModalScreenProps): React.JSX.Element => {
+}: DirectEmotionModalScreenProps): JSX.Element => {
     const { bottom } = useSafeAreaInsets();
 
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -130,15 +129,13 @@ export const DirectEmotionModalScreen = ({
                                             />
                                         ))}
                                 </>
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
+                                <AddFriendButton
+                                    size={45}
                                     onPress={onAddFriendPress}
                                     style={
-                                        DirectEmotionModalScreenStyle.addButtonView
+                                        DirectEmotionModalScreenStyle.addFriendButton
                                     }
-                                >
-                                    <Icon name={IconEnum.PLUS} size={12} />
-                                </TouchableOpacity>
+                                />
                             </View>
                             {friends?.length ? (
                                 <TouchableOpacity

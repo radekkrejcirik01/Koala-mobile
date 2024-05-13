@@ -21,29 +21,6 @@ export const ShareModalScreenStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center'
     },
-    tipsView: {
-        flex: 1,
-        paddingRight: 50
-    },
-    tipsTitleText: {
-        color: COLORS.BLACK,
-        fontWeight: 'bold'
-    },
-    row: {
-        flexDirection: 'row'
-    },
-    marginTop10: {
-        marginTop: 10
-    },
-    marginTop5: {
-        marginTop: 5
-    },
-    marginLeft2: {
-        marginLeft: 2
-    },
-    colorBlack: {
-        color: COLORS.BLACK
-    },
     sendContainer: {
         width: '45%',
         alignItems: 'center',
@@ -55,15 +32,8 @@ export const ShareModalScreenStyle = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap'
     },
-    addButtonView: {
-        margin: 4,
-        width: 45,
-        height: 45,
-        borderRadius: 40,
-        borderWidth: 2,
-        borderColor: COLORS.LIGHTGRAY,
-        alignItems: 'center',
-        justifyContent: 'center'
+    addFriendButton: {
+        margin: 4
     },
     shareButtonView: {
         width: 110,

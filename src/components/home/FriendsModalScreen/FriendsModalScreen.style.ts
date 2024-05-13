@@ -37,15 +37,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
         marginHorizontal: 12,
         marginBottom: 10
     },
-    addView: {
-        width: 55,
-        height: 55,
-        borderRadius: 40,
-        borderWidth: 3,
-        borderColor: COLORS.LIGHTGRAY,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     inviteContainer: {
         paddingVertical: 15,
         borderTopLeftRadius: 20,
