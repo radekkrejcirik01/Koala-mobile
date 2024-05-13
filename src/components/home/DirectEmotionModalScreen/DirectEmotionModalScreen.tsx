@@ -18,6 +18,7 @@ import COLORS from '@constants/COLORS';
 import { DirectEmotionModalScreenProps } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.props';
 import { DirectEmotionModalScreenStyle } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.style';
 import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
+import { filterSelected } from '@functions/filterSelected';
 
 export const DirectEmotionModalScreen = ({
     onAddFriendPress
@@ -33,21 +34,17 @@ export const DirectEmotionModalScreen = ({
     const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
-        if (selectedFriends?.current.includes(id)) {
-            selectedFriends.current = selectedFriends.current.filter(
-                (value) => value !== id
-            );
-        } else {
-            selectedFriends.current.push(id);
-        }
+        selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
     const onSend = useCallback(() => {
+        const selected = selectedFriends.current;
+
         if (!message?.length) {
             Alert.alert('Please write a message first');
             return;
         }
-        if (!selectedFriends.current?.length) {
+        if (!selected.length) {
             Alert.alert('Please select a friend first');
             return;
         }
@@ -57,16 +54,18 @@ export const DirectEmotionModalScreen = ({
         postRequest<ResponseInterface, EmotionMessagePostInterface>(
             'emotion-message',
             {
-                ids: selectedFriends.current,
+                ids: selected,
                 message
             }
         ).subscribe((response: ResponseInterface) => {
             if (response?.status === 'success') {
                 setSending(false);
                 setSent(true);
+
+                setMessage('');
             }
         });
-    }, [message]);
+    }, [message, setSending, setSent]);
 
     return (
         <View
@@ -82,6 +81,7 @@ export const DirectEmotionModalScreen = ({
                 placeholder="What happened?"
                 autoFocus
                 autoCorrect={false}
+                value={message}
                 onChangeText={setMessage}
                 selectionColor={COLORS.BUTTON_BLUE}
                 style={DirectEmotionModalScreenStyle.input}

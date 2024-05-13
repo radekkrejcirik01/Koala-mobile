@@ -1,4 +1,4 @@
-import React, { JSX, useRef, useState } from 'react';
+import React, { JSX, useCallback, useRef, useState } from 'react';
 import {
     ActivityIndicator,
     Alert,
@@ -18,6 +18,7 @@ import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
+import { filterSelected } from '@functions/filterSelected';
 
 export const ShareModalScreen = ({
     item,
@@ -33,23 +34,19 @@ export const ShareModalScreen = ({
     const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
-        if (selectedFriends?.current.includes(id)) {
-            selectedFriends.current = selectedFriends.current.filter(
-                (value) => value !== id
-            );
-        } else {
-            selectedFriends.current.push(id);
-        }
+        selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
-    const onSend = () => {
-        if (selectedFriends.current?.length) {
+    const onSend = useCallback(() => {
+        const selected = selectedFriends.current;
+
+        if (selected.length) {
             setSending(true);
 
             postRequest<ResponseInterface, EmotionMessagePostInterface>(
                 'emotion-message',
                 {
-                    ids: selectedFriends.current,
+                    ids: selected,
                     message: item.message
                 }
             ).subscribe((response: ResponseInterface) => {
@@ -61,7 +58,7 @@ export const ShareModalScreen = ({
         } else {
             Alert.alert('Please select a friend first');
         }
-    };
+    }, [item.message, setSending, setSent]);
 
     return (
         <View
