@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { JSX, useCallback, useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     Alert,
@@ -11,6 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useFriends } from '@hooks/useFriends';
 import { FriendsModalScreenStyle } from '@components/home/FriendsModalScreen/FriendsModalScreen.style';
 import {
     deleteRequest,
@@ -19,12 +20,11 @@ import {
     putRequest
 } from '@utils/Axios/Axios.service';
 import {
-    ResponseFriendsGetInterface,
     ResponseInterface,
     ResponseInvitesGetInterface
 } from '@interfaces/response/Response.interface';
 import { InvitePostInterface } from '@interfaces/post/Post.interface';
-import { InviteInterface, UserInterface } from '@interfaces/general.interface';
+import { InviteInterface } from '@interfaces/general.interface';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import COLORS from '@constants/COLORS';
 import { ReducerProps } from '@store/index/index.props';
@@ -41,7 +41,6 @@ export const FriendsModalScreen = ({
     const { bottom } = useSafeAreaInsets();
     const { showActionSheetWithOptions } = useActionSheet();
 
-    const [friends, setFriends] = useState<UserInterface[]>([]);
     const [loaded, setLoaded] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
     const [inviteUsername, setInviteUsername] = useState<string>();
@@ -49,7 +48,9 @@ export const FriendsModalScreen = ({
     const [invites, setInvites] = useState<InviteInterface[]>([]);
     const [posting, setPosting] = useState<boolean>(false);
 
-    const getInvites = () => {
+    const { friends, loadFriends } = useFriends(() => setLoaded(true));
+
+    const loadInvites = () => {
         getRequest<ResponseInvitesGetInterface>('invites').subscribe(
             (response: ResponseInvitesGetInterface) => {
                 if (response?.status) {
@@ -59,22 +60,9 @@ export const FriendsModalScreen = ({
         );
     };
 
-    const loadFriends = useCallback(() => {
-        getRequest<ResponseFriendsGetInterface>('friends').subscribe(
-            (response: ResponseFriendsGetInterface) => {
-                if (response?.status) {
-                    setFriends(response?.data);
-                    getInvites();
-
-                    setLoaded(true);
-                }
-            }
-        );
-    }, []);
-
     useEffect(() => {
-        loadFriends();
-    }, [loadFriends]);
+        loadInvites();
+    }, []);
 
     const sendInvite = useCallback(() => {
         setPosting(true);
@@ -116,7 +104,7 @@ export const FriendsModalScreen = ({
         deleteRequest<ResponseInterface>(`invite/${id}`).subscribe(
             (response: ResponseInterface) => {
                 if (response?.status) {
-                    getInvites();
+                    loadInvites();
                 }
             }
         );

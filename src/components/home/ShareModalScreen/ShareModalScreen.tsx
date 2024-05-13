@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useRef, useState } from 'react';
+import React, { JSX, useRef, useState } from 'react';
 import {
     ActivityIndicator,
     Alert,
@@ -7,15 +7,12 @@ import {
     View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFriends } from '@hooks/useFriends';
 import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
 import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
 import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
-import { UserInterface } from '@interfaces/general.interface';
-import { getRequest, postRequest } from '@utils/Axios/Axios.service';
-import {
-    ResponseFriendsGetInterface,
-    ResponseInterface
-} from '@interfaces/response/Response.interface';
+import { postRequest } from '@utils/Axios/Axios.service';
+import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
@@ -28,26 +25,12 @@ export const ShareModalScreen = ({
     const { bottom } = useSafeAreaInsets();
 
     const [loaded, setLoaded] = useState<boolean>(false);
-    const [friends, setFriends] = useState<UserInterface[]>([]);
     const [sending, setSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
 
     const selectedFriends = useRef<number[]>([]);
 
-    const loadFriends = () => {
-        getRequest<ResponseFriendsGetInterface>('friends').subscribe(
-            (response: ResponseFriendsGetInterface) => {
-                if (response?.status) {
-                    setFriends(response?.data);
-                    setLoaded(true);
-                }
-            }
-        );
-    };
-
-    useEffect(() => {
-        loadFriends();
-    }, []);
+    const { friends } = useFriends(() => setLoaded(true));
 
     const onFriendSelect = (id: number) => {
         if (selectedFriends?.current.includes(id)) {
