@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
+import { useSending } from '@hooks/useSending';
 import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
 import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
 import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
@@ -25,12 +26,11 @@ export const ShareModalScreen = ({
     const { bottom } = useSafeAreaInsets();
 
     const [loaded, setLoaded] = useState<boolean>(false);
-    const [sending, setSending] = useState<boolean>(false);
-    const [sent, setSent] = useState<boolean>(false);
-
-    const selectedFriends = useRef<number[]>([]);
 
     const { friends } = useFriends(() => setLoaded(true));
+    const { sending, sent, setSending, setSent } = useSending();
+
+    const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
         if (selectedFriends?.current.includes(id)) {
@@ -45,6 +45,7 @@ export const ShareModalScreen = ({
     const onSend = () => {
         if (selectedFriends.current?.length) {
             setSending(true);
+
             postRequest<ResponseInterface, EmotionMessagePostInterface>(
                 'emotion-message',
                 {

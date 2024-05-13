@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
+import { useSending } from '@hooks/useSending';
 import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
@@ -25,12 +26,11 @@ export const DirectEmotionModalScreen = ({
 
     const [loaded, setLoaded] = useState<boolean>(false);
     const [message, setMessage] = useState<string>();
-    const [sending, setSending] = useState<boolean>(false);
-    const [sent, setSent] = useState<boolean>(false);
-
-    const selectedFriends = useRef<number[]>([]);
 
     const { friends } = useFriends(() => setLoaded(true));
+    const { sending, sent, setSending, setSent } = useSending();
+
+    const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
         if (selectedFriends?.current.includes(id)) {
