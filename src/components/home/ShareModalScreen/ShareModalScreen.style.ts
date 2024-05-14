@@ -33,6 +33,7 @@ export const ShareModalScreenStyle = StyleSheet.create({
         flexWrap: 'wrap'
     },
     addFriendButton: {
-        margin: 4
+        margin: 4,
+        marginTop: 8
     }
 });
