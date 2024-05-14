@@ -1,4 +1,4 @@
-import React, { JSX, useCallback, useMemo, useRef, useState } from 'react';
+import React, { JSX, useCallback, useMemo, useRef } from 'react';
 import { ActivityIndicator, Alert, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
@@ -22,9 +22,7 @@ export const ShareModalScreen = ({
 }: ShareModalScreenProps): JSX.Element => {
     const { bottom } = useSafeAreaInsets();
 
-    const [loaded, setLoaded] = useState<boolean>(false);
-
-    const { friends } = useFriends(() => setLoaded(true));
+    const { friends, loaded } = useFriends();
     const { sending, sent, setSending, setSent } = useSending();
 
     const selectedFriends = useRef<number[]>([]);

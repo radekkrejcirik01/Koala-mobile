@@ -41,14 +41,13 @@ export const FriendsModalScreen = ({
     const { bottom } = useSafeAreaInsets();
     const { showActionSheetWithOptions } = useActionSheet();
 
-    const [loaded, setLoaded] = useState<boolean>(false);
     const [adding, setAdding] = useState<boolean>(false);
     const [inviteUsername, setInviteUsername] = useState<string>();
     const [showInvites, setShowInvites] = useState<boolean>(false);
     const [invites, setInvites] = useState<InviteInterface[]>([]);
     const [posting, setPosting] = useState<boolean>(false);
 
-    const { friends, loadFriends } = useFriends(() => setLoaded(true));
+    const { friends, loadFriends, loaded } = useFriends();
 
     const loadInvites = () => {
         getRequest<ResponseInvitesGetInterface>('invites').subscribe(

@@ -3,12 +3,12 @@ import { UserInterface } from '@interfaces/general.interface';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseFriendsGetInterface } from '@interfaces/response/Response.interface';
 
-export const useFriends = (
-    onLoaded?: () => void
-): {
+export const useFriends = (): {
     friends: UserInterface[];
     loadFriends: () => void;
+    loaded: boolean;
 } => {
+    const [loaded, setLoaded] = useState<boolean>(false);
     const [friends, setFriends] = useState<UserInterface[]>([]);
 
     const loadFriends = useCallback(() => {
@@ -16,15 +16,15 @@ export const useFriends = (
             (response: ResponseFriendsGetInterface) => {
                 if (response?.status) {
                     setFriends(response?.data);
-                    onLoaded();
+                    setLoaded(true);
                 }
             }
         );
-    }, [onLoaded]);
+    }, []);
 
     useEffect(() => {
         loadFriends();
     }, [loadFriends]);
 
-    return { friends, loadFriends };
+    return { friends, loadFriends, loaded };
 };

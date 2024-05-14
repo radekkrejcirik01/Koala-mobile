@@ -20,10 +20,9 @@ export const DirectEmotionModalScreen = ({
 }: DirectEmotionModalScreenProps): JSX.Element => {
     const { bottom } = useSafeAreaInsets();
 
-    const [loaded, setLoaded] = useState<boolean>(false);
     const [message, setMessage] = useState<string>();
 
-    const { friends } = useFriends(() => setLoaded(true));
+    const { friends, loaded } = useFriends();
     const { sending, sent, setSending, setSent } = useSending();
 
     const selectedFriends = useRef<number[]>([]);
