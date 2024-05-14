@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Alert, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
@@ -85,53 +85,44 @@ export const DirectEmotionModalScreen = ({
                 selectionColor={COLORS.BUTTON_BLUE}
                 style={DirectEmotionModalScreenStyle.input}
             />
-            <View style={DirectEmotionModalScreenStyle.content}>
-                <View style={DirectEmotionModalScreenStyle.supportView}>
-                    <Text style={DirectEmotionModalScreenStyle.supportText} />
-                </View>
-                <View style={DirectEmotionModalScreenStyle.sendContainer}>
-                    {loaded ? (
-                        <>
-                            <View
-                                style={DirectEmotionModalScreenStyle.selectView}
-                            >
-                                {friends?.map((value) => (
-                                    <ShareFriendItem
-                                        key={value.username}
-                                        item={{
-                                            name: value.name,
-                                            username: value.username
-                                        }}
-                                        onSelect={() =>
-                                            onFriendSelect(value.id)
-                                        }
-                                        sent={sent}
-                                    />
-                                ))}
-                                <AddFriendButton
-                                    size={45}
-                                    onPress={onAddFriendPress}
-                                    style={
-                                        DirectEmotionModalScreenStyle.addFriendButton
-                                    }
-                                />
-                            </View>
-                            {friendsAdded ? (
-                                <ShareButton
-                                    onPress={onSend}
-                                    sending={sending}
+            <View style={DirectEmotionModalScreenStyle.sendContainer}>
+                {loaded ? (
+                    <>
+                        <View style={DirectEmotionModalScreenStyle.selectView}>
+                            {friends?.map((value) => (
+                                <ShareFriendItem
+                                    key={value.username}
+                                    item={{
+                                        name: value.name,
+                                        username: value.username
+                                    }}
+                                    onSelect={() => onFriendSelect(value.id)}
                                     sent={sent}
                                 />
-                            ) : (
-                                <AddFriendsDescriptionButton
-                                    onPress={onAddFriendPress}
-                                />
-                            )}
-                        </>
-                    ) : (
-                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-                    )}
-                </View>
+                            ))}
+                            <AddFriendButton
+                                size={45}
+                                onPress={onAddFriendPress}
+                                style={
+                                    DirectEmotionModalScreenStyle.addFriendButton
+                                }
+                            />
+                        </View>
+                        {friendsAdded ? (
+                            <ShareButton
+                                onPress={onSend}
+                                sending={sending}
+                                sent={sent}
+                            />
+                        ) : (
+                            <AddFriendsDescriptionButton
+                                onPress={onAddFriendPress}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <ActivityIndicator color={COLORS.BUTTON_BLUE} />
+                )}
             </View>
         </View>
     );

@@ -4,13 +4,13 @@ import COLORS from '@constants/COLORS';
 export const ShareModalScreenStyle = StyleSheet.create({
     container: {
         minHeight: '50%',
+        paddingTop: 20,
         paddingHorizontal: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
     },
     messageText: {
-        marginTop: 20,
         fontSize: 24,
         color: COLORS.BLACK,
         fontWeight: 'bold'
@@ -23,6 +23,7 @@ export const ShareModalScreenStyle = StyleSheet.create({
     },
     sendContainer: {
         width: '45%',
+        paddingBottom: 50,
         alignItems: 'center',
         justifyContent: 'center'
     },
