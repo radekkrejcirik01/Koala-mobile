@@ -1,12 +1,5 @@
-import React, { JSX, useCallback, useRef, useState } from 'react';
-import {
-    ActivityIndicator,
-    Alert,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import React, { JSX, useCallback, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Alert, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
@@ -19,6 +12,8 @@ import { DirectEmotionModalScreenProps } from '@components/home/DirectEmotionMod
 import { DirectEmotionModalScreenStyle } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.style';
 import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
+import { ShareButton } from '@components/home/ShareButton/ShareButton';
+import { AddFriendsDescriptionButton } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 
 export const DirectEmotionModalScreen = ({
     onAddFriendPress
@@ -67,6 +62,11 @@ export const DirectEmotionModalScreen = ({
         });
     }, [message, setSending, setSent]);
 
+    const friendsAdded = useMemo(
+        (): boolean => !!friends?.length,
+        [friends?.length]
+    );
+
     return (
         <View
             style={[
@@ -96,22 +96,19 @@ export const DirectEmotionModalScreen = ({
                             <View
                                 style={DirectEmotionModalScreenStyle.selectView}
                             >
-                                <>
-                                    {friends?.length &&
-                                        friends?.map((value) => (
-                                            <ShareFriendItem
-                                                key={value.username}
-                                                item={{
-                                                    name: value.name,
-                                                    username: value.username
-                                                }}
-                                                onSelect={() =>
-                                                    onFriendSelect(value.id)
-                                                }
-                                                sent={sent}
-                                            />
-                                        ))}
-                                </>
+                                {friends?.map((value) => (
+                                    <ShareFriendItem
+                                        key={value.username}
+                                        item={{
+                                            name: value.name,
+                                            username: value.username
+                                        }}
+                                        onSelect={() =>
+                                            onFriendSelect(value.id)
+                                        }
+                                        sent={sent}
+                                    />
+                                ))}
                                 <AddFriendButton
                                     size={45}
                                     onPress={onAddFriendPress}
@@ -120,43 +117,16 @@ export const DirectEmotionModalScreen = ({
                                     }
                                 />
                             </View>
-                            {friends?.length ? (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
-                                    disabled={sent}
+                            {friendsAdded ? (
+                                <ShareButton
                                     onPress={onSend}
-                                    style={
-                                        DirectEmotionModalScreenStyle.shareButtonView
-                                    }
-                                >
-                                    {sending ? (
-                                        <ActivityIndicator
-                                            color={COLORS.WHITE}
-                                        />
-                                    ) : (
-                                        <Text
-                                            style={
-                                                DirectEmotionModalScreenStyle.shareButtonText
-                                            }
-                                        >
-                                            {sent ? 'Received' : 'Share'}
-                                        </Text>
-                                    )}
-                                </TouchableOpacity>
+                                    sending={sending}
+                                    sent={sent}
+                                />
                             ) : (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
+                                <AddFriendsDescriptionButton
                                     onPress={onAddFriendPress}
-                                >
-                                    <Text
-                                        adjustsFontSizeToFit
-                                        style={
-                                            DirectEmotionModalScreenStyle.noAddedDescription
-                                        }
-                                    >
-                                        Add friends to share
-                                    </Text>
-                                </TouchableOpacity>
+                                />
                             )}
                         </>
                     ) : (

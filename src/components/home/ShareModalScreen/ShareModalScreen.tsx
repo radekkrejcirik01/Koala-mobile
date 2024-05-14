@@ -1,11 +1,5 @@
-import React, { JSX, useCallback, useRef, useState } from 'react';
-import {
-    ActivityIndicator,
-    Alert,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import React, { JSX, useCallback, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Alert, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
@@ -19,6 +13,8 @@ import COLORS from '@constants/COLORS';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
+import { ShareButton } from '@components/home/ShareButton/ShareButton';
+import { AddFriendsDescriptionButton } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 
 export const ShareModalScreen = ({
     item,
@@ -40,25 +36,31 @@ export const ShareModalScreen = ({
     const onSend = useCallback(() => {
         const selected = selectedFriends.current;
 
-        if (selected.length) {
-            setSending(true);
-
-            postRequest<ResponseInterface, EmotionMessagePostInterface>(
-                'emotion-message',
-                {
-                    ids: selected,
-                    message: item.message
-                }
-            ).subscribe((response: ResponseInterface) => {
-                if (response?.status === 'success') {
-                    setSending(false);
-                    setSent(true);
-                }
-            });
-        } else {
+        if (!selected.length) {
             Alert.alert('Please select a friend first');
+            return;
         }
+
+        setSending(true);
+
+        postRequest<ResponseInterface, EmotionMessagePostInterface>(
+            'emotion-message',
+            {
+                ids: selected,
+                message: item.message
+            }
+        ).subscribe((response: ResponseInterface) => {
+            if (response?.status === 'success') {
+                setSending(false);
+                setSent(true);
+            }
+        });
     }, [item.message, setSending, setSent]);
+
+    const friendsAdded = useMemo(
+        (): boolean => !!friends?.length,
+        [friends?.length]
+    );
 
     return (
         <View
@@ -78,22 +80,19 @@ export const ShareModalScreen = ({
                     {loaded ? (
                         <>
                             <View style={ShareModalScreenStyle.selectView}>
-                                <>
-                                    {!!friends?.length &&
-                                        friends?.map((value) => (
-                                            <ShareFriendItem
-                                                key={value.username}
-                                                item={{
-                                                    name: value.name,
-                                                    username: value.username
-                                                }}
-                                                onSelect={() =>
-                                                    onFriendSelect(value.id)
-                                                }
-                                                sent={sent}
-                                            />
-                                        ))}
-                                </>
+                                {friends?.map((value) => (
+                                    <ShareFriendItem
+                                        key={value.username}
+                                        item={{
+                                            name: value.name,
+                                            username: value.username
+                                        }}
+                                        onSelect={() =>
+                                            onFriendSelect(value.id)
+                                        }
+                                        sent={sent}
+                                    />
+                                ))}
                                 <AddFriendButton
                                     size={45}
                                     onPress={onAddFriendPress}
@@ -102,43 +101,16 @@ export const ShareModalScreen = ({
                                     }
                                 />
                             </View>
-                            {friends?.length ? (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
-                                    disabled={sent}
+                            {friendsAdded ? (
+                                <ShareButton
                                     onPress={onSend}
-                                    style={
-                                        ShareModalScreenStyle.shareButtonView
-                                    }
-                                >
-                                    {sending ? (
-                                        <ActivityIndicator
-                                            color={COLORS.WHITE}
-                                        />
-                                    ) : (
-                                        <Text
-                                            style={
-                                                ShareModalScreenStyle.shareButtonText
-                                            }
-                                        >
-                                            {sent ? 'Received' : 'Share'}
-                                        </Text>
-                                    )}
-                                </TouchableOpacity>
+                                    sending={sending}
+                                    sent={sent}
+                                />
                             ) : (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
+                                <AddFriendsDescriptionButton
                                     onPress={onAddFriendPress}
-                                >
-                                    <Text
-                                        adjustsFontSizeToFit
-                                        style={
-                                            ShareModalScreenStyle.noAddedDescription
-                                        }
-                                    >
-                                        Add friends to share
-                                    </Text>
-                                </TouchableOpacity>
+                                />
                             )}
                         </>
                     ) : (

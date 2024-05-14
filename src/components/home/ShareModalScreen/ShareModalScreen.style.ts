@@ -34,24 +34,5 @@ export const ShareModalScreenStyle = StyleSheet.create({
     },
     addFriendButton: {
         margin: 4
-    },
-    shareButtonView: {
-        width: 110,
-        height: 45,
-        marginTop: 20,
-        marginHorizontal: 20,
-        borderRadius: 18,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    shareButtonText: {
-        fontSize: 20,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
-    },
-    noAddedDescription: {
-        marginTop: 15,
-        color: COLORS.BUTTON_BLUE
     }
 });
