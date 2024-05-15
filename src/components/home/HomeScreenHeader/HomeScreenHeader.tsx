@@ -2,7 +2,7 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
-import { NotificationsHeader } from '@components/home/NotificationsHeader/NotificationsHeader';
+import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
 import { ReducerProps } from '@store/index/index.props';
 import { HomeScreenHeaderStyle } from '@components/home/HomeScreenHeader/HomeScreenHeader.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -29,7 +29,11 @@ export const HomeScreenHeader = (): JSX.Element => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <NotificationsHeader />
+            <NotificationsButton
+                onPress={() =>
+                    navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
+                }
+            />
         </View>
     );
 };

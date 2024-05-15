@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const NotificationsHeaderStyle = StyleSheet.create({
+export const NotificationsButtonStyle = StyleSheet.create({
     container: {
         marginRight: 15
     }
