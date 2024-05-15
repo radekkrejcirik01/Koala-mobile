@@ -1,5 +1,5 @@
 export interface StatusModalScreenProps {
-    onPostPress: () => void;
+    onHide: () => void;
 }
 
 export interface ExpressionInterface {

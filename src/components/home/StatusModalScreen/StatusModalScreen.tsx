@@ -2,63 +2,22 @@ import React, { useCallback } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-    ExpressionInterface,
-    StatusModalScreenProps
-} from '@components/home/StatusModalScreen/StatusModalScreen.props';
+import { StatusModalScreenProps } from '@components/home/StatusModalScreen/StatusModalScreen.props';
 import { StatusModalScreenStyle } from '@components/home/StatusModalScreen/StatusModalScreen.style';
 import { deleteRequest, postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ExpressionPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
+import { EXPRESSIONS } from '@components/home/StatusModalScreen/StatusModalScreen.const';
 
 export const StatusModalScreen = ({
-    onPostPress
+    onHide
 }: StatusModalScreenProps): React.JSX.Element => {
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
     );
 
     const { bottom } = useSafeAreaInsets();
-
-    const expressions: ExpressionInterface[] = [
-        {
-            id: 1,
-            expression: '😴'
-        },
-        {
-            id: 2,
-            expression: '😡'
-        },
-        {
-            id: 3,
-            expression: '😩'
-        },
-        {
-            id: 4,
-            expression: '😔'
-        },
-        {
-            id: 5,
-            expression: '😥'
-        },
-        {
-            id: 6,
-            expression: '😭'
-        },
-        {
-            id: 7,
-            expression: '💀'
-        },
-        {
-            id: 8,
-            expression: '😕'
-        },
-        {
-            id: 9,
-            expression: '🤕'
-        }
-    ];
 
     const post = useCallback(
         (expression: string) => {
@@ -68,22 +27,24 @@ export const StatusModalScreen = ({
                     userId,
                     expression
                 }
-            ).subscribe();
-
-            onPostPress();
+            ).subscribe((response) => {
+                if (response?.status === 'success') {
+                    onHide();
+                }
+            });
         },
-        [onPostPress, userId]
+        [onHide, userId]
     );
 
-    const cleatStatus = useCallback(() => {
+    const clearStatus = useCallback(() => {
         deleteRequest<ResponseInterface>('expression').subscribe(
             (response: ResponseInterface) => {
-                if (response?.status) {
-                    onPostPress();
+                if (response?.status === 'success') {
+                    onHide();
                 }
             }
         );
-    }, [onPostPress]);
+    }, [onHide]);
 
     return (
         <View
@@ -101,7 +62,7 @@ export const StatusModalScreen = ({
                 Friends will receive silent notification and can reply directly
             </Text>
             <View style={StatusModalScreenStyle.expressionsContainer}>
-                {expressions?.map((value) => (
+                {EXPRESSIONS.map((value) => (
                     <TouchableOpacity
                         key={value.id + value.expression}
                         activeOpacity={0.7}
@@ -119,7 +80,7 @@ export const StatusModalScreen = ({
             <TouchableOpacity
                 activeOpacity={0.7}
                 hitSlop={10}
-                onPress={cleatStatus}
+                onPress={clearStatus}
                 style={StatusModalScreenStyle.clearStatusButtonView}
             >
                 <Text style={StatusModalScreenStyle.clearStatusButtonText}>

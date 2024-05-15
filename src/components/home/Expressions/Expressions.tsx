@@ -46,12 +46,9 @@ export const Expressions = (): React.JSX.Element => {
     const onStatusPress = useCallback(() => {
         setModalContent(
             <StatusModalScreen
-                onPostPress={() => {
+                onHide={() => {
                     hideModal();
-
-                    setTimeout(() => {
-                        loadExpressions();
-                    }, 500);
+                    loadExpressions();
                 }}
             />
         );
@@ -84,15 +81,14 @@ export const Expressions = (): React.JSX.Element => {
                         {status || 'Status'}
                     </Text>
                 </TouchableOpacity>
-                {!!expressions &&
-                    expressions.map((value) => (
-                        <ExpressionItem
-                            key={value.userId}
-                            onPress={() => onStatusReply(value)}
-                            name={value?.name}
-                            expression={value?.expression}
-                        />
-                    ))}
+                {expressions?.map((value) => (
+                    <ExpressionItem
+                        key={value.userId}
+                        onPress={() => onStatusReply(value)}
+                        name={value?.name}
+                        expression={value?.expression}
+                    />
+                ))}
             </ScrollView>
             <Modal
                 isVisible={modalVisible}
