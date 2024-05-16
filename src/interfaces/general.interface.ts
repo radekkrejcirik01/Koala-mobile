@@ -45,7 +45,7 @@ export interface EmotionInterface {
     message: string;
     tip1?: string;
     tip2?: string;
-    isCustom?: boolean;
+    isDefault?: boolean;
 }
 
 export interface ExpressionDataInterface {

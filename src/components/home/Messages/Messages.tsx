@@ -80,7 +80,7 @@ export const Messages = (): React.JSX.Element => {
     const onItemLongPress = useCallback(
         (item: EmotionInterface) => {
             // Enable removing only custom emotions
-            if (!item?.isCustom) {
+            if (item?.isDefault) {
                 return;
             }
 

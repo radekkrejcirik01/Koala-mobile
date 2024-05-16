@@ -26,8 +26,8 @@ export interface DevicePostInterface {
 export interface EmotionPostInterface {
     emotion: string;
     message: string;
-    tip1: string;
-    tip2: string;
+    tip1?: string;
+    tip2?: string;
 }
 
 export interface EmotionMessagePostInterface {
