@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const HomeScreenHeaderStyle = StyleSheet.create({
+export const HomeHeaderStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
         flexDirection: 'row',

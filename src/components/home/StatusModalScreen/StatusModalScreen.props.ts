@@ -1,5 +1,6 @@
 export interface StatusModalScreenProps {
-    onHide: () => void;
+    onPressExpression: (expression: string) => void;
+    onPressClearStatus: () => void;
 }
 
 export interface ExpressionInterface {

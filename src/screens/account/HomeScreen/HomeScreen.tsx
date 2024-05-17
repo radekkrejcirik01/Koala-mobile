@@ -5,8 +5,8 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useNotifications } from '@hooks/useNotifications';
 import { useAppState } from '@hooks/useAppState';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
-import { HomeScreenHeader } from '@components/home/HomeScreenHeader/HomeScreenHeader';
-import { Expressions } from '@components/home/Expressions/Expressions';
+import { HomeHeader } from '@components/home/HomeHeader/HomeHeader';
+import { Statuses } from '@components/home/Statuses/Statuses';
 import { Messages } from '@components/home/Messages/Messages';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
@@ -27,8 +27,8 @@ export const HomeScreen = (): React.JSX.Element => {
 
     return (
         <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
-            <HomeScreenHeader />
-            <Expressions />
+            <HomeHeader />
+            <Statuses />
             <Messages />
         </View>
     );

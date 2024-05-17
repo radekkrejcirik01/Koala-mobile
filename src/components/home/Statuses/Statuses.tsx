@@ -6,24 +6,38 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useModal } from '@hooks/useModal';
 import { useAppState } from '@hooks/useAppState';
 import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
-import { ExpressionsStyle } from '@components/home/Expressions/Expressions.style';
-import { ExpressionDataInterface } from '@interfaces/general.interface';
-import { getRequest } from '@utils/Axios/Axios.service';
-import { ResponseExpressionsGetInterface } from '@interfaces/response/Response.interface';
+import { StatusesStyle } from '@components/home/Statuses/Statuses.style';
+import { FriendStatusInterface } from '@interfaces/general.interface';
+import {
+    deleteRequest,
+    getRequest,
+    postRequest
+} from '@utils/Axios/Axios.service';
+import {
+    ResponseExpressionsGetInterface,
+    ResponseInterface
+} from '@interfaces/response/Response.interface';
 import { Modal } from '@components/general/Modal/Modal';
 import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
+import { ExpressionPostInterface } from '@interfaces/post/Post.interface';
+import { ReducerProps } from '@store/index/index.props';
 
-export const Expressions = (): React.JSX.Element => {
+export const Statuses = (): React.JSX.Element => {
+    const { id: userId } = useSelector(
+        (state: ReducerProps) => state.user.user
+    );
+
     const { modalVisible, showModal, hideModal } = useModal();
 
     const [status, setStatus] = useState<string>();
-    const [expressions, setExpressions] = useState<ExpressionDataInterface[]>(
-        []
-    );
+    const [friendsStatuses, setFriendsStatuses] = useState<
+        FriendStatusInterface[]
+    >([]);
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
 
     const loadExpressions = useCallback(() => {
@@ -31,7 +45,7 @@ export const Expressions = (): React.JSX.Element => {
             (response: ResponseExpressionsGetInterface) => {
                 if (response?.status) {
                     setStatus(response?.expression);
-                    setExpressions(response?.data);
+                    setFriendsStatuses(response?.data);
                 }
             }
         );
@@ -43,20 +57,47 @@ export const Expressions = (): React.JSX.Element => {
         loadExpressions();
     }, [loadExpressions]);
 
+    const postExpression = useCallback(
+        (expression: string) => {
+            hideModal();
+            postRequest<ResponseInterface, ExpressionPostInterface>(
+                'expression',
+                {
+                    userId,
+                    expression
+                }
+            ).subscribe((response) => {
+                if (response?.status === 'success') {
+                    loadExpressions();
+                }
+            });
+        },
+        [hideModal, loadExpressions, userId]
+    );
+
+    const clearStatus = useCallback(() => {
+        hideModal();
+        deleteRequest<ResponseInterface>('expression').subscribe(
+            (response: ResponseInterface) => {
+                if (response?.status === 'success') {
+                    loadExpressions();
+                }
+            }
+        );
+    }, [hideModal, loadExpressions]);
+
     const onStatusPress = useCallback(() => {
         setModalContent(
             <StatusModalScreen
-                onHide={() => {
-                    hideModal();
-                    loadExpressions();
-                }}
+                onPressExpression={postExpression}
+                onPressClearStatus={clearStatus}
             />
         );
         showModal();
-    }, [hideModal, loadExpressions, showModal]);
+    }, [clearStatus, postExpression, showModal]);
 
     const onStatusReply = useCallback(
-        (item: ExpressionDataInterface) => {
+        (item: FriendStatusInterface) => {
             setModalContent(<StatusReplyModalScreen item={item} />);
             showModal();
         },
@@ -69,19 +110,19 @@ export const Expressions = (): React.JSX.Element => {
     }, [hideModal]);
 
     return (
-        <View style={ExpressionsStyle.container}>
-            <ScrollView horizontal style={ExpressionsStyle.scrollView}>
+        <View style={StatusesStyle.container}>
+            <ScrollView horizontal style={StatusesStyle.scrollView}>
                 <TouchableOpacity
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onStatusPress}
-                    style={ExpressionsStyle.statusButtonView}
+                    style={StatusesStyle.statusButtonView}
                 >
-                    <Text style={ExpressionsStyle.statusButtonText}>
+                    <Text style={StatusesStyle.statusButtonText}>
                         {status || 'Status'}
                     </Text>
                 </TouchableOpacity>
-                {expressions?.map((value) => (
+                {friendsStatuses?.map((value) => (
                     <ExpressionItem
                         key={value.userId}
                         onPress={() => onStatusReply(value)}
@@ -94,7 +135,7 @@ export const Expressions = (): React.JSX.Element => {
                 isVisible={modalVisible}
                 content={modalContent}
                 onClose={hideModalAndKeyboard}
-                style={ExpressionsStyle.modal}
+                style={StatusesStyle.modal}
             />
         </View>
     );

@@ -1,5 +1,5 @@
-import { ExpressionDataInterface } from '@interfaces/general.interface';
+import { FriendStatusInterface } from '@interfaces/general.interface';
 
 export interface StatusReplyModalScreenProps {
-    item: ExpressionDataInterface;
+    item: FriendStatusInterface;
 }

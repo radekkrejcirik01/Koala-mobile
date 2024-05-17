@@ -48,7 +48,7 @@ export interface EmotionInterface {
     isDefault?: boolean;
 }
 
-export interface ExpressionDataInterface {
+export interface FriendStatusInterface {
     id: number;
     userId: number;
     name: string;

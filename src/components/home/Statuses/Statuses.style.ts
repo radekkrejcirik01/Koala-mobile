@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ExpressionsStyle = StyleSheet.create({
+export const StatusesStyle = StyleSheet.create({
     container: {
         paddingTop: 15
     },

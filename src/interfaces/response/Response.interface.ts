@@ -1,7 +1,7 @@
 import {
     ConversationInterface,
     EmotionInterface,
-    ExpressionDataInterface,
+    FriendStatusInterface,
     HistoryInterface,
     InviteInterface,
     NotificationInterface,
@@ -77,8 +77,8 @@ export interface ResponseEmotionsGetInterface {
 export interface ResponseExpressionsGetInterface {
     status: string;
     message: string;
-    data: ExpressionDataInterface[];
     expression: string;
+    data: FriendStatusInterface[];
 }
 
 export interface ResponseRecordingPostInterface {
