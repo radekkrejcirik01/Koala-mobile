@@ -1,4 +1,4 @@
-export interface ChatScreenHeaderProps {
+export interface ChatHeaderProps {
     id: number;
     username: string;
     name: string;

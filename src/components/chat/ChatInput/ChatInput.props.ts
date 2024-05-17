@@ -5,11 +5,11 @@ export interface ChatInputProps {
     message: string;
     onChangeText: (value: string) => void;
     onPressSend: () => void;
-    onPressReaction: (value: string) => void;
+    onPressReply: (value: string) => void;
     onAudioRecord: (value: string) => void;
     replyMessage: string;
     inputRef: RefObject<TextInput>;
     onFocus: () => void;
     onDismissReply: () => void;
-    showReactionsButtons: boolean;
+    showReplies: boolean;
 }

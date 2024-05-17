@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ChatScreenHeaderStyle = StyleSheet.create({
+export const ChatHeaderStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         paddingBottom: 5,

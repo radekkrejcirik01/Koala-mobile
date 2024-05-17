@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ReactionButtonsStyle = StyleSheet.create({
+export const RepliesStyle = StyleSheet.create({
     scrollView: {
         backgroundColor: COLORS.WHITE
     },

@@ -9,7 +9,7 @@ import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import fs from 'react-native-fs';
 import { useAppState } from '@hooks/useAppState';
-import { ChatScreenHeader } from '@components/chat/ChatScreenHeader/ChatScreenHeader';
+import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
 import {
@@ -42,7 +42,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const [conversation, setConversation] = useState<ConversationInterface[]>(
         []
     );
-    const [reactionButtons, setReactionButtons] = useState<boolean>(false);
+    const [showReplies, setShowReplies] = useState<boolean>(false);
     const [replyMessage, setReplyMessage] = useState<string>('');
     const [audioRecord, setAudioRecord] = useState<string>('');
     const [loaded, setLoaded] = useState<boolean>();
@@ -56,9 +56,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         }, 50);
     };
 
-    // Helper function to check reaction buttons visibility
+    // Helper function to check replies visibility
     // Return true when first messages is inbound and number of inbound messages is 1
-    const checkReactionButtons = useCallback(
+    const checkShowReplies = useCallback(
         (data: ConversationInterface[]) => {
             if (isStatusReply) {
                 return false;
@@ -91,7 +91,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     const data = response?.data;
 
                     setConversation(data);
-                    setReactionButtons(checkReactionButtons(data));
+                    setShowReplies(checkShowReplies(data));
 
                     updateSeenNotification();
 
@@ -104,7 +104,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 }
             });
         },
-        [checkReactionButtons, conversationId, id, updateSeenNotification]
+        [checkShowReplies, conversationId, id, updateSeenNotification]
     );
 
     useEffect(() => {
@@ -210,7 +210,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         [deleteMessage, userId]
     );
 
-    const onPressReaction = useCallback(
+    const onPressReply = useCallback(
         (value: string) => {
             send(value).catch();
         },
@@ -233,7 +233,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 { paddingTop: top || 10, paddingBottom: bottom || 5 }
             ]}
         >
-            <ChatScreenHeader id={senderId} username={username} name={name} />
+            <ChatHeader id={senderId} username={username} name={name} />
             <ChatList
                 scrollViewRef={scrollViewRef}
                 name={name}
@@ -244,13 +244,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 message={message}
                 onChangeText={setMessage}
                 onPressSend={onPressSend}
-                onPressReaction={onPressReaction}
+                onPressReply={onPressReply}
                 onAudioRecord={setAudioRecord}
                 replyMessage={replyMessage}
                 inputRef={inputRef}
                 onFocus={scrollToEnd}
                 onDismissReply={() => setReplyMessage('')}
-                showReactionsButtons={!!reactionButtons}
+                showReplies={showReplies}
             />
         </View>
     );

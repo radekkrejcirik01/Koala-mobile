@@ -4,8 +4,8 @@ import { useNavigation } from '@hooks/useNavigation';
 import { useAppState } from '@hooks/useAppState';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { ChatScreenHeaderStyle } from '@components/chat/ChatScreenHeader/ChatScreenHeader.style';
-import { ChatScreenHeaderProps } from '@components/chat/ChatScreenHeader/ChatScreenHeader.props';
+import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
+import { ChatHeaderProps } from '@components/chat/ChatHeader/ChatHeader.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
@@ -13,11 +13,11 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
 import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 
-export const ChatScreenHeader = ({
+export const ChatHeader = ({
     id,
     username,
     name
-}: ChatScreenHeaderProps): JSX.Element => {
+}: ChatHeaderProps): JSX.Element => {
     const { navigateBack, navigateTo } = useNavigation(
         RootStackNavigatorEnum.AccountStack
     );
@@ -47,22 +47,20 @@ export const ChatScreenHeader = ({
     }, [getLastOnlineTime]);
 
     return (
-        <View style={ChatScreenHeaderStyle.container}>
-            <View style={ChatScreenHeaderStyle.centerRow}>
+        <View style={ChatHeaderStyle.container}>
+            <View style={ChatHeaderStyle.centerRow}>
                 <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
                     <Icon name={IconEnum.BACK_BLUE} size={22} />
                 </TouchableOpacity>
-                <View style={ChatScreenHeaderStyle.contentContainer}>
+                <View style={ChatHeaderStyle.contentContainer}>
                     <ProfilePhoto
                         name={name}
                         size={42}
-                        acronymStyle={ChatScreenHeaderStyle.acronym}
+                        acronymStyle={ChatHeaderStyle.acronym}
                     />
-                    <View style={ChatScreenHeaderStyle.namesView}>
-                        <Text style={ChatScreenHeaderStyle.nameText}>
-                            {name}
-                        </Text>
-                        <Text style={ChatScreenHeaderStyle.usernameText}>
+                    <View style={ChatHeaderStyle.namesView}>
+                        <Text style={ChatHeaderStyle.nameText}>{name}</Text>
+                        <Text style={ChatHeaderStyle.usernameText}>
                             🪴{' '}
                             {showUsername
                                 ? username
@@ -79,7 +77,7 @@ export const ChatScreenHeader = ({
                         receiverId: id
                     })
                 }
-                style={ChatScreenHeaderStyle.sharedButtonView}
+                style={ChatHeaderStyle.sharedButtonView}
             >
                 <Icon name={IconEnum.REPLY} size={28} />
             </TouchableOpacity>

@@ -10,10 +10,10 @@ import {
 import { useSelector } from 'react-redux';
 import { usePrompt } from '@hooks/usePrompt';
 import {
-    ReactionButtonInterface,
-    ReactionButtonsProps
-} from '@components/chat/ReactionButtons/ReactionButtons.props';
-import { ReactionButtonsStyle } from '@components/chat/ReactionButtons/ReactionButtons.style';
+    RepliesProps,
+    ReplyInterface
+} from '@components/chat/Replies/Replies.props';
+import { RepliesStyle } from '@components/chat/Replies/Replies.style';
 import {
     deleteRequest,
     getRequest,
@@ -25,18 +25,18 @@ import {
 } from '@interfaces/response/Response.interface';
 import { ReplyPostInterface } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
-import { REPLIES } from '@components/chat/ReactionButtons/ReactionButtons.const';
+import { REPLIES } from '@components/chat/Replies/Replies.const';
 import COLORS from '@constants/COLORS';
 import { Prompt } from '@components/general/Prompt/Prompt';
 
-export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
+export const Replies = ({ onPressReply }: RepliesProps) => {
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
     );
 
     const { promptVisible, showPrompt, hidePrompt } = usePrompt();
 
-    const [replies, setReplies] = useState<ReactionButtonInterface[]>([]);
+    const [replies, setReplies] = useState<ReplyInterface[]>([]);
     const [loaded, setLoad] = useState<boolean>(false);
 
     const getReplies = useCallback(() => {
@@ -71,8 +71,9 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
     );
 
     const remove = useCallback(
-        (item: ReactionButtonInterface) => {
-            if (item.id <= 6) {
+        (item: ReplyInterface) => {
+            // Allow removing only custom replies
+            if (item?.isDefault) {
                 return;
             }
 
@@ -103,7 +104,7 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
         return (
             <ActivityIndicator
                 color={COLORS.BUTTON_BLUE}
-                style={ReactionButtonsStyle.activityIndicator}
+                style={RepliesStyle.activityIndicator}
             />
         );
     }
@@ -111,30 +112,28 @@ export const ReactionButtons = ({ onPressReaction }: ReactionButtonsProps) => {
     return (
         <ScrollView
             showsHorizontalScrollIndicator={false}
-            style={ReactionButtonsStyle.scrollView}
-            contentContainerStyle={ReactionButtonsStyle.container}
+            style={RepliesStyle.scrollView}
+            contentContainerStyle={RepliesStyle.container}
         >
             {replies?.map((value, index) => (
                 <TouchableOpacity
                     key={value.id + index.toString()}
                     activeOpacity={0.9}
                     delayLongPress={150}
-                    onPress={() => onPressReaction(value.message)}
+                    onPress={() => onPressReply(value.message)}
                     onLongPress={() => remove(value)}
-                    style={ReactionButtonsStyle.buttonView}
+                    style={RepliesStyle.buttonView}
                 >
-                    <Text style={ReactionButtonsStyle.buttonText}>
-                        {value.message}
-                    </Text>
+                    <Text style={RepliesStyle.buttonText}>{value.message}</Text>
                 </TouchableOpacity>
             ))}
-            <View style={ReactionButtonsStyle.addView}>
+            <View style={RepliesStyle.addView}>
                 <TouchableOpacity
                     activeOpacity={0.5}
                     onPress={showPrompt}
                     hitSlop={10}
                 >
-                    <Text style={ReactionButtonsStyle.addText}>Add +</Text>
+                    <Text style={RepliesStyle.addText}>Add +</Text>
                 </TouchableOpacity>
             </View>
             <Prompt

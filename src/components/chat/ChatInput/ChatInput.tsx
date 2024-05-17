@@ -11,7 +11,7 @@ import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import fs from 'react-native-fs';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { ReactionButtons } from '@components/chat/ReactionButtons/ReactionButtons';
+import { Replies } from '@components/chat/Replies/Replies';
 import { ChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
 import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
@@ -24,13 +24,13 @@ export const ChatInput = ({
     message,
     onChangeText,
     onPressSend,
-    onPressReaction,
+    onPressReply,
     onAudioRecord,
     replyMessage,
     inputRef,
     onFocus,
     onDismissReply,
-    showReactionsButtons
+    showReplies
 }: ChatInputProps): React.JSX.Element => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [record, setRecord] = useState<string>();
@@ -108,9 +108,7 @@ export const ChatInput = ({
                     </Text>
                 </View>
             )}
-            {showReactionsButtons && (
-                <ReactionButtons onPressReaction={onPressReaction} />
-            )}
+            {showReplies && <Replies onPressReply={onPressReply} />}
             <View style={ChatInputStyle.inputContainer}>
                 {isRecording ? (
                     <RecordingInput
