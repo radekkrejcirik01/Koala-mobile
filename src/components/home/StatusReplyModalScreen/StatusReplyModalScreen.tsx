@@ -1,8 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { postRequest } from '@utils/Axios/Axios.service';
-import { ResponseInterface } from '@interfaces/response/Response.interface';
-import { StatusReplyMessagePostInterface } from '@interfaces/post/Post.interface';
 import { StatusReplyModalScreenProps } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen.props';
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
@@ -10,25 +7,10 @@ import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { StatusReplyModalScreenStyle } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen.style';
 
 export const StatusReplyModalScreen = ({
-    item
+    item,
+    onPressReply
 }: StatusReplyModalScreenProps): React.JSX.Element => {
     const [message, setMessage] = useState<string>();
-    const [sent, setSent] = useState<boolean>(false);
-
-    const reply = useCallback(() => {
-        postRequest<ResponseInterface, StatusReplyMessagePostInterface>(
-            'status-reply-message',
-            {
-                receiverId: item.userId,
-                message,
-                replyExpression: item.expression
-            }
-        ).subscribe((response: ResponseInterface) => {
-            if (response?.status === 'success') {
-                setSent(true);
-            }
-        });
-    }, [item.expression, item.userId, message]);
 
     return (
         <View style={StatusReplyModalScreenStyle.container}>
@@ -43,32 +25,23 @@ export const StatusReplyModalScreen = ({
                         multiline
                         value={message}
                         onChangeText={setMessage}
-                        placeholder="Message"
+                        placeholder="Message..."
                         selectionColor={COLORS.BUTTON_BLUE}
                         style={StatusReplyModalScreenStyle.input}
                     />
-                    {sent ? (
-                        <Text style={StatusReplyModalScreenStyle.sentText}>
-                            ✅
-                        </Text>
-                    ) : (
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            disabled={!message}
-                            hitSlop={10}
-                            onPress={() => {
-                                reply();
-                                setMessage('');
-                            }}
-                            style={StatusReplyModalScreenStyle.sendIconView}
-                        >
-                            <Icon
-                                name={IconEnum.SEND}
-                                size={20}
-                                style={StatusReplyModalScreenStyle.sendIcon}
-                            />
-                        </TouchableOpacity>
-                    )}
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        disabled={!message}
+                        hitSlop={10}
+                        onPress={() => onPressReply(message)}
+                        style={StatusReplyModalScreenStyle.sendIconView}
+                    >
+                        <Icon
+                            name={IconEnum.SEND}
+                            size={22}
+                            style={StatusReplyModalScreenStyle.sendIcon}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

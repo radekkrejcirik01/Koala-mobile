@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+    Alert,
     Keyboard,
     ScrollView,
     Text,
@@ -24,7 +25,10 @@ import {
 import { Modal } from '@components/general/Modal/Modal';
 import { StatusModalScreen } from '@components/home/StatusModalScreen/StatusModalScreen';
 import { StatusReplyModalScreen } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen';
-import { ExpressionPostInterface } from '@interfaces/post/Post.interface';
+import {
+    ExpressionPostInterface,
+    StatusReplyMessagePostInterface
+} from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
 
 export const Statuses = (): React.JSX.Element => {
@@ -57,6 +61,11 @@ export const Statuses = (): React.JSX.Element => {
         loadExpressions();
     }, [loadExpressions]);
 
+    const hideModalAndKeyboard = useCallback(() => {
+        Keyboard.dismiss();
+        hideModal();
+    }, [hideModal]);
+
     const postExpression = useCallback(
         (expression: string) => {
             hideModal();
@@ -86,6 +95,26 @@ export const Statuses = (): React.JSX.Element => {
         );
     }, [hideModal, loadExpressions]);
 
+    const reply = useCallback(
+        (item: FriendStatusInterface, message: string) => {
+            hideModalAndKeyboard();
+
+            postRequest<ResponseInterface, StatusReplyMessagePostInterface>(
+                'status-reply-message',
+                {
+                    receiverId: item.userId,
+                    message,
+                    replyExpression: item.expression
+                }
+            ).subscribe((response: ResponseInterface) => {
+                if (response?.status === 'success') {
+                    Alert.alert('Replied 👍');
+                }
+            });
+        },
+        [hideModalAndKeyboard]
+    );
+
     const onStatusPress = useCallback(() => {
         setModalContent(
             <StatusModalScreen
@@ -98,16 +127,16 @@ export const Statuses = (): React.JSX.Element => {
 
     const onStatusReply = useCallback(
         (item: FriendStatusInterface) => {
-            setModalContent(<StatusReplyModalScreen item={item} />);
+            setModalContent(
+                <StatusReplyModalScreen
+                    item={item}
+                    onPressReply={(message: string) => reply(item, message)}
+                />
+            );
             showModal();
         },
-        [showModal]
+        [reply, showModal]
     );
-
-    const hideModalAndKeyboard = useCallback(() => {
-        Keyboard.dismiss();
-        hideModal();
-    }, [hideModal]);
 
     return (
         <View style={StatusesStyle.container}>
