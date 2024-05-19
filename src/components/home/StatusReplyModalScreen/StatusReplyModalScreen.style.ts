@@ -22,7 +22,10 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
     inputView: {
         flex: 1,
         minHeight: 100,
-        padding: 15,
+        paddingTop: 15,
+        paddingLeft: 15,
+        paddingBottom: 5,
+        paddingRight: 10,
         borderRadius: 15,
         backgroundColor: COLORS.WHITE_100,
         flexDirection: 'row'
