@@ -13,7 +13,6 @@ export const FirstIntroductionScreenStyle = StyleSheet.create({
     },
     description: {
         marginTop: 20,
-        paddingRight: 35,
         fontSize: 15,
         color: COLORS.BLACK,
         fontWeight: 'bold'

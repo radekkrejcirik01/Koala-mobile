@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
@@ -17,8 +17,11 @@ export const FirstScreen = (): JSX.Element => {
                 style={FirstScreenStyle.image}
             />
             <Text style={FirstScreenStyle.titleText}>Koala Messenger</Text>
+            <Text style={FirstScreenStyle.descriptionText}>
+                for mental health 🌱
+            </Text>
             <Button
-                title={`Let's start`}
+                title="Let's start!"
                 onPress={() =>
                     navigateTo(LoginStackNavigatorEnum.FirstIntroductionScreen)
                 }

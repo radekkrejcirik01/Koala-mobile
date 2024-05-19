@@ -21,10 +21,10 @@ export const FirstIntroductionScreen = (): JSX.Element => {
             ]}
         >
             <Text style={FirstIntroductionScreenStyle.title}>
-                What can you do with Koala? 😴
+                What is Koala for? 😴
             </Text>
             <Text style={FirstIntroductionScreenStyle.description}>
-                Koala helps sharing health messages to friends 💬
+                Koala helps sending messages to friends 💬
             </Text>
             <FastImage
                 source={require('@assets/images/img.png')}
