@@ -24,8 +24,7 @@ export const FirstIntroductionScreen = (): JSX.Element => {
                 What can you do with Koala? 😴
             </Text>
             <Text style={FirstIntroductionScreenStyle.description}>
-                You can share one of our predefined messages, create your own or
-                use direct sharing to message your friends 💬
+                Koala helps sharing health messages to friends 💬
             </Text>
             <FastImage
                 source={require('@assets/images/img.png')}

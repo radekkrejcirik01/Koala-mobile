@@ -21,11 +21,10 @@ export const SecondIntroductionScreen = (): JSX.Element => {
             ]}
         >
             <Text style={SecondIntroductionScreenStyle.title}>
-                How can friends reply?
+                What can friends do?
             </Text>
             <Text style={SecondIntroductionScreenStyle.description}>
-                Your friends can reply directly, send one of support messages or
-                send an audio message 🎧
+                They can reply with support messages 💬
             </Text>
             <FastImage
                 source={require('@assets/images/img2.png')}
