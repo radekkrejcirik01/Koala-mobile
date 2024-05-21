@@ -49,7 +49,8 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
         paddingTop: 0, // overwrite default value
         paddingBottom: 0, // overwrite default value
         fontSize: 16,
-        color: COLORS.BLACK
+        color: COLORS.BLACK,
+        alignSelf: 'flex-start'
     },
     sendIconView: {
         padding: 5,
