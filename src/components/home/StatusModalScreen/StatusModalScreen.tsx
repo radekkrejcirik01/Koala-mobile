@@ -20,11 +20,9 @@ export const StatusModalScreen = ({
                 }
             ]}
         >
-            <Text style={StatusModalScreenStyle.titleText}>
-                Your mood status
-            </Text>
+            <Text style={StatusModalScreenStyle.titleText}>Your status</Text>
             <Text style={StatusModalScreenStyle.descriptionText}>
-                Friends will receive silent notification and can reply
+                Disappears after 2 days
             </Text>
             <View style={StatusModalScreenStyle.expressionsContainer}>
                 {EXPRESSIONS.map((value) => (

@@ -53,4 +53,5 @@ export interface FriendStatusInterface {
     userId: number;
     name: string;
     expression: string;
+    time: number;
 }

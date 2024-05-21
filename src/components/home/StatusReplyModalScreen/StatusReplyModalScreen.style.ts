@@ -8,11 +8,24 @@ export const StatusReplyModalScreenStyle = StyleSheet.create({
         borderTopRightRadius: 20,
         backgroundColor: COLORS.WHITE
     },
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    titleView: {
+        paddingVertical: 10,
+        borderRadius: 20,
+        backgroundColor: '#00000010'
+    },
     titleText: {
-        marginLeft: 5,
-        fontSize: 20,
+        paddingHorizontal: 10,
+        fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'
+    },
+    timeText: {
+        marginLeft: 5,
+        color: COLORS.GRAY_200
     },
     inputContainer: {
         marginTop: 10,

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import moment from 'moment';
 import { StatusReplyModalScreenProps } from '@components/home/StatusReplyModalScreen/StatusReplyModalScreen.props';
 import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
@@ -14,9 +15,18 @@ export const StatusReplyModalScreen = ({
 
     return (
         <View style={StatusReplyModalScreenStyle.container}>
-            <Text style={StatusReplyModalScreenStyle.titleText}>
-                {`Replying to ${item.name}'s ${item.expression}`}
-            </Text>
+            <View style={StatusReplyModalScreenStyle.titleContainer}>
+                <View style={StatusReplyModalScreenStyle.titleView}>
+                    <Text style={StatusReplyModalScreenStyle.titleText}>
+                        {item.name} {item.expression}
+                    </Text>
+                </View>
+                {!!item?.time && (
+                    <Text style={StatusReplyModalScreenStyle.timeText}>
+                        {moment.unix(item?.time).fromNow()}
+                    </Text>
+                )}
+            </View>
             <View style={StatusReplyModalScreenStyle.inputContainer}>
                 <View style={StatusReplyModalScreenStyle.inputView}>
                     <TextInput
