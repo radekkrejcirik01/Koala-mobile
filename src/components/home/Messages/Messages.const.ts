@@ -35,10 +35,10 @@ export const MESSAGES: EmotionInterface[] = [
     },
     {
         id: 5,
-        emotion: 'Angry',
-        message: '🤬😤🤬🤬😡😡😤😤🤬',
-        tip1: `Say 'Fuck' 10 times in a row`,
-        tip2: 'Call you friend and spill the tea',
+        emotion: 'Social anxiety',
+        message: `There is too many people around me and I don't like it`,
+        tip1: 'Put on headphones and pretend you are somewhere else',
+        tip2: 'Remember that everybody are thinking only about themselves',
         isDefault: true
     },
     {
@@ -51,6 +51,30 @@ export const MESSAGES: EmotionInterface[] = [
     },
     {
         id: 7,
+        emotion: `Can't sleep`,
+        message: `I can't fucking sleep`,
+        tip1: `Think about anything but how you can't sleep`,
+        tip2: 'Good old counting sheep 🐑',
+        isDefault: true
+    },
+    {
+        id: 8,
+        emotion: `Can't get up`,
+        message: `I can't get up from my bed`,
+        tip1: `Staying as long you need, it is okay`,
+        tip2: 'Think about coffee you can have if you get up ☕️',
+        isDefault: true
+    },
+    {
+        id: 9,
+        emotion: `Can't eat`,
+        message: `I can't eat`,
+        tip1: 'Having a piece of a fruit is soo good and healing',
+        tip2: 'Talk about it with person you trust the best',
+        isDefault: true
+    },
+    {
+        id: 10,
         emotion: 'Tired',
         message: 'I am so f tired',
         tip1: 'Take that nap 😴🛌',
@@ -58,43 +82,19 @@ export const MESSAGES: EmotionInterface[] = [
         isDefault: true
     },
     {
-        id: 8,
-        emotion: 'Social anxiety',
-        message: `There is too many people around me and I don't like it`,
-        tip1: 'Put on headphones and pretend you are somewhere else',
-        tip2: 'Remember that everybody are thinking only about themselves',
-        isDefault: true
-    },
-    {
-        id: 9,
-        emotion: 'Exhausted',
-        message: 'I am extremely exhausted',
-        tip1: 'Little walk is always helpful',
-        tip2: 'Have a chat with coworker about not important stuff',
-        isDefault: true
-    },
-    {
-        id: 10,
-        emotion: 'Lost',
-        message: 'I feel so lost in life',
-        tip1: 'Change, trying to change the environment, job, people can help significantly',
-        tip2: 'Finding new hobbies and new people always bring new excitement into life',
-        isDefault: true
-    },
-    {
         id: 11,
-        emotion: 'Overthinking',
-        message: 'I am overthinking',
-        tip1: 'Remember how many times you were wrong when you were overthinking',
-        tip2: `Remember how many times you were right and it didn't matter at the end`,
+        emotion: 'Angry',
+        message: '🤬😤🤬🤬😡😡😤😤🤬',
+        tip1: `Say 'Fuck' 10 times in a row`,
+        tip2: 'Call you friend and spill the tea',
         isDefault: true
     },
     {
         id: 12,
-        emotion: 'Want go home',
-        message: 'I WANT TO GO HOME',
-        tip1: 'Put your headphones on and pretend you are somewhere else',
-        tip2: 'Think of how you will reward yourself when you finally come home',
+        emotion: 'Exhausted',
+        message: 'I am extremely exhausted',
+        tip1: 'Little walk is always helpful',
+        tip2: 'Have a chat with coworker about not important stuff',
         isDefault: true
     },
     {
@@ -107,18 +107,18 @@ export const MESSAGES: EmotionInterface[] = [
     },
     {
         id: 14,
-        emotion: `Can't eat`,
-        message: `I can't eat`,
-        tip1: 'Having a piece of a fruit is soo good and healing',
-        tip2: 'Talk about it with person you trust the best',
+        emotion: 'Want go home',
+        message: 'I WANT TO GO HOME',
+        tip1: 'Put your headphones on and pretend you are somewhere else',
+        tip2: 'Think of how you will reward yourself when you finally come home',
         isDefault: true
     },
     {
         id: 15,
-        emotion: 'Sad',
-        message: 'I am just sad',
-        tip1: 'Listening to your favorite music',
-        tip2: 'Watching tiktoks',
+        emotion: 'Overthinking',
+        message: 'I am overthinking',
+        tip1: 'Remember how many times you were wrong when you were overthinking',
+        tip2: `Remember how many times you were right and it didn't matter at the end`,
         isDefault: true
     },
     {
@@ -135,22 +135,6 @@ export const MESSAGES: EmotionInterface[] = [
         message: 'I have an existential crisis',
         tip1: `Focus on one skill you enjoy the best. If you don't have one yet put finding it as purpose. It will turn the life into happy place and money will come with it`,
         tip2: 'Travel, seriously, it opens world you have no idea that exists',
-        isDefault: true
-    },
-    {
-        id: 18,
-        emotion: `Can't get up`,
-        message: `I can't get up from my bed`,
-        tip1: `Staying as long you need, it is okay`,
-        tip2: 'Think about coffee you can have if you get up ☕️',
-        isDefault: true
-    },
-    {
-        id: 19,
-        emotion: `Can't sleep`,
-        message: `I can't fucking sleep`,
-        tip1: `Think about anything but how you can't sleep`,
-        tip2: 'Good old counting sheep 🐑',
         isDefault: true
     }
 ];
