@@ -11,7 +11,7 @@ export const ExpressionItemStyle = StyleSheet.create({
     },
     text: {
         paddingHorizontal: 10,
-        fontSize: 15,
+        fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'
     }

@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const StatusesStyle = StyleSheet.create({
     container: {
-        paddingTop: 10
+        paddingTop: 5
     },
     scrollView: {
         paddingLeft: 20
@@ -17,7 +17,7 @@ export const StatusesStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     statusButtonText: {
-        fontSize: 15,
+        fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'
     },
