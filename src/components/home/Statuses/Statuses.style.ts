@@ -15,18 +15,13 @@ export const StatusesStyle = StyleSheet.create({
         marginTop: 20,
         paddingLeft: 20
     },
-    statusButtonView: {
+    addStatusButton: {
         width: 65,
         height: 65,
         borderRadius: 50,
         backgroundColor: '#00000010',
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    statusButtonText: {
-        fontSize: 16,
-        color: COLORS.BUTTON_BLUE,
-        fontWeight: '500'
     },
     modal: {
         margin: 0,

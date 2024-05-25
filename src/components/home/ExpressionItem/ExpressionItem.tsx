@@ -15,8 +15,8 @@ export const ExpressionItem = ({
             onPress={onPress}
             style={ExpressionItemStyle.button}
         >
-            <Text style={ExpressionItemStyle.text}>{expression}</Text>
+            <Text style={ExpressionItemStyle.expressionText}>{expression}</Text>
         </TouchableOpacity>
-        <Text>{name}</Text>
+        <Text style={ExpressionItemStyle.nameText}>{name}</Text>
     </View>
 );

@@ -14,10 +14,13 @@ export const ExpressionItemStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    text: {
+    expressionText: {
         paddingHorizontal: 10,
         fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'
+    },
+    nameText: {
+        color: COLORS.BLACK_50
     }
 });

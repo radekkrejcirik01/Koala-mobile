@@ -148,7 +148,7 @@ export const Statuses = (): React.JSX.Element => {
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onStatusPress}
-                    style={StatusesStyle.statusButtonView}
+                    style={StatusesStyle.addStatusButton}
                 >
                     <Icon name={IconEnum.PLUS} size={20} />
                 </TouchableOpacity>
