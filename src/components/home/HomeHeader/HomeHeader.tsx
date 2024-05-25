@@ -2,11 +2,12 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
-import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
 import { ReducerProps } from '@store/index/index.props';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { MessagesButton } from '@components/home/MessagesButton/MessagesButton';
+import { getGreeting } from '@functions/getGreeting';
 
 export const HomeHeader = (): JSX.Element => {
     const { name } = useSelector((state: ReducerProps) => state.user.user);
@@ -15,8 +16,10 @@ export const HomeHeader = (): JSX.Element => {
 
     return (
         <View style={HomeHeaderStyle.container}>
-            <View style={HomeHeaderStyle.row}>
-                <Text style={HomeHeaderStyle.emojiText}>🌱</Text>
+            <View>
+                <Text style={HomeHeaderStyle.greetingText}>
+                    {getGreeting()},
+                </Text>
                 <TouchableOpacity
                     activeOpacity={0.7}
                     hitSlop={20}
@@ -24,10 +27,10 @@ export const HomeHeader = (): JSX.Element => {
                         navigateTo(AccountStackNavigatorEnum.ProfileScreen)
                     }
                 >
-                    <Text style={HomeHeaderStyle.homeTitleText}>{name}</Text>
+                    <Text style={HomeHeaderStyle.nameText}>{name}</Text>
                 </TouchableOpacity>
             </View>
-            <NotificationsButton
+            <MessagesButton
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
                 }

@@ -18,7 +18,7 @@ export const StatusesStyle = StyleSheet.create({
     },
     statusButtonText: {
         fontSize: 16,
-        color: COLORS.BLACK,
+        color: COLORS.BUTTON_BLUE,
         fontWeight: '500'
     },
     modal: {

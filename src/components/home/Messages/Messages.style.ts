@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesStyle = StyleSheet.create({
     scrollView: {
-        paddingTop: 60
+        paddingTop: 50
     },
     scrollViewContainer: {
         paddingBottom: 120,
@@ -33,7 +33,7 @@ export const MessagesStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     directEmotionText: {
-        fontSize: 15,
+        fontSize: 16,
         color: COLORS.BUTTON_BLUE,
         fontWeight: '600'
     },

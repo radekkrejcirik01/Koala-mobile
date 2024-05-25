@@ -26,7 +26,7 @@ export const HomeScreen = (): React.JSX.Element => {
     });
 
     return (
-        <View style={[HomeScreenStyle.container, { paddingTop: top + 20 }]}>
+        <View style={[HomeScreenStyle.container, { paddingTop: top + 10 }]}>
             <HomeHeader />
             <Statuses />
             <Messages />

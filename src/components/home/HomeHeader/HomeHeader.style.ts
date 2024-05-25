@@ -3,23 +3,18 @@ import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between'
     },
-    row: {
-        flexDirection: 'row'
+    greetingText: {
+        fontSize: 22,
+        color: COLORS.LIGHTGRAY_100,
+        fontWeight: 'bold'
     },
-    emojiText: {
-        marginLeft: 15,
-        marginRight: 5,
+    nameText: {
         fontSize: 32,
-        color: COLORS.BLACK
-    },
-    homeTitleText: {
-        fontSize: 34,
-        color: COLORS.BLACK,
+        color: COLORS.LIGHTGRAY_100,
         fontWeight: 'bold'
     }
 });
