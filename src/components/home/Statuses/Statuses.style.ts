@@ -3,15 +3,22 @@ import COLORS from '@constants/COLORS';
 
 export const StatusesStyle = StyleSheet.create({
     container: {
-        paddingTop: 5
+        marginTop: 25
+    },
+    titleText: {
+        marginLeft: 20,
+        fontSize: 22,
+        color: COLORS.LIGHTGRAY_100,
+        fontWeight: 'bold'
     },
     scrollView: {
+        marginTop: 20,
         paddingLeft: 20
     },
     statusButtonView: {
-        width: 75,
-        paddingVertical: 8,
-        borderRadius: 20,
+        width: 65,
+        height: 65,
+        borderRadius: 50,
         backgroundColor: '#00000010',
         alignItems: 'center',
         justifyContent: 'center'

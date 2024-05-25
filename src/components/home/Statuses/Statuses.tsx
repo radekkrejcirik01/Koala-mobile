@@ -30,6 +30,8 @@ import {
     StatusReplyMessagePostInterface
 } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const Statuses = (): React.JSX.Element => {
     const { id: userId } = useSelector(
@@ -140,6 +142,7 @@ export const Statuses = (): React.JSX.Element => {
 
     return (
         <View style={StatusesStyle.container}>
+            <Text style={StatusesStyle.titleText}>Feeling good?</Text>
             <ScrollView horizontal style={StatusesStyle.scrollView}>
                 <TouchableOpacity
                     activeOpacity={0.7}
@@ -147,10 +150,15 @@ export const Statuses = (): React.JSX.Element => {
                     onPress={onStatusPress}
                     style={StatusesStyle.statusButtonView}
                 >
-                    <Text style={StatusesStyle.statusButtonText}>
-                        {status || 'Status'}
-                    </Text>
+                    <Icon name={IconEnum.PLUS} size={20} />
                 </TouchableOpacity>
+                {!!status && (
+                    <ExpressionItem
+                        onPress={onStatusPress}
+                        name="You"
+                        expression={status}
+                    />
+                )}
                 {friendsStatuses?.map((value) => (
                     <ExpressionItem
                         key={value.userId}

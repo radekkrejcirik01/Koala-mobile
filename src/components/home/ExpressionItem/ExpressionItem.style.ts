@@ -2,12 +2,17 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ExpressionItemStyle = StyleSheet.create({
+    container: {
+        alignItems: 'center'
+    },
     button: {
         marginLeft: 5,
-        paddingVertical: 8,
-        borderRadius: 20,
+        width: 65,
+        height: 65,
+        borderRadius: 50,
         backgroundColor: '#00000010',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     text: {
         paddingHorizontal: 10,
