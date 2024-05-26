@@ -3,10 +3,10 @@ import COLORS from '@constants/COLORS';
 
 export const ExpressionItemStyle = StyleSheet.create({
     container: {
+        marginLeft: 10,
         alignItems: 'center'
     },
     button: {
-        marginLeft: 5,
         width: 65,
         height: 65,
         borderRadius: 50,
@@ -15,12 +15,12 @@ export const ExpressionItemStyle = StyleSheet.create({
         alignItems: 'center'
     },
     expressionText: {
-        paddingHorizontal: 10,
-        fontSize: 16,
+        fontSize: 24,
         color: COLORS.BLACK,
         fontWeight: '500'
     },
     nameText: {
-        color: COLORS.BLACK_50
+        color: COLORS.BLACK_50,
+        fontWeight: '600'
     }
 });

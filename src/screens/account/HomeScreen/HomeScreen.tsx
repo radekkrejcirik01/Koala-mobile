@@ -1,12 +1,11 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useNotifications } from '@hooks/useNotifications';
 import { useAppState } from '@hooks/useAppState';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { HomeHeader } from '@components/home/HomeHeader/HomeHeader';
-import { Statuses } from '@components/home/Statuses/Statuses';
 import { Messages } from '@components/home/Messages/Messages';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
@@ -26,10 +25,9 @@ export const HomeScreen = (): React.JSX.Element => {
     });
 
     return (
-        <View style={[HomeScreenStyle.container, { paddingTop: top + 10 }]}>
+        <ScrollView style={[HomeScreenStyle.container, { marginTop: top }]}>
             <HomeHeader />
-            <Statuses />
             <Messages />
-        </View>
+        </ScrollView>
     );
 };

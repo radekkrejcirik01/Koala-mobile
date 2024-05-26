@@ -1,15 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-    Keyboard,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useModal } from '@hooks/useModal';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { EmotionInterface } from '@interfaces/general.interface';
 import { deleteRequest, getRequest } from '@utils/Axios/Axios.service';
 import {
@@ -23,6 +15,7 @@ import { Modal } from '@components/general/Modal/Modal';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { MESSAGES } from '@components/home/Messages/Messages.const';
+import { Statuses } from '@components/home/Statuses/Statuses';
 
 export const Messages = (): React.JSX.Element => {
     const { showActionSheetWithOptions } = useActionSheet();
@@ -136,57 +129,38 @@ export const Messages = (): React.JSX.Element => {
     }, [hideModal, showModal]);
 
     return (
-        <>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                style={MessagesStyle.scrollView}
-                contentContainerStyle={MessagesStyle.scrollViewContainer}
-            >
-                <View style={MessagesStyle.contentView}>
-                    {messages.map((value) => (
-                        <TouchableOpacity
-                            key={value.id}
-                            activeOpacity={0.7}
-                            onPress={() => onItemPress(value)}
-                            onLongPress={() => onItemLongPress(value)}
-                            delayLongPress={150}
-                            style={MessagesStyle.buttonView}
-                        >
-                            <Text style={MessagesStyle.buttonText}>
-                                {value.emotion}
-                            </Text>
-                        </TouchableOpacity>
-                    ))}
+        <View style={MessagesStyle.container}>
+            <Text style={MessagesStyle.titleText}>How do you feel today?</Text>
+            <Statuses onPressDirect={onDirectEmotionPress} />
+            <View style={MessagesStyle.contentView}>
+                {messages.map((value) => (
                     <TouchableOpacity
+                        key={value.id}
                         activeOpacity={0.7}
-                        onPress={onAddItemPress}
+                        onPress={() => onItemPress(value)}
+                        onLongPress={() => onItemLongPress(value)}
+                        delayLongPress={150}
                         style={MessagesStyle.buttonView}
                     >
-                        <Text style={MessagesStyle.buttonText}>Add +</Text>
+                        <Text style={MessagesStyle.buttonText}>
+                            {value.emotion}
+                        </Text>
                     </TouchableOpacity>
-                </View>
+                ))}
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    hitSlop={20}
-                    onPress={onDirectEmotionPress}
-                    style={MessagesStyle.directEmotionButtonView}
+                    onPress={onAddItemPress}
+                    style={MessagesStyle.buttonView}
                 >
-                    <Text style={MessagesStyle.directEmotionText}>
-                        Direct sharing
-                    </Text>
-                    <Icon
-                        name={IconEnum.DIRECT}
-                        size={15}
-                        style={MessagesStyle.directIcon}
-                    />
+                    <Text style={MessagesStyle.buttonText}>Add +</Text>
                 </TouchableOpacity>
-            </ScrollView>
+            </View>
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
                 onClose={hideModalAndKeyboard}
                 style={MessagesStyle.modal}
             />
-        </>
+        </View>
     );
 };

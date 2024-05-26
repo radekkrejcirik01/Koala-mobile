@@ -1,12 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-    Alert,
-    Keyboard,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { Alert, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useModal } from '@hooks/useModal';
 import { useAppState } from '@hooks/useAppState';
@@ -32,8 +25,11 @@ import {
 import { ReducerProps } from '@store/index/index.props';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { StatuesProps } from '@components/home/Statuses/Statues.props';
 
-export const Statuses = (): React.JSX.Element => {
+export const Statuses = ({
+    onPressDirect
+}: StatuesProps): React.JSX.Element => {
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
     );
@@ -141,9 +137,20 @@ export const Statuses = (): React.JSX.Element => {
     );
 
     return (
-        <View style={StatusesStyle.container}>
-            <Text style={StatusesStyle.titleText}>Feeling good?</Text>
-            <ScrollView horizontal style={StatusesStyle.scrollView}>
+        <>
+            <ScrollView
+                horizontal
+                style={StatusesStyle.scrollView}
+                contentContainerStyle={StatusesStyle.scrollViewContainer}
+            >
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    hitSlop={10}
+                    onPress={onPressDirect}
+                    style={StatusesStyle.addStatusButton}
+                >
+                    <Icon name={IconEnum.DIRECT} size={20} />
+                </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.7}
                     hitSlop={10}
@@ -152,13 +159,11 @@ export const Statuses = (): React.JSX.Element => {
                 >
                     <Icon name={IconEnum.PLUS} size={20} />
                 </TouchableOpacity>
-                {!!status && (
-                    <ExpressionItem
-                        onPress={onStatusPress}
-                        name="You"
-                        expression={status}
-                    />
-                )}
+                <ExpressionItem
+                    onPress={onStatusPress}
+                    name="You"
+                    expression={status}
+                />
                 {friendsStatuses?.map((value) => (
                     <ExpressionItem
                         key={value.userId}
@@ -174,6 +179,6 @@ export const Statuses = (): React.JSX.Element => {
                 onClose={hideModalAndKeyboard}
                 style={StatusesStyle.modal}
             />
-        </View>
+        </>
     );
 };

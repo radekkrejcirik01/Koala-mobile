@@ -7,16 +7,24 @@ export const ExpressionItem = ({
     onPress,
     name,
     expression
-}: ExpressionItemProps): React.JSX.Element => (
-    <View style={ExpressionItemStyle.container}>
-        <TouchableOpacity
-            activeOpacity={0.7}
-            hitSlop={10}
-            onPress={onPress}
-            style={ExpressionItemStyle.button}
-        >
-            <Text style={ExpressionItemStyle.expressionText}>{expression}</Text>
-        </TouchableOpacity>
-        <Text style={ExpressionItemStyle.nameText}>{name}</Text>
-    </View>
-);
+}: ExpressionItemProps): React.JSX.Element => {
+    if (!expression) {
+        return null;
+    }
+
+    return (
+        <View style={ExpressionItemStyle.container}>
+            <TouchableOpacity
+                activeOpacity={0.7}
+                hitSlop={10}
+                onPress={onPress}
+                style={ExpressionItemStyle.button}
+            >
+                <Text style={ExpressionItemStyle.expressionText}>
+                    {expression}
+                </Text>
+            </TouchableOpacity>
+            <Text style={ExpressionItemStyle.nameText}>{name}</Text>
+        </View>
+    );
+};

@@ -1,21 +1,16 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const StatusesStyle = StyleSheet.create({
-    container: {
-        marginTop: 25
-    },
-    titleText: {
-        marginLeft: 20,
-        fontSize: 22,
-        color: COLORS.LIGHTGRAY_100,
-        fontWeight: 'bold'
-    },
     scrollView: {
         marginTop: 20,
-        paddingLeft: 20
+        minHeight: 95
+    },
+    scrollViewContainer: {
+        flex: 1,
+        justifyContent: 'center'
     },
     addStatusButton: {
+        marginLeft: 10,
         width: 65,
         height: 65,
         borderRadius: 50,
