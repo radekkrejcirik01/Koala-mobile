@@ -12,8 +12,10 @@ export const DirectEmotionModalScreenStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    inputView: {
+        flex: 1
+    },
     input: {
-        flex: 1,
         fontSize: 20,
         color: COLORS.BLACK,
         textAlignVertical: 'top',

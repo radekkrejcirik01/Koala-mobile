@@ -75,16 +75,18 @@ export const DirectEmotionModalScreen = ({
                 }
             ]}
         >
-            <TextInput
-                multiline
-                placeholder="What happened?"
-                autoFocus
-                autoCorrect={false}
-                value={message}
-                onChangeText={setMessage}
-                selectionColor={COLORS.BUTTON_BLUE}
-                style={DirectEmotionModalScreenStyle.input}
-            />
+            <View style={DirectEmotionModalScreenStyle.inputView}>
+                <TextInput
+                    multiline
+                    placeholder="What happened?"
+                    autoFocus
+                    autoCorrect={false}
+                    value={message}
+                    onChangeText={setMessage}
+                    selectionColor={COLORS.BUTTON_BLUE}
+                    style={DirectEmotionModalScreenStyle.input}
+                />
+            </View>
             <View style={DirectEmotionModalScreenStyle.sendContainer}>
                 {loaded ? (
                     <>
