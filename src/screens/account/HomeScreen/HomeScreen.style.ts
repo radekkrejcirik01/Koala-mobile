@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 export const HomeScreenStyle = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 10,
+    scrollView: {
+        flex: 1
+    },
+    scrollViewContainer: {
+        paddingTop: 20,
         paddingBottom: 100
     }
 });

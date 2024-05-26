@@ -27,7 +27,8 @@ export const HomeScreen = (): React.JSX.Element => {
     return (
         <ScrollView
             keyboardShouldPersistTaps="always"
-            style={[HomeScreenStyle.container, { marginTop: top }]}
+            style={[HomeScreenStyle.scrollView, { marginTop: top }]}
+            contentContainerStyle={HomeScreenStyle.scrollViewContainer}
         >
             <HomeHeader />
             <Messages />
