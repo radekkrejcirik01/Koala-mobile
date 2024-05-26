@@ -14,8 +14,13 @@ export const MessagesButton = ({
     );
 
     return (
-        <TouchableOpacity activeOpacity={0.9} hitSlop={10} onPress={onPress}>
-            <Text style={MessagesButtonStyle.emojiText}>💬</Text>
+        <TouchableOpacity
+            activeOpacity={0.9}
+            hitSlop={10}
+            onPress={onPress}
+            style={MessagesButtonStyle.view}
+        >
+            <Text style={MessagesButtonStyle.text}>💬</Text>
             <Badge value={unseenNotifications} />
         </TouchableOpacity>
     );
