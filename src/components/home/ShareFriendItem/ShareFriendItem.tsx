@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ShareFriendItemProps } from '@components/home/ShareFriendItem/ShareFriendItem.props';
@@ -17,10 +17,15 @@ export const ShareFriendItem = ({
         onSelect();
     }, [onSelect]);
 
+    useEffect(() => {
+        if (sent) {
+            setSelected(false);
+        }
+    }, [sent]);
+
     return (
         <TouchableOpacity
             activeOpacity={1}
-            disabled={sent}
             onPress={onPress}
             style={ShareFriendItemStyle.container}
         >
@@ -29,10 +34,9 @@ export const ShareFriendItem = ({
                 size={45}
                 style={[
                     ShareFriendItemStyle.profilePhoto,
-                    selected &&
-                        !sent && {
-                            borderColor: COLORS.BUTTON_BLUE
-                        }
+                    selected && {
+                        borderColor: COLORS.BUTTON_BLUE
+                    }
                 ]}
             />
             <Text adjustsFontSizeToFit style={ShareFriendItemStyle.nameText}>

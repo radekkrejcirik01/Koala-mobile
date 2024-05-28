@@ -49,6 +49,11 @@ export interface MessagePostInterface {
     audioBuffer?: string;
 }
 
+export interface CheckOnMessagePostInterface {
+    ids: number[];
+    message: string;
+}
+
 export interface ExpressionPostInterface {
     userId: number;
     expression: string;
