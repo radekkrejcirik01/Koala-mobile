@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const CheckOnScreenStyle = StyleSheet.create({
     contentContainer: {
+        paddingTop: '35%',
         paddingHorizontal: 20,
         paddingBottom: 10
     },
