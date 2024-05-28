@@ -2,18 +2,19 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const BottomTabNavigatorStyle = StyleSheet.create({
-    header: {
-        shadowOpacity: 0,
-        backgroundColor: 'lightblue'
-    },
-    tabBar: {
-        paddingTop: 5,
-        paddingHorizontal: '5%',
-        borderTopWidth: 0,
-        backgroundColor: 'lightblue'
-    },
     tabBarLabel: {
-        color: COLORS.WHITE,
+        fontSize: 11,
+        color: COLORS.LIGHTGRAY_100,
         fontWeight: '500'
+    },
+    tabBarIconEmoji: {
+        marginTop: 5,
+        fontSize: 20
+    },
+    tabBarIconImage: {
+        height: 25,
+        width: 25,
+        marginTop: 5,
+        opacity: 0.8
     }
 });

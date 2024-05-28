@@ -10,7 +10,6 @@ import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
@@ -18,18 +17,16 @@ export const ProfileScreen = (): React.JSX.Element => {
         (state: ReducerProps) => state.user.user
     );
 
-    const { top, bottom } = useSafeAreaInsets();
+    const { top } = useSafeAreaInsets();
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     return (
-        <View
-            style={[
-                ProfileScreenStyle.container,
-                { paddingTop: top + 10, paddingBottom: bottom || 10 }
-            ]}
+        <ScrollView
+            style={{ paddingTop: top + 10 }}
+            contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
         >
-            <ScreenHeader title="Profile" />
-            <ScrollView>
+            <View>
+                <Text style={ProfileScreenStyle.titleText}>Profile</Text>
                 <View style={ProfileScreenStyle.profileContainer}>
                     <ProfilePhoto name={name} size={60} />
                     <View style={ProfileScreenStyle.profileNamesView}>
@@ -67,9 +64,11 @@ export const ProfileScreen = (): React.JSX.Element => {
                         <Icon name={IconEnum.BACK_BLUE_RIGHT} size={18} />
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
-            <Text style={ProfileScreenStyle.text}>Made to help</Text>
-            <Text style={ProfileScreenStyle.text}>version {version}</Text>
-        </View>
+            </View>
+            <View>
+                <Text style={ProfileScreenStyle.text}>Made to help</Text>
+                <Text style={ProfileScreenStyle.text}>version {version}</Text>
+            </View>
+        </ScrollView>
     );
 };

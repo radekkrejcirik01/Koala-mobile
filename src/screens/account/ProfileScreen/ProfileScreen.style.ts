@@ -2,15 +2,18 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ProfileScreenStyle = StyleSheet.create({
-    container: {
-        flex: 1,
+    contentContainerStyle: {
+        flexGrow: 1,
         paddingLeft: 15,
-        paddingRight: 20
-    },
-    headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        paddingBottom: 10,
+        paddingRight: 20,
         justifyContent: 'space-between'
+    },
+    titleText: {
+        fontSize: 24,
+        color: COLORS.LIGHTGRAY_100,
+        fontWeight: 'bold',
+        alignSelf: 'flex-end'
     },
     profileContainer: {
         paddingVertical: 20,

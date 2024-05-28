@@ -1,3 +1,5 @@
 export enum BottomTabNavigatorEnum {
-    HomeTab = 'HomeTab'
+    HomeTab = 'HomeTab',
+    CheckOnTab = 'CheckOnTab',
+    ProfileTab = 'ProfileTab'
 }
