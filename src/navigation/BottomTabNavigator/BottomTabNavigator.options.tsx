@@ -3,12 +3,14 @@ import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { BottomTabNavigatorStyle } from '@navigation/BottomTabNavigator/BottomTabNavigator.style';
+import COLORS from '@constants/COLORS';
 
 export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
     tabBarStyle: {
         borderTopWidth: 0
     },
-    tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel,
+    tabBarActiveTintColor: COLORS.BUTTON_BLUE,
+    tabBarInactiveTintColor: COLORS.LIGHTGRAY_100,
     headerShown: false
 };
 
