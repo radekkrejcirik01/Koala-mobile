@@ -11,6 +11,7 @@ export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
     },
     tabBarActiveTintColor: COLORS.BUTTON_BLUE,
     tabBarInactiveTintColor: COLORS.LIGHTGRAY_100,
+    tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel,
     headerShown: false
 };
 

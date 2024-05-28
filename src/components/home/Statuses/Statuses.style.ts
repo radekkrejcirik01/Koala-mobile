@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const StatusesStyle = StyleSheet.create({
     scrollView: {
         marginTop: 20,
-        minHeight: 95
+        minHeight: 85
     },
     scrollViewContainer: {
         flex: 1,

@@ -1,10 +1,8 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const BottomTabNavigatorStyle = StyleSheet.create({
     tabBarLabel: {
         fontSize: 11,
-        color: COLORS.LIGHTGRAY_100,
         fontWeight: '500'
     },
     tabBarIconEmoji: {
