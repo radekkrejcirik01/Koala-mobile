@@ -26,6 +26,9 @@ export const NotificationItem = ({
         if (type === NotificationItemEnum.StatusReplyNotificationType) {
             return ' is replying to status';
         }
+        if (type === NotificationItemEnum.CheckOnMessageNotificationType) {
+            return ' is checking on';
+        }
         return '';
     }
 

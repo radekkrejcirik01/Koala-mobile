@@ -29,8 +29,15 @@ import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-    const { id, senderId, name, username, conversationId, isStatusReply } =
-        route.params;
+    const {
+        id,
+        senderId,
+        name,
+        username,
+        conversationId,
+        isStatusReply,
+        isCheckOnMessage
+    } = route.params;
 
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
@@ -60,7 +67,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     // Return true when first messages is inbound and number of inbound messages is 1
     const checkShowReplies = useCallback(
         (data: ConversationInterface[]) => {
-            if (isStatusReply) {
+            if (isStatusReply || isCheckOnMessage) {
                 return false;
             }
             if (data[0]?.senderId === userId) {
@@ -72,7 +79,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             );
             return receivedMessages?.length === 1;
         },
-        [isStatusReply, userId]
+        [isCheckOnMessage, isStatusReply, userId]
     );
 
     const updateSeenNotification = useCallback(() => {

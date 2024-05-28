@@ -94,7 +94,10 @@ export const NotificationsScreen = (): React.JSX.Element => {
                         conversationId: item?.conversationId,
                         isStatusReply:
                             item?.type ===
-                            NotificationItemEnum.StatusReplyNotificationType
+                            NotificationItemEnum.StatusReplyNotificationType,
+                        isCheckOnMessage:
+                            item?.type ===
+                            NotificationItemEnum.CheckOnMessageNotificationType
                     })
                 }
             />
