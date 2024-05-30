@@ -1,58 +1,33 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import {
-    GestureHandlerRootView,
-    Swipeable
-} from 'react-native-gesture-handler';
 import { InboundMessageItemProps } from '@components/chat/InboundMessageItem/InboundMessageItem.props';
 import { InboundMessageItemStyle } from '@components/chat/InboundMessageItem/InboundMessageItem.style';
 import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
-import { getMessageTime } from '@functions/getMessageTime';
-import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
+import { REGEX } from '@constants/REGEX';
 
 export const InboundMessageItem = ({
     name,
     children,
     onLongPress,
-    time,
     replyMessage,
     audioMessage,
-    isLast
+    isFirst
 }: InboundMessageItemProps): React.JSX.Element => {
     function isEmojiOnly(str: string): boolean {
-        const emojiRegex = /^(?:[\p{Emoji}\p{Mark}\p{Zs}\u{200D}])*$/u;
-
-        return emojiRegex.test(str);
+        return REGEX.test(str);
     }
 
     return (
-        <GestureHandlerRootView
+        <View
             style={[
                 InboundMessageItemStyle.container,
-                isLast && InboundMessageItemStyle.marginBottom
+                isFirst && InboundMessageItemStyle.marginTop
             ]}
         >
-            {isLast ? (
-                <ProfilePhoto
-                    name={name}
-                    size={32}
-                    acronymStyle={InboundMessageItemStyle.acronym}
-                    style={InboundMessageItemStyle.alignSelf}
-                />
-            ) : (
-                <View style={InboundMessageItemStyle.emptyView} />
+            {isFirst && (
+                <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
             )}
-            <Swipeable
-                renderLeftActions={() => (
-                    <Text style={InboundMessageItemStyle.timeText}>
-                        {getMessageTime(time)}
-                    </Text>
-                )}
-                containerStyle={InboundMessageItemStyle.contentContainer}
-                childrenContainerStyle={
-                    InboundMessageItemStyle.childrenContainer
-                }
-            >
+            <View style={InboundMessageItemStyle.messageContainer}>
                 {!!replyMessage && (
                     <View style={InboundMessageItemStyle.replyMessageView}>
                         <Text style={InboundMessageItemStyle.replyMessageText}>
@@ -65,7 +40,7 @@ export const InboundMessageItem = ({
                 ) : (
                     <TouchableOpacity
                         activeOpacity={1}
-                        delayLongPress={150}
+                        delayLongPress={100}
                         hitSlop={10}
                         onLongPress={onLongPress}
                     >
@@ -80,7 +55,7 @@ export const InboundMessageItem = ({
                         </Text>
                     </TouchableOpacity>
                 )}
-            </Swipeable>
-        </GestureHandlerRootView>
+            </View>
+        </View>
     );
 };

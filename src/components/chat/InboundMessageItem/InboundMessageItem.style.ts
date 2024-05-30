@@ -3,40 +3,18 @@ import COLORS from '@constants/COLORS';
 
 export const InboundMessageItemStyle = StyleSheet.create({
     container: {
-        marginTop: 5,
-        backgroundColor: COLORS.WHITE,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    marginBottom: {
-        marginBottom: 10
-    },
-    acronym: {
-        borderRadius: 14
-    },
-    alignSelf: {
-        alignSelf: 'flex-end'
-    },
-    emptyView: {
-        height: 32,
-        width: 32
-    },
-    contentContainer: {
-        flex: 1,
-        marginLeft: 5
-    },
-    childrenContainer: {
-        maxWidth: '70%',
-        paddingLeft: 5,
         backgroundColor: COLORS.WHITE
     },
-    timeText: {
-        marginLeft: 5,
-        marginRight: 10,
-        paddingBottom: 5,
-        fontSize: 12,
-        color: COLORS.GRAY_200,
-        alignSelf: 'flex-end'
+    marginTop: {
+        marginTop: 18
+    },
+    nameText: {
+        fontSize: 16,
+        color: COLORS.BUTTON_BLUE,
+        fontWeight: 'bold'
+    },
+    messageContainer: {
+        marginTop: 5
     },
     replyMessageView: {
         marginVertical: 2,
@@ -49,15 +27,14 @@ export const InboundMessageItemStyle = StyleSheet.create({
         alignSelf: 'flex-start'
     },
     replyMessageText: {
-        color: COLORS.BLACK_50,
+        color: COLORS.LIGHTGRAY_100,
         fontWeight: '500'
     },
     messageText: {
-        fontSize: 20,
-        marginBottom: 2,
-        color: COLORS.BLACK_50,
+        fontSize: 18,
+        color: COLORS.LIGHTGRAY_300,
         backgroundColor: COLORS.WHITE,
-        fontWeight: '600'
+        fontWeight: 'bold'
     },
     largeText: {
         fontSize: 35

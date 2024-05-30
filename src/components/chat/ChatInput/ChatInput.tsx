@@ -34,7 +34,6 @@ export const ChatInput = ({
 }: ChatInputProps): React.JSX.Element => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [record, setRecord] = useState<string>();
-    const [isFocused, setIsFocused] = useState<boolean>(false);
 
     const startRecording = useCallback(async () => {
         await checkAndroidRecordingPermission();
@@ -81,11 +80,6 @@ export const ChatInput = ({
         setRecord(null);
     }, [onAudioRecord]);
 
-    const onFocusFunc = () => {
-        onFocus();
-        setIsFocused(true);
-    };
-
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'position' : 'height'}
@@ -124,22 +118,19 @@ export const ChatInput = ({
                         onPress={() => inputRef.current.focus()}
                         style={ChatInputStyle.inputView}
                     >
-                        {!isFocused && (
-                            <TouchableOpacity
-                                activeOpacity={0.5}
-                                hitSlop={10}
-                                onPress={startRecording}
-                                style={ChatInputStyle.microphoneButtonView}
-                            >
-                                <Icon name={IconEnum.MICROPHONE} size={26} />
-                            </TouchableOpacity>
-                        )}
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            hitSlop={10}
+                            onPress={startRecording}
+                            style={ChatInputStyle.microphoneButtonView}
+                        >
+                            <Icon name={IconEnum.MICROPHONE} size={26} />
+                        </TouchableOpacity>
                         <TextInput
                             ref={inputRef}
                             autoCorrect={false}
                             multiline
-                            onFocus={onFocusFunc}
-                            onBlur={() => setIsFocused(false)}
+                            onFocus={onFocus}
                             value={message}
                             onChangeText={onChangeText}
                             placeholder="Message..."

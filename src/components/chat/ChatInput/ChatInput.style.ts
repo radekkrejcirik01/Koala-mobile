@@ -28,7 +28,7 @@ export const ChatInputStyle = StyleSheet.create({
         fontWeight: '500'
     },
     inputContainer: {
-        marginHorizontal: 14,
+        marginHorizontal: 18,
         paddingBottom: 5,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row'

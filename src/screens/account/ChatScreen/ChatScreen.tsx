@@ -8,6 +8,7 @@ import messaging, {
 import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import fs from 'react-native-fs';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { useAppState } from '@hooks/useAppState';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
@@ -27,6 +28,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
+import { getLocalTimeFromUTCUnix } from '@functions/getLocalTimeFromUTCUnix';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const {
@@ -195,13 +197,23 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
     const onMessageLongPress = useCallback(
         (item: ConversationInterface) => {
+            if (item.audioMessage) {
+                return;
+            }
+
             ReactNativeHapticFeedback.trigger('impactLight');
 
             if (item?.senderId === userId) {
-                Alert.alert(item.message || '🎤 Voice message', '', [
+                Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
                     {
                         text: 'Cancel',
                         style: 'cancel'
+                    },
+                    {
+                        text: 'Copy',
+                        onPress: () => {
+                            Clipboard.setString(item.message);
+                        }
                     },
                     {
                         text: 'Delete for everybody',
@@ -209,10 +221,28 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                         style: 'destructive'
                     }
                 ]);
-            } else {
-                inputRef.current.focus();
-                setReplyMessage(item.message);
+                return;
             }
+
+            Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Copy',
+                    onPress: () => {
+                        Clipboard.setString(item.message);
+                    }
+                },
+                {
+                    text: 'Reply',
+                    onPress: () => {
+                        inputRef.current.focus();
+                        setReplyMessage(item.message);
+                    }
+                }
+            ]);
         },
         [deleteMessage, userId]
     );

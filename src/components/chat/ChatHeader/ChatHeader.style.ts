@@ -27,7 +27,7 @@ export const ChatHeaderStyle = StyleSheet.create({
         marginLeft: 8
     },
     nameText: {
-        fontSize: 18,
+        fontSize: 17,
         color: COLORS.BLACK,
         fontWeight: '600'
     },

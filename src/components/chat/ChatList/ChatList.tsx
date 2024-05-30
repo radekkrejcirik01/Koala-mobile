@@ -31,9 +31,12 @@ export const ChatList = ({
                     <OutboundMessageItem
                         onLongPress={() => onMessageLongPress(value)}
                         key={value.id}
-                        time={value.time}
                         replyMessage={value?.replyMessage}
                         audioMessage={value?.audioMessage}
+                        isFirst={
+                            value?.senderId !==
+                            conversation[index - 1]?.senderId
+                        }
                     >
                         {value.message}
                     </OutboundMessageItem>
@@ -42,12 +45,11 @@ export const ChatList = ({
                         key={value.id}
                         name={name}
                         onLongPress={() => onMessageLongPress(value)}
-                        time={value.time}
                         replyMessage={value?.replyMessage}
                         audioMessage={value?.audioMessage}
-                        isLast={
+                        isFirst={
                             value?.senderId !==
-                            conversation[index + 1]?.senderId
+                            conversation[index - 1]?.senderId
                         }
                     >
                         {value.message}

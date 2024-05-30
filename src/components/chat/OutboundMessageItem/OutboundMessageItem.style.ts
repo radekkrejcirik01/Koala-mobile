@@ -3,28 +3,18 @@ import COLORS from '@constants/COLORS';
 
 export const OutboundMessageItemStyle = StyleSheet.create({
     container: {
-        minHeight: 32,
-        marginTop: 5,
-        backgroundColor: COLORS.WHITE,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    contentContainer: {
-        alignItems: 'flex-end',
-        flex: 1
-    },
-    childrenContainer: {
-        maxWidth: '70%',
-        paddingRight: 5,
         backgroundColor: COLORS.WHITE
     },
-    timeText: {
-        marginRight: 5,
-        marginLeft: 10,
-        paddingBottom: 5,
-        fontSize: 12,
-        color: COLORS.GRAY_200,
-        alignSelf: 'flex-end'
+    marginTop: {
+        marginTop: 18
+    },
+    nameText: {
+        fontSize: 16,
+        color: COLORS.BLACK_50,
+        fontWeight: 'bold'
+    },
+    messageContainer: {
+        marginTop: 5
     },
     replyMessageView: {
         marginBottom: 2,
@@ -34,18 +24,17 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         borderWidth: 2,
         borderColor: COLORS.LIGHTGRAY,
         backgroundColor: COLORS.WHITE,
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-start'
     },
     replyMessageText: {
-        color: COLORS.BLACK_50,
+        color: COLORS.LIGHTGRAY_100,
         fontWeight: '500'
     },
     messageText: {
-        fontSize: 20,
-        marginBottom: 2,
-        color: COLORS.BLACK_50,
+        fontSize: 18,
+        color: COLORS.LIGHTGRAY_300,
         backgroundColor: COLORS.WHITE,
-        fontWeight: '600'
+        fontWeight: 'bold'
     },
     largeText: {
         fontSize: 35
