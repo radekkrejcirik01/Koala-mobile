@@ -88,19 +88,17 @@ export const CheckOnScreen = () => {
                 style={{ paddingTop: top }}
                 contentContainerStyle={CheckOnScreenStyle.contentContainer}
             >
-                <Text style={CheckOnScreenStyle.titleText}>Check-on</Text>
+                <Text style={CheckOnScreenStyle.titleText}>Check on</Text>
                 <Text style={CheckOnScreenStyle.descriptionText}>
-                    Ask your friend how they are doing
+                    Ask your friends how they are doing
                 </Text>
                 <TextInput
                     value={message}
                     onChangeText={setMessage}
+                    autoCorrect={false}
                     selectionColor={COLORS.BUTTON_BLUE}
                     style={CheckOnScreenStyle.input}
                 />
-                <Text style={CheckOnScreenStyle.editText}>
-                    You can edit this message
-                </Text>
                 <View style={CheckOnScreenStyle.sendContainer}>
                     {loaded ? (
                         <>

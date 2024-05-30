@@ -8,14 +8,13 @@ export const CheckOnScreenStyle = StyleSheet.create({
         paddingBottom: 10
     },
     titleText: {
-        fontSize: 24,
+        fontSize: 26,
         color: COLORS.LIGHTGRAY_100,
         fontWeight: 'bold',
         alignSelf: 'flex-end'
     },
     descriptionText: {
         marginTop: 2,
-        fontSize: 12,
         color: COLORS.LIGHTGRAY_100,
         alignSelf: 'flex-end',
         fontWeight: 'bold'
@@ -26,13 +25,6 @@ export const CheckOnScreenStyle = StyleSheet.create({
         padding: 0, // Overwrite default value
         fontSize: 28,
         color: COLORS.BUTTON_BLUE,
-        fontWeight: 'bold'
-    },
-    editText: {
-        marginTop: 2,
-        marginLeft: 10,
-        fontSize: 12,
-        color: COLORS.LIGHTGRAY_100,
         fontWeight: 'bold'
     },
     sendContainer: {
