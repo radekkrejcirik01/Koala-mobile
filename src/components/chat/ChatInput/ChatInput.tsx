@@ -124,7 +124,7 @@ export const ChatInput = ({
                             onPress={startRecording}
                             style={ChatInputStyle.microphoneButtonView}
                         >
-                            <Icon name={IconEnum.MICROPHONE} size={26} />
+                            <Icon name={IconEnum.MICROPHONE} size={24} />
                         </TouchableOpacity>
                         <TextInput
                             ref={inputRef}
