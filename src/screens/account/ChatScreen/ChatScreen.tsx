@@ -197,14 +197,66 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
     const onMessageLongPress = useCallback(
         (item: ConversationInterface) => {
-            if (item.audioMessage) {
-                return;
-            }
+            const sentByUser = item?.senderId === userId;
 
             ReactNativeHapticFeedback.trigger('impactLight');
 
-            if (item?.senderId === userId) {
-                Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
+            if (item.audioMessage) {
+                if (sentByUser) {
+                    Alert.alert(
+                        '🎤 Voice message',
+                        `sent ${getLocalTimeFromUTCUnix(item.time)}`,
+                        [
+                            {
+                                text: 'Cancel',
+                                style: 'cancel'
+                            },
+                            {
+                                text: 'Delete for everybody',
+                                onPress: () => deleteMessage(item.id),
+                                style: 'destructive'
+                            }
+                        ]
+                    );
+                } else {
+                    Alert.alert(
+                        '🎤 Voice message',
+                        `sent ${getLocalTimeFromUTCUnix(item.time)}`
+                    );
+                }
+
+                return;
+            }
+
+            if (sentByUser) {
+                Alert.alert(
+                    item.message,
+                    `sent ${getLocalTimeFromUTCUnix(item.time)}`,
+                    [
+                        {
+                            text: 'Cancel',
+                            style: 'cancel'
+                        },
+                        {
+                            text: 'Copy',
+                            onPress: () => {
+                                Clipboard.setString(item.message);
+                            }
+                        },
+                        {
+                            text: 'Delete for everybody',
+                            onPress: () => deleteMessage(item.id),
+                            style: 'destructive'
+                        }
+                    ]
+                );
+                return;
+            }
+
+            Alert.alert(
+                item.message,
+                `sent ${getLocalTimeFromUTCUnix(item.time)}`,
+                [
                     {
                         text: 'Cancel',
                         style: 'cancel'
@@ -216,33 +268,14 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                         }
                     },
                     {
-                        text: 'Delete for everybody',
-                        onPress: () => deleteMessage(item.id),
-                        style: 'destructive'
+                        text: 'Reply',
+                        onPress: () => {
+                            inputRef.current.focus();
+                            setReplyMessage(item.message);
+                        }
                     }
-                ]);
-                return;
-            }
-
-            Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
-                {
-                    text: 'Cancel',
-                    style: 'cancel'
-                },
-                {
-                    text: 'Copy',
-                    onPress: () => {
-                        Clipboard.setString(item.message);
-                    }
-                },
-                {
-                    text: 'Reply',
-                    onPress: () => {
-                        inputRef.current.focus();
-                        setReplyMessage(item.message);
-                    }
-                }
-            ]);
+                ]
+            );
         },
         [deleteMessage, userId]
     );

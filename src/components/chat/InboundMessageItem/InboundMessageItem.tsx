@@ -25,14 +25,14 @@ export const InboundMessageItem = ({
                     </Text>
                 </View>
             )}
-            {audioMessage ? (
-                <AudioMessageItem audioMessage={audioMessage} />
-            ) : (
-                <TouchableOpacity
-                    activeOpacity={1}
-                    delayLongPress={100}
-                    onLongPress={onLongPress}
-                >
+            <TouchableOpacity
+                activeOpacity={1}
+                delayLongPress={100}
+                onLongPress={onLongPress}
+            >
+                {audioMessage ? (
+                    <AudioMessageItem audioMessage={audioMessage} />
+                ) : (
                     <Text
                         style={[
                             InboundMessageItemStyle.messageText,
@@ -42,8 +42,8 @@ export const InboundMessageItem = ({
                     >
                         {children}
                     </Text>
-                </TouchableOpacity>
-            )}
+                )}
+            </TouchableOpacity>
         </View>
     </View>
 );

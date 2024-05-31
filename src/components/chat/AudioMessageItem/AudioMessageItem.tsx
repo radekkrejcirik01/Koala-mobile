@@ -3,15 +3,11 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import Sound from 'react-native-sound';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import {
-    AudioMessageItemDefaultProps,
-    AudioMessageItemProps
-} from '@components/chat/AudioMessageItem/AudioMessageItem.props';
+import { AudioMessageItemProps } from '@components/chat/AudioMessageItem/AudioMessageItem.props';
 import { AudioMessageItemStyle } from '@components/chat/AudioMessageItem/AudioMessageItem.style';
 
 export const AudioMessageItem = ({
-    audioMessage,
-    outbound
+    audioMessage
 }: AudioMessageItemProps): JSX.Element => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [sound, setSound] = useState<Sound>();
@@ -40,12 +36,7 @@ export const AudioMessageItem = ({
     }, [sound]);
 
     return (
-        <View
-            style={[
-                AudioMessageItemStyle.view,
-                outbound && AudioMessageItemStyle.outbound
-            ]}
-        >
+        <View style={AudioMessageItemStyle.view}>
             <Text style={AudioMessageItemStyle.text}>🎤 Voice message</Text>
             {isPlaying ? (
                 <TouchableOpacity
@@ -69,5 +60,3 @@ export const AudioMessageItem = ({
         </View>
     );
 };
-
-AudioMessageItem.defaultProps = AudioMessageItemDefaultProps;

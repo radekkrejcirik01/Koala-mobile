@@ -29,7 +29,7 @@ export const OutboundMessageItem = ({
                 onLongPress={onLongPress}
             >
                 {audioMessage ? (
-                    <AudioMessageItem audioMessage={audioMessage} outbound />
+                    <AudioMessageItem audioMessage={audioMessage} />
                 ) : (
                     <Text
                         style={[
