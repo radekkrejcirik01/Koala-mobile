@@ -13,12 +13,7 @@ export const InboundMessageItem = ({
     audioMessage,
     isFirst
 }: InboundMessageItemProps): React.JSX.Element => (
-    <View
-        style={[
-            InboundMessageItemStyle.container,
-            isFirst && InboundMessageItemStyle.marginTop
-        ]}
-    >
+    <View style={isFirst && InboundMessageItemStyle.marginTop}>
         {isFirst && (
             <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
         )}
