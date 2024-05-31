@@ -23,8 +23,7 @@ export const ChatInputStyle = StyleSheet.create({
     },
     replyMessageText: {
         marginTop: 2,
-        fontSize: 16,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     inputContainer: {

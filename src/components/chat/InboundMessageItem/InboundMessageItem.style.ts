@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const InboundMessageItemStyle = StyleSheet.create({
     marginTop: {
-        marginTop: 18
+        marginTop: 12
     },
     nameText: {
         fontSize: 16,
@@ -11,7 +11,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     messageContainer: {
-        marginTop: 4
+        marginTop: 5
     },
     replyMessageView: {
         marginBottom: 2,

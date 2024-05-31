@@ -11,10 +11,10 @@ export function getLocalTimeFromUTCUnix(time: number): string {
     const localHour = moment(local).format('HH:mm');
 
     if (localDate === today) {
-        return `Today ${localHour}`;
+        return `today ${localHour}`;
     }
     if (localDate === yesterday) {
-        return `Yesterday ${localHour}`;
+        return `yesterday ${localHour}`;
     }
     return `${localDate} ${localHour}`;
 }
