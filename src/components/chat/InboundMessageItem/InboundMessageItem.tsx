@@ -16,8 +16,8 @@ export const InboundMessageItem = ({
     <View style={isFirst && InboundMessageItemStyle.marginTop}>
         {isFirst && (
             <View style={InboundMessageItemStyle.row}>
-                <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
                 <Text style={InboundMessageItemStyle.emojiText}>💬</Text>
+                <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
             </View>
         )}
         <View style={InboundMessageItemStyle.messageContainer}>

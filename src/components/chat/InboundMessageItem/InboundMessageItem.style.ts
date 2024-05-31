@@ -15,7 +15,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
     },
     emojiText: {
         marginTop: 1,
-        marginLeft: 3,
+        marginRight: 3,
         fontSize: 14
     },
     messageContainer: {
