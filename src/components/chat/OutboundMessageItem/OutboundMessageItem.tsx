@@ -26,7 +26,6 @@ export const OutboundMessageItem = ({
             <TouchableOpacity
                 activeOpacity={1}
                 delayLongPress={100}
-                hitSlop={10}
                 onLongPress={onLongPress}
             >
                 {audioMessage ? (
