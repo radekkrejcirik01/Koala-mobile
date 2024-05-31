@@ -26,8 +26,8 @@ export const MessagesStyle = StyleSheet.create({
         backgroundColor: '#00000010'
     },
     buttonText: {
-        fontSize: 16,
-        color: COLORS.BLACK,
+        fontSize: 15,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
     modal: {
