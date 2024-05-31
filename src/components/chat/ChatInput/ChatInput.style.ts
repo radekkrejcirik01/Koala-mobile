@@ -23,13 +23,12 @@ export const ChatInputStyle = StyleSheet.create({
     },
     replyMessageText: {
         marginTop: 2,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     inputContainer: {
         marginHorizontal: 5,
-        marginBottom: 2,
-        paddingBottom: 5,
+        paddingBottom: 7,
         backgroundColor: COLORS.WHITE,
         flexDirection: 'row'
     },
@@ -48,7 +47,7 @@ export const ChatInputStyle = StyleSheet.create({
     },
     input: {
         flex: 1,
-        paddingLeft: 5,
+        paddingLeft: 2,
         paddingRight: 20,
         paddingTop: 0, // overwrite default value
         paddingBottom: 0, // overwrite default value

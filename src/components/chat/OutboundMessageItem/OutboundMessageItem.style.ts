@@ -3,11 +3,11 @@ import COLORS from '@constants/COLORS';
 
 export const OutboundMessageItemStyle = StyleSheet.create({
     marginTop: {
-        marginTop: 12
+        marginTop: 16
     },
     nameText: {
-        fontSize: 16,
-        color: COLORS.BUTTON_BLUE,
+        fontSize: 17,
+        color: COLORS.LIGHTGRAY_100,
         fontWeight: 'bold'
     },
     messageContainer: {
@@ -28,7 +28,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     },
     messageText: {
         fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     largeText: {

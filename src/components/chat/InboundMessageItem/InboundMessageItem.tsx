@@ -15,7 +15,10 @@ export const InboundMessageItem = ({
 }: InboundMessageItemProps): React.JSX.Element => (
     <View style={isFirst && InboundMessageItemStyle.marginTop}>
         {isFirst && (
-            <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
+            <View style={InboundMessageItemStyle.row}>
+                <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
+                <Text style={InboundMessageItemStyle.emojiText}>💬</Text>
+            </View>
         )}
         <View style={InboundMessageItemStyle.messageContainer}>
             {!!replyMessage && (
@@ -27,7 +30,7 @@ export const InboundMessageItem = ({
             )}
             <TouchableOpacity
                 activeOpacity={1}
-                delayLongPress={100}
+                delayLongPress={120}
                 onLongPress={onLongPress}
             >
                 {audioMessage ? (

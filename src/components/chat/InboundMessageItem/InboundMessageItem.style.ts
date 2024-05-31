@@ -3,12 +3,20 @@ import COLORS from '@constants/COLORS';
 
 export const InboundMessageItemStyle = StyleSheet.create({
     marginTop: {
-        marginTop: 12
+        marginTop: 16
+    },
+    row: {
+        flexDirection: 'row'
     },
     nameText: {
-        fontSize: 16,
+        fontSize: 17,
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
+    },
+    emojiText: {
+        marginTop: 1,
+        marginLeft: 3,
+        fontSize: 14
     },
     messageContainer: {
         marginTop: 5
@@ -28,7 +36,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
     },
     messageText: {
         fontSize: 16,
-        color: COLORS.BLACK_50,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     largeText: {

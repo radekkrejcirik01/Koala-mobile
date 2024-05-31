@@ -3,7 +3,6 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { OutboundMessageItemProps } from '@components/chat/OutboundMessageItem/OutboundMessageItem.props';
 import { OutboundMessageItemStyle } from '@components/chat/OutboundMessageItem/OutboundMessageItem.style';
 import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
-import { InboundMessageItemStyle } from '@components/chat/InboundMessageItem/InboundMessageItem.style';
 import { isTextEmoji } from '@functions/isTextEmoji';
 
 export const OutboundMessageItem = ({
@@ -15,7 +14,7 @@ export const OutboundMessageItem = ({
 }: OutboundMessageItemProps): React.JSX.Element => (
     <View style={isFirst && OutboundMessageItemStyle.marginTop}>
         {isFirst && <Text style={OutboundMessageItemStyle.nameText}>You</Text>}
-        <View style={InboundMessageItemStyle.messageContainer}>
+        <View style={OutboundMessageItemStyle.messageContainer}>
             {!!replyMessage && (
                 <View style={OutboundMessageItemStyle.replyMessageView}>
                     <Text style={OutboundMessageItemStyle.replyMessageText}>
@@ -25,7 +24,7 @@ export const OutboundMessageItem = ({
             )}
             <TouchableOpacity
                 activeOpacity={1}
-                delayLongPress={100}
+                delayLongPress={120}
                 onLongPress={onLongPress}
             >
                 {audioMessage ? (
