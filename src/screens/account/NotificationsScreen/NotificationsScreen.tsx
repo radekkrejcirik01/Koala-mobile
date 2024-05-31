@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Keyboard, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
@@ -66,7 +65,9 @@ export const NotificationsScreen = (): React.JSX.Element => {
         [dispatch]
     );
 
-    useFocusEffect(loadNotifications);
+    useEffect(() => {
+        loadNotifications();
+    }, [loadNotifications]);
 
     const addFriends = useCallback(() => {
         hideModal();
