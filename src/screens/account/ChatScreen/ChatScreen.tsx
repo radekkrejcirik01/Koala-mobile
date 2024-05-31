@@ -205,7 +205,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 if (sentByUser) {
                     Alert.alert(
                         '🎤 Voice message',
-                        `sent ${getLocalTimeFromUTCUnix(item.time)}`,
+                        getLocalTimeFromUTCUnix(item.time),
                         [
                             {
                                 text: 'Cancel',
@@ -221,7 +221,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 } else {
                     Alert.alert(
                         '🎤 Voice message',
-                        `sent ${getLocalTimeFromUTCUnix(item.time)}`
+                        getLocalTimeFromUTCUnix(item.time)
                     );
                 }
 
@@ -229,34 +229,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             }
 
             if (sentByUser) {
-                Alert.alert(
-                    item.message,
-                    `sent ${getLocalTimeFromUTCUnix(item.time)}`,
-                    [
-                        {
-                            text: 'Cancel',
-                            style: 'cancel'
-                        },
-                        {
-                            text: 'Copy',
-                            onPress: () => {
-                                Clipboard.setString(item.message);
-                            }
-                        },
-                        {
-                            text: 'Delete for everybody',
-                            onPress: () => deleteMessage(item.id),
-                            style: 'destructive'
-                        }
-                    ]
-                );
-                return;
-            }
-
-            Alert.alert(
-                item.message,
-                `sent ${getLocalTimeFromUTCUnix(item.time)}`,
-                [
+                Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
                     {
                         text: 'Cancel',
                         style: 'cancel'
@@ -268,14 +241,33 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                         }
                     },
                     {
-                        text: 'Reply',
-                        onPress: () => {
-                            inputRef.current.focus();
-                            setReplyMessage(item.message);
-                        }
+                        text: 'Delete for everybody',
+                        onPress: () => deleteMessage(item.id),
+                        style: 'destructive'
                     }
-                ]
-            );
+                ]);
+                return;
+            }
+
+            Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Copy',
+                    onPress: () => {
+                        Clipboard.setString(item.message);
+                    }
+                },
+                {
+                    text: 'Reply',
+                    onPress: () => {
+                        inputRef.current.focus();
+                        setReplyMessage(item.message);
+                    }
+                }
+            ]);
         },
         [deleteMessage, userId]
     );
