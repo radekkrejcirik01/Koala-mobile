@@ -15,10 +15,7 @@ export const InboundMessageItem = ({
 }: InboundMessageItemProps): React.JSX.Element => (
     <View style={isFirst && InboundMessageItemStyle.marginTop}>
         {isFirst && (
-            <View style={InboundMessageItemStyle.row}>
-                <Text style={InboundMessageItemStyle.emojiText}>💬</Text>
-                <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
-            </View>
+            <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
         )}
         <View style={InboundMessageItemStyle.messageContainer}>
             {!!replyMessage && (

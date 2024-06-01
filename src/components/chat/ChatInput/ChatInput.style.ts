@@ -47,10 +47,9 @@ export const ChatInputStyle = StyleSheet.create({
     },
     input: {
         flex: 1,
+        paddingVertical: 5,
         paddingLeft: 2,
         paddingRight: 20,
-        paddingTop: 0, // overwrite default value
-        paddingBottom: 0, // overwrite default value
         fontSize: 16,
         color: COLORS.BLACK
     },

@@ -5,18 +5,10 @@ export const InboundMessageItemStyle = StyleSheet.create({
     marginTop: {
         marginTop: 16
     },
-    row: {
-        flexDirection: 'row'
-    },
     nameText: {
-        fontSize: 17,
+        fontSize: 16,
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
-    },
-    emojiText: {
-        marginTop: 1,
-        marginRight: 3,
-        fontSize: 14
     },
     messageContainer: {
         marginTop: 5
@@ -37,7 +29,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
     messageText: {
         fontSize: 16,
         color: COLORS.BLACK,
-        fontWeight: '500'
+        fontWeight: '600'
     },
     largeText: {
         fontSize: 35

@@ -224,12 +224,16 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                         getLocalTimeFromUTCUnix(item.time)
                     );
                 }
-
                 return;
             }
 
+            const subMessage =
+                item?.message?.length <= 25
+                    ? item?.message
+                    : `${item?.message?.substring(0, 25)}...`;
+
             if (sentByUser) {
-                Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
+                Alert.alert(subMessage, getLocalTimeFromUTCUnix(item.time), [
                     {
                         text: 'Cancel',
                         style: 'cancel'
@@ -248,8 +252,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 ]);
                 return;
             }
-
-            Alert.alert(item.message, getLocalTimeFromUTCUnix(item.time), [
+            Alert.alert(subMessage, getLocalTimeFromUTCUnix(item.time), [
                 {
                     text: 'Cancel',
                     style: 'cancel'

@@ -6,8 +6,8 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         marginTop: 16
     },
     nameText: {
-        fontSize: 17,
-        color: COLORS.LIGHTGRAY_100,
+        fontSize: 16,
+        color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
     },
     messageContainer: {
@@ -29,7 +29,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     messageText: {
         fontSize: 16,
         color: COLORS.BLACK,
-        fontWeight: '500'
+        fontWeight: '600'
     },
     largeText: {
         fontSize: 35
