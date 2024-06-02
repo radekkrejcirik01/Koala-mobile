@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         paddingBottom: 5,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: COLORS.LIGHTGRAY,
@@ -16,7 +16,7 @@ export const ChatHeaderStyle = StyleSheet.create({
         alignItems: 'center'
     },
     contentContainer: {
-        marginLeft: 20,
+        marginLeft: 15,
         flexDirection: 'row',
         alignItems: 'center'
     },

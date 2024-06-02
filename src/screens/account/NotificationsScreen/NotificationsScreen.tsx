@@ -11,7 +11,7 @@ import { NotificationInterface } from '@interfaces/general.interface';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import { NotificationItem } from '@components/notifications/NotificationItem/NotificationItem';
 import { setUnseenNotifications } from '@store/NotificationsReducer';
-import { NotificationsScreenHeader } from '@components/notifications/NotificationsScreenHeader/NotificationsScreenHeader';
+import { NotificationsHeader } from '@components/notifications/NotificationsHeader/NotificationsHeader';
 import COLORS from '@constants/COLORS';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -114,7 +114,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
 
     return (
         <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
-            <NotificationsScreenHeader onPlusPress={addFriends} />
+            <NotificationsHeader onPlusPress={addFriends} />
             <FlashList
                 data={notifications}
                 renderItem={renderItem}

@@ -12,15 +12,14 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
 import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
+import { BackButton } from '@components/general/BackButton/BackButton';
 
 export const ChatHeader = ({
     id,
     username,
     name
 }: ChatHeaderProps): JSX.Element => {
-    const { navigateBack, navigateTo } = useNavigation(
-        RootStackNavigatorEnum.AccountStack
-    );
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     const [showUsername, setShowUsername] = useState<boolean>(true);
     const [lastOnline, setLastOnline] = useState<number>(0);
@@ -49,9 +48,7 @@ export const ChatHeader = ({
     return (
         <View style={ChatHeaderStyle.container}>
             <View style={ChatHeaderStyle.centerRow}>
-                <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
-                    <Icon name={IconEnum.BACK_BLUE} size={22} />
-                </TouchableOpacity>
+                <BackButton />
                 <View style={ChatHeaderStyle.contentContainer}>
                     <ProfilePhoto
                         name={name}
@@ -79,7 +76,7 @@ export const ChatHeader = ({
                 }
                 style={ChatHeaderStyle.sharedButtonView}
             >
-                <Icon name={IconEnum.REPLY} size={28} />
+                <Icon name={IconEnum.REPLY} size={26} />
             </TouchableOpacity>
         </View>
     );
