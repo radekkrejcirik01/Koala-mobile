@@ -29,6 +29,7 @@ import { ConversationInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { getLocalTimeFromUTCUnix } from '@functions/getLocalTimeFromUTCUnix';
+import { getShortMessage } from '@functions/getShortMessage';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const {
@@ -198,42 +199,32 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const onMessageLongPress = useCallback(
         (item: ConversationInterface) => {
             const sentByUser = item?.senderId === userId;
+            const shortMessage = getShortMessage(item?.message);
+            const time = getLocalTimeFromUTCUnix(item.time);
 
             ReactNativeHapticFeedback.trigger('impactLight');
 
             if (item.audioMessage) {
                 if (sentByUser) {
-                    Alert.alert(
-                        '🎤 Voice message',
-                        getLocalTimeFromUTCUnix(item.time),
-                        [
-                            {
-                                text: 'Cancel',
-                                style: 'cancel'
-                            },
-                            {
-                                text: 'Delete for everybody',
-                                onPress: () => deleteMessage(item.id),
-                                style: 'destructive'
-                            }
-                        ]
-                    );
+                    Alert.alert('🎤 Voice message', time, [
+                        {
+                            text: 'Cancel',
+                            style: 'cancel'
+                        },
+                        {
+                            text: 'Delete for everybody',
+                            onPress: () => deleteMessage(item.id),
+                            style: 'destructive'
+                        }
+                    ]);
                 } else {
-                    Alert.alert(
-                        '🎤 Voice message',
-                        getLocalTimeFromUTCUnix(item.time)
-                    );
+                    Alert.alert('🎤 Voice message', time);
                 }
                 return;
             }
 
-            const subMessage =
-                item?.message?.length <= 25
-                    ? item?.message
-                    : `${item?.message?.substring(0, 25)}...`;
-
             if (sentByUser) {
-                Alert.alert(subMessage, getLocalTimeFromUTCUnix(item.time), [
+                Alert.alert(shortMessage, time, [
                     {
                         text: 'Cancel',
                         style: 'cancel'
@@ -250,27 +241,27 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                         style: 'destructive'
                     }
                 ]);
-                return;
+            } else {
+                Alert.alert(shortMessage, time, [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel'
+                    },
+                    {
+                        text: 'Copy',
+                        onPress: () => {
+                            Clipboard.setString(item.message);
+                        }
+                    },
+                    {
+                        text: 'Reply',
+                        onPress: () => {
+                            inputRef.current.focus();
+                            setReplyMessage(item.message);
+                        }
+                    }
+                ]);
             }
-            Alert.alert(subMessage, getLocalTimeFromUTCUnix(item.time), [
-                {
-                    text: 'Cancel',
-                    style: 'cancel'
-                },
-                {
-                    text: 'Copy',
-                    onPress: () => {
-                        Clipboard.setString(item.message);
-                    }
-                },
-                {
-                    text: 'Reply',
-                    onPress: () => {
-                        inputRef.current.focus();
-                        setReplyMessage(item.message);
-                    }
-                }
-            ]);
         },
         [deleteMessage, userId]
     );
