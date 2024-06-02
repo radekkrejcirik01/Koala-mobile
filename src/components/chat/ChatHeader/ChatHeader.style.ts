@@ -36,6 +36,7 @@ export const ChatHeaderStyle = StyleSheet.create({
         color: COLORS.GRAY_200
     },
     sharedButtonView: {
+        marginRight: 5,
         marginBottom: 5
     }
 });

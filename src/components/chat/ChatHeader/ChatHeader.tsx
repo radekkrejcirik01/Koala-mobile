@@ -76,7 +76,7 @@ export const ChatHeader = ({
                 }
                 style={ChatHeaderStyle.sharedButtonView}
             >
-                <Icon name={IconEnum.REPLY} size={26} />
+                <Icon name={IconEnum.REPLY} size={28} />
             </TouchableOpacity>
         </View>
     );

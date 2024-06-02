@@ -9,7 +9,11 @@ export const BackButton = (): JSX.Element => {
     const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     return (
-        <TouchableOpacity activeOpacity={0.7} onPress={navigateBack}>
+        <TouchableOpacity
+            activeOpacity={0.7}
+            hitSlop={15}
+            onPress={navigateBack}
+        >
             <Icon name={IconEnum.BACK_BLUE} size={20} />
         </TouchableOpacity>
     );

@@ -17,9 +17,7 @@ export const NotificationsHeader = ({
             hitSlop={20}
             onPress={onPlusPress}
         >
-            <Text style={NotificationsHeaderStyle.addFriendsText}>
-                Add friends
-            </Text>
+            <Text style={NotificationsHeaderStyle.addFriendsText}>Add +</Text>
         </TouchableOpacity>
     </View>
 );
