@@ -22,6 +22,7 @@ export const NotificationsScreenStyle = StyleSheet.create({
         opacity: 0.5
     },
     searchInput: {
+        flex: 1,
         fontSize: 16
     },
     listContainer: {

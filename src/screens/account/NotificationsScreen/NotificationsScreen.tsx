@@ -128,6 +128,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
                 <TextInput
                     placeholder="Search"
                     placeholderTextColor={COLORS.LIGHTGRAY_100}
+                    selectionColor={COLORS.BUTTON_BLUE}
                     style={NotificationsScreenStyle.searchInput}
                 />
             </View>

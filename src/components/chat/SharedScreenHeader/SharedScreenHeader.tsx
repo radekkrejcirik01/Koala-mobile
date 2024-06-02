@@ -12,7 +12,7 @@ export const SharedScreenHeader = (): React.JSX.Element => {
     return (
         <View style={SharedScreenHeaderStyle.container}>
             <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
-                <Icon name={IconEnum.BACK_BLUE} size={24} />
+                <Icon name={IconEnum.BACK} size={24} />
             </TouchableOpacity>
             <Text style={SharedScreenHeaderStyle.titleText}>All shared</Text>
         </View>

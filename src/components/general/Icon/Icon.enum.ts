@@ -1,3 +1,4 @@
+import Back from '@assets/webp/Back.webp';
 import BackBlue from '@assets/webp/BackBlue.webp';
 import BackBlueRight from '@assets/webp/BackBlueRight.webp';
 import Clean from '@assets/webp/Clean.webp';
@@ -12,6 +13,7 @@ import Send from '@assets/webp/Send.webp';
 import Stop from '@assets/webp/Stop.webp';
 
 export enum IconEnum {
+    BACK = 'Back',
     BACK_BLUE = 'BackBlue',
     BACK_BLUE_RIGHT = 'BackBlueRight',
     CLEAN = 'Clean',
@@ -27,6 +29,7 @@ export enum IconEnum {
 }
 
 export const ICONS = {
+    [IconEnum.BACK]: Back,
     [IconEnum.BACK_BLUE]: BackBlue,
     [IconEnum.BACK_BLUE_RIGHT]: BackBlueRight,
     [IconEnum.CLEAN]: Clean,

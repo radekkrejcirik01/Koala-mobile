@@ -9,6 +9,10 @@ export const NotificationsHeaderStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    rowCenter: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
     titleText: {
         marginLeft: 5,
         fontSize: 24,

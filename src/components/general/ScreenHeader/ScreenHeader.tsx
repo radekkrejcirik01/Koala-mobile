@@ -14,7 +14,7 @@ export const ScreenHeader = ({
     return (
         <View style={ScreenHeaderStyle.container}>
             <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
-                <Icon name={IconEnum.BACK_BLUE} size={25} />
+                <Icon name={IconEnum.BACK} size={25} />
             </TouchableOpacity>
             <Text style={ScreenHeaderStyle.titleText}>{title}</Text>
         </View>
