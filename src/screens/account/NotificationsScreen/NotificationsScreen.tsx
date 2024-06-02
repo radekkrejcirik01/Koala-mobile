@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Keyboard, Text, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Keyboard,
+    RefreshControl,
+    Text,
+    View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -31,6 +37,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
     );
     const [loaded, setLoaded] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
+    const [refreshing, setRefreshing] = useState<boolean>(false);
 
     const loadNotifications = useCallback(
         (lastId?: number) => {
@@ -123,6 +130,19 @@ export const NotificationsScreen = (): React.JSX.Element => {
                 onEndReached={onEndReached}
                 contentContainerStyle={NotificationsScreenStyle.listContainer}
                 showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={() => {
+                            setRefreshing(true);
+
+                            setTimeout(() => {
+                                setRefreshing(false);
+                                loadNotifications();
+                            }, 750);
+                        }}
+                    />
+                }
                 ListEmptyComponent={
                     loaded ? (
                         <Text style={NotificationsScreenStyle.listEmptyText}>
