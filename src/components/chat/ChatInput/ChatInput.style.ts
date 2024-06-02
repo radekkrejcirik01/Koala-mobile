@@ -47,6 +47,7 @@ export const ChatInputStyle = StyleSheet.create({
     },
     input: {
         flex: 1,
+        marginBottom: 2,
         paddingVertical: 2,
         paddingLeft: 2,
         paddingRight: 20,
