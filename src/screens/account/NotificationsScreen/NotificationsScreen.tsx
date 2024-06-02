@@ -4,6 +4,7 @@ import {
     Keyboard,
     RefreshControl,
     Text,
+    TextInput,
     View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -122,6 +123,14 @@ export const NotificationsScreen = (): React.JSX.Element => {
     return (
         <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
             <NotificationsHeader onPlusPress={addFriends} />
+            <View style={NotificationsScreenStyle.searchView}>
+                <Text style={NotificationsScreenStyle.searchEmojiText}>🔎</Text>
+                <TextInput
+                    placeholder="Search"
+                    placeholderTextColor={COLORS.LIGHTGRAY_100}
+                    style={NotificationsScreenStyle.searchInput}
+                />
+            </View>
             <FlashList
                 data={notifications}
                 renderItem={renderItem}
