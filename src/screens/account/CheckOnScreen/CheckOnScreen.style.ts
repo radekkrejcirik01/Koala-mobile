@@ -23,7 +23,7 @@ export const CheckOnScreenStyle = StyleSheet.create({
         marginTop: 35,
         marginLeft: 10,
         padding: 0, // Overwrite default value
-        fontSize: 28,
+        fontSize: 26,
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
     },
