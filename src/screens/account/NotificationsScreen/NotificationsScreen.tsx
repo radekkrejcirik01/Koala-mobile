@@ -4,7 +4,6 @@ import {
     Keyboard,
     RefreshControl,
     Text,
-    TextInput,
     View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -25,6 +24,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { Modal } from '@components/general/Modal/Modal';
 import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
+import { FriendsSearch } from '@components/notifications/FriendsSearch/FriendsSearch';
 
 export const NotificationsScreen = (): React.JSX.Element => {
     const dispatch = useDispatch();
@@ -39,10 +39,14 @@ export const NotificationsScreen = (): React.JSX.Element => {
     const [loaded, setLoaded] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
     const [refreshing, setRefreshing] = useState<boolean>(false);
+    const [filterFriendId, setFilterFriendId] = useState<number>();
 
     const loadNotifications = useCallback(
         (lastId?: number) => {
             let endpoint = 'notifications';
+            if (filterFriendId) {
+                endpoint = `friend-notifications/${filterFriendId}`;
+            }
             if (lastId) {
                 endpoint += `/${lastId}`;
             }
@@ -70,7 +74,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
                 }
             );
         },
-        [dispatch]
+        [dispatch, filterFriendId]
     );
 
     useEffect(() => {
@@ -123,15 +127,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
     return (
         <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
             <NotificationsHeader onPlusPress={addFriends} />
-            <View style={NotificationsScreenStyle.searchView}>
-                <Text style={NotificationsScreenStyle.searchEmojiText}>🔎</Text>
-                <TextInput
-                    placeholder="Search"
-                    placeholderTextColor={COLORS.LIGHTGRAY_100}
-                    selectionColor={COLORS.BUTTON_BLUE}
-                    style={NotificationsScreenStyle.searchInput}
-                />
-            </View>
+            <FriendsSearch onPressFriend={setFilterFriendId} />
             <FlashList
                 data={notifications}
                 renderItem={renderItem}

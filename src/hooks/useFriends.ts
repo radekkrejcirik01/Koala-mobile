@@ -3,7 +3,9 @@ import { UserInterface } from '@interfaces/general.interface';
 import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseFriendsGetInterface } from '@interfaces/response/Response.interface';
 
-export const useFriends = (): {
+export const useFriends = (
+    load = true
+): {
     friends: UserInterface[];
     loadFriends: () => void;
     loaded: boolean;
@@ -23,8 +25,10 @@ export const useFriends = (): {
     }, []);
 
     useEffect(() => {
-        loadFriends();
-    }, [loadFriends]);
+        if (load) {
+            loadFriends();
+        }
+    }, [load, loadFriends]);
 
     return { friends, loadFriends, loaded };
 };
