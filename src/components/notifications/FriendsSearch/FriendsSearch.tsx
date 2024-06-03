@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from 'react';
+import React, { JSX, useEffect, useRef, useState } from 'react';
 import {
     Keyboard,
     Text,
@@ -22,6 +22,8 @@ export const FriendsSearch = ({
     const [filtered, setFiltered] = useState<UserInterface[]>([]);
     const [focused, setFocused] = useState<boolean>(false);
 
+    const inputRef = useRef<TextInput>(null);
+
     useEffect(() => {
         if (friends) {
             setFiltered(
@@ -43,9 +45,16 @@ export const FriendsSearch = ({
 
     return (
         <View>
-            <View style={FriendsSearchStyle.searchView}>
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => {
+                    inputRef?.current?.focus();
+                }}
+                style={FriendsSearchStyle.searchView}
+            >
                 <Text style={FriendsSearchStyle.searchEmojiText}>🔎</Text>
                 <TextInput
+                    ref={inputRef}
                     placeholder="Search"
                     placeholderTextColor={COLORS.LIGHTGRAY_100}
                     value={searchValue}
@@ -62,7 +71,7 @@ export const FriendsSearch = ({
                         <Text style={FriendsSearchStyle.doneText}>Done</Text>
                     </TouchableOpacity>
                 )}
-            </View>
+            </TouchableOpacity>
             {focused && (
                 <View style={FriendsSearchStyle.itemsView}>
                     {filtered.map((item) => (
