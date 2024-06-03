@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const FriendsSearchStyle = StyleSheet.create({
     searchView: {
-        marginTop: 12,
+        marginVertical: 12,
         marginHorizontal: 5,
         paddingHorizontal: 15,
         height: 38,

@@ -26,7 +26,6 @@ export const NotificationsScreenStyle = StyleSheet.create({
         fontSize: 16
     },
     listContainer: {
-        paddingTop: 10,
         paddingBottom: 50
     },
     listEmptyText: {

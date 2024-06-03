@@ -11,7 +11,8 @@ export const NotificationsHeader = ({
         <View style={NotificationsHeaderStyle.rowCenter}>
             <BackButton />
             <Text style={NotificationsHeaderStyle.titleText}>
-                DMs <Text style={NotificationsHeaderStyle.emojiText}>💬</Text>
+                Messages{' '}
+                <Text style={NotificationsHeaderStyle.emojiText}>💬</Text>
             </Text>
         </View>
         <TouchableOpacity

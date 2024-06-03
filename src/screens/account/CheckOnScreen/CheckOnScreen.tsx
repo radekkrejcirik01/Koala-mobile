@@ -30,7 +30,7 @@ export const CheckOnScreen = () => {
     const { top } = useSafeAreaInsets();
     const { modalVisible, showModal, hideModal } = useModal();
 
-    const [message, setMessage] = useState<string>('How are you doing today?');
+    const [message, setMessage] = useState<string>('How is it going today?');
 
     const { friends, loaded } = useFriends();
     const { sending, sent, setSending, setSent } = useSending();
