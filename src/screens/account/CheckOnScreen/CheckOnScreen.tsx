@@ -6,7 +6,6 @@ import {
     ScrollView,
     Text,
     TextInput,
-    TouchableOpacity,
     View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,6 +24,7 @@ import { CheckOnMessagePostInterface } from '@interfaces/post/Post.interface';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { Modal } from '@components/general/Modal/Modal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
+import { SendButton } from '@components/home/SendButton/SendButton';
 
 export const CheckOnScreen = () => {
     const { top } = useSafeAreaInsets();
@@ -38,6 +38,8 @@ export const CheckOnScreen = () => {
     const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
+        setSent(false);
+
         selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
@@ -54,7 +56,6 @@ export const CheckOnScreen = () => {
         }
 
         setSending(true);
-        setSent(false);
 
         postRequest<ResponseInterface, CheckOnMessagePostInterface>(
             'check-on-message',
@@ -123,26 +124,11 @@ export const CheckOnScreen = () => {
                                 />
                             </View>
                             {friendsAdded ? (
-                                <TouchableOpacity
-                                    activeOpacity={0.7}
-                                    disabled={sending}
-                                    style={CheckOnScreenStyle.sendButtonView}
+                                <SendButton
                                     onPress={onSend}
-                                >
-                                    {sending ? (
-                                        <ActivityIndicator
-                                            color={COLORS.WHITE}
-                                        />
-                                    ) : (
-                                        <Text
-                                            style={
-                                                CheckOnScreenStyle.sendButtonText
-                                            }
-                                        >
-                                            Send
-                                        </Text>
-                                    )}
-                                </TouchableOpacity>
+                                    sending={sending}
+                                    sent={sent}
+                                />
                             ) : (
                                 <AddFriendsDescriptionButton
                                     onPress={showModal}

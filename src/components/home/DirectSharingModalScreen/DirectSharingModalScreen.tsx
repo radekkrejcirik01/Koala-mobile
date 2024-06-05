@@ -12,7 +12,7 @@ import { DirectSharingModalScreenProps } from '@components/home/DirectSharingMod
 import { DirectSharingModalScreenStyle } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.style';
 import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
-import { ShareButton } from '@components/home/ShareButton/ShareButton';
+import { SendButton } from '@components/home/SendButton/SendButton';
 import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 
 export const DirectSharingModalScreen = ({
@@ -28,6 +28,8 @@ export const DirectSharingModalScreen = ({
     const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
+        setSent(false);
+
         selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
@@ -57,6 +59,7 @@ export const DirectSharingModalScreen = ({
                 setSent(true);
 
                 setMessage('');
+                selectedFriends.current = [];
             }
         });
     }, [message, setSending, setSent]);
@@ -111,7 +114,7 @@ export const DirectSharingModalScreen = ({
                             />
                         </View>
                         {friendsAdded ? (
-                            <ShareButton
+                            <SendButton
                                 onPress={onSend}
                                 sending={sending}
                                 sent={sent}

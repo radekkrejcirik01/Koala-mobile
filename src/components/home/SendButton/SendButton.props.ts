@@ -1,4 +1,4 @@
-export interface ShareButtonProps {
+export interface SendButtonProps {
     onPress: () => void;
     sending: boolean;
     sent: boolean;

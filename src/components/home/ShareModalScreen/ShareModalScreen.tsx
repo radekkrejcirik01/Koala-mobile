@@ -13,7 +13,7 @@ import COLORS from '@constants/COLORS';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
-import { ShareButton } from '@components/home/ShareButton/ShareButton';
+import { SendButton } from '@components/home/SendButton/SendButton';
 import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 
 export const ShareModalScreen = ({
@@ -28,6 +28,8 @@ export const ShareModalScreen = ({
     const selectedFriends = useRef<number[]>([]);
 
     const onFriendSelect = (id: number) => {
+        setSent(false);
+
         selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
@@ -51,6 +53,8 @@ export const ShareModalScreen = ({
             if (response?.status === 'success') {
                 setSending(false);
                 setSent(true);
+
+                selectedFriends.current = [];
             }
         });
     }, [item.message, setSending, setSent]);
@@ -100,7 +104,7 @@ export const ShareModalScreen = ({
                                 />
                             </View>
                             {friendsAdded ? (
-                                <ShareButton
+                                <SendButton
                                     onPress={onSend}
                                     sending={sending}
                                     sent={sent}

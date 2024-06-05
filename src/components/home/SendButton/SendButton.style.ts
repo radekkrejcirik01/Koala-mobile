@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ShareButtonStyle = StyleSheet.create({
+export const SendButtonStyle = StyleSheet.create({
     view: {
         width: 110,
         height: 45,
