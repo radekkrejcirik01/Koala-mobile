@@ -21,17 +21,7 @@ export const DirectSharingModalScreenStyle = StyleSheet.create({
         textAlignVertical: 'top',
         fontWeight: 'bold'
     },
-    sendContainer: {
+    send: {
         justifyContent: 'center'
-    },
-    selectView: {
-        maxWidth: 150,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap'
-    },
-    addFriendButton: {
-        margin: 4,
-        marginTop: 8
     }
 });

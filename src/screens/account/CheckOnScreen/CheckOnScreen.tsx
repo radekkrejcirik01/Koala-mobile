@@ -1,22 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import {
-    ActivityIndicator,
-    Alert,
-    Keyboard,
-    ScrollView,
-    Text,
-    TextInput,
-    View
-} from 'react-native';
+import React, { useCallback, useRef, useState } from 'react';
+import { Alert, Keyboard, ScrollView, Text, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
 import { useModal } from '@hooks/useModal';
 import { CheckOnScreenStyle } from '@screens/account/CheckOnScreen/CheckOnScreen.style';
 import COLORS from '@constants/COLORS';
-import { SelectFriendItem } from '@components/friends/SelectFriendItem/SelectFriendItem';
-import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
-import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 import { filterSelected } from '@functions/filterSelected';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
@@ -24,16 +12,14 @@ import { CheckOnMessagePostInterface } from '@interfaces/post/Post.interface';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { Modal } from '@components/general/Modal/Modal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { SendButton } from '@components/home/SendButton/SendButton';
+import { Send } from '@components/home/Send/Send';
 
 export const CheckOnScreen = () => {
     const { top } = useSafeAreaInsets();
     const { modalVisible, showModal, hideModal } = useModal();
+    const { sending, sent, setSending, setSent } = useSending();
 
     const [message, setMessage] = useState<string>('How is it going today?');
-
-    const { friends, loaded } = useFriends();
-    const { sending, sent, setSending, setSent } = useSending();
 
     const selectedFriends = useRef<number[]>([]);
 
@@ -43,7 +29,7 @@ export const CheckOnScreen = () => {
         selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
-    const onSend = useCallback(() => {
+    const send = useCallback(() => {
         const selected = selectedFriends.current;
 
         if (!message?.length) {
@@ -73,11 +59,6 @@ export const CheckOnScreen = () => {
         });
     }, [message, setSending, setSent]);
 
-    const friendsAdded = useMemo(
-        (): boolean => !!friends?.length,
-        [friends?.length]
-    );
-
     const hideModalAndKeyboard = useCallback(() => {
         Keyboard.dismiss();
         hideModal();
@@ -100,45 +81,14 @@ export const CheckOnScreen = () => {
                     selectionColor={COLORS.BUTTON_BLUE}
                     style={CheckOnScreenStyle.input}
                 />
-                <View style={CheckOnScreenStyle.sendContainer}>
-                    {loaded ? (
-                        <>
-                            <View style={CheckOnScreenStyle.selectView}>
-                                {friends?.map((value) => (
-                                    <SelectFriendItem
-                                        key={value.username}
-                                        item={{
-                                            name: value.name,
-                                            username: value.username
-                                        }}
-                                        onSelect={() =>
-                                            onFriendSelect(value.id)
-                                        }
-                                        sent={sent}
-                                    />
-                                ))}
-                                <AddFriendButton
-                                    size={45}
-                                    onPress={showModal}
-                                    style={CheckOnScreenStyle.addFriendButton}
-                                />
-                            </View>
-                            {friendsAdded ? (
-                                <SendButton
-                                    onPress={onSend}
-                                    sending={sending}
-                                    sent={sent}
-                                />
-                            ) : (
-                                <AddFriendsDescriptionButton
-                                    onPress={showModal}
-                                />
-                            )}
-                        </>
-                    ) : (
-                        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-                    )}
-                </View>
+                <Send
+                    onFriendSelect={onFriendSelect}
+                    onAddFriendPress={showModal}
+                    onPressSend={send}
+                    sending={sending}
+                    sent={sent}
+                    style={CheckOnScreenStyle.send}
+                />
             </ScrollView>
             <Modal
                 isVisible={modalVisible}

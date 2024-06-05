@@ -21,20 +21,10 @@ export const ShareModalScreenStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center'
     },
-    sendContainer: {
+    send: {
         width: '45%',
         paddingBottom: 50,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    selectView: {
-        maxWidth: 150,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap'
-    },
-    addFriendButton: {
-        margin: 4,
-        marginTop: 8
     }
 });

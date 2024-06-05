@@ -1,19 +1,15 @@
-import React, { JSX, useCallback, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, TextInput, View } from 'react-native';
+import React, { JSX, useCallback, useRef, useState } from 'react';
+import { Alert, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
-import { SelectFriendItem } from '@components/friends/SelectFriendItem/SelectFriendItem';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { DirectSharingModalScreenProps } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.props';
 import { DirectSharingModalScreenStyle } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.style';
-import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
-import { SendButton } from '@components/home/SendButton/SendButton';
-import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
+import { Send } from '@components/home/Send/Send';
 
 export const DirectSharingModalScreen = ({
     onAddFriendPress
@@ -21,8 +17,6 @@ export const DirectSharingModalScreen = ({
     const { bottom } = useSafeAreaInsets();
 
     const [message, setMessage] = useState<string>();
-
-    const { friends, loaded } = useFriends();
     const { sending, sent, setSending, setSent } = useSending();
 
     const selectedFriends = useRef<number[]>([]);
@@ -33,7 +27,7 @@ export const DirectSharingModalScreen = ({
         selectedFriends.current = filterSelected(selectedFriends.current, id);
     };
 
-    const onSend = useCallback(() => {
+    const send = useCallback(() => {
         const selected = selectedFriends.current;
 
         if (!message?.length) {
@@ -64,11 +58,6 @@ export const DirectSharingModalScreen = ({
         });
     }, [message, setSending, setSent]);
 
-    const friendsAdded = useMemo(
-        (): boolean => !!friends?.length,
-        [friends?.length]
-    );
-
     return (
         <View
             style={[
@@ -90,45 +79,14 @@ export const DirectSharingModalScreen = ({
                     style={DirectSharingModalScreenStyle.input}
                 />
             </View>
-            <View style={DirectSharingModalScreenStyle.sendContainer}>
-                {loaded ? (
-                    <>
-                        <View style={DirectSharingModalScreenStyle.selectView}>
-                            {friends?.map((value) => (
-                                <SelectFriendItem
-                                    key={value.username}
-                                    item={{
-                                        name: value.name,
-                                        username: value.username
-                                    }}
-                                    onSelect={() => onFriendSelect(value.id)}
-                                    sent={sent}
-                                />
-                            ))}
-                            <AddFriendButton
-                                size={45}
-                                onPress={onAddFriendPress}
-                                style={
-                                    DirectSharingModalScreenStyle.addFriendButton
-                                }
-                            />
-                        </View>
-                        {friendsAdded ? (
-                            <SendButton
-                                onPress={onSend}
-                                sending={sending}
-                                sent={sent}
-                            />
-                        ) : (
-                            <AddFriendsDescriptionButton
-                                onPress={onAddFriendPress}
-                            />
-                        )}
-                    </>
-                ) : (
-                    <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-                )}
-            </View>
+            <Send
+                onFriendSelect={onFriendSelect}
+                onAddFriendPress={onAddFriendPress}
+                onPressSend={send}
+                sending={sending}
+                sent={sent}
+                style={DirectSharingModalScreenStyle.send}
+            />
         </View>
     );
 };

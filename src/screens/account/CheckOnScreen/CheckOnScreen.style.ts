@@ -27,34 +27,9 @@ export const CheckOnScreenStyle = StyleSheet.create({
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
     },
-    sendContainer: {
+    send: {
         marginTop: 35,
         alignSelf: 'flex-end',
         justifyContent: 'center'
-    },
-    selectView: {
-        maxWidth: 150,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap'
-    },
-    addFriendButton: {
-        margin: 4,
-        marginTop: 8
-    },
-    sendButtonView: {
-        width: 110,
-        height: 45,
-        marginTop: 20,
-        marginHorizontal: 20,
-        borderRadius: 18,
-        backgroundColor: COLORS.BUTTON_BLUE,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    sendButtonText: {
-        fontSize: 20,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
     }
 });
