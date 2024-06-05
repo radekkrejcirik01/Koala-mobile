@@ -3,19 +3,19 @@ import { Text, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Badge } from '@components/general/Badge/Badge';
 import { ReducerProps } from '@store/index/index.props';
-import { MessagesButtonStyle } from '@components/home/MessagesButton/MessagesButton.style';
-import { MessagesButtonProps } from '@components/home/MessagesButton/MessagesButton.props';
+import { NotificationsButtonStyle } from '@components/home/NotificationsButton/NotificationsButton.style';
+import { NotificationsButtonProps } from '@components/home/NotificationsButton/NotificationsButton.props';
 
-export const MessagesButton = ({
+export const NotificationsButton = ({
     onPress
-}: MessagesButtonProps): JSX.Element => {
+}: NotificationsButtonProps): JSX.Element => {
     const { unseenNotifications } = useSelector(
         (state: ReducerProps) => state.notifications
     );
 
     return (
         <TouchableOpacity activeOpacity={0.9} hitSlop={10} onPress={onPress}>
-            <Text style={MessagesButtonStyle.text}>💬</Text>
+            <Text style={NotificationsButtonStyle.text}>💬</Text>
             <Badge value={unseenNotifications} />
         </TouchableOpacity>
     );

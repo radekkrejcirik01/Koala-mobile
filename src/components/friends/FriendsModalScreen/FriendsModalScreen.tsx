@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useFriends } from '@hooks/useFriends';
-import { FriendsModalScreenStyle } from '@components/home/FriendsModalScreen/FriendsModalScreen.style';
+import { FriendsModalScreenStyle } from '@components/friends/FriendsModalScreen/FriendsModalScreen.style';
 import {
     deleteRequest,
     getRequest,
@@ -30,8 +30,8 @@ import COLORS from '@constants/COLORS';
 import { ReducerProps } from '@store/index/index.props';
 import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { InviteItem } from '@components/friends/InviteItem/InviteItem';
-import { FriendsModalScreenProps } from '@components/home/FriendsModalScreen/FriendsModalScreen.props';
-import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
+import { FriendsModalScreenProps } from '@components/friends/FriendsModalScreen/FriendsModalScreen.props';
+import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
 
 export const FriendsModalScreen = ({
     onActionSheetOpened

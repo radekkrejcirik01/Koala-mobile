@@ -9,13 +9,13 @@ import {
     ResponseInterface
 } from '@interfaces/response/Response.interface';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
-import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
-import { DirectEmotionModalScreen } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen';
+import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
+import { DirectSharingModalScreen } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { MESSAGES } from '@components/home/Messages/Messages.const';
-import { Statuses } from '@components/home/Statuses/Statuses';
+import { ToolBar } from '@components/home/ToolBar/ToolBar';
 
 export const Messages = (): React.JSX.Element => {
     const { showActionSheetWithOptions } = useActionSheet();
@@ -115,7 +115,7 @@ export const Messages = (): React.JSX.Element => {
 
     const onDirectEmotionPress = useCallback(() => {
         setModalContent(
-            <DirectEmotionModalScreen
+            <DirectSharingModalScreen
                 onAddFriendPress={() => {
                     hideModal();
                     setModalContent(<FriendsModalScreen />);
@@ -131,7 +131,7 @@ export const Messages = (): React.JSX.Element => {
     return (
         <View style={MessagesStyle.container}>
             <Text style={MessagesStyle.titleText}>How do you feel today?</Text>
-            <Statuses onPressDirect={onDirectEmotionPress} />
+            <ToolBar onPressDirect={onDirectEmotionPress} />
             <View style={MessagesStyle.contentView}>
                 {messages.map((value) => (
                     <TouchableOpacity

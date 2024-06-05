@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ExpressionItemStyle = StyleSheet.create({
+export const StatusItemStyle = StyleSheet.create({
     container: {
         marginLeft: 10,
         alignItems: 'center'

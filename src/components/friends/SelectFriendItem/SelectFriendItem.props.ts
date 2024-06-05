@@ -1,6 +1,6 @@
 import { UserInterface } from '@interfaces/general.interface';
 
-export interface ShareFriendItemProps {
+export interface SelectFriendItemProps {
     item: UserInterface;
     onSelect: () => void;
     sent: boolean;

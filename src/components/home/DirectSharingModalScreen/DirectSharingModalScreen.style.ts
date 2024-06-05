@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const DirectEmotionModalScreenStyle = StyleSheet.create({
+export const DirectSharingModalScreenStyle = StyleSheet.create({
     container: {
         minHeight: '48%',
         paddingTop: 20,

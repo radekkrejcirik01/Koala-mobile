@@ -30,7 +30,7 @@ export const IOSPrompt = ({
             undefined,
             ''
         );
-    }, [onClose, onPressOK]);
+    }, [onClose, onPressOK, title]);
 
     return <></>;
 };

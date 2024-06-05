@@ -23,7 +23,7 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { Modal } from '@components/general/Modal/Modal';
-import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
+import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { FriendsSearch } from '@components/notifications/FriendsSearch/FriendsSearch';
 
 export const NotificationsScreen = (): React.JSX.Element => {

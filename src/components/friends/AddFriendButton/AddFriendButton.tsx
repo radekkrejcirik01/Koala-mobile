@@ -2,11 +2,11 @@ import React, { JSX } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { AddFriendButtonStyle } from '@components/home/AddFriendButton/AddFriendButton.style';
+import { AddFriendButtonStyle } from '@components/friends/AddFriendButton/AddFriendButton.style';
 import {
     AddFriendButtonDefaultProps,
     AddFriendButtonProps
-} from '@components/home/AddFriendButton/AddFriendButton.props';
+} from '@components/friends/AddFriendButton/AddFriendButton.props';
 
 export const AddFriendButton = ({
     size,

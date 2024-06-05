@@ -7,7 +7,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { MessagesButton } from '@components/home/MessagesButton/MessagesButton';
+import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
 import { getGreeting } from '@functions/getGreeting';
 
 export const HomeHeader = (): JSX.Element => {
@@ -31,7 +31,7 @@ export const HomeHeader = (): JSX.Element => {
                 <Text style={HomeHeaderStyle.greetingText}>{greeting},</Text>
                 <Text style={HomeHeaderStyle.nameText}>{name}</Text>
             </View>
-            <MessagesButton
+            <NotificationsButton
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
                 }

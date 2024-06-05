@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const StatusesStyle = StyleSheet.create({
+export const ToolBarStyle = StyleSheet.create({
     scrollView: {
         marginTop: 20,
         minHeight: 85

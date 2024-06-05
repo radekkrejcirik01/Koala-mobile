@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
-import { ShareFriendItemProps } from '@components/home/ShareFriendItem/ShareFriendItem.props';
+import { SelectFriendItemProps } from '@components/friends/SelectFriendItem/SelectFriendItem.props';
 import COLORS from '@constants/COLORS';
-import { ShareFriendItemStyle } from '@components/home/ShareFriendItem/ShareFriendItem.style';
+import { SelectFriendItemStyle } from '@components/friends/SelectFriendItem/SelectFriendItem.style';
 
-export const ShareFriendItem = ({
+export const SelectFriendItem = ({
     item,
     onSelect,
     sent
-}: ShareFriendItemProps): JSX.Element => {
+}: SelectFriendItemProps): JSX.Element => {
     const [selected, setSelected] = useState<boolean>(false);
 
     const onPress = useCallback(() => {
@@ -27,19 +27,19 @@ export const ShareFriendItem = ({
         <TouchableOpacity
             activeOpacity={1}
             onPress={onPress}
-            style={ShareFriendItemStyle.container}
+            style={SelectFriendItemStyle.container}
         >
             <ProfilePhoto
                 name={item.name}
                 size={45}
                 style={[
-                    ShareFriendItemStyle.profilePhoto,
+                    SelectFriendItemStyle.profilePhoto,
                     selected && {
                         borderColor: COLORS.BUTTON_BLUE
                     }
                 ]}
             />
-            <Text adjustsFontSizeToFit style={ShareFriendItemStyle.nameText}>
+            <Text adjustsFontSizeToFit style={SelectFriendItemStyle.nameText}>
                 {item.name}
             </Text>
         </TouchableOpacity>

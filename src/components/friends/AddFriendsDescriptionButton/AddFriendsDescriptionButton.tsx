@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { AddFriendsDescriptionButtonStyle } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton.style';
-import { AddFriendsDescriptionButtonProps } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton.props';
+import { AddFriendsDescriptionButtonStyle } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton.style';
+import { AddFriendsDescriptionButtonProps } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton.props';
 
 export const AddFriendsDescriptionButton = ({
     onPress

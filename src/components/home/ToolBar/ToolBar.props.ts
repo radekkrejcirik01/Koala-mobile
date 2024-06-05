@@ -1,3 +1,3 @@
-export interface StatuesProps {
+export interface ToolBarProps {
     onPressDirect: () => void;
 }

@@ -3,8 +3,8 @@ import { Alert, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useModal } from '@hooks/useModal';
 import { useAppState } from '@hooks/useAppState';
-import { ExpressionItem } from '@components/home/ExpressionItem/ExpressionItem';
-import { StatusesStyle } from '@components/home/Statuses/Statuses.style';
+import { StatusItem } from '@components/home/StatusItem/StatusItem';
+import { ToolBarStyle } from '@components/home/ToolBar/ToolBar.style';
 import { FriendStatusInterface } from '@interfaces/general.interface';
 import {
     deleteRequest,
@@ -25,11 +25,9 @@ import {
 import { ReducerProps } from '@store/index/index.props';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { StatuesProps } from '@components/home/Statuses/Statues.props';
+import { ToolBarProps } from '@components/home/ToolBar/ToolBar.props';
 
-export const Statuses = ({
-    onPressDirect
-}: StatuesProps): React.JSX.Element => {
+export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
     );
@@ -140,14 +138,14 @@ export const Statuses = ({
         <>
             <ScrollView
                 horizontal
-                style={StatusesStyle.scrollView}
-                contentContainerStyle={StatusesStyle.scrollViewContainer}
+                style={ToolBarStyle.scrollView}
+                contentContainerStyle={ToolBarStyle.scrollViewContainer}
             >
                 <TouchableOpacity
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onPressDirect}
-                    style={StatusesStyle.addStatusButton}
+                    style={ToolBarStyle.addStatusButton}
                 >
                     <Icon name={IconEnum.DIRECT} size={20} />
                 </TouchableOpacity>
@@ -155,17 +153,17 @@ export const Statuses = ({
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onStatusPress}
-                    style={StatusesStyle.addStatusButton}
+                    style={ToolBarStyle.addStatusButton}
                 >
                     <Icon name={IconEnum.PLUS} size={20} />
                 </TouchableOpacity>
-                <ExpressionItem
+                <StatusItem
                     onPress={onStatusPress}
                     name="You"
                     expression={status}
                 />
                 {friendsStatuses?.map((value) => (
-                    <ExpressionItem
+                    <StatusItem
                         key={value.userId}
                         onPress={() => onStatusReply(value)}
                         name={value?.name}
@@ -177,7 +175,7 @@ export const Statuses = ({
                 isVisible={modalVisible}
                 content={modalContent}
                 onClose={hideModalAndKeyboard}
-                style={StatusesStyle.modal}
+                style={ToolBarStyle.modal}
             />
         </>
     );

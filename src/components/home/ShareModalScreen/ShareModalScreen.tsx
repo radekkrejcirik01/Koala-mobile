@@ -5,16 +5,16 @@ import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
 import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
 import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
-import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
+import { SelectFriendItem } from '@components/friends/SelectFriendItem/SelectFriendItem';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
-import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
+import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
 import { ShareButton } from '@components/home/ShareButton/ShareButton';
-import { AddFriendsDescriptionButton } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
+import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 
 export const ShareModalScreen = ({
     item,
@@ -79,7 +79,7 @@ export const ShareModalScreen = ({
                         <>
                             <View style={ShareModalScreenStyle.selectView}>
                                 {friends?.map((value) => (
-                                    <ShareFriendItem
+                                    <SelectFriendItem
                                         key={value.username}
                                         item={{
                                             name: value.name,

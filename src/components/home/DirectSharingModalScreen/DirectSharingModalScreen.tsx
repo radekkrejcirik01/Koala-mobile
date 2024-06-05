@@ -3,21 +3,21 @@ import { ActivityIndicator, Alert, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFriends } from '@hooks/useFriends';
 import { useSending } from '@hooks/useSending';
-import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
+import { SelectFriendItem } from '@components/friends/SelectFriendItem/SelectFriendItem';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
-import { DirectEmotionModalScreenProps } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.props';
-import { DirectEmotionModalScreenStyle } from '@components/home/DirectEmotionModalScreen/DirectEmotionModalScreen.style';
-import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
+import { DirectSharingModalScreenProps } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.props';
+import { DirectSharingModalScreenStyle } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.style';
+import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
 import { filterSelected } from '@functions/filterSelected';
 import { ShareButton } from '@components/home/ShareButton/ShareButton';
-import { AddFriendsDescriptionButton } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
+import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 
-export const DirectEmotionModalScreen = ({
+export const DirectSharingModalScreen = ({
     onAddFriendPress
-}: DirectEmotionModalScreenProps): JSX.Element => {
+}: DirectSharingModalScreenProps): JSX.Element => {
     const { bottom } = useSafeAreaInsets();
 
     const [message, setMessage] = useState<string>();
@@ -69,13 +69,13 @@ export const DirectEmotionModalScreen = ({
     return (
         <View
             style={[
-                DirectEmotionModalScreenStyle.container,
+                DirectSharingModalScreenStyle.container,
                 {
                     paddingBottom: bottom || 10
                 }
             ]}
         >
-            <View style={DirectEmotionModalScreenStyle.inputView}>
+            <View style={DirectSharingModalScreenStyle.inputView}>
                 <TextInput
                     multiline
                     placeholder="What's happening??"
@@ -84,15 +84,15 @@ export const DirectEmotionModalScreen = ({
                     value={message}
                     onChangeText={setMessage}
                     selectionColor={COLORS.BUTTON_BLUE}
-                    style={DirectEmotionModalScreenStyle.input}
+                    style={DirectSharingModalScreenStyle.input}
                 />
             </View>
-            <View style={DirectEmotionModalScreenStyle.sendContainer}>
+            <View style={DirectSharingModalScreenStyle.sendContainer}>
                 {loaded ? (
                     <>
-                        <View style={DirectEmotionModalScreenStyle.selectView}>
+                        <View style={DirectSharingModalScreenStyle.selectView}>
                             {friends?.map((value) => (
-                                <ShareFriendItem
+                                <SelectFriendItem
                                     key={value.username}
                                     item={{
                                         name: value.name,
@@ -106,7 +106,7 @@ export const DirectEmotionModalScreen = ({
                                 size={45}
                                 onPress={onAddFriendPress}
                                 style={
-                                    DirectEmotionModalScreenStyle.addFriendButton
+                                    DirectSharingModalScreenStyle.addFriendButton
                                 }
                             />
                         </View>

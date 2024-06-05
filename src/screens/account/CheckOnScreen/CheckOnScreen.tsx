@@ -15,16 +15,16 @@ import { useSending } from '@hooks/useSending';
 import { useModal } from '@hooks/useModal';
 import { CheckOnScreenStyle } from '@screens/account/CheckOnScreen/CheckOnScreen.style';
 import COLORS from '@constants/COLORS';
-import { ShareFriendItem } from '@components/home/ShareFriendItem/ShareFriendItem';
-import { AddFriendButton } from '@components/home/AddFriendButton/AddFriendButton';
-import { AddFriendsDescriptionButton } from '@components/home/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
+import { SelectFriendItem } from '@components/friends/SelectFriendItem/SelectFriendItem';
+import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
+import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 import { filterSelected } from '@functions/filterSelected';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { CheckOnMessagePostInterface } from '@interfaces/post/Post.interface';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { Modal } from '@components/general/Modal/Modal';
-import { FriendsModalScreen } from '@components/home/FriendsModalScreen/FriendsModalScreen';
+import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 
 export const CheckOnScreen = () => {
     const { top } = useSafeAreaInsets();
@@ -104,7 +104,7 @@ export const CheckOnScreen = () => {
                         <>
                             <View style={CheckOnScreenStyle.selectView}>
                                 {friends?.map((value) => (
-                                    <ShareFriendItem
+                                    <SelectFriendItem
                                         key={value.username}
                                         item={{
                                             name: value.name,
