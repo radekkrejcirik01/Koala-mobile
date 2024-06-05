@@ -14,40 +14,22 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
         paddingBottom: 50
     },
     titleText: {
-        marginTop: 10,
-        fontSize: 16,
+        fontSize: 20,
         color: COLORS.BLACK,
-        fontWeight: '600'
+        alignSelf: 'center',
+        fontWeight: 'bold'
     },
-    emotionInput: {
-        height: 50,
-        marginTop: 10,
-        paddingHorizontal: 15,
-        borderRadius: 20,
+    inputTitleText: {
+        marginTop: 20,
         fontSize: 16,
-        color: COLORS.GRAY_200,
-        backgroundColor: COLORS.WHITE_100,
+        color: COLORS.BLACK_50,
         fontWeight: '500'
     },
-    messageInput: {
-        height: 75,
+    input: {
+        height: 45,
         marginTop: 10,
-        paddingTop: 10,
-        paddingHorizontal: 15,
-        borderRadius: 20,
-        fontSize: 16,
-        color: COLORS.GRAY_200,
-        backgroundColor: COLORS.WHITE_100,
-        fontWeight: '500'
-    },
-    messageDescriptionText: {
-        fontSize: 12
-    },
-    tipInput: {
-        height: 50,
-        marginTop: 10,
-        paddingHorizontal: 15,
-        borderRadius: 20,
+        paddingHorizontal: 10,
+        borderRadius: 12,
         fontSize: 16,
         color: COLORS.GRAY_200,
         backgroundColor: COLORS.WHITE_100,

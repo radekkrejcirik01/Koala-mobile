@@ -52,40 +52,44 @@ export const AddEmotionModalScreen = ({
                 contentContainerStyle={AddEmotionModalScreenStyle.listContainer}
             >
                 <Text style={AddEmotionModalScreenStyle.titleText}>
-                    Emotion
+                    Add message
+                </Text>
+                <Text style={AddEmotionModalScreenStyle.inputTitleText}>
+                    Title
                 </Text>
                 <TextInput
                     autoFocus
                     autoCorrect={false}
+                    selectionColor={COLORS.BUTTON_BLUE}
                     onChangeText={setEmotion}
                     placeholder="Overthinking"
-                    style={AddEmotionModalScreenStyle.emotionInput}
+                    style={AddEmotionModalScreenStyle.input}
                 />
-                <Text style={AddEmotionModalScreenStyle.titleText}>
-                    Message
+                <Text style={AddEmotionModalScreenStyle.inputTitleText}>
+                    Message to send
                 </Text>
                 <TextInput
                     autoCorrect={false}
+                    selectionColor={COLORS.BUTTON_BLUE}
                     onChangeText={setEmotionMessage}
-                    multiline
                     placeholder="I CANT STOP OVERTHINKING"
-                    style={AddEmotionModalScreenStyle.messageInput}
+                    style={AddEmotionModalScreenStyle.input}
                 />
-                <Text style={AddEmotionModalScreenStyle.messageDescriptionText}>
-                    Message to send to your friends
+                <Text style={AddEmotionModalScreenStyle.inputTitleText}>
+                    Helps
                 </Text>
-                <Text style={AddEmotionModalScreenStyle.titleText}>Helps</Text>
                 <TextInput
                     autoCorrect={false}
                     onChangeText={setTip1}
                     placeholder="Put on headphones and be delulu"
-                    style={AddEmotionModalScreenStyle.tipInput}
+                    style={AddEmotionModalScreenStyle.input}
                 />
                 <TextInput
                     autoCorrect={false}
+                    selectionColor={COLORS.BUTTON_BLUE}
                     onChangeText={setTip2}
                     placeholder="Change environment"
-                    style={AddEmotionModalScreenStyle.tipInput}
+                    style={AddEmotionModalScreenStyle.input}
                 />
             </ScrollView>
             <View style={AddEmotionModalScreenStyle.addContainer}>
@@ -99,7 +103,7 @@ export const AddEmotionModalScreen = ({
                         <ActivityIndicator color={COLORS.WHITE} />
                     ) : (
                         <Text style={AddEmotionModalScreenStyle.addText}>
-                            Save it
+                            Done
                         </Text>
                     )}
                 </TouchableOpacity>

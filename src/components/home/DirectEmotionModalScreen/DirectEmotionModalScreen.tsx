@@ -78,7 +78,7 @@ export const DirectEmotionModalScreen = ({
             <View style={DirectEmotionModalScreenStyle.inputView}>
                 <TextInput
                     multiline
-                    placeholder="What happened?"
+                    placeholder="What's happening??"
                     autoFocus
                     autoCorrect={false}
                     value={message}

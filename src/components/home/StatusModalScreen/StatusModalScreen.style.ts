@@ -21,7 +21,7 @@ export const StatusModalScreenStyle = StyleSheet.create({
         fontSize: 12
     },
     expressionsContainer: {
-        marginVertical: 20,
+        marginTop: 10,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
@@ -37,6 +37,7 @@ export const StatusModalScreenStyle = StyleSheet.create({
         fontSize: 30
     },
     clearStatusButtonView: {
+        marginTop: 15,
         alignSelf: 'center'
     },
     clearStatusButtonText: {
