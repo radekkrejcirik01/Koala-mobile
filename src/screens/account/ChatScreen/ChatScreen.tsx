@@ -106,7 +106,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     updateSeenNotification();
 
                     // Scroll to bottom when conversation has more than 10 messages
-                    if (data?.length >= 10 && scroll) {
+                    if (data?.length >= 15 && scroll) {
                         scrollToEnd();
                     }
 
