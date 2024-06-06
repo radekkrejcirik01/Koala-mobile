@@ -25,7 +25,7 @@ export const Send = ({
     );
 
     return (
-        <View style={style}>
+        <View style={[SendStyle.container, style]}>
             {loaded ? (
                 <>
                     <View style={SendStyle.selectView}>
