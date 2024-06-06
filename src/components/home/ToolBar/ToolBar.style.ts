@@ -9,7 +9,7 @@ export const ToolBarStyle = StyleSheet.create({
         flex: 1,
         justifyContent: 'center'
     },
-    addStatusButton: {
+    button: {
         marginLeft: 10,
         width: 65,
         height: 65,

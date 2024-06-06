@@ -1,9 +1,10 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import DIMENSIONS from '@constants/DIMENSIONS';
 
 export const ChatListStyle = StyleSheet.create({
     container: {
         marginLeft: 26,
-        marginRight: '10%',
-        paddingBottom: Platform.OS === 'ios' ? 280 : 100
+        paddingRight: '10%',
+        paddingBottom: DIMENSIONS.height / 2
     }
 });

@@ -145,7 +145,7 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onPressDirect}
-                    style={ToolBarStyle.addStatusButton}
+                    style={ToolBarStyle.button}
                 >
                     <Icon name={IconEnum.DIRECT} size={20} />
                 </TouchableOpacity>
@@ -153,7 +153,7 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
                     activeOpacity={0.7}
                     hitSlop={10}
                     onPress={onStatusPress}
-                    style={ToolBarStyle.addStatusButton}
+                    style={ToolBarStyle.button}
                 >
                     <Icon name={IconEnum.PLUS} size={20} />
                 </TouchableOpacity>

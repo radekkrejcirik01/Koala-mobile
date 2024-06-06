@@ -16,8 +16,8 @@ export const DirectSharingModalScreenStyle = StyleSheet.create({
         flex: 1
     },
     input: {
-        fontSize: 20,
-        color: COLORS.BLACK,
+        fontSize: 18,
+        color: COLORS.BLACK_50,
         textAlignVertical: 'top',
         fontWeight: 'bold'
     },
