@@ -3,27 +3,66 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsHeaderStyle = StyleSheet.create({
     container: {
-        paddingTop: 10,
+        marginBottom: 10
+    },
+    row1: {
+        marginTop: 8,
         paddingHorizontal: 5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-    rowCenter: {
+    row2: {
         flexDirection: 'row',
         alignItems: 'center'
     },
-    titleText: {
-        marginLeft: 5,
-        fontSize: 24,
+    searchView: {
+        marginLeft: 12,
+        paddingHorizontal: 15,
+        width: 120,
+        height: 38,
+        borderRadius: 20,
+        backgroundColor: COLORS.WHITE_100,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    focused: {
+        width: 170
+    },
+    searchEmojiText: {
+        marginRight: 5,
+        fontSize: 16,
+        opacity: 0.5,
+        color: COLORS.BLACK
+    },
+    searchInput: {
+        flex: 1,
+        paddingRight: 5,
+        fontSize: 16,
+        color: COLORS.BLACK
+    },
+    doneText: {
+        color: COLORS.GRAY_200,
+        fontWeight: '500'
+    },
+    messagesTitle: {
+        fontSize: 28,
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
     },
-    emojiText: {
-        fontSize: 22
+    itemsView: {
+        flexGrow: 1
     },
-    addFriendsText: {
+    button: {
+        marginLeft: 10,
+        marginTop: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    buttonText: {
+        marginLeft: 8,
+        fontSize: 15,
         color: COLORS.BUTTON_BLUE,
-        fontWeight: 'bold'
+        fontWeight: '500'
     }
 });

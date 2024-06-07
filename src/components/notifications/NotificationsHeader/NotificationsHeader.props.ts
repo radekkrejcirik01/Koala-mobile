@@ -1,3 +1,3 @@
 export interface NotificationsHeaderProps {
-    onPlusPress: () => void;
+    onPressFriend: (id: number) => void;
 }

@@ -5,6 +5,7 @@ import { NotificationItemEnum } from '@components/notifications/NotificationItem
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getHourUnixTime } from '@functions/getHourUnixTime';
+import { getShortMessage } from '@functions/getShortMessage';
 
 export const NotificationItem = ({
     item,
@@ -19,24 +20,21 @@ export const NotificationItem = ({
         }, 500);
     }, [onPress]);
 
-    function getTitle(type: NotificationItemEnum): string {
-        if (type === NotificationItemEnum.EmotionNotificationType) {
-            return ' is sharing';
-        }
-        if (type === NotificationItemEnum.StatusReplyNotificationType) {
-            return ' is replying to status';
-        }
-        if (type === NotificationItemEnum.CheckOnMessageNotificationType) {
-            return ' is checking on';
-        }
-        return '';
-    }
-
-    function getMessage(message: string, type: NotificationItemEnum): string {
+    function getMessage(
+        type: NotificationItemEnum,
+        isNew: boolean,
+        message: string
+    ): string {
         if (type === NotificationItemEnum.VoiceMessageNotificationType) {
+            if (isNew) {
+                return 'New voice message';
+            }
             return '🎤 Voice Message';
         }
-        return message;
+        if (isNew) {
+            return 'New message';
+        }
+        return getShortMessage(message);
     }
 
     const isNew = useMemo(
@@ -57,11 +55,9 @@ export const NotificationItem = ({
                         size={48}
                         acronymStyle={NotificationItemStyle.profilePhoto}
                     />
-                    {isNew && <View style={NotificationItemStyle.newItem} />}
                     <View style={NotificationItemStyle.contentView}>
                         <Text style={NotificationItemStyle.titleText}>
                             {item.name}
-                            {getTitle(item.type)}
                         </Text>
                         <Text
                             style={[
@@ -69,7 +65,7 @@ export const NotificationItem = ({
                                 isNew && NotificationItemStyle.newItemText
                             ]}
                         >
-                            {getMessage(item?.message, item.type)} ∙{' '}
+                            {getMessage(item.type, isNew, item?.message)} ∙{' '}
                             {getHourUnixTime(item?.time)}
                         </Text>
                     </View>
