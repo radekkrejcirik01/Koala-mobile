@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const ToolBarStyle = StyleSheet.create({
     scrollView: {
-        marginTop: 20,
+        marginTop: 15,
         minHeight: 85
     },
     scrollViewContainer: {
