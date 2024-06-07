@@ -6,6 +6,7 @@ import { NotificationItemStyle } from '@components/notifications/NotificationIte
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getHourUnixTime } from '@functions/getHourUnixTime';
 import { getShortMessage } from '@functions/getShortMessage';
+import COLORS from '@constants/COLORS';
 
 export const NotificationItem = ({
     item,
@@ -56,7 +57,13 @@ export const NotificationItem = ({
                         acronymStyle={NotificationItemStyle.profilePhoto}
                     />
                     <View style={NotificationItemStyle.contentView}>
-                        <Text style={NotificationItemStyle.titleText}>
+                        <Text
+                            style={[
+                                NotificationItemStyle.titleText,
+                                isNew && { color: COLORS.BLACK_50 }
+                            ]}
+                        >
+                            {isNew && '💬 '}
                             {item.name}
                         </Text>
                         <Text

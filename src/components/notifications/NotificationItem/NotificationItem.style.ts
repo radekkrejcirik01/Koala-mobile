@@ -24,13 +24,13 @@ export const NotificationItemStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 15,
-        color: COLORS.BLACK_50,
-        fontWeight: '600'
+        color: COLORS.LIGHTGRAY_100,
+        fontWeight: 'bold'
     },
     messageText: {
         marginTop: 2,
         fontSize: 15,
-        color: COLORS.GRAY_200,
+        color: COLORS.LIGHTGRAY_100,
         fontWeight: '600'
     },
     newItemText: {

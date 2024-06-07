@@ -12,7 +12,7 @@ export const MessagesStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     contentView: {
-        paddingTop: 15,
+        paddingTop: 10,
         paddingHorizontal: 22,
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -29,7 +29,7 @@ export const MessagesStyle = StyleSheet.create({
     buttonText: {
         fontSize: 15,
         color: COLORS.BLACK,
-        fontWeight: '500'
+        fontWeight: '600'
     },
     modal: {
         margin: 0,

@@ -18,9 +18,7 @@ export const SendButton = ({
         {sending ? (
             <ActivityIndicator color={COLORS.WHITE} />
         ) : (
-            <Text style={SendButtonStyle.text}>
-                {sent ? 'Sent 👍' : 'Send'}
-            </Text>
+            <Text style={SendButtonStyle.text}>{sent ? 'Sent' : 'Send'}</Text>
         )}
     </TouchableOpacity>
 );

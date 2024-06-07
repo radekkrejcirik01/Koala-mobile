@@ -49,44 +49,44 @@ export const NotificationsHeader = ({
             <View style={NotificationsHeaderStyle.row1}>
                 <View style={NotificationsHeaderStyle.row2}>
                     <BackButton />
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        onPress={() => {
-                            inputRef?.current?.focus();
-                        }}
-                        style={[
-                            NotificationsHeaderStyle.searchView,
-                            focused && NotificationsHeaderStyle.focused
-                        ]}
-                    >
-                        <Text style={NotificationsHeaderStyle.searchEmojiText}>
-                            🔎
-                        </Text>
-                        <TextInput
-                            ref={inputRef}
-                            placeholder="Search"
-                            placeholderTextColor={COLORS.LIGHTGRAY_100}
-                            value={searchValue}
-                            onChangeText={setSearchValue}
-                            onFocus={() => {
-                                loadFriends();
-                                setFocused(true);
-                            }}
-                            selectionColor={COLORS.BUTTON_BLUE}
-                            style={NotificationsHeaderStyle.searchInput}
-                        />
-                        {focused && (
-                            <TouchableOpacity onPress={done}>
-                                <Text style={NotificationsHeaderStyle.doneText}>
-                                    Done
-                                </Text>
-                            </TouchableOpacity>
-                        )}
-                    </TouchableOpacity>
+                    <Text style={NotificationsHeaderStyle.messagesTitle}>
+                        Messages
+                    </Text>
                 </View>
-                <Text style={NotificationsHeaderStyle.messagesTitle}>
-                    Messages
-                </Text>
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => {
+                        inputRef?.current?.focus();
+                    }}
+                    style={[
+                        NotificationsHeaderStyle.searchView,
+                        focused && NotificationsHeaderStyle.focused
+                    ]}
+                >
+                    <Text style={NotificationsHeaderStyle.searchEmojiText}>
+                        🔎
+                    </Text>
+                    <TextInput
+                        ref={inputRef}
+                        placeholder="Search"
+                        placeholderTextColor={COLORS.LIGHTGRAY_100}
+                        value={searchValue}
+                        onChangeText={setSearchValue}
+                        onFocus={() => {
+                            loadFriends();
+                            setFocused(true);
+                        }}
+                        selectionColor={COLORS.BUTTON_BLUE}
+                        style={NotificationsHeaderStyle.searchInput}
+                    />
+                    {focused && (
+                        <TouchableOpacity onPress={done}>
+                            <Text style={NotificationsHeaderStyle.doneText}>
+                                Done
+                            </Text>
+                        </TouchableOpacity>
+                    )}
+                </TouchableOpacity>
             </View>
             {focused && (
                 <View style={NotificationsHeaderStyle.itemsView}>
