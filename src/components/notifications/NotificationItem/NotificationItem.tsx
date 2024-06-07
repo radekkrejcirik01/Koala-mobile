@@ -14,7 +14,9 @@ export const NotificationItem = ({
 
     const press = useCallback(() => {
         onPress();
-        setPressed(true);
+        setTimeout(() => {
+            setPressed(true);
+        }, 500);
     }, [onPress]);
 
     function getTitle(type: NotificationItemEnum): string {
