@@ -10,8 +10,6 @@ export const NotificationItem = ({
     item,
     onPress
 }: NotificationItemProps): React.JSX.Element => {
-    const unseen = useMemo((): boolean => !item?.seen, [item?.seen]);
-
     const [pressed, setPressed] = useState<boolean>(false);
 
     const press = useCallback(() => {
@@ -39,7 +37,10 @@ export const NotificationItem = ({
         return message;
     }
 
-    const isNew = useMemo((): boolean => unseen && !pressed, [pressed, unseen]);
+    const isNew = useMemo(
+        (): boolean => !item?.seen && !pressed,
+        [item?.seen, pressed]
+    );
 
     return (
         <TouchableOpacity
@@ -54,17 +55,22 @@ export const NotificationItem = ({
                         size={48}
                         acronymStyle={NotificationItemStyle.profilePhoto}
                     />
+                    {isNew && <View style={NotificationItemStyle.newItem} />}
                     <View style={NotificationItemStyle.contentView}>
                         <Text style={NotificationItemStyle.titleText}>
                             {item.name}
                             {getTitle(item.type)}
                         </Text>
-                        <Text style={NotificationItemStyle.messageText}>
+                        <Text
+                            style={[
+                                NotificationItemStyle.messageText,
+                                isNew && NotificationItemStyle.newItemText
+                            ]}
+                        >
                             {getMessage(item?.message, item.type)} ∙{' '}
                             {getHourUnixTime(item?.time)}
                         </Text>
                     </View>
-                    {isNew && <View style={NotificationItemStyle.newItem} />}
                 </View>
             </View>
         </TouchableOpacity>
