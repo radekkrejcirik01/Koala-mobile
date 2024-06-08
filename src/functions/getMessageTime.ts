@@ -1,8 +1,8 @@
 import moment from 'moment';
+import { getLocalTime } from '@functions/getLocalTime';
 
-export function getLocalTimeFromUTCUnix(time: number): string {
-    const unix = moment.unix(time);
-    const local = moment(unix).format('YYYY-MM-DD HH:mm:ss');
+export function getMessageTime(time: number): string {
+    const local = getLocalTime(time);
 
     const today = moment().format('D. M.');
     const yesterday = moment().subtract(1, 'days').format('D. M.');

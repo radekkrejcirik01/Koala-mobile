@@ -2,7 +2,7 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { HistoryItemProps } from '@components/profile/HistoryItem/HistoryItem.props';
 import { HistoryItemStyle } from '@components/profile/HistoryItem/HistoryItem.style';
-import { getLocalTimeFromUTCUnix } from '@functions/getLocalTimeFromUTCUnix';
+import { getMessageTime } from '@functions/getMessageTime';
 
 export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {
     function getReceiversNamesText(names: string[]): string {
@@ -17,7 +17,7 @@ export const HistoryItem = ({ item }: HistoryItemProps): JSX.Element => {
                         {item.message}
                     </Text>
                     <Text style={HistoryItemStyle.timeText}>
-                        {getLocalTimeFromUTCUnix(item?.time)}
+                        {getMessageTime(item?.time)}
                     </Text>
                 </View>
                 <Text style={HistoryItemStyle.sharedToText}>

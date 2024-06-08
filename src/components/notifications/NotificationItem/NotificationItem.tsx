@@ -4,7 +4,7 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
-import { getHourUnixTime } from '@functions/getHourUnixTime';
+import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
 import COLORS from '@constants/COLORS';
 
@@ -20,16 +20,6 @@ export const NotificationItem = ({
             setPressed(true);
         }, 500);
     }, [onPress]);
-
-    function getTitle(type: NotificationItemEnum): string {
-        if (type === NotificationItemEnum.StatusReplyNotificationType) {
-            return ' is replying to status';
-        }
-        if (type === NotificationItemEnum.CheckOnMessageNotificationType) {
-            return ' is checking on';
-        }
-        return '';
-    }
 
     function getMessage(
         type: NotificationItemEnum,
@@ -75,7 +65,6 @@ export const NotificationItem = ({
                         >
                             {isNew && '💬 '}
                             {item.name}
-                            {getTitle(item.type)}
                         </Text>
                         <Text
                             style={[
@@ -84,7 +73,7 @@ export const NotificationItem = ({
                             ]}
                         >
                             {getMessage(item.type, isNew, item?.message)} ∙{' '}
-                            {getHourUnixTime(item?.time)}
+                            {getNotificationTime(item?.time)}
                         </Text>
                     </View>
                 </View>

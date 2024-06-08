@@ -4,8 +4,7 @@ import COLORS from '@constants/COLORS';
 export const NotificationItemStyle = StyleSheet.create({
     container: {
         paddingVertical: 10,
-        paddingLeft: 10,
-        paddingRight: 20
+        paddingLeft: 10
     },
     profileView: {
         flexDirection: 'row',

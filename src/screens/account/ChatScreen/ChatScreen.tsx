@@ -28,7 +28,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
-import { getLocalTimeFromUTCUnix } from '@functions/getLocalTimeFromUTCUnix';
+import { getMessageTime } from '@functions/getMessageTime';
 import { getShortMessage } from '@functions/getShortMessage';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
@@ -200,7 +200,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         (item: ConversationInterface) => {
             const sentByUser = item?.senderId === userId;
             const shortMessage = getShortMessage(item?.message);
-            const time = getLocalTimeFromUTCUnix(item.time);
+            const time = getMessageTime(item.time);
 
             ReactNativeHapticFeedback.trigger('impactLight');
 
