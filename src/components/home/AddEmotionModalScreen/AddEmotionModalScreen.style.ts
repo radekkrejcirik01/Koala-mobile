@@ -21,7 +21,7 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     input: {
         height: 45,
         marginTop: 10,
-        paddingHorizontal: 15,
+        paddingHorizontal: 12,
         borderRadius: 8,
         fontSize: 16,
         color: COLORS.BLACK_50,

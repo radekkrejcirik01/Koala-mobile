@@ -30,7 +30,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
         fontWeight: '500'
     },
     messageText: {
-        fontSize: 16.5,
+        fontSize: 17,
         color: COLORS.BLACK,
         fontWeight: '600'
     },

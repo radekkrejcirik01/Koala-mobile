@@ -21,6 +21,16 @@ export const NotificationItem = ({
         }, 500);
     }, [onPress]);
 
+    function getTitle(type: NotificationItemEnum): string {
+        if (type === NotificationItemEnum.StatusReplyNotificationType) {
+            return ' is replying to status';
+        }
+        if (type === NotificationItemEnum.CheckOnMessageNotificationType) {
+            return ' is checking on';
+        }
+        return '';
+    }
+
     function getMessage(
         type: NotificationItemEnum,
         isNew: boolean,
@@ -65,6 +75,7 @@ export const NotificationItem = ({
                         >
                             {isNew && '💬 '}
                             {item.name}
+                            {getTitle(item.type)}
                         </Text>
                         <Text
                             style={[
