@@ -50,7 +50,7 @@ export const NotificationsHeader = ({
                 <View style={NotificationsHeaderStyle.row2}>
                     <BackButton />
                     <Text style={NotificationsHeaderStyle.messagesTitle}>
-                        Messages
+                        Chats
                     </Text>
                 </View>
                 <TouchableOpacity

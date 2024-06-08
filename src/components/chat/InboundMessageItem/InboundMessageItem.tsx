@@ -17,7 +17,12 @@ export const InboundMessageItem = ({
         {isFirst && (
             <Text style={InboundMessageItemStyle.nameText}>{name}</Text>
         )}
-        <View style={InboundMessageItemStyle.messageContainer}>
+        <View
+            style={[
+                InboundMessageItemStyle.messageContainer,
+                isFirst && InboundMessageItemStyle.marginTop5
+            ]}
+        >
             {!!replyMessage && (
                 <View style={InboundMessageItemStyle.replyMessageView}>
                     <Text style={InboundMessageItemStyle.replyMessageText}>

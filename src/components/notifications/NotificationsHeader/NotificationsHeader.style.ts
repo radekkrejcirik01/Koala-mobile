@@ -19,12 +19,12 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     messagesTitle: {
         marginLeft: 10,
         fontSize: 28,
-        color: COLORS.LIGHTGRAY_100,
+        color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
     },
     searchView: {
-        paddingHorizontal: 15,
-        height: 38,
+        paddingHorizontal: 10,
+        height: 35,
         borderRadius: 20,
         backgroundColor: COLORS.WHITE_100,
         flexDirection: 'row',
@@ -36,7 +36,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     searchEmojiText: {
         marginRight: 5,
         fontSize: 16,
-        opacity: 0.8,
+        opacity: 0.5,
         color: COLORS.BLACK
     },
     searchInput: {
