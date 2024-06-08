@@ -78,7 +78,7 @@ export const AddEmotionModalScreen = ({
                 style={AddEmotionModalScreenStyle.input}
             />
             <Text style={AddEmotionModalScreenStyle.inputTitleText}>
-                Send message
+                Message
             </Text>
             <TextInput
                 autoCorrect={false}

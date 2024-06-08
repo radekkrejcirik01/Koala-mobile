@@ -15,7 +15,6 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     },
     inputTitleText: {
         marginTop: 20,
-        fontSize: 16,
         color: COLORS.BLACK_50,
         fontWeight: 'bold'
     },
