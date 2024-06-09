@@ -9,7 +9,6 @@ import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 
 export const ChatList = ({
     scrollViewRef,
-    name,
     conversation,
     onMessageLongPress
 }: ChatListProps): React.JSX.Element => {
@@ -43,7 +42,6 @@ export const ChatList = ({
                 ) : (
                     <InboundMessageItem
                         key={value.id}
-                        name={name}
                         onLongPress={() => onMessageLongPress(value)}
                         replyMessage={value?.replyMessage}
                         audioMessage={value?.audioMessage}

@@ -286,13 +286,12 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         <View
             style={[
                 ChatScreenStyle.container,
-                { paddingTop: top || 10, paddingBottom: bottom || 5 }
+                { paddingTop: top + 5, paddingBottom: bottom || 5 }
             ]}
         >
             <ChatHeader id={senderId} username={username} name={name} />
             <ChatList
                 scrollViewRef={scrollViewRef}
-                name={name}
                 conversation={conversation}
                 onMessageLongPress={onMessageLongPress}
             />

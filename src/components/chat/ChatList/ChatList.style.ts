@@ -3,8 +3,8 @@ import DIMENSIONS from '@constants/DIMENSIONS';
 
 export const ChatListStyle = StyleSheet.create({
     container: {
-        marginLeft: 26,
-        paddingRight: '10%',
+        marginLeft: 18,
+        marginRight: 12,
         paddingBottom: DIMENSIONS.height / 2.5
     }
 });

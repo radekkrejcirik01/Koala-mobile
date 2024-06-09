@@ -4,9 +4,7 @@ import COLORS from '@constants/COLORS';
 export const ChatHeaderStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 15,
-        paddingBottom: 5,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: COLORS.LIGHTGRAY,
+        paddingBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
@@ -38,5 +36,9 @@ export const ChatHeaderStyle = StyleSheet.create({
     sharedButtonView: {
         marginRight: 5,
         marginBottom: 5
+    },
+    chatEmoji: {
+        fontSize: 20,
+        color: COLORS.BLACK
     }
 });

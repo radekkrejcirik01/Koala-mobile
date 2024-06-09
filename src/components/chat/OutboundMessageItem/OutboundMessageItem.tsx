@@ -12,40 +12,37 @@ export const OutboundMessageItem = ({
     audioMessage,
     isFirst
 }: OutboundMessageItemProps): React.JSX.Element => (
-    <View style={isFirst && OutboundMessageItemStyle.marginTop}>
-        {isFirst && <Text style={OutboundMessageItemStyle.nameText}>You</Text>}
-        <View
-            style={[
-                OutboundMessageItemStyle.messageContainer,
-                isFirst && OutboundMessageItemStyle.marginTop5
-            ]}
+    <View
+        style={[
+            OutboundMessageItemStyle.container,
+            isFirst && OutboundMessageItemStyle.marginTop
+        ]}
+    >
+        {!!replyMessage && (
+            <View style={OutboundMessageItemStyle.replyMessageView}>
+                <Text style={OutboundMessageItemStyle.replyMessageText}>
+                    {replyMessage}
+                </Text>
+            </View>
+        )}
+        <TouchableOpacity
+            activeOpacity={1}
+            delayLongPress={120}
+            onLongPress={onLongPress}
         >
-            {!!replyMessage && (
-                <View style={OutboundMessageItemStyle.replyMessageView}>
-                    <Text style={OutboundMessageItemStyle.replyMessageText}>
-                        {replyMessage}
-                    </Text>
-                </View>
+            {audioMessage ? (
+                <AudioMessageItem audioMessage={audioMessage} />
+            ) : (
+                <Text
+                    style={[
+                        OutboundMessageItemStyle.messageText,
+                        isTextEmoji(children) &&
+                            OutboundMessageItemStyle.largeText
+                    ]}
+                >
+                    {children}
+                </Text>
             )}
-            <TouchableOpacity
-                activeOpacity={1}
-                delayLongPress={120}
-                onLongPress={onLongPress}
-            >
-                {audioMessage ? (
-                    <AudioMessageItem audioMessage={audioMessage} />
-                ) : (
-                    <Text
-                        style={[
-                            OutboundMessageItemStyle.messageText,
-                            isTextEmoji(children) &&
-                                OutboundMessageItemStyle.largeText
-                        ]}
-                    >
-                        {children}
-                    </Text>
-                )}
-            </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     </View>
 );

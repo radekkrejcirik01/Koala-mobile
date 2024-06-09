@@ -2,19 +2,21 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const InboundMessageItemStyle = StyleSheet.create({
+    container: {
+        marginTop: 2,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        borderRadius: 20,
+        backgroundColor: COLORS.WHITE_100,
+        alignSelf: 'flex-start'
+    },
     marginTop: {
-        marginTop: 16
+        marginTop: 15
     },
     nameText: {
         fontSize: 17,
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
-    },
-    messageContainer: {
-        marginTop: 10
-    },
-    marginTop5: {
-        marginTop: 5
     },
     replyMessageView: {
         marginBottom: 2,
@@ -30,9 +32,9 @@ export const InboundMessageItemStyle = StyleSheet.create({
         fontWeight: '500'
     },
     messageText: {
-        fontSize: 17,
+        fontSize: 15,
         color: COLORS.BLACK,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     largeText: {
         fontSize: 35

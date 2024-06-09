@@ -2,8 +2,6 @@ import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useAppState } from '@hooks/useAppState';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import { ChatHeaderProps } from '@components/chat/ChatHeader/ChatHeader.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
@@ -76,7 +74,7 @@ export const ChatHeader = ({
                 }
                 style={ChatHeaderStyle.sharedButtonView}
             >
-                <Icon name={IconEnum.REPLY} size={26} />
+                <Text style={ChatHeaderStyle.chatEmoji}>💬</Text>
             </TouchableOpacity>
         </View>
     );
