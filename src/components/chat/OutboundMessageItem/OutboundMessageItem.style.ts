@@ -13,22 +13,27 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     marginTop: {
         marginTop: 15
     },
+    audioMessage: {
+        paddingVertical: 0,
+        paddingHorizontal: 0,
+        backgroundColor: COLORS.WHITE
+    },
     nameText: {
         fontSize: 17,
         color: COLORS.BUTTON_BLUE,
         fontWeight: 'bold'
     },
     replyMessageView: {
-        marginBottom: 2,
-        paddingVertical: 8,
-        paddingHorizontal: 10,
-        borderRadius: 16,
-        borderWidth: 2,
-        borderColor: COLORS.LIGHTGRAY,
-        alignSelf: 'flex-start'
+        marginTop: 2,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        borderRadius: 20,
+        backgroundColor: COLORS.WHITE_100,
+        alignSelf: 'flex-end'
     },
     replyMessageText: {
-        color: COLORS.LIGHTGRAY_100,
+        fontSize: 15,
+        color: COLORS.GRAY_200,
         fontWeight: '500'
     },
     messageText: {

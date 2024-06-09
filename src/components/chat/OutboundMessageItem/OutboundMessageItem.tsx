@@ -12,12 +12,7 @@ export const OutboundMessageItem = ({
     audioMessage,
     isFirst
 }: OutboundMessageItemProps): React.JSX.Element => (
-    <View
-        style={[
-            OutboundMessageItemStyle.container,
-            isFirst && OutboundMessageItemStyle.marginTop
-        ]}
-    >
+    <View style={isFirst && OutboundMessageItemStyle.marginTop}>
         {!!replyMessage && (
             <View style={OutboundMessageItemStyle.replyMessageView}>
                 <Text style={OutboundMessageItemStyle.replyMessageText}>
@@ -25,24 +20,31 @@ export const OutboundMessageItem = ({
                 </Text>
             </View>
         )}
-        <TouchableOpacity
-            activeOpacity={1}
-            delayLongPress={120}
-            onLongPress={onLongPress}
+        <View
+            style={[
+                OutboundMessageItemStyle.container,
+                audioMessage && OutboundMessageItemStyle.audioMessage
+            ]}
         >
-            {audioMessage ? (
-                <AudioMessageItem audioMessage={audioMessage} />
-            ) : (
-                <Text
-                    style={[
-                        OutboundMessageItemStyle.messageText,
-                        isTextEmoji(children) &&
-                            OutboundMessageItemStyle.largeText
-                    ]}
-                >
-                    {children}
-                </Text>
-            )}
-        </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={1}
+                delayLongPress={120}
+                onLongPress={onLongPress}
+            >
+                {audioMessage ? (
+                    <AudioMessageItem audioMessage={audioMessage} />
+                ) : (
+                    <Text
+                        style={[
+                            OutboundMessageItemStyle.messageText,
+                            isTextEmoji(children) &&
+                                OutboundMessageItemStyle.largeText
+                        ]}
+                    >
+                        {children}
+                    </Text>
+                )}
+            </TouchableOpacity>
+        </View>
     </View>
 );
