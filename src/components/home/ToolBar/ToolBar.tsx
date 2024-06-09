@@ -162,7 +162,7 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
                 </View>
                 <StatusItem
                     onPress={onStatusPress}
-                    name={status ? 'You' : 'Set'}
+                    name={status ? 'You' : 'Status'}
                     expression={status}
                 />
                 {friendsStatuses?.map((value) => (

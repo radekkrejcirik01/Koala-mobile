@@ -34,14 +34,14 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     },
     searchEmojiText: {
         marginRight: 5,
-        fontSize: 16,
+        fontSize: 15,
         opacity: 0.8,
         color: COLORS.BLACK
     },
     searchInput: {
         flexGrow: 1,
         paddingRight: 5,
-        fontSize: 16,
+        fontSize: 15,
         color: COLORS.BLACK
     },
     doneText: {

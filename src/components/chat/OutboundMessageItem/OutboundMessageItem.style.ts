@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const OutboundMessageItemStyle = StyleSheet.create({
     container: {
+        maxWidth: '70%',
         marginTop: 2,
         paddingVertical: 8,
         paddingHorizontal: 12,
