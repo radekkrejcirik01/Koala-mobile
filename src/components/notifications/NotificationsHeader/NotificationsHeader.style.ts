@@ -3,10 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsHeaderStyle = StyleSheet.create({
     container: {
-        marginBottom: 10
+        paddingVertical: 5
     },
     row1: {
-        marginTop: 8,
         paddingHorizontal: 5,
         flexDirection: 'row',
         alignItems: 'center',
@@ -36,7 +35,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     searchEmojiText: {
         marginRight: 5,
         fontSize: 16,
-        opacity: 0.5,
+        opacity: 0.8,
         color: COLORS.BLACK
     },
     searchInput: {

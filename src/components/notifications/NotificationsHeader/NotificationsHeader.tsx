@@ -69,7 +69,7 @@ export const NotificationsHeader = ({
                     <TextInput
                         ref={inputRef}
                         placeholder="Search"
-                        placeholderTextColor={COLORS.LIGHTGRAY_100}
+                        placeholderTextColor={COLORS.GRAY_200}
                         value={searchValue}
                         onChangeText={setSearchValue}
                         onFocus={() => {

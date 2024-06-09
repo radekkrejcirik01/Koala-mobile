@@ -16,11 +16,11 @@ export const StatusItemStyle = StyleSheet.create({
     },
     expressionText: {
         fontSize: 24,
-        color: COLORS.BLACK,
-        fontWeight: '500'
+        color: COLORS.BLACK
     },
     nameText: {
-        color: COLORS.BLACK_50,
-        fontWeight: '600'
+        marginTop: 2,
+        color: COLORS.BUTTON_BLUE,
+        fontWeight: '500'
     }
 });

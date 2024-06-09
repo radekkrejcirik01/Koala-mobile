@@ -32,6 +32,10 @@ export const StatusModalScreenStyle = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: COLORS.WHITE_100
     },
+    active: {
+        borderWidth: 2,
+        borderColor: COLORS.BUTTON_BLUE
+    },
     expressionButtonText: {
         color: COLORS.BLACK,
         fontSize: 30

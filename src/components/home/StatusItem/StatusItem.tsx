@@ -7,22 +7,18 @@ export const StatusItem = ({
     onPress,
     name,
     expression
-}: StatusItemProps): React.JSX.Element => {
-    if (!expression) {
-        return null;
-    }
-
-    return (
-        <View style={StatusItemStyle.container}>
-            <TouchableOpacity
-                activeOpacity={0.7}
-                hitSlop={10}
-                onPress={onPress}
-                style={StatusItemStyle.button}
-            >
-                <Text style={StatusItemStyle.expressionText}>{expression}</Text>
-            </TouchableOpacity>
-            <Text style={StatusItemStyle.nameText}>{name}</Text>
-        </View>
-    );
-};
+}: StatusItemProps): React.JSX.Element => (
+    <View style={StatusItemStyle.container}>
+        <TouchableOpacity
+            activeOpacity={0.7}
+            hitSlop={10}
+            onPress={onPress}
+            style={StatusItemStyle.button}
+        >
+            <Text style={StatusItemStyle.expressionText}>
+                {expression || '😴'}
+            </Text>
+        </TouchableOpacity>
+        <Text style={StatusItemStyle.nameText}>{name}</Text>
+    </View>
+);

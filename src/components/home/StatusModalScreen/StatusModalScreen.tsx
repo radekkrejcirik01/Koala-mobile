@@ -7,7 +7,8 @@ import { EXPRESSIONS } from '@components/home/StatusModalScreen/StatusModalScree
 
 export const StatusModalScreen = ({
     onPressExpression,
-    onPressClearStatus
+    onPressClearStatus,
+    expression
 }: StatusModalScreenProps): React.JSX.Element => {
     const { bottom } = useSafeAreaInsets();
 
@@ -20,7 +21,7 @@ export const StatusModalScreen = ({
                 }
             ]}
         >
-            <Text style={StatusModalScreenStyle.titleText}>Your status</Text>
+            <Text style={StatusModalScreenStyle.titleText}>Set status</Text>
             <Text style={StatusModalScreenStyle.descriptionText}>
                 Disappears after 2 days
             </Text>
@@ -29,8 +30,13 @@ export const StatusModalScreen = ({
                     <TouchableOpacity
                         key={value.id + value.expression}
                         activeOpacity={0.7}
+                        disabled={value.expression === expression}
                         onPress={() => onPressExpression(value.expression)}
-                        style={StatusModalScreenStyle.expressionButtonView}
+                        style={[
+                            StatusModalScreenStyle.expressionButtonView,
+                            value.expression === expression &&
+                                StatusModalScreenStyle.active
+                        ]}
                     >
                         <Text
                             style={StatusModalScreenStyle.expressionButtonText}
