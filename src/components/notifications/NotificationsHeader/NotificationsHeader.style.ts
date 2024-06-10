@@ -40,6 +40,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     },
     searchInput: {
         flexGrow: 1,
+        paddingVertical: 0,
         paddingRight: 5,
         fontSize: 15,
         color: COLORS.BLACK
