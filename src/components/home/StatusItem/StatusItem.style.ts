@@ -10,7 +10,7 @@ export const StatusItemStyle = StyleSheet.create({
         width: 65,
         height: 65,
         borderRadius: 50,
-        backgroundColor: '#00000010',
+        backgroundColor: COLORS.WHITE_200,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -24,6 +24,6 @@ export const StatusItemStyle = StyleSheet.create({
     nameText: {
         marginTop: 2,
         color: COLORS.BUTTON_BLUE,
-        fontWeight: '500'
+        fontWeight: '600'
     }
 });

@@ -24,7 +24,7 @@ export const MessagesStyle = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 14,
         borderRadius: 25,
-        backgroundColor: '#00000010'
+        backgroundColor: COLORS.WHITE_200
     },
     buttonText: {
         fontSize: 15,

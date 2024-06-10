@@ -16,14 +16,14 @@ export const ToolBarStyle = StyleSheet.create({
         width: 65,
         height: 65,
         borderRadius: 50,
-        backgroundColor: '#00000010',
+        backgroundColor: COLORS.WHITE_200,
         alignItems: 'center',
         justifyContent: 'center'
     },
     buttonTitle: {
         marginTop: 2,
         color: COLORS.BUTTON_BLUE,
-        fontWeight: '500'
+        fontWeight: '600'
     },
     modal: {
         margin: 0,

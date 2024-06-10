@@ -14,7 +14,12 @@ export const NotificationsButton = ({
     );
 
     return (
-        <TouchableOpacity activeOpacity={0.9} hitSlop={10} onPress={onPress}>
+        <TouchableOpacity
+            activeOpacity={0.9}
+            hitSlop={10}
+            onPress={onPress}
+            style={NotificationsButtonStyle.view}
+        >
             <Text style={NotificationsButtonStyle.text}>💬</Text>
             <Badge value={unseenNotifications} />
         </TouchableOpacity>
