@@ -3,7 +3,11 @@ import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useModal } from '@hooks/useModal';
 import { EmotionInterface } from '@interfaces/general.interface';
-import { deleteRequest, getRequest } from '@utils/Axios/Axios.service';
+import {
+    deleteRequest,
+    getRequest,
+    postRequest
+} from '@utils/Axios/Axios.service';
 import {
     ResponseEmotionsGetInterface,
     ResponseInterface
@@ -16,6 +20,7 @@ import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/Ad
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { MESSAGES } from '@components/home/Messages/Messages.const';
 import { ToolBar } from '@components/home/ToolBar/ToolBar';
+import { RemovedEmotionPostInterface } from '@interfaces/post/Post.interface';
 
 export const Messages = (): React.JSX.Element => {
     const { showActionSheetWithOptions } = useActionSheet();
@@ -28,7 +33,15 @@ export const Messages = (): React.JSX.Element => {
         getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
             (response: ResponseEmotionsGetInterface) => {
                 if (response?.status) {
-                    setMessages([...MESSAGES, ...(response?.data || [])]);
+                    let defaultMessage = MESSAGES;
+
+                    if (response?.removed) {
+                        defaultMessage = MESSAGES.filter(
+                            (e) => !response.removed.includes(e?.id)
+                        );
+                    }
+
+                    setMessages([...defaultMessage, ...(response?.data || [])]);
                 }
             }
         );
@@ -70,13 +83,24 @@ export const Messages = (): React.JSX.Element => {
         [loadMessages]
     );
 
+    const removeDefaultEmotion = useCallback(
+        (id: number) => {
+            postRequest<ResponseInterface, RemovedEmotionPostInterface>(
+                'removed-emotion',
+                {
+                    emotionId: id
+                }
+            ).subscribe((response: ResponseInterface) => {
+                if (response?.status) {
+                    loadMessages();
+                }
+            });
+        },
+        [loadMessages]
+    );
+
     const onItemLongPress = useCallback(
         (item: EmotionInterface) => {
-            // Enable removing only custom emotions
-            if (item?.isDefault) {
-                return;
-            }
-
             const options = ['Remove emotion', 'Cancel'];
 
             showActionSheetWithOptions(
@@ -88,12 +112,16 @@ export const Messages = (): React.JSX.Element => {
                 },
                 (selectedIndex: number) => {
                     if (selectedIndex === 0) {
-                        removeEmotion(item.id);
+                        if (item?.isDefault) {
+                            removeDefaultEmotion(item.id);
+                        } else {
+                            removeEmotion(item.id);
+                        }
                     }
                 }
             );
         },
-        [removeEmotion, showActionSheetWithOptions]
+        [removeDefaultEmotion, removeEmotion, showActionSheetWithOptions]
     );
 
     const hideModalAndKeyboard = useCallback(() => {

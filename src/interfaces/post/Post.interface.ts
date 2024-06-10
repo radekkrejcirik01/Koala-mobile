@@ -30,6 +30,10 @@ export interface EmotionPostInterface {
     tip2?: string;
 }
 
+export interface RemovedEmotionPostInterface {
+    emotionId: number;
+}
+
 export interface EmotionMessagePostInterface {
     ids: number[];
     message: string;

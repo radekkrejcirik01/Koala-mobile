@@ -72,6 +72,7 @@ export interface ResponseEmotionsGetInterface {
     status: string;
     message: string;
     data: EmotionInterface[];
+    removed?: number[];
 }
 
 export interface ResponseExpressionsGetInterface {
