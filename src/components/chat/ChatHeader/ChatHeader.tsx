@@ -50,7 +50,7 @@ export const ChatHeader = ({
                 <View style={ChatHeaderStyle.contentContainer}>
                     <ProfilePhoto
                         name={name}
-                        size={42}
+                        size={40}
                         acronymStyle={ChatHeaderStyle.acronym}
                     />
                     <View style={ChatHeaderStyle.namesView}>

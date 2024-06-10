@@ -32,7 +32,7 @@ export const RepliesStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     addText: {
-        color: COLORS.BUTTON_BLUE
+        color: COLORS.PURPLE
     },
     activityIndicator: {
         marginBottom: 100

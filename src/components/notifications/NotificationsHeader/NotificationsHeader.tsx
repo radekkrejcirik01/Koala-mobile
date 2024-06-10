@@ -76,7 +76,7 @@ export const NotificationsHeader = ({
                             loadFriends();
                             setFocused(true);
                         }}
-                        selectionColor={COLORS.BUTTON_BLUE}
+                        selectionColor={COLORS.PURPLE}
                         style={NotificationsHeaderStyle.searchInput}
                     />
                     {focused && (

@@ -12,8 +12,8 @@ export const MessagesStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     contentView: {
-        paddingTop: 25,
-        paddingHorizontal: 22,
+        paddingTop: 20,
+        paddingHorizontal: 15,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
@@ -21,8 +21,8 @@ export const MessagesStyle = StyleSheet.create({
     buttonView: {
         margin: 5,
         maxHeight: 60,
-        paddingVertical: 12,
-        paddingHorizontal: 14,
+        paddingVertical: 14,
+        paddingHorizontal: 16,
         borderRadius: 25,
         backgroundColor: COLORS.WHITE_200
     },

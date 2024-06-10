@@ -28,7 +28,6 @@ export const NotificationItemStyle = StyleSheet.create({
     },
     messageText: {
         marginTop: 2,
-        fontSize: 15,
         color: COLORS.LIGHTGRAY_100,
         fontWeight: '600'
     },
