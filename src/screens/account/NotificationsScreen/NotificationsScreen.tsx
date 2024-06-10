@@ -66,9 +66,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
         [dispatch, filterFriendId]
     );
 
-    useFocusEffect(() => {
-        loadNotifications();
-    });
+    useFocusEffect(loadNotifications);
 
     const renderItem = useCallback(
         ({
