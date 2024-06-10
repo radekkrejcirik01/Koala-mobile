@@ -19,11 +19,6 @@ export const InboundMessageItemStyle = StyleSheet.create({
         paddingHorizontal: 0,
         backgroundColor: COLORS.WHITE
     },
-    nameText: {
-        fontSize: 17,
-        color: COLORS.BUTTON_BLUE,
-        fontWeight: 'bold'
-    },
     replyMessageView: {
         marginTop: 2,
         paddingVertical: 10,

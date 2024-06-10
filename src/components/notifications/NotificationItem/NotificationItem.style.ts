@@ -33,7 +33,7 @@ export const NotificationItemStyle = StyleSheet.create({
         fontWeight: '600'
     },
     newItemText: {
-        color: COLORS.BUTTON_BLUE,
+        color: COLORS.PURPLE,
         fontWeight: 'bold'
     }
 });

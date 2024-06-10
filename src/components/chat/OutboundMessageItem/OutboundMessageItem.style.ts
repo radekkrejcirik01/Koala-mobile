@@ -8,7 +8,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         borderRadius: 20,
-        backgroundColor: COLORS.BUTTON_BLUE,
+        backgroundColor: COLORS.PURPLE,
         alignSelf: 'flex-end'
     },
     marginTop: {
@@ -18,11 +18,6 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         paddingVertical: 0,
         paddingHorizontal: 0,
         backgroundColor: COLORS.WHITE
-    },
-    nameText: {
-        fontSize: 17,
-        color: COLORS.BUTTON_BLUE,
-        fontWeight: 'bold'
     },
     replyMessageView: {
         marginTop: 2,

@@ -18,7 +18,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     messagesTitle: {
         marginLeft: 10,
         fontSize: 28,
-        color: COLORS.BUTTON_BLUE,
+        color: COLORS.PURPLE,
         fontWeight: 'bold'
     },
     searchView: {
@@ -61,7 +61,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     buttonText: {
         marginLeft: 8,
         fontSize: 15,
-        color: COLORS.BUTTON_BLUE,
+        color: COLORS.PURPLE,
         fontWeight: '600'
     }
 });
