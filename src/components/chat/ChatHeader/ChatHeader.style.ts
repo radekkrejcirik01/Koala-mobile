@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const ChatHeaderStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 15,
-        paddingBottom: 10,
+        paddingBottom: 5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'

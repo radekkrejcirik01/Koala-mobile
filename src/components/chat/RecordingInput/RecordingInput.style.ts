@@ -29,7 +29,7 @@ export const RecordingInputStyle = StyleSheet.create({
     sendButtonView: {
         padding: 5,
         borderRadius: 20,
-        backgroundColor: COLORS.BUTTON_BLUE
+        backgroundColor: COLORS.PURPLE
     },
     sendButtonIcon: {
         right: -1

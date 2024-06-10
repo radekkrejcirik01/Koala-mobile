@@ -56,7 +56,6 @@ export const ChatHeader = ({
                     <View style={ChatHeaderStyle.namesView}>
                         <Text style={ChatHeaderStyle.nameText}>{name}</Text>
                         <Text style={ChatHeaderStyle.usernameText}>
-                            🪴{' '}
                             {showUsername
                                 ? username
                                 : getChatOnlineStatus(lastOnline)}

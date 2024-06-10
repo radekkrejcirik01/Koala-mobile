@@ -48,7 +48,7 @@ export const RecordingInput = ({
                         width={5}
                         fill={100}
                         rotation={0}
-                        tintColor={COLORS.BUTTON_BLUE}
+                        tintColor={COLORS.PURPLE}
                         backgroundColor={COLORS.WHITE}
                     />
                 )}

@@ -134,7 +134,7 @@ export const ChatInput = ({
                             value={message}
                             onChangeText={onChangeText}
                             placeholder="Message..."
-                            selectionColor={COLORS.BUTTON_BLUE}
+                            selectionColor={COLORS.PURPLE}
                             style={ChatInputStyle.input}
                         />
                         <TouchableOpacity
