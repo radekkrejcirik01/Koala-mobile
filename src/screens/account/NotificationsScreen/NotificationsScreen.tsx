@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useNavigation } from '@hooks/useNavigation';
 import { getRequest } from '@utils/Axios/Axios.service';
@@ -65,9 +66,9 @@ export const NotificationsScreen = (): React.JSX.Element => {
         [dispatch, filterFriendId]
     );
 
-    useEffect(() => {
+    useFocusEffect(() => {
         loadNotifications();
-    }, [loadNotifications]);
+    });
 
     const renderItem = useCallback(
         ({
