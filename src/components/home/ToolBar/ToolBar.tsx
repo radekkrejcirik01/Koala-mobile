@@ -1,12 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-    Alert,
-    Keyboard,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { Alert, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useModal } from '@hooks/useModal';
 import { useAppState } from '@hooks/useAppState';
@@ -149,20 +142,17 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
                 style={ToolBarStyle.scrollView}
                 contentContainerStyle={ToolBarStyle.scrollViewContainer}
             >
-                <View style={ToolBarStyle.buttonContainer}>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        hitSlop={10}
-                        onPress={onPressDirect}
-                        style={ToolBarStyle.button}
-                    >
-                        <Icon name={IconEnum.DIRECT} size={20} />
-                    </TouchableOpacity>
-                    <Text style={ToolBarStyle.buttonTitle}>Send</Text>
-                </View>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    hitSlop={10}
+                    onPress={onPressDirect}
+                    style={ToolBarStyle.button}
+                >
+                    <Icon name={IconEnum.DIRECT} size={20} />
+                </TouchableOpacity>
                 <StatusItem
                     onPress={onStatusPress}
-                    name={status ? 'You' : 'Status'}
+                    name="You"
                     expression={status}
                 />
                 {friendsStatuses?.map((value) => (

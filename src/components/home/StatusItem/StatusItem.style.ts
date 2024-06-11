@@ -19,7 +19,7 @@ export const StatusItemStyle = StyleSheet.create({
         color: COLORS.BLACK
     },
     opacity: {
-        opacity: 0.8
+        opacity: 0.5
     },
     nameText: {
         marginTop: 2,

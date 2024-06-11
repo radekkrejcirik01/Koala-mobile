@@ -37,7 +37,7 @@ export const ChatInputStyle = StyleSheet.create({
         minHeight: 42,
         marginLeft: 6,
         marginRight: 4,
-        paddingVertical: 6,
+        paddingVertical: 8,
         paddingLeft: 14,
         paddingRight: 10,
         borderRadius: 20,

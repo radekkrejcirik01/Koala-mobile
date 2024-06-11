@@ -2,7 +2,7 @@ export default {
     RED: '#FF0000',
     WHITE: '#ffffff',
     WHITE_100: 'whitesmoke',
-    WHITE_200: '#00000009',
+    WHITE_200: '#00000010',
     GRAY_100: '#262626',
     GRAY_200: '#8c8c8c',
     GRAY_300: '#0d0d0d',

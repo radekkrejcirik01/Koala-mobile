@@ -3,14 +3,11 @@ import COLORS from '@constants/COLORS';
 
 export const ToolBarStyle = StyleSheet.create({
     scrollView: {
-        marginTop: 15
+        marginTop: 20
     },
     scrollViewContainer: {
         flex: 1,
         justifyContent: 'center'
-    },
-    buttonContainer: {
-        alignItems: 'center'
     },
     button: {
         width: 65,
@@ -19,11 +16,6 @@ export const ToolBarStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE_200,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    buttonTitle: {
-        marginTop: 2,
-        color: COLORS.BUTTON_BLUE,
-        fontWeight: '600'
     },
     modal: {
         margin: 0,
