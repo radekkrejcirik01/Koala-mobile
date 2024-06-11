@@ -1,5 +1,5 @@
 export interface ChatHeaderProps {
-    id: number;
+    chatUserId: number;
     username: string;
     name: string;
 }

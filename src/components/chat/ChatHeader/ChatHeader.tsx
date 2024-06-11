@@ -13,7 +13,7 @@ import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 import { BackButton } from '@components/general/BackButton/BackButton';
 
 export const ChatHeader = ({
-    id,
+    chatUserId,
     username,
     name
 }: ChatHeaderProps): JSX.Element => {
@@ -24,7 +24,7 @@ export const ChatHeader = ({
 
     const getLastOnlineTime = useCallback(() => {
         getRequest<ResponseLastOnlineGetInterface>(
-            `last-online/${id}`
+            `last-online/${chatUserId}`
         ).subscribe((response: ResponseLastOnlineGetInterface) => {
             if (response?.status && !!response?.time) {
                 setShowUsername(false);
@@ -35,7 +35,7 @@ export const ChatHeader = ({
                 }, 7000);
             }
         });
-    }, [id]);
+    }, [chatUserId]);
 
     useAppState(getLastOnlineTime);
 
@@ -68,7 +68,7 @@ export const ChatHeader = ({
                 hitSlop={10}
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.SharedScreen, {
-                        receiverId: id
+                        receiverId: chatUserId
                     })
                 }
                 style={ChatHeaderStyle.sharedButtonView}

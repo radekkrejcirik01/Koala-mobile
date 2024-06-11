@@ -10,8 +10,7 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItem = ({
     item,
-    onPress,
-    isInbound
+    onPress
 }: NotificationItemProps): React.JSX.Element => {
     const [pressed, setPressed] = useState<boolean>(false);
 
@@ -26,10 +25,7 @@ export const NotificationItem = ({
         if (isUnseen) {
             return `💬 ${name}`;
         }
-        if (isInbound) {
-            return name;
-        }
-        return 'You';
+        return name;
     }
 
     function getMessage(

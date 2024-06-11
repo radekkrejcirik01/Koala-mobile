@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -14,14 +14,9 @@ import { setUnseenNotifications } from '@store/NotificationsReducer';
 import COLORS from '@constants/COLORS';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
-import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationsHeader } from '@components/notifications/NotificationsHeader/NotificationsHeader';
-import { ReducerProps } from '@store/index/index.props';
 
 export const NotificationsScreen = (): React.JSX.Element => {
-    const { id: userId } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
     const dispatch = useDispatch();
 
     const { top } = useSafeAreaInsets();
@@ -81,22 +76,15 @@ export const NotificationsScreen = (): React.JSX.Element => {
                 onPress={() =>
                     navigateTo(AccountStackNavigatorEnum.ChatScreen, {
                         id: item.id,
-                        senderId: item?.senderId,
+                        chatUserId: item.senderId,
                         name: item.name,
-                        username: item?.sender,
-                        conversationId: item?.conversationId,
-                        isStatusReply:
-                            item?.type ===
-                            NotificationItemEnum.StatusReplyNotificationType,
-                        isCheckOnMessage:
-                            item?.type ===
-                            NotificationItemEnum.CheckOnMessageNotificationType
+                        username: item.sender,
+                        conversationId: item?.conversationId
                     })
                 }
-                isInbound={item.senderId !== userId}
             />
         ),
-        [navigateTo, userId]
+        [navigateTo]
     );
 
     const onEndReached = useCallback(() => {

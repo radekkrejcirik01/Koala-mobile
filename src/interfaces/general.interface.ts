@@ -25,6 +25,7 @@ export interface NotificationInterface {
 
 export interface ConversationInterface {
     id: number;
+    type?: NotificationItemEnum;
     senderId: number;
     message: string;
     time: number;

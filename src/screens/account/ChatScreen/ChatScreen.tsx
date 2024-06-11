@@ -30,17 +30,10 @@ import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { getMessageTime } from '@functions/getMessageTime';
 import { getShortMessage } from '@functions/getShortMessage';
+import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-    const {
-        id,
-        senderId,
-        name,
-        username,
-        conversationId,
-        isStatusReply,
-        isCheckOnMessage
-    } = route.params;
+    const { id, chatUserId, name, username, conversationId } = route.params;
 
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
@@ -70,9 +63,15 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     // Return true when first messages is inbound and number of inbound messages is 1
     const checkShowReplies = useCallback(
         (data: ConversationInterface[]) => {
-            if (isStatusReply || isCheckOnMessage) {
+            if (
+                data[0]?.type ===
+                    NotificationItemEnum.StatusReplyNotificationType ||
+                data[0]?.type ===
+                    NotificationItemEnum.CheckOnMessageNotificationType
+            ) {
                 return false;
             }
+
             if (data[0]?.senderId === userId) {
                 return false;
             }
@@ -82,7 +81,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             );
             return receivedMessages?.length === 1;
         },
-        [isCheckOnMessage, isStatusReply, userId]
+        [userId]
     );
 
     const updateSeenNotification = useCallback(() => {
@@ -157,7 +156,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             setLoaded(false);
             postRequest<ResponseInterface, MessagePostInterface>('message', {
                 conversationId: conversationId || id,
-                receiverId: senderId,
+                receiverId: chatUserId,
                 message: text || message,
                 replyMessage,
                 audioBuffer: text ? '' : base64Buffer
@@ -169,12 +168,12 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         },
         [
             audioRecord,
+            chatUserId,
             conversationId,
             getConversation,
             id,
             message,
             replyMessage,
-            senderId,
             userId
         ]
     );
@@ -289,7 +288,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 { paddingTop: top || 10, paddingBottom: bottom || 5 }
             ]}
         >
-            <ChatHeader id={senderId} username={username} name={name} />
+            <ChatHeader
+                chatUserId={chatUserId}
+                username={username}
+                name={name}
+            />
             <ChatList
                 scrollViewRef={scrollViewRef}
                 conversation={conversation}

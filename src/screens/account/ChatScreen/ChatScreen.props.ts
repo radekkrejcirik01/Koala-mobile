@@ -5,12 +5,10 @@ export interface ChatScreenProps {
         {
             params: {
                 id: number;
-                senderId: number;
+                chatUserId: number;
                 name: string;
                 username: string;
-                conversationId?: number;
-                isStatusReply: boolean;
-                isCheckOnMessage: boolean;
+                conversationId: number;
             };
         },
         'params'
