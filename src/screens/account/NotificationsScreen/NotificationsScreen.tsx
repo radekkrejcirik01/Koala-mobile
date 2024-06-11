@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -16,8 +16,12 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationsHeader } from '@components/notifications/NotificationsHeader/NotificationsHeader';
+import { ReducerProps } from '@store/index/index.props';
 
 export const NotificationsScreen = (): React.JSX.Element => {
+    const { id: userId } = useSelector(
+        (state: ReducerProps) => state.user.user
+    );
     const dispatch = useDispatch();
 
     const { top } = useSafeAreaInsets();
@@ -89,9 +93,10 @@ export const NotificationsScreen = (): React.JSX.Element => {
                             NotificationItemEnum.CheckOnMessageNotificationType
                     })
                 }
+                isInbound={item.senderId !== userId}
             />
         ),
-        [navigateTo]
+        [navigateTo, userId]
     );
 
     const onEndReached = useCallback(() => {

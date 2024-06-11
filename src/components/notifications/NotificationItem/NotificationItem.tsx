@@ -10,7 +10,8 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItem = ({
     item,
-    onPress
+    onPress,
+    isInbound
 }: NotificationItemProps): React.JSX.Element => {
     const [pressed, setPressed] = useState<boolean>(false);
 
@@ -21,24 +22,34 @@ export const NotificationItem = ({
         }, 500);
     }, [onPress]);
 
+    function getTitle(isUnseen: boolean, name: string): string {
+        if (isUnseen) {
+            return `💬 ${name}`;
+        }
+        if (isInbound) {
+            return name;
+        }
+        return 'You';
+    }
+
     function getMessage(
         type: NotificationItemEnum,
-        isNew: boolean,
+        isUnseen: boolean,
         message: string
     ): string {
         if (type === NotificationItemEnum.VoiceMessageNotificationType) {
-            if (isNew) {
+            if (isUnseen) {
                 return 'New voice message';
             }
             return '🎤 Voice Message';
         }
-        if (isNew) {
+        if (isUnseen) {
             return 'New message';
         }
         return getShortMessage(message);
     }
 
-    const isNew = useMemo(
+    const isUnseen = useMemo(
         (): boolean => !item?.seen && !pressed,
         [item?.seen, pressed]
     );
@@ -60,19 +71,18 @@ export const NotificationItem = ({
                         <Text
                             style={[
                                 NotificationItemStyle.titleText,
-                                isNew && { color: COLORS.BLACK_50 }
+                                isUnseen && { color: COLORS.BLACK_50 }
                             ]}
                         >
-                            {isNew && '💬 '}
-                            {item.name}
+                            {getTitle(isUnseen, item.name)}
                         </Text>
                         <Text
                             style={[
                                 NotificationItemStyle.messageText,
-                                isNew && NotificationItemStyle.newItemText
+                                isUnseen && NotificationItemStyle.newItemText
                             ]}
                         >
-                            {getMessage(item.type, isNew, item?.message)} ∙{' '}
+                            {getMessage(item.type, isUnseen, item?.message)} ∙{' '}
                             {getNotificationTime(item?.time)}
                         </Text>
                     </View>
