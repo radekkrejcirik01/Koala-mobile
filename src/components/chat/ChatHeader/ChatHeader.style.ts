@@ -19,7 +19,7 @@ export const ChatHeaderStyle = StyleSheet.create({
         alignItems: 'center'
     },
     acronym: {
-        borderRadius: 19
+        borderRadius: 18
     },
     namesView: {
         marginLeft: 8
