@@ -22,10 +22,10 @@ export const ChatHeaderStyle = StyleSheet.create({
         borderRadius: 18
     },
     namesView: {
-        marginLeft: 8
+        marginLeft: 8,
+        marginBottom: 2
     },
     nameText: {
-        marginBottom: 2,
         fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '600'
