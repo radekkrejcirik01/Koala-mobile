@@ -21,9 +21,9 @@ export const StatusModalScreen = ({
                 }
             ]}
         >
-            <Text style={StatusModalScreenStyle.titleText}>Set status</Text>
+            <Text style={StatusModalScreenStyle.titleText}>Your status</Text>
             <Text style={StatusModalScreenStyle.descriptionText}>
-                Disappears after 2 days
+                Disappears after 48 hours
             </Text>
             <View style={StatusModalScreenStyle.expressionsContainer}>
                 {EXPRESSIONS.map((value) => (

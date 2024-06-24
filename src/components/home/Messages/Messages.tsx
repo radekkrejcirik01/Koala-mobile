@@ -101,7 +101,7 @@ export const Messages = (): React.JSX.Element => {
 
     const onItemLongPress = useCallback(
         (item: EmotionInterface) => {
-            const options = ['Remove emotion', 'Cancel'];
+            const options = ['Remove message', 'Cancel'];
 
             showActionSheetWithOptions(
                 {
