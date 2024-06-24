@@ -158,7 +158,7 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
                     >
                         <Icon name={IconEnum.DIRECT} size={20} />
                     </TouchableOpacity>
-                    <Text style={ToolBarStyle.buttonText}>Spill</Text>
+                    <Text style={ToolBarStyle.buttonText}>Message</Text>
                 </View>
                 <StatusItem
                     onPress={onStatusPress}
