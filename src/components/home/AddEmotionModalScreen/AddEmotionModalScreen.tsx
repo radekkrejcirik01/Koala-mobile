@@ -68,35 +68,38 @@ export const AddEmotionModalScreen = ({
                     <Text style={AddEmotionModalScreenStyle.addText}>Done</Text>
                 )}
             </TouchableOpacity>
-            <Text style={AddEmotionModalScreenStyle.inputTitleText}>Title</Text>
+            <Text style={AddEmotionModalScreenStyle.inputTitleText}>Name</Text>
             <TextInput
                 autoFocus
                 autoCorrect={false}
-                selectionColor={COLORS.BUTTON_BLUE}
+                selectionColor={COLORS.PURPLE}
                 onChangeText={setEmotion}
                 placeholder="Overthinking"
                 style={AddEmotionModalScreenStyle.input}
             />
             <Text style={AddEmotionModalScreenStyle.inputTitleText}>
-                Message
+                Message to send
             </Text>
             <TextInput
                 autoCorrect={false}
-                selectionColor={COLORS.BUTTON_BLUE}
+                selectionColor={COLORS.PURPLE}
                 onChangeText={setEmotionMessage}
                 placeholder="I CANT STOP OVERTHINKING"
                 style={AddEmotionModalScreenStyle.input}
             />
-            <Text style={AddEmotionModalScreenStyle.inputTitleText}>Helps</Text>
+            <Text style={AddEmotionModalScreenStyle.inputTitleText}>
+                Helps me
+            </Text>
             <TextInput
                 autoCorrect={false}
+                selectionColor={COLORS.PURPLE}
                 onChangeText={setTip1}
                 placeholder="Put on headphones and be delulu"
                 style={AddEmotionModalScreenStyle.input}
             />
             <TextInput
                 autoCorrect={false}
-                selectionColor={COLORS.BUTTON_BLUE}
+                selectionColor={COLORS.PURPLE}
                 onChangeText={setTip2}
                 placeholder="Change environment"
                 style={AddEmotionModalScreenStyle.input}

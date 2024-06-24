@@ -8,7 +8,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         borderRadius: 20,
-        backgroundColor: COLORS.WHITE_100,
+        backgroundColor: COLORS.WHITE_200,
         alignSelf: 'flex-start'
     },
     marginTop: {
@@ -24,7 +24,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         borderRadius: 20,
-        backgroundColor: COLORS.WHITE_100,
+        backgroundColor: COLORS.WHITE_200,
         alignSelf: 'flex-start'
     },
     replyMessageText: {

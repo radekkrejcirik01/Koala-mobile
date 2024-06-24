@@ -67,7 +67,7 @@ export const NotificationItem = ({
                         <Text
                             style={[
                                 NotificationItemStyle.titleText,
-                                isUnseen && { color: COLORS.BLACK_50 }
+                                isUnseen && { color: COLORS.PURPLE }
                             ]}
                         >
                             {getTitle(isUnseen, item.name)}
@@ -82,6 +82,7 @@ export const NotificationItem = ({
                             {getNotificationTime(item?.time)}
                         </Text>
                     </View>
+                    {isUnseen && <View style={NotificationItemStyle.newItem} />}
                 </View>
             </View>
         </TouchableOpacity>

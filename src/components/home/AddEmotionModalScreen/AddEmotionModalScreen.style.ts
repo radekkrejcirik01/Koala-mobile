@@ -9,12 +9,13 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 18,
-        color: COLORS.BLACK,
+        color: COLORS.PURPLE,
         alignSelf: 'center',
         fontWeight: 'bold'
     },
     inputTitleText: {
         marginTop: 20,
+        fontSize: 15,
         color: COLORS.BLACK_50,
         fontWeight: 'bold'
     },

@@ -120,11 +120,11 @@ export const NotificationsScreen = (): React.JSX.Element => {
                 ListEmptyComponent={
                     loaded ? (
                         <Text style={NotificationsScreenStyle.listEmptyText}>
-                            Nothing shared yet
+                            No messages yet
                         </Text>
                     ) : (
                         <ActivityIndicator
-                            color={COLORS.BUTTON_BLUE}
+                            color={COLORS.PURPLE}
                             style={NotificationsScreenStyle.activityIndicator}
                         />
                     )
