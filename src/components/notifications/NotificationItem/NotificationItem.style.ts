@@ -38,7 +38,7 @@ export const NotificationItemStyle = StyleSheet.create({
     newItem: {
         width: 11,
         height: 11,
-        marginRight: 35,
+        marginRight: 15,
         borderRadius: 15,
         backgroundColor: COLORS.PURPLE
     }

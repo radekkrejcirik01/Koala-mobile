@@ -67,7 +67,7 @@ export const NotificationItem = ({
                         <Text
                             style={[
                                 NotificationItemStyle.titleText,
-                                isUnseen && { color: COLORS.PURPLE }
+                                isUnseen && { color: COLORS.GRAY_200 }
                             ]}
                         >
                             {getTitle(isUnseen, item.name)}
