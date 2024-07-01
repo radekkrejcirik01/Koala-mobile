@@ -42,7 +42,7 @@ export const DirectSharingModalScreen = ({
         setSending(true);
 
         postRequest<ResponseInterface, EmotionMessagePostInterface>(
-            'emotion-message',
+            'emotion-message/direct',
             {
                 ids: selected,
                 message
