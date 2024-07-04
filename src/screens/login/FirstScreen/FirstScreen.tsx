@@ -16,10 +16,7 @@ export const FirstScreen = (): JSX.Element => {
                 source={require('@assets/images/koala.png')}
                 style={FirstScreenStyle.image}
             />
-            <Text style={FirstScreenStyle.titleText}>Koala Messenger</Text>
-            <Text style={FirstScreenStyle.descriptionText}>
-                for mental health 🌱
-            </Text>
+            <Text style={FirstScreenStyle.titleText}>Koala Helping</Text>
             <Button
                 title="Let's start!"
                 onPress={() =>

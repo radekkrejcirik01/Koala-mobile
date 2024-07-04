@@ -14,6 +14,9 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { setUsernameAction } from '@store/NewAccountReducer';
 import { ThirdScreenStyle } from '@screens/login/ThirdScreen/ThirdScreen.style';
 import { Button } from '@components/general/Button/Button';
+import { postRequest } from '@utils/Axios/Axios.service';
+import { ResponseInterface } from '@interfaces/response/Response.interface';
+import { UsernamePostInterface } from '@interfaces/post/Post.interface';
 
 export const ThirdScreen = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -27,9 +30,18 @@ export const ThirdScreen = (): JSX.Element => {
             return;
         }
 
-        dispatch(setUsernameAction(username));
-
-        navigateTo(LoginStackNavigatorEnum.FourthScreen);
+        postRequest<ResponseInterface, UsernamePostInterface>('username', {
+            username
+        }).subscribe((response: ResponseInterface) => {
+            if (response?.status) {
+                if (response?.message?.includes('taken')) {
+                    Alert.alert('This username is already taken');
+                } else {
+                    dispatch(setUsernameAction(username));
+                    navigateTo(LoginStackNavigatorEnum.FourthScreen);
+                }
+            }
+        });
     }, [dispatch, navigateTo, username]);
 
     return (

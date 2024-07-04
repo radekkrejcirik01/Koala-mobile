@@ -8,6 +8,10 @@ export interface LoginPostInterface {
     password: string;
 }
 
+export interface UsernamePostInterface {
+    username: string;
+}
+
 export interface ChangePasswordPostInterface {
     oldPassword: string;
     newPassword: string;
