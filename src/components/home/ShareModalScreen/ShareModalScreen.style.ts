@@ -24,7 +24,7 @@ export const ShareModalScreenStyle = StyleSheet.create({
     send: {
         width: '45%',
         paddingLeft: 10,
-        paddingBottom: 50,
+        paddingBottom: 70,
         alignItems: 'center',
         justifyContent: 'center'
     }

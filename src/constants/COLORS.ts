@@ -9,7 +9,7 @@ export default {
     GRAY_400: '#333333',
     GRAY_800: '#b3b3b3',
     LIGHTGRAY_100: '#a6a6a6',
-    LIGHTGRAY_300: '#A9A9A9',
+    LIGHTGRAY_200: '#7A7A7A',
     LIGHTGRAY: 'lightgray',
     TRANSPARENT: 'transparent',
     BLACK: '#050210',

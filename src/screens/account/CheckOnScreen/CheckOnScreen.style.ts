@@ -9,13 +9,13 @@ export const CheckOnScreenStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 26,
-        color: COLORS.LIGHTGRAY_100,
+        color: COLORS.LIGHTGRAY_200,
         fontWeight: 'bold',
         alignSelf: 'flex-end'
     },
     descriptionText: {
         marginTop: 2,
-        color: COLORS.LIGHTGRAY_100,
+        color: COLORS.LIGHTGRAY_200,
         alignSelf: 'flex-end',
         fontWeight: 'bold'
     },

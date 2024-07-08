@@ -12,7 +12,7 @@ export const MessagesStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     contentView: {
-        paddingTop: 20,
+        paddingTop: '10%',
         paddingHorizontal: 22,
         flexDirection: 'row',
         flexWrap: 'wrap',

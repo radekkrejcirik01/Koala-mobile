@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useAppState } from '@hooks/useAppState';
 import { useModal } from '@hooks/useModal';
 import { EmotionInterface } from '@interfaces/general.interface';
 import {
@@ -21,13 +22,24 @@ import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { MESSAGES } from '@components/home/Messages/Messages.const';
 import { ToolBar } from '@components/home/ToolBar/ToolBar';
 import { RemovedEmotionPostInterface } from '@interfaces/post/Post.interface';
+import { getGreeting } from '@functions/getGreeting';
 
-export const Messages = (): React.JSX.Element => {
+export const Messages = (): JSX.Element => {
     const { showActionSheetWithOptions } = useActionSheet();
     const { modalVisible, showModal, hideModal } = useModal();
 
     const [messages, setMessages] = useState<EmotionInterface[]>([]);
     const [modalContent, setModalContent] = useState<React.JSX.Element>(<></>);
+
+    const [greeting, setGreeting] = useState<string>();
+
+    useAppState(() => {
+        setGreeting(getGreeting());
+    });
+
+    useEffect(() => {
+        setGreeting(getGreeting());
+    }, []);
 
     const loadMessages = useCallback(() => {
         getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
@@ -158,7 +170,7 @@ export const Messages = (): React.JSX.Element => {
 
     return (
         <View style={MessagesStyle.container}>
-            <Text style={MessagesStyle.titleText}>How do you feel today?</Text>
+            <Text style={MessagesStyle.titleText}>{greeting}</Text>
             <ToolBar onPressDirect={onDirectEmotionPress} />
             <View style={MessagesStyle.contentView}>
                 {messages.map((value) => (

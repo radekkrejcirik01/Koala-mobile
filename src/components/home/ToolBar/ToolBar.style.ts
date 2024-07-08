@@ -22,8 +22,7 @@ export const ToolBarStyle = StyleSheet.create({
     },
     buttonText: {
         marginTop: 2,
-        color: COLORS.BUTTON_BLUE,
-        fontWeight: '600'
+        color: COLORS.BUTTON_BLUE
     },
     modal: {
         margin: 0,

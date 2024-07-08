@@ -11,7 +11,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 24,
-        color: COLORS.LIGHTGRAY_100,
+        color: COLORS.LIGHTGRAY_200,
         fontWeight: 'bold',
         alignSelf: 'flex-end'
     },

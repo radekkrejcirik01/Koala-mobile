@@ -23,7 +23,6 @@ export const StatusItemStyle = StyleSheet.create({
     },
     nameText: {
         marginTop: 2,
-        color: COLORS.BUTTON_BLUE,
-        fontWeight: '600'
+        color: COLORS.BUTTON_BLUE
     }
 });

@@ -67,7 +67,7 @@ export const CheckOnScreen = () => {
     return (
         <>
             <ScrollView
-                style={{ paddingTop: top }}
+                style={{ marginTop: top }}
                 contentContainerStyle={CheckOnScreenStyle.contentContainer}
             >
                 <Text style={CheckOnScreenStyle.titleText}>Check on</Text>

@@ -22,7 +22,7 @@ export const ProfileScreen = (): React.JSX.Element => {
 
     return (
         <ScrollView
-            style={{ paddingTop: top + 10 }}
+            style={{ marginTop: top + 10 }}
             contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
         >
             <View>

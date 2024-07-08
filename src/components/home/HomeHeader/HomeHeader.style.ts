@@ -8,14 +8,9 @@ export const HomeHeaderStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    greetingText: {
-        fontSize: 22,
-        color: COLORS.LIGHTGRAY_100,
-        fontWeight: 'bold'
-    },
-    nameText: {
-        fontSize: 32,
-        color: COLORS.LIGHTGRAY_100,
+    title: {
+        fontSize: 26,
+        color: COLORS.LIGHTGRAY_200,
         fontWeight: 'bold'
     }
 });
