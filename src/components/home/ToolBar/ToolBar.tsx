@@ -160,11 +160,25 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
                     </TouchableOpacity>
                     <Text style={ToolBarStyle.buttonText}>Share</Text>
                 </View>
-                <StatusItem
-                    onPress={onStatusPress}
-                    name="You"
-                    expression={status}
-                />
+                {status ? (
+                    <StatusItem
+                        onPress={onStatusPress}
+                        name="You"
+                        expression={status}
+                    />
+                ) : (
+                    <View style={ToolBarStyle.buttonContainerMargin}>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            hitSlop={10}
+                            onPress={onStatusPress}
+                            style={ToolBarStyle.button}
+                        >
+                            <Icon name={IconEnum.PLUS} size={20} />
+                        </TouchableOpacity>
+                        <Text style={ToolBarStyle.buttonText}>You</Text>
+                    </View>
+                )}
                 {friendsStatuses?.map((value) => (
                     <StatusItem
                         key={value.userId}

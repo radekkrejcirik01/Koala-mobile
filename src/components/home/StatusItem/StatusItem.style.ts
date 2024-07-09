@@ -18,9 +18,6 @@ export const StatusItemStyle = StyleSheet.create({
         fontSize: 24,
         color: COLORS.BLACK
     },
-    opacity: {
-        opacity: 0.5
-    },
     nameText: {
         marginTop: 2,
         color: COLORS.BUTTON_BLUE

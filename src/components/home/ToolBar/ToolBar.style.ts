@@ -12,6 +12,10 @@ export const ToolBarStyle = StyleSheet.create({
     buttonContainer: {
         alignItems: 'center'
     },
+    buttonContainerMargin: {
+        marginLeft: 10,
+        alignItems: 'center'
+    },
     button: {
         width: 65,
         height: 65,
