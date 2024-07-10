@@ -57,7 +57,7 @@ export interface MessagePostInterface {
     audioBuffer?: string;
 }
 
-export interface CheckOnMessagePostInterface {
+export interface CheckOnMessageSendInterface {
     ids: number[];
     message: string;
 }
@@ -74,5 +74,9 @@ export interface PasswordResetPostInterface {
 }
 
 export interface ReplyPostInterface {
+    message: string;
+}
+
+export interface CheckOnMessagePostInterface {
     message: string;
 }

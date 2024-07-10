@@ -8,6 +8,7 @@ import {
     UserInterface
 } from '@interfaces/general.interface';
 import { ReplyInterface } from '@components/chat/Replies/Replies.props';
+import { QuestionInterface } from '@screens/account/CheckOnScreen/CheckOnScreen.const';
 
 export interface ResponseInterface {
     status: string;
@@ -86,4 +87,10 @@ export interface ResponseRepliesGetInterface {
     status: string;
     message: string;
     data: ReplyInterface[];
+}
+
+export interface ResponseCheckOnMessagesGetInterface {
+    status: string;
+    message: string;
+    data: QuestionInterface[];
 }

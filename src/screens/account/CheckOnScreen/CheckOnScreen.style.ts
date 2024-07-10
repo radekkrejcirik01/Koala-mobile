@@ -3,25 +3,27 @@ import COLORS from '@constants/COLORS';
 
 export const CheckOnScreenStyle = StyleSheet.create({
     contentContainer: {
-        paddingTop: '35%',
-        paddingHorizontal: 20,
-        paddingBottom: 10
+        paddingTop: 10
     },
-    titleText: {
-        fontSize: 26,
-        color: COLORS.LIGHTGRAY_200,
-        fontWeight: 'bold',
-        alignSelf: 'flex-end'
+    questionsContainer: {
+        marginTop: '10%',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
     },
-    descriptionText: {
-        marginTop: 2,
-        color: COLORS.LIGHTGRAY_200,
-        alignSelf: 'flex-end',
-        fontWeight: 'bold'
+    questionView: {
+        margin: 5,
+        paddingHorizontal: 12,
+        paddingVertical: 10,
+        borderRadius: 25,
+        backgroundColor: COLORS.WHITE_200
+    },
+    questionText: {
+        fontWeight: '600'
     },
     input: {
-        marginTop: 35,
-        marginLeft: 5,
+        marginTop: '15%',
+        marginLeft: 25,
         padding: 0, // Overwrite default value
         fontSize: 26,
         color: COLORS.BUTTON_BLUE,
@@ -29,6 +31,7 @@ export const CheckOnScreenStyle = StyleSheet.create({
     },
     send: {
         marginTop: 35,
+        marginRight: 20,
         alignSelf: 'flex-end',
         justifyContent: 'center'
     }

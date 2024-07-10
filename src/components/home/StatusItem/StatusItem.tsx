@@ -15,7 +15,14 @@ export const StatusItem = ({
             onPress={onPress}
             style={StatusItemStyle.button}
         >
-            <Text style={StatusItemStyle.expressionText}>{expression}</Text>
+            <Text
+                style={[
+                    StatusItemStyle.expressionText,
+                    !expression && StatusItemStyle.opacity
+                ]}
+            >
+                {expression || '😴'}
+            </Text>
         </TouchableOpacity>
         <Text style={StatusItemStyle.nameText}>{name}</Text>
     </View>
