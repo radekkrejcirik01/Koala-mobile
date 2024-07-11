@@ -6,9 +6,10 @@ export const CheckOnHeaderStyle = StyleSheet.create({
         marginLeft: 25,
         marginRight: 15,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    title: {
+    titleText: {
         fontSize: 26,
         color: COLORS.LIGHTGRAY_200,
         fontWeight: 'bold'

@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const CanHelpStyle = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 15,
+        paddingTop: 10,
         paddingRight: 50
     },
     titleText: {

@@ -7,18 +7,22 @@ export const CheckOnScreenStyle = StyleSheet.create({
     },
     questionsContainer: {
         marginTop: '10%',
+        paddingHorizontal: 20,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
     },
     questionView: {
         margin: 5,
-        paddingHorizontal: 12,
-        paddingVertical: 10,
-        borderRadius: 25,
-        backgroundColor: COLORS.WHITE_200
+        maxWidth: 170,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+        borderRadius: 15,
+        backgroundColor: COLORS.WHITE_200,
+        justifyContent: 'center'
     },
     questionText: {
+        textAlign: 'center',
         fontWeight: '600'
     },
     input: {

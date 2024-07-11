@@ -183,7 +183,7 @@ export const CheckOnScreen = () => {
                                     {
                                         color:
                                             value.message === message
-                                                ? COLORS.BLACK
+                                                ? COLORS.BUTTON_BLUE
                                                 : COLORS.LIGHTGRAY_200
                                     }
                                 ]}
