@@ -570,7 +570,8 @@ PODS:
     - FirebaseCoreExtension (= 10.17.0)
     - React-Core
     - RNFBApp
-  - RNFlashList (1.5.0):
+  - RNFlashList (1.7.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RNFS (2.20.0):
     - React-Core
@@ -924,7 +925,7 @@ SPEC CHECKSUMS:
   RNFBAnalytics: 9138cdb065c6ac9fc7dc076d83f9c2e64bc21d46
   RNFBApp: b43d4829366a5065e17f9af3b03a0c4890eaeb85
   RNFBMessaging: 1b55308131dc7e4cca6b22deb5067f1fdb55f768
-  RNFlashList: 25b0e092b4470c84db0386d4f5316dc34123bb6d
+  RNFlashList: 5b7df2fe571d8854797cb37d2a6bf05029011e3b
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
   RNGoogleMobileAds: d9f4d0085a6fe3d7e203930930d16e1cc7b3dd03
