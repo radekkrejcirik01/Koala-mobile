@@ -102,7 +102,7 @@ export const CheckOnScreen = () => {
                     style: 'cancel'
                 },
                 {
-                    text: 'Remove reply',
+                    text: 'Remove',
                     onPress: () => {
                         deleteRequest<ResponseInterface>(
                             `check-on-message/${item.id}`
