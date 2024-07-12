@@ -11,7 +11,7 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import COLORS from '@constants/COLORS';
 
 export const SharingHistoryScreen = (): React.JSX.Element => {
-    const { top } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
 
     const [history, setHistory] = useState<HistoryInterface[]>([]);
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -63,7 +63,7 @@ export const SharingHistoryScreen = (): React.JSX.Element => {
         <View
             style={[
                 SharingHistoryScreenStyle.container,
-                { paddingTop: top + 10 }
+                { paddingTop: top + 10, marginBottom: bottom }
             ]}
         >
             <ScreenHeader title="History" />

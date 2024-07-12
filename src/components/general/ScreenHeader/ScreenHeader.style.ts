@@ -9,7 +9,7 @@ export const ScreenHeaderStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 24,
-        color: COLORS.BLACK,
+        color: COLORS.LIGHTGRAY_200,
         fontWeight: 'bold'
     }
 });

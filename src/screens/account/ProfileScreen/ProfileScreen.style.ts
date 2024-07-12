@@ -4,36 +4,31 @@ import COLORS from '@constants/COLORS';
 export const ProfileScreenStyle = StyleSheet.create({
     contentContainerStyle: {
         flexGrow: 1,
+        paddingTop: 10,
         paddingLeft: 15,
         paddingBottom: 10,
         paddingRight: 20,
         justifyContent: 'space-between'
     },
-    titleText: {
-        fontSize: 24,
-        color: COLORS.LIGHTGRAY_200,
-        fontWeight: 'bold',
-        alignSelf: 'flex-end'
-    },
-    profileContainer: {
+    container: {
         paddingVertical: 20,
-        paddingLeft: 10,
-        flexDirection: 'row'
+        alignItems: 'center'
     },
-    profileNamesView: {
-        marginLeft: 10
+    namesView: {
+        alignItems: 'center'
     },
     nameText: {
         fontSize: 25,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_50,
         fontWeight: '600'
     },
     usernameText: {
         fontSize: 16,
-        color: COLORS.GRAY_200,
+        color: COLORS.LIGHTGRAY_200,
         fontWeight: '500'
     },
     buttonsContainer: {
+        marginTop: 20,
         borderRadius: 10,
         backgroundColor: COLORS.WHITE_100
     },

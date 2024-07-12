@@ -1,20 +1,11 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@hooks/useNavigation';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import React, { JSX } from 'react';
+import { Text, View } from 'react-native';
 import { SharedScreenHeaderStyle } from '@components/chat/SharedScreenHeader/SharedScreenHeader.style';
+import { BackButton } from '@components/general/BackButton/BackButton';
 
-export const SharedScreenHeader = (): React.JSX.Element => {
-    const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);
-
-    return (
-        <View style={SharedScreenHeaderStyle.container}>
-            <TouchableOpacity activeOpacity={0.9} onPress={navigateBack}>
-                <Icon name={IconEnum.BACK} size={24} />
-            </TouchableOpacity>
-            <Text style={SharedScreenHeaderStyle.titleText}>All shared</Text>
-        </View>
-    );
-};
+export const SharedScreenHeader = (): JSX.Element => (
+    <View style={SharedScreenHeaderStyle.container}>
+        <BackButton />
+        <Text style={SharedScreenHeaderStyle.titleText}>All shared</Text>
+    </View>
+);

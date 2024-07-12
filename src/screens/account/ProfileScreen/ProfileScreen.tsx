@@ -10,6 +10,7 @@ import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { ProfileHeader } from '@components/profile/ProfileHeader/ProfileHeader';
 import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
@@ -22,14 +23,14 @@ export const ProfileScreen = (): React.JSX.Element => {
 
     return (
         <ScrollView
-            style={{ marginTop: top + 10 }}
+            style={{ marginTop: top }}
             contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
         >
             <View>
-                <Text style={ProfileScreenStyle.titleText}>Profile</Text>
-                <View style={ProfileScreenStyle.profileContainer}>
-                    <ProfilePhoto name={name} size={60} />
-                    <View style={ProfileScreenStyle.profileNamesView}>
+                <ProfileHeader />
+                <View style={ProfileScreenStyle.container}>
+                    <ProfilePhoto name={name} size={75} />
+                    <View style={ProfileScreenStyle.namesView}>
                         <Text style={ProfileScreenStyle.nameText}>{name}</Text>
                         <Text style={ProfileScreenStyle.usernameText}>
                             {username}
@@ -66,8 +67,8 @@ export const ProfileScreen = (): React.JSX.Element => {
                 </View>
             </View>
             <View>
-                <Text style={ProfileScreenStyle.text}>Made to help</Text>
-                <Text style={ProfileScreenStyle.text}>version {version}</Text>
+                <Text style={ProfileScreenStyle.text}>Koala Helping</Text>
+                <Text style={ProfileScreenStyle.text}>{version}</Text>
             </View>
         </ScrollView>
     );
