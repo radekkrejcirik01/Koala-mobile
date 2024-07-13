@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const CheckOnHeaderStyle = StyleSheet.create({
     container: {
-        marginLeft: 25,
+        marginLeft: 15,
         marginRight: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',

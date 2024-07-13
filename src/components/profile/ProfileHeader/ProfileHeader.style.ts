@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const ProfileHeaderStyle = StyleSheet.create({
     container: {
-        marginLeft: 10,
         flexDirection: 'row',
         alignItems: 'center'
     },

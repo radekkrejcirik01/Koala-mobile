@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
     container: {
-        paddingLeft: 25,
+        paddingLeft: 15,
         paddingRight: 15,
         flexDirection: 'row',
         justifyContent: 'space-between'
