@@ -14,7 +14,7 @@ export const BackButton = (): JSX.Element => {
             hitSlop={15}
             onPress={navigateBack}
         >
-            <Icon name={IconEnum.BACK} size={20} />
+            <Icon name={IconEnum.BACK_PURPLE} size={20} />
         </TouchableOpacity>
     );
 };

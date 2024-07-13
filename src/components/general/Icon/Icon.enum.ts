@@ -1,6 +1,7 @@
 import Back from '@assets/webp/Back.webp';
 import BackBlue from '@assets/webp/BackBlue.webp';
 import BackBlueRight from '@assets/webp/BackBlueRight.webp';
+import BackPurple from '@assets/webp/BackPurple.webp';
 import Clean from '@assets/webp/Clean.webp';
 import Direct from '@assets/webp/Direct.webp';
 import Mail from '@assets/webp/Mail.webp';
@@ -16,6 +17,7 @@ export enum IconEnum {
     BACK = 'Back',
     BACK_BLUE = 'BackBlue',
     BACK_BLUE_RIGHT = 'BackBlueRight',
+    BACK_PURPLE = 'BackPurple',
     CLEAN = 'Clean',
     DIRECT = 'Direct',
     MAIL = 'Mail',
@@ -32,6 +34,7 @@ export const ICONS = {
     [IconEnum.BACK]: Back,
     [IconEnum.BACK_BLUE]: BackBlue,
     [IconEnum.BACK_BLUE_RIGHT]: BackBlueRight,
+    [IconEnum.BACK_PURPLE]: BackPurple,
     [IconEnum.CLEAN]: Clean,
     [IconEnum.DIRECT]: Direct,
     [IconEnum.MENU]: Menu,

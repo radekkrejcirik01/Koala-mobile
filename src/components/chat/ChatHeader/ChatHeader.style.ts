@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
     container: {
-        paddingHorizontal: 15,
+        paddingLeft: 20,
+        paddingRight: 15,
         paddingBottom: 5,
         flexDirection: 'row',
         alignItems: 'center',
@@ -14,16 +15,15 @@ export const ChatHeaderStyle = StyleSheet.create({
         alignItems: 'center'
     },
     contentContainer: {
-        marginLeft: 15,
+        marginLeft: 18,
         flexDirection: 'row',
         alignItems: 'center'
     },
     acronym: {
-        borderRadius: 18
+        borderRadius: 25
     },
     namesView: {
-        marginLeft: 8,
-        marginBottom: 2
+        marginLeft: 10
     },
     nameText: {
         fontSize: 16,
