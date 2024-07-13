@@ -4,4 +4,6 @@ export interface OutboundMessageItemProps {
     replyMessage: string;
     audioMessage: string;
     isFirst: boolean;
+    isLast: boolean;
+    isSending: boolean;
 }

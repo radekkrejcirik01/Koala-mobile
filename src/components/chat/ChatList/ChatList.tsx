@@ -36,6 +36,8 @@ export const ChatList = ({
                             value?.senderId !==
                             conversation[index - 1]?.senderId
                         }
+                        isLast={index === conversation?.length - 1}
+                        isSending={value?.isSending}
                     >
                         {value.message}
                     </OutboundMessageItem>

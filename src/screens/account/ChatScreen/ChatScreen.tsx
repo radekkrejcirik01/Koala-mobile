@@ -144,7 +144,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                     message: text || message,
                     time: moment().unix(),
                     replyMessage,
-                    audioMessage: audioRecord
+                    audioMessage: audioRecord,
+                    isSending: true
                 })
             );
 

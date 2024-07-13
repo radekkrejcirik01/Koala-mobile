@@ -38,5 +38,12 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     },
     largeText: {
         fontSize: 35
+    },
+    statusText: {
+        margin: 2,
+        fontSize: 12,
+        color: COLORS.LIGHTGRAY_100,
+        alignSelf: 'flex-end',
+        fontWeight: '600'
     }
 });
