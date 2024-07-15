@@ -7,7 +7,7 @@ export const CheckOnHeader = ({
     onPressAdd
 }: CheckOnHeaderProps): JSX.Element => (
     <View style={CheckOnHeaderStyle.container}>
-        <Text style={CheckOnHeaderStyle.titleText}>🙋 Check-on</Text>
+        <Text style={CheckOnHeaderStyle.titleText}>🙋 Check on</Text>
         <TouchableOpacity activeOpacity={0.8} hitSlop={10} onPress={onPressAdd}>
             <Text style={CheckOnHeaderStyle.buttonText}>Add +</Text>
         </TouchableOpacity>

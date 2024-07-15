@@ -23,7 +23,7 @@ export const HomeTabOptions: BottomTabNavigationOptions = {
 };
 
 export const CheckOnTabbOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Check-on',
+    tabBarLabel: 'Check on',
     tabBarIcon: () => (
         <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🙋</Text>
     )
