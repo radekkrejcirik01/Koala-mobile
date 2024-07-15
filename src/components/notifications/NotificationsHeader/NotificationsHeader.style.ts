@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsHeaderStyle = StyleSheet.create({
     container: {
-        paddingVertical: 5
+        paddingTop: 5,
+        paddingBottom: 10
     },
     row1: {
         paddingHorizontal: 5,
@@ -15,17 +16,19 @@ export const NotificationsHeaderStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    messagesTitle: {
+    title: {
         marginLeft: 10,
         fontSize: 28,
         color: COLORS.PURPLE,
         fontWeight: 'bold'
     },
     searchView: {
-        paddingHorizontal: 10,
+        marginLeft: 15,
+        paddingLeft: 10,
+        paddingRight: 20,
         height: 35,
         borderRadius: 20,
-        backgroundColor: COLORS.WHITE_200,
+        backgroundColor: COLORS.WHITE_100,
         flexDirection: 'row',
         alignItems: 'center'
     },
