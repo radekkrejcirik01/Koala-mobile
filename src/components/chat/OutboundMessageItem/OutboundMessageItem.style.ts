@@ -28,7 +28,6 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     replyMessageText: {
-        fontSize: 15,
         color: COLORS.GRAY_200,
         fontWeight: '500'
     },
