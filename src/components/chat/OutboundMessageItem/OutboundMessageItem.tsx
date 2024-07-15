@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { OutboundMessageItemProps } from '@components/chat/OutboundMessageItem/OutboundMessageItem.props';
 import { OutboundMessageItemStyle } from '@components/chat/OutboundMessageItem/OutboundMessageItem.style';
@@ -14,14 +14,22 @@ export const OutboundMessageItem = ({
     isLast,
     isSending
 }: OutboundMessageItemProps): React.JSX.Element => {
-    function getStatus(): string {
+    function getStatus(): JSX.Element {
         if (isSending) {
-            return 'Sending';
+            return (
+                <Text style={OutboundMessageItemStyle.sendingText}>
+                    Sending
+                </Text>
+            );
         }
         if (isLast) {
-            return 'Delivered';
+            return (
+                <Text style={OutboundMessageItemStyle.deliveredText}>
+                    Delivered
+                </Text>
+            );
         }
-        return '';
+        return <></>;
     }
 
     return (
@@ -59,11 +67,7 @@ export const OutboundMessageItem = ({
                     )}
                 </TouchableOpacity>
             </View>
-            {getStatus() && (
-                <Text style={OutboundMessageItemStyle.statusText}>
-                    {getStatus()}
-                </Text>
-            )}
+            {getStatus()}
         </View>
     );
 };
