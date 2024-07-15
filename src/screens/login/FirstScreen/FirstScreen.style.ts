@@ -20,7 +20,8 @@ export const FirstScreenStyle = StyleSheet.create({
     },
     descriptionText: {
         marginTop: 10,
-        color: COLORS.BLACK
+        color: COLORS.BUTTON_BLUE,
+        fontWeight: '500'
     },
     startButton: {
         marginTop: '80%'

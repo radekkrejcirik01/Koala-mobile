@@ -35,9 +35,7 @@ export const SecondScreen = (): JSX.Element => {
     return (
         <View style={SecondScreenStyle.container}>
             <View>
-                <Text style={SecondScreenStyle.title}>
-                    {`Let's start with your name 🌱`}
-                </Text>
+                <Text style={SecondScreenStyle.title}>Your name</Text>
                 <TextInput
                     autoFocus
                     autoCorrect={false}

@@ -17,11 +17,12 @@ export const FirstScreen = (): JSX.Element => {
                 style={FirstScreenStyle.image}
             />
             <Text style={FirstScreenStyle.titleText}>Koala Helping</Text>
+            <Text style={FirstScreenStyle.descriptionText}>
+                Your private messenger.
+            </Text>
             <Button
                 title="Let's start!"
-                onPress={() =>
-                    navigateTo(LoginStackNavigatorEnum.FirstIntroductionScreen)
-                }
+                onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
                 style={FirstScreenStyle.startButton}
             />
             <TouchableOpacity
