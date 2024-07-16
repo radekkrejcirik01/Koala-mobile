@@ -45,15 +45,18 @@ export const Messages = (): JSX.Element => {
         getRequest<ResponseEmotionsGetInterface>('emotions').subscribe(
             (response: ResponseEmotionsGetInterface) => {
                 if (response?.status) {
-                    let defaultMessage = MESSAGES;
+                    let defaultMessages = MESSAGES;
 
                     if (response?.removed) {
-                        defaultMessage = MESSAGES.filter(
+                        defaultMessages = MESSAGES.filter(
                             (e) => !response.removed.includes(e?.id)
                         );
                     }
 
-                    setMessages([...defaultMessage, ...(response?.data || [])]);
+                    setMessages([
+                        ...defaultMessages,
+                        ...(response?.data || [])
+                    ]);
                 }
             }
         );
