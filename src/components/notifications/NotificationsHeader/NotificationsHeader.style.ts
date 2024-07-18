@@ -28,7 +28,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
         paddingRight: 20,
         height: 35,
         borderRadius: 20,
-        backgroundColor: COLORS.WHITE_100,
+        backgroundColor: COLORS.WHITE_200,
         flexDirection: 'row',
         alignItems: 'center'
     },
