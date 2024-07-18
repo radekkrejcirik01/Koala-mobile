@@ -5,7 +5,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     container: {
         maxWidth: '70%',
         marginTop: 2,
-        paddingVertical: 8,
+        paddingVertical: 9,
         paddingHorizontal: 12,
         borderRadius: 20,
         backgroundColor: COLORS.PURPLE,
@@ -20,7 +20,7 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         backgroundColor: COLORS.WHITE
     },
     replyMessageView: {
-        marginTop: 2,
+        marginTop: 5,
         paddingVertical: 10,
         paddingHorizontal: 12,
         borderRadius: 20,
@@ -32,8 +32,9 @@ export const OutboundMessageItemStyle = StyleSheet.create({
         fontWeight: '500'
     },
     messageText: {
+        fontSize: 14.5,
         color: COLORS.WHITE,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     largeText: {
         fontSize: 35
