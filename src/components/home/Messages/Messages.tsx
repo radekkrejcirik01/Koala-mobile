@@ -1,4 +1,4 @@
-import React, { JSX, useCallback, useState } from 'react';
+import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
@@ -12,18 +12,49 @@ import { EmotionInterface } from '@interfaces/general.interface';
 import COLORS from '@constants/COLORS';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { getRequest } from '@utils/Axios/Axios.service';
+import { ResponseLastSharedMessageGetInterface } from '@interfaces/response/Response.interface';
+import { ANXIETY_AND_PANIC_MESSAGES } from '@screens/account/AnxietyAndPanicScreen/AnxietyAndPanicScreen.const';
+import { DEPRESSION_MESSAGES } from '@screens/account/DepressionScreen/DepressionScreen.const';
+import { WELLBEING_MESSAGES } from '@screens/account/WellbeingScreen/WellbeingScreen.const';
+import { KUDOS_MESSAGES } from '@screens/account/KudosScreen/KudosScreen.const';
 
 export const Messages = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
     const { modalVisible, showModal, hideModal } = useModal();
 
-    const [lastShared, setLastShared] = useState<EmotionInterface>({
-        id: 1,
-        message: 'I feel better now',
-        tip1: 'Good 1',
-        tip2: 'Good 2'
-    });
+    const [lastShared, setLastShared] = useState<EmotionInterface>(undefined);
     const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
+
+    function getMessage(
+        message: string,
+        ...arrays: EmotionInterface[][]
+    ): EmotionInterface | undefined {
+        return arrays
+            .flat() // Flatten the array of arrays into a single array
+            .find((obj) => obj.message === message);
+    }
+    const getLastSharedMessage = useCallback(() => {
+        getRequest<ResponseLastSharedMessageGetInterface>(
+            'last-shared-message'
+        ).subscribe((response: ResponseLastSharedMessageGetInterface) => {
+            if (response?.status) {
+                const emotion = getMessage(
+                    response?.data?.message,
+                    ANXIETY_AND_PANIC_MESSAGES,
+                    DEPRESSION_MESSAGES,
+                    WELLBEING_MESSAGES,
+                    KUDOS_MESSAGES
+                );
+
+                setLastShared(emotion || response?.data);
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        getLastSharedMessage();
+    }, [getLastSharedMessage]);
 
     const openLastMessage = useCallback(() => {
         setModalContent(
@@ -65,7 +96,9 @@ export const Messages = (): JSX.Element => {
         <View>
             <Text style={MessagesStyle.titleText}>Lastly shared</Text>
             <View style={MessagesStyle.cardView}>
-                <Text style={MessagesStyle.cardText}>{lastShared.message}</Text>
+                <Text style={MessagesStyle.cardText}>
+                    {lastShared?.message}
+                </Text>
                 <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={openLastMessage}

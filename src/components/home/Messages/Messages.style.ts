@@ -13,8 +13,7 @@ export const MessagesStyle = StyleSheet.create({
         width: '90%',
         height: 150,
         marginTop: 15,
-        paddingVertical: 12,
-        paddingHorizontal: 15,
+        padding: 15,
         borderRadius: 20,
         backgroundColor: COLORS.WHITE_200,
         alignSelf: 'center',
@@ -26,8 +25,9 @@ export const MessagesStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     cardButton: {
-        width: 70,
-        height: 70,
+        width: 65,
+        height: 65,
+        marginRight: 5,
         borderRadius: 50,
         backgroundColor: COLORS.WHITE,
         alignItems: 'center',
@@ -35,7 +35,7 @@ export const MessagesStyle = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     cardButtonText: {
-        fontSize: 24
+        fontSize: 26
     },
     itemsContainer: {
         paddingTop: 15,

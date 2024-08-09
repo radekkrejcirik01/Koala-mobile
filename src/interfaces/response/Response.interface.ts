@@ -94,3 +94,9 @@ export interface ResponseCheckOnMessagesGetInterface {
     message: string;
     data: QuestionInterface[];
 }
+
+export interface ResponseLastSharedMessageGetInterface {
+    status: string;
+    message: string;
+    data: EmotionInterface;
+}
