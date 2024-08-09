@@ -8,7 +8,7 @@ export const NotificationsButtonStyle = StyleSheet.create({
         width: 55,
         borderRadius: 12,
         backgroundColor: COLORS.WHITE_200,
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-end',
         alignItems: 'center',
         justifyContent: 'center'
     },

@@ -43,7 +43,6 @@ export interface HistoryInterface {
 
 export interface EmotionInterface {
     id: number;
-    emotion: string;
     message: string;
     tip1?: string;
     tip2?: string;

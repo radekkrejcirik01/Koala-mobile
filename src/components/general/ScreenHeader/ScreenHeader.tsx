@@ -8,7 +8,10 @@ export const ScreenHeader = ({
     title
 }: ScreenHeaderProps): React.JSX.Element => (
     <View style={ScreenHeaderStyle.container}>
-        <BackButton />
+        <View style={ScreenHeaderStyle.flex}>
+            <BackButton />
+        </View>
         <Text style={ScreenHeaderStyle.titleText}>{title}</Text>
+        <View style={ScreenHeaderStyle.flex} />
     </View>
 );

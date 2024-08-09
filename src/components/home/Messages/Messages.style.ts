@@ -2,34 +2,60 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const MessagesStyle = StyleSheet.create({
-    container: {
-        paddingTop: 35,
-        alignItems: 'center'
-    },
     titleText: {
-        fontSize: 26,
-        color: COLORS.BUTTON_BLUE,
+        marginTop: 30,
+        marginLeft: 20,
+        fontSize: 18,
+        color: COLORS.PURPLE,
         fontWeight: 'bold'
     },
-    contentView: {
-        paddingTop: '10%',
-        paddingHorizontal: 22,
+    cardView: {
+        width: '90%',
+        height: 150,
+        marginTop: 15,
+        paddingVertical: 12,
+        paddingHorizontal: 15,
+        borderRadius: 20,
+        backgroundColor: COLORS.WHITE_200,
+        alignSelf: 'center',
+        justifyContent: 'space-between'
+    },
+    cardText: {
+        fontSize: 24,
+        color: COLORS.BLACK_75,
+        fontWeight: 'bold'
+    },
+    cardButton: {
+        width: 70,
+        height: 70,
+        borderRadius: 50,
+        backgroundColor: COLORS.WHITE,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'flex-end'
+    },
+    cardButtonText: {
+        fontSize: 24
+    },
+    itemsContainer: {
+        paddingTop: 15,
+        paddingLeft: 20,
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center'
+        flexWrap: 'wrap'
     },
     buttonView: {
-        margin: 5,
-        maxHeight: 60,
-        paddingVertical: 12,
-        paddingHorizontal: 14,
-        borderRadius: 25,
+        width: '45%',
+        height: 80,
+        marginRight: 15,
+        marginBottom: 20,
+        padding: 12,
+        borderRadius: 15,
         backgroundColor: COLORS.WHITE_200
     },
     buttonText: {
-        fontSize: 15,
-        color: COLORS.BLACK,
-        fontWeight: '500'
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: COLORS.BLACK_75
     },
     modal: {
         margin: 0,

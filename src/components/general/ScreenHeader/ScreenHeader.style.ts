@@ -3,13 +3,16 @@ import COLORS from '@constants/COLORS';
 
 export const ScreenHeaderStyle = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+        flexDirection: 'row'
+    },
+    flex: {
+        flex: 1
     },
     titleText: {
-        fontSize: 24,
-        color: COLORS.LIGHTGRAY_200,
+        fontSize: 16,
+        color: COLORS.BLACK_75,
         fontWeight: 'bold'
     }
 });
