@@ -50,7 +50,7 @@ export const Messages = (): JSX.Element => {
                     KUDOS_MESSAGES
                 );
 
-                setLastShared(emotion || response?.data);
+                setLastShared(emotion || response?.data || KUDOS_MESSAGES[1]);
             }
         });
     }, []);
