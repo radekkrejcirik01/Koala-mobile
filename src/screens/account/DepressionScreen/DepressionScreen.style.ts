@@ -14,7 +14,7 @@ export const DepressionScreenStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     messagesContainer: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
         paddingTop: 50
     },
     buttonView: {
@@ -23,6 +23,7 @@ export const DepressionScreenStyle = StyleSheet.create({
         justifyContent: 'space-between'
     },
     buttonText: {
+        width: '80%',
         fontSize: 15,
         fontWeight: '500'
     },

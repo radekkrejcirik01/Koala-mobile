@@ -4,22 +4,26 @@ export const KUDOS_MESSAGES: EmotionInterface[] = [
     {
         id: 1,
         message: 'You are doing great!',
-        tip1: 'Tip 1',
-        tip2: 'Tip 2',
         isDefault: true
     },
     {
         id: 2,
         message: 'So proud of you!',
-        tip1: 'Tip 1',
-        tip2: 'Tip yes',
         isDefault: true
     },
     {
         id: 3,
-        message: 'I am here for you.',
-        tip1: 'Tip 1',
-        tip2: 'Tip 2',
+        message: 'I am here for you',
+        isDefault: true
+    },
+    {
+        id: 4,
+        message: 'Nobody is better than you!',
+        isDefault: true
+    },
+    {
+        id: 5,
+        message: 'You are the most special person!',
         isDefault: true
     }
 ];
