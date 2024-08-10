@@ -1,5 +1,6 @@
-import React, { JSX, useCallback, useEffect, useState } from 'react';
+import React, { JSX, useCallback, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
@@ -54,9 +55,7 @@ export const Messages = (): JSX.Element => {
         });
     }, []);
 
-    useEffect(() => {
-        getLastSharedMessage();
-    }, [getLastSharedMessage]);
+    useFocusEffect(getLastSharedMessage);
 
     const openLastMessage = useCallback(() => {
         setModalContent(
@@ -182,7 +181,10 @@ export const Messages = (): JSX.Element => {
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
-                onClose={hideModalAndKeyboard}
+                onClose={() => {
+                    hideModalAndKeyboard();
+                    getLastSharedMessage();
+                }}
                 style={MessagesStyle.modal}
             />
         </View>
