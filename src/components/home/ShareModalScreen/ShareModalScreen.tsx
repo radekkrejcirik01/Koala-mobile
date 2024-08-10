@@ -2,7 +2,10 @@ import React, { JSX, useCallback, useRef } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
-import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
+import {
+    ShareModalScreenDefaultProps,
+    ShareModalScreenProps
+} from '@components/home/ShareModalScreen/ShareModalScreen.props';
 import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
@@ -13,7 +16,8 @@ import { Send } from '@components/home/Send/Send';
 
 export const ShareModalScreen = ({
     item,
-    onAddFriendPress
+    onAddFriendPress,
+    isKudos
 }: ShareModalScreenProps): JSX.Element => {
     const { bottom } = useSafeAreaInsets();
     const { sending, sent, setSending, setSent } = useSending();
@@ -36,13 +40,15 @@ export const ShareModalScreen = ({
 
         setSending(true);
 
-        postRequest<ResponseInterface, EmotionMessagePostInterface>(
-            'emotion-message',
-            {
-                ids: selected,
-                message: item.message
-            }
-        ).subscribe((response: ResponseInterface) => {
+        let endpoint = 'emotion-message';
+        if (isKudos) {
+            endpoint += '/kudos';
+        }
+
+        postRequest<ResponseInterface, EmotionMessagePostInterface>(endpoint, {
+            ids: selected,
+            message: item.message
+        }).subscribe((response: ResponseInterface) => {
             if (response?.status === 'success') {
                 setSending(false);
                 setSent(true);
@@ -50,7 +56,7 @@ export const ShareModalScreen = ({
                 selectedFriends.current = [];
             }
         });
-    }, [item.message, setSending, setSent]);
+    }, [isKudos, item.message, setSending, setSent]);
 
     return (
         <View
@@ -78,3 +84,5 @@ export const ShareModalScreen = ({
         </View>
     );
 };
+
+ShareModalScreen.defaultProps = ShareModalScreenDefaultProps;

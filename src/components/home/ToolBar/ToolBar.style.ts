@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const ToolBarStyle = StyleSheet.create({
     scrollView: {
-        marginTop: 20
+        marginTop: 10
     },
     scrollViewContainer: {
         flex: 1,

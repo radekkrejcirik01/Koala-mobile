@@ -1,8 +1,14 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const DepressionScreenStyle = StyleSheet.create({
     container: {
         flexGrow: 1
+    },
+    addButtonText: {
+        fontSize: 15,
+        color: COLORS.PURPLE,
+        fontWeight: 'bold'
     },
     scrollView: {
         paddingTop: 20
@@ -24,7 +30,7 @@ export const DepressionScreenStyle = StyleSheet.create({
     },
     buttonText: {
         width: '80%',
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: '500'
     },
     modal: {

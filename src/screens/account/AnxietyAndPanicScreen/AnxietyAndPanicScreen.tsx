@@ -22,7 +22,6 @@ import {
     ResponseEmotionsGetInterface,
     ResponseInterface
 } from '@interfaces/response/Response.interface';
-import COLORS from '@constants/COLORS';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
 
@@ -133,9 +132,12 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
                 rightComponent={
                     <TouchableOpacity
                         activeOpacity={0.9}
+                        hitSlop={10}
                         onPress={onPressAddEmotion}
                     >
-                        <Text style={{ color: COLORS.PURPLE }}>Add +</Text>
+                        <Text style={AnxietyAndPanicScreenStyle.addButtonText}>
+                            Add +
+                        </Text>
                     </TouchableOpacity>
                 }
             />

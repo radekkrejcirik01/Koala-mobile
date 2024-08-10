@@ -24,7 +24,6 @@ import {
 } from '@interfaces/response/Response.interface';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
-import COLORS from '@constants/COLORS';
 
 export const KudosScreen = (): JSX.Element => {
     const { top } = useSafeAreaInsets();
@@ -60,6 +59,7 @@ export const KudosScreen = (): JSX.Element => {
                             showModal();
                         }, 100);
                     }}
+                    isKudos
                 />
             );
             showModal();
@@ -130,9 +130,12 @@ export const KudosScreen = (): JSX.Element => {
                 rightComponent={
                     <TouchableOpacity
                         activeOpacity={0.9}
+                        hitSlop={10}
                         onPress={onPressAddEmotion}
                     >
-                        <Text style={{ color: COLORS.PURPLE }}>Add +</Text>
+                        <Text style={KudosScreenStyle.addButtonText}>
+                            Add +
+                        </Text>
                     </TouchableOpacity>
                 }
             />

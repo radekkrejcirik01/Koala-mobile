@@ -24,7 +24,6 @@ import {
 } from '@interfaces/response/Response.interface';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
-import COLORS from '@constants/COLORS';
 
 export const DepressionScreen = (): JSX.Element => {
     const { top } = useSafeAreaInsets();
@@ -133,9 +132,12 @@ export const DepressionScreen = (): JSX.Element => {
                 rightComponent={
                     <TouchableOpacity
                         activeOpacity={0.9}
+                        hitSlop={10}
                         onPress={onPressAddEmotion}
                     >
-                        <Text style={{ color: COLORS.PURPLE }}>Add +</Text>
+                        <Text style={DepressionScreenStyle.addButtonText}>
+                            Add +
+                        </Text>
                     </TouchableOpacity>
                 }
             />

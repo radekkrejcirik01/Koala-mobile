@@ -67,7 +67,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 data[0]?.type ===
                     NotificationItemEnum.StatusReplyNotificationType ||
                 data[0]?.type ===
-                    NotificationItemEnum.CheckOnMessageNotificationType
+                    NotificationItemEnum.CheckOnMessageNotificationType ||
+                data[0]?.type === NotificationItemEnum.KudosNotificationType
             ) {
                 return false;
             }
