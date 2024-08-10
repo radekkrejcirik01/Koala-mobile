@@ -1,5 +1,6 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
@@ -34,6 +35,7 @@ export const Messages = (): JSX.Element => {
             .flat() // Flatten the array of arrays into a single array
             .find((obj) => obj.message === message);
     }
+
     const getLastSharedMessage = useCallback(() => {
         getRequest<ResponseLastSharedMessageGetInterface>(
             'last-shared-message'
@@ -95,18 +97,18 @@ export const Messages = (): JSX.Element => {
     return (
         <View>
             <Text style={MessagesStyle.titleText}>Lastly shared</Text>
-            <View style={MessagesStyle.cardView}>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={openLastMessage}
+                style={MessagesStyle.cardView}
+            >
                 <Text style={MessagesStyle.cardText}>
                     {lastShared?.message}
                 </Text>
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={openLastMessage}
-                    style={MessagesStyle.cardButton}
-                >
+                <View style={MessagesStyle.cardButton}>
                     <Text style={MessagesStyle.cardButtonText}>💭</Text>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
             <Text style={MessagesStyle.titleText}>Messages</Text>
             <View style={MessagesStyle.itemsContainer}>
                 <TouchableOpacity
@@ -121,6 +123,10 @@ export const Messages = (): JSX.Element => {
                     <Text style={MessagesStyle.buttonText}>
                         Anxiety & panic
                     </Text>
+                    <FastImage
+                        source={require('../../../assets/images/Anxiety_no_bg.png')}
+                        style={MessagesStyle.anxietyImage}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -130,6 +136,10 @@ export const Messages = (): JSX.Element => {
                     style={MessagesStyle.buttonView}
                 >
                     <Text style={MessagesStyle.buttonText}>Depression</Text>
+                    <FastImage
+                        source={require('../../../assets/images/Depression_no_bg.png')}
+                        style={MessagesStyle.depressionImage}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -139,6 +149,10 @@ export const Messages = (): JSX.Element => {
                     style={MessagesStyle.buttonView}
                 >
                     <Text style={MessagesStyle.buttonText}>Wellbeing</Text>
+                    <FastImage
+                        source={require('../../../assets/images/Wellbeing_no_bg.png')}
+                        style={MessagesStyle.wellbeingImage}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -158,6 +172,10 @@ export const Messages = (): JSX.Element => {
                     >
                         Kudos
                     </Text>
+                    <FastImage
+                        source={require('../../../assets/images/Kudos_no_bg.png')}
+                        style={MessagesStyle.kudosImage}
+                    />
                 </TouchableOpacity>
             </View>
             <ToolBar onPressDirect={onDirectEmotionPress} />

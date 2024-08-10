@@ -45,17 +45,39 @@ export const MessagesStyle = StyleSheet.create({
     },
     buttonView: {
         width: '45%',
-        height: 80,
+        height: 90,
         marginRight: 15,
         marginBottom: 20,
         padding: 12,
         borderRadius: 15,
-        backgroundColor: COLORS.WHITE_200
+        backgroundColor: COLORS.WHITE_200,
+        justifyContent: 'space-between'
     },
     buttonText: {
         fontSize: 16,
         fontWeight: 'bold',
         color: COLORS.BLACK_75
+    },
+    anxietyImage: {
+        width: 40,
+        height: 40,
+        alignSelf: 'flex-end'
+    },
+    depressionImage: {
+        width: 55,
+        height: 55,
+        alignSelf: 'flex-end'
+    },
+    wellbeingImage: {
+        width: 45,
+        height: 45,
+        alignSelf: 'flex-end'
+    },
+    kudosImage: {
+        width: 40,
+        height: 40,
+        marginBottom: 5,
+        alignSelf: 'flex-end'
     },
     modal: {
         margin: 0,
