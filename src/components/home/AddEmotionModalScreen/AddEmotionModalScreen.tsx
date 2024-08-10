@@ -15,18 +15,18 @@ import { EmotionPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 
 export const AddEmotionModalScreen = ({
-    onAdded
+    onAdded,
+    type
 }: AddEmotionModalScreenProps): JSX.Element => {
     const { top } = useSafeAreaInsets();
 
-    const [emotion, setEmotion] = useState<string>();
-    const [emotionMessage, setEmotionMessage] = useState<string>();
+    const [message, setMessage] = useState<string>();
     const [tip1, setTip1] = useState<string>();
     const [tip2, setTip2] = useState<string>();
     const [posting, setPosting] = useState<boolean>(false);
 
     const add = useCallback(async () => {
-        if (!emotion || !emotionMessage) {
+        if (!message) {
             onAdded();
             return;
         }
@@ -34,10 +34,10 @@ export const AddEmotionModalScreen = ({
         setPosting(true);
 
         postRequest<ResponseInterface, EmotionPostInterface>('emotion', {
-            emotion,
-            message: emotionMessage,
+            message,
             tip1,
-            tip2
+            tip2,
+            type
         }).subscribe((response: ResponseInterface) => {
             setPosting(false);
 
@@ -45,7 +45,7 @@ export const AddEmotionModalScreen = ({
                 onAdded();
             }
         });
-    }, [emotion, emotionMessage, onAdded, tip1, tip2]);
+    }, [message, onAdded, tip1, tip2, type]);
 
     return (
         <View
@@ -54,9 +54,7 @@ export const AddEmotionModalScreen = ({
                 { paddingTop: top + 10 }
             ]}
         >
-            <Text style={AddEmotionModalScreenStyle.titleText}>
-                Add message
-            </Text>
+            <Text style={AddEmotionModalScreenStyle.titleText}>Add</Text>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={add}
@@ -68,23 +66,14 @@ export const AddEmotionModalScreen = ({
                     <Text style={AddEmotionModalScreenStyle.addText}>Done</Text>
                 )}
             </TouchableOpacity>
-            <Text style={AddEmotionModalScreenStyle.inputTitleText}>Name</Text>
+            <Text style={AddEmotionModalScreenStyle.inputTitleText}>
+                Message
+            </Text>
             <TextInput
                 autoFocus
                 autoCorrect={false}
                 selectionColor={COLORS.PURPLE}
-                onChangeText={setEmotion}
-                placeholder="Overthinking"
-                style={AddEmotionModalScreenStyle.input}
-            />
-            <Text style={AddEmotionModalScreenStyle.inputTitleText}>
-                Message to send
-            </Text>
-            <TextInput
-                autoCorrect={false}
-                selectionColor={COLORS.PURPLE}
-                onChangeText={setEmotionMessage}
-                placeholder="I CANT STOP OVERTHINKING"
+                onChangeText={setMessage}
                 style={AddEmotionModalScreenStyle.input}
             />
             <Text style={AddEmotionModalScreenStyle.inputTitleText}>
@@ -101,7 +90,7 @@ export const AddEmotionModalScreen = ({
                 autoCorrect={false}
                 selectionColor={COLORS.PURPLE}
                 onChangeText={setTip2}
-                placeholder="Change environment"
+                placeholder="Positive thinking"
                 style={AddEmotionModalScreenStyle.input}
             />
         </View>

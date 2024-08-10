@@ -1,3 +1,5 @@
+import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
+
 export interface UserPostInterface {
     name: string;
     username: string;
@@ -28,14 +30,10 @@ export interface DevicePostInterface {
 }
 
 export interface EmotionPostInterface {
-    emotion: string;
     message: string;
     tip1?: string;
     tip2?: string;
-}
-
-export interface RemovedEmotionPostInterface {
-    emotionId: number;
+    type: AddEmotionModalScreenEnum;
 }
 
 export interface EmotionMessagePostInterface {
