@@ -25,7 +25,7 @@ export const NotificationsHeaderStyle = StyleSheet.create({
     searchView: {
         marginLeft: 15,
         paddingLeft: 10,
-        paddingRight: 20,
+        paddingRight: 15,
         height: 35,
         borderRadius: 20,
         backgroundColor: COLORS.WHITE_200,

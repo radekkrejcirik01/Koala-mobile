@@ -23,7 +23,7 @@ export const WellbeingScreenStyle = StyleSheet.create({
         paddingTop: 50
     },
     buttonView: {
-        marginBottom: 25,
+        paddingBottom: 25,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
