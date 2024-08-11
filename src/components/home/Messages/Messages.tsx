@@ -26,6 +26,7 @@ export const Messages = (): JSX.Element => {
     const { modalVisible, showModal, hideModal } = useModal();
 
     const [lastShared, setLastShared] = useState<EmotionInterface>(undefined);
+    const [suggested, setSuggested] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
     function getMessage(
@@ -42,6 +43,12 @@ export const Messages = (): JSX.Element => {
             'last-shared-message'
         ).subscribe((response: ResponseLastSharedMessageGetInterface) => {
             if (response?.status) {
+                if (!response?.data?.message) {
+                    setLastShared(KUDOS_MESSAGES[1]);
+                    setSuggested(true);
+                    return;
+                }
+
                 const emotion = getMessage(
                     response?.data?.message,
                     ANXIETY_AND_PANIC_MESSAGES,
@@ -50,7 +57,7 @@ export const Messages = (): JSX.Element => {
                     KUDOS_MESSAGES
                 );
 
-                setLastShared(emotion || response?.data || KUDOS_MESSAGES[1]);
+                setLastShared(emotion || response?.data);
             }
         });
     }, []);
@@ -95,7 +102,9 @@ export const Messages = (): JSX.Element => {
 
     return (
         <View>
-            <Text style={MessagesStyle.titleText}>Lastly shared</Text>
+            <Text style={MessagesStyle.titleText}>
+                {suggested ? 'Suggested' : 'Lastly shared'}
+            </Text>
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={openLastMessage}
