@@ -165,7 +165,7 @@ export const KudosScreen = (): JSX.Element => {
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
-                onClose={hideModal}
+                onClose={hideModalAndKeyboard}
                 style={KudosScreenStyle.modal}
             />
         </View>

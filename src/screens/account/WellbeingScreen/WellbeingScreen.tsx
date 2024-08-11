@@ -164,7 +164,7 @@ export const WellbeingScreen = (): JSX.Element => {
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
-                onClose={hideModal}
+                onClose={hideModalAndKeyboard}
                 style={WellbeingScreenStyle.modal}
             />
         </View>

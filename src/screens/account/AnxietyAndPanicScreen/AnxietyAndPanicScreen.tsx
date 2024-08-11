@@ -169,7 +169,7 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
-                onClose={hideModal}
+                onClose={hideModalAndKeyboard}
                 style={AnxietyAndPanicScreenStyle.modal}
             />
         </View>

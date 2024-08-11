@@ -13,6 +13,7 @@ import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
+import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
 
 export const AddEmotionModalScreen = ({
     onAdded,
@@ -76,23 +77,27 @@ export const AddEmotionModalScreen = ({
                 onChangeText={setMessage}
                 style={AddEmotionModalScreenStyle.input}
             />
-            <Text style={AddEmotionModalScreenStyle.inputTitleText}>
-                Helps me
-            </Text>
-            <TextInput
-                autoCorrect={false}
-                selectionColor={COLORS.PURPLE}
-                onChangeText={setTip1}
-                placeholder="Put on headphones and be delulu"
-                style={AddEmotionModalScreenStyle.input}
-            />
-            <TextInput
-                autoCorrect={false}
-                selectionColor={COLORS.PURPLE}
-                onChangeText={setTip2}
-                placeholder="Positive thinking"
-                style={AddEmotionModalScreenStyle.input}
-            />
+            {type !== AddEmotionModalScreenEnum.KudosEmotionType && (
+                <>
+                    <Text style={AddEmotionModalScreenStyle.inputTitleText}>
+                        Helps me
+                    </Text>
+                    <TextInput
+                        autoCorrect={false}
+                        selectionColor={COLORS.PURPLE}
+                        onChangeText={setTip1}
+                        placeholder="Put on headphones and be delulu"
+                        style={AddEmotionModalScreenStyle.input}
+                    />
+                    <TextInput
+                        autoCorrect={false}
+                        selectionColor={COLORS.PURPLE}
+                        onChangeText={setTip2}
+                        placeholder="Positive thinking"
+                        style={AddEmotionModalScreenStyle.input}
+                    />
+                </>
+            )}
         </View>
     );
 };

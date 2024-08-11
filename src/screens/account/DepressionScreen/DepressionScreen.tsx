@@ -169,7 +169,7 @@ export const DepressionScreen = (): JSX.Element => {
             <Modal
                 isVisible={modalVisible}
                 content={modalContent}
-                onClose={hideModal}
+                onClose={hideModalAndKeyboard}
                 style={DepressionScreenStyle.modal}
             />
         </View>
