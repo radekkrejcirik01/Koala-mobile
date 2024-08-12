@@ -13,7 +13,7 @@ export const LoginScreenStyle = StyleSheet.create({
         paddingLeft: 15,
         borderRadius: 10,
         fontSize: 16,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_75,
         backgroundColor: COLORS.WHITE_100,
         fontWeight: 'bold'
     },

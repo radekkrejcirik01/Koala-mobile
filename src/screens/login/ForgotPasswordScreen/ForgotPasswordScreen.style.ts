@@ -9,7 +9,7 @@ export const ForgotPasswordScreenStyle = StyleSheet.create({
     inputTitleText: {
         marginTop: 20,
         marginBottom: 10,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_75,
         fontWeight: '500'
     },
     input: {

@@ -9,7 +9,7 @@ export const ThirdScreenStyle = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_75,
         fontWeight: 'bold'
     },
     input: {
@@ -18,7 +18,7 @@ export const ThirdScreenStyle = StyleSheet.create({
         paddingLeft: 15,
         borderRadius: 10,
         fontSize: 20,
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_75,
         backgroundColor: COLORS.WHITE_100,
         fontWeight: 'bold'
     }
