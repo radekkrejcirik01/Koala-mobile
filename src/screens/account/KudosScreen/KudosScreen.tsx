@@ -140,10 +140,12 @@ export const KudosScreen = (): JSX.Element => {
                 }
             />
             <ScrollView contentContainerStyle={KudosScreenStyle.scrollView}>
-                <FastImage
-                    source={require('../../../assets/images/Kudos.png')}
-                    style={KudosScreenStyle.image}
-                />
+                <View style={KudosScreenStyle.imageContainer}>
+                    <FastImage
+                        source={require('../../../assets/images/Kudos.png')}
+                        style={KudosScreenStyle.image}
+                    />
+                </View>
                 <View style={KudosScreenStyle.messagesContainer}>
                     {messages.map((value) => (
                         <TouchableOpacity

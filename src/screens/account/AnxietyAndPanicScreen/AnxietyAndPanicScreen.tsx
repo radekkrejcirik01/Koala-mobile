@@ -144,10 +144,12 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
             <ScrollView
                 contentContainerStyle={AnxietyAndPanicScreenStyle.scrollView}
             >
-                <FastImage
-                    source={require('../../../assets/images/Anxiety.png')}
-                    style={AnxietyAndPanicScreenStyle.image}
-                />
+                <View style={AnxietyAndPanicScreenStyle.imageContainer}>
+                    <FastImage
+                        source={require('../../../assets/images/Anxiety.png')}
+                        style={AnxietyAndPanicScreenStyle.image}
+                    />
+                </View>
                 <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
                     {messages.map((value) => (
                         <TouchableOpacity

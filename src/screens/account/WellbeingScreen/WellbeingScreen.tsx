@@ -139,10 +139,12 @@ export const WellbeingScreen = (): JSX.Element => {
                 }
             />
             <ScrollView contentContainerStyle={WellbeingScreenStyle.scrollView}>
-                <FastImage
-                    source={require('../../../assets/images/Wellbeing.png')}
-                    style={WellbeingScreenStyle.image}
-                />
+                <View style={WellbeingScreenStyle.imageContainer}>
+                    <FastImage
+                        source={require('../../../assets/images/Wellbeing.png')}
+                        style={WellbeingScreenStyle.image}
+                    />
+                </View>
                 <View style={WellbeingScreenStyle.messagesContainer}>
                     {messages.map((value) => (
                         <TouchableOpacity

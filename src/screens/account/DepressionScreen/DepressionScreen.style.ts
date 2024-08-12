@@ -13,15 +13,18 @@ export const DepressionScreenStyle = StyleSheet.create({
     scrollView: {
         paddingTop: 20
     },
-    image: {
-        width: 200,
+    imageContainer: {
         height: 200,
-        marginVertical: -20,
+        justifyContent: 'center'
+    },
+    image: {
+        width: 230,
+        height: 230,
         alignSelf: 'center'
     },
     messagesContainer: {
         paddingHorizontal: 25,
-        paddingTop: 50
+        paddingTop: 20
     },
     buttonView: {
         paddingBottom: 25,

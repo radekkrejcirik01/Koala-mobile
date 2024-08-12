@@ -144,10 +144,12 @@ export const DepressionScreen = (): JSX.Element => {
             <ScrollView
                 contentContainerStyle={DepressionScreenStyle.scrollView}
             >
-                <FastImage
-                    source={require('../../../assets/images/Depression.png')}
-                    style={DepressionScreenStyle.image}
-                />
+                <View style={DepressionScreenStyle.imageContainer}>
+                    <FastImage
+                        source={require('../../../assets/images/Depression.png')}
+                        style={DepressionScreenStyle.image}
+                    />
+                </View>
                 <View style={DepressionScreenStyle.messagesContainer}>
                     {messages.map((value) => (
                         <TouchableOpacity

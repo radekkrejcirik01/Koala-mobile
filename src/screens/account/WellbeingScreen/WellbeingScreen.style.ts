@@ -13,14 +13,18 @@ export const WellbeingScreenStyle = StyleSheet.create({
     scrollView: {
         paddingTop: 20
     },
+    imageContainer: {
+        height: 200,
+        justifyContent: 'center'
+    },
     image: {
-        width: 180,
-        height: 180,
+        width: 200,
+        height: 200,
         alignSelf: 'center'
     },
     messagesContainer: {
         paddingHorizontal: 25,
-        paddingTop: 50
+        paddingTop: 20
     },
     buttonView: {
         paddingBottom: 25,
