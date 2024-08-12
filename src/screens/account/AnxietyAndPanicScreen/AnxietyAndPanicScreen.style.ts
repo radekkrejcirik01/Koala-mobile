@@ -34,6 +34,7 @@ export const AnxietyAndPanicScreenStyle = StyleSheet.create({
     buttonText: {
         width: '80%',
         fontSize: 16,
+        color: COLORS.BLACK,
         fontWeight: '500'
     },
     modal: {

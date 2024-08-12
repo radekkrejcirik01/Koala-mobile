@@ -7,6 +7,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import store from '@store/index/index';
 import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
+import COLORS from '@constants/COLORS';
 
 const App = () => {
     useEffect(() => {
@@ -19,7 +20,10 @@ const App = () => {
     return (
         <ActionSheetProvider>
             <SafeAreaProvider>
-                <StatusBar />
+                <StatusBar
+                    backgroundColor={COLORS.WHITE}
+                    barStyle="dark-content"
+                />
                 <Provider store={store}>
                     <Navigation />
                 </Provider>
