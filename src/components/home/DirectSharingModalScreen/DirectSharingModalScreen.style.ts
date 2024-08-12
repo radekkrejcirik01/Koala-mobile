@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const DirectSharingModalScreenStyle = StyleSheet.create({
     container: {
-        height: '80%',
+        height: '70%',
         paddingTop: 30,
         paddingHorizontal: 20,
         borderTopLeftRadius: 20,
