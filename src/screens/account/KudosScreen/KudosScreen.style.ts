@@ -23,7 +23,8 @@ export const KudosScreenStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     messagesContainer: {
-        paddingHorizontal: 25,
+        paddingLeft: 25,
+        paddingRight: 20,
         paddingTop: 35
     },
     modal: {

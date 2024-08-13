@@ -15,13 +15,14 @@ export const DepressionScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     image: {
-        width: 230,
-        height: 230,
+        width: 250,
+        height: 250,
         alignSelf: 'center'
     },
     messagesContainer: {
-        paddingHorizontal: 25,
-        paddingTop: 35
+        paddingLeft: 25,
+        paddingRight: 20,
+        paddingTop: 45
     },
     modal: {
         margin: 0,

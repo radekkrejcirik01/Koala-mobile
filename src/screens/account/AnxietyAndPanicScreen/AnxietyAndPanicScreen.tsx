@@ -151,11 +151,6 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
                         style={AnxietyAndPanicScreenStyle.image}
                     />
                 </View>
-                <Text style={AnxietyAndPanicScreenStyle.descriptionText}>
-                    Breathing colors helps calming anxiety, inhale one color and
-                    exhale another
-                </Text>
-                <View style={AnxietyAndPanicScreenStyle.line} />
                 <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
                         <MessageItem
