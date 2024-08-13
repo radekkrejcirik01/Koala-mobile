@@ -11,7 +11,7 @@ export const AnxietyAndPanicScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     scrollView: {
-        paddingTop: 20
+        paddingTop: 10
     },
     imageContainer: {
         height: 200,
@@ -24,7 +24,7 @@ export const AnxietyAndPanicScreenStyle = StyleSheet.create({
     },
     messagesContainer: {
         paddingHorizontal: 25,
-        paddingTop: 20
+        paddingTop: 35
     },
     buttonView: {
         paddingBottom: 25,

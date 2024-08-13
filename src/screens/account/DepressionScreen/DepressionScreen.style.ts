@@ -10,9 +10,6 @@ export const DepressionScreenStyle = StyleSheet.create({
         color: COLORS.PURPLE,
         fontWeight: 'bold'
     },
-    scrollView: {
-        paddingTop: 20
-    },
     imageContainer: {
         height: 200,
         justifyContent: 'center'
@@ -24,7 +21,7 @@ export const DepressionScreenStyle = StyleSheet.create({
     },
     messagesContainer: {
         paddingHorizontal: 25,
-        paddingTop: 20
+        paddingTop: 35
     },
     buttonView: {
         paddingBottom: 25,

@@ -141,9 +141,7 @@ export const DepressionScreen = (): JSX.Element => {
                     </TouchableOpacity>
                 }
             />
-            <ScrollView
-                contentContainerStyle={DepressionScreenStyle.scrollView}
-            >
+            <ScrollView>
                 <View style={DepressionScreenStyle.imageContainer}>
                     <FastImage
                         source={require('../../../assets/images/Depression.png')}
