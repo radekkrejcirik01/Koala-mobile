@@ -22,9 +22,22 @@ export const AnxietyAndPanicScreenStyle = StyleSheet.create({
         height: 180,
         alignSelf: 'center'
     },
+    descriptionText: {
+        paddingHorizontal: 50,
+        color: COLORS.LIGHTGRAY_200,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: '500'
+    },
+    line: {
+        marginTop: 20,
+        marginHorizontal: 20,
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: COLORS.LIGHTGRAY
+    },
     messagesContainer: {
         paddingHorizontal: 25,
-        paddingTop: 35
+        paddingTop: 15
     },
     modal: {
         margin: 0,
