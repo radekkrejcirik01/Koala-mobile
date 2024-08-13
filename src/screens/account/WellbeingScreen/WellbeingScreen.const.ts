@@ -1,4 +1,5 @@
 import { EmotionInterface } from '@interfaces/general.interface';
+import { Platform } from 'react-native';
 
 export const WELLBEING_MESSAGES: EmotionInterface[] = [
     {
@@ -10,7 +11,10 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
     },
     {
         id: 2,
-        message: 'Today is ass, sucks, fucking terrible',
+        message:
+            Platform.OS === 'ios'
+                ? 'Today is ass, sucks, fucking terrible'
+                : 'Today is a**, sucks, f***ing terrible',
         tip1: 'Call your friend and tell them everything',
         tip2: 'Have your guilty pleasure, whatever it is',
         isDefault: true
@@ -24,7 +28,10 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
     },
     {
         id: 4,
-        message: 'I am so fucking tired',
+        message:
+            Platform.OS === 'ios'
+                ? 'I am so fucking tired'
+                : 'I am so f***ing tired',
         tip1: 'Take that nap 😴🛌',
         tip2: 'Take a break, day off, week off',
         isDefault: true
