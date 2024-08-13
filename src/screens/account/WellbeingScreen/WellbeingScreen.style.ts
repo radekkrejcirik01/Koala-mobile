@@ -23,19 +23,9 @@ export const WellbeingScreenStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     messagesContainer: {
-        paddingHorizontal: 25,
+        paddingLeft: 25,
+        paddingRight: 20,
         paddingTop: 35
-    },
-    buttonView: {
-        paddingBottom: 25,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    buttonText: {
-        width: '80%',
-        fontSize: 16,
-        color: COLORS.BLACK,
-        fontWeight: '500'
     },
     modal: {
         margin: 0,

@@ -26,17 +26,6 @@ export const KudosScreenStyle = StyleSheet.create({
         paddingHorizontal: 25,
         paddingTop: 35
     },
-    buttonView: {
-        paddingBottom: 25,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    buttonText: {
-        width: '80%',
-        fontSize: 16,
-        color: COLORS.BLACK,
-        fontWeight: '500'
-    },
     modal: {
         margin: 0,
         justifyContent: 'flex-end'

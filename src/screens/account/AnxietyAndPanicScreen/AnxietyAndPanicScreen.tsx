@@ -24,6 +24,7 @@ import {
 } from '@interfaces/response/Response.interface';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
+import { MessageItem } from '@components/home/MessageItem/MessageItem';
 
 export const AnxietyAndPanicScreen = (): JSX.Element => {
     const { top } = useSafeAreaInsets();
@@ -151,20 +152,14 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
                     />
                 </View>
                 <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
-                    {messages.map((value) => (
-                        <TouchableOpacity
+                    {messages.map((value, index) => (
+                        <MessageItem
                             key={value.id}
-                            activeOpacity={0.7}
-                            onPress={() => onPressMessage(value)}
-                            onLongPress={() => onItemLongPress(value)}
-                            delayLongPress={150}
-                            style={AnxietyAndPanicScreenStyle.buttonView}
-                        >
-                            <Text style={AnxietyAndPanicScreenStyle.buttonText}>
-                                {value.message}
-                            </Text>
-                            <Text>💬</Text>
-                        </TouchableOpacity>
+                            item={value}
+                            index={index}
+                            onPressMessage={() => onPressMessage(value)}
+                            onItemLongPress={() => onItemLongPress(value)}
+                        />
                     ))}
                 </View>
             </ScrollView>

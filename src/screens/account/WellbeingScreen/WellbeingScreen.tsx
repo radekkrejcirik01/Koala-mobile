@@ -24,6 +24,7 @@ import {
 } from '@interfaces/response/Response.interface';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
+import { MessageItem } from '@components/home/MessageItem/MessageItem';
 
 export const WellbeingScreen = (): JSX.Element => {
     const { top } = useSafeAreaInsets();
@@ -146,20 +147,14 @@ export const WellbeingScreen = (): JSX.Element => {
                     />
                 </View>
                 <View style={WellbeingScreenStyle.messagesContainer}>
-                    {messages.map((value) => (
-                        <TouchableOpacity
+                    {messages.map((value, index) => (
+                        <MessageItem
                             key={value.id}
-                            activeOpacity={0.7}
-                            onPress={() => onPressMessage(value)}
-                            onLongPress={() => onItemLongPress(value)}
-                            delayLongPress={150}
-                            style={WellbeingScreenStyle.buttonView}
-                        >
-                            <Text style={WellbeingScreenStyle.buttonText}>
-                                {value.message}
-                            </Text>
-                            <Text>💬</Text>
-                        </TouchableOpacity>
+                            index={index}
+                            item={value}
+                            onPressMessage={() => onPressMessage(value)}
+                            onItemLongPress={() => onItemLongPress(value)}
+                        />
                     ))}
                 </View>
             </ScrollView>
