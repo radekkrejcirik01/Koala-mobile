@@ -33,7 +33,7 @@ export const KUDOS_MESSAGES: EmotionInterface[] = [
     },
     {
         id: 7,
-        message: 'Let me know if you need help with anything 🤍',
+        message: 'Let me know if you need anything 🤍',
         isDefault: true
     }
 ];
