@@ -13,7 +13,7 @@ export const MessageItemStyle = StyleSheet.create({
         fontWeight: '500'
     },
     messageText: {
-        width: '80%',
+        width: '82%',
         fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'

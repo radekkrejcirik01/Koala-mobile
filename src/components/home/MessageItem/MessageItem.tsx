@@ -20,7 +20,9 @@ export const MessageItem = ({
             style={MessageItemStyle.buttonView}
         >
             <Text style={MessageItemStyle.numberText}>{messageNumber}</Text>
-            <Text style={MessageItemStyle.messageText}>{item.message}</Text>
+            <Text style={MessageItemStyle.messageText} numberOfLines={1}>
+                {item.message}
+            </Text>
             <Text style={MessageItemStyle.emojiText}>💬</Text>
         </TouchableOpacity>
     );

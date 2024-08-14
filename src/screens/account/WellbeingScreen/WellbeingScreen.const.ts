@@ -55,9 +55,9 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
     },
     {
         id: 7,
-        message: 'I want to disappear',
-        tip1: `Remember that its just a feeling, and feelings go always away`,
-        tip2: 'Think of your favorite person',
+        message: `I don't feel like doing anything today`,
+        tip1: `Do the bare minimum`,
+        tip2: 'Think of the good thinks that are about to come',
         isDefault: true
     }
 ];
