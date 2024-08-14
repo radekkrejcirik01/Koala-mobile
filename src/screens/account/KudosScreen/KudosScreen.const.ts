@@ -25,5 +25,15 @@ export const KUDOS_MESSAGES: EmotionInterface[] = [
         id: 5,
         message: 'You are the most special person!',
         isDefault: true
+    },
+    {
+        id: 6,
+        message: 'Sending hugs 🥰',
+        isDefault: true
+    },
+    {
+        id: 7,
+        message: 'Let me know if you need help with anything 🤍',
+        isDefault: true
     }
 ];

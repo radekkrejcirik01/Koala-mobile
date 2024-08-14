@@ -35,5 +35,19 @@ export const DEPRESSION_MESSAGES: EmotionInterface[] = [
         tip1: `Staying as long you need, it is okay`,
         tip2: 'Think about coffee you can have if you get up ☕️',
         isDefault: true
+    },
+    {
+        id: 6,
+        message: `I can barely function`,
+        tip1: `Take it easy as much you can`,
+        tip2: 'Think about achieving that one thing you always wanted',
+        isDefault: true
+    },
+    {
+        id: 7,
+        message: 'I have trouble to eat',
+        tip1: 'Having a piece of a fruit is soo good and healing',
+        tip2: 'Talk about it with person you trust the best',
+        isDefault: true
     }
 ];
