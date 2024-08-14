@@ -3,17 +3,14 @@ import COLORS from '@constants/COLORS';
 
 export const ProfileHeaderStyle = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        alignItems: 'center'
+        paddingTop: 45,
+        paddingLeft: 20,
+        paddingRight: 15,
+        flexDirection: 'row'
     },
-    image: {
-        height: 30,
-        width: 30
-    },
-    titleText: {
-        marginLeft: 10,
-        fontSize: 26,
-        color: COLORS.LIGHTGRAY_200,
+    title: {
+        fontSize: 30,
+        color: COLORS.BLACK_75,
         fontWeight: 'bold'
     }
 });

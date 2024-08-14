@@ -48,7 +48,11 @@ export const ProfileScreen = (): React.JSX.Element => {
                         <Text style={ProfileScreenStyle.buttonText}>
                             Account
                         </Text>
-                        <Icon name={IconEnum.BACK_BLUE_RIGHT} size={18} />
+                        <Icon
+                            name={IconEnum.BACK}
+                            size={18}
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                        />
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
@@ -60,9 +64,13 @@ export const ProfileScreen = (): React.JSX.Element => {
                         style={ProfileScreenStyle.buttonView}
                     >
                         <Text style={ProfileScreenStyle.buttonText}>
-                            Sharing history
+                            Shared
                         </Text>
-                        <Icon name={IconEnum.BACK_BLUE_RIGHT} size={18} />
+                        <Icon
+                            name={IconEnum.BACK}
+                            size={18}
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                        />
                     </TouchableOpacity>
                 </View>
             </View>

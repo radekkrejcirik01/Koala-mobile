@@ -1,15 +1,14 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { CheckOnHeaderStyle } from '@components/check-on/CheckOnHeader/CheckOnHeader.style';
 import { CheckOnHeaderProps } from '@components/check-on/CheckOnHeader/CheckOnHeader.props';
+import { AddButton } from '@components/general/AddButton/AddButton';
 
 export const CheckOnHeader = ({
     onPressAdd
 }: CheckOnHeaderProps): JSX.Element => (
     <View style={CheckOnHeaderStyle.container}>
-        <Text style={CheckOnHeaderStyle.titleText}>🙋 Check on</Text>
-        <TouchableOpacity activeOpacity={0.8} hitSlop={10} onPress={onPressAdd}>
-            <Text style={CheckOnHeaderStyle.buttonText}>Add +</Text>
-        </TouchableOpacity>
+        <Text style={CheckOnHeaderStyle.title}>Check on 🙋</Text>
+        <AddButton onPress={onPressAdd} />
     </View>
 );

@@ -1,14 +1,8 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const WellbeingScreenStyle = StyleSheet.create({
     container: {
         flexGrow: 1
-    },
-    addButtonText: {
-        fontSize: 15,
-        color: COLORS.PURPLE,
-        fontWeight: 'bold'
     },
     scrollView: {
         paddingTop: 10

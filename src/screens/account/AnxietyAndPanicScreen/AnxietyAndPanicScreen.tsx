@@ -1,11 +1,5 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
-import {
-    Keyboard,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { Keyboard, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import FastImage from 'react-native-fast-image';
@@ -25,6 +19,7 @@ import {
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
 import { MessageItem } from '@components/home/MessageItem/MessageItem';
+import { AddButton } from '@components/general/AddButton/AddButton';
 
 export const AnxietyAndPanicScreen = (): JSX.Element => {
     const { top } = useSafeAreaInsets();
@@ -130,17 +125,7 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
         <View style={[AnxietyAndPanicScreenStyle.container, { top }]}>
             <ScreenHeader
                 title="Anxiety & panic"
-                rightComponent={
-                    <TouchableOpacity
-                        activeOpacity={0.9}
-                        hitSlop={10}
-                        onPress={onPressAddEmotion}
-                    >
-                        <Text style={AnxietyAndPanicScreenStyle.addButtonText}>
-                            Add +
-                        </Text>
-                    </TouchableOpacity>
-                }
+                rightComponent={<AddButton onPress={onPressAddEmotion} />}
             />
             <ScrollView
                 contentContainerStyle={AnxietyAndPanicScreenStyle.scrollView}

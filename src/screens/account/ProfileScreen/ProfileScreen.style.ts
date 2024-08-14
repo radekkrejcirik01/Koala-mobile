@@ -5,9 +5,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     contentContainerStyle: {
         flexGrow: 1,
         paddingTop: 10,
-        paddingLeft: 15,
         paddingBottom: 10,
-        paddingRight: 20,
         justifyContent: 'space-between'
     },
     container: {
@@ -24,11 +22,12 @@ export const ProfileScreenStyle = StyleSheet.create({
     },
     usernameText: {
         fontSize: 16,
-        color: COLORS.LIGHTGRAY_200,
+        color: COLORS.PURPLE,
         fontWeight: '500'
     },
     buttonsContainer: {
         marginTop: 20,
+        marginHorizontal: 10,
         borderRadius: 10,
         backgroundColor: COLORS.WHITE_100
     },
