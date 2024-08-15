@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
-import { Keyboard, ScrollView, View } from 'react-native';
+import { Keyboard, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import FastImage from 'react-native-fast-image';
@@ -131,6 +131,9 @@ export const WellbeingScreen = (): JSX.Element => {
                         style={WellbeingScreenStyle.image}
                     />
                 </View>
+                <Text style={WellbeingScreenStyle.description}>
+                    {`There is not a problem, that you couldn't handle 💙`}
+                </Text>
                 <View style={WellbeingScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
                         <MessageItem

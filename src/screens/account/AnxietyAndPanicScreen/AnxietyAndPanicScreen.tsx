@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
-import { Keyboard, ScrollView, View } from 'react-native';
+import { Keyboard, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import FastImage from 'react-native-fast-image';
@@ -136,6 +136,9 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
                         style={AnxietyAndPanicScreenStyle.image}
                     />
                 </View>
+                <Text style={AnxietyAndPanicScreenStyle.description}>
+                    Anxiety can be very difficult, but you get this! 🫶
+                </Text>
                 <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
                         <MessageItem

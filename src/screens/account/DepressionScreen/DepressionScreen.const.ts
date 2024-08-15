@@ -4,8 +4,8 @@ export const DEPRESSION_MESSAGES: EmotionInterface[] = [
     {
         id: 1,
         message: 'I have a depressive episode',
-        tip1: 'Positive thinking will help your brain feel better',
-        tip2: 'Think about the small things that are good rn in your life',
+        tip1: 'Positive thinking helps your brain feel better',
+        tip2: 'Think about the small things that are good in your life',
         isDefault: true
     },
     {

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const DepressionScreenStyle = StyleSheet.create({
     container: {
@@ -12,6 +13,14 @@ export const DepressionScreenStyle = StyleSheet.create({
         width: 250,
         height: 250,
         alignSelf: 'center'
+    },
+    description: {
+        width: '85%',
+        marginTop: 10,
+        color: COLORS.LIGHTGRAY_200,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: '500'
     },
     messagesContainer: {
         paddingLeft: 25,
