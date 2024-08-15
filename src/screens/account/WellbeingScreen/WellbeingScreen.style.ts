@@ -18,7 +18,7 @@ export const WellbeingScreenStyle = StyleSheet.create({
         alignSelf: 'center'
     },
     description: {
-        width: '75%',
+        width: '65%',
         marginTop: 10,
         color: COLORS.LIGHTGRAY_200,
         alignSelf: 'center',

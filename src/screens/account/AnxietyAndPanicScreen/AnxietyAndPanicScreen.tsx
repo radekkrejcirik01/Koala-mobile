@@ -137,7 +137,7 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
                     />
                 </View>
                 <Text style={AnxietyAndPanicScreenStyle.description}>
-                    Anxiety can be very difficult, but you get this! 🫶
+                    Anxiety can be very difficult, but you got this! 🫶
                 </Text>
                 <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (

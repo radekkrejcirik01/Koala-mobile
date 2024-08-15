@@ -132,7 +132,7 @@ export const WellbeingScreen = (): JSX.Element => {
                     />
                 </View>
                 <Text style={WellbeingScreenStyle.description}>
-                    {`There is not a problem, that you couldn't handle 💙`}
+                    {`There is not a problem you couldn't handle 💙`}
                 </Text>
                 <View style={WellbeingScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
