@@ -75,7 +75,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                 </View>
             </View>
             <View>
-                <Text style={ProfileScreenStyle.text}>Koala Helping</Text>
+                <Text style={ProfileScreenStyle.text}>Koala Messenger</Text>
                 <Text style={ProfileScreenStyle.text}>{version}</Text>
             </View>
         </ScrollView>
