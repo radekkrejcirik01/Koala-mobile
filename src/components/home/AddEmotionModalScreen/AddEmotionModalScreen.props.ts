@@ -1,6 +1,6 @@
-import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
+import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export interface AddEmotionModalScreenProps {
     onAdded: () => void;
-    type: AddEmotionModalScreenEnum;
+    type: EmotionScreenMessageType;
 }

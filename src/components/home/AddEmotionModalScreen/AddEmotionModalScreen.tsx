@@ -13,7 +13,7 @@ import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
-import { AddEmotionModalScreenEnum } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.enum';
+import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export const AddEmotionModalScreen = ({
     onAdded,
@@ -77,7 +77,7 @@ export const AddEmotionModalScreen = ({
                 onChangeText={setMessage}
                 style={AddEmotionModalScreenStyle.input}
             />
-            {type !== AddEmotionModalScreenEnum.KudosEmotionType && (
+            {type !== EmotionScreenMessageType.Kudos && (
                 <>
                     <Text style={AddEmotionModalScreenStyle.inputTitleText}>
                         Helps me
