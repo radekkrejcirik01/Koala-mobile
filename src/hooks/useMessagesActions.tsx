@@ -86,19 +86,23 @@ export const useMessagesActions = (
         [hideModal, setModalScreen, showModal]
     );
 
+    const hideModalAndKeyboard = useCallback(() => {
+        Keyboard.dismiss();
+        hideModal();
+    }, [hideModal]);
+
     const onPressAddEmotion = useCallback(() => {
         setModalScreen(
             <AddEmotionModalScreen
                 onAdded={() => {
                     loadMessages();
-                    Keyboard.dismiss();
-                    hideModal();
+                    hideModalAndKeyboard();
                 }}
                 type={type}
             />
         );
         showModal();
-    }, [hideModal, loadMessages, showModal, type]);
+    }, [hideModalAndKeyboard, loadMessages, showModal, type]);
 
     const removeEmotion = useCallback(
         (id: number) => {
@@ -137,11 +141,6 @@ export const useMessagesActions = (
         },
         [removeEmotion, showActionSheetWithOptions]
     );
-
-    const hideModalAndKeyboard = useCallback(() => {
-        Keyboard.dismiss();
-        hideModal();
-    }, [hideModal]);
 
     return {
         messages,
