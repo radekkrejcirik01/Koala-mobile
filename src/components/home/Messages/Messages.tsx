@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
+import { Keyboard, Text, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
@@ -19,6 +19,7 @@ import { DEPRESSION_MESSAGES } from '@screens/account/DepressionScreen/Depressio
 import { WELLBEING_MESSAGES } from '@screens/account/WellbeingScreen/WellbeingScreen.const';
 import { KUDOS_MESSAGES } from '@screens/account/KudosScreen/KudosScreen.const';
 import { MessagesCard } from '@components/home/MessagesCard/MessagesCard';
+import { LastlySharedCard } from '@components/home/LastlySharedCard/LastlySharedCard';
 
 export const Messages = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
@@ -104,18 +105,10 @@ export const Messages = (): JSX.Element => {
             <Text style={MessagesStyle.titleText}>
                 {suggested ? 'Suggested' : 'Lastly shared'}
             </Text>
-            <TouchableOpacity
-                activeOpacity={0.9}
+            <LastlySharedCard
+                title={lastShared?.message}
                 onPress={openLastMessage}
-                style={MessagesStyle.cardView}
-            >
-                <Text style={MessagesStyle.cardText}>
-                    {lastShared?.message}
-                </Text>
-                <View style={MessagesStyle.cardButton}>
-                    <Text style={MessagesStyle.cardButtonText}>💭</Text>
-                </View>
-            </TouchableOpacity>
+            />
             <Text style={MessagesStyle.titleText}>Messages</Text>
             <View style={MessagesStyle.itemsContainer}>
                 <MessagesCard
