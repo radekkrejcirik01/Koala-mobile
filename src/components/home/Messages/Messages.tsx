@@ -1,7 +1,6 @@
 import React, { JSX, useCallback, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
@@ -11,7 +10,6 @@ import { Modal } from '@components/general/Modal/Modal';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { ToolBar } from '@components/home/ToolBar/ToolBar';
 import { EmotionInterface } from '@interfaces/general.interface';
-import COLORS from '@constants/COLORS';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { getRequest } from '@utils/Axios/Axios.service';
@@ -20,6 +18,7 @@ import { ANXIETY_AND_PANIC_MESSAGES } from '@screens/account/AnxietyAndPanicScre
 import { DEPRESSION_MESSAGES } from '@screens/account/DepressionScreen/DepressionScreen.const';
 import { WELLBEING_MESSAGES } from '@screens/account/WellbeingScreen/WellbeingScreen.const';
 import { KUDOS_MESSAGES } from '@screens/account/KudosScreen/KudosScreen.const';
+import { MessagesCard } from '@components/home/MessagesCard/MessagesCard';
 
 export const Messages = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
@@ -119,72 +118,41 @@ export const Messages = (): JSX.Element => {
             </TouchableOpacity>
             <Text style={MessagesStyle.titleText}>Messages</Text>
             <View style={MessagesStyle.itemsContainer}>
-                <TouchableOpacity
-                    activeOpacity={0.9}
+                <MessagesCard
+                    title="Anxiety & panic"
                     onPress={() =>
                         navigateTo(
                             AccountStackNavigatorEnum.AnxietyAndPanicScreen
                         )
                     }
-                    style={MessagesStyle.buttonView}
-                >
-                    <Text style={MessagesStyle.buttonText}>
-                        Anxiety & panic
-                    </Text>
-                    <FastImage
-                        source={require('../../../assets/images/Anxiety_no_bg.png')}
-                        style={MessagesStyle.anxietyImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={0.9}
+                    image={require('../../../assets/images/Anxiety_no_bg.png')}
+                    imageStyle={MessagesStyle.anxietyImage}
+                />
+                <MessagesCard
+                    title="Depression"
                     onPress={() =>
                         navigateTo(AccountStackNavigatorEnum.DepressionScreen)
                     }
-                    style={MessagesStyle.buttonView}
-                >
-                    <Text style={MessagesStyle.buttonText}>Depression</Text>
-                    <FastImage
-                        source={require('../../../assets/images/Depression_no_bg.png')}
-                        style={MessagesStyle.depressionImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={0.9}
+                    image={require('../../../assets/images/Depression_no_bg.png')}
+                    imageStyle={MessagesStyle.depressionImage}
+                />
+                <MessagesCard
+                    title="Wellbeing"
                     onPress={() =>
                         navigateTo(AccountStackNavigatorEnum.WellbeingScreen)
                     }
-                    style={MessagesStyle.buttonView}
-                >
-                    <Text style={MessagesStyle.buttonText}>Wellbeing</Text>
-                    <FastImage
-                        source={require('../../../assets/images/Wellbeing_no_bg.png')}
-                        style={MessagesStyle.wellbeingImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={0.9}
+                    image={require('../../../assets/images/Wellbeing_no_bg.png')}
+                    imageStyle={MessagesStyle.wellbeingImage}
+                />
+                <MessagesCard
+                    title="Kudos"
                     onPress={() =>
                         navigateTo(AccountStackNavigatorEnum.KudosScreen)
                     }
-                    style={[
-                        MessagesStyle.buttonView,
-                        { backgroundColor: COLORS.PURPLE }
-                    ]}
-                >
-                    <Text
-                        style={[
-                            MessagesStyle.buttonText,
-                            { color: COLORS.WHITE }
-                        ]}
-                    >
-                        Kudos
-                    </Text>
-                    <FastImage
-                        source={require('../../../assets/images/Kudos_no_bg.png')}
-                        style={MessagesStyle.kudosImage}
-                    />
-                </TouchableOpacity>
+                    image={require('../../../assets/images/Kudos_no_bg.png')}
+                    imageStyle={MessagesStyle.kudosImage}
+                    isKudos
+                />
             </View>
             <ToolBar onPressDirect={onDirectEmotionPress} />
             <Modal
