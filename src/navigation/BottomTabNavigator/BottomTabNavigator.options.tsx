@@ -9,7 +9,7 @@ export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
     tabBarStyle: {
         borderTopWidth: 0
     },
-    tabBarActiveTintColor: COLORS.BUTTON_BLUE,
+    tabBarActiveTintColor: COLORS.PURPLE,
     tabBarInactiveTintColor: COLORS.LIGHTGRAY_100,
     tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel,
     headerShown: false
@@ -23,7 +23,7 @@ export const HomeTabOptions: BottomTabNavigationOptions = {
 };
 
 export const CheckOnTabbOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Check on',
+    tabBarLabel: 'Check-on',
     tabBarIcon: () => (
         <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🙋</Text>
     )

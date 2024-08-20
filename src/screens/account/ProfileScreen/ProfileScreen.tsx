@@ -46,7 +46,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                         style={ProfileScreenStyle.buttonView}
                     >
                         <Text style={ProfileScreenStyle.buttonText}>
-                            Account
+                            🌱 Account
                         </Text>
                         <Icon
                             name={IconEnum.BACK}
@@ -64,7 +64,43 @@ export const ProfileScreen = (): React.JSX.Element => {
                         style={ProfileScreenStyle.buttonView}
                     >
                         <Text style={ProfileScreenStyle.buttonText}>
-                            Shared
+                            📱 Shared history
+                        </Text>
+                        <Icon
+                            name={IconEnum.BACK}
+                            size={18}
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() =>
+                            navigateTo(
+                                AccountStackNavigatorEnum.SharingHistoryScreen
+                            )
+                        }
+                        style={ProfileScreenStyle.buttonView}
+                    >
+                        <Text style={ProfileScreenStyle.buttonText}>
+                            🫶 Feedback
+                        </Text>
+                        <Icon
+                            name={IconEnum.BACK}
+                            size={18}
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() =>
+                            navigateTo(
+                                AccountStackNavigatorEnum.SharingHistoryScreen
+                            )
+                        }
+                        style={ProfileScreenStyle.buttonView}
+                    >
+                        <Text style={ProfileScreenStyle.buttonText}>
+                            🫂 Support
                         </Text>
                         <Icon
                             name={IconEnum.BACK}
