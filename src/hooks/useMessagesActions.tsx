@@ -83,7 +83,7 @@ export const useMessagesActions = (
             );
             showModal();
         },
-        [hideModal, setModalScreen, showModal]
+        [hideModal, showModal]
     );
 
     const hideModalAndKeyboard = useCallback(() => {

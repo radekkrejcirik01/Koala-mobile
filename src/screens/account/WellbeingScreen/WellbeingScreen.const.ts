@@ -1,5 +1,6 @@
 import { EmotionInterface } from '@interfaces/general.interface';
 import { Platform } from 'react-native';
+import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export const WELLBEING_MESSAGES: EmotionInterface[] = [
     {
@@ -7,6 +8,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
         message: 'I WANT TO GO HOME',
         tip1: 'Put your headphones on and pretend you are somewhere else',
         tip2: 'Think of how you will reward yourself when you finally come home',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     },
     {
@@ -17,6 +19,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
                 : 'Today is a**, sucks, f***ing terrible',
         tip1: 'Call your friend and tell them everything',
         tip2: 'Have your guilty pleasure, whatever it is',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     },
     {
@@ -24,6 +27,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
         message: 'My head is completely overwhelmed',
         tip1: 'Focus only on one important thing',
         tip2: 'Asking for a help is not shameful',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     },
     {
@@ -34,6 +38,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
                 : 'I am so f***ing tired',
         tip1: 'Take that nap 😴🛌',
         tip2: 'Take a break, day off, week off',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     },
     {
@@ -41,6 +46,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
         message: `I don't feel good at all`,
         tip1: 'Go have some good sweet treatment',
         tip2: 'Think of your favorite person',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     },
     {
@@ -51,6 +57,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
                 : `I can't f***ing sleep`,
         tip1: `Think about anything but how you can't sleep`,
         tip2: 'Good old counting sheep 🐑',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     },
     {
@@ -58,6 +65,7 @@ export const WELLBEING_MESSAGES: EmotionInterface[] = [
         message: `I don't feel like doing anything today`,
         tip1: `Do the bare minimum`,
         tip2: 'Think of the good thinks that are about to come',
+        type: EmotionScreenMessageType.Wellbeing,
         isDefault: true
     }
 ];
