@@ -18,6 +18,7 @@ export const FeedbackScreenStyle = StyleSheet.create({
         borderRadius: 20,
         color: COLORS.BLACK,
         backgroundColor: COLORS.WHITE_200,
+        textAlignVertical: 'top',
         alignSelf: 'center'
     },
     button: {
