@@ -22,10 +22,16 @@ export const DepressionScreenStyle = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '500'
     },
+    line: {
+        marginHorizontal: 25,
+        marginTop: 15,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: COLORS.LIGHTGRAY
+    },
     messagesContainer: {
         paddingLeft: 25,
         paddingRight: 20,
-        paddingTop: 45
+        paddingTop: 15
     },
     modal: {
         margin: 0,

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const KudosScreenStyle = StyleSheet.create({
     container: {
@@ -16,10 +17,16 @@ export const KudosScreenStyle = StyleSheet.create({
         height: 180,
         alignSelf: 'center'
     },
+    line: {
+        marginHorizontal: 25,
+        marginTop: 15,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: COLORS.LIGHTGRAY
+    },
     messagesContainer: {
         paddingLeft: 25,
         paddingRight: 20,
-        paddingTop: 35
+        paddingTop: 15
     },
     modal: {
         margin: 0,

@@ -3,7 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const MessageItemStyle = StyleSheet.create({
     buttonView: {
-        paddingBottom: 25,
+        paddingVertical: 15,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: COLORS.LIGHTGRAY,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

@@ -39,6 +39,7 @@ export const DepressionScreen = (): JSX.Element => {
                 <Text style={DepressionScreenStyle.description}>
                     {`You are not alone and you won't feel like this forever 💚`}
                 </Text>
+                <View style={DepressionScreenStyle.line} />
                 <View style={DepressionScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
                         <MessageItem

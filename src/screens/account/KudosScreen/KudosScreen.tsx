@@ -36,6 +36,7 @@ export const KudosScreen = (): JSX.Element => {
                         style={KudosScreenStyle.image}
                     />
                 </View>
+                <View style={KudosScreenStyle.line} />
                 <View style={KudosScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
                         <MessageItem
