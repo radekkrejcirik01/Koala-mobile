@@ -3,13 +3,11 @@ import COLORS from '@constants/COLORS';
 
 export const SharingHistoryScreenStyle = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingLeft: 15,
-        paddingRight: 20
+        flex: 1
     },
     historyListContainer: {
-        paddingVertical: 25,
-        paddingLeft: 5
+        paddingVertical: 20,
+        paddingHorizontal: 15
     },
     listEmptyText: {
         marginTop: 100,

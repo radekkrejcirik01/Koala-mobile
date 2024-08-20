@@ -2,6 +2,7 @@ export enum AccountStackNavigatorEnum {
     AccountScreen = 'AccountScreen',
     AnxietyAndPanicScreen = 'AnxietyAndPanicScreen',
     DepressionScreen = 'DepressionScreen',
+    FeedbackScreen = 'FeedbackScreen',
     HomeScreen = 'HomeScreen',
     ChangePasswordScreen = 'ChangePasswordScreen',
     ChatScreen = 'ChatScreen',
@@ -10,5 +11,6 @@ export enum AccountStackNavigatorEnum {
     ProfileScreen = 'ProfileScreen',
     WellbeingScreen = 'WellbeingScreen',
     SharedScreen = 'SharedScreen',
-    SharingHistoryScreen = 'SharingHistoryScreen'
+    SharingHistoryScreen = 'SharingHistoryScreen',
+    SupportScreen = 'SupportScreen'
 }

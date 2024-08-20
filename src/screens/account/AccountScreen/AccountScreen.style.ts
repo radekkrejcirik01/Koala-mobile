@@ -3,13 +3,12 @@ import COLORS from '@constants/COLORS';
 
 export const AccountScreenStyle = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingLeft: 15,
-        paddingRight: 20
+        flex: 1
     },
     contentContainer: {
         flex: 1,
         paddingTop: 5,
+        paddingHorizontal: 15,
         paddingBottom: 25,
         justifyContent: 'space-between'
     },

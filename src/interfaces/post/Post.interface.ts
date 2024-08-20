@@ -78,3 +78,12 @@ export interface ReplyPostInterface {
 export interface CheckOnMessagePostInterface {
     message: string;
 }
+
+export interface SupportPostInterface {
+    message: string;
+    email: string;
+}
+
+export interface FeedbackPostInterface {
+    message: string;
+}

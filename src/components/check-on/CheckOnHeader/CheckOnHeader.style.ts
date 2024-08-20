@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const CheckOnHeaderStyle = StyleSheet.create({
     container: {
-        paddingVertical: 5,
         paddingHorizontal: 15,
         flexDirection: 'row'
     },

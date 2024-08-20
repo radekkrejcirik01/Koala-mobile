@@ -18,6 +18,8 @@ import { AnxietyAndPanicScreen } from '@screens/account/AnxietyAndPanicScreen/An
 import { DepressionScreen } from '@screens/account/DepressionScreen/DepressionScreen';
 import { WellbeingScreen } from '@screens/account/WellbeingScreen/WellbeingScreen';
 import { KudosScreen } from '@screens/account/KudosScreen/KudosScreen';
+import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
+import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -39,6 +41,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.DepressionScreen}
             component={DepressionScreen}
+            options={NoHeader}
+        />
+        <Account.Screen
+            name={AccountStackNavigatorEnum.FeedbackScreen}
+            component={FeedbackScreen}
             options={NoHeader}
         />
         <Account.Screen
@@ -84,6 +91,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.SharingHistoryScreen}
             component={SharingHistoryScreen}
+            options={NoHeader}
+        />
+        <Account.Screen
+            name={AccountStackNavigatorEnum.SupportScreen}
+            component={SupportScreen}
             options={NoHeader}
         />
     </Account.Navigator>

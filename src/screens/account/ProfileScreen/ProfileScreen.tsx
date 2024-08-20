@@ -50,7 +50,7 @@ export const ProfileScreen = (): React.JSX.Element => {
                         </Text>
                         <Icon
                             name={IconEnum.BACK}
-                            size={18}
+                            size={16}
                             style={{ transform: [{ rotate: '180deg' }] }}
                         />
                     </TouchableOpacity>
@@ -68,34 +68,16 @@ export const ProfileScreen = (): React.JSX.Element => {
                         </Text>
                         <Icon
                             name={IconEnum.BACK}
-                            size={18}
+                            size={16}
                             style={{ transform: [{ rotate: '180deg' }] }}
                         />
                     </TouchableOpacity>
+                </View>
+                <View style={ProfileScreenStyle.buttonsContainer}>
                     <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() =>
-                            navigateTo(
-                                AccountStackNavigatorEnum.SharingHistoryScreen
-                            )
-                        }
-                        style={ProfileScreenStyle.buttonView}
-                    >
-                        <Text style={ProfileScreenStyle.buttonText}>
-                            🫶 Feedback
-                        </Text>
-                        <Icon
-                            name={IconEnum.BACK}
-                            size={18}
-                            style={{ transform: [{ rotate: '180deg' }] }}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() =>
-                            navigateTo(
-                                AccountStackNavigatorEnum.SharingHistoryScreen
-                            )
+                            navigateTo(AccountStackNavigatorEnum.SupportScreen)
                         }
                         style={ProfileScreenStyle.buttonView}
                     >
@@ -104,7 +86,23 @@ export const ProfileScreen = (): React.JSX.Element => {
                         </Text>
                         <Icon
                             name={IconEnum.BACK}
-                            size={18}
+                            size={16}
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() =>
+                            navigateTo(AccountStackNavigatorEnum.FeedbackScreen)
+                        }
+                        style={ProfileScreenStyle.buttonView}
+                    >
+                        <Text style={ProfileScreenStyle.buttonText}>
+                            🫶 Feedback
+                        </Text>
+                        <Icon
+                            name={IconEnum.BACK}
+                            size={16}
                             style={{ transform: [{ rotate: '180deg' }] }}
                         />
                     </TouchableOpacity>
