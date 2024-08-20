@@ -14,7 +14,7 @@ export const LastlySharedCardStyle = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        color: COLORS.BLACK_75,
+        color: COLORS.GRAY_200,
         fontWeight: 'bold'
     },
     button: {
@@ -26,9 +26,5 @@ export const LastlySharedCardStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'flex-end'
-    },
-    buttonText: {
-        fontSize: 26,
-        color: COLORS.BLACK_75
     }
 });
