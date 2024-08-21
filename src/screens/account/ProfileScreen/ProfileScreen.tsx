@@ -41,7 +41,8 @@ export const ProfileScreen = (): React.JSX.Element => {
                         onPress={() =>
                             navigateTo(AccountStackNavigatorEnum.AccountScreen)
                         }
-                        title="🌱 Account"
+                        icon="🌱"
+                        title="Account"
                     />
                     <ProfileItem
                         onPress={() =>
@@ -49,7 +50,8 @@ export const ProfileScreen = (): React.JSX.Element => {
                                 AccountStackNavigatorEnum.SharingHistoryScreen
                             )
                         }
-                        title="📱 Shared history"
+                        icon="📱"
+                        title="Sharing history"
                         isLast
                     />
                 </View>
@@ -58,13 +60,15 @@ export const ProfileScreen = (): React.JSX.Element => {
                         onPress={() =>
                             navigateTo(AccountStackNavigatorEnum.SupportScreen)
                         }
-                        title="🫂 Support"
+                        icon="🫂"
+                        title="Support"
                     />
                     <ProfileItem
                         onPress={() =>
                             navigateTo(AccountStackNavigatorEnum.FeedbackScreen)
                         }
-                        title="🫶 Feedback"
+                        icon="🫶"
+                        title="Feedback"
                         isLast
                     />
                 </View>

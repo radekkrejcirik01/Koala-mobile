@@ -7,12 +7,12 @@ export const SupportScreenStyle = StyleSheet.create({
     },
     title: {
         marginTop: 20,
-        marginLeft: 25
+        marginLeft: 20
     },
     input: {
         height: 150,
         width: '90%',
-        marginTop: 15,
+        marginTop: 10,
         paddingTop: 15,
         padding: 15,
         fontSize: 16,

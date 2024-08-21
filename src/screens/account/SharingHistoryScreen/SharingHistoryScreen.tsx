@@ -63,7 +63,7 @@ export const SharingHistoryScreen = (): React.JSX.Element => {
         <View
             style={[
                 SharingHistoryScreenStyle.container,
-                { paddingTop: top + 10, marginBottom: bottom }
+                { paddingTop: top, marginBottom: bottom }
             ]}
         >
             <ScreenHeader title="History" />

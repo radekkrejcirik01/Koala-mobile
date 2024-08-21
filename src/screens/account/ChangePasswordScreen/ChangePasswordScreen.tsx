@@ -69,7 +69,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
         <View
             style={[
                 ChangePasswordScreenStyle.container,
-                { paddingTop: top + 10, paddingBottom: bottom + 10 }
+                { paddingTop: top, paddingBottom: bottom + 10 }
             ]}
         >
             <ScreenHeader title="New password" />

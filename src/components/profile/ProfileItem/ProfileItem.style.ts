@@ -13,7 +13,15 @@ export const ProfileItemStyle = StyleSheet.create({
     noBorder: {
         borderBottomWidth: 0
     },
+    row: {
+        flexDirection: 'row'
+    },
+    icon: {
+        fontSize: 16,
+        color: COLORS.BLACK
+    },
     title: {
+        marginLeft: 10,
         fontSize: 16,
         color: COLORS.BLACK,
         fontWeight: '500'

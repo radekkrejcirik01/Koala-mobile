@@ -3,12 +3,11 @@ import COLORS from '@constants/COLORS';
 
 export const ChangePasswordScreenStyle = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingLeft: 15,
-        paddingRight: 20
+        flex: 1
     },
     contentView: {
-        paddingTop: 10
+        paddingTop: 5,
+        paddingHorizontal: 15
     },
     inputTitleText: {
         marginTop: 15,

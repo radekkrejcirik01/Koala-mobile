@@ -16,7 +16,7 @@ export const MessageItemStyle = StyleSheet.create({
     },
     messageText: {
         width: '82%',
-        fontSize: 17,
+        fontSize: 16,
         color: COLORS.BLACK
     },
     emojiText: {

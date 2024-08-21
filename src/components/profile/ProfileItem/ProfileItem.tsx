@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import {
@@ -10,6 +10,7 @@ import { ProfileItemStyle } from '@components/profile/ProfileItem/ProfileItem.st
 
 export const ProfileItem = ({
     onPress,
+    icon,
     title,
     isLast
 }: ProfileItemProps): JSX.Element => (
@@ -18,7 +19,10 @@ export const ProfileItem = ({
         onPress={onPress}
         style={[ProfileItemStyle.view, isLast && ProfileItemStyle.noBorder]}
     >
-        <Text style={ProfileItemStyle.title}>{title}</Text>
+        <View style={ProfileItemStyle.row}>
+            <Text style={ProfileItemStyle.icon}>{icon}</Text>
+            <Text style={ProfileItemStyle.title}>{title}</Text>
+        </View>
         <Icon
             name={IconEnum.BACK}
             size={16}

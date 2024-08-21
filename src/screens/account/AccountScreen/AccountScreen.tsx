@@ -68,7 +68,7 @@ export const AccountScreen = (): React.JSX.Element => {
         <View
             style={[
                 AccountScreenStyle.container,
-                { paddingTop: top + 10, paddingBottom: bottom + 10 }
+                { paddingTop: top, paddingBottom: bottom + 10 }
             ]}
         >
             <ScreenHeader title="Account" />

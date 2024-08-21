@@ -33,8 +33,7 @@ export const AnxietyAndPanicScreenStyle = StyleSheet.create({
     },
     messagesContainer: {
         paddingLeft: 25,
-        paddingRight: 20,
-        paddingTop: 15
+        paddingRight: 20
     },
     modal: {
         margin: 0,
