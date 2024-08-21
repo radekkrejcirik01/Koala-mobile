@@ -15,34 +15,21 @@ export const ProfileScreenStyle = StyleSheet.create({
     namesView: {
         alignItems: 'center'
     },
-    nameText: {
+    name: {
         fontSize: 25,
         color: COLORS.BLACK_50,
         fontWeight: '600'
     },
-    usernameText: {
+    username: {
         fontSize: 16,
         color: COLORS.PURPLE,
         fontWeight: '500'
     },
     buttonsContainer: {
         marginTop: 20,
-        marginHorizontal: 10,
+        marginHorizontal: 15,
         borderRadius: 10,
         backgroundColor: COLORS.WHITE_100
-    },
-    buttonView: {
-        paddingVertical: 12,
-        paddingHorizontal: 15,
-        borderBottomWidth: 0.4,
-        borderBottomColor: COLORS.LIGHTGRAY,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    buttonText: {
-        fontSize: 16,
-        color: COLORS.BLACK,
-        fontWeight: '500'
     },
     text: {
         marginTop: 5,

@@ -41,7 +41,7 @@ export const FeedbackScreen = (): JSX.Element => {
             <ScreenHeader title="Feedback" />
             <Text
                 style={FeedbackScreenStyle.title}
-            >{`Share with us what you like or don't like\nabout Koala 🫶`}</Text>
+            >{`Share with us what you like or don't like about Koala 🫶`}</Text>
             <TextInput
                 placeholder="Message..."
                 value={message}

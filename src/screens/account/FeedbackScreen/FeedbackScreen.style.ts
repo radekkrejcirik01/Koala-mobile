@@ -7,14 +7,15 @@ export const FeedbackScreenStyle = StyleSheet.create({
     },
     title: {
         marginTop: 20,
-        marginLeft: 20
+        marginLeft: 25
     },
     input: {
         height: 150,
         width: '90%',
-        marginTop: 10,
+        marginTop: 15,
         paddingTop: 15,
         padding: 15,
+        fontSize: 16,
         borderRadius: 20,
         color: COLORS.BLACK,
         backgroundColor: COLORS.WHITE_200,
