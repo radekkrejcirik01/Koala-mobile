@@ -34,7 +34,8 @@ export const Send = ({
                                 key={item.username}
                                 item={{
                                     name: item.name,
-                                    username: item.username
+                                    username: item.username,
+                                    profilePhoto: item?.profilePhoto
                                 }}
                                 onSelect={() => onFriendSelect(item.id)}
                                 sent={sent}

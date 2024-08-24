@@ -9,6 +9,7 @@ import { FriendItemStyle } from '@components/friends/FriendItem/FriendItem.style
 
 export const FriendItem = ({
     name,
+    profilePhoto,
     onPress,
     onLongPress,
     size,
@@ -21,7 +22,7 @@ export const FriendItem = ({
         delayLongPress={150}
         style={[FriendItemStyle.container, style]}
     >
-        <ProfilePhoto name={name} size={size} />
+        <ProfilePhoto name={name} photo={profilePhoto} size={size} />
         <Text adjustsFontSizeToFit style={FriendItemStyle.nameText}>
             {name}
         </Text>

@@ -15,7 +15,11 @@ export const InviteItem = ({
 }: InviteItemProps): JSX.Element => (
     <View style={InviteItemStyle.container}>
         <View style={InviteItemStyle.content}>
-            <ProfilePhoto name={item.username} size={40} />
+            <ProfilePhoto
+                name={item.username}
+                photo={item?.profilePhoto}
+                size={40}
+            />
             <Text style={InviteItemStyle.usernameText}>{item.username}</Text>
         </View>
         <View style={InviteItemStyle.buttonsContainer}>

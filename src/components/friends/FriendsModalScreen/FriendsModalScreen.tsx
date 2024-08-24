@@ -258,6 +258,7 @@ export const FriendsModalScreen = ({
                             {!!friends?.length && friends[index] ? (
                                 <FriendItem
                                     name={friends[index]?.name}
+                                    profilePhoto={friends[index]?.profilePhoto}
                                     onPress={() =>
                                         onFriendPress(
                                             friends[index]?.id,

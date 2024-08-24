@@ -42,7 +42,7 @@
     "react-native-gesture-handler": "^2.6.0",
     "react-native-google-mobile-ads": "^12.4.0",
     "react-native-haptic-feedback": "^2.2.0",
-    "react-native-image-crop-picker": "^0.37.3",
+    "react-native-image-crop-picker": "^0.41.2",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-modal": "^13.0.0",
     "react-native-permissions": "^3.10.1",

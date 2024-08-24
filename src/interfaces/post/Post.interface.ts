@@ -87,3 +87,8 @@ export interface SupportPostInterface {
 export interface FeedbackPostInterface {
     message: string;
 }
+
+export interface ProfilePhotoPostInterface {
+    buffer: string;
+    fileName: string;
+}

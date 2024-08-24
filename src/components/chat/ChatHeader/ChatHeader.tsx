@@ -3,7 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useAppState } from '@hooks/useAppState';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
-import { ChatHeaderProps } from '@components/chat/ChatHeader/ChatHeader.props';
+import {
+    ChatHeaderDefaultProps,
+    ChatHeaderProps
+} from '@components/chat/ChatHeader/ChatHeader.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
@@ -15,7 +18,8 @@ import { BackButton } from '@components/general/BackButton/BackButton';
 export const ChatHeader = ({
     chatUserId,
     username,
-    name
+    name,
+    profilePhoto
 }: ChatHeaderProps): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
@@ -50,6 +54,7 @@ export const ChatHeader = ({
                 <View style={ChatHeaderStyle.contentContainer}>
                     <ProfilePhoto
                         name={name}
+                        photo={profilePhoto}
                         size={38}
                         acronymStyle={ChatHeaderStyle.acronym}
                     />
@@ -78,3 +83,5 @@ export const ChatHeader = ({
         </View>
     );
 };
+
+ChatHeader.defaultProps = ChatHeaderDefaultProps;

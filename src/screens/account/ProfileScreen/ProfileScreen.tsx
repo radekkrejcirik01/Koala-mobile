@@ -1,7 +1,16 @@
-import React from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import {
+    Alert,
+    Image,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ImagePicker from 'react-native-image-crop-picker';
+import fs from 'react-native-fs';
 import Share, { ShareSingleOptions, Social } from 'react-native-share';
 import { useNavigation } from '@hooks/useNavigation';
 import { ReducerProps } from '@store/index/index.props';
@@ -12,15 +21,44 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { ProfileHeader } from '@components/profile/ProfileHeader/ProfileHeader';
 import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
 import COLORS from '@constants/COLORS';
+import { postRequest } from '@utils/Axios/Axios.service';
+import { setProfilePhotoAction } from '@store/UserReducer';
+import { ProfilePhotoPostInterface } from '@interfaces/post/Post.interface';
+import { ResponseProfilePhotoPostInterface } from '@interfaces/response/Response.interface';
 import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
-    const { username, name } = useSelector(
+    const { username, name, profilePhoto } = useSelector(
         (state: ReducerProps) => state.user.user
     );
 
+    const dispatch = useDispatch();
     const { top } = useSafeAreaInsets();
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+
+    const changeProfilePhoto = useCallback(() => {
+        ImagePicker.openPicker({
+            width: 500,
+            height: 500,
+            cropping: true,
+            waitAnimationEnd: false
+        }).then(async (image) => {
+            const base64 = await fs.readFile(image?.path, 'base64');
+            dispatch(setProfilePhotoAction(image?.path));
+
+            postRequest<
+                ResponseProfilePhotoPostInterface,
+                ProfilePhotoPostInterface
+            >('profile-photo', {
+                buffer: base64,
+                fileName: image.filename
+            }).subscribe((response: ResponseProfilePhotoPostInterface) => {
+                if (!response?.status) {
+                    Alert.alert("Sorry, we couldn't upload the photo");
+                }
+            });
+        });
+    }, [dispatch]);
 
     const share = async () => {
         const shareOptions: ShareSingleOptions = {
@@ -45,7 +83,13 @@ export const ProfileScreen = (): React.JSX.Element => {
             <View>
                 <ProfileHeader />
                 <View style={ProfileScreenStyle.container}>
-                    <ProfilePhoto name={name} size={75} />
+                    <TouchableOpacity onPress={changeProfilePhoto}>
+                        <ProfilePhoto
+                            name={name}
+                            photo={profilePhoto}
+                            size={75}
+                        />
+                    </TouchableOpacity>
                     <View style={ProfileScreenStyle.namesView}>
                         <Text style={ProfileScreenStyle.name}>{name}</Text>
                         <Text style={ProfileScreenStyle.username}>

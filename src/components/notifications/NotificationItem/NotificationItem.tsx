@@ -60,6 +60,7 @@ export const NotificationItem = ({
                 <View style={NotificationItemStyle.centerView}>
                     <ProfilePhoto
                         name={item.name}
+                        photo={item?.profilePhoto}
                         size={48}
                         acronymStyle={NotificationItemStyle.profilePhoto}
                     />

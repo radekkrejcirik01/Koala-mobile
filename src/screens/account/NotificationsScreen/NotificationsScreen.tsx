@@ -78,6 +78,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
                         id: item.id,
                         chatUserId: item.senderId,
                         name: item.name,
+                        profilePhoto: item?.profilePhoto,
                         username: item.sender,
                         conversationId: item?.conversationId
                     })

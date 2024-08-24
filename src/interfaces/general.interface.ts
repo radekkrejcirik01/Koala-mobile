@@ -5,11 +5,13 @@ export interface UserInterface {
     id?: number;
     name: string;
     username: string;
+    profilePhoto: string;
 }
 
 export interface InviteInterface {
     id: number;
     username: string;
+    profilePhoto?: string;
 }
 
 export interface NotificationInterface {
@@ -17,6 +19,7 @@ export interface NotificationInterface {
     senderId?: number;
     sender?: string;
     name: string;
+    profilePhoto?: string;
     message: string;
     type: NotificationItemEnum;
     time: number;

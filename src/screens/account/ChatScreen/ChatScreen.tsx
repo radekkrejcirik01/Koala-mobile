@@ -33,7 +33,8 @@ import { getShortMessage } from '@functions/getShortMessage';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-    const { id, chatUserId, name, username, conversationId } = route.params;
+    const { id, chatUserId, name, profilePhoto, username, conversationId } =
+        route.params;
 
     const { id: userId } = useSelector(
         (state: ReducerProps) => state.user.user
@@ -294,6 +295,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 chatUserId={chatUserId}
                 username={username}
                 name={name}
+                profilePhoto={profilePhoto}
             />
             <ChatList
                 scrollViewRef={scrollViewRef}

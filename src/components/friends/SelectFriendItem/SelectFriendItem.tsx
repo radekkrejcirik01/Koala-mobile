@@ -31,6 +31,7 @@ export const SelectFriendItem = ({
         >
             <ProfilePhoto
                 name={item.name}
+                photo={item?.profilePhoto}
                 size={45}
                 style={[
                     SelectFriendItemStyle.profilePhoto,

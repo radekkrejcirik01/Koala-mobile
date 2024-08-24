@@ -28,7 +28,11 @@ export const UserReducer = createSlice({
     }
 });
 
-export const { setUserToken, setUserStateAction, resetUserState } =
-    UserReducer.actions;
+export const {
+    setUserToken,
+    setUserStateAction,
+    setProfilePhotoAction,
+    resetUserState
+} = UserReducer.actions;
 
 export default UserReducer.reducer;

@@ -100,3 +100,9 @@ export interface ResponseLastSharedMessageGetInterface {
     message: string;
     data: EmotionInterface;
 }
+
+export interface ResponseProfilePhotoPostInterface {
+    status: string;
+    message: string;
+    data: string;
+}

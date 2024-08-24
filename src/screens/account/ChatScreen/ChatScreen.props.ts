@@ -7,6 +7,7 @@ export interface ChatScreenProps {
                 id: number;
                 chatUserId: number;
                 name: string;
+                profilePhoto?: string;
                 username: string;
                 conversationId: number;
             };
