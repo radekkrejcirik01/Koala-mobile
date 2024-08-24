@@ -36,7 +36,7 @@ export const ProfileScreen = (): React.JSX.Element => {
     const { top } = useSafeAreaInsets();
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
-    const changeProfilePhoto = useCallback(() => {
+    const addPhoto = useCallback(() => {
         ImagePicker.openPicker({
             width: 500,
             height: 500,
@@ -83,13 +83,22 @@ export const ProfileScreen = (): React.JSX.Element => {
             <View>
                 <ProfileHeader />
                 <View style={ProfileScreenStyle.container}>
-                    <TouchableOpacity onPress={changeProfilePhoto}>
+                    <View>
                         <ProfilePhoto
                             name={name}
                             photo={profilePhoto}
                             size={75}
                         />
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            onPress={addPhoto}
+                            style={ProfileScreenStyle.photoButton}
+                        >
+                            <Text style={ProfileScreenStyle.photoEmoji}>
+                                📷
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={ProfileScreenStyle.namesView}>
                         <Text style={ProfileScreenStyle.name}>{name}</Text>
                         <Text style={ProfileScreenStyle.username}>
