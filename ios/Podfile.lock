@@ -582,15 +582,15 @@ PODS:
     - GoogleUserMessagingPlatform (= 2.1.0)
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNImageCropPicker (0.37.3):
+  - RNImageCropPicker (0.41.2):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.37.3)
-    - TOCropViewController
-  - RNImageCropPicker/QBImagePickerController (0.37.3):
+    - RNImageCropPicker/QBImagePickerController (= 0.41.2)
+    - TOCropViewController (~> 2.7.4)
+  - RNImageCropPicker/QBImagePickerController (0.41.2):
     - React-Core
     - React-RCTImage
-    - TOCropViewController
+    - TOCropViewController (~> 2.7.4)
   - RNPermissions (3.10.1):
     - React-Core
   - RNReactNativeHapticFeedback (2.2.0):
@@ -643,7 +643,7 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SocketRocket (0.6.1)
-  - TOCropViewController (2.6.1)
+  - TOCropViewController (2.7.4)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -934,7 +934,7 @@ SPEC CHECKSUMS:
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
   RNGoogleMobileAds: d9f4d0085a6fe3d7e203930930d16e1cc7b3dd03
-  RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
+  RNImageCropPicker: 771e2ca319d2cf92e04ebf334ece892ee9a6728f
   RNPermissions: 4e3714e18afe7141d000beae3755e5b5fb2f5e05
   RNReactNativeHapticFeedback: ec56a5f81c3941206fd85625fa669ffc7b4545f9
   RNReanimated: 726395a2fa2f04cea340274ba57a4e659bc0d9c1
@@ -945,7 +945,7 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
+  TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 
 PODFILE CHECKSUM: bb327da71767b63469c4459afdd5e84c05f34e59
