@@ -1,17 +1,10 @@
 import React, { useCallback } from 'react';
-import {
-    Alert,
-    Image,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagePicker from 'react-native-image-crop-picker';
 import fs from 'react-native-fs';
-import Share, { ShareSingleOptions, Social } from 'react-native-share';
+import Share from 'react-native-share';
 import { useNavigation } from '@hooks/useNavigation';
 import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
@@ -20,11 +13,14 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { ProfileHeader } from '@components/profile/ProfileHeader/ProfileHeader';
 import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
-import COLORS from '@constants/COLORS';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { setProfilePhotoAction } from '@store/UserReducer';
 import { ProfilePhotoPostInterface } from '@interfaces/post/Post.interface';
 import { ResponseProfilePhotoPostInterface } from '@interfaces/response/Response.interface';
+import {
+    ImagePickerOptions,
+    ShareOptions
+} from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
@@ -37,14 +33,11 @@ export const ProfileScreen = (): React.JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
     const addPhoto = useCallback(() => {
-        ImagePicker.openPicker({
-            width: 500,
-            height: 500,
-            cropping: true,
-            waitAnimationEnd: false
-        }).then(async (image) => {
-            const base64 = await fs.readFile(image?.path, 'base64');
-            dispatch(setProfilePhotoAction(image?.path));
+        ImagePicker.openPicker(ImagePickerOptions).then(async (image) => {
+            const path = image?.path;
+            const base64 = await fs.readFile(path, 'base64');
+
+            dispatch(setProfilePhotoAction(path));
 
             postRequest<
                 ResponseProfilePhotoPostInterface,
@@ -61,18 +54,7 @@ export const ProfileScreen = (): React.JSX.Element => {
     }, [dispatch]);
 
     const share = async () => {
-        const shareOptions: ShareSingleOptions = {
-            backgroundBottomColor: COLORS.BUTTON_BLUE,
-            backgroundTopColor: COLORS.BUTTON_BLUE,
-            stickerImage: Image.resolveAssetSource(
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
-                require('../../../assets/images/preview.png')
-            ).uri,
-            social: Social.InstagramStories,
-            appId: 'app.com.koala'
-        };
-
-        await Share.shareSingle(shareOptions);
+        await Share.shareSingle(ShareOptions);
     };
 
     return (
