@@ -14,6 +14,10 @@ export interface UsernamePostInterface {
     username: string;
 }
 
+export interface ChangeNamePostInterface {
+    name: string;
+}
+
 export interface ChangePasswordPostInterface {
     oldPassword: string;
     newPassword: string;

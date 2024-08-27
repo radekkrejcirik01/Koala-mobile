@@ -24,6 +24,9 @@ export const UserReducer = createSlice({
         setProfilePhotoAction: (state, action) => {
             state.user.profilePhoto = action.payload;
         },
+        setNameAction: (state, action) => {
+            state.user.name = action.payload;
+        },
         resetUserState: () => initialState
     }
 });
@@ -32,6 +35,7 @@ export const {
     setUserToken,
     setUserStateAction,
     setProfilePhotoAction,
+    setNameAction,
     resetUserState
 } = UserReducer.actions;
 

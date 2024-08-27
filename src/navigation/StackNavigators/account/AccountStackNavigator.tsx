@@ -20,6 +20,7 @@ import { WellbeingScreen } from '@screens/account/WellbeingScreen/WellbeingScree
 import { KudosScreen } from '@screens/account/KudosScreen/KudosScreen';
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
+import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -41,6 +42,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
         <Account.Screen
             name={AccountStackNavigatorEnum.DepressionScreen}
             component={DepressionScreen}
+            options={NoHeader}
+        />
+        <Account.Screen
+            name={AccountStackNavigatorEnum.EditNameScreen}
+            component={EditNameScreen}
             options={NoHeader}
         />
         <Account.Screen
