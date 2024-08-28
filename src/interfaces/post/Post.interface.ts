@@ -72,7 +72,7 @@ export interface ExpressionPostInterface {
 export interface PasswordResetPostInterface {
     username: string;
     email: string;
-    friends: string;
+    friendUsername: string;
 }
 
 export interface ReplyPostInterface {

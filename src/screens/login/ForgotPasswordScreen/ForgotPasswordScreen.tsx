@@ -11,40 +11,46 @@ import { ForgotPasswordScreenStyle } from '@screens/login/ForgotPasswordScreen/F
 import { postRequest } from '@utils/Axios/Axios.service';
 import { PasswordResetPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
+import { ResponseInterface } from '@interfaces/response/Response.interface';
 
 export const ForgotPasswordScreen = (): React.JSX.Element => {
     const [username, setUsername] = useState<string>();
     const [email, setEmail] = useState<string>();
-    const [friends, setFriends] = useState<string>();
+    const [friendUsername, setFriendUsername] = useState<string>();
 
     const [posting, setPosting] = useState<boolean>();
 
     const send = useCallback(() => {
-        if (!username || !email || !friends) {
+        if (!username || !email || !friendUsername) {
             Alert.alert('Please enter all information');
             return;
         }
 
         setPosting(true);
 
-        postRequest<Response, PasswordResetPostInterface>('password-reset', {
-            username,
-            email,
-            friends
-        }).subscribe((response: Response) => {
+        postRequest<ResponseInterface, PasswordResetPostInterface>(
+            'password-reset',
+            {
+                username,
+                email,
+                friendUsername
+            }
+        ).subscribe((response: ResponseInterface) => {
             setPosting(false);
 
             if (response?.status) {
-                Alert.alert(
-                    'Success ✅',
-                    'New password is coming within 24 hours on your email'
-                );
+                if (response?.message?.includes('incorrect')) {
+                    Alert.alert('Incorrect usernames');
+                    return;
+                }
+
+                Alert.alert('Success ✅', 'Check your email');
                 setUsername('');
                 setEmail('');
-                setFriends('');
+                setFriendUsername('');
             }
         });
-    }, [email, friends, username]);
+    }, [email, friendUsername, username]);
 
     return (
         <ScrollView style={ForgotPasswordScreenStyle.container}>
@@ -68,14 +74,13 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
                 style={ForgotPasswordScreenStyle.input}
             />
             <Text style={ForgotPasswordScreenStyle.inputTitleText}>
-                Safety confirmation{'\n'}Type names of all your friends this
-                account had
+                Safety confirmation{'\n'}Type username of one of your friends
             </Text>
             <TextInput
                 autoCorrect={false}
                 autoCapitalize="none"
-                value={friends}
-                onChangeText={setFriends}
+                value={friendUsername}
+                onChangeText={setFriendUsername}
                 style={ForgotPasswordScreenStyle.input}
             />
             <TouchableOpacity
