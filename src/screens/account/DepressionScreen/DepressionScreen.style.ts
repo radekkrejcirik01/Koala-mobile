@@ -14,13 +14,6 @@ export const DepressionScreenStyle = StyleSheet.create({
         height: 250,
         alignSelf: 'center'
     },
-    description: {
-        width: '85%',
-        marginTop: 10,
-        color: COLORS.LIGHTGRAY_200,
-        alignSelf: 'center',
-        textAlign: 'center'
-    },
     line: {
         marginHorizontal: 25,
         marginTop: 15,

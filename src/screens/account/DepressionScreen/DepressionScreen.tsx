@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
 import { useMessagesActions } from '@hooks/useMessagesActions';
@@ -36,9 +36,6 @@ export const DepressionScreen = (): JSX.Element => {
                         style={DepressionScreenStyle.image}
                     />
                 </View>
-                <Text style={DepressionScreenStyle.description}>
-                    {`You are not alone and you won't feel like this forever 💚`}
-                </Text>
                 <View style={DepressionScreenStyle.line} />
                 <View style={DepressionScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (

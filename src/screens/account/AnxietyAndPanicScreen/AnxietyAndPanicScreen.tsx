@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
 import { useMessagesActions } from '@hooks/useMessagesActions';
@@ -38,9 +38,6 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
                         style={AnxietyAndPanicScreenStyle.image}
                     />
                 </View>
-                <Text style={AnxietyAndPanicScreenStyle.description}>
-                    Anxiety can be very difficult, but you got this! 🫶
-                </Text>
                 <View style={AnxietyAndPanicScreenStyle.line} />
                 <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
                     {messages.map((value, index) => (
