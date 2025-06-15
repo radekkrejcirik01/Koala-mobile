@@ -15,6 +15,6 @@ export const MessagesCardStyle = StyleSheet.create({
     text: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: COLORS.BLACK_75
+        color: COLORS.BLACK
     }
 });

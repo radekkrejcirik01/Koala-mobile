@@ -9,7 +9,7 @@ export const HomeHeaderStyle = StyleSheet.create({
     title: {
         marginTop: 10,
         fontSize: 30,
-        color: COLORS.BLACK_75,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     }
 });

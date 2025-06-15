@@ -14,7 +14,7 @@ export const LastlySharedCardStyle = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        color: COLORS.GRAY_200,
+        color: COLORS.BLACK,
         fontWeight: 'bold'
     },
     button: {
