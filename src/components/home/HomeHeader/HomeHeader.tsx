@@ -36,7 +36,7 @@ export const HomeHeader = (): JSX.Element => {
           {helloText}, {name}
         </Text>
         <TouchableOpacity activeOpacity={0.8} onPress={showModal}>
-          <Text style={HomeHeaderStyle.heartText}>️🙋</Text>
+          <Text style={HomeHeaderStyle.heartText}>️😴</Text>
         </TouchableOpacity>
       </View>
       <Modal
