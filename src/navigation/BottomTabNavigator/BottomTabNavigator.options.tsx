@@ -21,9 +21,9 @@ export const HomeTabOptions: BottomTabNavigationOptions = {
   )
 };
 
-export const CheckOnTabbOptions: BottomTabNavigationOptions = {
+export const NotificationsTabbOptions: BottomTabNavigationOptions = {
   tabBarIcon: () => (
-    <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🙋</Text>
+    <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>💬</Text>
   )
 };
 

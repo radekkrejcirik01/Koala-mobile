@@ -3,13 +3,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigatorEnum } from '@navigation/BottomTabNavigator/BottomTabNavigator.enum';
 import {
   BottomTabNavigatorOptions,
-  CheckOnTabbOptions,
   HomeTabOptions,
+  NotificationsTabbOptions,
   ProfileTabOptions
 } from '@navigation/BottomTabNavigator/BottomTabNavigator.options';
 import { HomeScreen } from '@screens/account/HomeScreen/HomeScreen';
 import { ProfileScreen } from '@screens/account/ProfileScreen/ProfileScreen';
-import { CheckOnScreen } from '@screens/account/CheckOnScreen/CheckOnScreen';
+import { NotificationsScreen } from '@screens/account/NotificationsScreen/NotificationsScreen';
 
 export const BottomTabNavigator = (): JSX.Element => {
   const TabBar = createBottomTabNavigator();
@@ -23,8 +23,8 @@ export const BottomTabNavigator = (): JSX.Element => {
       />
       <TabBar.Screen
         name={BottomTabNavigatorEnum.CheckOnTab}
-        component={CheckOnScreen}
-        options={CheckOnTabbOptions}
+        component={NotificationsScreen}
+        options={NotificationsTabbOptions}
       />
       <TabBar.Screen
         name={BottomTabNavigatorEnum.ProfileTab}

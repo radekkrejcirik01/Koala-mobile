@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesStyle = StyleSheet.create({
   titleText: {
-    marginTop: 30,
+    marginTop: 40,
     marginLeft: 20,
     fontSize: 18,
     color: COLORS.PURPLE,

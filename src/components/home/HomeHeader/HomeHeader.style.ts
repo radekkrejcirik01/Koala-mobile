@@ -3,6 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
   container: {
+    paddingTop: 25,
     paddingLeft: 20,
     paddingRight: 15
   },
@@ -16,7 +17,6 @@ export const HomeHeaderStyle = StyleSheet.create({
     color: COLORS.BLACK
   },
   title: {
-    marginTop: 15,
     fontSize: 30,
     color: COLORS.BLACK,
     fontWeight: 'bold'

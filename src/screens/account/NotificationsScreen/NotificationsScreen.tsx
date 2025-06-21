@@ -27,14 +27,10 @@ export const NotificationsScreen = (): React.JSX.Element => {
   );
   const [loaded, setLoaded] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [filterFriendId, setFilterFriendId] = useState<number>();
 
   const loadNotifications = useCallback(
     (lastId?: number) => {
       let endpoint = 'notifications';
-      if (filterFriendId) {
-        endpoint = `friend-notifications/${filterFriendId}`;
-      }
       if (lastId) {
         endpoint += `/${lastId}`;
       }
@@ -60,7 +56,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
         }
       );
     },
-    [dispatch, filterFriendId]
+    [dispatch]
   );
 
   useFocusEffect(loadNotifications);
@@ -93,8 +89,8 @@ export const NotificationsScreen = (): React.JSX.Element => {
   }, [loadNotifications, notifications]);
 
   return (
-    <View style={[NotificationsScreenStyle.container, { paddingTop: top }]}>
-      <NotificationsHeader onPressFriend={setFilterFriendId} />
+    <View style={[NotificationsScreenStyle.container, { marginTop: top }]}>
+      <NotificationsHeader />
       <FlashList
         data={notifications}
         renderItem={renderItem}
@@ -123,7 +119,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
             </Text>
           ) : (
             <ActivityIndicator
-              color={COLORS.PURPLE}
+              color={COLORS.LIGHTGRAY}
               style={NotificationsScreenStyle.activityIndicator}
             />
           )
