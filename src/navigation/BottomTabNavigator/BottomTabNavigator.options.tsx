@@ -11,26 +11,23 @@ export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
   },
   tabBarActiveTintColor: COLORS.PURPLE,
   tabBarInactiveTintColor: COLORS.LIGHTGRAY_100,
-  tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel,
-  headerShown: false
+  headerShown: false,
+  tabBarShowLabel: false
 };
 
 export const HomeTabOptions: BottomTabNavigationOptions = {
-  tabBarLabel: 'Home',
   tabBarIcon: () => (
     <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🏠</Text>
   )
 };
 
 export const CheckOnTabbOptions: BottomTabNavigationOptions = {
-  tabBarLabel: 'Check-on',
   tabBarIcon: () => (
     <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🙋</Text>
   )
 };
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
-  tabBarLabel: 'Profile',
   tabBarIcon: () => (
     <FastImage
       source={require('../../assets/images/koala.png')}
