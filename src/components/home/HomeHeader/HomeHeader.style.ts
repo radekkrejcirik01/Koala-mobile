@@ -6,10 +6,23 @@ export const HomeHeaderStyle = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 15
   },
+  friendsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  friendsText: {
+    fontSize: 22,
+    color: COLORS.BLACK
+  },
   title: {
-    marginTop: 10,
+    marginTop: 15,
     fontSize: 30,
     color: COLORS.BLACK,
     fontWeight: 'bold'
+  },
+  modal: {
+    margin: 0,
+    justifyContent: 'flex-end'
   }
 });
