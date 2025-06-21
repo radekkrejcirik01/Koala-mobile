@@ -8,8 +8,8 @@ export const BottomTabNavigatorStyle = StyleSheet.create({
     color: COLORS.BLACK_50
   },
   tabBarIconImage: {
-    height: 25,
-    width: 25,
+    height: 28,
+    width: 28,
     marginTop: 5,
     opacity: 0.9
   }
