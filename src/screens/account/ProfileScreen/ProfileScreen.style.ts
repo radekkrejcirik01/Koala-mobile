@@ -4,7 +4,6 @@ import COLORS from '@constants/COLORS';
 export const ProfileScreenStyle = StyleSheet.create({
   contentContainerStyle: {
     flexGrow: 1,
-    paddingTop: 10,
     paddingBottom: 10,
     justifyContent: 'space-between'
   },

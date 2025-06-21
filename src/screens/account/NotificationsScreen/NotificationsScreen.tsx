@@ -1,5 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Keyboard,
+  RefreshControl,
+  Text,
+  View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
@@ -14,13 +20,19 @@ import { setUnseenNotifications } from '@store/NotificationsReducer';
 import COLORS from '@constants/COLORS';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
-import { NotificationsHeader } from '@components/notifications/NotificationsHeader/NotificationsHeader';
+import { AddButton } from '@components/general/AddButton/AddButton';
+import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
+import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
+import { Modal } from '@components/general/Modal/Modal';
+import { useModal } from '@hooks/useModal';
 
 export const NotificationsScreen = (): React.JSX.Element => {
   const dispatch = useDispatch();
 
   const { top } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+  const { modalVisible, showModal, hideModal } = useModal();
 
   const [notifications, setNotifications] = useState<NotificationInterface[]>(
     []
@@ -88,9 +100,18 @@ export const NotificationsScreen = (): React.JSX.Element => {
     }
   }, [loadNotifications, notifications]);
 
+  const hideModalAndKeyboard = useCallback(() => {
+    Keyboard.dismiss();
+    hideModal();
+  }, [hideModal]);
+
   return (
     <View style={[NotificationsScreenStyle.container, { marginTop: top }]}>
-      <NotificationsHeader />
+      <ScreenHeader
+        title="Messages 💬"
+        rightComponent={<AddButton onPress={showModal} />}
+        goBack={false}
+      />
       <FlashList
         data={notifications}
         renderItem={renderItem}
@@ -124,6 +145,12 @@ export const NotificationsScreen = (): React.JSX.Element => {
             />
           )
         }
+      />
+      <Modal
+        isVisible={modalVisible}
+        content={<FriendsModalScreen />}
+        onClose={hideModalAndKeyboard}
+        style={HomeHeaderStyle.modal}
       />
     </View>
   );

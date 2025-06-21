@@ -13,7 +13,7 @@ export const HomeHeaderStyle = StyleSheet.create({
     alignItems: 'center'
   },
   heartText: {
-    fontSize: 24,
+    fontSize: 26,
     color: COLORS.BLACK
   },
   title: {

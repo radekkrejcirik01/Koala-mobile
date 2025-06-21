@@ -1,4 +1,4 @@
-import React, { JSX, useCallback } from 'react';
+import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useModal } from '@hooks/useModal';
@@ -18,17 +18,22 @@ export const HomeHeader = (): JSX.Element => {
   const { name } = useSelector((state: ReducerProps) => state.user.user);
 
   const { modalVisible, showModal, hideModal } = useModal();
+  const [helloText, setHelloText] = useState<string>();
 
   const hideModalAndKeyboard = useCallback(() => {
     Keyboard.dismiss();
     hideModal();
   }, [hideModal]);
 
+  useEffect(() => {
+    setHelloText(getHello());
+  }, []);
+
   return (
     <View style={HomeHeaderStyle.container}>
       <View style={HomeHeaderStyle.row}>
         <Text style={HomeHeaderStyle.title}>
-          {getHello()}, {name}
+          {helloText}, {name}
         </Text>
         <TouchableOpacity activeOpacity={0.8} onPress={showModal}>
           <Text style={HomeHeaderStyle.heartText}>️🙋</Text>

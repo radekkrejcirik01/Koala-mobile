@@ -11,7 +11,6 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ProfileScreenStyle } from '@screens/account/ProfileScreen/ProfileScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { ProfileHeader } from '@components/profile/ProfileHeader/ProfileHeader';
 import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { setProfilePhotoAction } from '@store/UserReducer';
@@ -21,6 +20,7 @@ import {
   ImagePickerOptions,
   ShareOptions
 } from '@screens/account/ProfileScreen/ProfileScreen.options';
+import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
@@ -63,7 +63,7 @@ export const ProfileScreen = (): React.JSX.Element => {
       contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
     >
       <View>
-        <ProfileHeader />
+        <ScreenHeader title="Profile" goBack={false} />
         <View style={ProfileScreenStyle.container}>
           <View>
             <ProfilePhoto name={name} photo={profilePhoto} size={75} />

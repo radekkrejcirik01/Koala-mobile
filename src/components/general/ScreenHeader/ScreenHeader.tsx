@@ -9,12 +9,11 @@ import { BackButton } from '@components/general/BackButton/BackButton';
 
 export const ScreenHeader = ({
   title,
-  rightComponent
+  rightComponent,
+  goBack = true
 }: ScreenHeaderProps): React.JSX.Element => (
   <View style={ScreenHeaderStyle.container}>
-    <View style={ScreenHeaderStyle.flex}>
-      <BackButton />
-    </View>
+    <View style={ScreenHeaderStyle.flex}>{goBack && <BackButton />}</View>
     <Text style={ScreenHeaderStyle.titleText}>{title}</Text>
     <View style={[ScreenHeaderStyle.flex, { alignItems: 'flex-end' }]}>
       {rightComponent}
