@@ -6,8 +6,8 @@ export const ProfileHeaderStyle = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    fontSize: 16,
-    color: COLORS.BLACK_75,
+    fontSize: 18,
+    color: COLORS.BLACK,
     fontWeight: 'bold'
   }
 });

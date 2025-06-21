@@ -7,6 +7,13 @@ import { ReducerProps } from '@store/index/index.props';
 import { Modal } from '@components/general/Modal/Modal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 
+const getHello = (): string => {
+  const hellos = ['Hi', 'Hola', 'Hej'];
+
+  const randomIndex = Math.floor(Math.random() * hellos.length);
+  return hellos[randomIndex];
+};
+
 export const HomeHeader = (): JSX.Element => {
   const { name } = useSelector((state: ReducerProps) => state.user.user);
 
@@ -20,9 +27,11 @@ export const HomeHeader = (): JSX.Element => {
   return (
     <View style={HomeHeaderStyle.container}>
       <View style={HomeHeaderStyle.row}>
-        <Text style={HomeHeaderStyle.title}>Hi, {name}</Text>
+        <Text style={HomeHeaderStyle.title}>
+          {getHello()}, {name}
+        </Text>
         <TouchableOpacity activeOpacity={0.8} onPress={showModal}>
-          <Text style={HomeHeaderStyle.heartText}>🤍</Text>
+          <Text style={HomeHeaderStyle.heartText}>️🙋</Text>
         </TouchableOpacity>
       </View>
       <Modal
