@@ -4,22 +4,20 @@ import store from '@store/index/index';
 import { setUnseenNotifications } from '@store/NotificationsReducer';
 
 class NotificationsServiceClass {
-    public getUnseenNotifications = () => {
-        if (store.getState().user.token) {
-            getRequest<ResponseUnseenNotificationsGetInterface>(
-                'unseen-notifications'
-            ).subscribe((response: ResponseUnseenNotificationsGetInterface) => {
-                if (response?.status) {
-                    store.dispatch(
-                        setUnseenNotifications(response?.unseenNotifications)
-                    );
-                }
-            });
+  public getUnseenNotifications = () => {
+    if (store.getState().user.token) {
+      getRequest<ResponseUnseenNotificationsGetInterface>(
+        'unseen-notifications'
+      ).subscribe((response: ResponseUnseenNotificationsGetInterface) => {
+        if (response?.status) {
+          store.dispatch(setUnseenNotifications(response?.unseenNotifications));
         }
-    };
+      });
+    }
+  };
 }
 
 const NotificationsService: NotificationsServiceClass =
-    new NotificationsServiceClass();
+  new NotificationsServiceClass();
 
 export { NotificationsService };

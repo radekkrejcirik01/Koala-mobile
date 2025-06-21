@@ -5,22 +5,20 @@ import { SendButtonStyle } from '@components/home/SendButton/SendButton.style';
 import { SendButtonProps } from '@components/home/SendButton/SendButton.props';
 
 export const SendButton = ({
-    onPress,
-    sending,
-    sent
+  onPress,
+  sending,
+  sent
 }: SendButtonProps): JSX.Element => (
-    <TouchableOpacity
-        activeOpacity={0.9}
-        disabled={sent}
-        onPress={onPress}
-        style={SendButtonStyle.view}
-    >
-        {sending ? (
-            <ActivityIndicator color={COLORS.WHITE} />
-        ) : (
-            <Text style={SendButtonStyle.text}>
-                {sent ? 'Delivered' : 'Send'}
-            </Text>
-        )}
-    </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.9}
+    disabled={sent}
+    onPress={onPress}
+    style={SendButtonStyle.view}
+  >
+    {sending ? (
+      <ActivityIndicator color={COLORS.WHITE} />
+    ) : (
+      <Text style={SendButtonStyle.text}>{sent ? 'Delivered' : 'Send'}</Text>
+    )}
+  </TouchableOpacity>
 );

@@ -1,4 +1,4 @@
 export interface LastlySharedCardProps {
-    title: string;
-    onPress: () => void;
+  title: string;
+  onPress: () => void;
 }

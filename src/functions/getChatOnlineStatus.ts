@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 
 export function getChatOnlineStatus(time: number): string {
-    const unix = moment.unix(time);
+  const unix = moment.unix(time);
 
-    return `Last online ${unix.fromNow()}`;
+  return `Last online ${unix.fromNow()}`;
 }

@@ -12,27 +12,27 @@ import { MessagingService } from '@utils/general/MessagingService';
 import { OnlineService } from '@utils/general/OnlineService';
 
 export const HomeScreen = (): React.JSX.Element => {
-    useNotifications();
-    const { top } = useSafeAreaInsets();
+  useNotifications();
+  const { top } = useSafeAreaInsets();
 
-    useAppState(() => {
-        NotificationsService.getUnseenNotifications();
-        MessagingService.initMessaging().catch();
-        OnlineService.update();
-        if (Platform.OS === 'ios') {
-            PushNotificationIOS.setApplicationIconBadgeNumber(0);
-        }
-    });
+  useAppState(() => {
+    NotificationsService.getUnseenNotifications();
+    MessagingService.initMessaging().catch();
+    OnlineService.update();
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.setApplicationIconBadgeNumber(0);
+    }
+  });
 
-    return (
-        <ScrollView
-            keyboardShouldPersistTaps="always"
-            showsVerticalScrollIndicator={false}
-            style={[HomeScreenStyle.scrollView, { marginTop: top }]}
-            contentContainerStyle={HomeScreenStyle.scrollViewContainer}
-        >
-            <HomeHeader />
-            <Messages />
-        </ScrollView>
-    );
+  return (
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
+      style={[HomeScreenStyle.scrollView, { marginTop: top }]}
+      contentContainerStyle={HomeScreenStyle.scrollViewContainer}
+    >
+      <HomeHeader />
+      <Messages />
+    </ScrollView>
+  );
 };

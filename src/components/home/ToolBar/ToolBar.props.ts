@@ -1,3 +1,3 @@
 export interface ToolBarProps {
-    onPressDirect: () => void;
+  onPressDirect: () => void;
 }

@@ -1,3 +1,3 @@
 export interface AddButtonProps {
-    onPress: () => void;
+  onPress: () => void;
 }

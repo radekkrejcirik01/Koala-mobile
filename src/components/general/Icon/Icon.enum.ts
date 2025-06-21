@@ -14,35 +14,35 @@ import Send from '@assets/webp/Send.webp';
 import Stop from '@assets/webp/Stop.webp';
 
 export enum IconEnum {
-    BACK = 'Back',
-    BACK_BLUE = 'BackBlue',
-    BACK_BLUE_RIGHT = 'BackBlueRight',
-    BACK_PURPLE = 'BackPurple',
-    CLEAN = 'Clean',
-    DIRECT = 'Direct',
-    MAIL = 'Mail',
-    MENU = 'Menu',
-    MICROPHONE = 'Microphone',
-    REPLY = 'Reply',
-    PLAY = 'Play',
-    PLUS = 'Plus',
-    SEND = 'Send',
-    STOP = 'Stop'
+  BACK = 'Back',
+  BACK_BLUE = 'BackBlue',
+  BACK_BLUE_RIGHT = 'BackBlueRight',
+  BACK_PURPLE = 'BackPurple',
+  CLEAN = 'Clean',
+  DIRECT = 'Direct',
+  MAIL = 'Mail',
+  MENU = 'Menu',
+  MICROPHONE = 'Microphone',
+  REPLY = 'Reply',
+  PLAY = 'Play',
+  PLUS = 'Plus',
+  SEND = 'Send',
+  STOP = 'Stop'
 }
 
 export const ICONS = {
-    [IconEnum.BACK]: Back,
-    [IconEnum.BACK_BLUE]: BackBlue,
-    [IconEnum.BACK_BLUE_RIGHT]: BackBlueRight,
-    [IconEnum.BACK_PURPLE]: BackPurple,
-    [IconEnum.CLEAN]: Clean,
-    [IconEnum.DIRECT]: Direct,
-    [IconEnum.MENU]: Menu,
-    [IconEnum.MICROPHONE]: Microphone,
-    [IconEnum.MAIL]: Mail,
-    [IconEnum.REPLY]: Reply,
-    [IconEnum.PLAY]: Play,
-    [IconEnum.PLUS]: Plus,
-    [IconEnum.SEND]: Send,
-    [IconEnum.STOP]: Stop
+  [IconEnum.BACK]: Back,
+  [IconEnum.BACK_BLUE]: BackBlue,
+  [IconEnum.BACK_BLUE_RIGHT]: BackBlueRight,
+  [IconEnum.BACK_PURPLE]: BackPurple,
+  [IconEnum.CLEAN]: Clean,
+  [IconEnum.DIRECT]: Direct,
+  [IconEnum.MENU]: Menu,
+  [IconEnum.MICROPHONE]: Microphone,
+  [IconEnum.MAIL]: Mail,
+  [IconEnum.REPLY]: Reply,
+  [IconEnum.PLAY]: Play,
+  [IconEnum.PLUS]: Plus,
+  [IconEnum.SEND]: Send,
+  [IconEnum.STOP]: Stop
 };

@@ -6,45 +6,44 @@ import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessage
 import { isTextEmoji } from '@functions/isTextEmoji';
 
 export const InboundMessageItem = ({
-    children,
-    onLongPress,
-    replyMessage,
-    audioMessage,
-    isFirst
+  children,
+  onLongPress,
+  replyMessage,
+  audioMessage,
+  isFirst
 }: InboundMessageItemProps): React.JSX.Element => (
-    <View style={isFirst && InboundMessageItemStyle.marginTop}>
-        {!!replyMessage && (
-            <View style={InboundMessageItemStyle.replyMessageView}>
-                <Text style={InboundMessageItemStyle.replyMessageText}>
-                    {replyMessage}
-                </Text>
-            </View>
-        )}
-        <View
+  <View style={isFirst && InboundMessageItemStyle.marginTop}>
+    {!!replyMessage && (
+      <View style={InboundMessageItemStyle.replyMessageView}>
+        <Text style={InboundMessageItemStyle.replyMessageText}>
+          {replyMessage}
+        </Text>
+      </View>
+    )}
+    <View
+      style={[
+        InboundMessageItemStyle.container,
+        audioMessage && InboundMessageItemStyle.audioMessage
+      ]}
+    >
+      <TouchableOpacity
+        activeOpacity={1}
+        delayLongPress={120}
+        onLongPress={onLongPress}
+      >
+        {audioMessage ? (
+          <AudioMessageItem audioMessage={audioMessage} />
+        ) : (
+          <Text
             style={[
-                InboundMessageItemStyle.container,
-                audioMessage && InboundMessageItemStyle.audioMessage
+              InboundMessageItemStyle.messageText,
+              isTextEmoji(children) && InboundMessageItemStyle.largeText
             ]}
-        >
-            <TouchableOpacity
-                activeOpacity={1}
-                delayLongPress={120}
-                onLongPress={onLongPress}
-            >
-                {audioMessage ? (
-                    <AudioMessageItem audioMessage={audioMessage} />
-                ) : (
-                    <Text
-                        style={[
-                            InboundMessageItemStyle.messageText,
-                            isTextEmoji(children) &&
-                                InboundMessageItemStyle.largeText
-                        ]}
-                    >
-                        {children}
-                    </Text>
-                )}
-            </TouchableOpacity>
-        </View>
+          >
+            {children}
+          </Text>
+        )}
+      </TouchableOpacity>
     </View>
+  </View>
 );

@@ -6,15 +6,11 @@ import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const BackButton = (): JSX.Element => {
-    const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);
+  const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
-    return (
-        <TouchableOpacity
-            activeOpacity={0.7}
-            hitSlop={15}
-            onPress={navigateBack}
-        >
-            <Icon name={IconEnum.BACK_PURPLE} size={20} />
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity activeOpacity={0.7} hitSlop={15} onPress={navigateBack}>
+      <Icon name={IconEnum.BACK_PURPLE} size={20} />
+    </TouchableOpacity>
+  );
 };

@@ -1,3 +1,3 @@
 export interface HomeHeaderProps {
-    onProfilePress: () => void;
+  onProfilePress: () => void;
 }

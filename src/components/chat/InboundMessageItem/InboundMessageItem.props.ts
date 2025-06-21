@@ -1,7 +1,7 @@
 export interface InboundMessageItemProps {
-    children: string;
-    onLongPress: () => void;
-    replyMessage: string;
-    audioMessage: string;
-    isFirst: boolean;
+  children: string;
+  onLongPress: () => void;
+  replyMessage: string;
+  audioMessage: string;
+  isFirst: boolean;
 }

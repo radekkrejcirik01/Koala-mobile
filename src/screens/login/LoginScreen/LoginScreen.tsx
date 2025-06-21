@@ -15,74 +15,74 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { Button } from '@components/general/Button/Button';
 
 export const LoginScreen = (): JSX.Element => {
-    const dispatch = useDispatch();
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const dispatch = useDispatch();
+  const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
-    const [username, setUsername] = useState<string>();
-    const [password, setPassword] = useState<string>();
-    const [posting, setPosting] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [posting, setPosting] = useState<boolean>(false);
 
-    const login = useCallback(() => {
-        setPosting(true);
+  const login = useCallback(() => {
+    setPosting(true);
 
-        postRequest<AuthResponseInterface, LoginPostInterface>('login', {
-            username,
-            password
-        }).subscribe((response: AuthResponseInterface) => {
-            setPosting(false);
+    postRequest<AuthResponseInterface, LoginPostInterface>('login', {
+      username,
+      password
+    }).subscribe((response: AuthResponseInterface) => {
+      setPosting(false);
 
-            if (response?.status) {
-                dispatch(setUserToken(response?.token));
+      if (response?.status) {
+        dispatch(setUserToken(response?.token));
 
-                PersistStorage.setItem(
-                    PersistStorageKeys.TOKEN,
-                    response?.token
-                ).catch();
+        PersistStorage.setItem(
+          PersistStorageKeys.TOKEN,
+          response?.token
+        ).catch();
 
-                PreloadService.loadUserObject();
-            } else {
-                Alert.alert('Incorrect credentials');
-            }
-        });
-    }, [dispatch, password, username]);
+        PreloadService.loadUserObject();
+      } else {
+        Alert.alert('Incorrect credentials');
+      }
+    });
+  }, [dispatch, password, username]);
 
-    const onPressForgotPassword = useCallback(() => {
-        navigateTo(LoginStackNavigatorEnum.ForgotPasswordScreen);
-    }, [navigateTo]);
+  const onPressForgotPassword = useCallback(() => {
+    navigateTo(LoginStackNavigatorEnum.ForgotPasswordScreen);
+  }, [navigateTo]);
 
-    return (
-        <View style={LoginScreenStyle.container}>
-            <TextInput
-                autoFocus
-                autoCorrect={false}
-                autoCapitalize="none"
-                onChangeText={setUsername}
-                placeholder="Username"
-                style={LoginScreenStyle.input}
-            />
-            <TextInput
-                autoCorrect={false}
-                autoCapitalize="none"
-                onChangeText={setPassword}
-                placeholder="Password"
-                secureTextEntry
-                style={LoginScreenStyle.input}
-            />
-            <Button
-                title="Login"
-                onPress={login}
-                posting={posting}
-                style={LoginScreenStyle.buttonView}
-            />
-            <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={onPressForgotPassword}
-                style={LoginScreenStyle.forgotPasswordView}
-            >
-                <Text style={LoginScreenStyle.forgotPasswordText}>
-                    Forgot my password
-                </Text>
-            </TouchableOpacity>
-        </View>
-    );
+  return (
+    <View style={LoginScreenStyle.container}>
+      <TextInput
+        autoFocus
+        autoCorrect={false}
+        autoCapitalize="none"
+        onChangeText={setUsername}
+        placeholder="Username"
+        style={LoginScreenStyle.input}
+      />
+      <TextInput
+        autoCorrect={false}
+        autoCapitalize="none"
+        onChangeText={setPassword}
+        placeholder="Password"
+        secureTextEntry
+        style={LoginScreenStyle.input}
+      />
+      <Button
+        title="Login"
+        onPress={login}
+        posting={posting}
+        style={LoginScreenStyle.buttonView}
+      />
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={onPressForgotPassword}
+        style={LoginScreenStyle.forgotPasswordView}
+      >
+        <Text style={LoginScreenStyle.forgotPasswordText}>
+          Forgot my password
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 };

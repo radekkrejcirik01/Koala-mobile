@@ -3,5 +3,5 @@ import { KeyboardAvoidingViewProps as KeyboardAvoidingViewPropsDefault } from 'r
 export type KeyboardAvoidingViewProps = KeyboardAvoidingViewPropsDefault;
 
 export const KeyboardAvoidingViewDefaultProps: KeyboardAvoidingViewProps = {
-    keyboardVerticalOffset: 0
+  keyboardVerticalOffset: 0
 };

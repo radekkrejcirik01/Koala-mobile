@@ -11,52 +11,50 @@ import { AddButton } from '@components/general/AddButton/AddButton';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export const AnxietyAndPanicScreen = (): JSX.Element => {
-    const { top } = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
 
-    const {
-        messages,
-        modalScreen,
-        modalVisible,
-        onPressMessage,
-        onPressAddEmotion,
-        onItemLongPress,
-        hideModalAndKeyboard
-    } = useMessagesActions(EmotionScreenMessageType.Anxiety);
+  const {
+    messages,
+    modalScreen,
+    modalVisible,
+    onPressMessage,
+    onPressAddEmotion,
+    onItemLongPress,
+    hideModalAndKeyboard
+  } = useMessagesActions(EmotionScreenMessageType.Anxiety);
 
-    return (
-        <View style={[AnxietyAndPanicScreenStyle.container, { top }]}>
-            <ScreenHeader
-                title="Anxiety & panic"
-                rightComponent={<AddButton onPress={onPressAddEmotion} />}
-            />
-            <ScrollView
-                contentContainerStyle={AnxietyAndPanicScreenStyle.scrollView}
-            >
-                <View style={AnxietyAndPanicScreenStyle.imageContainer}>
-                    <FastImage
-                        source={require('../../../assets/images/Anxiety.png')}
-                        style={AnxietyAndPanicScreenStyle.image}
-                    />
-                </View>
-                <View style={AnxietyAndPanicScreenStyle.line} />
-                <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
-                    {messages.map((value, index) => (
-                        <MessageItem
-                            key={value.id}
-                            item={value}
-                            index={index}
-                            onPressMessage={() => onPressMessage(value)}
-                            onItemLongPress={() => onItemLongPress(value)}
-                        />
-                    ))}
-                </View>
-            </ScrollView>
-            <Modal
-                isVisible={modalVisible}
-                content={modalScreen}
-                onClose={hideModalAndKeyboard}
-                style={AnxietyAndPanicScreenStyle.modal}
-            />
+  return (
+    <View style={[AnxietyAndPanicScreenStyle.container, { top }]}>
+      <ScreenHeader
+        title="Anxiety & panic"
+        rightComponent={<AddButton onPress={onPressAddEmotion} />}
+      />
+      <ScrollView contentContainerStyle={AnxietyAndPanicScreenStyle.scrollView}>
+        <View style={AnxietyAndPanicScreenStyle.imageContainer}>
+          <FastImage
+            source={require('../../../assets/images/Anxiety.png')}
+            style={AnxietyAndPanicScreenStyle.image}
+          />
         </View>
-    );
+        <View style={AnxietyAndPanicScreenStyle.line} />
+        <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
+          {messages.map((value, index) => (
+            <MessageItem
+              key={value.id}
+              item={value}
+              index={index}
+              onPressMessage={() => onPressMessage(value)}
+              onItemLongPress={() => onItemLongPress(value)}
+            />
+          ))}
+        </View>
+      </ScrollView>
+      <Modal
+        isVisible={modalVisible}
+        content={modalScreen}
+        onClose={hideModalAndKeyboard}
+        style={AnxietyAndPanicScreenStyle.modal}
+      />
+    </View>
+  );
 };

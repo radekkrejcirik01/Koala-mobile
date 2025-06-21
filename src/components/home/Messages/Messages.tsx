@@ -22,141 +22,130 @@ import { MessagesCard } from '@components/home/MessagesCard/MessagesCard';
 import { LastlySharedCard } from '@components/home/LastlySharedCard/LastlySharedCard';
 
 export const Messages = (): JSX.Element => {
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
-    const { modalVisible, showModal, hideModal } = useModal();
+  const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+  const { modalVisible, showModal, hideModal } = useModal();
 
-    const [lastShared, setLastShared] = useState<EmotionInterface>(undefined);
-    const [suggested, setSuggested] = useState<boolean>(false);
-    const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
+  const [lastShared, setLastShared] = useState<EmotionInterface>(undefined);
+  const [suggested, setSuggested] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
-    function getMessage(
-        message: string,
-        ...arrays: EmotionInterface[][]
-    ): EmotionInterface | undefined {
-        return arrays
-            .flat() // Flatten the array of arrays into a single array
-            .find((obj) => obj.message === message);
-    }
+  function getMessage(
+    message: string,
+    ...arrays: EmotionInterface[][]
+  ): EmotionInterface | undefined {
+    return arrays
+      .flat() // Flatten the array of arrays into a single array
+      .find((obj) => obj.message === message);
+  }
 
-    const getLastSharedMessage = useCallback(() => {
-        getRequest<ResponseLastSharedMessageGetInterface>(
-            'last-shared-message'
-        ).subscribe((response: ResponseLastSharedMessageGetInterface) => {
-            if (response?.status) {
-                if (!response?.data?.message) {
-                    setLastShared(KUDOS_MESSAGES[1]);
-                    setSuggested(true);
-                    return;
-                }
+  const getLastSharedMessage = useCallback(() => {
+    getRequest<ResponseLastSharedMessageGetInterface>(
+      'last-shared-message'
+    ).subscribe((response: ResponseLastSharedMessageGetInterface) => {
+      if (response?.status) {
+        if (!response?.data?.message) {
+          setLastShared(KUDOS_MESSAGES[1]);
+          setSuggested(true);
+          return;
+        }
 
-                const emotion = getMessage(
-                    response?.data?.message,
-                    ANXIETY_AND_PANIC_MESSAGES,
-                    DEPRESSION_MESSAGES,
-                    WELLBEING_MESSAGES,
-                    KUDOS_MESSAGES
-                );
-
-                setLastShared(emotion || response?.data);
-            }
-        });
-    }, []);
-
-    useFocusEffect(getLastSharedMessage);
-
-    const openLastMessage = useCallback(() => {
-        setModalContent(
-            <ShareModalScreen
-                item={lastShared}
-                onAddFriendPress={() => {
-                    hideModal();
-                    setModalContent(<FriendsModalScreen />);
-                    setTimeout(() => {
-                        showModal();
-                    }, 100);
-                }}
-            />
+        const emotion = getMessage(
+          response?.data?.message,
+          ANXIETY_AND_PANIC_MESSAGES,
+          DEPRESSION_MESSAGES,
+          WELLBEING_MESSAGES,
+          KUDOS_MESSAGES
         );
-        showModal();
-    }, [hideModal, lastShared, showModal]);
 
-    const onDirectEmotionPress = useCallback(() => {
-        setModalContent(
-            <DirectSharingModalScreen
-                onAddFriendPress={() => {
-                    hideModal();
-                    setModalContent(<FriendsModalScreen />);
-                    setTimeout(() => {
-                        showModal();
-                    }, 100);
-                }}
-            />
-        );
-        showModal();
-    }, [hideModal, showModal]);
+        setLastShared(emotion || response?.data);
+      }
+    });
+  }, []);
 
-    const hideModalAndKeyboard = useCallback(() => {
-        Keyboard.dismiss();
-        hideModal();
-    }, [hideModal]);
+  useFocusEffect(getLastSharedMessage);
 
-    return (
-        <View>
-            <Text style={MessagesStyle.titleText}>
-                {suggested ? 'Suggested' : 'Lastly shared'}
-            </Text>
-            <LastlySharedCard
-                title={lastShared?.message}
-                onPress={openLastMessage}
-            />
-            <Text style={MessagesStyle.titleText}>Messages</Text>
-            <View style={MessagesStyle.itemsContainer}>
-                <MessagesCard
-                    title="Anxiety & panic"
-                    onPress={() =>
-                        navigateTo(
-                            AccountStackNavigatorEnum.AnxietyAndPanicScreen
-                        )
-                    }
-                    image={require('../../../assets/images/Anxiety_no_bg.png')}
-                    imageStyle={MessagesStyle.anxietyImage}
-                />
-                <MessagesCard
-                    title="Depression"
-                    onPress={() =>
-                        navigateTo(AccountStackNavigatorEnum.DepressionScreen)
-                    }
-                    image={require('../../../assets/images/Depression_no_bg.png')}
-                    imageStyle={MessagesStyle.depressionImage}
-                />
-                <MessagesCard
-                    title="Wellbeing"
-                    onPress={() =>
-                        navigateTo(AccountStackNavigatorEnum.WellbeingScreen)
-                    }
-                    image={require('../../../assets/images/Wellbeing_no_bg.png')}
-                    imageStyle={MessagesStyle.wellbeingImage}
-                />
-                <MessagesCard
-                    title="Kudos"
-                    onPress={() =>
-                        navigateTo(AccountStackNavigatorEnum.KudosScreen)
-                    }
-                    image={require('../../../assets/images/Kudos_no_bg.png')}
-                    imageStyle={MessagesStyle.kudosImage}
-                    isKudos
-                />
-            </View>
-            <ToolBar onPressDirect={onDirectEmotionPress} />
-            <Modal
-                isVisible={modalVisible}
-                content={modalContent}
-                onClose={() => {
-                    hideModalAndKeyboard();
-                    getLastSharedMessage();
-                }}
-                style={MessagesStyle.modal}
-            />
-        </View>
+  const openLastMessage = useCallback(() => {
+    setModalContent(
+      <ShareModalScreen
+        item={lastShared}
+        onAddFriendPress={() => {
+          hideModal();
+          setModalContent(<FriendsModalScreen />);
+          setTimeout(() => {
+            showModal();
+          }, 100);
+        }}
+      />
     );
+    showModal();
+  }, [hideModal, lastShared, showModal]);
+
+  const onDirectEmotionPress = useCallback(() => {
+    setModalContent(
+      <DirectSharingModalScreen
+        onAddFriendPress={() => {
+          hideModal();
+          setModalContent(<FriendsModalScreen />);
+          setTimeout(() => {
+            showModal();
+          }, 100);
+        }}
+      />
+    );
+    showModal();
+  }, [hideModal, showModal]);
+
+  const hideModalAndKeyboard = useCallback(() => {
+    Keyboard.dismiss();
+    hideModal();
+  }, [hideModal]);
+
+  return (
+    <View>
+      <Text style={MessagesStyle.titleText}>
+        {suggested ? 'Suggested' : 'Lastly shared'}
+      </Text>
+      <LastlySharedCard title={lastShared?.message} onPress={openLastMessage} />
+      <Text style={MessagesStyle.titleText}>Messages</Text>
+      <View style={MessagesStyle.itemsContainer}>
+        <MessagesCard
+          title="Anxiety & panic"
+          onPress={() =>
+            navigateTo(AccountStackNavigatorEnum.AnxietyAndPanicScreen)
+          }
+          image={require('../../../assets/images/Anxiety_no_bg.png')}
+          imageStyle={MessagesStyle.anxietyImage}
+        />
+        <MessagesCard
+          title="Depression"
+          onPress={() => navigateTo(AccountStackNavigatorEnum.DepressionScreen)}
+          image={require('../../../assets/images/Depression_no_bg.png')}
+          imageStyle={MessagesStyle.depressionImage}
+        />
+        <MessagesCard
+          title="Wellbeing"
+          onPress={() => navigateTo(AccountStackNavigatorEnum.WellbeingScreen)}
+          image={require('../../../assets/images/Wellbeing_no_bg.png')}
+          imageStyle={MessagesStyle.wellbeingImage}
+        />
+        <MessagesCard
+          title="Kudos"
+          onPress={() => navigateTo(AccountStackNavigatorEnum.KudosScreen)}
+          image={require('../../../assets/images/Kudos_no_bg.png')}
+          imageStyle={MessagesStyle.kudosImage}
+          isKudos
+        />
+      </View>
+      <ToolBar onPressDirect={onDirectEmotionPress} />
+      <Modal
+        isVisible={modalVisible}
+        content={modalContent}
+        onClose={() => {
+          hideModalAndKeyboard();
+          getLastSharedMessage();
+        }}
+        style={MessagesStyle.modal}
+      />
+    </View>
+  );
 };

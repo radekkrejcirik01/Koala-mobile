@@ -1,98 +1,99 @@
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export interface UserPostInterface {
-    name: string;
-    username: string;
-    password: string;
+  name: string;
+  username: string;
+  password: string;
 }
+
 export interface LoginPostInterface {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
 export interface UsernamePostInterface {
-    username: string;
+  username: string;
 }
 
 export interface ChangeNamePostInterface {
-    name: string;
+  name: string;
 }
 
 export interface ChangePasswordPostInterface {
-    oldPassword: string;
-    newPassword: string;
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface InvitePostInterface {
-    receiver: string;
+  receiver: string;
 }
 
 export interface DevicePostInterface {
-    deviceToken: string;
-    userId: number;
-    platform: string;
+  deviceToken: string;
+  userId: number;
+  platform: string;
 }
 
 export interface EmotionPostInterface {
-    message: string;
-    tip1?: string;
-    tip2?: string;
-    type: EmotionScreenMessageType;
+  message: string;
+  tip1?: string;
+  tip2?: string;
+  type: EmotionScreenMessageType;
 }
 
 export interface EmotionMessagePostInterface {
-    ids: number[];
-    message: string;
+  ids: number[];
+  message: string;
 }
 
 export interface StatusReplyMessagePostInterface {
-    receiverId: number;
-    message: string;
-    replyExpression: string;
+  receiverId: number;
+  message: string;
+  replyExpression: string;
 }
 
 export interface MessagePostInterface {
-    conversationId: number;
-    receiverId: number;
-    message: string;
-    replyMessage?: string;
-    audioBuffer?: string;
+  conversationId: number;
+  receiverId: number;
+  message: string;
+  replyMessage?: string;
+  audioBuffer?: string;
 }
 
 export interface CheckOnMessageSendInterface {
-    ids: number[];
-    message: string;
+  ids: number[];
+  message: string;
 }
 
 export interface ExpressionPostInterface {
-    userId: number;
-    expression: string;
+  userId: number;
+  expression: string;
 }
 
 export interface PasswordResetPostInterface {
-    username: string;
-    email: string;
-    friendUsername: string;
+  username: string;
+  email: string;
+  friendUsername: string;
 }
 
 export interface ReplyPostInterface {
-    message: string;
+  message: string;
 }
 
 export interface CheckOnMessagePostInterface {
-    message: string;
+  message: string;
 }
 
 export interface SupportPostInterface {
-    message: string;
-    email: string;
+  message: string;
+  email: string;
 }
 
 export interface FeedbackPostInterface {
-    message: string;
+  message: string;
 }
 
 export interface ProfilePhotoPostInterface {
-    buffer: string;
-    fileName: string;
+  buffer: string;
+  fileName: string;
 }

@@ -13,73 +13,71 @@ import { Send } from '@components/home/Send/Send';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export const ShareModalScreen = ({
-    item,
-    onAddFriendPress
+  item,
+  onAddFriendPress
 }: ShareModalScreenProps): JSX.Element => {
-    const { bottom } = useSafeAreaInsets();
-    const { sending, sent, setSending, setSent } = useSending();
+  const { bottom } = useSafeAreaInsets();
+  const { sending, sent, setSending, setSent } = useSending();
 
-    const selectedFriends = useRef<number[]>([]);
+  const selectedFriends = useRef<number[]>([]);
 
-    const isMessageKudos = item.type === EmotionScreenMessageType.Kudos;
+  const isMessageKudos = item.type === EmotionScreenMessageType.Kudos;
 
-    const onFriendSelect = (id: number) => {
-        setSent(false);
+  const onFriendSelect = (id: number) => {
+    setSent(false);
 
-        selectedFriends.current = filterSelected(selectedFriends.current, id);
-    };
+    selectedFriends.current = filterSelected(selectedFriends.current, id);
+  };
 
-    const send = useCallback(() => {
-        const selected = selectedFriends.current;
+  const send = useCallback(() => {
+    const selected = selectedFriends.current;
 
-        if (!selected.length) {
-            Alert.alert('Please select a friend first');
-            return;
+    if (!selected.length) {
+      Alert.alert('Please select a friend first');
+      return;
+    }
+
+    setSending(true);
+
+    let endpoint = 'emotion-message';
+    if (isMessageKudos) {
+      endpoint += '/kudos';
+    }
+
+    postRequest<ResponseInterface, EmotionMessagePostInterface>(endpoint, {
+      ids: selected,
+      message: item.message
+    }).subscribe((response: ResponseInterface) => {
+      if (response?.status === 'success') {
+        setSending(false);
+        setSent(true);
+
+        selectedFriends.current = [];
+      }
+    });
+  }, [isMessageKudos, item.message, setSending, setSent]);
+
+  return (
+    <View
+      style={[
+        ShareModalScreenStyle.container,
+        {
+          paddingBottom: bottom + 10
         }
-
-        setSending(true);
-
-        let endpoint = 'emotion-message';
-        if (isMessageKudos) {
-            endpoint += '/kudos';
-        }
-
-        postRequest<ResponseInterface, EmotionMessagePostInterface>(endpoint, {
-            ids: selected,
-            message: item.message
-        }).subscribe((response: ResponseInterface) => {
-            if (response?.status === 'success') {
-                setSending(false);
-                setSent(true);
-
-                selectedFriends.current = [];
-            }
-        });
-    }, [isMessageKudos, item.message, setSending, setSent]);
-
-    return (
-        <View
-            style={[
-                ShareModalScreenStyle.container,
-                {
-                    paddingBottom: bottom + 10
-                }
-            ]}
-        >
-            <Text style={ShareModalScreenStyle.messageText}>
-                {item.message}
-            </Text>
-            <View style={ShareModalScreenStyle.content}>
-                <CanHelp tip1={item?.tip1} tip2={item?.tip2} />
-                <Send
-                    onFriendSelect={onFriendSelect}
-                    onAddFriendPress={onAddFriendPress}
-                    onPressSend={send}
-                    sending={sending}
-                    sent={sent}
-                    style={ShareModalScreenStyle.send}
-                />
-            </View>
-        </View>
-    );
+      ]}
+    >
+      <Text style={ShareModalScreenStyle.messageText}>{item.message}</Text>
+      <View style={ShareModalScreenStyle.content}>
+        <CanHelp tip1={item?.tip1} tip2={item?.tip2} />
+        <Send
+          onFriendSelect={onFriendSelect}
+          onAddFriendPress={onAddFriendPress}
+          onPressSend={send}
+          sending={sending}
+          sent={sent}
+          style={ShareModalScreenStyle.send}
+        />
+      </View>
+    </View>
+  );
 };

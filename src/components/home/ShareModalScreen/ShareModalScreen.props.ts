@@ -1,6 +1,6 @@
 import { EmotionInterface } from '@interfaces/general.interface';
 
 export interface ShareModalScreenProps {
-    item: EmotionInterface;
-    onAddFriendPress: () => void;
+  item: EmotionInterface;
+  onAddFriendPress: () => void;
 }

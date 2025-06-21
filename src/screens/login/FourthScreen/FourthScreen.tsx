@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import {
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
@@ -24,85 +24,83 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { Button } from '@components/general/Button/Button';
 
 export const FourthScreen = (): JSX.Element => {
-    const { name, username } = useSelector(
-        (state: ReducerProps) => state.newAccount
-    );
-    const dispatch = useDispatch();
+  const { name, username } = useSelector(
+    (state: ReducerProps) => state.newAccount
+  );
+  const dispatch = useDispatch();
 
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
-    const [password, setPassword] = useState<string>();
-    const [posting, setPosting] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>();
+  const [posting, setPosting] = useState<boolean>(false);
 
-    const createAccount = useCallback(() => {
-        if (!password) {
-            Alert.alert('Please enter password');
-            return;
+  const createAccount = useCallback(() => {
+    if (!password) {
+      Alert.alert('Please enter password');
+      return;
+    }
+
+    setPosting(true);
+
+    postRequest<AuthResponseInterface, UserPostInterface>('user', {
+      name,
+      username,
+      password
+    }).subscribe((response: AuthResponseInterface) => {
+      setPosting(false);
+
+      if (response?.status) {
+        if (response?.message?.includes('exists')) {
+          Alert.alert('This username is already taken');
+        } else {
+          dispatch(setUserToken(response?.token));
+
+          PersistStorage.setItem(
+            PersistStorageKeys.TOKEN,
+            response?.token
+          ).catch();
+
+          PreloadService.loadUserObject();
         }
+      }
+    });
+  }, [dispatch, name, password, username]);
 
-        setPosting(true);
+  const openPrivacyPolicy = useCallback(() => {
+    navigateTo(LoginStackNavigatorEnum.PrivacyPolicyScreen);
+  }, [navigateTo]);
 
-        postRequest<AuthResponseInterface, UserPostInterface>('user', {
-            name,
-            username,
-            password
-        }).subscribe((response: AuthResponseInterface) => {
-            setPosting(false);
-
-            if (response?.status) {
-                if (response?.message?.includes('exists')) {
-                    Alert.alert('This username is already taken');
-                } else {
-                    dispatch(setUserToken(response?.token));
-
-                    PersistStorage.setItem(
-                        PersistStorageKeys.TOKEN,
-                        response?.token
-                    ).catch();
-
-                    PreloadService.loadUserObject();
-                }
-            }
-        });
-    }, [dispatch, name, password, username]);
-
-    const openPrivacyPolicy = useCallback(() => {
-        navigateTo(LoginStackNavigatorEnum.PrivacyPolicyScreen);
-    }, [navigateTo]);
-
-    return (
-        <View style={FourthScreenStyle.container}>
-            <View>
-                <Text style={FourthScreenStyle.title}>
-                    Finish with safe password
-                </Text>
-                <TextInput
-                    autoFocus
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    onChangeText={setPassword}
-                    style={FourthScreenStyle.input}
-                />
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    onPress={openPrivacyPolicy}
-                    style={FourthScreenStyle.margin5}
-                >
-                    <Text style={FourthScreenStyle.privacyPolicyText}>
-                        By creating account you agree with our privacy policy
-                    </Text>
-                </TouchableOpacity>
-            </View>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                keyboardVerticalOffset={15}
-            >
-                <Button
-                    title="Create account"
-                    onPress={createAccount}
-                    posting={posting}
-                />
-            </KeyboardAvoidingView>
-        </View>
-    );
+  return (
+    <View style={FourthScreenStyle.container}>
+      <View>
+        <Text style={FourthScreenStyle.title}>Finish with safe password</Text>
+        <TextInput
+          autoFocus
+          autoCorrect={false}
+          autoCapitalize="none"
+          onChangeText={setPassword}
+          style={FourthScreenStyle.input}
+        />
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={openPrivacyPolicy}
+          style={FourthScreenStyle.margin5}
+        >
+          <Text style={FourthScreenStyle.privacyPolicyText}>
+            By creating account you agree with our privacy policy
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+        keyboardVerticalOffset={15}
+      >
+        <Button
+          title="Create account"
+          onPress={createAccount}
+          posting={posting}
+        />
+      </KeyboardAvoidingView>
+    </View>
+  );
 };

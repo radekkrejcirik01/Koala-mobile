@@ -12,61 +12,61 @@ import { setNameAction } from '@store/UserReducer';
 import { Button } from '@components/general/Button/Button';
 
 export const EditNameScreen = (): JSX.Element => {
-    const { name: firstname } = useSelector(
-        (state: ReducerProps) => state.user.user
-    );
+  const { name: firstname } = useSelector(
+    (state: ReducerProps) => state.user.user
+  );
 
-    const dispatch = useDispatch();
-    const { top, bottom } = useSafeAreaInsets();
+  const dispatch = useDispatch();
+  const { top, bottom } = useSafeAreaInsets();
 
-    const [name, setName] = useState<string>(firstname);
-    const [posting, setPosting] = useState<boolean>(false);
+  const [name, setName] = useState<string>(firstname);
+  const [posting, setPosting] = useState<boolean>(false);
 
-    const save = useCallback(() => {
-        if (!name) {
-            Alert.alert('Please type a name');
-            return;
-        }
+  const save = useCallback(() => {
+    if (!name) {
+      Alert.alert('Please type a name');
+      return;
+    }
 
-        setPosting(true);
+    setPosting(true);
 
-        putRequest<ResponseInterface, ChangeNamePostInterface>('user-name', {
-            name
-        }).subscribe((response: ResponseInterface) => {
-            setPosting(false);
+    putRequest<ResponseInterface, ChangeNamePostInterface>('user-name', {
+      name
+    }).subscribe((response: ResponseInterface) => {
+      setPosting(false);
 
-            if (response?.status) {
-                dispatch(setNameAction(name));
-                Alert.alert('Successfully changed name');
-            }
-        });
-    }, [dispatch, name]);
+      if (response?.status) {
+        dispatch(setNameAction(name));
+        Alert.alert('Successfully changed name');
+      }
+    });
+  }, [dispatch, name]);
 
-    return (
-        <View
-            style={[
-                EditNameScreenStyle.container,
-                { paddingTop: top, paddingBottom: bottom + 10 }
-            ]}
-        >
-            <ScreenHeader title="Edit name" />
-            <View style={EditNameScreenStyle.contentView}>
-                <Text style={EditNameScreenStyle.inputTitleText}>Name</Text>
-                <TextInput
-                    autoFocus
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    value={name}
-                    onChangeText={setName}
-                    style={EditNameScreenStyle.input}
-                />
-            </View>
-            <Button
-                title="Save it"
-                posting={posting}
-                onPress={save}
-                style={EditNameScreenStyle.button}
-            />
-        </View>
-    );
+  return (
+    <View
+      style={[
+        EditNameScreenStyle.container,
+        { paddingTop: top, paddingBottom: bottom + 10 }
+      ]}
+    >
+      <ScreenHeader title="Edit name" />
+      <View style={EditNameScreenStyle.contentView}>
+        <Text style={EditNameScreenStyle.inputTitleText}>Name</Text>
+        <TextInput
+          autoFocus
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={name}
+          onChangeText={setName}
+          style={EditNameScreenStyle.input}
+        />
+      </View>
+      <Button
+        title="Save it"
+        posting={posting}
+        onPress={save}
+        style={EditNameScreenStyle.button}
+      />
+    </View>
+  );
 };

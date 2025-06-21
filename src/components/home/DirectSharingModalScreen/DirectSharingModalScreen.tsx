@@ -12,81 +12,81 @@ import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
 
 export const DirectSharingModalScreen = ({
-    onAddFriendPress
+  onAddFriendPress
 }: DirectSharingModalScreenProps): JSX.Element => {
-    const { bottom } = useSafeAreaInsets();
+  const { bottom } = useSafeAreaInsets();
 
-    const [message, setMessage] = useState<string>();
-    const { sending, sent, setSending, setSent } = useSending();
+  const [message, setMessage] = useState<string>();
+  const { sending, sent, setSending, setSent } = useSending();
 
-    const selectedFriends = useRef<number[]>([]);
+  const selectedFriends = useRef<number[]>([]);
 
-    const onFriendSelect = (id: number) => {
-        setSent(false);
+  const onFriendSelect = (id: number) => {
+    setSent(false);
 
-        selectedFriends.current = filterSelected(selectedFriends.current, id);
-    };
+    selectedFriends.current = filterSelected(selectedFriends.current, id);
+  };
 
-    const send = useCallback(() => {
-        const selected = selectedFriends.current;
+  const send = useCallback(() => {
+    const selected = selectedFriends.current;
 
-        if (!message?.length) {
-            Alert.alert('Please write a message first');
-            return;
+    if (!message?.length) {
+      Alert.alert('Please write a message first');
+      return;
+    }
+    if (!selected.length) {
+      Alert.alert('Please select a friend first');
+      return;
+    }
+
+    setSending(true);
+
+    postRequest<ResponseInterface, EmotionMessagePostInterface>(
+      'emotion-message/direct',
+      {
+        ids: selected,
+        message
+      }
+    ).subscribe((response: ResponseInterface) => {
+      if (response?.status === 'success') {
+        setSending(false);
+        setSent(true);
+
+        setMessage('');
+        selectedFriends.current = [];
+      }
+    });
+  }, [message, setSending, setSent]);
+
+  return (
+    <View
+      style={[
+        DirectSharingModalScreenStyle.container,
+        {
+          paddingBottom: bottom || 10
         }
-        if (!selected.length) {
-            Alert.alert('Please select a friend first');
-            return;
-        }
-
-        setSending(true);
-
-        postRequest<ResponseInterface, EmotionMessagePostInterface>(
-            'emotion-message/direct',
-            {
-                ids: selected,
-                message
-            }
-        ).subscribe((response: ResponseInterface) => {
-            if (response?.status === 'success') {
-                setSending(false);
-                setSent(true);
-
-                setMessage('');
-                selectedFriends.current = [];
-            }
-        });
-    }, [message, setSending, setSent]);
-
-    return (
-        <View
-            style={[
-                DirectSharingModalScreenStyle.container,
-                {
-                    paddingBottom: bottom || 10
-                }
-            ]}
-        >
-            <View style={DirectSharingModalScreenStyle.inputView}>
-                <TextInput
-                    multiline
-                    placeholder="What's happening??"
-                    autoFocus
-                    autoCorrect={false}
-                    value={message}
-                    onChangeText={setMessage}
-                    selectionColor={COLORS.BUTTON_BLUE}
-                    style={DirectSharingModalScreenStyle.input}
-                />
-            </View>
-            <Send
-                onFriendSelect={onFriendSelect}
-                onAddFriendPress={onAddFriendPress}
-                onPressSend={send}
-                sending={sending}
-                sent={sent}
-                style={DirectSharingModalScreenStyle.send}
-            />
-        </View>
-    );
+      ]}
+    >
+      <View style={DirectSharingModalScreenStyle.inputView}>
+        <TextInput
+          multiline
+          placeholder="What's happening??"
+          autoFocus
+          autoCorrect={false}
+          value={message}
+          onChangeText={setMessage}
+          selectionColor={COLORS.BUTTON_BLUE}
+          style={DirectSharingModalScreenStyle.input}
+        />
+      </View>
+      <Send
+        onFriendSelect={onFriendSelect}
+        onAddFriendPress={onAddFriendPress}
+        onPressSend={send}
+        sending={sending}
+        sent={sent}
+        style={DirectSharingModalScreenStyle.send}
+      />
+    </View>
+  );
 };

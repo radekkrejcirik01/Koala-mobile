@@ -10,26 +10,23 @@ import { PreloadService } from '@utils/general/PreloadService';
 import COLORS from '@constants/COLORS';
 
 const App = () => {
-    useEffect(() => {
-        PreloadService.init().catch();
-        if (Platform.OS === 'ios') {
-            PushNotificationIOS.setApplicationIconBadgeNumber(0);
-        }
-    }, []);
+  useEffect(() => {
+    PreloadService.init().catch();
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.setApplicationIconBadgeNumber(0);
+    }
+  }, []);
 
-    return (
-        <ActionSheetProvider>
-            <SafeAreaProvider>
-                <StatusBar
-                    backgroundColor={COLORS.WHITE}
-                    barStyle="dark-content"
-                />
-                <Provider store={store}>
-                    <Navigation />
-                </Provider>
-            </SafeAreaProvider>
-        </ActionSheetProvider>
-    );
+  return (
+    <ActionSheetProvider>
+      <SafeAreaProvider>
+        <StatusBar backgroundColor={COLORS.WHITE} barStyle="dark-content" />
+        <Provider store={store}>
+          <Navigation />
+        </Provider>
+      </SafeAreaProvider>
+    </ActionSheetProvider>
+  );
 };
 
 export default App;

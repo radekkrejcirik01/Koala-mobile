@@ -5,18 +5,18 @@ import { IOSPrompt } from '@components/general/IOSPrompt/IOSPrompt';
 import { PromptProps } from '@components/general/Prompt/Prompt.props';
 
 export const Prompt = ({
-    isVisible,
-    title,
-    onPressOk,
-    onClose
+  isVisible,
+  title,
+  onPressOk,
+  onClose
 }: PromptProps): JSX.Element => {
-    if (!isVisible) {
-        return null;
-    }
+  if (!isVisible) {
+    return null;
+  }
 
-    return Platform.OS === 'ios' ? (
-        <IOSPrompt title={title} onPressOK={onPressOk} onClose={onClose} />
-    ) : (
-        <AndroidPrompt title={title} onPressOK={onPressOk} onClose={onClose} />
-    );
+  return Platform.OS === 'ios' ? (
+    <IOSPrompt title={title} onPressOK={onPressOk} onClose={onClose} />
+  ) : (
+    <AndroidPrompt title={title} onPressOK={onPressOk} onClose={onClose} />
+  );
 };

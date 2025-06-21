@@ -4,26 +4,26 @@ import { ModalProps } from '@components/general/Modal/Modal.props';
 import { ModalStyle } from '@components/general/Modal/Modal.style';
 
 export const Modal = ({
-    isVisible,
-    content,
-    onClose,
-    ...props
+  isVisible,
+  content,
+  onClose,
+  ...props
 }: ModalProps): JSX.Element => (
-    <ModalComponent
-        isVisible={isVisible}
-        useNativeDriverForBackdrop
-        swipeDirection={['down']}
-        animationInTiming={300}
-        animationOutTiming={300}
-        swipeThreshold={50}
-        onBackdropPress={onClose}
-        onSwipeComplete={onClose}
-        avoidKeyboard
-        propagateSwipe
-        backdropOpacity={0.2}
-        style={ModalStyle.container}
-        {...props}
-    >
-        {content}
-    </ModalComponent>
+  <ModalComponent
+    isVisible={isVisible}
+    useNativeDriverForBackdrop
+    swipeDirection={['down']}
+    animationInTiming={300}
+    animationOutTiming={300}
+    swipeThreshold={50}
+    onBackdropPress={onClose}
+    onSwipeComplete={onClose}
+    avoidKeyboard
+    propagateSwipe
+    backdropOpacity={0.2}
+    style={ModalStyle.container}
+    {...props}
+  >
+    {content}
+  </ModalComponent>
 );

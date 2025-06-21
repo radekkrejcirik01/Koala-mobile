@@ -1,3 +1,3 @@
 export interface FriendsModalScreenProps {
-    onActionSheetOpened?: () => void;
+  onActionSheetOpened?: () => void;
 }

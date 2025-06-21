@@ -6,56 +6,53 @@ import { StatusModalScreenStyle } from '@components/home/StatusModalScreen/Statu
 import { EXPRESSIONS } from '@components/home/StatusModalScreen/StatusModalScreen.const';
 
 export const StatusModalScreen = ({
-    onPressExpression,
-    onPressClearStatus,
-    expression
+  onPressExpression,
+  onPressClearStatus,
+  expression
 }: StatusModalScreenProps): React.JSX.Element => {
-    const { bottom } = useSafeAreaInsets();
+  const { bottom } = useSafeAreaInsets();
 
-    return (
-        <View
+  return (
+    <View
+      style={[
+        StatusModalScreenStyle.container,
+        {
+          paddingBottom: bottom + 20
+        }
+      ]}
+    >
+      <Text style={StatusModalScreenStyle.titleText}>Your status</Text>
+      <Text style={StatusModalScreenStyle.descriptionText}>
+        Disappears after 48 hours
+      </Text>
+      <View style={StatusModalScreenStyle.expressionsContainer}>
+        {EXPRESSIONS.map((value) => (
+          <TouchableOpacity
+            key={value.id + value.expression}
+            activeOpacity={0.7}
+            disabled={value.expression === expression}
+            onPress={() => onPressExpression(value.expression)}
             style={[
-                StatusModalScreenStyle.container,
-                {
-                    paddingBottom: bottom + 20
-                }
+              StatusModalScreenStyle.expressionButtonView,
+              value.expression === expression && StatusModalScreenStyle.active
             ]}
-        >
-            <Text style={StatusModalScreenStyle.titleText}>Your status</Text>
-            <Text style={StatusModalScreenStyle.descriptionText}>
-                Disappears after 48 hours
+          >
+            <Text style={StatusModalScreenStyle.expressionButtonText}>
+              {value.expression}
             </Text>
-            <View style={StatusModalScreenStyle.expressionsContainer}>
-                {EXPRESSIONS.map((value) => (
-                    <TouchableOpacity
-                        key={value.id + value.expression}
-                        activeOpacity={0.7}
-                        disabled={value.expression === expression}
-                        onPress={() => onPressExpression(value.expression)}
-                        style={[
-                            StatusModalScreenStyle.expressionButtonView,
-                            value.expression === expression &&
-                                StatusModalScreenStyle.active
-                        ]}
-                    >
-                        <Text
-                            style={StatusModalScreenStyle.expressionButtonText}
-                        >
-                            {value.expression}
-                        </Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
-            <TouchableOpacity
-                activeOpacity={0.7}
-                hitSlop={10}
-                onPress={onPressClearStatus}
-                style={StatusModalScreenStyle.clearStatusButtonView}
-            >
-                <Text style={StatusModalScreenStyle.clearStatusButtonText}>
-                    Clear status
-                </Text>
-            </TouchableOpacity>
-        </View>
-    );
+          </TouchableOpacity>
+        ))}
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        hitSlop={10}
+        onPress={onPressClearStatus}
+        style={StatusModalScreenStyle.clearStatusButtonView}
+      >
+        <Text style={StatusModalScreenStyle.clearStatusButtonText}>
+          Clear status
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 };

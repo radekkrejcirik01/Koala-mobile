@@ -1,6 +1,6 @@
 export interface RecordingInputProps {
-    onStopRecording: () => void;
-    onPressSend: () => void;
-    onPressPlay: () => void;
-    onPressClean: () => void;
+  onStopRecording: () => void;
+  onPressSend: () => void;
+  onPressPlay: () => void;
+  onPressClean: () => void;
 }

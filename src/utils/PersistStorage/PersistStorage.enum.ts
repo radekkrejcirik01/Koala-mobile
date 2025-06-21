@@ -1,3 +1,3 @@
 export enum PersistStorageKeys {
-    TOKEN = 'TOKEN'
+  TOKEN = 'TOKEN'
 }

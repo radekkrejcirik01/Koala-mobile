@@ -6,43 +6,43 @@ import COLORS from '@constants/COLORS';
 import { SelectFriendItemStyle } from '@components/friends/SelectFriendItem/SelectFriendItem.style';
 
 export const SelectFriendItem = ({
-    item,
-    onSelect,
-    sent
+  item,
+  onSelect,
+  sent
 }: SelectFriendItemProps): JSX.Element => {
-    const [selected, setSelected] = useState<boolean>(false);
+  const [selected, setSelected] = useState<boolean>(false);
 
-    const onPress = useCallback(() => {
-        setSelected((value) => !value);
-        onSelect();
-    }, [onSelect]);
+  const onPress = useCallback(() => {
+    setSelected((value) => !value);
+    onSelect();
+  }, [onSelect]);
 
-    useEffect(() => {
-        if (sent) {
-            setSelected(false);
-        }
-    }, [sent]);
+  useEffect(() => {
+    if (sent) {
+      setSelected(false);
+    }
+  }, [sent]);
 
-    return (
-        <TouchableOpacity
-            activeOpacity={1}
-            onPress={onPress}
-            style={SelectFriendItemStyle.container}
-        >
-            <ProfilePhoto
-                name={item.name}
-                photo={item?.profilePhoto}
-                size={45}
-                style={[
-                    SelectFriendItemStyle.profilePhoto,
-                    selected && {
-                        borderColor: COLORS.BUTTON_BLUE
-                    }
-                ]}
-            />
-            <Text adjustsFontSizeToFit style={SelectFriendItemStyle.nameText}>
-                {item.name}
-            </Text>
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={onPress}
+      style={SelectFriendItemStyle.container}
+    >
+      <ProfilePhoto
+        name={item.name}
+        photo={item?.profilePhoto}
+        size={45}
+        style={[
+          SelectFriendItemStyle.profilePhoto,
+          selected && {
+            borderColor: COLORS.BUTTON_BLUE
+          }
+        ]}
+      />
+      <Text adjustsFontSizeToFit style={SelectFriendItemStyle.nameText}>
+        {item.name}
+      </Text>
+    </TouchableOpacity>
+  );
 };

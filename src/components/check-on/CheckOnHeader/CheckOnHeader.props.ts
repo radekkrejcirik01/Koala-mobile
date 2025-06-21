@@ -1,3 +1,3 @@
 export interface CheckOnHeaderProps {
-    onPressAdd: () => void;
+  onPressAdd: () => void;
 }

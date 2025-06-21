@@ -9,18 +9,18 @@ import { NotificationsButton } from '@components/home/NotificationsButton/Notifi
 import { ReducerProps } from '@store/index/index.props';
 
 export const HomeHeader = (): JSX.Element => {
-    const { name } = useSelector((state: ReducerProps) => state.user.user);
+  const { name } = useSelector((state: ReducerProps) => state.user.user);
 
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+  const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
-    return (
-        <View style={HomeHeaderStyle.container}>
-            <NotificationsButton
-                onPress={() =>
-                    navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
-                }
-            />
-            <Text style={HomeHeaderStyle.title}>Hi, {name} 😴</Text>
-        </View>
-    );
+  return (
+    <View style={HomeHeaderStyle.container}>
+      <NotificationsButton
+        onPress={() =>
+          navigateTo(AccountStackNavigatorEnum.NotificationsScreen)
+        }
+      />
+      <Text style={HomeHeaderStyle.title}>Hi, {name} 😴</Text>
+    </View>
+  );
 };

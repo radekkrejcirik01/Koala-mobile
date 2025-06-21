@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import {
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    Text,
-    TextInput,
-    View
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
@@ -19,49 +19,49 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { UsernamePostInterface } from '@interfaces/post/Post.interface';
 
 export const ThirdScreen = (): JSX.Element => {
-    const dispatch = useDispatch();
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const dispatch = useDispatch();
+  const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
-    const [username, setUsername] = useState<string>();
+  const [username, setUsername] = useState<string>();
 
-    const onPressNext = useCallback(() => {
-        if (!username) {
-            Alert.alert('Please enter username');
-            return;
+  const onPressNext = useCallback(() => {
+    if (!username) {
+      Alert.alert('Please enter username');
+      return;
+    }
+
+    postRequest<ResponseInterface, UsernamePostInterface>('username', {
+      username
+    }).subscribe((response: ResponseInterface) => {
+      if (response?.status) {
+        if (response?.message?.includes('taken')) {
+          Alert.alert('This username is already taken');
+        } else {
+          dispatch(setUsernameAction(username));
+          navigateTo(LoginStackNavigatorEnum.FourthScreen);
         }
+      }
+    });
+  }, [dispatch, navigateTo, username]);
 
-        postRequest<ResponseInterface, UsernamePostInterface>('username', {
-            username
-        }).subscribe((response: ResponseInterface) => {
-            if (response?.status) {
-                if (response?.message?.includes('taken')) {
-                    Alert.alert('This username is already taken');
-                } else {
-                    dispatch(setUsernameAction(username));
-                    navigateTo(LoginStackNavigatorEnum.FourthScreen);
-                }
-            }
-        });
-    }, [dispatch, navigateTo, username]);
-
-    return (
-        <View style={ThirdScreenStyle.container}>
-            <View>
-                <Text style={ThirdScreenStyle.title}>Your username</Text>
-                <TextInput
-                    autoFocus
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    onChangeText={setUsername}
-                    style={ThirdScreenStyle.input}
-                />
-            </View>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                keyboardVerticalOffset={15}
-            >
-                <Button title="Next" onPress={onPressNext} />
-            </KeyboardAvoidingView>
-        </View>
-    );
+  return (
+    <View style={ThirdScreenStyle.container}>
+      <View>
+        <Text style={ThirdScreenStyle.title}>Your username</Text>
+        <TextInput
+          autoFocus
+          autoCorrect={false}
+          autoCapitalize="none"
+          onChangeText={setUsername}
+          style={ThirdScreenStyle.input}
+        />
+      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+        keyboardVerticalOffset={15}
+      >
+        <Button title="Next" onPress={onPressNext} />
+      </KeyboardAvoidingView>
+    </View>
+  );
 };

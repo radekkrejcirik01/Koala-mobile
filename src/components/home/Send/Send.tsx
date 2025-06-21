@@ -10,58 +10,52 @@ import { SendProps } from '@components/home/Send/Send.props';
 import { SendStyle } from '@components/home/Send/Send.style';
 
 export const Send = ({
-    onFriendSelect,
-    onAddFriendPress,
-    onPressSend,
-    sending,
-    sent,
-    style
+  onFriendSelect,
+  onAddFriendPress,
+  onPressSend,
+  sending,
+  sent,
+  style
 }: SendProps): JSX.Element => {
-    const { friends, loaded } = useFriends();
+  const { friends, loaded } = useFriends();
 
-    const friendsAdded = useMemo(
-        (): boolean => !!friends?.length,
-        [friends?.length]
-    );
+  const friendsAdded = useMemo(
+    (): boolean => !!friends?.length,
+    [friends?.length]
+  );
 
-    return (
-        <View style={[SendStyle.container, style]}>
-            {loaded ? (
-                <>
-                    <View style={SendStyle.selectView}>
-                        {friends?.map((item) => (
-                            <SelectFriendItem
-                                key={item.username}
-                                item={{
-                                    name: item.name,
-                                    username: item.username,
-                                    profilePhoto: item?.profilePhoto
-                                }}
-                                onSelect={() => onFriendSelect(item.id)}
-                                sent={sent}
-                            />
-                        ))}
-                        <AddFriendButton
-                            size={45}
-                            onPress={onAddFriendPress}
-                            style={SendStyle.addFriendButton}
-                        />
-                    </View>
-                    {friendsAdded ? (
-                        <SendButton
-                            onPress={onPressSend}
-                            sending={sending}
-                            sent={sent}
-                        />
-                    ) : (
-                        <AddFriendsDescriptionButton
-                            onPress={onAddFriendPress}
-                        />
-                    )}
-                </>
-            ) : (
-                <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-            )}
-        </View>
-    );
+  return (
+    <View style={[SendStyle.container, style]}>
+      {loaded ? (
+        <>
+          <View style={SendStyle.selectView}>
+            {friends?.map((item) => (
+              <SelectFriendItem
+                key={item.username}
+                item={{
+                  name: item.name,
+                  username: item.username,
+                  profilePhoto: item?.profilePhoto
+                }}
+                onSelect={() => onFriendSelect(item.id)}
+                sent={sent}
+              />
+            ))}
+            <AddFriendButton
+              size={45}
+              onPress={onAddFriendPress}
+              style={SendStyle.addFriendButton}
+            />
+          </View>
+          {friendsAdded ? (
+            <SendButton onPress={onPressSend} sending={sending} sent={sent} />
+          ) : (
+            <AddFriendsDescriptionButton onPress={onAddFriendPress} />
+          )}
+        </>
+      ) : (
+        <ActivityIndicator color={COLORS.BUTTON_BLUE} />
+      )}
+    </View>
+  );
 };

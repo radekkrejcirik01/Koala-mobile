@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const ModalStyle = StyleSheet.create({
-    container: {
-        margin: 0
-    }
+  container: {
+    margin: 0
+  }
 });

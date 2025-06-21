@@ -9,84 +9,84 @@ import { RecordingInputProps } from '@components/chat/RecordingInput/RecordingIn
 import COLORS from '@constants/COLORS';
 
 export const RecordingInput = ({
-    onStopRecording,
-    onPressSend,
-    onPressPlay,
-    onPressClean
+  onStopRecording,
+  onPressSend,
+  onPressPlay,
+  onPressClean
 }: RecordingInputProps): React.JSX.Element => {
-    const [stopped, setStopped] = useState<boolean>(false);
+  const [stopped, setStopped] = useState<boolean>(false);
 
-    const progressAnimationRef = useRef(null);
+  const progressAnimationRef = useRef(null);
 
-    useEffect(() => {
-        progressAnimationRef?.current?.animate(100, 15000, Easing.quad);
-    }, []);
+  useEffect(() => {
+    progressAnimationRef?.current?.animate(100, 15000, Easing.quad);
+  }, []);
 
-    const stop = useCallback(() => {
-        onStopRecording();
+  const stop = useCallback(() => {
+    onStopRecording();
 
-        setStopped(true);
-    }, [onStopRecording]);
+    setStopped(true);
+  }, [onStopRecording]);
 
-    useTimer(15, stop, !stopped);
+  useTimer(15, stop, !stopped);
 
-    return (
-        <View style={RecordingInputStyle.container}>
-            <View style={RecordingInputStyle.centerRow}>
-                {stopped ? (
-                    <TouchableOpacity
-                        activeOpacity={0.9}
-                        hitSlop={10}
-                        onPress={onPressClean}
-                    >
-                        <Text>🗑️</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <AnimatedCircularProgress
-                        ref={progressAnimationRef}
-                        size={30}
-                        width={5}
-                        fill={100}
-                        rotation={0}
-                        tintColor={COLORS.PURPLE}
-                        backgroundColor={COLORS.WHITE}
-                    />
-                )}
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    hitSlop={10}
-                    disabled={!stopped}
-                    onPress={onPressPlay}
-                    style={RecordingInputStyle.titleView}
-                >
-                    <Text style={RecordingInputStyle.titleText}>
-                        {stopped ? 'Voice message 🎧' : 'Listening...'}
-                    </Text>
-                </TouchableOpacity>
-            </View>
-            {stopped ? (
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    hitSlop={10}
-                    onPress={onPressSend}
-                    style={RecordingInputStyle.sendButtonView}
-                >
-                    <Icon
-                        name={IconEnum.SEND}
-                        size={22}
-                        style={RecordingInputStyle.sendButtonIcon}
-                    />
-                </TouchableOpacity>
-            ) : (
-                <TouchableOpacity
-                    activeOpacity={0.9}
-                    hitSlop={10}
-                    onPress={stop}
-                    style={RecordingInputStyle.centerRow}
-                >
-                    <Icon name={IconEnum.STOP} size={26} />
-                </TouchableOpacity>
-            )}
-        </View>
-    );
+  return (
+    <View style={RecordingInputStyle.container}>
+      <View style={RecordingInputStyle.centerRow}>
+        {stopped ? (
+          <TouchableOpacity
+            activeOpacity={0.9}
+            hitSlop={10}
+            onPress={onPressClean}
+          >
+            <Text>🗑️</Text>
+          </TouchableOpacity>
+        ) : (
+          <AnimatedCircularProgress
+            ref={progressAnimationRef}
+            size={30}
+            width={5}
+            fill={100}
+            rotation={0}
+            tintColor={COLORS.PURPLE}
+            backgroundColor={COLORS.WHITE}
+          />
+        )}
+        <TouchableOpacity
+          activeOpacity={0.9}
+          hitSlop={10}
+          disabled={!stopped}
+          onPress={onPressPlay}
+          style={RecordingInputStyle.titleView}
+        >
+          <Text style={RecordingInputStyle.titleText}>
+            {stopped ? 'Voice message 🎧' : 'Listening...'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {stopped ? (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          hitSlop={10}
+          onPress={onPressSend}
+          style={RecordingInputStyle.sendButtonView}
+        >
+          <Icon
+            name={IconEnum.SEND}
+            size={22}
+            style={RecordingInputStyle.sendButtonIcon}
+          />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          activeOpacity={0.9}
+          hitSlop={10}
+          onPress={stop}
+          style={RecordingInputStyle.centerRow}
+        >
+          <Icon name={IconEnum.STOP} size={26} />
+        </TouchableOpacity>
+      )}
+    </View>
+  );
 };

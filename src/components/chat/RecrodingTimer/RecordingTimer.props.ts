@@ -1,3 +1,3 @@
 export interface RecordingTimerProps {
-    onLimitExceeded: () => void;
+  onLimitExceeded: () => void;
 }

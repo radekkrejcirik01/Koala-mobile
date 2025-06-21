@@ -4,14 +4,11 @@ import { AddFriendsDescriptionButtonStyle } from '@components/friends/AddFriends
 import { AddFriendsDescriptionButtonProps } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton.props';
 
 export const AddFriendsDescriptionButton = ({
-    onPress
+  onPress
 }: AddFriendsDescriptionButtonProps): JSX.Element => (
-    <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
-        <Text
-            adjustsFontSizeToFit
-            style={AddFriendsDescriptionButtonStyle.view}
-        >
-            Add friends to share
-        </Text>
-    </TouchableOpacity>
+  <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
+    <Text adjustsFontSizeToFit style={AddFriendsDescriptionButtonStyle.view}>
+      Add friends to share
+    </Text>
+  </TouchableOpacity>
 );

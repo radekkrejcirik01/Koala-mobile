@@ -1,3 +1,3 @@
 export interface DirectSharingModalScreenProps {
-    onAddFriendPress: () => void;
+  onAddFriendPress: () => void;
 }

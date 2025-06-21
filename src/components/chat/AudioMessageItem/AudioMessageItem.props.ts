@@ -1,3 +1,3 @@
 export interface AudioMessageItemProps {
-    audioMessage: string;
+  audioMessage: string;
 }

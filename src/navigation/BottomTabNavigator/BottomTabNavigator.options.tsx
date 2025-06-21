@@ -6,35 +6,35 @@ import { BottomTabNavigatorStyle } from '@navigation/BottomTabNavigator/BottomTa
 import COLORS from '@constants/COLORS';
 
 export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
-    tabBarStyle: {
-        borderTopWidth: 0
-    },
-    tabBarActiveTintColor: COLORS.PURPLE,
-    tabBarInactiveTintColor: COLORS.LIGHTGRAY_100,
-    tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel,
-    headerShown: false
+  tabBarStyle: {
+    borderTopWidth: 0
+  },
+  tabBarActiveTintColor: COLORS.PURPLE,
+  tabBarInactiveTintColor: COLORS.LIGHTGRAY_100,
+  tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel,
+  headerShown: false
 };
 
 export const HomeTabOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Home',
-    tabBarIcon: () => (
-        <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🏠</Text>
-    )
+  tabBarLabel: 'Home',
+  tabBarIcon: () => (
+    <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🏠</Text>
+  )
 };
 
 export const CheckOnTabbOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Check-on',
-    tabBarIcon: () => (
-        <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🙋</Text>
-    )
+  tabBarLabel: 'Check-on',
+  tabBarIcon: () => (
+    <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>🙋</Text>
+  )
 };
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Profile',
-    tabBarIcon: () => (
-        <FastImage
-            source={require('../../assets/images/koala.png')}
-            style={BottomTabNavigatorStyle.tabBarIconImage}
-        />
-    )
+  tabBarLabel: 'Profile',
+  tabBarIcon: () => (
+    <FastImage
+      source={require('../../assets/images/koala.png')}
+      style={BottomTabNavigatorStyle.tabBarIconImage}
+    />
+  )
 };

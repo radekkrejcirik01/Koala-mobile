@@ -12,83 +12,81 @@ import { SharedScreenStyle } from '@screens/account/SharedScreen/SharedScreen.st
 import { SharedScreenHeader } from '@components/chat/SharedScreenHeader/SharedScreenHeader';
 
 export const SharedScreen = ({ route }: SharedScreenProps): JSX.Element => {
-    const { receiverId } = route.params;
+  const { receiverId } = route.params;
 
-    const { top } = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
 
-    const [history, setHistory] = useState<HistoryInterface[]>([]);
-    const [loaded, setLoaded] = useState<boolean>(false);
+  const [history, setHistory] = useState<HistoryInterface[]>([]);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
-    const loadHistory = useCallback(
-        (lastId?: number) => {
-            let endpoint = `user-history/${receiverId}`;
-            if (lastId) {
-                endpoint += `/${lastId}`;
+  const loadHistory = useCallback(
+    (lastId?: number) => {
+      let endpoint = `user-history/${receiverId}`;
+      if (lastId) {
+        endpoint += `/${lastId}`;
+      }
+
+      getRequest<ResponseHistoryGetInterface>(endpoint).subscribe(
+        (response: ResponseHistoryGetInterface) => {
+          if (response?.status) {
+            if (!lastId) {
+              setHistory(response.data);
+
+              setLoaded(true);
+              return;
             }
 
-            getRequest<ResponseHistoryGetInterface>(endpoint).subscribe(
-                (response: ResponseHistoryGetInterface) => {
-                    if (response?.status) {
-                        if (!lastId) {
-                            setHistory(response.data);
+            if (lastId && !!response?.data?.length) {
+              setHistory((value) => value.concat(response.data));
+            }
 
-                            setLoaded(true);
-                            return;
-                        }
-
-                        if (lastId && !!response?.data?.length) {
-                            setHistory((value) => value.concat(response.data));
-                        }
-
-                        setLoaded(true);
-                    }
-                }
-            );
-        },
-        [receiverId]
-    );
-
-    useEffect(() => {
-        loadHistory();
-    }, [loadHistory]);
-
-    const renderItem = useCallback(
-        ({ item }: ListRenderItemInfo<HistoryInterface>): JSX.Element => (
-            <SharedItem item={item} />
-        ),
-        []
-    );
-
-    const onEndReached = useCallback(() => {
-        if (history?.length) {
-            loadHistory(history[history?.length - 1]?.id);
+            setLoaded(true);
+          }
         }
-    }, [history, loadHistory]);
+      );
+    },
+    [receiverId]
+  );
 
-    return (
-        <View style={[SharedScreenStyle.container, { paddingTop: top + 10 }]}>
-            <SharedScreenHeader />
-            <FlashList
-                data={history}
-                renderItem={renderItem}
-                estimatedItemSize={80}
-                keyExtractor={(item) => item.id.toString()}
-                showsVerticalScrollIndicator={false}
-                onEndReached={onEndReached}
-                contentContainerStyle={SharedScreenStyle.historyListContainer}
-                ListEmptyComponent={
-                    loaded ? (
-                        <Text style={SharedScreenStyle.listEmptyText}>
-                            No history yet
-                        </Text>
-                    ) : (
-                        <ActivityIndicator
-                            color={COLORS.BUTTON_BLUE}
-                            style={SharedScreenStyle.activityIndicator}
-                        />
-                    )
-                }
+  useEffect(() => {
+    loadHistory();
+  }, [loadHistory]);
+
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<HistoryInterface>): JSX.Element => (
+      <SharedItem item={item} />
+    ),
+    []
+  );
+
+  const onEndReached = useCallback(() => {
+    if (history?.length) {
+      loadHistory(history[history?.length - 1]?.id);
+    }
+  }, [history, loadHistory]);
+
+  return (
+    <View style={[SharedScreenStyle.container, { paddingTop: top + 10 }]}>
+      <SharedScreenHeader />
+      <FlashList
+        data={history}
+        renderItem={renderItem}
+        estimatedItemSize={80}
+        keyExtractor={(item) => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+        onEndReached={onEndReached}
+        contentContainerStyle={SharedScreenStyle.historyListContainer}
+        ListEmptyComponent={
+          loaded ? (
+            <Text style={SharedScreenStyle.listEmptyText}>No history yet</Text>
+          ) : (
+            <ActivityIndicator
+              color={COLORS.BUTTON_BLUE}
+              style={SharedScreenStyle.activityIndicator}
             />
-        </View>
-    );
+          )
+        }
+      />
+    </View>
+  );
 };

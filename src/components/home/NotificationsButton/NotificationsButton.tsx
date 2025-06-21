@@ -7,21 +7,21 @@ import { NotificationsButtonStyle } from '@components/home/NotificationsButton/N
 import { NotificationsButtonProps } from '@components/home/NotificationsButton/NotificationsButton.props';
 
 export const NotificationsButton = ({
-    onPress
+  onPress
 }: NotificationsButtonProps): JSX.Element => {
-    const { unseenNotifications } = useSelector(
-        (state: ReducerProps) => state.notifications
-    );
+  const { unseenNotifications } = useSelector(
+    (state: ReducerProps) => state.notifications
+  );
 
-    return (
-        <TouchableOpacity
-            activeOpacity={0.9}
-            hitSlop={10}
-            onPress={onPress}
-            style={NotificationsButtonStyle.view}
-        >
-            <Text style={NotificationsButtonStyle.text}>💬</Text>
-            <Badge value={unseenNotifications} />
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity
+      activeOpacity={0.9}
+      hitSlop={10}
+      onPress={onPress}
+      style={NotificationsButtonStyle.view}
+    >
+      <Text style={NotificationsButtonStyle.text}>💬</Text>
+      <Badge value={unseenNotifications} />
+    </TouchableOpacity>
+  );
 };

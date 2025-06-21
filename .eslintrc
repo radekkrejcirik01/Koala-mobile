@@ -1,9 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "@react-native-community",
     "airbnb-typescript",
@@ -11,13 +9,9 @@
     "prettier"
   ],
   "parserOptions": {
-    "project": [
-      "tsconfig.json"
-    ]
+    "project": ["tsconfig.json"]
   },
-  "ignorePatterns": [
-    "*.js"
-  ],
+  "ignorePatterns": ["*.js"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",

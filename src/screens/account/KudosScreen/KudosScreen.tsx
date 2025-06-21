@@ -11,50 +11,50 @@ import { AddButton } from '@components/general/AddButton/AddButton';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export const KudosScreen = (): JSX.Element => {
-    const { top } = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
 
-    const {
-        messages,
-        modalScreen,
-        modalVisible,
-        onPressMessage,
-        onPressAddEmotion,
-        onItemLongPress,
-        hideModalAndKeyboard
-    } = useMessagesActions(EmotionScreenMessageType.Kudos);
+  const {
+    messages,
+    modalScreen,
+    modalVisible,
+    onPressMessage,
+    onPressAddEmotion,
+    onItemLongPress,
+    hideModalAndKeyboard
+  } = useMessagesActions(EmotionScreenMessageType.Kudos);
 
-    return (
-        <View style={[KudosScreenStyle.container, { top }]}>
-            <ScreenHeader
-                title="Kudos"
-                rightComponent={<AddButton onPress={onPressAddEmotion} />}
-            />
-            <ScrollView contentContainerStyle={KudosScreenStyle.scrollView}>
-                <View style={KudosScreenStyle.imageContainer}>
-                    <FastImage
-                        source={require('../../../assets/images/Kudos.png')}
-                        style={KudosScreenStyle.image}
-                    />
-                </View>
-                <View style={KudosScreenStyle.line} />
-                <View style={KudosScreenStyle.messagesContainer}>
-                    {messages.map((value, index) => (
-                        <MessageItem
-                            key={value.id}
-                            item={value}
-                            index={index}
-                            onPressMessage={() => onPressMessage(value)}
-                            onItemLongPress={() => onItemLongPress(value)}
-                        />
-                    ))}
-                </View>
-            </ScrollView>
-            <Modal
-                isVisible={modalVisible}
-                content={modalScreen}
-                onClose={hideModalAndKeyboard}
-                style={KudosScreenStyle.modal}
-            />
+  return (
+    <View style={[KudosScreenStyle.container, { top }]}>
+      <ScreenHeader
+        title="Kudos"
+        rightComponent={<AddButton onPress={onPressAddEmotion} />}
+      />
+      <ScrollView contentContainerStyle={KudosScreenStyle.scrollView}>
+        <View style={KudosScreenStyle.imageContainer}>
+          <FastImage
+            source={require('../../../assets/images/Kudos.png')}
+            style={KudosScreenStyle.image}
+          />
         </View>
-    );
+        <View style={KudosScreenStyle.line} />
+        <View style={KudosScreenStyle.messagesContainer}>
+          {messages.map((value, index) => (
+            <MessageItem
+              key={value.id}
+              item={value}
+              index={index}
+              onPressMessage={() => onPressMessage(value)}
+              onItemLongPress={() => onItemLongPress(value)}
+            />
+          ))}
+        </View>
+      </ScrollView>
+      <Modal
+        isVisible={modalVisible}
+        content={modalScreen}
+        onClose={hideModalAndKeyboard}
+        style={KudosScreenStyle.modal}
+      />
+    </View>
+  );
 };
