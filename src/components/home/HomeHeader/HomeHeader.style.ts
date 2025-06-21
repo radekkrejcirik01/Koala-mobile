@@ -5,15 +5,15 @@ export const HomeHeaderStyle = StyleSheet.create({
   container: {
     paddingTop: 25,
     paddingLeft: 20,
-    paddingRight: 15
+    paddingRight: 25
   },
-  friendsView: {
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  friendsText: {
-    fontSize: 22,
+  heartText: {
+    fontSize: 28,
     color: COLORS.BLACK
   },
   title: {
