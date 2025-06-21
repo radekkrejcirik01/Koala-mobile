@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { BottomTabNavigatorStyle } from '@navigation/BottomTabNavigator/BottomTabNavigator.style';
 import COLORS from '@constants/COLORS';
+import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
 
 export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
   tabBarStyle: {
@@ -22,9 +23,7 @@ export const HomeTabOptions: BottomTabNavigationOptions = {
 };
 
 export const NotificationsTabbOptions: BottomTabNavigationOptions = {
-  tabBarIcon: () => (
-    <Text style={BottomTabNavigatorStyle.tabBarIconEmoji}>💬</Text>
-  )
+  tabBarIcon: () => <NotificationsButton />
 };
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
