@@ -6,7 +6,6 @@ import { NotificationItemStyle } from '@components/notifications/NotificationIte
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
-import COLORS from '@constants/COLORS';
 
 export const NotificationItem = ({
   item,
@@ -20,13 +19,6 @@ export const NotificationItem = ({
       setPressed(true);
     }, 500);
   }, [onPress]);
-
-  function getTitle(isUnseen: boolean, name: string): string {
-    if (isUnseen) {
-      return `💬 ${name}`;
-    }
-    return name;
-  }
 
   function getMessage(
     type: NotificationItemEnum,
@@ -65,14 +57,7 @@ export const NotificationItem = ({
             acronymStyle={NotificationItemStyle.profilePhoto}
           />
           <View style={NotificationItemStyle.contentView}>
-            <Text
-              style={[
-                NotificationItemStyle.titleText,
-                isUnseen && { color: COLORS.GRAY_200 }
-              ]}
-            >
-              {getTitle(isUnseen, item.name)}
-            </Text>
+            <Text style={NotificationItemStyle.titleText}>{item.name}</Text>
             <Text
               style={[
                 NotificationItemStyle.messageText,
