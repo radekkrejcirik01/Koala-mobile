@@ -17,7 +17,7 @@ export const ProfileScreenStyle = StyleSheet.create({
   photoButton: {
     marginVertical: 10,
     paddingHorizontal: 10,
-    paddingVertical: 2,
+    paddingVertical: 5,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',

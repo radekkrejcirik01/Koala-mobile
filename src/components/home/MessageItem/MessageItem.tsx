@@ -2,7 +2,6 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { MessageItemProps } from '@components/home/MessageItem/MessageItem.props';
 import { MessageItemStyle } from '@components/home/MessageItem/MessageItem.style';
-import COLORS from '@constants/COLORS';
 import { useTheme } from '../../../ThemeContext';
 
 export const MessageItem = ({
@@ -23,7 +22,7 @@ export const MessageItem = ({
       delayLongPress={150}
       style={[
         MessageItemStyle.buttonView,
-        { borderColor: theme.isDark ? COLORS.GRAY_200 : COLORS.LIGHTGRAY }
+        { borderColor: theme.isDark ? '#ffffff30' : '#00000030' }
       ]}
     >
       <Text style={MessageItemStyle.numberText}>{messageNumber}</Text>

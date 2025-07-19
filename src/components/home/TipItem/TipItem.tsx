@@ -12,7 +12,7 @@ export const TipItem = ({ tip, style }: TipItemProps): JSX.Element => {
 
   return (
     <View style={[TipItemStyle.container, style]}>
-      <Text style={TipItemStyle.emoji}>💡</Text>
+      <Text>💡</Text>
       <Text style={[TipItemStyle.tipText, { color: theme.theme.colors.text }]}>
         {tip}
       </Text>
