@@ -7,19 +7,32 @@ import {
   AddFriendButtonDefaultProps,
   AddFriendButtonProps
 } from '@components/friends/AddFriendButton/AddFriendButton.props';
+import COLORS from '@constants/COLORS';
+import { useTheme } from '../../../ThemeContext';
 
 export const AddFriendButton = ({
   size,
   onPress,
   style
-}: AddFriendButtonProps): JSX.Element => (
-  <TouchableOpacity
-    activeOpacity={0.9}
-    onPress={onPress}
-    style={[AddFriendButtonStyle.view, { height: size, width: size }, style]}
-  >
-    <Icon name={IconEnum.PLUS} size={12} />
-  </TouchableOpacity>
-);
+}: AddFriendButtonProps): JSX.Element => {
+  const theme = useTheme();
+  return (
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={onPress}
+      style={[
+        AddFriendButtonStyle.view,
+        {
+          height: size,
+          width: size,
+          borderColor: theme.isDark ? COLORS.GRAY_200 : COLORS.LIGHTGRAY
+        },
+        style
+      ]}
+    >
+      <Icon name={IconEnum.PLUS} size={12} />
+    </TouchableOpacity>
+  );
+};
 
 AddFriendButton.defaultProps = AddFriendButtonDefaultProps;

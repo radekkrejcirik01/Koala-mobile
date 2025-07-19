@@ -7,15 +7,13 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     paddingTop: 15,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    justifyContent: 'space-between',
-    backgroundColor: COLORS.WHITE
+    justifyContent: 'space-between'
   },
   flexStart: {
     justifyContent: 'flex-start'
   },
   titleText: {
     fontSize: 16,
-    color: COLORS.BLACK,
     alignSelf: 'center',
     fontWeight: 'bold'
   },
@@ -40,8 +38,7 @@ export const FriendsModalScreenStyle = StyleSheet.create({
   inviteContainer: {
     paddingVertical: 15,
     borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor: COLORS.WHITE
+    borderTopRightRadius: 20
   },
   input: {
     height: 50,
@@ -49,8 +46,6 @@ export const FriendsModalScreenStyle = StyleSheet.create({
     marginHorizontal: '10%',
     borderRadius: 20,
     fontSize: 20,
-    color: COLORS.BLACK,
-    backgroundColor: COLORS.WHITE_100,
     textAlign: 'center',
     fontWeight: 'bold'
   },

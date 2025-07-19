@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusModalScreenProps } from '@components/home/StatusModalScreen/StatusModalScreen.props';
 import { StatusModalScreenStyle } from '@components/home/StatusModalScreen/StatusModalScreen.style';
 import { EXPRESSIONS } from '@components/home/StatusModalScreen/StatusModalScreen.const';
+import { useTheme } from '../../../ThemeContext';
 
 export const StatusModalScreen = ({
   onPressExpression,
@@ -11,17 +12,26 @@ export const StatusModalScreen = ({
   expression
 }: StatusModalScreenProps): React.JSX.Element => {
   const { bottom } = useSafeAreaInsets();
+  const theme = useTheme();
 
   return (
     <View
       style={[
         StatusModalScreenStyle.container,
         {
+          backgroundColor: theme.theme.colors.surface,
           paddingBottom: bottom + 20
         }
       ]}
     >
-      <Text style={StatusModalScreenStyle.titleText}>Your status</Text>
+      <Text
+        style={[
+          StatusModalScreenStyle.titleText,
+          { color: theme.theme.colors.text }
+        ]}
+      >
+        Your status
+      </Text>
       <Text style={StatusModalScreenStyle.descriptionText}>
         Disappears after 48 hours
       </Text>
@@ -34,6 +44,7 @@ export const StatusModalScreen = ({
             onPress={() => onPressExpression(value.expression)}
             style={[
               StatusModalScreenStyle.expressionButtonView,
+              { backgroundColor: theme.theme.colors.background },
               value.expression === expression && StatusModalScreenStyle.active
             ]}
           >

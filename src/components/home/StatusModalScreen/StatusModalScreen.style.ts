@@ -6,18 +6,16 @@ export const StatusModalScreenStyle = StyleSheet.create({
     minHeight: '50%',
     paddingHorizontal: 20,
     borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor: COLORS.WHITE
+    borderTopRightRadius: 20
   },
   titleText: {
     marginTop: 20,
     fontSize: 24,
-    color: COLORS.BLACK,
     fontWeight: '600'
   },
   descriptionText: {
     marginTop: 5,
-    color: COLORS.BLACK,
+    color: COLORS.GRAY_200,
     fontSize: 12
   },
   expressionsContainer: {
@@ -29,8 +27,7 @@ export const StatusModalScreenStyle = StyleSheet.create({
   expressionButtonView: {
     margin: 20,
     padding: 15,
-    borderRadius: 10,
-    backgroundColor: COLORS.WHITE_100
+    borderRadius: 10
   },
   active: {
     borderWidth: 2,

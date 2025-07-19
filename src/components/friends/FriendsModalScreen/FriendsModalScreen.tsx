@@ -32,6 +32,7 @@ import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { InviteItem } from '@components/friends/InviteItem/InviteItem';
 import { FriendsModalScreenProps } from '@components/friends/FriendsModalScreen/FriendsModalScreen.props';
 import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
+import { useTheme } from '../../../ThemeContext';
 
 export const FriendsModalScreen = ({
   onActionSheetOpened
@@ -39,6 +40,7 @@ export const FriendsModalScreen = ({
   const { username } = useSelector((state: ReducerProps) => state.user.user);
 
   const { bottom } = useSafeAreaInsets();
+  const theme = useTheme();
   const { showActionSheetWithOptions } = useActionSheet();
 
   const [adding, setAdding] = useState<boolean>(false);
@@ -162,15 +164,33 @@ export const FriendsModalScreen = ({
 
   if (adding) {
     return (
-      <View style={FriendsModalScreenStyle.inviteContainer}>
-        <Text style={FriendsModalScreenStyle.titleText}>Invite friend</Text>
+      <View
+        style={[
+          FriendsModalScreenStyle.inviteContainer,
+          { backgroundColor: theme.theme.colors.surface }
+        ]}
+      >
+        <Text
+          style={[
+            FriendsModalScreenStyle.titleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Invite friend
+        </Text>
         <TextInput
           autoFocus
           autoCorrect={false}
           autoCapitalize="none"
           placeholder="username"
           onChangeText={setInviteUsername}
-          style={FriendsModalScreenStyle.input}
+          style={[
+            FriendsModalScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'position' : 'height'}
@@ -198,10 +218,18 @@ export const FriendsModalScreen = ({
       <View
         style={[
           FriendsModalScreenStyle.container,
-          FriendsModalScreenStyle.flexStart
+          FriendsModalScreenStyle.flexStart,
+          { backgroundColor: theme.theme.colors.surface }
         ]}
       >
-        <Text style={FriendsModalScreenStyle.titleText}>Friend invites</Text>
+        <Text
+          style={[
+            FriendsModalScreenStyle.titleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Friend invites
+        </Text>
         {invites?.length ? (
           <View style={FriendsModalScreenStyle.friendInvitesView}>
             {invites?.map((value: InviteInterface) => (
@@ -227,11 +255,21 @@ export const FriendsModalScreen = ({
     <View
       style={[
         FriendsModalScreenStyle.container,
-        { paddingBottom: bottom + 15 }
+        {
+          backgroundColor: theme.theme.colors.surface,
+          paddingBottom: bottom + 15
+        }
       ]}
     >
       <View>
-        <Text style={FriendsModalScreenStyle.titleText}>Friends</Text>
+        <Text
+          style={[
+            FriendsModalScreenStyle.titleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Friends
+        </Text>
         <TouchableOpacity onPress={() => setShowInvites(true)}>
           <Text style={FriendsModalScreenStyle.invitesText}>
             Invites {!!invites?.length && `(${invites?.length})`}

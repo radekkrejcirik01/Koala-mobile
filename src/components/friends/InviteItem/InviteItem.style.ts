@@ -16,7 +16,6 @@ export const InviteItemStyle = StyleSheet.create({
   usernameText: {
     marginLeft: 5,
     fontSize: 16,
-    color: COLORS.BLACK,
     fontWeight: '500'
   },
   buttonsContainer: {

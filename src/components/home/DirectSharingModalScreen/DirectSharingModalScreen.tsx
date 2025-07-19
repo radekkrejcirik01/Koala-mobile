@@ -10,11 +10,13 @@ import { DirectSharingModalScreenProps } from '@components/home/DirectSharingMod
 import { DirectSharingModalScreenStyle } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.style';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
+import { useTheme } from '../../../ThemeContext';
 
 export const DirectSharingModalScreen = ({
   onAddFriendPress
 }: DirectSharingModalScreenProps): JSX.Element => {
   const { bottom } = useSafeAreaInsets();
+  const theme = useTheme();
 
   const [message, setMessage] = useState<string>();
   const { sending, sent, setSending, setSent } = useSending();
@@ -63,6 +65,7 @@ export const DirectSharingModalScreen = ({
       style={[
         DirectSharingModalScreenStyle.container,
         {
+          backgroundColor: theme.theme.colors.surface,
           paddingBottom: bottom || 10
         }
       ]}
@@ -71,12 +74,16 @@ export const DirectSharingModalScreen = ({
         <TextInput
           multiline
           placeholder="What's happening??"
+          placeholderTextColor={COLORS.GRAY_200}
           autoFocus
           autoCorrect={false}
           value={message}
           onChangeText={setMessage}
           selectionColor={COLORS.BUTTON_BLUE}
-          style={DirectSharingModalScreenStyle.input}
+          style={[
+            DirectSharingModalScreenStyle.input,
+            { color: theme.theme.colors.text }
+          ]}
         />
       </View>
       <Send
