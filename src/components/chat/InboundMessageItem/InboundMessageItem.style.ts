@@ -8,7 +8,6 @@ export const InboundMessageItemStyle = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_200,
     alignSelf: 'flex-start'
   },
   marginTop: {
@@ -16,15 +15,13 @@ export const InboundMessageItemStyle = StyleSheet.create({
   },
   audioMessage: {
     paddingVertical: 0,
-    paddingHorizontal: 0,
-    backgroundColor: COLORS.WHITE
+    paddingHorizontal: 0
   },
   replyMessageView: {
     marginTop: 5,
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_100,
     alignSelf: 'flex-start'
   },
   replyMessageText: {
@@ -33,7 +30,6 @@ export const InboundMessageItemStyle = StyleSheet.create({
   },
   messageText: {
     fontSize: 14.5,
-    color: COLORS.BLACK,
     fontWeight: '500'
   },
   largeText: {

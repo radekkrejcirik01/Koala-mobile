@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const RepliesStyle = StyleSheet.create({
-  scrollView: {
-    backgroundColor: COLORS.WHITE
-  },
   container: {
     paddingHorizontal: 50,
     paddingBottom: 25,
@@ -18,11 +15,9 @@ export const RepliesStyle = StyleSheet.create({
     marginHorizontal: 2,
     padding: 10,
     borderRadius: 20,
-    backgroundColor: '#00000010',
     alignItems: 'center'
   },
   buttonText: {
-    color: COLORS.BLACK_50,
     fontWeight: '500'
   },
   addView: {

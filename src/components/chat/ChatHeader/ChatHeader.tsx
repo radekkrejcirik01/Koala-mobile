@@ -14,6 +14,7 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
 import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 import { BackButton } from '@components/general/BackButton/BackButton';
+import { useTheme } from '../../../ThemeContext';
 
 export const ChatHeader = ({
   chatUserId,
@@ -21,6 +22,7 @@ export const ChatHeader = ({
   name,
   profilePhoto
 }: ChatHeaderProps): JSX.Element => {
+  const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
   const [showUsername, setShowUsername] = useState<boolean>(true);
@@ -59,7 +61,14 @@ export const ChatHeader = ({
             acronymStyle={ChatHeaderStyle.acronym}
           />
           <View style={ChatHeaderStyle.namesView}>
-            <Text style={ChatHeaderStyle.nameText}>{name}</Text>
+            <Text
+              style={[
+                ChatHeaderStyle.nameText,
+                { color: theme.theme.colors.text }
+              ]}
+            >
+              {name}
+            </Text>
             <Text style={ChatHeaderStyle.usernameText}>
               {showUsername ? username : getChatOnlineStatus(lastOnline)}
             </Text>

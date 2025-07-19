@@ -28,11 +28,13 @@ import { ReducerProps } from '@store/index/index.props';
 import { REPLIES } from '@components/chat/Replies/Replies.const';
 import COLORS from '@constants/COLORS';
 import { Prompt } from '@components/general/Prompt/Prompt';
+import { useTheme } from '../../../ThemeContext';
 
 export const Replies = ({ onPressReply }: RepliesProps) => {
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
   const { promptVisible, showPrompt, hidePrompt } = usePrompt();
+  const theme = useTheme();
 
   const [replies, setReplies] = useState<ReplyInterface[]>([]);
   const [loaded, setLoad] = useState<boolean>(false);
@@ -110,7 +112,7 @@ export const Replies = ({ onPressReply }: RepliesProps) => {
   return (
     <ScrollView
       showsHorizontalScrollIndicator={false}
-      style={RepliesStyle.scrollView}
+      style={{ backgroundColor: theme.isDark ? COLORS.BLACK : COLORS.WHITE }}
       contentContainerStyle={RepliesStyle.container}
     >
       {replies?.map((value, index) => (
@@ -120,9 +122,19 @@ export const Replies = ({ onPressReply }: RepliesProps) => {
           delayLongPress={150}
           onPress={() => onPressReply(value.message)}
           onLongPress={() => remove(value)}
-          style={RepliesStyle.buttonView}
+          style={[
+            RepliesStyle.buttonView,
+            { backgroundColor: theme.theme.colors.surface }
+          ]}
         >
-          <Text style={RepliesStyle.buttonText}>{value.message}</Text>
+          <Text
+            style={[
+              RepliesStyle.buttonText,
+              { color: theme.theme.colors.text }
+            ]}
+          >
+            {value.message}
+          </Text>
         </TouchableOpacity>
       ))}
       <View style={RepliesStyle.addView}>

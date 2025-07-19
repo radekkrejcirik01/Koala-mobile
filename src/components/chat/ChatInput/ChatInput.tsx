@@ -17,6 +17,7 @@ import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
 import { RecordingInput } from '@components/chat/RecordingInput/RecordingInput';
 import { checkAndroidRecordingPermission } from '@functions/checkAndroidRecordingPermission';
+import { useTheme } from '../../../ThemeContext';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
@@ -32,6 +33,8 @@ export const ChatInput = ({
   onDismissReply,
   showReplies
 }: ChatInputProps): React.JSX.Element => {
+  const theme = useTheme();
+
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [record, setRecord] = useState<string>();
 
@@ -85,7 +88,12 @@ export const ChatInput = ({
       behavior={Platform.OS === 'ios' ? 'position' : 'height'}
     >
       {!!replyMessage && (
-        <View style={ChatInputStyle.replyMessageContainer}>
+        <View
+          style={[
+            ChatInputStyle.replyMessageContainer,
+            { backgroundColor: theme.isDark ? COLORS.BLACK : COLORS.WHITE }
+          ]}
+        >
           <View style={ChatInputStyle.replyingToContainer}>
             <Text style={ChatInputStyle.replyingToText}>Replying to</Text>
             <TouchableOpacity
@@ -95,11 +103,23 @@ export const ChatInput = ({
               <Icon name={IconEnum.CLEAN} size={20} />
             </TouchableOpacity>
           </View>
-          <Text style={ChatInputStyle.replyMessageText}>{replyMessage}</Text>
+          <Text
+            style={[
+              ChatInputStyle.replyMessageText,
+              { color: theme.theme.colors.text }
+            ]}
+          >
+            {replyMessage}
+          </Text>
         </View>
       )}
       {showReplies && <Replies onPressReply={onPressReply} />}
-      <View style={ChatInputStyle.inputContainer}>
+      <View
+        style={[
+          ChatInputStyle.inputContainer,
+          { backgroundColor: theme.isDark ? COLORS.BLACK : COLORS.WHITE }
+        ]}
+      >
         {isRecording ? (
           <RecordingInput
             onStopRecording={stopRecording}
@@ -112,7 +132,10 @@ export const ChatInput = ({
             activeOpacity={1}
             hitSlop={10}
             onPress={() => inputRef.current.focus()}
-            style={ChatInputStyle.inputView}
+            style={[
+              ChatInputStyle.inputView,
+              { backgroundColor: theme.theme.colors.surface }
+            ]}
           >
             <TouchableOpacity
               activeOpacity={0.5}
@@ -129,9 +152,8 @@ export const ChatInput = ({
               onFocus={onFocus}
               value={message}
               onChangeText={onChangeText}
-              placeholder="Message..."
               selectionColor={COLORS.PURPLE}
-              style={ChatInputStyle.input}
+              style={[ChatInputStyle.input, { color: theme.theme.colors.text }]}
             />
             <TouchableOpacity
               activeOpacity={0.5}

@@ -6,11 +6,14 @@ import { NotificationItemStyle } from '@components/notifications/NotificationIte
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
+import { useTheme } from '../../../ThemeContext';
 
 export const NotificationItem = ({
   item,
   onPress
 }: NotificationItemProps): React.JSX.Element => {
+  const theme = useTheme();
+
   const [pressed, setPressed] = useState<boolean>(false);
 
   const press = useCallback(() => {
@@ -57,11 +60,21 @@ export const NotificationItem = ({
             acronymStyle={NotificationItemStyle.profilePhoto}
           />
           <View style={NotificationItemStyle.contentView}>
-            <Text style={NotificationItemStyle.titleText}>{item.name}</Text>
+            <Text
+              style={[
+                NotificationItemStyle.titleText,
+                { color: theme.theme.colors.text }
+              ]}
+            >
+              {item.name}
+            </Text>
             <Text
               style={[
                 NotificationItemStyle.messageText,
-                isUnseen && NotificationItemStyle.newItemText
+                isUnseen && {
+                  ...NotificationItemStyle.newItemText,
+                  color: theme.theme.colors.text
+                }
               ]}
             >
               {getMessage(item.type, isUnseen, item?.message)} ∙{' '}

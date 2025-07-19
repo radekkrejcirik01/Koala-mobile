@@ -23,7 +23,6 @@ export const NotificationItemStyle = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    color: COLORS.BLACK,
     fontWeight: 'bold'
   },
   messageText: {
@@ -32,7 +31,6 @@ export const NotificationItemStyle = StyleSheet.create({
     fontWeight: '600'
   },
   newItemText: {
-    color: COLORS.BLACK,
     fontWeight: 'bold'
   },
   newItem: {

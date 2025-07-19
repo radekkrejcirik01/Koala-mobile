@@ -24,7 +24,6 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_100,
     alignSelf: 'flex-end'
   },
   replyMessageText: {

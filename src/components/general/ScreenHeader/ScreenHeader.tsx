@@ -6,19 +6,31 @@ import {
 } from '@components/general/ScreenHeader/ScreenHeader.props';
 import { ScreenHeaderStyle } from '@components/general/ScreenHeader/ScreenHeader.style';
 import { BackButton } from '@components/general/BackButton/BackButton';
+import { useTheme } from '../../../ThemeContext';
 
 export const ScreenHeader = ({
   title,
   rightComponent,
   goBack = true
-}: ScreenHeaderProps): React.JSX.Element => (
-  <View style={ScreenHeaderStyle.container}>
-    <View style={ScreenHeaderStyle.flex}>{goBack && <BackButton />}</View>
-    <Text style={ScreenHeaderStyle.titleText}>{title}</Text>
-    <View style={[ScreenHeaderStyle.flex, { alignItems: 'flex-end' }]}>
-      {rightComponent}
+}: ScreenHeaderProps): React.JSX.Element => {
+  const theme = useTheme();
+
+  return (
+    <View style={ScreenHeaderStyle.container}>
+      <View style={ScreenHeaderStyle.flex}>{goBack && <BackButton />}</View>
+      <Text
+        style={[
+          ScreenHeaderStyle.titleText,
+          { color: theme.theme.colors.text }
+        ]}
+      >
+        {title}
+      </Text>
+      <View style={[ScreenHeaderStyle.flex, { alignItems: 'flex-end' }]}>
+        {rightComponent}
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 ScreenHeader.defaultProps = ScreenHeaderDefaultProps;

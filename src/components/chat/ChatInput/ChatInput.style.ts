@@ -7,8 +7,7 @@ export const ChatInputStyle = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 10,
     borderTopWidth: 0.2,
-    borderTopColor: COLORS.LIGHTGRAY,
-    backgroundColor: COLORS.WHITE
+    borderTopColor: COLORS.LIGHTGRAY
   },
   replyingToContainer: {
     flexDirection: 'row',
@@ -23,13 +22,11 @@ export const ChatInputStyle = StyleSheet.create({
   },
   replyMessageText: {
     marginTop: 2,
-    color: COLORS.BLACK,
     fontWeight: '500'
   },
   inputContainer: {
     marginHorizontal: 5,
     paddingBottom: 7,
-    backgroundColor: COLORS.WHITE,
     flexDirection: 'row'
   },
   inputView: {
@@ -41,7 +38,6 @@ export const ChatInputStyle = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 10,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_100,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -51,8 +47,7 @@ export const ChatInputStyle = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 2,
     paddingBottom: 2,
-    fontSize: 16,
-    color: COLORS.BLACK
+    fontSize: 16
   },
   sendButtonView: {
     padding: 5,
