@@ -138,8 +138,16 @@ export const ProfileScreen = (): React.JSX.Element => {
         </View>
       </View>
       <View>
-        <Text style={ProfileScreenStyle.text}>Koala Messenger</Text>
-        <Text style={ProfileScreenStyle.text}>{version}</Text>
+        <Text
+          style={[ProfileScreenStyle.text, { color: theme.theme.colors.text }]}
+        >
+          Koala
+        </Text>
+        <Text
+          style={[ProfileScreenStyle.text, { color: theme.theme.colors.text }]}
+        >
+          {version}
+        </Text>
       </View>
     </ScrollView>
   );

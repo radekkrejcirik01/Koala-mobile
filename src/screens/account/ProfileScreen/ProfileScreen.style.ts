@@ -46,6 +46,7 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   text: {
     marginTop: 5,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontWeight: '600'
   }
 });
