@@ -23,7 +23,6 @@ export const ProfileItemStyle = StyleSheet.create({
   title: {
     marginLeft: 10,
     fontSize: 16,
-    color: COLORS.BLACK,
     fontWeight: '500'
   }
 });

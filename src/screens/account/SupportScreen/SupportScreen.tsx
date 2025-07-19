@@ -9,9 +9,11 @@ import { SendButton } from '@components/home/SendButton/SendButton';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { SupportPostInterface } from '@interfaces/post/Post.interface';
+import { useTheme } from '../../../ThemeContext';
 
 export const SupportScreen = (): JSX.Element => {
   const { top } = useSafeAreaInsets();
+  const theme = useTheme();
   const { sending, setSending, sent, setSent } = useSending();
 
   const [message, setMessage] = useState<string>();
@@ -46,26 +48,42 @@ export const SupportScreen = (): JSX.Element => {
   return (
     <View style={[SupportScreenStyle.container, { top }]}>
       <ScreenHeader title="Support" />
-      <Text style={SupportScreenStyle.title}>
+      <Text
+        style={[SupportScreenStyle.title, { color: theme.theme.colors.text }]}
+      >
         Share with us your problem and we will get to you
       </Text>
       <TextInput
         placeholder="Message..."
+        placeholderTextColor={COLORS.GRAY_200}
         value={message}
         onChangeText={setMessage}
         multiline
         selectionColor={COLORS.BUTTON_BLUE}
-        style={SupportScreenStyle.input}
+        style={[
+          SupportScreenStyle.input,
+          {
+            backgroundColor: theme.theme.colors.surface,
+            color: theme.theme.colors.text
+          }
+        ]}
       />
       <TextInput
         placeholder="Email"
+        placeholderTextColor={COLORS.GRAY_200}
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
         value={email}
         onChangeText={setEmail}
         selectionColor={COLORS.BUTTON_BLUE}
-        style={SupportScreenStyle.emailInput}
+        style={[
+          SupportScreenStyle.emailInput,
+          {
+            backgroundColor: theme.theme.colors.surface,
+            color: theme.theme.colors.text
+          }
+        ]}
       />
       <View style={SupportScreenStyle.button}>
         <SendButton onPress={send} sending={sending} sent={sent} />

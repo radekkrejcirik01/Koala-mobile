@@ -22,6 +22,7 @@ import {
 } from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { version } from '../../../../package.json';
+import { useTheme } from '../../../ThemeContext';
 
 export const ProfileScreen = (): React.JSX.Element => {
   const { username, name, profilePhoto } = useSelector(
@@ -29,6 +30,7 @@ export const ProfileScreen = (): React.JSX.Element => {
   );
 
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { top } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
@@ -76,11 +78,23 @@ export const ProfileScreen = (): React.JSX.Element => {
             </TouchableOpacity>
           </View>
           <View style={ProfileScreenStyle.namesView}>
-            <Text style={ProfileScreenStyle.name}>{name}</Text>
+            <Text
+              style={[
+                ProfileScreenStyle.name,
+                { color: theme.theme.colors.text }
+              ]}
+            >
+              {name}
+            </Text>
             <Text style={ProfileScreenStyle.username}>{username}</Text>
           </View>
         </View>
-        <View style={ProfileScreenStyle.buttonsContainer}>
+        <View
+          style={[
+            ProfileScreenStyle.buttonsContainer,
+            { backgroundColor: theme.theme.colors.surface }
+          ]}
+        >
           <ProfileItem
             onPress={() => navigateTo(AccountStackNavigatorEnum.AccountScreen)}
             icon="🌱"
@@ -95,7 +109,12 @@ export const ProfileScreen = (): React.JSX.Element => {
             isLast
           />
         </View>
-        <View style={ProfileScreenStyle.buttonsContainer}>
+        <View
+          style={[
+            ProfileScreenStyle.buttonsContainer,
+            { backgroundColor: theme.theme.colors.surface }
+          ]}
+        >
           <ProfileItem
             onPress={() => navigateTo(AccountStackNavigatorEnum.SupportScreen)}
             icon="🫂"
@@ -108,7 +127,12 @@ export const ProfileScreen = (): React.JSX.Element => {
             isLast
           />
         </View>
-        <View style={ProfileScreenStyle.buttonsContainer}>
+        <View
+          style={[
+            ProfileScreenStyle.buttonsContainer,
+            { backgroundColor: theme.theme.colors.surface }
+          ]}
+        >
           <ProfileItem onPress={share} icon="❤️" title="Share Koala" isLast />
         </View>
       </View>

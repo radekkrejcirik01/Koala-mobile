@@ -9,9 +9,11 @@ import { SendButton } from '@components/home/SendButton/SendButton';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { FeedbackPostInterface } from '@interfaces/post/Post.interface';
+import { useTheme } from '../../../ThemeContext';
 
 export const FeedbackScreen = (): JSX.Element => {
   const { top } = useSafeAreaInsets();
+  const theme = useTheme();
   const { sending, setSending, sent, setSent } = useSending();
 
   const [message, setMessage] = useState<string>();
@@ -40,15 +42,22 @@ export const FeedbackScreen = (): JSX.Element => {
     <View style={[FeedbackScreenStyle.container, { top }]}>
       <ScreenHeader title="Feedback" />
       <Text
-        style={FeedbackScreenStyle.title}
-      >{`Share with us what you like or don't like about Koala 🫶`}</Text>
+        style={[FeedbackScreenStyle.title, { color: theme.theme.colors.text }]}
+      >{`Share with us what you like or don't like about our app`}</Text>
       <TextInput
         placeholder="Message..."
+        placeholderTextColor={COLORS.GRAY_200}
         value={message}
         onChangeText={setMessage}
         multiline
         selectionColor={COLORS.BUTTON_BLUE}
-        style={FeedbackScreenStyle.input}
+        style={[
+          FeedbackScreenStyle.input,
+          {
+            backgroundColor: theme.theme.colors.surface,
+            color: theme.theme.colors.text
+          }
+        ]}
       />
       <View style={FeedbackScreenStyle.button}>
         <SendButton onPress={send} sending={sending} sent={sent} />

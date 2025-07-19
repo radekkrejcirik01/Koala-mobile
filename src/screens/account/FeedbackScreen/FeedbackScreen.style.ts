@@ -7,7 +7,8 @@ export const FeedbackScreenStyle = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    fontWeight: '600'
   },
   input: {
     height: 150,
@@ -16,9 +17,7 @@ export const FeedbackScreenStyle = StyleSheet.create({
     paddingTop: 15,
     padding: 15,
     fontSize: 16,
-    borderRadius: 20,
-    color: COLORS.BLACK,
-    backgroundColor: COLORS.WHITE_200,
+    borderRadius: 10,
     textAlignVertical: 'top',
     alignSelf: 'center'
   },

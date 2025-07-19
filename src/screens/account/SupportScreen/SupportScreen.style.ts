@@ -7,18 +7,18 @@ export const SupportScreenStyle = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    marginLeft: 20
+    marginLeft: 20,
+    fontWeight: '600'
   },
   input: {
     height: 150,
     width: '90%',
-    marginTop: 10,
+    marginTop: 15,
     paddingTop: 15,
     padding: 15,
     fontSize: 16,
-    borderRadius: 20,
+    borderRadius: 10,
     color: COLORS.BLACK,
-    backgroundColor: COLORS.WHITE_200,
     textAlignVertical: 'top',
     alignSelf: 'center'
   },
@@ -29,9 +29,8 @@ export const SupportScreenStyle = StyleSheet.create({
     paddingTop: 15,
     padding: 15,
     fontSize: 16,
-    borderRadius: 20,
+    borderRadius: 10,
     color: COLORS.BLACK,
-    backgroundColor: COLORS.WHITE_200,
     alignSelf: 'center'
   },
   button: {

@@ -30,23 +30,20 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   name: {
     fontSize: 25,
-    color: COLORS.BLACK_50,
     fontWeight: '600'
   },
   username: {
     fontSize: 16,
-    color: COLORS.PURPLE,
+    color: COLORS.GRAY_200,
     fontWeight: '500'
   },
   buttonsContainer: {
     marginTop: 20,
     marginHorizontal: 15,
-    borderRadius: 10,
-    backgroundColor: COLORS.WHITE_100
+    borderRadius: 10
   },
   text: {
     marginTop: 5,
-    color: COLORS.GRAY_200,
     alignSelf: 'center'
   }
 });

@@ -18,17 +18,14 @@ export const AccountScreenStyle = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: COLORS.WHITE_100
+    justifyContent: 'space-between'
   },
   buttonText: {
     fontSize: 16,
-    color: COLORS.BLACK,
     fontWeight: '600'
   },
   descriptionText: {
-    marginTop: 5,
-    marginHorizontal: 15,
+    marginTop: 10,
     color: COLORS.GRAY_200
   }
 });
