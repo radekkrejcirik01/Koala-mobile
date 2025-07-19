@@ -32,11 +32,10 @@ export const KudosScreen = (): JSX.Element => {
       <ScrollView contentContainerStyle={KudosScreenStyle.scrollView}>
         <View style={KudosScreenStyle.imageContainer}>
           <FastImage
-            source={require('../../../assets/images/Kudos.png')}
+            source={require('../../../assets/images/Kudos_no_bg.png')}
             style={KudosScreenStyle.image}
           />
         </View>
-        <View style={KudosScreenStyle.line} />
         <View style={KudosScreenStyle.messagesContainer}>
           {messages.map((value, index) => (
             <MessageItem

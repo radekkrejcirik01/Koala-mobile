@@ -32,11 +32,10 @@ export const WellbeingScreen = (): JSX.Element => {
       <ScrollView contentContainerStyle={WellbeingScreenStyle.scrollView}>
         <View style={WellbeingScreenStyle.imageContainer}>
           <FastImage
-            source={require('../../../assets/images/Wellbeing.png')}
+            source={require('../../../assets/images/Wellbeing_no_bg.png')}
             style={WellbeingScreenStyle.image}
           />
         </View>
-        <View style={WellbeingScreenStyle.line} />
         <View style={WellbeingScreenStyle.messagesContainer}>
           {messages.map((value, index) => (
             <MessageItem

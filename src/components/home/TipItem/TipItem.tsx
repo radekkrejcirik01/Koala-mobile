@@ -5,12 +5,19 @@ import {
   TipItemDefaultProps,
   TipItemProps
 } from '@components/home/TipItem/TipItem.props';
+import { useTheme } from '../../../ThemeContext';
 
-export const TipItem = ({ tip, style }: TipItemProps): JSX.Element => (
-  <View style={[TipItemStyle.container, style]}>
-    <Text style={TipItemStyle.handText}>👉</Text>
-    <Text style={TipItemStyle.tipText}>{tip}</Text>
-  </View>
-);
+export const TipItem = ({ tip, style }: TipItemProps): JSX.Element => {
+  const theme = useTheme();
+
+  return (
+    <View style={[TipItemStyle.container, style]}>
+      <Text style={TipItemStyle.emoji}>💡</Text>
+      <Text style={[TipItemStyle.tipText, { color: theme.theme.colors.text }]}>
+        {tip}
+      </Text>
+    </View>
+  );
+};
 
 TipItem.defaultProps = TipItemDefaultProps;

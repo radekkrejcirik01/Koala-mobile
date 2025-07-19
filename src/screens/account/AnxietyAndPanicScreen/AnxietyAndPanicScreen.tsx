@@ -32,11 +32,10 @@ export const AnxietyAndPanicScreen = (): JSX.Element => {
       <ScrollView contentContainerStyle={AnxietyAndPanicScreenStyle.scrollView}>
         <View style={AnxietyAndPanicScreenStyle.imageContainer}>
           <FastImage
-            source={require('../../../assets/images/Anxiety.png')}
+            source={require('../../../assets/images/Anxiety_no_bg.png')}
             style={AnxietyAndPanicScreenStyle.image}
           />
         </View>
-        <View style={AnxietyAndPanicScreenStyle.line} />
         <View style={AnxietyAndPanicScreenStyle.messagesContainer}>
           {messages.map((value, index) => (
             <MessageItem

@@ -11,12 +11,14 @@ import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
+import { useTheme } from '../../../ThemeContext';
 
 export const ShareModalScreen = ({
   item,
   onAddFriendPress
 }: ShareModalScreenProps): JSX.Element => {
   const { bottom } = useSafeAreaInsets();
+  const theme = useTheme();
   const { sending, sent, setSending, setSent } = useSending();
 
   const selectedFriends = useRef<number[]>([]);
@@ -62,11 +64,19 @@ export const ShareModalScreen = ({
       style={[
         ShareModalScreenStyle.container,
         {
+          backgroundColor: theme.theme.colors.surface,
           paddingBottom: bottom + 10
         }
       ]}
     >
-      <Text style={ShareModalScreenStyle.messageText}>{item.message}</Text>
+      <Text
+        style={[
+          ShareModalScreenStyle.messageText,
+          { color: theme.theme.colors.text }
+        ]}
+      >
+        {item.message}
+      </Text>
       <View style={ShareModalScreenStyle.content}>
         <CanHelp tip1={item?.tip1} tip2={item?.tip2} />
         <Send

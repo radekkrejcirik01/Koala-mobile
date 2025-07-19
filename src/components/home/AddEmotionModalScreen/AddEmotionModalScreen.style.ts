@@ -4,8 +4,7 @@ import COLORS from '@constants/COLORS';
 export const AddEmotionModalScreenStyle = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    backgroundColor: COLORS.WHITE
+    paddingHorizontal: 20
   },
   titleText: {
     fontSize: 18,
@@ -16,7 +15,6 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
   inputTitleText: {
     marginTop: 20,
     fontSize: 15,
-    color: COLORS.BLACK_50,
     fontWeight: 'bold'
   },
   input: {
@@ -25,8 +23,6 @@ export const AddEmotionModalScreenStyle = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 8,
     fontSize: 16,
-    color: COLORS.BLACK_50,
-    backgroundColor: COLORS.WHITE_100,
     fontWeight: '500'
   },
   addView: {

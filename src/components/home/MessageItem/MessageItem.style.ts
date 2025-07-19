@@ -5,7 +5,6 @@ export const MessageItemStyle = StyleSheet.create({
   buttonView: {
     paddingVertical: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: COLORS.LIGHTGRAY,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
@@ -17,7 +16,6 @@ export const MessageItemStyle = StyleSheet.create({
   messageText: {
     width: '82%',
     fontSize: 16,
-    color: COLORS.BLACK,
     fontWeight: '500'
   },
   emojiText: {

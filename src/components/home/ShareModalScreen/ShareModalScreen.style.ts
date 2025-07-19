@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const ShareModalScreenStyle = StyleSheet.create({
   container: {
@@ -7,12 +6,10 @@ export const ShareModalScreenStyle = StyleSheet.create({
     paddingTop: 25,
     paddingHorizontal: 20,
     borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor: COLORS.WHITE
+    borderTopRightRadius: 20
   },
   messageText: {
     fontSize: 24,
-    color: COLORS.BLACK,
     fontWeight: 'bold'
   },
   content: {

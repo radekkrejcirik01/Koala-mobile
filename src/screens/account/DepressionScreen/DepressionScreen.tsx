@@ -32,11 +32,10 @@ export const DepressionScreen = (): JSX.Element => {
       <ScrollView>
         <View style={DepressionScreenStyle.imageContainer}>
           <FastImage
-            source={require('../../../assets/images/Depression.png')}
+            source={require('../../../assets/images/Depression_no_bg.png')}
             style={DepressionScreenStyle.image}
           />
         </View>
-        <View style={DepressionScreenStyle.line} />
         <View style={DepressionScreenStyle.messagesContainer}>
           {messages.map((value, index) => (
             <MessageItem

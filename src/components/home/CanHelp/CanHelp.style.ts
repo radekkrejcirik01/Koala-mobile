@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const CanHelpStyle = StyleSheet.create({
   container: {
@@ -8,7 +7,6 @@ export const CanHelpStyle = StyleSheet.create({
     paddingRight: 50
   },
   titleText: {
-    color: COLORS.BLACK,
     fontWeight: 'bold'
   },
   marginTop10: {
