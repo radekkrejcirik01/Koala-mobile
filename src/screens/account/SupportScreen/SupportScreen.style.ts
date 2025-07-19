@@ -18,7 +18,6 @@ export const SupportScreenStyle = StyleSheet.create({
     padding: 15,
     fontSize: 16,
     borderRadius: 10,
-    color: COLORS.BLACK,
     textAlignVertical: 'top',
     alignSelf: 'center'
   },
@@ -38,7 +37,6 @@ export const SupportScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   thankText: {
-    marginTop: 10,
-    color: COLORS.BLACK
+    marginTop: 10
   }
 });

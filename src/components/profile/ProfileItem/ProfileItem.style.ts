@@ -5,8 +5,6 @@ export const ProfileItemStyle = StyleSheet.create({
   view: {
     paddingVertical: 12,
     paddingHorizontal: 15,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: COLORS.LIGHTGRAY,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

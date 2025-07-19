@@ -88,7 +88,14 @@ export const SupportScreen = (): JSX.Element => {
       <View style={SupportScreenStyle.button}>
         <SendButton onPress={send} sending={sending} sent={sent} />
         {sent && (
-          <Text style={SupportScreenStyle.thankText}>We got your message.</Text>
+          <Text
+            style={[
+              SupportScreenStyle.thankText,
+              { color: theme.theme.colors.text }
+            ]}
+          >
+            We got your message.
+          </Text>
         )}
       </View>
     </View>

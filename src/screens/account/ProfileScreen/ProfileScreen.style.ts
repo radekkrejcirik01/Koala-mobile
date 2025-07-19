@@ -11,19 +11,21 @@ export const ProfileScreenStyle = StyleSheet.create({
     paddingVertical: 20,
     alignItems: 'center'
   },
+  photoContainer: {
+    alignItems: 'center'
+  },
   photoButton: {
-    marginTop: -15,
+    marginVertical: 10,
     paddingHorizontal: 10,
     paddingVertical: 2,
     borderRadius: 8,
-    backgroundColor: COLORS.BUTTON_BLUE,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'flex-end'
   },
-  photoEmoji: {
-    fontSize: 18,
-    color: COLORS.BLACK
+  photoText: {
+    fontSize: 16,
+    color: COLORS.PURPLE
   },
   namesView: {
     alignItems: 'center'

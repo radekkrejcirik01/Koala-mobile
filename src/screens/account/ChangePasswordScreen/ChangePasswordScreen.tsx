@@ -14,9 +14,11 @@ import COLORS from '@constants/COLORS';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangePasswordPostInterface } from '@interfaces/post/Post.interface';
+import { useTheme } from '../../../ThemeContext';
 
 export const ChangePasswordScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
+  const theme = useTheme();
 
   const [oldPassword, setOldPassword] = useState<string>();
   const [newPassword, setNewPassword] = useState<string>();
@@ -74,7 +76,12 @@ export const ChangePasswordScreen = (): JSX.Element => {
     >
       <ScreenHeader title="New password" />
       <View style={ChangePasswordScreenStyle.contentView}>
-        <Text style={ChangePasswordScreenStyle.inputTitleText}>
+        <Text
+          style={[
+            ChangePasswordScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
           Old password
         </Text>
         <TextInput
@@ -83,9 +90,20 @@ export const ChangePasswordScreen = (): JSX.Element => {
           autoCapitalize="none"
           value={oldPassword}
           onChangeText={setOldPassword}
-          style={ChangePasswordScreenStyle.input}
+          style={[
+            ChangePasswordScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
-        <Text style={ChangePasswordScreenStyle.inputTitleText}>
+        <Text
+          style={[
+            ChangePasswordScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
           New password
         </Text>
         <TextInput
@@ -93,9 +111,20 @@ export const ChangePasswordScreen = (): JSX.Element => {
           autoCapitalize="none"
           onChangeText={setNewPassword}
           value={newPassword}
-          style={ChangePasswordScreenStyle.input}
+          style={[
+            ChangePasswordScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
-        <Text style={ChangePasswordScreenStyle.inputTitleText}>
+        <Text
+          style={[
+            ChangePasswordScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
           Confirm new password
         </Text>
         <TextInput
@@ -103,7 +132,13 @@ export const ChangePasswordScreen = (): JSX.Element => {
           autoCapitalize="none"
           value={confirmPassword}
           onChangeText={setConfirmPassword}
-          style={ChangePasswordScreenStyle.input}
+          style={[
+            ChangePasswordScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
         <TouchableOpacity
           activeOpacity={0.9}

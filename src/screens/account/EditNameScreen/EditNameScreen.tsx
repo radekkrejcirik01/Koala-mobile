@@ -10,6 +10,7 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangeNamePostInterface } from '@interfaces/post/Post.interface';
 import { setNameAction } from '@store/UserReducer';
 import { Button } from '@components/general/Button/Button';
+import { useTheme } from '../../../ThemeContext';
 
 export const EditNameScreen = (): JSX.Element => {
   const { name: firstname } = useSelector(
@@ -17,6 +18,7 @@ export const EditNameScreen = (): JSX.Element => {
   );
 
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
 
   const [name, setName] = useState<string>(firstname);
@@ -51,14 +53,27 @@ export const EditNameScreen = (): JSX.Element => {
     >
       <ScreenHeader title="Edit name" />
       <View style={EditNameScreenStyle.contentView}>
-        <Text style={EditNameScreenStyle.inputTitleText}>Name</Text>
+        <Text
+          style={[
+            EditNameScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Name
+        </Text>
         <TextInput
           autoFocus
           autoCorrect={false}
           autoCapitalize="none"
           value={name}
           onChangeText={setName}
-          style={EditNameScreenStyle.input}
+          style={[
+            EditNameScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
       </View>
       <Button

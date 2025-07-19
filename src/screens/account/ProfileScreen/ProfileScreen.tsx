@@ -67,14 +67,17 @@ export const ProfileScreen = (): React.JSX.Element => {
       <View>
         <ScreenHeader title="Profile" goBack={false} />
         <View style={ProfileScreenStyle.container}>
-          <View>
+          <View style={ProfileScreenStyle.photoContainer}>
             <ProfilePhoto name={name} photo={profilePhoto} size={75} />
             <TouchableOpacity
               activeOpacity={0.9}
               onPress={addPhoto}
-              style={ProfileScreenStyle.photoButton}
+              style={[
+                ProfileScreenStyle.photoButton,
+                { backgroundColor: theme.theme.colors.surface }
+              ]}
             >
-              <Text style={ProfileScreenStyle.photoEmoji}>📷</Text>
+              <Text style={ProfileScreenStyle.photoText}>Add photo</Text>
             </TouchableOpacity>
           </View>
           <View style={ProfileScreenStyle.namesView}>
@@ -106,7 +109,6 @@ export const ProfileScreen = (): React.JSX.Element => {
             }
             icon="📱"
             title="Sharing history"
-            isLast
           />
         </View>
         <View
@@ -124,7 +126,6 @@ export const ProfileScreen = (): React.JSX.Element => {
             onPress={() => navigateTo(AccountStackNavigatorEnum.FeedbackScreen)}
             icon="🫶"
             title="Feedback"
-            isLast
           />
         </View>
         <View
@@ -133,7 +134,7 @@ export const ProfileScreen = (): React.JSX.Element => {
             { backgroundColor: theme.theme.colors.surface }
           ]}
         >
-          <ProfileItem onPress={share} icon="❤️" title="Share Koala" isLast />
+          <ProfileItem onPress={share} icon="❤️" title="Share Koala" />
         </View>
       </View>
       <View>

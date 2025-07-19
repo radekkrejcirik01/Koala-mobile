@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const EditNameScreenStyle = StyleSheet.create({
   container: {
@@ -11,16 +10,14 @@ export const EditNameScreenStyle = StyleSheet.create({
   },
   inputTitleText: {
     marginTop: 15,
-    color: COLORS.BLACK,
-    fontWeight: '500'
+    fontWeight: '600'
   },
   input: {
+    marginTop: 5,
     height: 45,
     paddingHorizontal: 15,
     borderRadius: 10,
     fontSize: 16,
-    color: COLORS.GRAY_200,
-    backgroundColor: COLORS.WHITE_100,
     fontWeight: '500'
   },
   button: {

@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const FeedbackScreenStyle = StyleSheet.create({
   container: {
@@ -26,7 +25,6 @@ export const FeedbackScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   thankText: {
-    marginTop: 10,
-    color: COLORS.BLACK
+    marginTop: 10
   }
 });
