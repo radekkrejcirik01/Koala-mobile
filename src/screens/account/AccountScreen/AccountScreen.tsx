@@ -127,9 +127,19 @@ export const AccountScreen = (): React.JSX.Element => {
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={logout}
-          style={AccountScreenStyle.buttonView}
+          style={[
+            AccountScreenStyle.buttonView,
+            { backgroundColor: theme.theme.colors.surface }
+          ]}
         >
-          <Text style={AccountScreenStyle.buttonText}>Logout</Text>
+          <Text
+            style={[
+              AccountScreenStyle.buttonText,
+              { color: theme.theme.colors.text }
+            ]}
+          >
+            Logout
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
