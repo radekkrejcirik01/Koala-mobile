@@ -33,11 +33,13 @@ import { ReducerProps } from '@store/index/index.props';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ToolBarProps } from '@components/home/ToolBar/ToolBar.props';
+import { useTheme } from '../../../ThemeContext';
 
 export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
   const { modalVisible, showModal, hideModal } = useModal();
+  const theme = useTheme();
 
   const [status, setStatus] = useState<string>();
   const [friendsStatuses, setFriendsStatuses] = useState<
@@ -149,11 +151,21 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
             activeOpacity={0.7}
             hitSlop={10}
             onPress={onPressDirect}
-            style={ToolBarStyle.button}
+            style={[
+              ToolBarStyle.button,
+              { backgroundColor: theme.theme.colors.surface }
+            ]}
           >
             <Icon name={IconEnum.DIRECT} size={20} />
           </TouchableOpacity>
-          <Text style={ToolBarStyle.buttonText}>Direct</Text>
+          <Text
+            style={[
+              ToolBarStyle.buttonText,
+              { color: theme.theme.colors.text }
+            ]}
+          >
+            Direct
+          </Text>
         </View>
         <StatusItem onPress={onStatusPress} name="You" expression={status} />
         {friendsStatuses?.map((value) => (

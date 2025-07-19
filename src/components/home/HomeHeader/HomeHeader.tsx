@@ -6,6 +6,7 @@ import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { ReducerProps } from '@store/index/index.props';
 import { Modal } from '@components/general/Modal/Modal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
+import { useTheme } from '../../../ThemeContext';
 
 const getHello = (): string => {
   const hellos = ['Hi', 'Hola', 'Hej'];
@@ -18,6 +19,7 @@ export const HomeHeader = (): JSX.Element => {
   const { name } = useSelector((state: ReducerProps) => state.user.user);
 
   const { modalVisible, showModal, hideModal } = useModal();
+  const theme = useTheme();
   const [helloText, setHelloText] = useState<string>();
 
   const hideModalAndKeyboard = useCallback(() => {
@@ -32,7 +34,9 @@ export const HomeHeader = (): JSX.Element => {
   return (
     <View style={HomeHeaderStyle.container}>
       <View style={HomeHeaderStyle.row}>
-        <Text style={HomeHeaderStyle.title}>
+        <Text
+          style={[HomeHeaderStyle.title, { color: theme.theme.colors.text }]}
+        >
           {helloText}, {name}
         </Text>
         <TouchableOpacity activeOpacity={0.8} onPress={showModal}>

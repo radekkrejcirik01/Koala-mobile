@@ -7,6 +7,7 @@ import {
 } from '@components/home/MessagesCard/MessagesCard.props';
 import { MessagesCardStyle } from '@components/home/MessagesCard/MessagesCard.style';
 import COLORS from '@constants/COLORS';
+import { useTheme } from '../../../ThemeContext';
 
 export const MessagesCard = ({
   title,
@@ -14,20 +15,31 @@ export const MessagesCard = ({
   image,
   imageStyle,
   isKudos
-}: MessagesCardProps): JSX.Element => (
-  <TouchableOpacity
-    activeOpacity={0.9}
-    onPress={onPress}
-    style={[
-      MessagesCardStyle.view,
-      isKudos && { backgroundColor: COLORS.PURPLE }
-    ]}
-  >
-    <Text style={[MessagesCardStyle.text, isKudos && { color: COLORS.WHITE }]}>
-      {title}
-    </Text>
-    <FastImage source={image} style={imageStyle} />
-  </TouchableOpacity>
-);
+}: MessagesCardProps): JSX.Element => {
+  const theme = useTheme();
+
+  return (
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={onPress}
+      style={[
+        MessagesCardStyle.view,
+        { backgroundColor: theme.theme.colors.surface },
+        isKudos && { backgroundColor: COLORS.PURPLE }
+      ]}
+    >
+      <Text
+        style={[
+          MessagesCardStyle.text,
+          { color: theme.theme.colors.text },
+          isKudos && { color: COLORS.WHITE }
+        ]}
+      >
+        {title}
+      </Text>
+      <FastImage source={image} style={imageStyle} />
+    </TouchableOpacity>
+  );
+};
 
 MessagesCard.defaultProps = MessagesCardDefaultProps;

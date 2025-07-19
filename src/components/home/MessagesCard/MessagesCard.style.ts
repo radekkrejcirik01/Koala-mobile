@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const MessagesCardStyle = StyleSheet.create({
   view: {
@@ -9,12 +8,10 @@ export const MessagesCardStyle = StyleSheet.create({
     marginBottom: 20,
     padding: 12,
     borderRadius: 15,
-    backgroundColor: COLORS.WHITE_200,
     justifyContent: 'space-between'
   },
   text: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: COLORS.BLACK
+    fontWeight: 'bold'
   }
 });

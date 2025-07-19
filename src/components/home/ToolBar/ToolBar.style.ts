@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const ToolBarStyle = StyleSheet.create({
   scrollView: {
@@ -20,13 +19,11 @@ export const ToolBarStyle = StyleSheet.create({
     width: 65,
     height: 65,
     borderRadius: 50,
-    backgroundColor: COLORS.WHITE_200,
     alignItems: 'center',
     justifyContent: 'center'
   },
   buttonText: {
     marginTop: 2,
-    color: COLORS.PURPLE,
     fontWeight: '600'
   },
   modal: {
