@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { TipItem } from '@components/home/TipItem/TipItem';
 import { CanHelpStyle } from '@components/home/CanHelp/CanHelp.style';
 import { CanHelpProps } from '@components/home/CanHelp/CanHelp.props';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const CanHelp = ({ tip1, tip2 }: CanHelpProps): JSX.Element => {
   const theme = useTheme();

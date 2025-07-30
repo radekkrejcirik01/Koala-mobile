@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusModalScreenProps } from '@components/home/StatusModalScreen/StatusModalScreen.props';
 import { StatusModalScreenStyle } from '@components/home/StatusModalScreen/StatusModalScreen.style';
 import { EXPRESSIONS } from '@components/home/StatusModalScreen/StatusModalScreen.const';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const StatusModalScreen = ({
   onPressExpression,

@@ -33,7 +33,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ToolBarProps } from '@components/home/ToolBar/ToolBar.props';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);

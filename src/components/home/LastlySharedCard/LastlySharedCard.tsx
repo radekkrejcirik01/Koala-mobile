@@ -4,7 +4,7 @@ import { LastlySharedCardProps } from '@components/home/LastlySharedCard/LastlyS
 import { LastlySharedCardStyle } from '@components/home/LastlySharedCard/LastlySharedCard.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const LastlySharedCard = ({
   onPress,

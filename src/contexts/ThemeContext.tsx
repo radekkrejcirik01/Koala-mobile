@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react';
 import { useColorScheme } from 'react-native';
-import { darkTheme, lightTheme, Theme } from './theme';
+import { darkTheme, lightTheme, Theme } from '../theme';
 
 interface ThemeContextType {
   theme: Theme;

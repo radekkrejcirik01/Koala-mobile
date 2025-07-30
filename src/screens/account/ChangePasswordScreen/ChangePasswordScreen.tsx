@@ -14,7 +14,7 @@ import COLORS from '@constants/COLORS';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangePasswordPostInterface } from '@interfaces/post/Post.interface';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ChangePasswordScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();

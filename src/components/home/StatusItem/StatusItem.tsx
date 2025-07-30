@@ -2,7 +2,7 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { StatusItemStyle } from '@components/home/StatusItem/StatusItem.style';
 import { StatusItemProps } from '@components/home/StatusItem/StatusItem.props';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const StatusItem = ({
   onPress,

@@ -4,7 +4,7 @@ import { InboundMessageItemProps } from '@components/chat/InboundMessageItem/Inb
 import { InboundMessageItemStyle } from '@components/chat/InboundMessageItem/InboundMessageItem.style';
 import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
 import { isTextEmoji } from '@functions/isTextEmoji';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const InboundMessageItem = ({
   children,

@@ -2,7 +2,7 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { MessageItemProps } from '@components/home/MessageItem/MessageItem.props';
 import { MessageItemStyle } from '@components/home/MessageItem/MessageItem.style';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const MessageItem = ({
   item,

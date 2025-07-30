@@ -6,7 +6,7 @@ import COLORS from '@constants/COLORS';
 import { InviteItemStyle } from '@components/friends/InviteItem/InviteItem.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const InviteItem = ({
   item,

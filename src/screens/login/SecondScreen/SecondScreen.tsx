@@ -14,10 +14,12 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { setNameAction } from '@store/NewAccountReducer';
 import { SecondScreenStyle } from '@screens/login/SecondScreen/SecondScreen.style';
 import { Button } from '@components/general/Button/Button';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const SecondScreen = (): JSX.Element => {
   const dispatch = useDispatch();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const theme = useTheme();
 
   const [name, setName] = useState<string>();
 
@@ -35,12 +37,22 @@ export const SecondScreen = (): JSX.Element => {
   return (
     <View style={SecondScreenStyle.container}>
       <View>
-        <Text style={SecondScreenStyle.title}>Your name</Text>
+        <Text
+          style={[SecondScreenStyle.title, { color: theme.theme.colors.text }]}
+        >
+          Your name
+        </Text>
         <TextInput
           autoFocus
           autoCorrect={false}
           onChangeText={setName}
-          style={SecondScreenStyle.input}
+          style={[
+            SecondScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
       </View>
       <KeyboardAvoidingView

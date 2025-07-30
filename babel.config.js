@@ -22,7 +22,8 @@ module.exports = {
           '@helpers': './src/helpers',
           '@navigation': './src/navigation',
           '@functions': './src/functions',
-          '@utils': './src/utils'
+          '@utils': './src/utils',
+          '@contexts': './src/contexts'
         }
       }
     ],

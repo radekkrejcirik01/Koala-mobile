@@ -8,7 +8,7 @@ import {
   AddFriendButtonProps
 } from '@components/friends/AddFriendButton/AddFriendButton.props';
 import COLORS from '@constants/COLORS';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const AddFriendButton = ({
   size,

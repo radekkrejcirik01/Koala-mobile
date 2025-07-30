@@ -14,7 +14,7 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const AddEmotionModalScreen = ({
   onAdded,

@@ -6,7 +6,7 @@ import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { ReducerProps } from '@store/index/index.props';
 import { Modal } from '@components/general/Modal/Modal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 const getHello = (): string => {
   const hellos = ['Hi', 'Hola', 'Hej'];

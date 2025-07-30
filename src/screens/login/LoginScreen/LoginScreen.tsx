@@ -13,10 +13,12 @@ import { PreloadService } from '@utils/general/PreloadService';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const LoginScreen = (): JSX.Element => {
   const dispatch = useDispatch();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const theme = useTheme();
 
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -58,7 +60,13 @@ export const LoginScreen = (): JSX.Element => {
         autoCapitalize="none"
         onChangeText={setUsername}
         placeholder="Username"
-        style={LoginScreenStyle.input}
+        style={[
+          LoginScreenStyle.input,
+          {
+            backgroundColor: theme.theme.colors.surface,
+            color: theme.theme.colors.text
+          }
+        ]}
       />
       <TextInput
         autoCorrect={false}
@@ -66,7 +74,13 @@ export const LoginScreen = (): JSX.Element => {
         onChangeText={setPassword}
         placeholder="Password"
         secureTextEntry
-        style={LoginScreenStyle.input}
+        style={[
+          LoginScreenStyle.input,
+          {
+            backgroundColor: theme.theme.colors.surface,
+            color: theme.theme.colors.text
+          }
+        ]}
       />
       <Button
         title="Login"

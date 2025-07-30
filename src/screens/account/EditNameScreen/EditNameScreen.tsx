@@ -10,7 +10,7 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangeNamePostInterface } from '@interfaces/post/Post.interface';
 import { setNameAction } from '@store/UserReducer';
 import { Button } from '@components/general/Button/Button';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const EditNameScreen = (): JSX.Element => {
   const { name: firstname } = useSelector(

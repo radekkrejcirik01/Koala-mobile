@@ -17,7 +17,7 @@ import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
 import { RecordingInput } from '@components/chat/RecordingInput/RecordingInput';
 import { checkAndroidRecordingPermission } from '@functions/checkAndroidRecordingPermission';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 

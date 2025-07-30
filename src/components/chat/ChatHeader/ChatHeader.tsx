@@ -14,7 +14,7 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
 import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 import { BackButton } from '@components/general/BackButton/BackButton';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ChatHeader = ({
   chatUserId,

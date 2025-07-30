@@ -32,7 +32,7 @@ import { FriendItem } from '@components/friends/FriendItem/FriendItem';
 import { InviteItem } from '@components/friends/InviteItem/InviteItem';
 import { FriendsModalScreenProps } from '@components/friends/FriendsModalScreen/FriendsModalScreen.props';
 import { AddFriendButton } from '@components/friends/AddFriendButton/AddFriendButton';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const FriendsModalScreen = ({
   onActionSheetOpened

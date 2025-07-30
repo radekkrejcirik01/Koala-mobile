@@ -7,7 +7,7 @@ import {
 } from '@components/home/MessagesCard/MessagesCard.props';
 import { MessagesCardStyle } from '@components/home/MessagesCard/MessagesCard.style';
 import COLORS from '@constants/COLORS';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const MessagesCard = ({
   title,

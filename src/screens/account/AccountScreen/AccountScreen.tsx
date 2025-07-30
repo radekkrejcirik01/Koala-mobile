@@ -12,7 +12,7 @@ import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const AccountScreen = (): React.JSX.Element => {
   const dispatch = useDispatch();

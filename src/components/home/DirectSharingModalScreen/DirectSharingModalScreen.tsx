@@ -10,7 +10,7 @@ import { DirectSharingModalScreenProps } from '@components/home/DirectSharingMod
 import { DirectSharingModalScreenStyle } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen.style';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const DirectSharingModalScreen = ({
   onAddFriendPress

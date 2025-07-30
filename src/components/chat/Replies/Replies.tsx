@@ -28,7 +28,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { REPLIES } from '@components/chat/Replies/Replies.const';
 import COLORS from '@constants/COLORS';
 import { Prompt } from '@components/general/Prompt/Prompt';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const Replies = ({ onPressReply }: RepliesProps) => {
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);

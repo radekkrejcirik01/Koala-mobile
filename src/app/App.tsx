@@ -7,7 +7,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import store from '@store/index/index';
 import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
-import { ThemeProvider } from '../ThemeContext';
+import { ThemeProvider } from '@contexts/ThemeContext';
 
 const App = () => {
   const theme = useColorScheme();

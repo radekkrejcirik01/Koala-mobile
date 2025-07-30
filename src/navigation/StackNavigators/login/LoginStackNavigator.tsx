@@ -11,10 +11,6 @@ import { SecondScreen } from '@screens/login/SecondScreen/SecondScreen';
 import { ThirdScreen } from '@screens/login/ThirdScreen/ThirdScreen';
 import { FourthScreen } from '@screens/login/FourthScreen/FourthScreen';
 import { PrivacyPolicyScreen } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen';
-import {
-  ForgotPasswordOptions,
-  PrivacyPolicyOptions
-} from '@navigation/StackNavigators/login/LoginStackNavigator.options';
 import { LoginScreen } from '@screens/login/LoginScreen/LoginScreen';
 import { ForgotPasswordScreen } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen';
 
@@ -50,12 +46,12 @@ export const LoginStackNavigator = (): JSX.Element => (
     <Login.Screen
       name={LoginStackNavigatorEnum.PrivacyPolicyScreen}
       component={PrivacyPolicyScreen}
-      options={PrivacyPolicyOptions}
+      options={NoHeader}
     />
     <Login.Screen
       name={LoginStackNavigatorEnum.ForgotPasswordScreen}
       component={ForgotPasswordScreen}
-      options={ForgotPasswordOptions}
+      options={NoHeader}
     />
   </Login.Navigator>
 );

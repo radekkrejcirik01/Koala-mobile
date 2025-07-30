@@ -17,10 +17,12 @@ import { Button } from '@components/general/Button/Button';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { UsernamePostInterface } from '@interfaces/post/Post.interface';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ThirdScreen = (): JSX.Element => {
   const dispatch = useDispatch();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const theme = useTheme();
 
   const [username, setUsername] = useState<string>();
 
@@ -47,13 +49,23 @@ export const ThirdScreen = (): JSX.Element => {
   return (
     <View style={ThirdScreenStyle.container}>
       <View>
-        <Text style={ThirdScreenStyle.title}>Your username</Text>
+        <Text
+          style={[ThirdScreenStyle.title, { color: theme.theme.colors.text }]}
+        >
+          Your username
+        </Text>
         <TextInput
           autoFocus
           autoCorrect={false}
           autoCapitalize="none"
           onChangeText={setUsername}
-          style={ThirdScreenStyle.input}
+          style={[
+            ThirdScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
       </View>
       <KeyboardAvoidingView

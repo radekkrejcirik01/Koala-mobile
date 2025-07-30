@@ -5,7 +5,7 @@ import {
   TipItemDefaultProps,
   TipItemProps
 } from '@components/home/TipItem/TipItem.props';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const TipItem = ({ tip, style }: TipItemProps): JSX.Element => {
   const theme = useTheme();

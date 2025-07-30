@@ -21,8 +21,8 @@ import {
   ShareOptions
 } from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { useTheme } from '@contexts/ThemeContext';
 import { version } from '../../../../package.json';
-import { useTheme } from '../../../ThemeContext';
 
 export const ProfileScreen = (): React.JSX.Element => {
   const { username, name, profilePhoto } = useSelector(

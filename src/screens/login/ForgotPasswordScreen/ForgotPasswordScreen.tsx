@@ -5,15 +5,22 @@ import {
   ScrollView,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { ForgotPasswordScreenStyle } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { PasswordResetPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
+import { useTheme } from '@contexts/ThemeContext';
+import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const ForgotPasswordScreen = (): React.JSX.Element => {
+  const { top } = useSafeAreaInsets();
+  const theme = useTheme();
+
   const [username, setUsername] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [friendUsername, setFriendUsername] = useState<string>();
@@ -53,45 +60,85 @@ export const ForgotPasswordScreen = (): React.JSX.Element => {
   }, [email, friendUsername, username]);
 
   return (
-    <ScrollView style={ForgotPasswordScreenStyle.container}>
-      <Text style={ForgotPasswordScreenStyle.inputTitleText}>Username</Text>
-      <TextInput
-        autoCorrect={false}
-        autoCapitalize="none"
-        value={username}
-        onChangeText={setUsername}
-        style={ForgotPasswordScreenStyle.input}
-      />
-      <Text style={ForgotPasswordScreenStyle.inputTitleText}>Email</Text>
-      <TextInput
-        autoCorrect={false}
-        autoCapitalize="none"
-        value={email}
-        keyboardType="email-address"
-        onChangeText={setEmail}
-        style={ForgotPasswordScreenStyle.input}
-      />
-      <Text style={ForgotPasswordScreenStyle.inputTitleText}>
-        Safety confirmation{'\n'}Type username of one of your friends
-      </Text>
-      <TextInput
-        autoCorrect={false}
-        autoCapitalize="none"
-        value={friendUsername}
-        onChangeText={setFriendUsername}
-        style={ForgotPasswordScreenStyle.input}
-      />
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={send}
-        style={ForgotPasswordScreenStyle.buttonView}
-      >
-        {posting ? (
-          <ActivityIndicator color={COLORS.WHITE} />
-        ) : (
-          <Text style={ForgotPasswordScreenStyle.buttonText}>Reset</Text>
-        )}
-      </TouchableOpacity>
+    <ScrollView style={{ marginTop: top }}>
+      <ScreenHeader title="Forgot password" />
+      <View style={ForgotPasswordScreenStyle.container}>
+        <Text
+          style={[
+            ForgotPasswordScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Username
+        </Text>
+        <TextInput
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={username}
+          onChangeText={setUsername}
+          style={[
+            ForgotPasswordScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
+        />
+        <Text
+          style={[
+            ForgotPasswordScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Email
+        </Text>
+        <TextInput
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={email}
+          keyboardType="email-address"
+          onChangeText={setEmail}
+          style={[
+            ForgotPasswordScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
+        />
+        <Text
+          style={[
+            ForgotPasswordScreenStyle.inputTitleText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Safety confirmation{'\n'}Type username of one of your friends
+        </Text>
+        <TextInput
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={friendUsername}
+          onChangeText={setFriendUsername}
+          style={[
+            ForgotPasswordScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
+        />
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={send}
+          style={ForgotPasswordScreenStyle.buttonView}
+        >
+          {posting ? (
+            <ActivityIndicator color={COLORS.WHITE} />
+          ) : (
+            <Text style={ForgotPasswordScreenStyle.buttonText}>Reset</Text>
+          )}
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };

@@ -22,6 +22,7 @@ import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.styl
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const FourthScreen = (): JSX.Element => {
   const { name, username } = useSelector(
@@ -30,6 +31,7 @@ export const FourthScreen = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const theme = useTheme();
 
   const [password, setPassword] = useState<string>();
   const [posting, setPosting] = useState<boolean>(false);
@@ -73,20 +75,35 @@ export const FourthScreen = (): JSX.Element => {
   return (
     <View style={FourthScreenStyle.container}>
       <View>
-        <Text style={FourthScreenStyle.title}>Finish with safe password</Text>
+        <Text
+          style={[FourthScreenStyle.title, { color: theme.theme.colors.text }]}
+        >
+          Finish with safe password
+        </Text>
         <TextInput
           autoFocus
           autoCorrect={false}
           autoCapitalize="none"
           onChangeText={setPassword}
-          style={FourthScreenStyle.input}
+          style={[
+            FourthScreenStyle.input,
+            {
+              backgroundColor: theme.theme.colors.surface,
+              color: theme.theme.colors.text
+            }
+          ]}
         />
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={openPrivacyPolicy}
           style={FourthScreenStyle.margin5}
         >
-          <Text style={FourthScreenStyle.privacyPolicyText}>
+          <Text
+            style={[
+              FourthScreenStyle.privacyPolicyText,
+              { color: theme.theme.colors.text }
+            ]}
+          >
             By creating account you agree with our privacy policy
           </Text>
         </TouchableOpacity>

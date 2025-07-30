@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const SecondScreenStyle = StyleSheet.create({
   container: {
@@ -9,7 +8,6 @@ export const SecondScreenStyle = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: COLORS.BLACK_75,
     fontWeight: 'bold'
   },
   input: {
@@ -18,8 +16,6 @@ export const SecondScreenStyle = StyleSheet.create({
     paddingLeft: 15,
     borderRadius: 10,
     fontSize: 20,
-    color: COLORS.BLACK_75,
-    backgroundColor: COLORS.WHITE_100,
     fontWeight: 'bold'
   }
 });

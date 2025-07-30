@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const FourthScreenStyle = StyleSheet.create({
   container: {
@@ -9,7 +8,6 @@ export const FourthScreenStyle = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: COLORS.BLACK_75,
     fontWeight: 'bold'
   },
   input: {
@@ -18,15 +16,12 @@ export const FourthScreenStyle = StyleSheet.create({
     paddingLeft: 15,
     borderRadius: 10,
     fontSize: 20,
-    color: COLORS.BLACK_75,
-    backgroundColor: COLORS.WHITE_100,
     fontWeight: 'bold'
   },
   margin5: {
     margin: 5
   },
   privacyPolicyText: {
-    fontSize: 12,
-    color: COLORS.BLACK_100
+    fontSize: 12
   }
 });

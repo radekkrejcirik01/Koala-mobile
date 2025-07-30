@@ -6,9 +6,11 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { FirstScreenStyle } from '@screens/login/FirstScreen/FirstScreen.style';
 import { Button } from '@components/general/Button/Button';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const FirstScreen = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
+  const theme = useTheme();
 
   return (
     <View style={FirstScreenStyle.container}>
@@ -16,8 +18,11 @@ export const FirstScreen = (): JSX.Element => {
         source={require('@assets/images/koala.png')}
         style={FirstScreenStyle.image}
       />
-      <Text style={FirstScreenStyle.titleText}>Koala Messenger</Text>
-      <Text style={FirstScreenStyle.descriptionText}>Share, help & chat</Text>
+      <Text
+        style={[FirstScreenStyle.titleText, { color: theme.theme.colors.text }]}
+      >
+        Koala: Mental Health Sharing
+      </Text>
       <Button
         title="Let's start!"
         onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
@@ -29,7 +34,14 @@ export const FirstScreen = (): JSX.Element => {
         onPress={() => navigateTo(LoginStackNavigatorEnum.LoginScreen)}
         style={FirstScreenStyle.loginButtonView}
       >
-        <Text style={FirstScreenStyle.loginButtonText}>Login</Text>
+        <Text
+          style={[
+            FirstScreenStyle.loginButtonText,
+            { color: theme.theme.colors.text }
+          ]}
+        >
+          Login
+        </Text>
       </TouchableOpacity>
     </View>
   );

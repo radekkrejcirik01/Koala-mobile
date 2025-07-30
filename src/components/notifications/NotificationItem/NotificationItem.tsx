@@ -6,7 +6,7 @@ import { NotificationItemStyle } from '@components/notifications/NotificationIte
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const NotificationItem = ({
   item,

@@ -11,7 +11,7 @@ import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ShareModalScreen = ({
   item,

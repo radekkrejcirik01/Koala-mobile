@@ -6,7 +6,7 @@ import {
 } from '@components/general/ScreenHeader/ScreenHeader.props';
 import { ScreenHeaderStyle } from '@components/general/ScreenHeader/ScreenHeader.style';
 import { BackButton } from '@components/general/BackButton/BackButton';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ScreenHeader = ({
   title,

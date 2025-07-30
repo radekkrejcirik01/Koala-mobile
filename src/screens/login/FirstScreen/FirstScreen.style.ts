@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const FirstScreenStyle = StyleSheet.create({
   container: {
@@ -15,13 +14,8 @@ export const FirstScreenStyle = StyleSheet.create({
   },
   titleText: {
     fontSize: 26,
-    color: COLORS.BLACK_75,
-    fontWeight: 'bold'
-  },
-  descriptionText: {
-    marginTop: 10,
-    color: COLORS.BLACK_75,
-    fontWeight: '500'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   startButton: {
     marginTop: '80%'
@@ -31,7 +25,6 @@ export const FirstScreenStyle = StyleSheet.create({
   },
   loginButtonText: {
     fontSize: 16,
-    color: COLORS.BLACK_75,
     fontWeight: '600'
   }
 });

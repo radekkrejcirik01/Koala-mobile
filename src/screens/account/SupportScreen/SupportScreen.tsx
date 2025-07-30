@@ -9,7 +9,7 @@ import { SendButton } from '@components/home/SendButton/SendButton';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { SupportPostInterface } from '@interfaces/post/Post.interface';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const SupportScreen = (): JSX.Element => {
   const { top } = useSafeAreaInsets();

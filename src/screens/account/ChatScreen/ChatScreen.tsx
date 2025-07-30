@@ -31,7 +31,7 @@ import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { getMessageTime } from '@functions/getMessageTime';
 import { getShortMessage } from '@functions/getShortMessage';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const { id, chatUserId, name, profilePhoto, username, conversationId } =
