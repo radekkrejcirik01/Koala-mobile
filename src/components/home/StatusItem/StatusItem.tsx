@@ -19,7 +19,7 @@ export const StatusItem = ({
         onPress={onPress}
         style={[
           StatusItemStyle.button,
-          { backgroundColor: theme.theme.colors.surface }
+          { backgroundColor: theme.theme.colors.surface_200 }
         ]}
       >
         <Text

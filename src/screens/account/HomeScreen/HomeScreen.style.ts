@@ -5,7 +5,6 @@ export const HomeScreenStyle = StyleSheet.create({
     flex: 1
   },
   scrollViewContainer: {
-    paddingTop: 10,
-    paddingBottom: 100
+    paddingTop: 10
   }
 });

@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesStyle = StyleSheet.create({
   titleText: {
-    marginTop: 40,
     marginLeft: 20,
     fontSize: 18,
     color: COLORS.PURPLE,
@@ -16,23 +15,23 @@ export const MessagesStyle = StyleSheet.create({
     flexWrap: 'wrap'
   },
   anxietyImage: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     alignSelf: 'flex-end'
   },
   depressionImage: {
+    width: 65,
+    height: 65,
+    alignSelf: 'flex-end'
+  },
+  wellbeingImage: {
     width: 55,
     height: 55,
     alignSelf: 'flex-end'
   },
-  wellbeingImage: {
-    width: 45,
-    height: 45,
-    alignSelf: 'flex-end'
-  },
   kudosImage: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     marginBottom: 5,
     alignSelf: 'flex-end'
   },

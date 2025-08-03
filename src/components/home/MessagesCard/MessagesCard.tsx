@@ -24,7 +24,7 @@ export const MessagesCard = ({
       onPress={onPress}
       style={[
         MessagesCardStyle.view,
-        { backgroundColor: theme.theme.colors.surface },
+        { backgroundColor: theme.theme.colors.surface_200 },
         isKudos && { backgroundColor: COLORS.PURPLE }
       ]}
     >

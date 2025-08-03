@@ -1,7 +1,6 @@
 import React from 'react';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import { BottomTabNavigatorStyle } from '@navigation/BottomTabNavigator/BottomTabNavigator.style';
 import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
 
@@ -18,7 +17,7 @@ export const HomeTabOptions: BottomTabNavigationOptions = {
     <Text
       style={[
         BottomTabNavigatorStyle.tabBarIconEmoji,
-        { fontSize: focused ? 26 : 24, opacity: focused ? 1 : 0.8 }
+        { fontSize: focused ? 26 : 24 }
       ]}
     >
       🏠
@@ -32,16 +31,13 @@ export const NotificationsTabbOptions: BottomTabNavigationOptions = {
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <FastImage
-      source={require('../../assets/images/koala.png')}
+    <Text
       style={[
-        BottomTabNavigatorStyle.tabBarIconImage,
-        {
-          height: focused ? 32 : 30,
-          width: focused ? 32 : 30,
-          opacity: focused ? 1 : 0.8
-        }
+        BottomTabNavigatorStyle.tabBarIconEmoji,
+        { fontSize: focused ? 26 : 24 }
       ]}
-    />
+    >
+      🙍‍♂️
+    </Text>
   )
 };

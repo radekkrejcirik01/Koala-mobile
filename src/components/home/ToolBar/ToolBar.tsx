@@ -153,7 +153,7 @@ export const ToolBar = ({ onPressDirect }: ToolBarProps): React.JSX.Element => {
             onPress={onPressDirect}
             style={[
               ToolBarStyle.button,
-              { backgroundColor: theme.theme.colors.surface }
+              { backgroundColor: theme.theme.colors.surface_200 }
             ]}
           >
             <Icon name={IconEnum.DIRECT} size={20} />

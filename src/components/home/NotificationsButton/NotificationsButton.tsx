@@ -17,10 +17,7 @@ export const NotificationsButton = ({
   return (
     <View>
       <Text
-        style={[
-          NotificationsButtonStyle.text,
-          { fontSize: focused ? 26 : 24, opacity: focused ? 1 : 0.8 }
-        ]}
+        style={[NotificationsButtonStyle.text, { fontSize: focused ? 26 : 24 }]}
       >
         💬
       </Text>

@@ -68,7 +68,7 @@ export const ProfileScreen = (): React.JSX.Element => {
         <ScreenHeader title="Profile" goBack={false} />
         <View style={ProfileScreenStyle.container}>
           <View style={ProfileScreenStyle.photoContainer}>
-            <ProfilePhoto name={name} photo={profilePhoto} size={75} />
+            <ProfilePhoto name={name} photo={profilePhoto} size={80} />
             <TouchableOpacity
               activeOpacity={0.9}
               onPress={addPhoto}
