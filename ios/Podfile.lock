@@ -559,7 +559,7 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.19.3):
     - React-Core
-  - RNCClipboard (1.11.2):
+  - RNCClipboard (1.16.3):
     - React-Core
   - RNCPushNotificationIOS (1.11.0):
     - React-Core
@@ -933,7 +933,7 @@ SPEC CHECKSUMS:
   RNAudioRecorderPlayer: fa079748b34d15cd3b7b6a5d47b286bae6d5d49b
   RNBootSplash: 9a3df8494c6e56d9c25dafdf324cdaa5e1338f56
   RNCAsyncStorage: b934e5ab140257f25f5d67ded2464646731e4349
-  RNCClipboard: efe1b27ad1ea378c60c8c8aabfd130961bbeb474
+  RNCClipboard: f6679d470d0da2bce2a37b0af7b9e0bf369ecda5
   RNCPushNotificationIOS: 6c4ca3388c7434e4a662b92e4dfeeee858e6f440
   RNFastImage: 462a183c4b0b6b26fdfd639e1ed6ba37536c3b87
   RNFBAnalytics: 2d040380d1f9178896ff4fb4b72bdfc913343fe8
