@@ -23,20 +23,6 @@ export const HomeHeader = (): JSX.Element => {
   return (
     <View style={HomeHeaderStyle.container}>
       <View style={HomeHeaderStyle.row}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={showModal}
-          style={[
-            HomeHeaderStyle.buttonView,
-            {
-              backgroundColor: theme.isDark
-                ? theme.theme.colors.background
-                : COLORS.WHITE
-            }
-          ]}
-        >
-          <Text style={HomeHeaderStyle.buttonText}>️😴</Text>
-        </TouchableOpacity>
         <Text style={HomeHeaderStyle.appName}>Koala</Text>
         <TouchableOpacity
           activeOpacity={0.8}

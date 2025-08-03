@@ -28,7 +28,7 @@ export const HomeHeaderStyle = StyleSheet.create({
     color: COLORS.BLACK
   },
   appName: {
-    fontSize: 22,
+    fontSize: 30,
     color: COLORS.LIGHTGRAY_200,
     fontWeight: 'bold'
   },
