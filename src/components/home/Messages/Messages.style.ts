@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesStyle = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
     marginBottom: 60
   },
   title: {
@@ -13,33 +12,54 @@ export const MessagesStyle = StyleSheet.create({
     alignSelf: 'center'
   },
   itemsContainer: {
-    justifyContent: 'center',
+    paddingHorizontal: 10,
     paddingTop: 20,
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly'
   },
   messagesView: {
+    padding: 20,
     height: 300,
-    width: '45%',
-    marginRight: 20,
+    width: '43%',
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: '#c8b6ff',
+    justifyContent: 'space-between'
+  },
+  rightViewsContainer: {
+    width: '42%'
   },
   directView: {
-    width: 140,
+    padding: 20,
     height: 140,
     marginBottom: 20,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: '#a2d2ff'
   },
   voiceView: {
-    width: 140,
+    padding: 20,
     height: 140,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: '#f2cc8f'
+  },
+  emojiView: {
+    padding: 7,
+    borderRadius: 20,
+    backgroundColor: COLORS.WHITE_100,
+    alignSelf: 'flex-start'
+  },
+  emojiText: {
+    fontSize: 20
+  },
+  viewText: {
+    marginTop: 5,
+    fontSize: 16,
+    color: COLORS.BLACK,
+    fontWeight: '600'
   },
   footerContainer: {
     paddingTop: 30,
+    paddingHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

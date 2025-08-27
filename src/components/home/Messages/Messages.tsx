@@ -18,7 +18,7 @@ export const Messages = (): JSX.Element => {
 
   const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
-  const onDirectEmotionPress = useCallback(() => {
+  const onPressDirect = useCallback(() => {
     setModalContent(
       <DirectSharingModalScreen
         onAddFriendPress={() => {
@@ -33,6 +33,8 @@ export const Messages = (): JSX.Element => {
     showModal();
   }, [hideModal, showModal]);
 
+  const onPressFriends = () => {};
+
   const navigateToProfile = () => {
     navigateTo(AccountStackNavigatorEnum.ProfileScreen);
   };
@@ -46,16 +48,46 @@ export const Messages = (): JSX.Element => {
     <View style={MessagesStyle.container}>
       <Text style={MessagesStyle.title}>Start a chat</Text>
       <View style={MessagesStyle.itemsContainer}>
-        <View style={MessagesStyle.messagesView} />
-        <View>
-          <View style={MessagesStyle.directView} />
-          <View style={MessagesStyle.voiceView} />
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={onPressDirect}
+          style={MessagesStyle.messagesView}
+        >
+          <View>
+            <View style={MessagesStyle.emojiView}>
+              <Text style={MessagesStyle.emojiText}>📚</Text>
+            </View>
+            <Text style={MessagesStyle.viewText}>Messages</Text>
+          </View>
+          <Text>Add your own or use ours</Text>
+        </TouchableOpacity>
+        <View style={MessagesStyle.rightViewsContainer}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onPressDirect}
+            style={MessagesStyle.directView}
+          >
+            <View style={MessagesStyle.emojiView}>
+              <Text style={MessagesStyle.emojiText}>💬</Text>
+            </View>
+            <Text style={MessagesStyle.viewText}>Share</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onPressDirect}
+            style={MessagesStyle.voiceView}
+          >
+            <View style={MessagesStyle.emojiView}>
+              <Text style={MessagesStyle.emojiText}>🎤</Text>
+            </View>
+            <Text style={MessagesStyle.viewText}>Voice</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={MessagesStyle.footerContainer}>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={onDirectEmotionPress}
+          onPress={onPressFriends}
           style={[
             MessagesStyle.friendsView,
             {
