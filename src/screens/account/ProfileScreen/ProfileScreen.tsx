@@ -65,7 +65,7 @@ export const ProfileScreen = (): React.JSX.Element => {
       contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
     >
       <View>
-        <ScreenHeader title="Profile" goBack={false} />
+        <ScreenHeader title="Profile" />
         <View style={ProfileScreenStyle.container}>
           <View style={ProfileScreenStyle.photoContainer}>
             <ProfilePhoto name={name} photo={profilePhoto} size={80} />

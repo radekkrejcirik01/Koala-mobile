@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationsButtonStyle = StyleSheet.create({
   text: {
-    marginTop: 5,
-    color: COLORS.BLACK_50
+    fontSize: 22,
+    color: COLORS.BLACK
   }
 });

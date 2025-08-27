@@ -1,55 +1,38 @@
-import React, { JSX, useCallback } from 'react';
-import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { useModal } from '@hooks/useModal';
+import React, { JSX } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
-import { Modal } from '@components/general/Modal/Modal';
-import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { useTheme } from '@contexts/ThemeContext';
 import COLORS from '@constants/COLORS';
-import { ReducerProps } from '@store/index/index.props';
+import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
+import { useNavigation } from '@hooks/useNavigation';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 
 export const HomeHeader = (): JSX.Element => {
-  const { name } = useSelector((state: ReducerProps) => state.user.user);
-
-  const { modalVisible, showModal, hideModal } = useModal();
   const theme = useTheme();
+  const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
-  const hideModalAndKeyboard = useCallback(() => {
-    Keyboard.dismiss();
-    hideModal();
-  }, [hideModal]);
+  const navigateToChats = () => {
+    navigateTo(AccountStackNavigatorEnum.NotificationsScreen);
+  };
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <View style={HomeHeaderStyle.row}>
-        <Text style={HomeHeaderStyle.appName}>Koala</Text>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={showModal}
-          style={[
-            HomeHeaderStyle.buttonView,
-            {
-              backgroundColor: theme.isDark
-                ? theme.theme.colors.surface
-                : COLORS.WHITE
-            }
-          ]}
-        >
-          <Text style={HomeHeaderStyle.buttonText}>️🔎</Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={[HomeHeaderStyle.title, { color: COLORS.BUTTON_BLUE }]}>
-        {`Hi ${name},\nhow do you feel today?`}
-      </Text>
-      <Modal
-        isVisible={modalVisible}
-        content={<FriendsModalScreen />}
-        onClose={() => {
-          hideModalAndKeyboard();
-        }}
-        style={HomeHeaderStyle.modal}
-      />
+      <Text style={HomeHeaderStyle.title}>{`You are safe\nnow 🫶`}</Text>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={navigateToChats}
+        style={[
+          HomeHeaderStyle.buttonView,
+          {
+            backgroundColor: theme.isDark
+              ? theme.theme.colors.surface
+              : COLORS.WHITE
+          }
+        ]}
+      >
+        <NotificationsButton />
+      </TouchableOpacity>
     </View>
   );
 };

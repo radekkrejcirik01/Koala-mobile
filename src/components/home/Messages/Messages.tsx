@@ -1,17 +1,18 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Keyboard, View } from 'react-native';
+import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { DirectSharingModalScreen } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
-import { ToolBar } from '@components/home/ToolBar/ToolBar';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { MessagesCard } from '@components/home/MessagesCard/MessagesCard';
+import COLORS from '@constants/COLORS';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const Messages = (): JSX.Element => {
+  const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
   const { modalVisible, showModal, hideModal } = useModal();
 
@@ -32,43 +33,55 @@ export const Messages = (): JSX.Element => {
     showModal();
   }, [hideModal, showModal]);
 
+  const navigateToProfile = () => {
+    navigateTo(AccountStackNavigatorEnum.ProfileScreen);
+  };
+
   const hideModalAndKeyboard = useCallback(() => {
     Keyboard.dismiss();
     hideModal();
   }, [hideModal]);
 
   return (
-    <View style={{ marginTop: 40 }}>
+    <View style={MessagesStyle.container}>
+      <Text style={MessagesStyle.title}>Start a chat</Text>
       <View style={MessagesStyle.itemsContainer}>
-        <MessagesCard
-          title="Anxiety & panic"
-          onPress={() =>
-            navigateTo(AccountStackNavigatorEnum.AnxietyAndPanicScreen)
-          }
-          image={require('../../../assets/images/Anxiety_no_bg.png')}
-          imageStyle={MessagesStyle.anxietyImage}
-        />
-        <MessagesCard
-          title="Depression"
-          onPress={() => navigateTo(AccountStackNavigatorEnum.DepressionScreen)}
-          image={require('../../../assets/images/Depression_no_bg.png')}
-          imageStyle={MessagesStyle.depressionImage}
-        />
-        <MessagesCard
-          title="Wellbeing"
-          onPress={() => navigateTo(AccountStackNavigatorEnum.WellbeingScreen)}
-          image={require('../../../assets/images/Wellbeing_no_bg.png')}
-          imageStyle={MessagesStyle.wellbeingImage}
-        />
-        <MessagesCard
-          title="Kudos"
-          onPress={() => navigateTo(AccountStackNavigatorEnum.KudosScreen)}
-          image={require('../../../assets/images/Kudos_no_bg.png')}
-          imageStyle={MessagesStyle.kudosImage}
-          isKudos
-        />
+        <View style={MessagesStyle.messagesView} />
+        <View>
+          <View style={MessagesStyle.directView} />
+          <View style={MessagesStyle.voiceView} />
+        </View>
       </View>
-      <ToolBar onPressDirect={onDirectEmotionPress} />
+      <View style={MessagesStyle.footerContainer}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onDirectEmotionPress}
+          style={[
+            MessagesStyle.friendsView,
+            {
+              backgroundColor: theme.isDark
+                ? theme.theme.colors.surface
+                : COLORS.WHITE
+            }
+          ]}
+        >
+          <Text style={MessagesStyle.friendsText}>🔎 Friends</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={navigateToProfile}
+          style={[
+            MessagesStyle.profileView,
+            {
+              backgroundColor: theme.isDark
+                ? theme.theme.colors.surface
+                : COLORS.WHITE
+            }
+          ]}
+        >
+          <Text style={MessagesStyle.profileText}>🙆</Text>
+        </TouchableOpacity>
+      </View>
       <Modal
         isVisible={modalVisible}
         content={modalContent}

@@ -23,7 +23,6 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { AddButton } from '@components/general/AddButton/AddButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { Modal } from '@components/general/Modal/Modal';
 import { useModal } from '@hooks/useModal';
 
@@ -110,7 +109,6 @@ export const NotificationsScreen = (): React.JSX.Element => {
       <ScreenHeader
         title="Messages 💬"
         rightComponent={<AddButton onPress={showModal} />}
-        goBack={false}
       />
       <FlashList
         data={notifications}
@@ -150,7 +148,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
         isVisible={modalVisible}
         content={<FriendsModalScreen />}
         onClose={hideModalAndKeyboard}
-        style={HomeHeaderStyle.modal}
+        style={NotificationsScreenStyle.modal}
       />
     </View>
   );

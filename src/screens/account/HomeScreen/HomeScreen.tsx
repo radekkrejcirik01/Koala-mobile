@@ -1,15 +1,15 @@
 import React from 'react';
-import { Platform, ScrollView } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useNotifications } from '@hooks/useNotifications';
 import { useAppState } from '@hooks/useAppState';
-import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 import { HomeHeader } from '@components/home/HomeHeader/HomeHeader';
 import { Messages } from '@components/home/Messages/Messages';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
 import { OnlineService } from '@utils/general/OnlineService';
+import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 
 export const HomeScreen = (): React.JSX.Element => {
   useNotifications();
@@ -25,14 +25,9 @@ export const HomeScreen = (): React.JSX.Element => {
   });
 
   return (
-    <ScrollView
-      keyboardShouldPersistTaps="always"
-      showsVerticalScrollIndicator={false}
-      style={[HomeScreenStyle.scrollView, { marginTop: top }]}
-      contentContainerStyle={HomeScreenStyle.scrollViewContainer}
-    >
+    <View style={[HomeScreenStyle.container, { marginTop: top + 10 }]}>
       <HomeHeader />
       <Messages />
-    </ScrollView>
+    </View>
   );
 };

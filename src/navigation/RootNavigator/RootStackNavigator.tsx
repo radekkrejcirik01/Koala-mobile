@@ -10,7 +10,6 @@ import {
   NoHeader
 } from '@navigation/RootNavigator/RootStackNavigator.options';
 import { AccountStackNavigator } from '@navigation/StackNavigators/account/AccountStackNavigator';
-import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
 
 const Root = createStackNavigator<ParamListBase>();
 export const RootStackNavigator = (): JSX.Element => {
@@ -19,11 +18,6 @@ export const RootStackNavigator = (): JSX.Element => {
   if (token) {
     return (
       <Root.Navigator screenOptions={NavigatorScreenOptions}>
-        <Root.Screen
-          name={RootStackNavigatorEnum.BottomTabBar}
-          component={BottomTabNavigator}
-          options={NoHeader}
-        />
         <Root.Screen
           name={RootStackNavigatorEnum.AccountStack}
           component={AccountStackNavigator}

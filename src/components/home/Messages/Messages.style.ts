@@ -2,38 +2,79 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const MessagesStyle = StyleSheet.create({
-  titleText: {
-    marginLeft: 20,
-    fontSize: 18,
-    color: COLORS.PURPLE,
-    fontWeight: 'bold'
+  container: {
+    paddingHorizontal: 30,
+    marginBottom: 60
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: COLORS.LIGHTGRAY_100,
+    alignSelf: 'center'
   },
   itemsContainer: {
-    paddingTop: 15,
-    paddingLeft: 20,
+    justifyContent: 'center',
+    paddingTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap'
   },
-  anxietyImage: {
+  messagesView: {
+    height: 300,
+    width: '45%',
+    marginRight: 20,
+    borderRadius: 20,
+    backgroundColor: COLORS.WHITE_200
+  },
+  directView: {
+    width: 140,
+    height: 140,
+    marginBottom: 20,
+    borderRadius: 20,
+    backgroundColor: COLORS.WHITE_200
+  },
+  voiceView: {
+    width: 140,
+    height: 140,
+    borderRadius: 20,
+    backgroundColor: COLORS.WHITE_200
+  },
+  footerContainer: {
+    paddingTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  friendsView: {
+    width: 100,
+    height: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  friendsText: {
+    fontWeight: 'bold',
+    color: COLORS.LIGHTGRAY_200
+  },
+  profileView: {
     width: 50,
     height: 50,
-    alignSelf: 'flex-end'
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
-  depressionImage: {
-    width: 65,
-    height: 65,
-    alignSelf: 'flex-end'
-  },
-  wellbeingImage: {
-    width: 55,
-    height: 55,
-    alignSelf: 'flex-end'
-  },
-  kudosImage: {
-    width: 50,
-    height: 50,
-    marginBottom: 5,
-    alignSelf: 'flex-end'
+  profileText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: COLORS.BLACK
   },
   modal: {
     margin: 0,
