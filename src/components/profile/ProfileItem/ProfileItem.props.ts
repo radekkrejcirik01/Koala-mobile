@@ -1,5 +1,5 @@
 export interface ProfileItemProps {
   onPress: () => void;
-  icon: string;
+  icon?: string;
   title: string;
 }

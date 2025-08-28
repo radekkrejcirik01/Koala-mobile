@@ -31,7 +31,7 @@ export const ProfileScreen = (): React.JSX.Element => {
 
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
   const addPhoto = useCallback(() => {
@@ -61,7 +61,7 @@ export const ProfileScreen = (): React.JSX.Element => {
 
   return (
     <ScrollView
-      style={{ marginTop: top }}
+      style={{ marginTop: top, paddingBottom: bottom || 10 }}
       contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
     >
       <View>
@@ -100,14 +100,12 @@ export const ProfileScreen = (): React.JSX.Element => {
         >
           <ProfileItem
             onPress={() => navigateTo(AccountStackNavigatorEnum.AccountScreen)}
-            icon="🌱"
             title="Account"
           />
           <ProfileItem
             onPress={() =>
               navigateTo(AccountStackNavigatorEnum.SharingHistoryScreen)
             }
-            icon="📱"
             title="Sharing history"
           />
         </View>
@@ -119,12 +117,10 @@ export const ProfileScreen = (): React.JSX.Element => {
         >
           <ProfileItem
             onPress={() => navigateTo(AccountStackNavigatorEnum.SupportScreen)}
-            icon="🫂"
             title="Support"
           />
           <ProfileItem
             onPress={() => navigateTo(AccountStackNavigatorEnum.FeedbackScreen)}
-            icon="🫶"
             title="Feedback"
           />
         </View>

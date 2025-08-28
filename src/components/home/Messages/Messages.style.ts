@@ -49,7 +49,7 @@ export const MessagesStyle = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   emojiText: {
-    fontSize: 20
+    fontSize: 24
   },
   viewText: {
     marginTop: 5,

@@ -19,7 +19,7 @@ export const ProfileItem = ({
       style={ProfileItemStyle.view}
     >
       <View style={ProfileItemStyle.row}>
-        <Text style={ProfileItemStyle.icon}>{icon}</Text>
+        {!!icon && <Text style={ProfileItemStyle.icon}>{icon}</Text>}
         <Text
           style={[ProfileItemStyle.title, { color: theme.theme.colors.text }]}
         >

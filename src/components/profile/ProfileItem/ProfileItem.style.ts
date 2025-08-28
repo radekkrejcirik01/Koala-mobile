@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const ProfileItemStyle = StyleSheet.create({
   view: {
-    paddingVertical: 12,
-    paddingHorizontal: 15,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

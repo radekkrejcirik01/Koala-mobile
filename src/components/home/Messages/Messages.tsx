@@ -10,6 +10,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import COLORS from '@constants/COLORS';
 import { useTheme } from '@contexts/ThemeContext';
+import { MessagesModalScreen } from '@components/home/MessagesModalScreen/MessagesModalScreen';
 
 export const Messages = (): JSX.Element => {
   const theme = useTheme();
@@ -19,19 +20,9 @@ export const Messages = (): JSX.Element => {
   const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
   const onPressMessages = useCallback(() => {
-    setModalContent(
-      <ShareModalScreen
-        onAddFriendPress={() => {
-          hideModal();
-          setModalContent(<FriendsModalScreen />);
-          setTimeout(() => {
-            showModal();
-          }, 100);
-        }}
-      />
-    );
+    setModalContent(<MessagesModalScreen />);
     showModal();
-  }, [hideModal, showModal]);
+  }, [showModal]);
 
   const onPressShare = useCallback(() => {
     setModalContent(
@@ -81,7 +72,7 @@ export const Messages = (): JSX.Element => {
             </View>
             <Text style={MessagesStyle.viewText}>Messages</Text>
           </View>
-          <Text>Add your own or use ours</Text>
+          <Text>Share ours or add your own</Text>
         </TouchableOpacity>
         <View style={MessagesStyle.rightViewsContainer}>
           <TouchableOpacity
