@@ -53,11 +53,3 @@ export interface EmotionInterface {
   type: EmotionScreenMessageType;
   isDefault?: boolean;
 }
-
-export interface FriendStatusInterface {
-  id: number;
-  userId: number;
-  name: string;
-  expression: string;
-  time: number;
-}

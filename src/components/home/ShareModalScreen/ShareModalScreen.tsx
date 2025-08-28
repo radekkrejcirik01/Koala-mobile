@@ -1,29 +1,27 @@
-import React, { JSX, useCallback, useRef } from 'react';
-import { Alert, Text, View } from 'react-native';
+import React, { JSX, useCallback, useRef, useState } from 'react';
+import { Alert, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
-import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
-import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
-import { CanHelp } from '@components/home/CanHelp/CanHelp';
+import COLORS from '@constants/COLORS';
+import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
+import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
-import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 import { useTheme } from '@contexts/ThemeContext';
 
 export const ShareModalScreen = ({
-  item,
   onAddFriendPress
 }: ShareModalScreenProps): JSX.Element => {
   const { bottom } = useSafeAreaInsets();
   const theme = useTheme();
+
+  const [message, setMessage] = useState<string>();
   const { sending, sent, setSending, setSent } = useSending();
 
   const selectedFriends = useRef<number[]>([]);
-
-  const isMessageKudos = item.type === EmotionScreenMessageType.Kudos;
 
   const onFriendSelect = (id: number) => {
     setSent(false);
@@ -34,6 +32,10 @@ export const ShareModalScreen = ({
   const send = useCallback(() => {
     const selected = selectedFriends.current;
 
+    if (!message?.length) {
+      Alert.alert('Please write a message first');
+      return;
+    }
     if (!selected.length) {
       Alert.alert('Please select a friend first');
       return;
@@ -41,23 +43,22 @@ export const ShareModalScreen = ({
 
     setSending(true);
 
-    let endpoint = 'emotion-message';
-    if (isMessageKudos) {
-      endpoint += '/kudos';
-    }
-
-    postRequest<ResponseInterface, EmotionMessagePostInterface>(endpoint, {
-      ids: selected,
-      message: item.message
-    }).subscribe((response: ResponseInterface) => {
+    postRequest<ResponseInterface, EmotionMessagePostInterface>(
+      'emotion-message/direct',
+      {
+        ids: selected,
+        message
+      }
+    ).subscribe((response: ResponseInterface) => {
       if (response?.status === 'success') {
         setSending(false);
         setSent(true);
 
+        setMessage('');
         selectedFriends.current = [];
       }
     });
-  }, [isMessageKudos, item.message, setSending, setSent]);
+  }, [message, setSending, setSent]);
 
   return (
     <View
@@ -65,29 +66,34 @@ export const ShareModalScreen = ({
         ShareModalScreenStyle.container,
         {
           backgroundColor: theme.theme.colors.surface,
-          paddingBottom: bottom + 10
+          paddingBottom: bottom || 10
         }
       ]}
     >
-      <Text
-        style={[
-          ShareModalScreenStyle.messageText,
-          { color: theme.theme.colors.text }
-        ]}
-      >
-        {item.message}
-      </Text>
-      <View style={ShareModalScreenStyle.content}>
-        <CanHelp tip1={item?.tip1} tip2={item?.tip2} />
-        <Send
-          onFriendSelect={onFriendSelect}
-          onAddFriendPress={onAddFriendPress}
-          onPressSend={send}
-          sending={sending}
-          sent={sent}
-          style={ShareModalScreenStyle.send}
+      <View style={ShareModalScreenStyle.inputView}>
+        <TextInput
+          multiline
+          placeholder="What's happening??"
+          placeholderTextColor={COLORS.GRAY_200}
+          autoFocus
+          autoCorrect={false}
+          value={message}
+          onChangeText={setMessage}
+          selectionColor={COLORS.BUTTON_BLUE}
+          style={[
+            ShareModalScreenStyle.input,
+            { color: theme.theme.colors.text }
+          ]}
         />
       </View>
+      <Send
+        onFriendSelect={onFriendSelect}
+        onAddFriendPress={onAddFriendPress}
+        onPressSend={send}
+        sending={sending}
+        sent={sent}
+        style={ShareModalScreenStyle.send}
+      />
     </View>
   );
 };

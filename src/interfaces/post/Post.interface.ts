@@ -46,28 +46,12 @@ export interface EmotionMessagePostInterface {
   message: string;
 }
 
-export interface StatusReplyMessagePostInterface {
-  receiverId: number;
-  message: string;
-  replyExpression: string;
-}
-
 export interface MessagePostInterface {
   conversationId: number;
   receiverId: number;
   message: string;
   replyMessage?: string;
   audioBuffer?: string;
-}
-
-export interface CheckOnMessageSendInterface {
-  ids: number[];
-  message: string;
-}
-
-export interface ExpressionPostInterface {
-  userId: number;
-  expression: string;
 }
 
 export interface PasswordResetPostInterface {
@@ -77,10 +61,6 @@ export interface PasswordResetPostInterface {
 }
 
 export interface ReplyPostInterface {
-  message: string;
-}
-
-export interface CheckOnMessagePostInterface {
   message: string;
 }
 

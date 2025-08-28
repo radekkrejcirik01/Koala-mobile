@@ -1,9 +1,9 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Keyboard, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { DirectSharingModalScreen } from '@components/home/DirectSharingModalScreen/DirectSharingModalScreen';
+import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
 import { MessagesStyle } from '@components/home/Messages/Messages.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -18,9 +18,9 @@ export const Messages = (): JSX.Element => {
 
   const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
-  const onPressDirect = useCallback(() => {
+  const onPressMessages = useCallback(() => {
     setModalContent(
-      <DirectSharingModalScreen
+      <ShareModalScreen
         onAddFriendPress={() => {
           hideModal();
           setModalContent(<FriendsModalScreen />);
@@ -33,7 +33,29 @@ export const Messages = (): JSX.Element => {
     showModal();
   }, [hideModal, showModal]);
 
-  const onPressFriends = () => {};
+  const onPressShare = useCallback(() => {
+    setModalContent(
+      <ShareModalScreen
+        onAddFriendPress={() => {
+          hideModal();
+          setModalContent(<FriendsModalScreen />);
+          setTimeout(() => {
+            showModal();
+          }, 100);
+        }}
+      />
+    );
+    showModal();
+  }, [hideModal, showModal]);
+
+  const onPressVoice = () => {
+    Alert.alert('This feature is coming soon ✨');
+  };
+
+  const onPressFriends = () => {
+    setModalContent(<FriendsModalScreen />);
+    showModal();
+  };
 
   const navigateToProfile = () => {
     navigateTo(AccountStackNavigatorEnum.ProfileScreen);
@@ -50,7 +72,7 @@ export const Messages = (): JSX.Element => {
       <View style={MessagesStyle.itemsContainer}>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={onPressDirect}
+          onPress={onPressMessages}
           style={MessagesStyle.messagesView}
         >
           <View>
@@ -64,7 +86,7 @@ export const Messages = (): JSX.Element => {
         <View style={MessagesStyle.rightViewsContainer}>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={onPressDirect}
+            onPress={onPressShare}
             style={MessagesStyle.directView}
           >
             <View style={MessagesStyle.emojiView}>
@@ -74,7 +96,7 @@ export const Messages = (): JSX.Element => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={onPressDirect}
+            onPress={onPressVoice}
             style={MessagesStyle.voiceView}
           >
             <View style={MessagesStyle.emojiView}>
@@ -117,9 +139,7 @@ export const Messages = (): JSX.Element => {
       <Modal
         isVisible={modalVisible}
         content={modalContent}
-        onClose={() => {
-          hideModalAndKeyboard();
-        }}
+        onClose={hideModalAndKeyboard}
         style={MessagesStyle.modal}
       />
     </View>

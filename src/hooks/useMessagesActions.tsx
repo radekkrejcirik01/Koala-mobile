@@ -8,7 +8,7 @@ import {
   ResponseEmotionsGetInterface,
   ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
+import { SendModalScreen } from '@components/home/SendModalScreen/SendModalScreen';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
@@ -67,7 +67,7 @@ export const useMessagesActions = (
   const onPressMessage = useCallback(
     (item: EmotionInterface) => {
       setModalScreen(
-        <ShareModalScreen
+        <SendModalScreen
           item={item}
           onAddFriendPress={() => {
             hideModal();

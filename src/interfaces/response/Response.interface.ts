@@ -1,14 +1,12 @@
 import {
   ConversationInterface,
   EmotionInterface,
-  FriendStatusInterface,
   HistoryInterface,
   InviteInterface,
   NotificationInterface,
   UserInterface
 } from '@interfaces/general.interface';
 import { ReplyInterface } from '@components/chat/Replies/Replies.props';
-import { QuestionInterface } from '@screens/account/CheckOnScreen/CheckOnScreen.const';
 
 export interface ResponseInterface {
   status: string;
@@ -76,29 +74,10 @@ export interface ResponseEmotionsGetInterface {
   removed?: number[];
 }
 
-export interface ResponseExpressionsGetInterface {
-  status: string;
-  message: string;
-  expression: string;
-  data: FriendStatusInterface[];
-}
-
 export interface ResponseRepliesGetInterface {
   status: string;
   message: string;
   data: ReplyInterface[];
-}
-
-export interface ResponseCheckOnMessagesGetInterface {
-  status: string;
-  message: string;
-  data: QuestionInterface[];
-}
-
-export interface ResponseLastSharedMessageGetInterface {
-  status: string;
-  message: string;
-  data: EmotionInterface;
 }
 
 export interface ResponseProfilePhotoPostInterface {
