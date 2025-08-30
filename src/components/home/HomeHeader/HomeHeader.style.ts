@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   title: {
     fontSize: 30,
-    color: COLORS.LIGHTGRAY_100,
     fontWeight: 'bold'
   },
   buttonView: {

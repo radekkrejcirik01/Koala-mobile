@@ -59,7 +59,14 @@ export const Messages = (): JSX.Element => {
 
   return (
     <View style={MessagesStyle.container}>
-      <Text style={MessagesStyle.title}>Start a chat</Text>
+      <Text
+        style={[
+          MessagesStyle.title,
+          { color: theme.isDark ? COLORS.WHITE : COLORS.LIGHTGRAY_100 }
+        ]}
+      >
+        Start a chat
+      </Text>
       <View style={MessagesStyle.itemsContainer}>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -110,7 +117,7 @@ export const Messages = (): JSX.Element => {
             }
           ]}
         >
-          <Text style={MessagesStyle.friendsText}>🔎 Friends</Text>
+          <Text style={MessagesStyle.friendsText}>Friends</Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -124,7 +131,7 @@ export const Messages = (): JSX.Element => {
             }
           ]}
         >
-          <Text style={MessagesStyle.profileText}>🙆</Text>
+          <Text style={MessagesStyle.profileText}>🔎</Text>
         </TouchableOpacity>
       </View>
       <Modal

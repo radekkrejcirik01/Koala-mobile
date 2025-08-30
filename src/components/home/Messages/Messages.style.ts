@@ -7,9 +7,8 @@ export const MessagesStyle = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: COLORS.LIGHTGRAY_100,
-    alignSelf: 'center'
+    marginLeft: 30,
+    fontWeight: 'bold'
   },
   itemsContainer: {
     paddingHorizontal: 10,
@@ -49,7 +48,8 @@ export const MessagesStyle = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   emojiText: {
-    fontSize: 24
+    fontSize: 24,
+    color: COLORS.BLACK
   },
   viewText: {
     marginTop: 5,
@@ -76,8 +76,8 @@ export const MessagesStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   friendsText: {
-    fontWeight: 'bold',
-    color: COLORS.LIGHTGRAY_200
+    color: COLORS.LIGHTGRAY_100,
+    fontWeight: 'bold'
   },
   profileView: {
     width: 50,

@@ -18,7 +18,14 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <Text style={HomeHeaderStyle.title}>{`You are safe\nnow 🫶`}</Text>
+      <Text
+        style={[
+          HomeHeaderStyle.title,
+          { color: theme.isDark ? COLORS.WHITE : COLORS.LIGHTGRAY_100 }
+        ]}
+      >
+        Koala
+      </Text>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={navigateToChats}
