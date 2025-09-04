@@ -79,7 +79,7 @@ export const Messages = (): JSX.Element => {
             </View>
             <Text style={MessagesStyle.viewText}>Messages</Text>
           </View>
-          <Text>Share ours or add your own</Text>
+          <Text>Add your own or use ours</Text>
         </TouchableOpacity>
         <View style={MessagesStyle.rightViewsContainer}>
           <TouchableOpacity
@@ -117,7 +117,7 @@ export const Messages = (): JSX.Element => {
             }
           ]}
         >
-          <Text style={MessagesStyle.friendsText}>Friends</Text>
+          <Text style={MessagesStyle.friendsText}>🔎 Friends</Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -131,7 +131,7 @@ export const Messages = (): JSX.Element => {
             }
           ]}
         >
-          <Text style={MessagesStyle.profileText}>🔎</Text>
+          <Text style={MessagesStyle.profileText}>🙆</Text>
         </TouchableOpacity>
       </View>
       <Modal

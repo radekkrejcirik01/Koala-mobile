@@ -7,8 +7,18 @@ export const HomeHeaderStyle = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
+  titleView: {
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
   title: {
-    fontSize: 30,
+    fontSize: 22,
     fontWeight: 'bold'
   },
   buttonView: {

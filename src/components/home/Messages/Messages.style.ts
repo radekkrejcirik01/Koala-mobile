@@ -7,12 +7,13 @@ export const MessagesStyle = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    marginLeft: 30,
+    alignSelf: 'center',
     fontWeight: 'bold'
   },
   itemsContainer: {
     paddingHorizontal: 10,
     paddingTop: 20,
+    paddingBottom: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly'
@@ -76,7 +77,7 @@ export const MessagesStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   friendsText: {
-    color: COLORS.LIGHTGRAY_100,
+    color: COLORS.LIGHTGRAY_200,
     fontWeight: 'bold'
   },
   profileView: {
