@@ -1,5 +1,4 @@
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
-import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 
 export interface UserInterface {
   id?: number;
@@ -50,6 +49,5 @@ export interface EmotionInterface {
   message: string;
   tip1?: string;
   tip2?: string;
-  type: EmotionScreenMessageType;
   isDefault?: boolean;
 }

@@ -14,10 +14,6 @@ import { AccountScreen } from '@screens/account/AccountScreen/AccountScreen';
 import { SharingHistoryScreen } from '@screens/account/SharingHistoryScreen/SharingHistoryScreen';
 import { SharedScreen } from '@screens/account/SharedScreen/SharedScreen';
 import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen';
-import { AnxietyAndPanicScreen } from '@screens/account/AnxietyAndPanicScreen/AnxietyAndPanicScreen';
-import { DepressionScreen } from '@screens/account/DepressionScreen/DepressionScreen';
-import { WellbeingScreen } from '@screens/account/WellbeingScreen/WellbeingScreen';
-import { KudosScreen } from '@screens/account/KudosScreen/KudosScreen';
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
@@ -35,16 +31,6 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       options={NoHeader}
     />
     <Account.Screen
-      name={AccountStackNavigatorEnum.AnxietyAndPanicScreen}
-      component={AnxietyAndPanicScreen}
-      options={NoHeader}
-    />
-    <Account.Screen
-      name={AccountStackNavigatorEnum.DepressionScreen}
-      component={DepressionScreen}
-      options={NoHeader}
-    />
-    <Account.Screen
       name={AccountStackNavigatorEnum.EditNameScreen}
       component={EditNameScreen}
       options={NoHeader}
@@ -57,11 +43,6 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     <Account.Screen
       name={AccountStackNavigatorEnum.HomeScreen}
       component={HomeScreen}
-      options={NoHeader}
-    />
-    <Account.Screen
-      name={AccountStackNavigatorEnum.KudosScreen}
-      component={KudosScreen}
       options={NoHeader}
     />
     <Account.Screen
@@ -82,11 +63,6 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     <Account.Screen
       name={AccountStackNavigatorEnum.ChatScreen}
       component={ChatScreen}
-      options={NoHeader}
-    />
-    <Account.Screen
-      name={AccountStackNavigatorEnum.WellbeingScreen}
-      component={WellbeingScreen}
       options={NoHeader}
     />
     <Account.Screen

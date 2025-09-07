@@ -10,7 +10,6 @@ import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
-import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 import { useTheme } from '@contexts/ThemeContext';
 
 export const SendModalScreen = ({
@@ -22,8 +21,6 @@ export const SendModalScreen = ({
   const { sending, sent, setSending, setSent } = useSending();
 
   const selectedFriends = useRef<number[]>([]);
-
-  const isMessageKudos = item.type === EmotionScreenMessageType.Kudos;
 
   const onFriendSelect = (id: number) => {
     setSent(false);
@@ -41,15 +38,13 @@ export const SendModalScreen = ({
 
     setSending(true);
 
-    let endpoint = 'emotion-message';
-    if (isMessageKudos) {
-      endpoint += '/kudos';
-    }
-
-    postRequest<ResponseInterface, EmotionMessagePostInterface>(endpoint, {
-      ids: selected,
-      message: item.message
-    }).subscribe((response: ResponseInterface) => {
+    postRequest<ResponseInterface, EmotionMessagePostInterface>(
+      'emotion-message',
+      {
+        ids: selected,
+        message: item.message
+      }
+    ).subscribe((response: ResponseInterface) => {
       if (response?.status === 'success') {
         setSending(false);
         setSent(true);
@@ -57,7 +52,7 @@ export const SendModalScreen = ({
         selectedFriends.current = [];
       }
     });
-  }, [isMessageKudos, item.message, setSending, setSent]);
+  }, [item.message, setSending, setSent]);
 
   return (
     <View

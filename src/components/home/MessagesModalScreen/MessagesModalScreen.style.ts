@@ -3,32 +3,55 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesModalScreenStyle = StyleSheet.create({
   container: {
-    height: '80%',
+    height: '60%',
     paddingTop: 25,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20
   },
+  headerView: {
+    paddingLeft: 20,
+    paddingRight: 25,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
   title: {
     fontSize: 22,
-    marginLeft: 25,
-    color: COLORS.LIGHTGRAY_200,
+    color: COLORS.PURPLE,
     fontWeight: 'bold'
   },
-  scrollView: {
-    marginTop: 20,
-    alignSelf: 'flex-start',
-    flexGrow: 0
+  addText: {
+    fontSize: 15,
+    color: COLORS.PURPLE,
+    fontWeight: 'bold'
   },
-  scrollViewContainer: {
-    paddingLeft: 25
+  tabScrollView: {
+    marginTop: 20,
+    alignSelf: 'flex-start'
+  },
+  tabScrollViewContainer: {
+    paddingLeft: 20
   },
   tabButtonView: {
+    marginRight: 10,
     padding: 10,
     borderRadius: 20,
-    marginRight: 10,
     alignSelf: 'flex-start'
   },
   tabButtonText: {
     fontWeight: 'bold'
+  },
+  contentScrollView: {
+    marginTop: 10,
+    paddingTop: 5
+  },
+  contentButtonView: {
+    paddingVertical: 12,
+    paddingHorizontal: 25
+  },
+  contentButtonText: {
+    fontSize: 20,
+    color: COLORS.LIGHTGRAY_200,
+    fontWeight: '800'
   }
 });

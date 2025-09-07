@@ -17,8 +17,7 @@ import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
 import { useTheme } from '@contexts/ThemeContext';
 
 export const AddEmotionModalScreen = ({
-  onAdded,
-  type
+  onAdded
 }: AddEmotionModalScreenProps): JSX.Element => {
   const { top } = useSafeAreaInsets();
   const theme = useTheme();
@@ -40,7 +39,7 @@ export const AddEmotionModalScreen = ({
       message,
       tip1,
       tip2,
-      type
+      type: EmotionScreenMessageType.Wellbeing
     }).subscribe((response: ResponseInterface) => {
       setPosting(false);
 
@@ -48,7 +47,7 @@ export const AddEmotionModalScreen = ({
         onAdded();
       }
     });
-  }, [message, onAdded, tip1, tip2, type]);
+  }, [message, onAdded, tip1, tip2]);
 
   return (
     <View
@@ -90,46 +89,42 @@ export const AddEmotionModalScreen = ({
           }
         ]}
       />
-      {type !== EmotionScreenMessageType.Kudos && (
-        <>
-          <Text
-            style={[
-              AddEmotionModalScreenStyle.inputTitleText,
-              { color: theme.theme.colors.text }
-            ]}
-          >
-            Helps me
-          </Text>
-          <TextInput
-            autoCorrect={false}
-            selectionColor={COLORS.PURPLE}
-            onChangeText={setTip1}
-            placeholder="Put on headphones and be delulu"
-            placeholderTextColor={COLORS.GRAY_200}
-            style={[
-              AddEmotionModalScreenStyle.input,
-              {
-                color: theme.theme.colors.text,
-                backgroundColor: theme.theme.colors.surface
-              }
-            ]}
-          />
-          <TextInput
-            autoCorrect={false}
-            selectionColor={COLORS.PURPLE}
-            onChangeText={setTip2}
-            placeholder="Positive thinking"
-            placeholderTextColor={COLORS.GRAY_200}
-            style={[
-              AddEmotionModalScreenStyle.input,
-              {
-                color: theme.theme.colors.text,
-                backgroundColor: theme.theme.colors.surface
-              }
-            ]}
-          />
-        </>
-      )}
+      <Text
+        style={[
+          AddEmotionModalScreenStyle.inputTitleText,
+          { color: theme.theme.colors.text }
+        ]}
+      >
+        Helps me
+      </Text>
+      <TextInput
+        autoCorrect={false}
+        selectionColor={COLORS.PURPLE}
+        onChangeText={setTip1}
+        placeholder="Put on headphones and be delulu"
+        placeholderTextColor={COLORS.GRAY_200}
+        style={[
+          AddEmotionModalScreenStyle.input,
+          {
+            color: theme.theme.colors.text,
+            backgroundColor: theme.theme.colors.surface
+          }
+        ]}
+      />
+      <TextInput
+        autoCorrect={false}
+        selectionColor={COLORS.PURPLE}
+        onChangeText={setTip2}
+        placeholder="Positive thinking"
+        placeholderTextColor={COLORS.GRAY_200}
+        style={[
+          AddEmotionModalScreenStyle.input,
+          {
+            color: theme.theme.colors.text,
+            backgroundColor: theme.theme.colors.surface
+          }
+        ]}
+      />
     </View>
   );
 };

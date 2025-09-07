@@ -1,117 +1,141 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useMessagesActions } from '@hooks/useMessagesActions';
 import { useTheme } from '@contexts/ThemeContext';
 import { MessagesModalScreenStyle } from '@components/home/MessagesModalScreen/MessagesModalScreen.style';
 import COLORS from '@constants/COLORS';
-import { SLEEPY } from '@components/home/MessagesModalScreen/MessagesModalScreen.const';
+import { MessagesStyle } from '@components/home/Messages/Messages.style';
+import { Modal } from '@components/general/Modal/Modal';
+import { EmotionInterface } from '@interfaces/general.interface';
+import {
+  CHECK_ON_MESSAGES,
+  KUDOS_MESSAGES
+} from '@components/home/MessagesModalScreen/MessagesModalScreen.const';
 
 type TabItem = {
   id: number;
   name: string;
-};
-
-type MessageItem = {
-  id: number;
-  message: string;
-};
-
-type TabsContentType = {
-  [key: string]: MessageItem[];
-};
-
-enum TabTitles {
-  Custom = 'Custom',
-  Sleepy = 'Sleepy',
-  Wins = 'Wins',
-  Kudos = 'Kudos',
-  CheckOn = 'Check-on'
-}
-
-const TABS: TabItem[] = [
-  { id: 1, name: TabTitles.Custom },
-  { id: 2, name: TabTitles.Sleepy },
-  { id: 3, name: TabTitles.Wins },
-  { id: 4, name: TabTitles.Kudos },
-  { id: 5, name: TabTitles.CheckOn }
-];
-
-const TABS_CONTENT: TabsContentType = {
-  [TabTitles.Sleepy]: SLEEPY,
-  [TabTitles.Wins]: SLEEPY,
-  [TabTitles.Kudos]: SLEEPY,
-  [TabTitles.CheckOn]: SLEEPY
+  content: EmotionInterface[];
 };
 
 export const MessagesModalScreen = () => {
   const { theme } = useTheme();
   const { bottom } = useSafeAreaInsets();
 
-  const [selected, setSelected] = useState<TabTitles>(TabTitles.Sleepy);
-  const [customMessages, setCustomMessages] = useState<MessageItem[]>([
-    { id: 1, message: 'Custom' }
-  ]);
+  const [selected, setSelected] = useState<number>(1);
 
-  const renderContent = useMemo(() => {
-    let content;
+  const {
+    messages: customMessages,
+    modalScreen,
+    modalVisible,
+    onPressMessage,
+    onPressAddEmotion,
+    onItemLongPress,
+    hideModalAndKeyboard
+  } = useMessagesActions(() => {
+    setSelected(0);
+  });
 
-    if (selected === TabTitles.Custom) {
-      content = customMessages;
-    } else {
-      content = TABS_CONTENT[selected];
-    }
+  const tabs = useMemo(
+    (): TabItem[] => [
+      { id: 1, name: 'Custom', content: customMessages },
+      { id: 2, name: 'Not feeling best 🤕', content: CHECK_ON_MESSAGES },
+      { id: 3, name: 'Wins 🎉', content: CHECK_ON_MESSAGES },
+      { id: 4, name: 'Kudos 🫶', content: KUDOS_MESSAGES },
+      { id: 5, name: 'Check-on 🙋', content: CHECK_ON_MESSAGES }
+    ],
+    [customMessages]
+  );
 
-    return content?.map((item) => (
-      <View key={item.id} style={{ marginTop: 10, paddingHorizontal: 20 }}>
-        <Text>{item.message}</Text>
-      </View>
-    ));
-  }, [customMessages, selected]);
+  const renderContent = () => {
+    const tab = tabs[selected];
+
+    return tab?.content?.map((item) => {
+      const onLongPress = () => {
+        if (tab.id === 1) {
+          onItemLongPress(item);
+        }
+      };
+
+      return (
+        <TouchableOpacity
+          key={item.id}
+          style={MessagesModalScreenStyle.contentButtonView}
+          delayLongPress={120}
+          onLongPress={onLongPress}
+          onPress={() => onPressMessage(item)}
+        >
+          <Text style={MessagesModalScreenStyle.contentButtonText}>
+            {item.message}
+          </Text>
+        </TouchableOpacity>
+      );
+    });
+  };
 
   return (
     <View
       style={[
         MessagesModalScreenStyle.container,
         {
-          backgroundColor: theme.colors.surface,
+          backgroundColor: theme.colors.background,
           paddingBottom: bottom || 10
         }
       ]}
     >
-      <Text style={MessagesModalScreenStyle.title}>Messages</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={MessagesModalScreenStyle.scrollView}
-        contentContainerStyle={MessagesModalScreenStyle.scrollViewContainer}
-      >
-        {TABS.map((tab) => (
-          <TouchableOpacity
-            key={tab.id}
-            activeOpacity={1}
-            onPress={() => setSelected(tab.name as TabTitles)}
-            style={[
-              MessagesModalScreenStyle.tabButtonView,
-              {
-                backgroundColor:
-                  selected === tab.name ? COLORS.PURPLE : COLORS.WHITE
-              }
-            ]}
-          >
-            <Text
+      <View style={MessagesModalScreenStyle.headerView}>
+        <Text style={MessagesModalScreenStyle.title}>Messages</Text>
+        <TouchableOpacity hitSlop={10} onPress={onPressAddEmotion}>
+          <Text style={MessagesModalScreenStyle.addText}>Add</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={MessagesModalScreenStyle.tabScrollView}
+          contentContainerStyle={
+            MessagesModalScreenStyle.tabScrollViewContainer
+          }
+        >
+          {tabs.map((tab, index) => (
+            <TouchableOpacity
+              key={tab.id}
+              activeOpacity={1}
+              onPress={() => setSelected(index)}
               style={[
-                MessagesModalScreenStyle.tabButtonText,
+                MessagesModalScreenStyle.tabButtonView,
                 {
-                  color: selected === tab.name ? COLORS.WHITE : COLORS.BLACK
+                  backgroundColor:
+                    selected === index ? COLORS.PURPLE : theme.colors.surface
                 }
               ]}
             >
-              {tab.name}
-            </Text>
-          </TouchableOpacity>
-        ))}
+              <Text
+                style={[
+                  MessagesModalScreenStyle.tabButtonText,
+                  {
+                    color:
+                      selected === index ? COLORS.WHITE : COLORS.LIGHTGRAY_200
+                  }
+                ]}
+              >
+                {tab.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+      <ScrollView style={MessagesModalScreenStyle.contentScrollView}>
+        {renderContent()}
       </ScrollView>
-      {renderContent}
+      <Modal
+        isVisible={modalVisible}
+        content={modalScreen}
+        onClose={hideModalAndKeyboard}
+        style={MessagesStyle.modal}
+      />
     </View>
   );
 };

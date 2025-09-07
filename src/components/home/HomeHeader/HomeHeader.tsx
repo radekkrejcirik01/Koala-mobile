@@ -28,14 +28,7 @@ export const HomeHeader = (): JSX.Element => {
           }
         ]}
       >
-        <Text
-          style={[
-            HomeHeaderStyle.title,
-            { color: theme.isDark ? COLORS.WHITE : COLORS.LIGHTGRAY_100 }
-          ]}
-        >
-          Koala
-        </Text>
+        <Text style={HomeHeaderStyle.title}>Koala</Text>
       </View>
       <TouchableOpacity
         activeOpacity={0.8}

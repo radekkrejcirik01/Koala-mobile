@@ -11,14 +11,9 @@ import {
 import { SendModalScreen } from '@components/home/SendModalScreen/SendModalScreen';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
-import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
-import { ANXIETY_AND_PANIC_MESSAGES } from '@screens/account/AnxietyAndPanicScreen/AnxietyAndPanicScreen.const';
-import { DEPRESSION_MESSAGES } from '@screens/account/DepressionScreen/DepressionScreen.const';
-import { WELLBEING_MESSAGES } from '@screens/account/WellbeingScreen/WellbeingScreen.const';
-import { KUDOS_MESSAGES } from '@screens/account/KudosScreen/KudosScreen.const';
 
 export const useMessagesActions = (
-  type: EmotionScreenMessageType
+  onMessageAdded: () => void
 ): {
   messages: EmotionInterface[];
   modalScreen: JSX.Element;
@@ -34,31 +29,16 @@ export const useMessagesActions = (
   const [messages, setMessages] = useState<EmotionInterface[]>([]);
   const [modalScreen, setModalScreen] = useState<JSX.Element>(<></>);
 
-  const getDefaultMessages = useCallback((): EmotionInterface[] => {
-    if (type === EmotionScreenMessageType.Anxiety) {
-      return ANXIETY_AND_PANIC_MESSAGES;
-    }
-    if (type === EmotionScreenMessageType.Depression) {
-      return DEPRESSION_MESSAGES;
-    }
-    if (type === EmotionScreenMessageType.Wellbeing) {
-      return WELLBEING_MESSAGES;
-    }
-    return KUDOS_MESSAGES;
-  }, [type]);
-
   const loadMessages = useCallback(() => {
-    const endpoint = `emotions-messages/${type}`;
-    const defaultMessages = getDefaultMessages();
-
-    getRequest<ResponseEmotionsGetInterface>(endpoint).subscribe(
+    getRequest<ResponseEmotionsGetInterface>('/emotions').subscribe(
       (response: ResponseEmotionsGetInterface) => {
-        if (response?.status) {
-          setMessages([...defaultMessages, ...(response?.data || [])]);
+        const data = response?.data;
+        if (data?.length) {
+          setMessages(data?.reverse());
         }
       }
     );
-  }, [getDefaultMessages, type]);
+  }, []);
 
   useEffect(() => {
     loadMessages();
@@ -94,12 +74,12 @@ export const useMessagesActions = (
         onAdded={() => {
           loadMessages();
           hideModalAndKeyboard();
+          onMessageAdded();
         }}
-        type={type}
       />
     );
     showModal();
-  }, [hideModalAndKeyboard, loadMessages, showModal, type]);
+  }, [hideModalAndKeyboard, loadMessages, onMessageAdded, showModal]);
 
   const removeEmotion = useCallback(
     (id: number) => {
@@ -116,10 +96,6 @@ export const useMessagesActions = (
 
   const onItemLongPress = useCallback(
     (item: EmotionInterface) => {
-      if (item?.isDefault) {
-        return;
-      }
-
       const options = ['Remove message', 'Cancel'];
 
       showActionSheetWithOptions(
@@ -131,7 +107,7 @@ export const useMessagesActions = (
         },
         (selectedIndex: number) => {
           if (selectedIndex === 0) {
-            removeEmotion(item.id);
+            removeEmotion(item?.id);
           }
         }
       );

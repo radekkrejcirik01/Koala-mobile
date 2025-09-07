@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
   container: {
@@ -19,6 +20,7 @@ export const HomeHeaderStyle = StyleSheet.create({
   },
   title: {
     fontSize: 22,
+    color: COLORS.PURPLE,
     fontWeight: 'bold'
   },
   buttonView: {
