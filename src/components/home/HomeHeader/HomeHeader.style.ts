@@ -3,13 +3,13 @@ import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
   container: {
-    paddingTop: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
   title: {
+    marginLeft: 5,
     fontSize: 22,
     color: COLORS.LIGHTGRAY_100,
     fontWeight: '800'
