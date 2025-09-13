@@ -43,10 +43,5 @@ export const ProfileScreenStyle = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 15,
     borderRadius: 10
-  },
-  text: {
-    marginTop: 5,
-    alignSelf: 'center',
-    fontWeight: '600'
   }
 });

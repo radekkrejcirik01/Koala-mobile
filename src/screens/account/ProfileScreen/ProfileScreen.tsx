@@ -22,7 +22,6 @@ import {
 } from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { useTheme } from '@contexts/ThemeContext';
-import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
   const { username, name, profilePhoto } = useSelector(
@@ -130,20 +129,8 @@ export const ProfileScreen = (): React.JSX.Element => {
             { backgroundColor: theme.theme.colors.surface }
           ]}
         >
-          <ProfileItem onPress={share} icon="❤️" title="Share Koala" />
+          <ProfileItem onPress={share} title="Share Koala" />
         </View>
-      </View>
-      <View>
-        <Text
-          style={[ProfileScreenStyle.text, { color: theme.theme.colors.text }]}
-        >
-          Koala
-        </Text>
-        <Text
-          style={[ProfileScreenStyle.text, { color: theme.theme.colors.text }]}
-        >
-          {version}
-        </Text>
       </View>
     </ScrollView>
   );
