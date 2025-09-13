@@ -1,13 +1,13 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@hooks/useNavigation';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { useTheme } from '@contexts/ThemeContext';
 import COLORS from '@constants/COLORS';
 import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
-import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 
