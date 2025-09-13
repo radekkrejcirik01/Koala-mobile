@@ -23,7 +23,7 @@ export const MessagesStyle = StyleSheet.create({
     height: 300,
     width: '43%',
     borderRadius: 20,
-    backgroundColor: '#c8b6ff',
+    backgroundColor: COLORS.PASTEL_PURPLE,
     justifyContent: 'space-between'
   },
   rightViewsContainer: {
@@ -34,13 +34,13 @@ export const MessagesStyle = StyleSheet.create({
     height: 140,
     marginBottom: 20,
     borderRadius: 20,
-    backgroundColor: '#a2d2ff'
+    backgroundColor: COLORS.PASTEL_BLUE
   },
   voiceView: {
     padding: 20,
     height: 140,
     borderRadius: 20,
-    backgroundColor: '#f2cc8f'
+    backgroundColor: COLORS.PASTEL_YELLOW
   },
   emojiView: {
     padding: 7,
@@ -77,7 +77,7 @@ export const MessagesStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   friendsText: {
-    color: COLORS.LIGHTGRAY_200,
+    color: COLORS.LIGHTGRAY_100,
     fontWeight: 'bold'
   },
   profileView: {

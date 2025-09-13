@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const AddButtonStyle = StyleSheet.create({
   text: {
     fontSize: 15,
-    color: COLORS.PURPLE,
+    color: COLORS.BUTTON_BLUE,
     fontWeight: 'bold'
   }
 });

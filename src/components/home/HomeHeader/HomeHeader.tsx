@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { useTheme } from '@contexts/ThemeContext';
 import COLORS from '@constants/COLORS';
@@ -18,16 +18,11 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <View
-        style={[
-          HomeHeaderStyle.titleView,
-          {
-            backgroundColor: theme.isDark
-              ? theme.theme.colors.surface
-              : COLORS.WHITE
-          }
-        ]}
-      >
+      <View style={HomeHeaderStyle.titleView}>
+        <Image
+          style={{ width: 35, height: 35 }}
+          source={require('../../../assets/images/koala.png')}
+        />
         <Text style={HomeHeaderStyle.title}>Koala</Text>
       </View>
       <TouchableOpacity

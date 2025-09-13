@@ -87,7 +87,7 @@ export const MessagesModalScreen = () => {
       <View style={MessagesModalScreenStyle.headerView}>
         <Text style={MessagesModalScreenStyle.title}>Messages</Text>
         <TouchableOpacity hitSlop={10} onPress={onPressAddEmotion}>
-          <Text style={MessagesModalScreenStyle.addText}>Add</Text>
+          <Text style={MessagesModalScreenStyle.addText}>Add +</Text>
         </TouchableOpacity>
       </View>
       <View>

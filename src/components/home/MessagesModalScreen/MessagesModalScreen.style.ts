@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesModalScreenStyle = StyleSheet.create({
   container: {
-    height: '60%',
+    height: '80%',
     paddingTop: 25,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20
@@ -16,17 +16,17 @@ export const MessagesModalScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     color: COLORS.PURPLE,
-    fontWeight: 'bold'
+    fontWeight: '800'
   },
   addText: {
     fontSize: 15,
-    color: COLORS.PURPLE,
+    color: COLORS.LIGHTGRAY_200,
     fontWeight: 'bold'
   },
   tabScrollView: {
-    marginTop: 20,
+    marginTop: 25,
     alignSelf: 'flex-start'
   },
   tabScrollViewContainer: {
@@ -42,7 +42,7 @@ export const MessagesModalScreenStyle = StyleSheet.create({
     fontWeight: 'bold'
   },
   contentScrollView: {
-    marginTop: 10,
+    marginTop: 15,
     paddingTop: 5
   },
   contentButtonView: {
