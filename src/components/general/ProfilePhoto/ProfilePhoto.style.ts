@@ -15,6 +15,6 @@ export const ProfilePhotoStyle = StyleSheet.create({
   },
   acronymText: {
     color: COLORS.WHITE,
-    fontWeight: 'bold'
+    fontWeight: '800'
   }
 });

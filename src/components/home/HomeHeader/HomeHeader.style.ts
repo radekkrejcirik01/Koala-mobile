@@ -3,24 +3,16 @@ import COLORS from '@constants/COLORS';
 
 export const HomeHeaderStyle = StyleSheet.create({
   container: {
-    paddingLeft: 15,
-    paddingRight: 30,
+    paddingTop: 10,
+    paddingHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  titleView: {
-    borderRadius: 2,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   title: {
-    marginLeft: 5,
-    fontSize: 28,
+    fontSize: 22,
     color: COLORS.LIGHTGRAY_100,
-    fontWeight: 'bold'
+    fontWeight: '800'
   },
   buttonView: {
     width: 50,

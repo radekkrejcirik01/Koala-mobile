@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
 import { useTheme } from '@contexts/ThemeContext';
 import COLORS from '@constants/COLORS';
@@ -7,10 +7,17 @@ import { NotificationsButton } from '@components/home/NotificationsButton/Notifi
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { useSelector } from 'react-redux';
+import { ReducerProps } from '@store/index/index.props';
+import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 
 export const HomeHeader = (): JSX.Element => {
   const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+
+  const { name, profilePhoto } = useSelector(
+    (state: ReducerProps) => state.user.user
+  );
 
   const navigateToChats = () => {
     navigateTo(AccountStackNavigatorEnum.NotificationsScreen);
@@ -18,13 +25,8 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <View style={HomeHeaderStyle.titleView}>
-        <Image
-          style={{ width: 35, height: 35 }}
-          source={require('../../../assets/images/koala.png')}
-        />
-        <Text style={HomeHeaderStyle.title}>Koala</Text>
-      </View>
+      <ProfilePhoto name={name} photo={profilePhoto} size={45} />
+      <Text style={HomeHeaderStyle.title}>Koala</Text>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={navigateToChats}

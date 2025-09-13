@@ -25,7 +25,7 @@ export const HomeScreen = (): React.JSX.Element => {
   });
 
   return (
-    <View style={[HomeScreenStyle.container, { marginTop: top + 10 }]}>
+    <View style={[HomeScreenStyle.container, { marginTop: top || 10 }]}>
       <HomeHeader />
       <Messages />
     </View>
