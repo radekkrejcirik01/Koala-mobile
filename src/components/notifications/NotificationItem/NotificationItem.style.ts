@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const NotificationItemStyle = StyleSheet.create({
   container: {
-    marginVertical: 14,
+    marginVertical: 12,
     marginLeft: 10
   },
   profileView: {

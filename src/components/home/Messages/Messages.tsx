@@ -12,6 +12,33 @@ import COLORS from '@constants/COLORS';
 import { useTheme } from '@contexts/ThemeContext';
 import { MessagesModalScreen } from '@components/home/MessagesModalScreen/MessagesModalScreen';
 
+const BottomButton = ({
+  text,
+  onPress
+}: {
+  text: string;
+  onPress: () => void;
+}) => {
+  const theme = useTheme();
+
+  return (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={onPress}
+      style={[
+        MessagesStyle.bottomButtonView,
+        {
+          backgroundColor: theme.isDark
+            ? theme.theme.colors.surface
+            : COLORS.WHITE
+        }
+      ]}
+    >
+      <Text style={MessagesStyle.bottomButtonText}>{text}</Text>
+    </TouchableOpacity>
+  );
+};
+
 export const Messages = (): JSX.Element => {
   const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
@@ -48,7 +75,7 @@ export const Messages = (): JSX.Element => {
     showModal();
   };
 
-  const navigateToProfile = () => {
+  const onPressProfile = () => {
     navigateTo(AccountStackNavigatorEnum.ProfileScreen);
   };
 
@@ -105,34 +132,8 @@ export const Messages = (): JSX.Element => {
         </View>
       </View>
       <View style={MessagesStyle.footerContainer}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={onPressFriends}
-          style={[
-            MessagesStyle.friendsView,
-            {
-              backgroundColor: theme.isDark
-                ? theme.theme.colors.surface
-                : COLORS.WHITE
-            }
-          ]}
-        >
-          <Text style={MessagesStyle.friendsText}>🔎 Friends</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={navigateToProfile}
-          style={[
-            MessagesStyle.profileView,
-            {
-              backgroundColor: theme.isDark
-                ? theme.theme.colors.surface
-                : COLORS.WHITE
-            }
-          ]}
-        >
-          <Text style={MessagesStyle.profileText}>🙆</Text>
-        </TouchableOpacity>
+        <BottomButton text="🔎 Friends" onPress={onPressFriends} />
+        <BottomButton text="🙆 Profile" onPress={onPressProfile} />
       </View>
       <Modal
         isVisible={modalVisible}

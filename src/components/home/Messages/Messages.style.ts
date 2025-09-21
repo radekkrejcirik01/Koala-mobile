@@ -59,12 +59,12 @@ export const MessagesStyle = StyleSheet.create({
     fontWeight: '600'
   },
   footerContainer: {
-    paddingTop: 30,
+    paddingTop: 15,
     paddingHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  friendsView: {
+  bottomButtonView: {
     width: 100,
     height: 50,
     borderRadius: 50,
@@ -76,26 +76,9 @@ export const MessagesStyle = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84
   },
-  friendsText: {
+  bottomButtonText: {
     color: COLORS.LIGHTGRAY_100,
     fontWeight: 'bold'
-  },
-  profileView: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84
-  },
-  profileText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: COLORS.BLACK
   },
   modal: {
     margin: 0,

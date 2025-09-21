@@ -25,7 +25,7 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <ProfilePhoto name={name} photo={profilePhoto} size={45} />
+      <ProfilePhoto name={name} photo={profilePhoto} size={50} />
       <Text style={HomeHeaderStyle.title}>Koala</Text>
       <TouchableOpacity
         activeOpacity={0.8}

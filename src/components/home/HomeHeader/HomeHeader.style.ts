@@ -15,8 +15,8 @@ export const HomeHeaderStyle = StyleSheet.create({
     fontWeight: '800'
   },
   buttonView: {
-    width: 50,
-    height: 50,
+    width: 55,
+    height: 55,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
