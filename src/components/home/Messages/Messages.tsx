@@ -10,7 +10,6 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import COLORS from '@constants/COLORS';
 import { useTheme } from '@contexts/ThemeContext';
-import { MessagesModalScreen } from '@components/home/MessagesModalScreen/MessagesModalScreen';
 
 const BottomButton = ({
   text,
@@ -46,10 +45,9 @@ export const Messages = (): JSX.Element => {
 
   const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
-  const onPressMessages = useCallback(() => {
-    setModalContent(<MessagesModalScreen />);
-    showModal();
-  }, [showModal]);
+  const onPressMessages = () => {
+    navigateTo(AccountStackNavigatorEnum.MessagesStartScreen);
+  };
 
   const onPressShare = useCallback(() => {
     setModalContent(

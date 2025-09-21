@@ -1,5 +1,8 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator
+} from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/native';
 import {
   NavigatorScreenOptions,
@@ -17,6 +20,7 @@ import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/Chan
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
+import { MessagesStartScreen } from '@screens/account/MessagesStartScreen/MessagesStartScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -44,6 +48,14 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       name={AccountStackNavigatorEnum.HomeScreen}
       component={HomeScreen}
       options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.MessagesStartScreen}
+      component={MessagesStartScreen}
+      options={{
+        ...NoHeader,
+        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS
+      }}
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.NotificationsScreen}

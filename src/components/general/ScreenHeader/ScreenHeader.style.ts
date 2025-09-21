@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const ScreenHeaderStyle = StyleSheet.create({
   container: {
@@ -12,6 +13,10 @@ export const ScreenHeaderStyle = StyleSheet.create({
   },
   titleText: {
     fontSize: 18,
+    fontWeight: 'bold'
+  },
+  closeText: {
+    color: COLORS.LIGHTGRAY_200,
     fontWeight: 'bold'
   }
 });

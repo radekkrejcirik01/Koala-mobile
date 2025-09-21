@@ -4,8 +4,5 @@ export interface ScreenHeaderProps {
   title: string;
   rightComponent?: JSX.Element;
   goBack?: boolean;
+  close?: boolean;
 }
-
-export const ScreenHeaderDefaultProps: Omit<ScreenHeaderProps, 'title'> = {
-  rightComponent: null
-};
