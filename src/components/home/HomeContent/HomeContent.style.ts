@@ -1,9 +1,12 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const HomeContentStyle = StyleSheet.create({
   container: {
-    paddingTop: Dimensions.get('screen').height / 3
+    paddingBottom: '10%'
+  },
+  helperView: {
+    height: 200
   },
   itemsContainer: {
     paddingHorizontal: 10,

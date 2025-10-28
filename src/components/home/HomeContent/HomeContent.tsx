@@ -96,47 +96,47 @@ export const HomeContent = (): JSX.Element => {
   }, [hideModal]);
 
   return (
-    <ScrollView
-      keyboardShouldPersistTaps="always"
-      style={HomeContentStyle.container}
-    >
-      <View style={HomeContentStyle.itemsContainer}>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={onPressMessages}
-          style={HomeContentStyle.messagesView}
-        >
-          <View>
-            <View style={HomeContentStyle.emojiView}>
-              <Text style={HomeContentStyle.emojiText}>📚</Text>
+    <View style={HomeContentStyle.container}>
+      <ScrollView>
+        <View style={HomeContentStyle.helperView} />
+        <View style={HomeContentStyle.itemsContainer}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onPressMessages}
+            style={HomeContentStyle.messagesView}
+          >
+            <View>
+              <View style={HomeContentStyle.emojiView}>
+                <Text style={HomeContentStyle.emojiText}>📚</Text>
+              </View>
+              <Text style={HomeContentStyle.viewText}>Messages</Text>
             </View>
-            <Text style={HomeContentStyle.viewText}>Messages</Text>
+            <Text>Add messages for sharing</Text>
+          </TouchableOpacity>
+          <View style={HomeContentStyle.rightViewsContainer}>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={onPressShare}
+              style={HomeContentStyle.directView}
+            >
+              <View style={HomeContentStyle.emojiView}>
+                <Text style={HomeContentStyle.emojiText}>💬</Text>
+              </View>
+              <Text style={HomeContentStyle.viewText}>Share</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={onPressVoice}
+              style={HomeContentStyle.voiceView}
+            >
+              <View style={HomeContentStyle.emojiView}>
+                <Text style={HomeContentStyle.emojiText}>🎤</Text>
+              </View>
+              <Text style={HomeContentStyle.viewText}>Voice</Text>
+            </TouchableOpacity>
           </View>
-          <Text>Add messages for sharing</Text>
-        </TouchableOpacity>
-        <View style={HomeContentStyle.rightViewsContainer}>
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={onPressShare}
-            style={HomeContentStyle.directView}
-          >
-            <View style={HomeContentStyle.emojiView}>
-              <Text style={HomeContentStyle.emojiText}>💬</Text>
-            </View>
-            <Text style={HomeContentStyle.viewText}>Share</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={onPressVoice}
-            style={HomeContentStyle.voiceView}
-          >
-            <View style={HomeContentStyle.emojiView}>
-              <Text style={HomeContentStyle.emojiText}>🎤</Text>
-            </View>
-            <Text style={HomeContentStyle.viewText}>Voice</Text>
-          </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
       <View style={HomeContentStyle.footerContainer}>
         <BottomButton text="🔎 Friends" onPress={onPressFriends} />
         <BottomButton text="🙆 Profile" onPress={onPressProfile} />
@@ -147,6 +147,6 @@ export const HomeContent = (): JSX.Element => {
         onClose={hideModalAndKeyboard}
         style={HomeContentStyle.modal}
       />
-    </ScrollView>
+    </View>
   );
 };
