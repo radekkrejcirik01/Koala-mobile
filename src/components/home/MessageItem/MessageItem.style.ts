@@ -1,26 +1,13 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const MessageItemStyle = StyleSheet.create({
   buttonView: {
-    paddingVertical: 15,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  numberText: {
-    fontSize: 16,
-    color: COLORS.LIGHTGRAY_100,
-    fontWeight: '500'
+    padding: 15,
+    flexDirection: 'row'
   },
   messageText: {
-    width: '82%',
+    flex: 1,
     fontSize: 16,
-    fontWeight: '500'
-  },
-  emojiText: {
-    fontSize: 16,
-    color: COLORS.BLACK,
     fontWeight: '500'
   }
 });

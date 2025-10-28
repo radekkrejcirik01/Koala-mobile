@@ -20,6 +20,11 @@ export const ScreenHeader = ({
     <View style={ScreenHeaderStyle.container}>
       <View style={ScreenHeaderStyle.flex}>
         {goBack && !close && <BackButton />}
+        {close && (
+          <TouchableOpacity activeOpacity={0.7} onPress={navigateBack}>
+            <Text style={ScreenHeaderStyle.closeText}>Close</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <Text
         style={[
@@ -30,13 +35,7 @@ export const ScreenHeader = ({
         {title}
       </Text>
       <View style={[ScreenHeaderStyle.flex, { alignItems: 'flex-end' }]}>
-        {close ? (
-          <TouchableOpacity activeOpacity={0.7} onPress={navigateBack}>
-            <Text style={ScreenHeaderStyle.closeText}>Close</Text>
-          </TouchableOpacity>
-        ) : (
-          rightComponent
-        )}
+        {rightComponent}
       </View>
     </View>
   );

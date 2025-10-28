@@ -6,13 +6,10 @@ import { useTheme } from '@contexts/ThemeContext';
 
 export const MessageItem = ({
   item,
-  index,
   onPressMessage,
   onItemLongPress
 }: MessageItemProps): JSX.Element => {
   const theme = useTheme();
-
-  const messageNumber = index + 1;
 
   return (
     <TouchableOpacity
@@ -25,7 +22,6 @@ export const MessageItem = ({
         { borderColor: theme.isDark ? '#ffffff30' : '#00000030' }
       ]}
     >
-      <Text style={MessageItemStyle.numberText}>{messageNumber}</Text>
       <Text
         style={[
           MessageItemStyle.messageText,
@@ -35,7 +31,6 @@ export const MessageItem = ({
       >
         {item.message}
       </Text>
-      <Text style={MessageItemStyle.emojiText}>💬</Text>
     </TouchableOpacity>
   );
 };

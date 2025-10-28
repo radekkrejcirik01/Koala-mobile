@@ -102,7 +102,7 @@ export const HomeContent = (): JSX.Element => {
             </View>
             <Text style={HomeContentStyle.viewText}>Messages</Text>
           </View>
-          <Text>Add your own or use ours</Text>
+          <Text>Add messages for sharing</Text>
         </TouchableOpacity>
         <View style={HomeContentStyle.rightViewsContainer}>
           <TouchableOpacity

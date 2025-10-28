@@ -1,25 +1,63 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { MessagesScreenStyle } from '@screens/account/MessagesScreen/MessagesScreen.style';
+import { useMessagesActions } from '@hooks/useMessagesActions';
+import { AddButton } from '@components/general/AddButton/AddButton';
+import { Modal } from '@components/general/Modal/Modal';
+import { MessageItem } from '@components/home/MessageItem/MessageItem';
 
 export const MessagesScreen = () => {
   const { top } = useSafeAreaInsets();
 
+  const {
+    messages,
+    modalScreen,
+    modalVisible,
+    onPressMessage,
+    onPressAddEmotion,
+    onItemLongPress,
+    hideModalAndKeyboard
+  } = useMessagesActions(() => {});
+
+  const renderContent = () => {
+    if (!messages?.length) {
+      return (
+        <Text style={MessagesScreenStyle.emptyText}>
+          Here you can add your own messages and share them easily when you need
+          ✨
+        </Text>
+      );
+    }
+
+    return (
+      <View style={{ paddingTop: 20 }}>
+        {messages?.map((message, index) => (
+          <MessageItem
+            item={message}
+            onPressMessage={() => onPressMessage(message)}
+            onItemLongPress={() => onItemLongPress(message)}
+          />
+        ))}
+      </View>
+    );
+  };
+
   return (
     <View style={[MessagesScreenStyle.container, { paddingTop: top }]}>
-      <ScreenHeader title="New message" close />
-      <Text style={MessagesScreenStyle.title}>
-        {`Can't find the right words? Let us help you find them.`}
-      </Text>
-
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={MessagesScreenStyle.buttonView}
-      >
-        <Text style={MessagesScreenStyle.buttonText}>Start</Text>
-      </TouchableOpacity>
+      <ScreenHeader
+        title="Messages"
+        close
+        rightComponent={<AddButton onPress={onPressAddEmotion} />}
+      />
+      {renderContent()}
+      <Modal
+        isVisible={modalVisible}
+        content={modalScreen}
+        onClose={hideModalAndKeyboard}
+        style={MessagesScreenStyle.modal}
+      />
     </View>
   );
 };
