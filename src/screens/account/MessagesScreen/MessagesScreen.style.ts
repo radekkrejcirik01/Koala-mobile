@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const MessagesStartScreenStyle = StyleSheet.create({
+export const MessagesScreenStyle = StyleSheet.create({
   container: {
     flex: 1
   },

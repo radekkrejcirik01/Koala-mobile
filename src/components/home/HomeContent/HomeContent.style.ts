@@ -1,14 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const MessagesStyle = StyleSheet.create({
+export const HomeContentStyle = StyleSheet.create({
   container: {
-    marginBottom: 60
-  },
-  title: {
-    fontSize: 28,
-    alignSelf: 'center',
-    fontWeight: 'bold'
+    paddingTop: Dimensions.get('screen').height / 3
   },
   itemsContainer: {
     paddingHorizontal: 10,

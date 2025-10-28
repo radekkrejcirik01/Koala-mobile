@@ -6,7 +6,6 @@ export const NotificationsScreenStyle = StyleSheet.create({
     flex: 1
   },
   listContainer: {
-    paddingTop: 10,
     paddingBottom: 50,
     paddingHorizontal: 15
   },

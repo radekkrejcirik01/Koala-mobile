@@ -32,13 +32,5 @@ export const ChatHeaderStyle = StyleSheet.create({
   usernameText: {
     fontSize: 12,
     color: COLORS.GRAY_200
-  },
-  sharedButtonView: {
-    marginRight: 5,
-    marginBottom: 5
-  },
-  chatEmoji: {
-    fontSize: 20,
-    color: COLORS.BLACK
   }
 });

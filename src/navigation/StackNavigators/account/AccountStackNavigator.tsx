@@ -20,7 +20,7 @@ import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/Chan
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
-import { MessagesStartScreen } from '@screens/account/MessagesStartScreen/MessagesStartScreen';
+import { MessagesScreen } from '@screens/account/MessagesScreen/MessagesScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -50,8 +50,8 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       options={NoHeader}
     />
     <Account.Screen
-      name={AccountStackNavigatorEnum.MessagesStartScreen}
-      component={MessagesStartScreen}
+      name={AccountStackNavigatorEnum.MessagesScreen}
+      component={MessagesScreen}
       options={{
         ...NoHeader,
         cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS

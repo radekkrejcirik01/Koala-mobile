@@ -1,11 +1,18 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Alert, Keyboard, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
-import { MessagesStyle } from '@components/home/Messages/Messages.style';
+import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import COLORS from '@constants/COLORS';
@@ -25,7 +32,7 @@ const BottomButton = ({
       activeOpacity={0.8}
       onPress={onPress}
       style={[
-        MessagesStyle.bottomButtonView,
+        HomeContentStyle.bottomButtonView,
         {
           backgroundColor: theme.isDark
             ? theme.theme.colors.surface
@@ -33,20 +40,19 @@ const BottomButton = ({
         }
       ]}
     >
-      <Text style={MessagesStyle.bottomButtonText}>{text}</Text>
+      <Text style={HomeContentStyle.bottomButtonText}>{text}</Text>
     </TouchableOpacity>
   );
 };
 
-export const Messages = (): JSX.Element => {
-  const theme = useTheme();
+export const HomeContent = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
   const { modalVisible, showModal, hideModal } = useModal();
 
   const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
   const onPressMessages = () => {
-    navigateTo(AccountStackNavigatorEnum.MessagesStartScreen);
+    navigateTo(AccountStackNavigatorEnum.MessagesScreen);
   };
 
   const onPressShare = useCallback(() => {
@@ -83,53 +89,45 @@ export const Messages = (): JSX.Element => {
   }, [hideModal]);
 
   return (
-    <View style={MessagesStyle.container}>
-      <Text
-        style={[
-          MessagesStyle.title,
-          { color: theme.isDark ? COLORS.WHITE : COLORS.LIGHTGRAY_100 }
-        ]}
-      >
-        Start a chat
-      </Text>
-      <View style={MessagesStyle.itemsContainer}>
+    <ScrollView style={HomeContentStyle.container}>
+      <View style={HomeContentStyle.itemsContainer}>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={onPressMessages}
-          style={MessagesStyle.messagesView}
+          style={HomeContentStyle.messagesView}
         >
           <View>
-            <View style={MessagesStyle.emojiView}>
-              <Text style={MessagesStyle.emojiText}>📚</Text>
+            <View style={HomeContentStyle.emojiView}>
+              <Text style={HomeContentStyle.emojiText}>📚</Text>
             </View>
-            <Text style={MessagesStyle.viewText}>Messages</Text>
+            <Text style={HomeContentStyle.viewText}>Messages</Text>
           </View>
           <Text>Add your own or use ours</Text>
         </TouchableOpacity>
-        <View style={MessagesStyle.rightViewsContainer}>
+        <View style={HomeContentStyle.rightViewsContainer}>
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={onPressShare}
-            style={MessagesStyle.directView}
+            style={HomeContentStyle.directView}
           >
-            <View style={MessagesStyle.emojiView}>
-              <Text style={MessagesStyle.emojiText}>💬</Text>
+            <View style={HomeContentStyle.emojiView}>
+              <Text style={HomeContentStyle.emojiText}>💬</Text>
             </View>
-            <Text style={MessagesStyle.viewText}>Share</Text>
+            <Text style={HomeContentStyle.viewText}>Share</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={onPressVoice}
-            style={MessagesStyle.voiceView}
+            style={HomeContentStyle.voiceView}
           >
-            <View style={MessagesStyle.emojiView}>
-              <Text style={MessagesStyle.emojiText}>🎤</Text>
+            <View style={HomeContentStyle.emojiView}>
+              <Text style={HomeContentStyle.emojiText}>🎤</Text>
             </View>
-            <Text style={MessagesStyle.viewText}>Voice</Text>
+            <Text style={HomeContentStyle.viewText}>Voice</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={MessagesStyle.footerContainer}>
+      <View style={HomeContentStyle.footerContainer}>
         <BottomButton text="🔎 Friends" onPress={onPressFriends} />
         <BottomButton text="🙆 Profile" onPress={onPressProfile} />
       </View>
@@ -137,8 +135,8 @@ export const Messages = (): JSX.Element => {
         isVisible={modalVisible}
         content={modalContent}
         onClose={hideModalAndKeyboard}
-        style={MessagesStyle.modal}
+        style={HomeContentStyle.modal}
       />
-    </View>
+    </ScrollView>
   );
 };
