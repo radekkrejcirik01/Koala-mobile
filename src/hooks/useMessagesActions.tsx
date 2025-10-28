@@ -20,20 +20,22 @@ export const useMessagesActions = (): {
   onPressAddEmotion: () => void;
   onItemLongPress: (item: EmotionInterface) => void;
   hideModalAndKeyboard: () => void;
+  isLoading: boolean;
 } => {
   const { showActionSheetWithOptions } = useActionSheet();
   const { modalVisible, showModal, hideModal } = useModal();
 
   const [messages, setMessages] = useState<EmotionInterface[]>([]);
   const [modalScreen, setModalScreen] = useState<JSX.Element>(<></>);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loadMessages = useCallback(() => {
+    setIsLoading(true);
     getRequest<ResponseEmotionsGetInterface>('/emotions').subscribe(
       (response: ResponseEmotionsGetInterface) => {
         const data = response?.data;
-        if (data?.length) {
-          setMessages(data?.reverse());
-        }
+        setMessages(data?.length ? data?.reverse() : []);
+        setIsLoading(false);
       }
     );
   }, []);
@@ -119,6 +121,7 @@ export const useMessagesActions = (): {
     onPressMessage,
     onPressAddEmotion,
     onItemLongPress,
-    hideModalAndKeyboard
+    hideModalAndKeyboard,
+    isLoading
   };
 };

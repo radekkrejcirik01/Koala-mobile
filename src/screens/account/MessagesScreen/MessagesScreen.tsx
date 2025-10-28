@@ -18,10 +18,14 @@ export const MessagesScreen = () => {
     onPressMessage,
     onPressAddEmotion,
     onItemLongPress,
-    hideModalAndKeyboard
+    hideModalAndKeyboard,
+    isLoading
   } = useMessagesActions();
 
   const renderContent = () => {
+    if (isLoading) {
+      return null;
+    }
     if (!messages?.length) {
       return (
         <Text style={MessagesScreenStyle.emptyText}>
