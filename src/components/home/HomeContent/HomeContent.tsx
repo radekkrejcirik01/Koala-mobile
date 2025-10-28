@@ -89,7 +89,10 @@ export const HomeContent = (): JSX.Element => {
   }, [hideModal]);
 
   return (
-    <ScrollView style={HomeContentStyle.container}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={HomeContentStyle.container}
+    >
       <View style={HomeContentStyle.itemsContainer}>
         <TouchableOpacity
           activeOpacity={0.9}

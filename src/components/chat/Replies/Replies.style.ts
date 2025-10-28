@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const RepliesStyle = StyleSheet.create({
   container: {
-    paddingHorizontal: 50,
+    paddingHorizontal: 20,
     paddingBottom: 25,
     justifyContent: 'center',
     flexDirection: 'row',

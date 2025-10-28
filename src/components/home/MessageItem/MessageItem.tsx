@@ -17,10 +17,7 @@ export const MessageItem = ({
       onPress={onPressMessage}
       onLongPress={onItemLongPress}
       delayLongPress={150}
-      style={[
-        MessageItemStyle.buttonView,
-        { borderColor: theme.isDark ? '#ffffff30' : '#00000030' }
-      ]}
+      style={MessageItemStyle.buttonView}
     >
       <Text
         style={[

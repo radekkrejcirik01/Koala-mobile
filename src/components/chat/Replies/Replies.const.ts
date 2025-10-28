@@ -18,17 +18,7 @@ export const REPLIES: ReplyInterface[] = [
   },
   {
     id: 4,
-    message: 'What happened?',
-    isDefault: true
-  },
-  {
-    id: 5,
-    message: 'Can I do something?',
-    isDefault: true
-  },
-  {
-    id: 6,
-    message: '😞',
+    message: 'You are doing amazing 😘',
     isDefault: true
   }
 ];

@@ -54,7 +54,8 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       component={MessagesScreen}
       options={{
         ...NoHeader,
-        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS
+        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        gestureEnabled: false
       }}
     />
     <Account.Screen

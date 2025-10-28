@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const MessageItemStyle = StyleSheet.create({
   buttonView: {
-    padding: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 18,
     flexDirection: 'row'
   },
   messageText: {

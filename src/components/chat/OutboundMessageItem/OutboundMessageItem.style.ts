@@ -31,9 +31,8 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     fontWeight: '500'
   },
   messageText: {
-    fontSize: 14.5,
-    color: COLORS.WHITE,
-    fontWeight: '500'
+    fontSize: 15.5,
+    color: COLORS.WHITE
   },
   largeText: {
     fontSize: 35

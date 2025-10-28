@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { MessagesScreenStyle } from '@screens/account/MessagesScreen/MessagesScreen.style';
@@ -32,15 +32,16 @@ export const MessagesScreen = () => {
     }
 
     return (
-      <View style={MessagesScreenStyle.contentContainer}>
+      <ScrollView style={MessagesScreenStyle.contentContainer}>
         {messages?.map((message) => (
           <MessageItem
+            key={message.id}
             item={message}
             onPressMessage={() => onPressMessage(message)}
             onItemLongPress={() => onItemLongPress(message)}
           />
         ))}
-      </View>
+      </ScrollView>
     );
   };
 
