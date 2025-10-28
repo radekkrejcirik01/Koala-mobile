@@ -12,9 +12,7 @@ import { SendModalScreen } from '@components/home/SendModalScreen/SendModalScree
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { AddEmotionModalScreen } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen';
 
-export const useMessagesActions = (
-  onMessageAdded: () => void
-): {
+export const useMessagesActions = (): {
   messages: EmotionInterface[];
   modalScreen: JSX.Element;
   modalVisible: boolean;
@@ -74,12 +72,11 @@ export const useMessagesActions = (
         onAdded={() => {
           loadMessages();
           hideModalAndKeyboard();
-          onMessageAdded();
         }}
       />
     );
     showModal();
-  }, [hideModalAndKeyboard, loadMessages, onMessageAdded, showModal]);
+  }, [hideModalAndKeyboard, loadMessages, showModal]);
 
   const removeEmotion = useCallback(
     (id: number) => {

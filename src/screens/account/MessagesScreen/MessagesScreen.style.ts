@@ -10,9 +10,12 @@ export const MessagesScreenStyle = StyleSheet.create({
     paddingHorizontal: 60,
     fontSize: 16,
     color: COLORS.PURPLE,
+    fontWeight: '600',
     alignSelf: 'center',
-    textAlign: 'center',
-    fontWeight: '600'
+    textAlign: 'center'
+  },
+  contentContainer: {
+    paddingTop: 20
   },
   modal: {
     margin: 0,

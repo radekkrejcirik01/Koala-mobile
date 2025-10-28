@@ -19,7 +19,7 @@ export const MessagesScreen = () => {
     onPressAddEmotion,
     onItemLongPress,
     hideModalAndKeyboard
-  } = useMessagesActions(() => {});
+  } = useMessagesActions();
 
   const renderContent = () => {
     if (!messages?.length) {
@@ -32,8 +32,8 @@ export const MessagesScreen = () => {
     }
 
     return (
-      <View style={{ paddingTop: 20 }}>
-        {messages?.map((message, index) => (
+      <View style={MessagesScreenStyle.contentContainer}>
+        {messages?.map((message) => (
           <MessageItem
             item={message}
             onPressMessage={() => onPressMessage(message)}
