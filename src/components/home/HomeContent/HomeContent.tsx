@@ -40,7 +40,14 @@ const BottomButton = ({
         }
       ]}
     >
-      <Text style={HomeContentStyle.bottomButtonText}>{text}</Text>
+      <Text
+        style={[
+          HomeContentStyle.bottomButtonText,
+          { color: theme.theme.colors.text }
+        ]}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 };

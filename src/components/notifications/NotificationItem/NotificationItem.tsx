@@ -7,6 +7,7 @@ import { NotificationItemProps } from '@components/notifications/NotificationIte
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
 import { useTheme } from '@contexts/ThemeContext';
+import COLORS from '@constants/COLORS';
 
 export const NotificationItem = ({
   item,
@@ -63,7 +64,7 @@ export const NotificationItem = ({
             <Text
               style={[
                 NotificationItemStyle.titleText,
-                { color: theme.theme.colors.text }
+                { color: isUnseen ? theme.theme.colors.text : COLORS.GRAY_200 }
               ]}
             >
               {item.name}

@@ -72,8 +72,7 @@ export const HomeContentStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   bottomButtonText: {
-    color: COLORS.LIGHTGRAY_100,
-    fontWeight: 'bold'
+    fontWeight: '600'
   },
   modal: {
     margin: 0,
