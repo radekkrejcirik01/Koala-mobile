@@ -28,8 +28,5 @@ export const RepliesStyle = StyleSheet.create({
   },
   addText: {
     color: COLORS.PURPLE
-  },
-  activityIndicator: {
-    marginBottom: 100
   }
 });

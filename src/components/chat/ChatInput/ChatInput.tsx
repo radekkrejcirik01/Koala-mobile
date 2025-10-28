@@ -37,6 +37,7 @@ export const ChatInput = ({
 
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [record, setRecord] = useState<string>();
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const startRecording = useCallback(async () => {
     await checkAndroidRecordingPermission();
@@ -113,7 +114,7 @@ export const ChatInput = ({
           </Text>
         </View>
       )}
-      {showReplies && <Replies onPressReply={onPressReply} />}
+      {showReplies && !isFocused && <Replies onPressReply={onPressReply} />}
       <View
         style={[
           ChatInputStyle.inputContainer,
@@ -149,7 +150,11 @@ export const ChatInput = ({
               ref={inputRef}
               autoCorrect={false}
               multiline
-              onFocus={onFocus}
+              onFocus={() => {
+                setIsFocused(true);
+                onFocus();
+              }}
+              onBlur={() => setIsFocused(false)}
               value={message}
               onChangeText={onChangeText}
               selectionColor={COLORS.PURPLE}

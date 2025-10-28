@@ -1,12 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { usePrompt } from '@hooks/usePrompt';
 import {
@@ -37,13 +30,10 @@ export const Replies = ({ onPressReply }: RepliesProps) => {
   const theme = useTheme();
 
   const [replies, setReplies] = useState<ReplyInterface[]>([]);
-  const [loaded, setLoad] = useState<boolean>(false);
 
   const getReplies = useCallback(() => {
     getRequest<ResponseRepliesGetInterface>(`replies/${userId}`).subscribe(
       (response: ResponseRepliesGetInterface) => {
-        setLoad(true);
-
         if (response?.status && !!response?.data?.length) {
           setReplies([...REPLIES, ...response?.data]);
         } else {
@@ -99,15 +89,6 @@ export const Replies = ({ onPressReply }: RepliesProps) => {
     },
     [getReplies]
   );
-
-  if (!loaded) {
-    return (
-      <ActivityIndicator
-        color={COLORS.BUTTON_BLUE}
-        style={RepliesStyle.activityIndicator}
-      />
-    );
-  }
 
   return (
     <ScrollView
