@@ -26,9 +26,7 @@ export const HomeHeader = (): JSX.Element => {
   return (
     <View style={HomeHeaderStyle.container}>
       <ProfilePhoto name={name} photo={profilePhoto} size={48} />
-      <Text style={[HomeHeaderStyle.title, { color: theme.theme.colors.text }]}>
-        Koala
-      </Text>
+      <Text style={HomeHeaderStyle.title}>Start a new chat</Text>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={navigateToChats}
