@@ -35,6 +35,7 @@
       "@contexts/*": ["./src/contexts/*"]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["src", "src/custom.d.ts"]
+  "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"]
 }
