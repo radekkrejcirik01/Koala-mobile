@@ -2466,7 +2466,7 @@ PODS:
     - SocketRocket
   - RNAudioRecorderPlayer (3.6.14):
     - React-Core
-  - RNBootSplash (5.5.3):
+  - RNBootSplash (6.3.11):
     - boost
     - DoubleConversion
     - fast_float
@@ -3432,7 +3432,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 6c26f8c25d0b5ae66f86a1cce1777076ac8bcbd8
   ReactCommon: 5f0e5c09a64a2717215dd84380e1a747810406f2
   RNAudioRecorderPlayer: b5ed41ccfe72a211a870bfe09ab36c046eb27d2a
-  RNBootSplash: 4da78adaaa3178360645fcfeee3df6e399ff56f8
+  RNBootSplash: 98a34471966945e8dacd1da8f0c2f87cbc2e2df7
   RNCAsyncStorage: 29f0230e1a25f36c20b05f65e2eb8958d6526e82
   RNCClipboard: 4b58c780f63676367640f23c8e114e9bd0cf86ac
   RNCPushNotificationIOS: 6c4ca3388c7434e4a662b92e4dfeeee858e6f440
