@@ -67,6 +67,7 @@
     "@react-native-community/cli": "^20.0.2",
     "@react-native-community/eslint-config": "^2.0.0",
     "@react-native/babel-preset": "0.81.5",
+    "@react-native/metro-config": "^0.82.1",
     "@react-native/typescript-config": "0.81.5",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.67.3",
