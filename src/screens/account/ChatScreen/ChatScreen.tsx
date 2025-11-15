@@ -61,7 +61,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   // Return true when first messages is inbound and number of inbound messages is 1
   const checkShowReplies = useCallback(
     (data: ConversationInterface[]) => {
-      if (data[0]?.senderId === userId) {
+      if (data[data?.length - 1]?.senderId === userId) {
         return false;
       }
 
