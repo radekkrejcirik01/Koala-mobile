@@ -3,7 +3,4 @@ export interface OutboundMessageItemProps {
   onLongPress: () => void;
   replyMessage: string;
   audioMessage: string;
-  isFirst: boolean;
-  isLast: boolean;
-  isSending: boolean;
 }

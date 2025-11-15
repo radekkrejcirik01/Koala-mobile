@@ -36,19 +36,5 @@ export const OutboundMessageItemStyle = StyleSheet.create({
   },
   largeText: {
     fontSize: 35
-  },
-  sendingText: {
-    margin: 2,
-    fontSize: 12,
-    color: COLORS.LIGHTGRAY_100,
-    alignSelf: 'flex-end',
-    fontWeight: '500'
-  },
-  deliveredText: {
-    margin: 2,
-    fontSize: 12,
-    color: COLORS.LIGHTGRAY_100,
-    alignSelf: 'flex-end',
-    fontWeight: '600'
   }
 });

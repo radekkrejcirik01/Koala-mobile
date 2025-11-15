@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
-import { ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props';
-import { InboundMessageItem } from '@components/chat/InboundMessageItem/InboundMessageItem';
-import { OutboundMessageItem } from '@components/chat/OutboundMessageItem/OutboundMessageItem';
-import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
+import { OutboundMessageItem } from '@components/chat/OutboundMessageItem/OutboundMessageItem';
+import { InboundMessageItem } from '@components/chat/InboundMessageItem/InboundMessageItem';
+import { FlashList } from '@shopify/flash-list';
+import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 
 export const ChatList = ({
-  scrollViewRef,
+  listRef,
   conversation,
   onMessageLongPress
 }: ChatListProps): React.JSX.Element => {
@@ -20,21 +20,21 @@ export const ChatList = ({
   );
 
   return (
-    <ScrollView
-      ref={scrollViewRef}
+    <FlashList
+      ref={listRef}
+      inverted
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={ChatListStyle.container}
-    >
-      {conversation?.map((value, index) =>
+      data={conversation}
+      keyboardDismissMode="on-drag"
+      estimatedItemSize={100}
+      contentContainerStyle={ChatListStyle.scrollViewContainer}
+      renderItem={({ item: value }) =>
         isOutbound(value.senderId) ? (
           <OutboundMessageItem
             onLongPress={() => onMessageLongPress(value)}
             key={value.id}
             replyMessage={value?.replyMessage}
             audioMessage={value?.audioMessage}
-            isFirst={value?.senderId !== conversation[index - 1]?.senderId}
-            isLast={index === conversation?.length - 1}
-            isSending={value?.isSending}
           >
             {value.message}
           </OutboundMessageItem>
@@ -44,12 +44,11 @@ export const ChatList = ({
             onLongPress={() => onMessageLongPress(value)}
             replyMessage={value?.replyMessage}
             audioMessage={value?.audioMessage}
-            isFirst={value?.senderId !== conversation[index - 1]?.senderId}
           >
             {value.message}
           </InboundMessageItem>
         )
-      )}
-    </ScrollView>
+      }
+    />
   );
 };

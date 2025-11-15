@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, Dimensions, KeyboardAvoidingView, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
@@ -31,6 +31,8 @@ import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { getMessageTime } from '@functions/getMessageTime';
 import { getShortMessage } from '@functions/getShortMessage';
 
+const CHAT_HEADER_HEIGHT = 45;
+
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const { id, chatUserId, name, profilePhoto, username, conversationId } =
     route.params;
@@ -46,12 +48,12 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const [audioRecord, setAudioRecord] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean>();
 
-  const scrollViewRef = useRef(null);
+  const listRef = useRef(null);
   const inputRef = useRef(null);
 
   const scrollToEnd = () => {
     setTimeout(() => {
-      scrollViewRef?.current?.scrollToEnd({ animated: true });
+      listRef?.current?.scrollToIndex({ index: 0 });
     }, 50);
   };
 
@@ -77,31 +79,23 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     ).subscribe();
   }, [conversationId, id]);
 
-  const getConversation = useCallback(
-    (scroll = true) => {
-      setLoaded(false);
-      getRequest<ResponseConversationGetInterface>(
-        `conversation/${conversationId || id}`
-      ).subscribe((response: ResponseConversationGetInterface) => {
-        if (response?.status && !!response?.data?.length) {
-          const data = response?.data;
+  const getConversation = useCallback(() => {
+    setLoaded(false);
+    getRequest<ResponseConversationGetInterface>(
+      `conversation/${conversationId || id}`
+    ).subscribe((response: ResponseConversationGetInterface) => {
+      if (response?.status && !!response?.data?.length) {
+        const data = response?.data;
 
-          setConversation(data);
-          setShowReplies(checkShowReplies(data));
+        setConversation(data.reverse());
+        setShowReplies(checkShowReplies(data));
 
-          updateSeenNotification();
+        updateSeenNotification();
 
-          // Scroll to bottom when conversation has more than 10 messages
-          if (data?.length >= 15 && scroll) {
-            scrollToEnd();
-          }
-
-          setLoaded(true);
-        }
-      });
-    },
-    [checkShowReplies, conversationId, id, updateSeenNotification]
-  );
+        setLoaded(true);
+      }
+    });
+  }, [checkShowReplies, conversationId, id, updateSeenNotification]);
 
   useEffect(() => {
     getConversation();
@@ -113,28 +107,28 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       messaging().onMessage(
         (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
           if (remoteMessage) {
-            getConversation(false);
+            getConversation();
           }
         }
       ),
     [getConversation]
   );
 
-  useAppState(() => getConversation(false));
+  useAppState(() => getConversation());
 
   const send = useCallback(
     async (text?: string) => {
-      setConversation((prevState) =>
-        prevState.concat({
+      setConversation((prevState) => [
+        {
           id: prevState[prevState?.length - 1].id + 1,
           senderId: userId,
           message: text || message,
           time: moment().unix(),
           replyMessage,
-          audioMessage: audioRecord,
-          isSending: true
-        })
-      );
+          audioMessage: audioRecord
+        },
+        ...prevState
+      ]);
 
       let base64Buffer;
       if (audioRecord) {
@@ -150,7 +144,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         audioBuffer: text ? '' : base64Buffer
       }).subscribe((response) => {
         if (response?.status) {
-          getConversation(false);
+          getConversation();
         }
       });
     },
@@ -175,7 +169,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       deleteRequest<ResponseInterface>(`message/${messageId}`).subscribe(
         (response: ResponseInterface) => {
           if (response?.status) {
-            getConversation(false);
+            getConversation();
           }
         }
       );
@@ -270,35 +264,45 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   }, [send]);
 
   return (
-    <View
-      style={[
-        ChatScreenStyle.container,
-        { paddingTop: top || 10, paddingBottom: bottom || 5 }
-      ]}
-    >
+    <View style={[ChatScreenStyle.container, { paddingTop: top || 10 }]}>
       <ChatHeader
         chatUserId={chatUserId}
         username={username}
         name={name}
         profilePhoto={profilePhoto}
       />
-      <ChatList
-        scrollViewRef={scrollViewRef}
-        conversation={conversation}
-        onMessageLongPress={onMessageLongPress}
-      />
-      <ChatInput
-        message={message}
-        onChangeText={setMessage}
-        onPressSend={onPressSend}
-        onPressReply={onPressReply}
-        onAudioRecord={setAudioRecord}
-        replyMessage={replyMessage}
-        inputRef={inputRef}
-        onFocus={scrollToEnd}
-        onDismissReply={() => setReplyMessage('')}
-        showReplies={showReplies}
-      />
+      <KeyboardAvoidingView
+        behavior="position"
+        style={ChatScreenStyle.keyboardAvoidingView}
+      >
+        <View
+          style={{
+            height:
+              Dimensions.get('window').height -
+              (top || 10) -
+              CHAT_HEADER_HEIGHT -
+              bottom
+          }}
+        >
+          <ChatList
+            listRef={listRef}
+            conversation={conversation}
+            onMessageLongPress={onMessageLongPress}
+          />
+          <ChatInput
+            message={message}
+            onChangeText={setMessage}
+            onPressSend={onPressSend}
+            onPressReply={onPressReply}
+            onAudioRecord={setAudioRecord}
+            replyMessage={replyMessage}
+            inputRef={inputRef}
+            onFocus={scrollToEnd}
+            onDismissReply={() => setReplyMessage('')}
+            showReplies={showReplies}
+          />
+        </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import {
-  KeyboardAvoidingView,
   Platform,
   Text,
   TextInput,
@@ -85,9 +84,7 @@ export const ChatInput = ({
   }, [onAudioRecord]);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-    >
+    <View style={ChatInputStyle.container}>
       {!!replyMessage && (
         <View
           style={[
@@ -176,6 +173,6 @@ export const ChatInput = ({
           </TouchableOpacity>
         )}
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };

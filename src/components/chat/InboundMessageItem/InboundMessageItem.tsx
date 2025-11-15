@@ -10,12 +10,11 @@ export const InboundMessageItem = ({
   children,
   onLongPress,
   replyMessage,
-  audioMessage,
-  isFirst
+  audioMessage
 }: InboundMessageItemProps): React.JSX.Element => {
   const theme = useTheme();
   return (
-    <View style={isFirst && InboundMessageItemStyle.marginTop}>
+    <View>
       {!!replyMessage && (
         <View style={InboundMessageItemStyle.replyMessageView}>
           <Text style={InboundMessageItemStyle.replyMessageText}>

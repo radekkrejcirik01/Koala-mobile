@@ -1,9 +1,9 @@
 import { RefObject } from 'react';
-import { ScrollView } from 'react-native';
 import { ConversationInterface } from '@interfaces/general.interface';
+import { FlashList } from '@shopify/flash-list';
 
 export interface ChatListProps {
-  scrollViewRef: RefObject<ScrollView>;
+  listRef: RefObject<FlashList<ConversationInterface>>;
   conversation: ConversationInterface[];
   onMessageLongPress: (value: ConversationInterface) => void;
 }

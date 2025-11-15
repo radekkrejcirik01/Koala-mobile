@@ -1,10 +1,8 @@
-import { Platform, StyleSheet } from 'react-native';
-import DIMENSIONS from '@constants/DIMENSIONS';
+import { StyleSheet } from 'react-native';
 
 export const ChatListStyle = StyleSheet.create({
-  container: {
-    marginLeft: 12,
-    marginRight: 10,
-    paddingBottom: Platform.OS === 'ios' ? DIMENSIONS.height / 2.5 : 20
+  scrollViewContainer: {
+    paddingLeft: 12,
+    paddingRight: 10
   }
 });

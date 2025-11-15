@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ChatInputStyle = StyleSheet.create({
+  container: {
+    paddingTop: 20
+  },
   replyMessageContainer: {
     paddingVertical: 5,
     paddingLeft: 20,
