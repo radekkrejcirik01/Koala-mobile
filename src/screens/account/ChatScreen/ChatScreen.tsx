@@ -186,21 +186,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       ReactNativeHapticFeedback.trigger('impactLight');
 
       if (item.audioMessage) {
-        if (sentByUser) {
-          Alert.alert('🎤 Voice message', time, [
-            {
-              text: 'Cancel',
-              style: 'cancel'
-            },
-            {
-              text: 'Delete for everybody',
-              onPress: () => deleteMessage(item.id),
-              style: 'destructive'
-            }
-          ]);
-        } else {
-          Alert.alert('🎤 Voice message', time);
-        }
+        Alert.alert('🎤 Voice message', time);
         return;
       }
 
@@ -215,11 +201,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             onPress: () => {
               Clipboard.setString(item.message);
             }
-          },
-          {
-            text: 'Delete for everybody',
-            onPress: () => deleteMessage(item.id),
-            style: 'destructive'
           }
         ]);
       } else {
@@ -244,7 +225,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         ]);
       }
     },
-    [deleteMessage, userId]
+    [userId]
   );
 
   const onPressReply = useCallback(
