@@ -28,13 +28,15 @@ export const ChatList = ({
       keyboardDismissMode="on-drag"
       estimatedItemSize={100}
       contentContainerStyle={ChatListStyle.scrollViewContainer}
-      renderItem={({ item: value }) =>
+      renderItem={({ item: value, index }) =>
         isOutbound(value.senderId) ? (
           <OutboundMessageItem
             onLongPress={() => onMessageLongPress(value)}
             key={value.id}
             replyMessage={value?.replyMessage}
             audioMessage={value?.audioMessage}
+            showSpace={conversation[index - 1]?.senderId !== id}
+            isLast={conversation[0]?.id === value.id}
           >
             {value.message}
           </OutboundMessageItem>
@@ -44,6 +46,8 @@ export const ChatList = ({
             onLongPress={() => onMessageLongPress(value)}
             replyMessage={value?.replyMessage}
             audioMessage={value?.audioMessage}
+            showSpace={conversation[index - 1]?.senderId === id}
+            isLast={conversation[0]?.id === value.id}
           >
             {value.message}
           </InboundMessageItem>

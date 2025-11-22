@@ -10,11 +10,13 @@ export const InboundMessageItem = ({
   children,
   onLongPress,
   replyMessage,
-  audioMessage
+  audioMessage,
+  showSpace,
+  isLast
 }: InboundMessageItemProps): React.JSX.Element => {
   const theme = useTheme();
   return (
-    <View>
+    <View style={isLast && InboundMessageItemStyle.lastItemPadding}>
       {!!replyMessage && (
         <View style={InboundMessageItemStyle.replyMessageView}>
           <Text style={InboundMessageItemStyle.replyMessageText}>
@@ -52,6 +54,7 @@ export const InboundMessageItem = ({
           )}
         </TouchableOpacity>
       </View>
+      {showSpace && <View style={InboundMessageItemStyle.spaceHeight} />}
     </View>
   );
 };

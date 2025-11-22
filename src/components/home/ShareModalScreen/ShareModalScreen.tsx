@@ -11,11 +11,12 @@ import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareMo
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
 import { useTheme } from '@contexts/ThemeContext';
+import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 
 export const ShareModalScreen = ({
   onAddFriendPress
 }: ShareModalScreenProps): JSX.Element => {
-  const { bottom } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
 
   const [message, setMessage] = useState<string>();
@@ -66,10 +67,12 @@ export const ShareModalScreen = ({
         ShareModalScreenStyle.container,
         {
           backgroundColor: theme.theme.colors.surface,
+          paddingTop: top || 10,
           paddingBottom: bottom || 10
         }
       ]}
     >
+      <ScreenHeader title="Share" goBack={false} />
       <View style={ShareModalScreenStyle.inputView}>
         <TextInput
           multiline

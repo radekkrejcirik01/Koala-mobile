@@ -3,4 +3,6 @@ export interface InboundMessageItemProps {
   onLongPress: () => void;
   replyMessage: string;
   audioMessage: string;
+  showSpace: boolean;
+  isLast: boolean;
 }

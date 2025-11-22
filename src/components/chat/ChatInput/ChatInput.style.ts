@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ChatInputStyle = StyleSheet.create({
-  container: {
-    paddingTop: 20
-  },
   replyMessageContainer: {
     paddingVertical: 5,
     paddingLeft: 20,
@@ -55,7 +52,7 @@ export const ChatInputStyle = StyleSheet.create({
   sendButtonView: {
     padding: 5,
     borderRadius: 20,
-    backgroundColor: COLORS.PURPLE
+    backgroundColor: COLORS.BUTTON_BLUE
   },
   sendButtonIcon: {
     right: -1

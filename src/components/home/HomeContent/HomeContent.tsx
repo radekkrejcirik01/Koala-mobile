@@ -100,11 +100,11 @@ export const HomeContent = (): JSX.Element => {
           >
             <View>
               <View style={HomeContentStyle.emojiView}>
-                <Text style={HomeContentStyle.emojiText}>📚</Text>
+                <Text style={HomeContentStyle.emojiText}>🫶</Text>
               </View>
               <Text style={HomeContentStyle.viewText}>Messages</Text>
             </View>
-            <Text>Add messages for sharing</Text>
+            <Text>Add your own messages</Text>
           </TouchableOpacity>
           <View style={HomeContentStyle.rightViewsContainer}>
             <TouchableOpacity

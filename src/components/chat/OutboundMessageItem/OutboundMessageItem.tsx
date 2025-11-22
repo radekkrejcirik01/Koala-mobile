@@ -9,9 +9,11 @@ export const OutboundMessageItem = ({
   children,
   onLongPress,
   replyMessage,
-  audioMessage
+  audioMessage,
+  showSpace,
+  isLast
 }: OutboundMessageItemProps): React.JSX.Element => (
-  <View>
+  <View style={isLast && OutboundMessageItemStyle.lastItemPadding}>
     {!!replyMessage && (
       <View style={OutboundMessageItemStyle.replyMessageView}>
         <Text style={OutboundMessageItemStyle.replyMessageText}>
@@ -44,5 +46,6 @@ export const OutboundMessageItem = ({
         )}
       </TouchableOpacity>
     </View>
+    {showSpace && <View style={OutboundMessageItemStyle.spaceHeight} />}
   </View>
 );

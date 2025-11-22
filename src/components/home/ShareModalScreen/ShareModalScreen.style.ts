@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const ShareModalScreenStyle = StyleSheet.create({
   container: {
-    height: '70%',
-    paddingTop: 25,
+    flex: 1,
     paddingHorizontal: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -13,9 +12,9 @@ export const ShareModalScreenStyle = StyleSheet.create({
     flex: 1
   },
   input: {
-    fontSize: 18,
+    fontSize: 16,
     textAlignVertical: 'top',
-    fontWeight: 'bold'
+    fontWeight: '500'
   },
   send: {
     justifyContent: 'center',

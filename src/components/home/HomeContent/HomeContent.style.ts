@@ -41,13 +41,13 @@ export const HomeContentStyle = StyleSheet.create({
     backgroundColor: COLORS.PASTEL_YELLOW
   },
   emojiView: {
-    padding: 7,
-    borderRadius: 20,
+    padding: 8,
+    borderRadius: 25,
     backgroundColor: COLORS.WHITE_100,
     alignSelf: 'flex-start'
   },
   emojiText: {
-    fontSize: 24,
+    fontSize: 26,
     color: COLORS.BLACK
   },
   viewText: {

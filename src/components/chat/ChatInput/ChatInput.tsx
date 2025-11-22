@@ -84,7 +84,7 @@ export const ChatInput = ({
   }, [onAudioRecord]);
 
   return (
-    <View style={ChatInputStyle.container}>
+    <View>
       {!!replyMessage && (
         <View
           style={[
@@ -135,14 +135,6 @@ export const ChatInput = ({
               { backgroundColor: theme.theme.colors.surface }
             ]}
           >
-            <TouchableOpacity
-              activeOpacity={0.5}
-              hitSlop={10}
-              onPress={startRecording}
-              style={ChatInputStyle.microphoneButtonView}
-            >
-              <Icon name={IconEnum.MICROPHONE} size={24} />
-            </TouchableOpacity>
             <TextInput
               ref={inputRef}
               autoCorrect={false}
@@ -151,6 +143,7 @@ export const ChatInput = ({
                 setIsFocused(true);
                 onFocus();
               }}
+              placeholder="New message"
               onBlur={() => setIsFocused(false)}
               value={message}
               onChangeText={onChangeText}

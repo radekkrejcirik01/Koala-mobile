@@ -33,5 +33,11 @@ export const InboundMessageItemStyle = StyleSheet.create({
   },
   largeText: {
     fontSize: 35
+  },
+  spaceHeight: {
+    height: 5
+  },
+  lastItemPadding: {
+    paddingBottom: 20
   }
 });
