@@ -5,6 +5,7 @@ import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { DevicePostInterface } from '@interfaces/post/Post.interface';
 import store from '@store/index/index';
+import { version } from '../../../package.json';
 
 class MessagingServiceClass {
   private fcmToken: string;
@@ -16,7 +17,8 @@ class MessagingServiceClass {
       postRequest<ResponseInterface, DevicePostInterface>('device', {
         deviceToken: this.fcmToken,
         userId,
-        platform: Platform.OS
+        platform: Platform.OS,
+        version
       }).subscribe();
     }
   };

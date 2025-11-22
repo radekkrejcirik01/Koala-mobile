@@ -32,6 +32,7 @@ export interface DevicePostInterface {
   deviceToken: string;
   userId: number;
   platform: string;
+  version: string;
 }
 
 export interface EmotionPostInterface {
