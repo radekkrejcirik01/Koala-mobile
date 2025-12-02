@@ -144,6 +144,7 @@ export const ChatInput = ({
                 onFocus();
               }}
               placeholder="New message"
+              placeholderTextColor={COLORS.LIGHTGRAY_100}
               onBlur={() => setIsFocused(false)}
               value={message}
               onChangeText={onChangeText}
