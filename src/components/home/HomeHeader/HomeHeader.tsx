@@ -3,8 +3,6 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
 import { HomeHeaderStyle } from '@components/home/HomeHeader/HomeHeader.style';
-import { useTheme } from '@contexts/ThemeContext';
-import COLORS from '@constants/COLORS';
 import { NotificationsButton } from '@components/home/NotificationsButton/NotificationsButton';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
@@ -12,7 +10,6 @@ import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 
 export const HomeHeader = (): JSX.Element => {
-  const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
   const { name, profilePhoto } = useSelector(
@@ -25,18 +22,9 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <ProfilePhoto name={name} photo={profilePhoto} size={48} />
+      <ProfilePhoto name={name} photo={profilePhoto} size={42} />
       <Text style={HomeHeaderStyle.title}>Start a new chat</Text>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={navigateToChats}
-        style={[
-          HomeHeaderStyle.buttonView,
-          {
-            backgroundColor: theme.isDark ? COLORS.WHITE_300 : COLORS.WHITE
-          }
-        ]}
-      >
+      <TouchableOpacity activeOpacity={0.8} onPress={navigateToChats}>
         <NotificationsButton />
       </TouchableOpacity>
     </View>
