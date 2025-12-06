@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  CardStyleInterpolators,
-  createStackNavigator
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/native';
 import {
   NavigatorScreenOptions,
@@ -21,6 +18,7 @@ import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
 import { MessagesScreen } from '@screens/account/MessagesScreen/MessagesScreen';
+import { ShareScreen } from '@screens/account/ShareScreen/ShareScreen';
 
 const Account = createStackNavigator<ParamListBase>();
 
@@ -54,7 +52,16 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       component={MessagesScreen}
       options={{
         ...NoHeader,
-        cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        presentation: 'transparentModal',
+        gestureEnabled: false
+      }}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ShareScreen}
+      component={ShareScreen}
+      options={{
+        ...NoHeader,
+        presentation: 'transparentModal',
         gestureEnabled: false
       }}
     />

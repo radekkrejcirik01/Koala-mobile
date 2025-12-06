@@ -6,18 +6,16 @@ import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
-import { ShareModalScreenProps } from '@components/home/ShareModalScreen/ShareModalScreen.props';
-import { ShareModalScreenStyle } from '@components/home/ShareModalScreen/ShareModalScreen.style';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
 import { useTheme } from '@contexts/ThemeContext';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props';
+import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
+import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 
-export const ShareModalScreen = ({
-  onAddFriendPress
-}: ShareModalScreenProps): JSX.Element => {
+export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { name } = useSelector((state: ReducerProps) => state.user.user);
@@ -67,7 +65,7 @@ export const ShareModalScreen = ({
   return (
     <View
       style={[
-        ShareModalScreenStyle.container,
+        ShareScreenStyle.container,
         {
           backgroundColor: theme.theme.colors.background,
           paddingTop: top || 10,
@@ -75,8 +73,8 @@ export const ShareModalScreen = ({
         }
       ]}
     >
-      <ScreenHeader title="Share" goBack={false} />
-      <View style={ShareModalScreenStyle.inputView}>
+      <ScreenHeader title="Share" />
+      <View style={ShareScreenStyle.inputView}>
         <TextInput
           multiline
           placeholder={`What is happening ${name}?`}
@@ -84,22 +82,23 @@ export const ShareModalScreen = ({
           autoFocus
           autoCorrect={false}
           value={message}
-          onChangeText={setMessage}
+          onChangeText={(value) => {
+            setMessage(value);
+          }}
           selectionColor={COLORS.BUTTON_BLUE}
-          style={[
-            ShareModalScreenStyle.input,
-            { color: theme.theme.colors.text }
-          ]}
+          style={[ShareScreenStyle.input, { color: theme.theme.colors.text }]}
         />
       </View>
-      <Send
-        onFriendSelect={onFriendSelect}
-        onAddFriendPress={onAddFriendPress}
-        onPressSend={send}
-        sending={sending}
-        sent={sent}
-        style={ShareModalScreenStyle.send}
-      />
+      <KeyboardAvoidingView>
+        <Send
+          onFriendSelect={onFriendSelect}
+          onAddFriendPress={() => {}}
+          onPressSend={send}
+          sending={sending}
+          sent={sent}
+          style={ShareScreenStyle.send}
+        />
+      </KeyboardAvoidingView>
     </View>
   );
 };

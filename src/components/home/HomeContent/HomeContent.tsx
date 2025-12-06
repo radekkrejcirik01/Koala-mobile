@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
 import { useModal } from '@hooks/useModal';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { ShareModalScreen } from '@components/home/ShareModalScreen/ShareModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
 import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -51,34 +51,28 @@ export const HomeContent = (): JSX.Element => {
   const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 
   const onPressMessages = () => {
+    trigger(HapticFeedbackTypes.impactMedium);
     navigateTo(AccountStackNavigatorEnum.MessagesScreen);
   };
 
   const onPressShare = useCallback(() => {
-    setModalContent(
-      <ShareModalScreen
-        onAddFriendPress={() => {
-          hideModal();
-          setModalContent(<FriendsModalScreen />);
-          setTimeout(() => {
-            showModal();
-          }, 100);
-        }}
-      />
-    );
-    showModal();
-  }, [hideModal, showModal]);
+    trigger(HapticFeedbackTypes.impactMedium);
+    navigateTo(AccountStackNavigatorEnum.ShareScreen);
+  }, [navigateTo]);
 
   const onPressVoice = () => {
+    trigger(HapticFeedbackTypes.impactMedium);
     Alert.alert('This feature is coming soon ✨');
   };
 
   const onPressFriends = () => {
+    trigger(HapticFeedbackTypes.impactMedium);
     setModalContent(<FriendsModalScreen />);
     showModal();
   };
 
   const onPressProfile = () => {
+    trigger(HapticFeedbackTypes.impactMedium);
     navigateTo(AccountStackNavigatorEnum.ProfileScreen);
   };
 

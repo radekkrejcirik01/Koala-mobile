@@ -143,7 +143,7 @@ export const ChatInput = ({
                 setIsFocused(true);
                 onFocus();
               }}
-              placeholder="New message 💬"
+              placeholder="New message..."
               placeholderTextColor={COLORS.LIGHTGRAY_100}
               onBlur={() => setIsFocused(false)}
               value={message}

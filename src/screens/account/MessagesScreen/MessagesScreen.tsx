@@ -7,9 +7,11 @@ import { useMessagesActions } from '@hooks/useMessagesActions';
 import { AddButton } from '@components/general/AddButton/AddButton';
 import { Modal } from '@components/general/Modal/Modal';
 import { MessageItem } from '@components/home/MessageItem/MessageItem';
+import { useTheme } from '@contexts/ThemeContext';
 
 export const MessagesScreen = () => {
-  const { top } = useSafeAreaInsets();
+  const theme = useTheme();
+  const { top, bottom } = useSafeAreaInsets();
 
   const {
     messages,
@@ -50,10 +52,18 @@ export const MessagesScreen = () => {
   };
 
   return (
-    <View style={[MessagesScreenStyle.container, { paddingTop: top }]}>
+    <View
+      style={[
+        MessagesScreenStyle.container,
+        {
+          backgroundColor: theme.theme.colors.background,
+          paddingTop: top || 10,
+          paddingBottom: bottom || 10
+        }
+      ]}
+    >
       <ScreenHeader
         title="Messages"
-        close
         rightComponent={<AddButton onPress={onPressAddEmotion} />}
       />
       {renderContent()}
