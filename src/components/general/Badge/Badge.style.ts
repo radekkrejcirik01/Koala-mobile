@@ -9,7 +9,7 @@ export const BadgeStyle = StyleSheet.create({
     paddingHorizontal: 5,
     paddingBottom: 2,
     borderRadius: 10,
-    backgroundColor: COLORS.RED,
+    backgroundColor: COLORS.NOTIFICATION_DOT,
     position: 'absolute',
     alignSelf: 'flex-end'
   },

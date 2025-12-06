@@ -5,8 +5,8 @@ export const OutboundMessageItemStyle = StyleSheet.create({
   container: {
     maxWidth: '70%',
     marginTop: 2,
-    paddingVertical: 9,
-    paddingHorizontal: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
     borderRadius: 20,
     backgroundColor: COLORS.PURPLE,
     alignSelf: 'flex-end'

@@ -32,12 +32,12 @@ export const ChatInputStyle = StyleSheet.create({
   inputView: {
     flex: 1,
     minHeight: 42,
-    marginLeft: 6,
-    marginRight: 4,
-    paddingVertical: 6,
-    paddingLeft: 14,
-    paddingRight: 10,
-    borderRadius: 20,
+    marginLeft: 8,
+    marginRight: 6,
+    paddingVertical: 8,
+    paddingLeft: 16,
+    paddingRight: 14,
+    borderRadius: 25,
     flexDirection: 'row',
     alignItems: 'center'
   },

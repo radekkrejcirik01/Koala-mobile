@@ -12,12 +12,15 @@ import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
 import { useTheme } from '@contexts/ThemeContext';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { useSelector } from 'react-redux';
+import { ReducerProps } from '@store/index/index.props';
 
 export const ShareModalScreen = ({
   onAddFriendPress
 }: ShareModalScreenProps): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
+  const { name } = useSelector((state: ReducerProps) => state.user.user);
 
   const [message, setMessage] = useState<string>();
   const { sending, sent, setSending, setSent } = useSending();
@@ -76,7 +79,7 @@ export const ShareModalScreen = ({
       <View style={ShareModalScreenStyle.inputView}>
         <TextInput
           multiline
-          placeholder="What's happening??"
+          placeholder={`What is happening ${name}?`}
           placeholderTextColor={COLORS.GRAY_200}
           autoFocus
           autoCorrect={false}

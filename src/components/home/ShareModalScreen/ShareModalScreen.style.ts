@@ -9,10 +9,11 @@ export const ShareModalScreenStyle = StyleSheet.create({
     justifyContent: 'space-between'
   },
   inputView: {
-    flex: 1
+    flex: 1,
+    paddingTop: 10
   },
   input: {
-    fontSize: 16,
+    fontSize: 16.5,
     textAlignVertical: 'top',
     fontWeight: '500'
   },

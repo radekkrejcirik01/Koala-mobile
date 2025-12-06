@@ -98,13 +98,13 @@ export const HomeContent = (): JSX.Element => {
             onPress={onPressMessages}
             style={HomeContentStyle.messagesView}
           >
-            <View>
-              <View style={HomeContentStyle.emojiView}>
-                <Text style={HomeContentStyle.emojiText}>🫶</Text>
-              </View>
-              <Text style={HomeContentStyle.viewText}>Messages</Text>
+            <View style={HomeContentStyle.emojiView}>
+              <Text style={HomeContentStyle.emojiText}>🫶</Text>
             </View>
-            <Text>Add your own messages</Text>
+            <View>
+              <Text style={HomeContentStyle.viewText}>Messages</Text>
+              <Text>Predefine your own</Text>
+            </View>
           </TouchableOpacity>
           <View style={HomeContentStyle.rightViewsContainer}>
             <TouchableOpacity

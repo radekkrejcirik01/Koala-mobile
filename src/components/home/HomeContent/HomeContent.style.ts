@@ -51,8 +51,9 @@ export const HomeContentStyle = StyleSheet.create({
     color: COLORS.BLACK
   },
   viewText: {
-    marginTop: 5,
-    fontSize: 16,
+    marginTop: 8,
+    marginBottom: 10,
+    fontSize: 17,
     color: COLORS.BLACK,
     fontWeight: '600'
   },
