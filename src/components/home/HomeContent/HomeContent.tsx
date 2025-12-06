@@ -105,10 +105,17 @@ export const HomeContent = (): JSX.Element => {
             ]}
           >
             <View style={HomeContentStyle.emojiView}>
-              <Text style={HomeContentStyle.emojiText}>🫶</Text>
+              <Text style={HomeContentStyle.emojiText}>✨</Text>
             </View>
             <View>
-              <Text style={HomeContentStyle.viewText}>Messages</Text>
+              <Text
+                style={[
+                  HomeContentStyle.viewText,
+                  { color: theme.isDark ? COLORS.PURPLE : COLORS.WHITE }
+                ]}
+              >
+                Messages
+              </Text>
               <Text style={{ color: COLORS.WHITE_100 }}>
                 Predefine your own
               </Text>
@@ -128,9 +135,16 @@ export const HomeContent = (): JSX.Element => {
               ]}
             >
               <View style={HomeContentStyle.emojiView}>
-                <Text style={HomeContentStyle.emojiText}>💬</Text>
+                <Text style={HomeContentStyle.emojiText}>💭</Text>
               </View>
-              <Text style={HomeContentStyle.viewText}>Share</Text>
+              <Text
+                style={[
+                  HomeContentStyle.viewText,
+                  { color: theme.isDark ? COLORS.PURPLE : COLORS.WHITE }
+                ]}
+              >
+                Share
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.9}
@@ -147,14 +161,21 @@ export const HomeContent = (): JSX.Element => {
               <View style={HomeContentStyle.emojiView}>
                 <Text style={HomeContentStyle.emojiText}>🎤</Text>
               </View>
-              <Text style={HomeContentStyle.viewText}>Voice</Text>
+              <Text
+                style={[
+                  HomeContentStyle.viewText,
+                  { color: theme.isDark ? COLORS.PURPLE : COLORS.WHITE }
+                ]}
+              >
+                Voice
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
       <View style={HomeContentStyle.footerContainer}>
         <BottomButton text="🔎 Friends" onPress={onPressFriends} />
-        <BottomButton text="🙆 Profile" onPress={onPressProfile} />
+        <BottomButton text="🏠 Profile" onPress={onPressProfile} />
       </View>
       <Modal
         isVisible={modalVisible}

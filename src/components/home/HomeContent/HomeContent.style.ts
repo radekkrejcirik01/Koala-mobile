@@ -11,7 +11,7 @@ export const HomeContentStyle = StyleSheet.create({
   itemsContainer: {
     paddingHorizontal: 10,
     paddingTop: 20,
-    paddingBottom: 20,
+    paddingBottom: 30,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly'
@@ -19,18 +19,18 @@ export const HomeContentStyle = StyleSheet.create({
   messagesView: {
     padding: 18,
     paddingBottom: 30,
-    height: 300,
+    height: 305,
     width: '43%',
     borderRadius: 20,
     justifyContent: 'space-between'
   },
   rightViewsContainer: {
-    width: '42%'
+    width: '40%'
   },
   directView: {
     padding: 18,
     height: 140,
-    marginBottom: 20,
+    marginBottom: 25,
     borderRadius: 20
   },
   voiceView: {
@@ -42,15 +42,14 @@ export const HomeContentStyle = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   emojiText: {
-    fontSize: 28,
+    fontSize: 32,
     color: COLORS.BLACK
   },
   viewText: {
     marginTop: 8,
     marginBottom: 10,
-    fontSize: 17,
-    color: COLORS.WHITE_100,
-    fontWeight: '600'
+    fontSize: 20,
+    fontWeight: '700'
   },
   footerContainer: {
     paddingTop: 15,
@@ -59,9 +58,9 @@ export const HomeContentStyle = StyleSheet.create({
     justifyContent: 'space-between'
   },
   bottomButtonView: {
-    width: 100,
-    height: 50,
-    borderRadius: 50,
+    width: 110,
+    height: 55,
+    borderRadius: 70,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
@@ -72,6 +71,7 @@ export const HomeContentStyle = StyleSheet.create({
   },
   bottomButtonText: {
     color: COLORS.GRAY_200,
+    fontSize: 16,
     fontWeight: 'bold'
   },
   modal: {

@@ -1,5 +1,5 @@
 export default {
-  RED: '#FF5050',
+  RED: 'red',
   WHITE: '#ffffff',
   WHITE_100: 'whitesmoke',
   WHITE_200: '#00000010',
