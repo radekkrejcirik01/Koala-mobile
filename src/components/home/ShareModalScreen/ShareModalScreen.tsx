@@ -69,7 +69,7 @@ export const ShareModalScreen = ({
       style={[
         ShareModalScreenStyle.container,
         {
-          backgroundColor: theme.theme.colors.surface,
+          backgroundColor: theme.theme.colors.background,
           paddingTop: top || 10,
           paddingBottom: bottom || 10
         }

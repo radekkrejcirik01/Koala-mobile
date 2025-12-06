@@ -17,44 +17,39 @@ export const HomeContentStyle = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   messagesView: {
-    padding: 20,
+    padding: 18,
+    paddingBottom: 30,
     height: 300,
     width: '43%',
     borderRadius: 20,
-    backgroundColor: COLORS.PASTEL_PURPLE,
     justifyContent: 'space-between'
   },
   rightViewsContainer: {
     width: '42%'
   },
   directView: {
-    padding: 20,
+    padding: 18,
     height: 140,
     marginBottom: 20,
-    borderRadius: 20,
-    backgroundColor: COLORS.PASTEL_BLUE
+    borderRadius: 20
   },
   voiceView: {
-    padding: 20,
+    padding: 18,
     height: 140,
-    borderRadius: 20,
-    backgroundColor: COLORS.PASTEL_YELLOW
+    borderRadius: 20
   },
   emojiView: {
-    padding: 8,
-    borderRadius: 25,
-    backgroundColor: COLORS.WHITE_100,
     alignSelf: 'flex-start'
   },
   emojiText: {
-    fontSize: 26,
+    fontSize: 28,
     color: COLORS.BLACK
   },
   viewText: {
     marginTop: 8,
     marginBottom: 10,
     fontSize: 17,
-    color: COLORS.BLACK,
+    color: COLORS.WHITE_100,
     fontWeight: '600'
   },
   footerContainer: {

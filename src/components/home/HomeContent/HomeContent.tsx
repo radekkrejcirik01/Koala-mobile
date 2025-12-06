@@ -34,9 +34,7 @@ const BottomButton = ({
       style={[
         HomeContentStyle.bottomButtonView,
         {
-          backgroundColor: theme.isDark
-            ? theme.theme.colors.surface
-            : COLORS.WHITE
+          backgroundColor: theme.isDark ? COLORS.WHITE_300 : COLORS.WHITE
         }
       ]}
     >
@@ -46,6 +44,7 @@ const BottomButton = ({
 };
 
 export const HomeContent = (): JSX.Element => {
+  const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
   const { modalVisible, showModal, hideModal } = useModal();
 
@@ -96,21 +95,37 @@ export const HomeContent = (): JSX.Element => {
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={onPressMessages}
-            style={HomeContentStyle.messagesView}
+            style={[
+              HomeContentStyle.messagesView,
+              {
+                backgroundColor: theme.isDark
+                  ? COLORS.WHITE_300
+                  : COLORS.PASTEL_PURPLE
+              }
+            ]}
           >
             <View style={HomeContentStyle.emojiView}>
               <Text style={HomeContentStyle.emojiText}>🫶</Text>
             </View>
             <View>
               <Text style={HomeContentStyle.viewText}>Messages</Text>
-              <Text>Predefine your own</Text>
+              <Text style={{ color: COLORS.WHITE_100 }}>
+                Predefine your own
+              </Text>
             </View>
           </TouchableOpacity>
           <View style={HomeContentStyle.rightViewsContainer}>
             <TouchableOpacity
               activeOpacity={0.9}
               onPress={onPressShare}
-              style={HomeContentStyle.directView}
+              style={[
+                HomeContentStyle.directView,
+                {
+                  backgroundColor: theme.isDark
+                    ? COLORS.WHITE_300
+                    : COLORS.PASTEL_BLUE
+                }
+              ]}
             >
               <View style={HomeContentStyle.emojiView}>
                 <Text style={HomeContentStyle.emojiText}>💬</Text>
@@ -120,7 +135,14 @@ export const HomeContent = (): JSX.Element => {
             <TouchableOpacity
               activeOpacity={0.9}
               onPress={onPressVoice}
-              style={HomeContentStyle.voiceView}
+              style={[
+                HomeContentStyle.voiceView,
+                {
+                  backgroundColor: theme.isDark
+                    ? COLORS.WHITE_300
+                    : COLORS.PASTEL_YELLOW
+                }
+              ]}
             >
               <View style={HomeContentStyle.emojiView}>
                 <Text style={HomeContentStyle.emojiText}>🎤</Text>

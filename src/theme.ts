@@ -25,8 +25,8 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   colors: {
     primary: '#bb86fc',
-    background: '#121212',
-    surface: '#1e1e1e',
+    background: '#1e1e1e',
+    surface: '#121212',
     surface_200: '#1e1e1e',
     text: '#ffffff',
     error: '#cf6679'

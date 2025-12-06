@@ -33,9 +33,7 @@ export const HomeHeader = (): JSX.Element => {
         style={[
           HomeHeaderStyle.buttonView,
           {
-            backgroundColor: theme.isDark
-              ? theme.theme.colors.surface
-              : COLORS.WHITE
+            backgroundColor: theme.isDark ? COLORS.WHITE_300 : COLORS.WHITE
           }
         ]}
       >

@@ -115,7 +115,7 @@ export const ChatInput = ({
       <View
         style={[
           ChatInputStyle.inputContainer,
-          { backgroundColor: theme.isDark ? COLORS.BLACK : COLORS.WHITE }
+          { backgroundColor: theme.theme.colors.background }
         ]}
       >
         {isRecording ? (
@@ -143,7 +143,7 @@ export const ChatInput = ({
                 setIsFocused(true);
                 onFocus();
               }}
-              placeholder="New message"
+              placeholder="New message 💬"
               placeholderTextColor={COLORS.LIGHTGRAY_100}
               onBlur={() => setIsFocused(false)}
               value={message}

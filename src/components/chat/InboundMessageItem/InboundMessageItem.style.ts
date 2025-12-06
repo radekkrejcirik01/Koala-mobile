@@ -5,8 +5,8 @@ export const InboundMessageItemStyle = StyleSheet.create({
   container: {
     maxWidth: '70%',
     marginTop: 2,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
     borderRadius: 20,
     alignSelf: 'flex-start'
   },
@@ -35,7 +35,7 @@ export const InboundMessageItemStyle = StyleSheet.create({
     fontSize: 35
   },
   spaceHeight: {
-    height: 5
+    height: 10
   },
   lastItemPadding: {
     paddingBottom: 20

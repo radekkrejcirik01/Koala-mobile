@@ -3,6 +3,7 @@ export default {
   WHITE: '#ffffff',
   WHITE_100: 'whitesmoke',
   WHITE_200: '#00000010',
+  WHITE_300: '#00000030',
   GRAY_200: '#8c8c8c',
   LIGHTGRAY_100: '#a6a6a6',
   LIGHTGRAY_200: '#7A7A7A',
