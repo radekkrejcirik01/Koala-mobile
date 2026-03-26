@@ -15,5 +15,8 @@ export default {
   PASTEL_PURPLE: '#c8b6ff',
   PASTEL_BLUE: '#a2d2ff',
   PASTEL_YELLOW: '#f2cc8f',
-  NOTIFICATION_DOT: '#ED4956'
+  NOTIFICATION_DOT: '#ED4956',
+  GREEN: '#e7f4c6',
+  BLUE: '#c0dbee',
+  BEIGE: '#fbefd7'
 };
