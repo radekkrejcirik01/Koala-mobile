@@ -5,54 +5,17 @@ export const HomeContentStyle = StyleSheet.create({
   container: {
     paddingBottom: '10%'
   },
-  helperView: {
-    height: 200
+  scrollView: {
+    overflow: 'visible'
   },
-  itemsContainer: {
-    paddingHorizontal: 10,
-    paddingTop: 20,
-    paddingBottom: 30,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly'
-  },
-  messagesView: {
-    padding: 18,
-    paddingBottom: 30,
-    height: 305,
-    width: '43%',
-    borderRadius: 20,
-    justifyContent: 'space-between'
-  },
-  rightViewsContainer: {
-    width: '40%'
-  },
-  directView: {
-    padding: 18,
-    height: 140,
-    marginBottom: 25,
-    borderRadius: 20
-  },
-  voiceView: {
-    padding: 18,
-    height: 140,
-    borderRadius: 20
-  },
-  emojiView: {
-    alignSelf: 'flex-start'
-  },
-  emojiText: {
-    fontSize: 32,
-    color: COLORS.BLACK
-  },
-  viewText: {
-    marginTop: 8,
-    marginBottom: 10,
-    fontSize: 20,
-    fontWeight: '700'
+  image: {
+    marginTop: 20,
+    width: '95%',
+    height: 300,
+    alignSelf: 'center'
   },
   footerContainer: {
-    paddingTop: 15,
+    paddingTop: 250,
     paddingHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -70,12 +33,8 @@ export const HomeContentStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   bottomButtonText: {
-    color: COLORS.GRAY_200,
+    color: COLORS.BLACK,
     fontSize: 16,
     fontWeight: 'bold'
-  },
-  modal: {
-    margin: 0,
-    justifyContent: 'flex-end'
   }
 });

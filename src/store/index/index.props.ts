@@ -1,3 +1,5 @@
+import { Images } from '@enums/images';
+
 export interface ReducerProps {
   user: User;
   newAccount: NewAccount;
@@ -12,6 +14,7 @@ export interface User {
     username: string;
     profilePhoto: string;
   };
+  image: Images;
 }
 
 export interface NewAccount {

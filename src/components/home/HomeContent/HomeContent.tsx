@@ -1,22 +1,25 @@
-import React, { JSX, useCallback, useState } from 'react';
+import React, { JSX, useCallback, useMemo } from 'react';
 import {
-  Alert,
-  Keyboard,
+  Image,
+  RefreshControl,
   ScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
-import { useModal } from '@hooks/useModal';
-import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { Modal } from '@components/general/Modal/Modal';
 import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import COLORS from '@constants/COLORS';
 import { useTheme } from '@contexts/ThemeContext';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
+import { Images } from '@enums/images';
+import { setImageAction } from '@store/UserReducer';
+import { ReducerProps } from '@store/index/index.props';
 
 const BottomButton = ({
   text,
@@ -44,15 +47,41 @@ const BottomButton = ({
 };
 
 export const HomeContent = (): JSX.Element => {
-  const theme = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
-  const { modalVisible, showModal, hideModal } = useModal();
+  const dispatch = useDispatch();
 
-  const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
+  const { image } = useSelector((state: ReducerProps) => state.user);
 
-  const onPressMessages = () => {
+  const setNewImage = () => {
+    let value = image;
+    if (value === Images.ROOM) {
+      value = Images.PARK;
+    } else if (value === Images.PARK) {
+      value = Images.SEA;
+    } else if (value === Images.SEA) {
+      value = Images.ROOM;
+    }
+
+    dispatch(setImageAction(value));
+    PersistStorage.setItem(PersistStorageKeys.IMAGE, value.toString()).catch();
+  };
+
+  const imageSource = useMemo(() => {
+    if (image === Images.ROOM) {
+      return require('@assets/illustrations/room.jpg');
+    }
+    if (image === Images.PARK) {
+      return require('@assets/illustrations/park.jpg');
+    }
+    if (image === Images.SEA) {
+      return require('@assets/illustrations/sea.jpg');
+    }
+    return undefined;
+  }, [image]);
+
+  const onPressChats = () => {
     trigger(HapticFeedbackTypes.impactMedium);
-    navigateTo(AccountStackNavigatorEnum.MessagesScreen);
+    navigateTo(AccountStackNavigatorEnum.NotificationsScreen);
   };
 
   const onPressShare = useCallback(() => {
@@ -60,123 +89,24 @@ export const HomeContent = (): JSX.Element => {
     navigateTo(AccountStackNavigatorEnum.ShareScreen);
   }, [navigateTo]);
 
-  const onPressVoice = () => {
-    trigger(HapticFeedbackTypes.impactMedium);
-    Alert.alert('This feature is coming soon ✨');
-  };
-
-  const onPressFriends = () => {
-    trigger(HapticFeedbackTypes.impactMedium);
-    setModalContent(<FriendsModalScreen />);
-    showModal();
-  };
-
-  const onPressProfile = () => {
-    trigger(HapticFeedbackTypes.impactMedium);
-    navigateTo(AccountStackNavigatorEnum.ProfileScreen);
-  };
-
-  const hideModalAndKeyboard = useCallback(() => {
-    Keyboard.dismiss();
-    hideModal();
-  }, [hideModal]);
-
   return (
     <View style={HomeContentStyle.container}>
-      <ScrollView>
-        <View style={HomeContentStyle.helperView} />
-        <View style={HomeContentStyle.itemsContainer}>
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={onPressMessages}
-            style={[
-              HomeContentStyle.messagesView,
-              {
-                backgroundColor: theme.isDark
-                  ? COLORS.WHITE_300
-                  : COLORS.PASTEL_PURPLE
-              }
-            ]}
-          >
-            <View style={HomeContentStyle.emojiView}>
-              <Text style={HomeContentStyle.emojiText}>✨</Text>
-            </View>
-            <View>
-              <Text
-                style={[
-                  HomeContentStyle.viewText,
-                  { color: theme.isDark ? COLORS.PURPLE : COLORS.WHITE }
-                ]}
-              >
-                Messages
-              </Text>
-              <Text style={{ color: COLORS.WHITE_100 }}>
-                Predefine your own
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <View style={HomeContentStyle.rightViewsContainer}>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              onPress={onPressShare}
-              style={[
-                HomeContentStyle.directView,
-                {
-                  backgroundColor: theme.isDark
-                    ? COLORS.WHITE_300
-                    : COLORS.PASTEL_BLUE
-                }
-              ]}
-            >
-              <View style={HomeContentStyle.emojiView}>
-                <Text style={HomeContentStyle.emojiText}>💭</Text>
-              </View>
-              <Text
-                style={[
-                  HomeContentStyle.viewText,
-                  { color: theme.isDark ? COLORS.PURPLE : COLORS.WHITE }
-                ]}
-              >
-                Share
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              onPress={onPressVoice}
-              style={[
-                HomeContentStyle.voiceView,
-                {
-                  backgroundColor: theme.isDark
-                    ? COLORS.WHITE_300
-                    : COLORS.PASTEL_YELLOW
-                }
-              ]}
-            >
-              <View style={HomeContentStyle.emojiView}>
-                <Text style={HomeContentStyle.emojiText}>🎤</Text>
-              </View>
-              <Text
-                style={[
-                  HomeContentStyle.viewText,
-                  { color: theme.isDark ? COLORS.PURPLE : COLORS.WHITE }
-                ]}
-              >
-                Voice
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={setNewImage} />
+        }
+        style={HomeContentStyle.scrollView}
+      >
+        <Image
+          source={imageSource}
+          style={HomeContentStyle.image}
+          resizeMode="contain"
+        />
       </ScrollView>
       <View style={HomeContentStyle.footerContainer}>
-        <BottomButton text="🔎 Friends" onPress={onPressFriends} />
-        <BottomButton text="🏠 Profile" onPress={onPressProfile} />
+        <BottomButton text="Share" onPress={onPressShare} />
+        <BottomButton text="Chats 💬" onPress={onPressChats} />
       </View>
-      <Modal
-        isVisible={modalVisible}
-        content={modalContent}
-        onClose={hideModalAndKeyboard}
-        style={HomeContentStyle.modal}
-      />
     </View>
   );
 };

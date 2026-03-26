@@ -8,7 +8,8 @@ const initialState: User = {
     name: null,
     username: null,
     profilePhoto: null
-  }
+  },
+  image: null
 };
 
 export const UserReducer = createSlice({
@@ -27,6 +28,9 @@ export const UserReducer = createSlice({
     setNameAction: (state, action) => {
       state.user.name = action.payload;
     },
+    setImageAction: (state, action) => {
+      state.image = action.payload;
+    },
     resetUserState: () => initialState
   }
 });
@@ -36,6 +40,7 @@ export const {
   setUserStateAction,
   setProfilePhotoAction,
   setNameAction,
+  setImageAction,
   resetUserState
 } = UserReducer.actions;
 
