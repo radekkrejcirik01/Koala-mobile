@@ -11,6 +11,8 @@ import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
 import { Modal } from '@components/general/Modal/Modal';
+import { Icon } from '@components/general/Icon/Icon';
+import { IconEnum } from '@components/general/Icon/Icon.enum';
 
 export const HomeHeader = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
@@ -39,14 +41,9 @@ export const HomeHeader = (): JSX.Element => {
   return (
     <View style={HomeHeaderStyle.container}>
       <TouchableOpacity onPress={onPressFriends}>
-        <View
-          style={{
-            width: 42,
-            height: 42,
-            borderRadius: 25,
-            backgroundColor: '#fff'
-          }}
-        />
+        <TouchableOpacity activeOpacity={0.9} onPress={onPressFriends}>
+          <Icon name={IconEnum.ADD_FRIEND} size={22} />
+        </TouchableOpacity>
       </TouchableOpacity>
       <ProfilePhoto
         name={name}

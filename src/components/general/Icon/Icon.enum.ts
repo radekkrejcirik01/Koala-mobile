@@ -1,3 +1,4 @@
+import AddFriend from '@assets/webp/AddFriend.webp';
 import Back from '@assets/webp/Back.webp';
 import BackBlue from '@assets/webp/BackBlue.webp';
 import BackBlueRight from '@assets/webp/BackBlueRight.webp';
@@ -14,6 +15,7 @@ import Send from '@assets/webp/Send.webp';
 import Stop from '@assets/webp/Stop.webp';
 
 export enum IconEnum {
+  ADD_FRIEND = 'AddFriend',
   BACK = 'Back',
   BACK_BLUE = 'BackBlue',
   BACK_BLUE_RIGHT = 'BackBlueRight',
@@ -31,6 +33,7 @@ export enum IconEnum {
 }
 
 export const ICONS = {
+  [IconEnum.ADD_FRIEND]: AddFriend,
   [IconEnum.BACK]: Back,
   [IconEnum.BACK_BLUE]: BackBlue,
   [IconEnum.BACK_BLUE_RIGHT]: BackBlueRight,
