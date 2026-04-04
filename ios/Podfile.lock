@@ -57,8 +57,7 @@ PODS:
     - nanopb (< 2.30911.0, >= 2.30908.0)
   - fmt (11.0.2)
   - glog (0.3.5)
-  - Google-Mobile-Ads-SDK (10.14.0):
-    - GoogleAppMeasurement (< 11.0, >= 7.0)
+  - Google-Mobile-Ads-SDK (12.2.0):
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleAppMeasurement (10.24.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.24.0)
@@ -84,7 +83,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUserMessagingPlatform (2.1.0)
+  - GoogleUserMessagingPlatform (2.7.0)
   - GoogleUtilities (7.13.3):
     - GoogleUtilities/AppDelegateSwizzler (= 7.13.3)
     - GoogleUtilities/Environment (= 7.13.3)
@@ -1860,11 +1859,11 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNGoogleMobileAds (12.11.0):
+  - RNGoogleMobileAds (14.11.0):
     - DoubleConversion
     - glog
-    - Google-Mobile-Ads-SDK (= 10.14.0)
-    - GoogleUserMessagingPlatform (= 2.1.0)
+    - Google-Mobile-Ads-SDK (= 12.2.0)
+    - GoogleUserMessagingPlatform (= 2.7.0)
     - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
@@ -2491,10 +2490,10 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 4d52717dd820707cc4eadec5eb981b4832ec8d5d
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: eb93e2f488219332457c3c4eafd2738ddc7e80b8
-  Google-Mobile-Ads-SDK: 8f67a72f88d057335b1ac3f501e2b68ad054116e
+  Google-Mobile-Ads-SDK: 1dfb0c3cb46c7e2b00b0f4de74a1e06d9ea25d67
   GoogleAppMeasurement: f3abf08495ef2cba7829f15318c373b8d9226491
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
-  GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
+  GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: b5c9cfbe6415f1b0b24759f2942c8f33e9af6347
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
@@ -2571,7 +2570,7 @@ SPEC CHECKSUMS:
   RNFlashList: 3badc5badd3342f1e75515f911e34a34dd0fcb96
   RNFS: 89de7d7f4c0f6bafa05343c578f61118c8282ed8
   RNGestureHandler: 0cc7cc54355caa2261bfa1bb5d972e53b80c468c
-  RNGoogleMobileAds: da64a363438fa41b4c5db16dcbdae136a547715a
+  RNGoogleMobileAds: 73459108363fcf5f83dcc41fcbd585984fa94ff9
   RNImageCropPicker: d5387003612dd08d52fb062760136e0e473df186
   RNPermissions: eb8670d9148c4934a9feb2a3461445a73908102e
   RNReactNativeHapticFeedback: c156a343c5e3a7ff0104030e48fe85f24d3471ff
@@ -2586,6 +2585,6 @@ SPEC CHECKSUMS:
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: eca8dd841b7cd47d82d66be58af8e3aeb819012f
 
-PODFILE CHECKSUM: a0ad1775d8b8a75fda81308acef2839fd5d8beb8
+PODFILE CHECKSUM: 04f858ec55cf525afde8516f2e2ca672a4e5ea2a
 
 COCOAPODS: 1.16.2
