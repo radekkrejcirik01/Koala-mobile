@@ -17,7 +17,7 @@ export const RootStackNavigator = (): JSX.Element => {
 
   if (token) {
     return (
-      <Root.Navigator screenOptions={NavigatorScreenOptions}>
+      <Root.Navigator id="account" screenOptions={NavigatorScreenOptions}>
         <Root.Screen
           name={RootStackNavigatorEnum.AccountStack}
           component={AccountStackNavigator}
@@ -27,7 +27,7 @@ export const RootStackNavigator = (): JSX.Element => {
     );
   }
   return (
-    <Root.Navigator>
+    <Root.Navigator id={'login'} screenOptions={NavigatorScreenOptions}>
       <Root.Screen
         name={RootStackNavigatorEnum.LoginStack}
         component={LoginStackNavigator}

@@ -1,11 +1,11 @@
 import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { TipItemStyle } from '@components/home/TipItem/TipItem.style';
 import {
   TipItemDefaultProps,
   TipItemProps
 } from '@components/home/TipItem/TipItem.props';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const TipItem = ({ tip, style }: TipItemProps): JSX.Element => {
   const theme = useTheme();

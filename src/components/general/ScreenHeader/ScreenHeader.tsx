@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
+import { useNavigation } from '@hooks/useNavigation';
 import { ScreenHeaderProps } from '@components/general/ScreenHeader/ScreenHeader.props';
 import { ScreenHeaderStyle } from '@components/general/ScreenHeader/ScreenHeader.style';
 import { BackButton } from '@components/general/BackButton/BackButton';
-import { useTheme } from '@contexts/ThemeContext';
-import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 
 export const ScreenHeader = ({

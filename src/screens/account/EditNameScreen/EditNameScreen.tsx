@@ -2,6 +2,7 @@ import React, { JSX, useCallback, useState } from 'react';
 import { Alert, Text, TextInput, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { EditNameScreenStyle } from '@screens/account/EditNameScreen/EditNameScreen.style';
 import { ReducerProps } from '@store/index/index.props';
@@ -10,7 +11,6 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangeNamePostInterface } from '@interfaces/post/Post.interface';
 import { setNameAction } from '@store/UserReducer';
 import { Button } from '@components/general/Button/Button';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const EditNameScreen = (): JSX.Element => {
   const { name: firstname } = useSelector(

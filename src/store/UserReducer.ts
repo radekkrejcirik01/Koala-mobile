@@ -31,7 +31,10 @@ export const UserReducer = createSlice({
     setImageAction: (state, action) => {
       state.image = action.payload;
     },
-    resetUserState: () => initialState
+    resetUserState: (state) => ({
+      ...initialState,
+      image: state.image
+    })
   }
 });
 

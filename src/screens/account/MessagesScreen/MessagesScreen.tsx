@@ -1,13 +1,13 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { MessagesScreenStyle } from '@screens/account/MessagesScreen/MessagesScreen.style';
 import { useMessagesActions } from '@hooks/useMessagesActions';
 import { AddButton } from '@components/general/AddButton/AddButton';
 import { Modal } from '@components/general/Modal/Modal';
 import { MessageItem } from '@components/home/MessageItem/MessageItem';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const MessagesScreen = () => {
   const theme = useTheme();

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { setUsernameAction } from '@store/NewAccountReducer';
@@ -17,7 +18,6 @@ import { Button } from '@components/general/Button/Button';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { UsernamePostInterface } from '@interfaces/post/Post.interface';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const ThirdScreen = (): JSX.Element => {
   const dispatch = useDispatch();

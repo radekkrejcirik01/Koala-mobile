@@ -1,9 +1,9 @@
 import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { TipItem } from '@components/home/TipItem/TipItem';
 import { CanHelpStyle } from '@components/home/CanHelp/CanHelp.style';
 import { CanHelpProps } from '@components/home/CanHelp/CanHelp.props';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const CanHelp = ({ tip1, tip2 }: CanHelpProps): JSX.Element => {
   const theme = useTheme();

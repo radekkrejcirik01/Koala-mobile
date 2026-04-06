@@ -10,11 +10,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import COLORS from '@constants/COLORS';
-import { useTheme } from '@contexts/ThemeContext';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { Images } from '@enums/images';

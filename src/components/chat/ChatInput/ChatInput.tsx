@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import fs from 'react-native-fs';
+import { useTheme } from '@hooks/useTheme';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { Replies } from '@components/chat/Replies/Replies';
@@ -16,7 +17,6 @@ import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
 import { RecordingInput } from '@components/chat/RecordingInput/RecordingInput';
 import { checkAndroidRecordingPermission } from '@functions/checkAndroidRecordingPermission';
-import { useTheme } from '@contexts/ThemeContext';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 

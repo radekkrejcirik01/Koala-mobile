@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { SelectFriendItemProps } from '@components/friends/SelectFriendItem/SelectFriendItem.props';
 import COLORS from '@constants/COLORS';
 import { SelectFriendItemStyle } from '@components/friends/SelectFriendItem/SelectFriendItem.style';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const SelectFriendItem = ({
   item,

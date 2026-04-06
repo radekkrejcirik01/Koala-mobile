@@ -1,12 +1,12 @@
 import React, { JSX } from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { InviteItemProps } from '@components/friends/InviteItem/InviteItem.props';
 import COLORS from '@constants/COLORS';
 import { InviteItemStyle } from '@components/friends/InviteItem/InviteItem.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const InviteItem = ({
   item,

@@ -2,6 +2,7 @@ import React, { JSX, useCallback, useRef } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
+import { useTheme } from '@hooks/useTheme';
 import { SendModalScreenProps } from '@components/home/SendModalScreen/SendModalScreen.props';
 import { SendModalScreenStyle } from '@components/home/SendModalScreen/SendModalScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
@@ -10,7 +11,6 @@ import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { CanHelp } from '@components/home/CanHelp/CanHelp';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const SendModalScreen = ({
   item,

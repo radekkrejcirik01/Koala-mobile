@@ -1,8 +1,8 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { MessageItemProps } from '@components/home/MessageItem/MessageItem.props';
 import { MessageItemStyle } from '@components/home/MessageItem/MessageItem.style';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const MessageItem = ({
   item,

@@ -32,3 +32,36 @@ export const darkTheme: Theme = {
     error: '#cf6679'
   }
 };
+
+export const beigeTheme: Theme = {
+  colors: {
+    primary: '#6200ee',
+    background: COLORS.BEIGE,
+    surface: '#f5f5f5',
+    surface_200: COLORS.WHITE_200,
+    text: '#000000',
+    error: '#B00020'
+  }
+};
+
+export const greenTheme: Theme = {
+  colors: {
+    primary: '#6200ee',
+    background: COLORS.GREEN,
+    surface: '#f5f5f5',
+    surface_200: COLORS.WHITE_200,
+    text: '#000000',
+    error: '#B00020'
+  }
+};
+
+export const blueTheme: Theme = {
+  colors: {
+    primary: '#6200ee',
+    background: COLORS.BLUE,
+    surface: '#f5f5f5',
+    surface_200: COLORS.WHITE_200,
+    text: '#000000',
+    error: '#B00020'
+  }
+};

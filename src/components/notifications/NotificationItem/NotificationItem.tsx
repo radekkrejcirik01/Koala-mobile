@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 import { NotificationItemStyle } from '@components/notifications/NotificationItem/NotificationItem.style';
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const NotificationItem = ({
   item,

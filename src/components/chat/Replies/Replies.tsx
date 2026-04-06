@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { usePrompt } from '@hooks/usePrompt';
+import { useTheme } from '@hooks/useTheme';
 import {
   RepliesProps,
   ReplyInterface
@@ -21,7 +22,6 @@ import { ReducerProps } from '@store/index/index.props';
 import { REPLIES } from '@components/chat/Replies/Replies.const';
 import COLORS from '@constants/COLORS';
 import { Prompt } from '@components/general/Prompt/Prompt';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const Replies = ({ onPressReply }: RepliesProps) => {
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);

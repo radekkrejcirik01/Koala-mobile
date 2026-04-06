@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
 import { UserPostInterface } from '@interfaces/post/Post.interface';
@@ -22,7 +23,6 @@ import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.styl
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const FourthScreen = (): JSX.Element => {
   const { name, username } = useSelector(

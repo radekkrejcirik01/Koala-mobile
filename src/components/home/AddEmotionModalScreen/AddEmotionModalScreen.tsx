@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@hooks/useTheme';
 import { AddEmotionModalScreenStyle } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.style';
 import { AddEmotionModalScreenProps } from '@components/home/AddEmotionModalScreen/AddEmotionModalScreen.props';
 import { postRequest } from '@utils/Axios/Axios.service';
@@ -14,7 +15,6 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const AddEmotionModalScreen = ({
   onAdded

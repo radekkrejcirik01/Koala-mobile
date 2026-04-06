@@ -2,6 +2,7 @@ import React, { JSX, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { LoginScreenStyle } from '@screens/login/LoginScreen/LoginScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
@@ -13,7 +14,6 @@ import { PreloadService } from '@utils/general/PreloadService';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const LoginScreen = (): JSX.Element => {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ProfileItemProps } from '@components/profile/ProfileItem/ProfileItem.props';
 import { ProfileItemStyle } from '@components/profile/ProfileItem/ProfileItem.style';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const ProfileItem = ({
   onPress,

@@ -8,13 +8,13 @@ import {
   View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ChangePasswordScreenStyle } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen.style';
 import COLORS from '@constants/COLORS';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangePasswordPostInterface } from '@interfaces/post/Post.interface';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const ChangePasswordScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();

@@ -1,16 +1,16 @@
 import React, { JSX, useCallback, useRef, useState } from 'react';
 import { Alert, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import { useSending } from '@hooks/useSending';
+import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
-import { useTheme } from '@contexts/ThemeContext';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
-import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props';
 import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';

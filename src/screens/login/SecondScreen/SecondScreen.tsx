@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { setNameAction } from '@store/NewAccountReducer';
 import { SecondScreenStyle } from '@screens/login/SecondScreen/SecondScreen.style';
 import { Button } from '@components/general/Button/Button';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const SecondScreen = (): JSX.Element => {
   const dispatch = useDispatch();

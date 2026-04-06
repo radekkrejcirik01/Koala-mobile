@@ -2,11 +2,11 @@ import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { FirstScreenStyle } from '@screens/login/FirstScreen/FirstScreen.style';
 import { Button } from '@components/general/Button/Button';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const FirstScreen = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);

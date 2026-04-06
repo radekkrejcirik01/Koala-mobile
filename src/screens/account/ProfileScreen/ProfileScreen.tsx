@@ -6,6 +6,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import fs from 'react-native-fs';
 import Share from 'react-native-share';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ProfileScreenStyle } from '@screens/account/ProfileScreen/ProfileScreen.style';
@@ -21,7 +22,6 @@ import {
   ShareOptions
 } from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const ProfileScreen = (): React.JSX.Element => {
   const { username, name, profilePhoto } = useSelector(

@@ -2,6 +2,7 @@ import React, { JSX, useCallback, useState } from 'react';
 import { Alert, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
+import { useTheme } from '@hooks/useTheme';
 import { SupportScreenStyle } from '@screens/account/SupportScreen/SupportScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import COLORS from '@constants/COLORS';
@@ -9,7 +10,6 @@ import { SendButton } from '@components/home/SendButton/SendButton';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { SupportPostInterface } from '@interfaces/post/Post.interface';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const SupportScreen = (): JSX.Element => {
   const { top } = useSafeAreaInsets();

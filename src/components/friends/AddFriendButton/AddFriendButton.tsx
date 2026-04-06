@@ -1,6 +1,7 @@
 import React, { JSX } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from '@components/general/Icon/Icon';
+import { useTheme } from '@hooks/useTheme';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { AddFriendButtonStyle } from '@components/friends/AddFriendButton/AddFriendButton.style';
 import {
@@ -8,7 +9,6 @@ import {
   AddFriendButtonProps
 } from '@components/friends/AddFriendButton/AddFriendButton.props';
 import COLORS from '@constants/COLORS';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const AddFriendButton = ({
   size,

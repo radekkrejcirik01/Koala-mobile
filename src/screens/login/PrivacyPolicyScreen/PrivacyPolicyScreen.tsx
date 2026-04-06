@@ -1,8 +1,8 @@
 import React, { JSX } from 'react';
 import { ScrollView, Text } from 'react-native';
-import { PrivacyPolicyScreenStyle } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen.style';
-import { useTheme } from '@contexts/ThemeContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PrivacyPolicyScreenStyle } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen.style';
+import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 
 export const PrivacyPolicyScreen = (): JSX.Element => {

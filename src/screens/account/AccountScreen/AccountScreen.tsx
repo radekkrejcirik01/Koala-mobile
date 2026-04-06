@@ -3,6 +3,7 @@ import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
+import { useTheme } from '@hooks/useTheme';
 import { deleteRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { resetUserState } from '@store/UserReducer';
@@ -12,7 +13,6 @@ import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const AccountScreen = (): React.JSX.Element => {
   const dispatch = useDispatch();

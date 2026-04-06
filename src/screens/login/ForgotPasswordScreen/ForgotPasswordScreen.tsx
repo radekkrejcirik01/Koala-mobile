@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@hooks/useTheme';
 import { ForgotPasswordScreenStyle } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { PasswordResetPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
-import { useTheme } from '@contexts/ThemeContext';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const ForgotPasswordScreen = (): React.JSX.Element => {
   const { top } = useSafeAreaInsets();

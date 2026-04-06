@@ -1,6 +1,7 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useAppState } from '@hooks/useAppState';
+import { useTheme } from '@hooks/useTheme';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import {
   ChatHeaderDefaultProps,
@@ -11,7 +12,6 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
 import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 import { BackButton } from '@components/general/BackButton/BackButton';
-import { useTheme } from '@contexts/ThemeContext';
 
 export const ChatHeader = ({
   chatUserId,
