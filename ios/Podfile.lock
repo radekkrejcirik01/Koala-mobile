@@ -1777,7 +1777,7 @@ PODS:
     - React-utils (= 0.78.3)
   - RNAudioRecorderPlayer (3.6.14):
     - React-Core
-  - RNBootSplash (5.5.3):
+  - RNBootSplash (7.2.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2606,7 +2606,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 208bce6d59af415a05645e698c05099c712b7c9e
   ReactCommon: f8ba2c1fc9562f77a16d44fb96fad96aa3eac847
   RNAudioRecorderPlayer: b5ed41ccfe72a211a870bfe09ab36c046eb27d2a
-  RNBootSplash: cdae28c9ea45e6c76f08b8e28ea74c3baa8763e0
+  RNBootSplash: d026850f2778c71d083240dcf1d4a3f4685ee8d7
   RNCAsyncStorage: 79cfba789fca205b204f3ce7948b874500129eb4
   RNCClipboard: ba9fda8e2c9f003a29f7f66793069c4d0dada955
   RNCPushNotificationIOS: 85957a0534fd1309b4c028ccbe5b1baf9ab5cf57
