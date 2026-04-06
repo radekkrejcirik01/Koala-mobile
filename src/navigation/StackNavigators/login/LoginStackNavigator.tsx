@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 import {
   NavigatorScreenOptions,
@@ -14,7 +14,7 @@ import { PrivacyPolicyScreen } from '@screens/login/PrivacyPolicyScreen/PrivacyP
 import { LoginScreen } from '@screens/login/LoginScreen/LoginScreen';
 import { ForgotPasswordScreen } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen';
 
-const Login = createStackNavigator<ParamListBase>();
+const Login = createNativeStackNavigator<ParamListBase>();
 
 export const LoginStackNavigator = (): JSX.Element => (
   <Login.Navigator screenOptions={NavigatorScreenOptions}>

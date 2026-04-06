@@ -55,7 +55,7 @@ export const SupportScreen = (): JSX.Element => {
       </Text>
       <TextInput
         placeholder="Message..."
-        placeholderTextColor={COLORS.GRAY_200}
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         value={message}
         onChangeText={setMessage}
         multiline
@@ -70,7 +70,7 @@ export const SupportScreen = (): JSX.Element => {
       />
       <TextInput
         placeholder="Email"
-        placeholderTextColor={COLORS.GRAY_200}
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}

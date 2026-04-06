@@ -1,6 +1,4 @@
-import { TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types';
-
-export const transitionConfig: TransitionSpec = {
+export const transitionConfig = {
   animation: 'spring',
   config: {
     speed: 2,

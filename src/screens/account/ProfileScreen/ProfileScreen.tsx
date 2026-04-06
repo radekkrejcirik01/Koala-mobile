@@ -101,12 +101,6 @@ export const ProfileScreen = (): React.JSX.Element => {
             onPress={() => navigateTo(AccountStackNavigatorEnum.AccountScreen)}
             title="Account"
           />
-          <ProfileItem
-            onPress={() =>
-              navigateTo(AccountStackNavigatorEnum.SharingHistoryScreen)
-            }
-            title="Sharing history"
-          />
         </View>
         <View
           style={[
@@ -122,14 +116,6 @@ export const ProfileScreen = (): React.JSX.Element => {
             onPress={() => navigateTo(AccountStackNavigatorEnum.FeedbackScreen)}
             title="Feedback"
           />
-        </View>
-        <View
-          style={[
-            ProfileScreenStyle.buttonsContainer,
-            { backgroundColor: theme.theme.colors.surface }
-          ]}
-        >
-          <ProfileItem onPress={share} title="Share Koala" />
         </View>
       </View>
     </ScrollView>

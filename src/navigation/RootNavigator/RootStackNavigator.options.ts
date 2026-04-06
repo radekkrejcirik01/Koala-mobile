@@ -1,18 +1,11 @@
-import { StackNavigationOptions } from '@react-navigation/stack';
-import { Dimensions } from 'react-native';
-import { transitionConfig } from './RootStackNavigator.config';
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
-const { width } = Dimensions.get('screen');
-
-export const NavigatorScreenOptions: StackNavigationOptions = {
-  transitionSpec: {
-    open: transitionConfig,
-    close: transitionConfig
-  },
+export const NavigatorScreenOptions: NativeStackNavigationOptions = {
   headerTitleAlign: 'center',
-  gestureResponseDistance: width
+  gestureEnabled: true,
+  fullScreenGestureEnabled: true
 };
 
-export const NoHeader: StackNavigationOptions = {
+export const NoHeader: NativeStackNavigationOptions = {
   headerShown: false
 };

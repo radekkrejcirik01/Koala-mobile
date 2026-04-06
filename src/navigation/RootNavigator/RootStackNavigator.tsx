@@ -1,5 +1,5 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { JSX } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props';
@@ -11,7 +11,8 @@ import {
 } from '@navigation/RootNavigator/RootStackNavigator.options';
 import { AccountStackNavigator } from '@navigation/StackNavigators/account/AccountStackNavigator';
 
-const Root = createStackNavigator<ParamListBase>();
+const Root = createNativeStackNavigator<ParamListBase>();
+
 export const RootStackNavigator = (): JSX.Element => {
   const { token } = useSelector((state: ReducerProps) => state.user);
 

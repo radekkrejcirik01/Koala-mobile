@@ -46,7 +46,7 @@ export const FeedbackScreen = (): JSX.Element => {
       >{`Share with us what you like or don't like about our app`}</Text>
       <TextInput
         placeholder="Message..."
-        placeholderTextColor={COLORS.GRAY_200}
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         value={message}
         onChangeText={setMessage}
         multiline

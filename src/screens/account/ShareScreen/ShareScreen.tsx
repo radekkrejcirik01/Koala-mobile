@@ -78,7 +78,7 @@ export const ShareScreen = (): JSX.Element => {
         <TextInput
           multiline
           placeholder={`How are you feeling ${name}?`}
-          placeholderTextColor={COLORS.GRAY_200}
+          placeholderTextColor={COLORS.LIGHTGRAY_100}
           autoFocus
           autoCorrect={false}
           value={message}

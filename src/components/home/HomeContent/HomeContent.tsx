@@ -29,18 +29,11 @@ const BottomButton = ({
   text: string;
   onPress: () => void;
 }) => {
-  const theme = useTheme();
-
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={onPress}
-      style={[
-        HomeContentStyle.bottomButtonView,
-        {
-          backgroundColor: theme.isDark ? COLORS.WHITE_300 : COLORS.WHITE
-        }
-      ]}
+      style={HomeContentStyle.bottomButtonView}
     >
       <Text style={HomeContentStyle.bottomButtonText}>{text}</Text>
     </TouchableOpacity>

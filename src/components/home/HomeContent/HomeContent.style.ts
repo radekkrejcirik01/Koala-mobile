@@ -25,6 +25,7 @@ export const HomeContentStyle = StyleSheet.create({
     width: 110,
     height: 52,
     borderRadius: 70,
+    backgroundColor: COLORS.WHITE,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,

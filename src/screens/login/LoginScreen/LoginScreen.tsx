@@ -14,6 +14,7 @@ import { PreloadService } from '@utils/general/PreloadService';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
+import COLORS from '@constants/COLORS.ts';
 
 export const LoginScreen = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ export const LoginScreen = (): JSX.Element => {
         autoCapitalize="none"
         onChangeText={setUsername}
         placeholder="Username"
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         style={[
           LoginScreenStyle.input,
           {
@@ -73,6 +75,7 @@ export const LoginScreen = (): JSX.Element => {
         autoCapitalize="none"
         onChangeText={setPassword}
         placeholder="Password"
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         secureTextEntry
         style={[
           LoginScreenStyle.input,

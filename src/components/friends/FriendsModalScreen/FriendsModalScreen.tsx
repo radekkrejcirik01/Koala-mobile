@@ -183,6 +183,7 @@ export const FriendsModalScreen = ({
           autoCorrect={false}
           autoCapitalize="none"
           placeholder="username"
+          placeholderTextColor={COLORS.LIGHTGRAY_100}
           onChangeText={setInviteUsername}
           style={[
             FriendsModalScreenStyle.input,

@@ -93,7 +93,6 @@ export const Replies = ({ onPressReply }: RepliesProps) => {
   return (
     <ScrollView
       showsHorizontalScrollIndicator={false}
-      style={{ backgroundColor: theme.isDark ? COLORS.BLACK : COLORS.WHITE }}
       contentContainerStyle={RepliesStyle.container}
     >
       {replies?.map((value, index) => (

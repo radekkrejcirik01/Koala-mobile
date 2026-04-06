@@ -102,7 +102,7 @@ export const AddEmotionModalScreen = ({
         selectionColor={COLORS.PURPLE}
         onChangeText={setTip1}
         placeholder="Put on headphones and be delulu"
-        placeholderTextColor={COLORS.GRAY_200}
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         style={[
           AddEmotionModalScreenStyle.input,
           {
@@ -116,7 +116,7 @@ export const AddEmotionModalScreen = ({
         selectionColor={COLORS.PURPLE}
         onChangeText={setTip2}
         placeholder="Positive thinking"
-        placeholderTextColor={COLORS.GRAY_200}
+        placeholderTextColor={COLORS.LIGHTGRAY_100}
         style={[
           AddEmotionModalScreenStyle.input,
           {
