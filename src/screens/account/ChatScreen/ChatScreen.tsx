@@ -30,6 +30,11 @@ import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { getMessageTime } from '@functions/getMessageTime';
 import { getShortMessage } from '@functions/getShortMessage';
+import {
+  KeyboardAwareScrollView,
+  KeyboardStickyView
+} from 'react-native-keyboard-controller';
+import COLORS from '@constants/COLORS.ts';
 
 const CHAT_HEADER_HEIGHT = 45;
 
@@ -252,10 +257,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         name={name}
         profilePhoto={profilePhoto}
       />
-      <KeyboardAvoidingView
-        behavior="position"
-        style={ChatScreenStyle.keyboardAvoidingView}
-      >
+      <KeyboardAwareScrollView bottomOffset={20}>
         <View
           style={{
             height:
@@ -283,7 +285,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             showReplies={showReplies}
           />
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </View>
   );
 };

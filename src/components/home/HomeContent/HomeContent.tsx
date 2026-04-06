@@ -20,6 +20,7 @@ import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { Images } from '@enums/images';
 import { setImageAction } from '@store/UserReducer';
 import { ReducerProps } from '@store/index/index.props';
+import { NotificationsBadge } from '@components/home/NotificationsBadge/NotificationsBadge.tsx';
 
 const BottomButton = ({
   text,
@@ -105,7 +106,10 @@ export const HomeContent = (): JSX.Element => {
       </ScrollView>
       <View style={HomeContentStyle.footerContainer}>
         <BottomButton text="Share" onPress={onPressShare} />
-        <BottomButton text="Chats 💬" onPress={onPressChats} />
+        <View style={HomeContentStyle.footerButtonRow}>
+          <BottomButton text="Chats 💬" onPress={onPressChats} />
+          <NotificationsBadge />
+        </View>
       </View>
     </View>
   );

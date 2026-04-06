@@ -77,7 +77,7 @@ export const ShareScreen = (): JSX.Element => {
       <View style={ShareScreenStyle.inputView}>
         <TextInput
           multiline
-          placeholder={`What is happening ${name}?`}
+          placeholder={`How are you feeling ${name}?`}
           placeholderTextColor={COLORS.GRAY_200}
           autoFocus
           autoCorrect={false}
@@ -92,7 +92,6 @@ export const ShareScreen = (): JSX.Element => {
       <KeyboardAvoidingView>
         <Send
           onFriendSelect={onFriendSelect}
-          onAddFriendPress={() => {}}
           onPressSend={send}
           sending={sending}
           sent={sent}

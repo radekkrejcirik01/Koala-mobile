@@ -40,15 +40,17 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <TouchableOpacity onPress={onPressFriends}>
-        <TouchableOpacity activeOpacity={0.9} onPress={onPressFriends}>
-          <Icon name={IconEnum.ADD_FRIEND} size={22} />
-        </TouchableOpacity>
+      <TouchableOpacity
+        onPress={onPressFriends}
+        activeOpacity={0.8}
+        style={HomeHeaderStyle.addFriendsView}
+      >
+        <Icon name={IconEnum.ADD_FRIEND} size={20} />
       </TouchableOpacity>
       <ProfilePhoto
         name={name}
         photo={profilePhoto}
-        size={42}
+        size={45}
         onPhotoPress={onPressProfile}
       />
       <Modal

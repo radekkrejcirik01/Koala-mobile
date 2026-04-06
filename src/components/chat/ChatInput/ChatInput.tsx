@@ -89,7 +89,7 @@ export const ChatInput = ({
         <View
           style={[
             ChatInputStyle.replyMessageContainer,
-            { backgroundColor: theme.isDark ? COLORS.BLACK : COLORS.WHITE }
+            { backgroundColor: theme.theme.colors.background }
           ]}
         >
           <View style={ChatInputStyle.replyingToContainer}>
@@ -111,7 +111,6 @@ export const ChatInput = ({
           </Text>
         </View>
       )}
-      {showReplies && !isFocused && <Replies onPressReply={onPressReply} />}
       <View
         style={[
           ChatInputStyle.inputContainer,

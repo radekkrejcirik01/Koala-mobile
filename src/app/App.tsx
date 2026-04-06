@@ -7,6 +7,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import store from '@store/index/index';
 import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 const App = () => {
   const theme = useColorScheme();
@@ -19,16 +20,18 @@ const App = () => {
   }, []);
 
   return (
-    <ActionSheetProvider>
-      <SafeAreaProvider>
-        <StatusBar
-          barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
-        />
-        <Provider store={store}>
-          <Navigation />
-        </Provider>
-      </SafeAreaProvider>
-    </ActionSheetProvider>
+    <KeyboardProvider>
+      <ActionSheetProvider>
+        <SafeAreaProvider>
+          <StatusBar
+            barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
+          />
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </SafeAreaProvider>
+      </ActionSheetProvider>
+    </KeyboardProvider>
   );
 };
 

@@ -6,6 +6,8 @@ export const HomeContentStyle = StyleSheet.create({
     paddingBottom: '10%'
   },
   scrollView: {
+    height: '75%',
+    paddingTop: '10%',
     overflow: 'visible'
   },
   image: {
@@ -15,7 +17,6 @@ export const HomeContentStyle = StyleSheet.create({
     alignSelf: 'center'
   },
   footerContainer: {
-    paddingTop: 250,
     paddingHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -31,6 +32,9 @@ export const HomeContentStyle = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84
+  },
+  footerButtonRow: {
+    flexDirection: 'row'
   },
   bottomButtonText: {
     color: COLORS.BLACK,

@@ -20,6 +20,7 @@ export const ProfilePhoto = ({
   <TouchableOpacity
     disabled={!onPhotoPress}
     onPress={onPhotoPress}
+    activeOpacity={0.8}
     style={[ProfilePhotoStyle.container, style]}
   >
     {photo ? (

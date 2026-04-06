@@ -1692,7 +1692,7 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
-"@react-navigation/native@^7.1.14":
+"@react-navigation/native@^7.1.28":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-7.2.2.tgz#c9438fe8393454d74fdb7f959ac9abede52b1f8e"
   integrity sha512-kem1Ko2BcbAjmbQIv66dNmr6EtfDut3QU0qjsVhMnLLhktwyXb6FzZYp8gTrUb6AvkAbaJoi+BF5Pl55pAUa5w==
@@ -7007,6 +7007,13 @@ react-native-is-edge-to-edge@^1.2.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.3.1.tgz#feb9a6a8faf0874298947edd556e5af22044e139"
   integrity sha512-NIXU/iT5+ORyCc7p0z2nnlkouYKX425vuU1OEm6bMMtWWR9yvb+Xg5AZmImTKoF9abxCPqrKC3rOZsKzUYgYZA==
+
+react-native-keyboard-controller@^1.21.4:
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-controller/-/react-native-keyboard-controller-1.21.4.tgz#9ea9687c4b1a7e9856d796abd867449713a83da5"
+  integrity sha512-j1bS2ZKo+ahexnhTYJ+GxXWeMHUylY7AM0h3i0y+XgxcCHW05DpJJQcSvMCmDtMrMhRUtalLZRDCGvuh/aUPZQ==
+  dependencies:
+    react-native-is-edge-to-edge "^1.2.1"
 
 react-native-linear-gradient@^2.5.6:
   version "2.8.3"

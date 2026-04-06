@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const BadgeStyle = StyleSheet.create({
   view: {
     top: -2,
-    left: 15,
+    right: 0,
     paddingTop: 1,
     paddingHorizontal: 5,
     paddingBottom: 2,

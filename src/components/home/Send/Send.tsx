@@ -11,7 +11,6 @@ import { SendStyle } from '@components/home/Send/Send.style';
 
 export const Send = ({
   onFriendSelect,
-  onAddFriendPress,
   onPressSend,
   sending,
   sent,
@@ -41,16 +40,11 @@ export const Send = ({
                 sent={sent}
               />
             ))}
-            <AddFriendButton
-              size={45}
-              onPress={onAddFriendPress}
-              style={SendStyle.addFriendButton}
-            />
           </View>
           {friendsAdded ? (
             <SendButton onPress={onPressSend} sending={sending} sent={sent} />
           ) : (
-            <AddFriendsDescriptionButton onPress={onAddFriendPress} />
+            <AddFriendsDescriptionButton />
           )}
         </>
       ) : (
