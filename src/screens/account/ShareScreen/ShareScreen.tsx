@@ -84,6 +84,7 @@ export const ShareScreen = (): JSX.Element => {
           value={message}
           onChangeText={(value) => {
             setMessage(value);
+            setSent(false);
           }}
           selectionColor={COLORS.BUTTON_BLUE}
           style={[ShareScreenStyle.input, { color: theme.theme.colors.text }]}

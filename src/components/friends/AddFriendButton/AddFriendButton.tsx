@@ -8,14 +8,12 @@ import {
   AddFriendButtonDefaultProps,
   AddFriendButtonProps
 } from '@components/friends/AddFriendButton/AddFriendButton.props';
-import COLORS from '@constants/COLORS';
 
 export const AddFriendButton = ({
   size,
   onPress,
   style
 }: AddFriendButtonProps): JSX.Element => {
-  const theme = useTheme();
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -24,8 +22,7 @@ export const AddFriendButton = ({
         AddFriendButtonStyle.view,
         {
           height: size,
-          width: size,
-          borderColor: theme.isDark ? COLORS.GRAY_200 : COLORS.LIGHTGRAY
+          width: size
         },
         style
       ]}
