@@ -20,10 +20,10 @@ const App = () => {
   }, []);
 
   return (
-    <KeyboardProvider>
+    <KeyboardProvider navigationBarTranslucent>
       <ActionSheetProvider>
         <SafeAreaProvider>
-          <StatusBar barStyle="dark-content" />
+          <StatusBar barStyle="dark-content" translucent />
           <Provider store={store}>
             <Navigation />
           </Provider>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Dimensions, KeyboardAvoidingView, View } from 'react-native';
+import { Alert, Dimensions, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
@@ -9,6 +9,7 @@ import moment from 'moment';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import fs from 'react-native-fs';
 import Clipboard from '@react-native-clipboard/clipboard';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useAppState } from '@hooks/useAppState';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
@@ -30,11 +31,6 @@ import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { getMessageTime } from '@functions/getMessageTime';
 import { getShortMessage } from '@functions/getShortMessage';
-import {
-  KeyboardAwareScrollView,
-  KeyboardStickyView
-} from 'react-native-keyboard-controller';
-import COLORS from '@constants/COLORS.ts';
 
 const CHAT_HEADER_HEIGHT = 45;
 
@@ -257,7 +253,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         name={name}
         profilePhoto={profilePhoto}
       />
-      <KeyboardAwareScrollView bottomOffset={20}>
+      <KeyboardAwareScrollView
+        bottomOffset={20}
+        showsVerticalScrollIndicator={false}
+      >
         <View
           style={{
             height:

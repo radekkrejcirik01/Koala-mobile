@@ -2,6 +2,7 @@ import React, { JSX, useCallback, useRef, useState } from 'react';
 import { Alert, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import { KeyboardStickyView } from 'react-native-keyboard-controller';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
@@ -13,7 +14,6 @@ import { Send } from '@components/home/Send/Send';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ReducerProps } from '@store/index/index.props';
 import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
-import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 
 export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
@@ -90,7 +90,7 @@ export const ShareScreen = (): JSX.Element => {
           style={[ShareScreenStyle.input, { color: theme.theme.colors.text }]}
         />
       </View>
-      <KeyboardAvoidingView>
+      <KeyboardStickyView>
         <Send
           onFriendSelect={onFriendSelect}
           onPressSend={send}
@@ -98,7 +98,7 @@ export const ShareScreen = (): JSX.Element => {
           sent={sent}
           style={ShareScreenStyle.send}
         />
-      </KeyboardAvoidingView>
+      </KeyboardStickyView>
     </View>
   );
 };
