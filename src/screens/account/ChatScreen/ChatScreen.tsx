@@ -256,6 +256,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       <KeyboardAwareScrollView
         bottomOffset={20}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="always"
       >
         <View
           style={{
