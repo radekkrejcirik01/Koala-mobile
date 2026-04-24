@@ -107,7 +107,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
   return (
     <View style={[NotificationsScreenStyle.container, { marginTop: top }]}>
       <ScreenHeader
-        title="My Chats"
+        title="Chats"
         rightComponent={<AddButton onPress={showModal} />}
       />
       <FlashList

@@ -1,15 +1,11 @@
-import React from 'react';
-import {
-  createNavigationContainerRef,
-  DefaultTheme,
-  NavigationContainer
-} from '@react-navigation/native';
+import React, { JSX } from 'react';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useTheme } from '@hooks/useTheme.ts';
 import { RootStackNavigator } from '@navigation/RootNavigator/RootStackNavigator';
+import { navigationRef } from '@utils/getCurrentRouteName.ts';
 
 export const Navigation = (): JSX.Element => {
   const theme = useTheme();
-  const navigationRef = createNavigationContainerRef();
 
   const THEME = {
     ...DefaultTheme,
