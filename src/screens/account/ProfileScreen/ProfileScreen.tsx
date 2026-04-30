@@ -22,6 +22,7 @@ import {
   ShareOptions
 } from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { ThemeSelect } from '@components/profile/ThemeSelect/ThemeSelect.tsx';
 
 export const ProfileScreen = (): React.JSX.Element => {
   const { username, name, profilePhoto } = useSelector(
@@ -118,6 +119,7 @@ export const ProfileScreen = (): React.JSX.Element => {
           />
         </View>
       </View>
+      <ThemeSelect />
     </ScrollView>
   );
 };
