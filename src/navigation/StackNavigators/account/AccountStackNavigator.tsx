@@ -11,7 +11,6 @@ import { NotificationsScreen } from '@screens/account/NotificationsScreen/Notifi
 import { ChatScreen } from '@screens/account/ChatScreen/ChatScreen';
 import { ProfileScreen } from '@screens/account/ProfileScreen/ProfileScreen';
 import { AccountScreen } from '@screens/account/AccountScreen/AccountScreen';
-import { SharedScreen } from '@screens/account/SharedScreen/SharedScreen';
 import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen';
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';

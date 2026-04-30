@@ -46,11 +46,7 @@ export const NotificationItem = ({
   );
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.9}
-      onPress={press}
-      style={NotificationItemStyle.container}
-    >
+    <View style={NotificationItemStyle.container}>
       <View style={NotificationItemStyle.profileView}>
         <View style={NotificationItemStyle.centerView}>
           <ProfilePhoto
@@ -59,7 +55,11 @@ export const NotificationItem = ({
             size={48}
             acronymStyle={NotificationItemStyle.profilePhoto}
           />
-          <View style={NotificationItemStyle.contentView}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={press}
+            style={NotificationItemStyle.contentView}
+          >
             <Text
               style={[
                 NotificationItemStyle.titleText,
@@ -83,10 +83,10 @@ export const NotificationItem = ({
               {getMessage(item.type, isUnseen, item?.message)} ∙{' '}
               {getNotificationTime(item?.time)}
             </Text>
-          </View>
+          </TouchableOpacity>
           {isUnseen && <View style={NotificationItemStyle.newItem} />}
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
