@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import Toast from 'react-native-toast-message';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import store from '@store/index/index';
 import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
@@ -21,16 +22,18 @@ const App = () => {
 
   return (
     <>
-      <KeyboardProvider navigationBarTranslucent>
-        <ActionSheetProvider>
-          <SafeAreaProvider>
-            <StatusBar barStyle="dark-content" translucent />
-            <Provider store={store}>
-              <Navigation />
-            </Provider>
-          </SafeAreaProvider>
-        </ActionSheetProvider>
-      </KeyboardProvider>
+      <GestureHandlerRootView>
+        <KeyboardProvider navigationBarTranslucent>
+          <ActionSheetProvider>
+            <SafeAreaProvider>
+              <StatusBar barStyle="dark-content" translucent />
+              <Provider store={store}>
+                <Navigation />
+              </Provider>
+            </SafeAreaProvider>
+          </ActionSheetProvider>
+        </KeyboardProvider>
+      </GestureHandlerRootView>
       <Toast config={TOAST_CONFIG} />
     </>
   );

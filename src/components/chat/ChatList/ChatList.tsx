@@ -1,58 +1,92 @@
 import React, { useCallback } from 'react';
+import { View } from 'react-native';
 import { useSelector } from 'react-redux';
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
+import { useReactionBar } from '@hooks/useReactionBar';
 import { ReducerProps } from '@store/index/index.props';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 import { OutboundMessageItem } from '@components/chat/OutboundMessageItem/OutboundMessageItem';
 import { InboundMessageItem } from '@components/chat/InboundMessageItem/InboundMessageItem';
-import { FlashList } from '@shopify/flash-list';
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
+import { ConversationInterface } from '@interfaces/general.interface';
+import { ReactionBar } from '@components/chat/ReactionBar/ReactionBar';
 
 export const ChatList = ({
   listRef,
-  conversation,
-  onMessageLongPress
+  conversation
 }: ChatListProps): React.JSX.Element => {
   const { id } = useSelector((state: ReducerProps) => state.user.user);
+
+  const {
+    reactionState,
+    scale,
+    opacity,
+    translateY,
+    registerMessageRef,
+    openReactions,
+    hideReactions,
+    selectReaction
+  } = useReactionBar();
 
   const isOutbound = useCallback(
     (senderId: number): boolean => senderId === id,
     [id]
   );
 
-  return (
-    <FlashList
-      ref={listRef}
-      inverted
-      showsVerticalScrollIndicator={false}
-      data={conversation}
-      keyboardDismissMode="on-drag"
-      estimatedItemSize={100}
-      contentContainerStyle={ChatListStyle.scrollViewContainer}
-      renderItem={({ item: value, index }) =>
-        isOutbound(value.senderId) ? (
+  const renderItem = ({
+    item: value,
+    index
+  }: ListRenderItemInfo<ConversationInterface>) => {
+    return (
+      <View ref={registerMessageRef(value.id)}>
+        {isOutbound(value.senderId) ? (
           <OutboundMessageItem
-            onLongPress={() => onMessageLongPress(value)}
             key={value.id}
             replyMessage={value?.replyMessage}
             audioMessage={value?.audioMessage}
             showSpace={conversation[index - 1]?.senderId !== id}
             isLast={conversation[0]?.id === value.id}
+            onLongPress={() => openReactions(value.id)}
           >
             {value.message}
           </OutboundMessageItem>
         ) : (
           <InboundMessageItem
             key={value.id}
-            onLongPress={() => onMessageLongPress(value)}
             replyMessage={value?.replyMessage}
             audioMessage={value?.audioMessage}
             showSpace={conversation[index - 1]?.senderId === id}
             isLast={conversation[0]?.id === value.id}
+            onLongPress={() => openReactions(value.id)}
           >
             {value.message}
           </InboundMessageItem>
-        )
-      }
-    />
+        )}
+      </View>
+    );
+  };
+
+  return (
+    <View style={ChatListStyle.container}>
+      <FlashList
+        ref={listRef}
+        inverted
+        data={conversation}
+        estimatedItemSize={100}
+        keyboardDismissMode="on-drag"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={ChatListStyle.scrollViewContainer}
+        renderItem={renderItem}
+      />
+
+      <ReactionBar
+        reactionState={reactionState}
+        scale={scale}
+        opacity={opacity}
+        translateY={translateY}
+        onClose={hideReactions}
+        onSelect={selectReaction}
+      />
+    </View>
   );
 };
