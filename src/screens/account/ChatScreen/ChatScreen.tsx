@@ -221,6 +221,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         bottomOffset={20}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always"
+        keyboardDismissMode="on-drag"
       >
         <View
           style={{

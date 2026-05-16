@@ -76,7 +76,6 @@ export const ChatList = ({
         inverted
         data={conversation}
         estimatedItemSize={100}
-        keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={ChatListStyle.scrollViewContainer}
         renderItem={renderItem}
