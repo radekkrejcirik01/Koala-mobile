@@ -5,8 +5,9 @@ import {
   withSpring,
   withTiming
 } from 'react-native-reanimated';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 
-export interface ReactionState {
+interface ReactionState {
   visible: boolean;
   x: number;
   y: number;
@@ -35,6 +36,8 @@ export const useReactionBar = (
   };
 
   const openReactions = (messageId: number) => {
+    trigger(HapticFeedbackTypes.impactMedium);
+
     const node = messageRefs.current.get(messageId);
     messageIdRef.current = messageId;
 
@@ -44,7 +47,7 @@ export const useReactionBar = (
       setReactionState({
         visible: true,
         x: x + 150,
-        y: y - 100
+        y: y - 95
       });
 
       scale.value = withSpring(1, {
@@ -52,7 +55,7 @@ export const useReactionBar = (
         stiffness: 180
       });
 
-      opacity.value = withTiming(1, { duration: 120 });
+      opacity.value = withTiming(1, { duration: 100 });
       translateY.value = withSpring(0);
     });
   };

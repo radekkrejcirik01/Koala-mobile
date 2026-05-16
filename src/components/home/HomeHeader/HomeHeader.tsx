@@ -24,12 +24,12 @@ export const HomeHeader = (): JSX.Element => {
   );
 
   const onPressFriends = () => {
-    trigger(HapticFeedbackTypes.impactMedium);
+    trigger(HapticFeedbackTypes.impactLight);
     showModal();
   };
 
   const onPressProfile = () => {
-    trigger(HapticFeedbackTypes.impactMedium);
+    trigger(HapticFeedbackTypes.impactLight);
     navigateTo(AccountStackNavigatorEnum.ProfileScreen);
   };
 
