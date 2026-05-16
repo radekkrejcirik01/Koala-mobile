@@ -16,6 +16,7 @@ export const ReactionBarStyle = StyleSheet.create({
     marginHorizontal: 6
   },
   emoji: {
+    color: COLORS.BLACK,
     fontSize: 28
   }
 });

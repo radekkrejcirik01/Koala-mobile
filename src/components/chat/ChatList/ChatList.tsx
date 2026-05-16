@@ -39,7 +39,7 @@ export const ChatList = ({
     index
   }: ListRenderItemInfo<ConversationInterface>) => {
     return (
-      <View ref={registerMessageRef(value.id)}>
+      <View ref={registerMessageRef(value.id)} collapsable={false}>
         {isOutbound(value.senderId) ? (
           <OutboundMessageItem
             key={value.id}

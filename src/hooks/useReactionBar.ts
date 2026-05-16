@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import {
   useSharedValue,
   withSpring,
@@ -47,7 +47,7 @@ export const useReactionBar = (
       setReactionState({
         visible: true,
         x: x + 150,
-        y: y - 95
+        y: Platform.OS === 'ios' ? y - 95 : y - 40
       });
 
       scale.value = withSpring(1, {
