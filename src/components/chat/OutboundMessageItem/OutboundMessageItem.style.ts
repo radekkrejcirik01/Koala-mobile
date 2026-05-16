@@ -42,5 +42,17 @@ export const OutboundMessageItemStyle = StyleSheet.create({
   },
   lastItemPadding: {
     paddingBottom: 20
+  },
+  reactionView: {
+    alignSelf: 'flex-end',
+    backgroundColor: COLORS.WHITE,
+    padding: 5,
+    borderRadius: 20,
+    marginLeft: 8,
+    marginTop: -10,
+    marginBottom: 5
+  },
+  reactionText: {
+    color: COLORS.BLACK
   }
 });

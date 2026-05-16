@@ -12,7 +12,9 @@ export interface ReactionState {
   y: number;
 }
 
-export const useReactionBar = () => {
+export const useReactionBar = (
+  onSelectReaction: (reaction: string, messageId: number) => void
+) => {
   const [reactionState, setReactionState] = useState<ReactionState>({
     visible: false,
     x: 0,
@@ -20,6 +22,7 @@ export const useReactionBar = () => {
   });
 
   const messageRefs = useRef(new Map());
+  const messageIdRef = useRef<number>(0);
 
   const scale = useSharedValue(0.8);
   const opacity = useSharedValue(0);
@@ -33,6 +36,7 @@ export const useReactionBar = () => {
 
   const openReactions = (messageId: number) => {
     const node = messageRefs.current.get(messageId);
+    messageIdRef.current = messageId;
 
     if (!node) return;
 
@@ -65,7 +69,7 @@ export const useReactionBar = () => {
   };
 
   const selectReaction = (emoji: string) => {
-    // Alert.alert(emoji);
+    onSelectReaction(emoji, messageIdRef.current);
     hideReactions();
   };
 

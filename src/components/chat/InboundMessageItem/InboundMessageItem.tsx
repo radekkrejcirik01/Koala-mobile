@@ -12,7 +12,8 @@ export const InboundMessageItem = ({
   replyMessage,
   audioMessage,
   showSpace,
-  isLast
+  isLast,
+  reaction
 }: InboundMessageItemProps): React.JSX.Element => {
   const theme = useTheme();
   return (
@@ -54,6 +55,11 @@ export const InboundMessageItem = ({
           )}
         </TouchableOpacity>
       </View>
+      {!!reaction && (
+        <View style={InboundMessageItemStyle.reactionView}>
+          <Text style={InboundMessageItemStyle.reactionText}>{reaction}</Text>
+        </View>
+      )}
       {showSpace && <View style={InboundMessageItemStyle.spaceHeight} />}
     </View>
   );

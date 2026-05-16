@@ -24,13 +24,14 @@ import {
   ResponseConversationGetInterface,
   ResponseInterface
 } from '@interfaces/response/Response.interface';
-import { MessagePostInterface } from '@interfaces/post/Post.interface';
+import {
+  MessagePostInterface,
+  ReactionPostInterface
+} from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
-import { getMessageTime } from '@functions/getMessageTime';
-import { getShortMessage } from '@functions/getShortMessage';
 
 const CHAT_HEADER_HEIGHT = 45;
 
@@ -161,6 +162,20 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     ]
   );
 
+  const sendReaction = useCallback(
+    (reaction: string, messageId: number) => {
+      putRequest<ResponseInterface, ReactionPostInterface>(
+        `notification-reaction/${messageId}`,
+        { reaction }
+      ).subscribe((response: ResponseInterface) => {
+        if (response?.status) {
+          getConversation();
+        }
+      });
+    },
+    [getConversation]
+  );
+
   const deleteMessage = useCallback(
     (messageId: number) => {
       if (!loaded) {
@@ -176,57 +191,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       );
     },
     [getConversation, loaded]
-  );
-
-  const onMessageLongPress = useCallback(
-    (item: ConversationInterface) => {
-      const sentByUser = item?.senderId === userId;
-      const shortMessage = getShortMessage(item?.message);
-      const time = getMessageTime(item.time);
-
-      ReactNativeHapticFeedback.trigger('impactLight');
-
-      if (item.audioMessage) {
-        Alert.alert('🎤 Voice message', time);
-        return;
-      }
-
-      if (sentByUser) {
-        Alert.alert(shortMessage, time, [
-          {
-            text: 'Cancel',
-            style: 'cancel'
-          },
-          {
-            text: 'Copy',
-            onPress: () => {
-              Clipboard.setString(item.message);
-            }
-          }
-        ]);
-      } else {
-        Alert.alert(shortMessage, time, [
-          {
-            text: 'Cancel',
-            style: 'cancel'
-          },
-          {
-            text: 'Copy',
-            onPress: () => {
-              Clipboard.setString(item.message);
-            }
-          },
-          {
-            text: 'Reply',
-            onPress: () => {
-              inputRef.current.focus();
-              setReplyMessage(item.message);
-            }
-          }
-        ]);
-      }
-    },
-    [userId]
   );
 
   const onPressReply = useCallback(
@@ -270,7 +234,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           <ChatList
             listRef={listRef}
             conversation={conversation}
-            onMessageLongPress={onMessageLongPress}
+            onSelectReaction={sendReaction}
           />
           <ChatInput
             message={message}

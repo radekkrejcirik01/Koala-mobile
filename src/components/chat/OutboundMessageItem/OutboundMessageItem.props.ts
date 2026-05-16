@@ -5,4 +5,5 @@ export interface OutboundMessageItemProps {
   audioMessage: string;
   showSpace: boolean;
   isLast: boolean;
+  reaction?: string;
 }

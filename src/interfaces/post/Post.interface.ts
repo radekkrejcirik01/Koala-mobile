@@ -78,3 +78,7 @@ export interface ProfilePhotoPostInterface {
   buffer: string;
   fileName: string;
 }
+
+export interface ReactionPostInterface {
+  reaction: string;
+}

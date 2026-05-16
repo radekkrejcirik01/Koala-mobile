@@ -13,7 +13,8 @@ import { ReactionBar } from '@components/chat/ReactionBar/ReactionBar';
 
 export const ChatList = ({
   listRef,
-  conversation
+  conversation,
+  onSelectReaction
 }: ChatListProps): React.JSX.Element => {
   const { id } = useSelector((state: ReducerProps) => state.user.user);
 
@@ -26,7 +27,7 @@ export const ChatList = ({
     openReactions,
     hideReactions,
     selectReaction
-  } = useReactionBar();
+  } = useReactionBar(onSelectReaction);
 
   const isOutbound = useCallback(
     (senderId: number): boolean => senderId === id,
@@ -46,7 +47,8 @@ export const ChatList = ({
             audioMessage={value?.audioMessage}
             showSpace={conversation[index - 1]?.senderId !== id}
             isLast={conversation[0]?.id === value.id}
-            onLongPress={() => openReactions(value.id)}
+            onLongPress={() => {}}
+            reaction={value?.reaction}
           >
             {value.message}
           </OutboundMessageItem>
@@ -58,6 +60,7 @@ export const ChatList = ({
             showSpace={conversation[index - 1]?.senderId === id}
             isLast={conversation[0]?.id === value.id}
             onLongPress={() => openReactions(value.id)}
+            reaction={value?.reaction}
           >
             {value.message}
           </InboundMessageItem>

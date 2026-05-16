@@ -5,5 +5,5 @@ import { FlashList } from '@shopify/flash-list';
 export interface ChatListProps {
   listRef: RefObject<FlashList<ConversationInterface>>;
   conversation: ConversationInterface[];
-  onMessageLongPress: (value: ConversationInterface) => void;
+  onSelectReaction: (reaction: string, messageId: number) => void;
 }
