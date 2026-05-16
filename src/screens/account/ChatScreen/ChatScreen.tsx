@@ -1,14 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Dimensions, View } from 'react-native';
+import { Dimensions, Keyboard, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
   FirebaseMessagingTypes
 } from '@react-native-firebase/messaging';
 import moment from 'moment';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import fs from 'react-native-fs';
-import Clipboard from '@react-native-clipboard/clipboard';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useAppState } from '@hooks/useAppState';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
@@ -220,8 +218,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       <KeyboardAwareScrollView
         bottomOffset={20}
         showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="always"
-        keyboardDismissMode="on-drag"
+        onScrollBeginDrag={Keyboard.dismiss}
       >
         <View
           style={{
