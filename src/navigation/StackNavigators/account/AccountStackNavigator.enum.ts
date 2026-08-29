@@ -3,7 +3,6 @@ export enum AccountStackNavigatorEnum {
   EditNameScreen = 'EditNameScreen',
   FeedbackScreen = 'FeedbackScreen',
   HomeScreen = 'HomeScreen',
-  MessagesScreen = 'MessagesScreen',
   ShareScreen = 'ShareScreen',
   ChangePasswordScreen = 'ChangePasswordScreen',
   ChatScreen = 'ChatScreen',

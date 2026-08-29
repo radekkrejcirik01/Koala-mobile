@@ -1,5 +1,3 @@
-import { EmotionScreenMessageType } from '@enums/EmotionScreenMessageType';
-
 export interface UserPostInterface {
   name: string;
   username: string;
@@ -33,13 +31,6 @@ export interface DevicePostInterface {
   userId: number;
   platform: string;
   version: string;
-}
-
-export interface EmotionPostInterface {
-  message: string;
-  tip1?: string;
-  tip2?: string;
-  type: EmotionScreenMessageType;
 }
 
 export interface EmotionMessagePostInterface {

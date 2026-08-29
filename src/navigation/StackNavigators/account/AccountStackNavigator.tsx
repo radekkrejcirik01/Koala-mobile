@@ -15,7 +15,6 @@ import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/Chan
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
-import { MessagesScreen } from '@screens/account/MessagesScreen/MessagesScreen';
 import { ShareScreen } from '@screens/account/ShareScreen/ShareScreen';
 
 const Account = createNativeStackNavigator<ParamListBase>();
@@ -44,15 +43,6 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       name={AccountStackNavigatorEnum.HomeScreen}
       component={HomeScreen}
       options={NoHeader}
-    />
-    <Account.Screen
-      name={AccountStackNavigatorEnum.MessagesScreen}
-      component={MessagesScreen}
-      options={{
-        ...NoHeader,
-        presentation: 'transparentModal',
-        gestureEnabled: false
-      }}
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.ShareScreen}

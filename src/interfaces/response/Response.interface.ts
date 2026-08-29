@@ -1,6 +1,5 @@
 import {
   ConversationInterface,
-  EmotionInterface,
   HistoryInterface,
   InviteInterface,
   NotificationInterface,
@@ -65,13 +64,6 @@ export interface ResponseUnseenNotificationsGetInterface {
   status: string;
   message: string;
   unseenNotifications?: number;
-}
-
-export interface ResponseEmotionsGetInterface {
-  status: string;
-  message: string;
-  data: EmotionInterface[];
-  removed?: number[];
 }
 
 export interface ResponseRepliesGetInterface {
