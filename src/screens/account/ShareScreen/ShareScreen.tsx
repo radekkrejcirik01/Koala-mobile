@@ -1,5 +1,5 @@
-import React, { JSX, useCallback, useRef, useState } from 'react';
-import { Alert, TextInput, View } from 'react-native';
+import React, { JSX, useCallback, useMemo, useRef, useState } from 'react';
+import { Alert, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { KeyboardStickyView } from 'react-native-keyboard-controller';
@@ -8,22 +8,42 @@ import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
-import COLORS from '@constants/COLORS';
+import { EmotionType } from '@enums/EmotionType';
+import { EMOTIONS } from '@constants/EMOTIONS';
 import { filterSelected } from '@functions/filterSelected';
 import { Send } from '@components/home/Send/Send';
+import { EmotionItem } from '@components/home/EmotionItem/EmotionItem';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ReducerProps } from '@store/index/index.props';
-import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
+import {
+  EMOTION_POSITIONS,
+  ShareScreenStyle
+} from '@screens/account/ShareScreen/ShareScreen.style';
 
 export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { name } = useSelector((state: ReducerProps) => state.user.user);
 
-  const [message, setMessage] = useState<string>();
+  const [emotion, setEmotion] = useState<EmotionType>();
   const { sending, sent, setSending, setSent } = useSending();
 
   const selectedFriends = useRef<number[]>([]);
+
+  const selectedConfig = useMemo(
+    () => EMOTIONS.find((item) => item.type === emotion),
+    [emotion]
+  );
+
+  const title = selectedConfig?.message ?? `How are you feeling ${name}?`;
+
+  const onEmotionSelect = useCallback(
+    (type: EmotionType) => {
+      setEmotion(type);
+      setSent(false);
+    },
+    [setSent]
+  );
 
   const onFriendSelect = (id: number) => {
     setSent(false);
@@ -34,8 +54,8 @@ export const ShareScreen = (): JSX.Element => {
   const send = useCallback(() => {
     const selected = selectedFriends.current;
 
-    if (!message?.length) {
-      Alert.alert('Please write a message first');
+    if (!emotion) {
+      Alert.alert('Please select how you are feeling first');
       return;
     }
     if (!selected.length) {
@@ -49,18 +69,19 @@ export const ShareScreen = (): JSX.Element => {
       'emotion-message/direct',
       {
         ids: selected,
-        message
+        message: selectedConfig?.message,
+        emotion
       }
     ).subscribe((response: ResponseInterface) => {
       if (response?.status === 'success') {
         setSending(false);
         setSent(true);
 
-        setMessage('');
+        setEmotion(undefined);
         selectedFriends.current = [];
       }
     });
-  }, [message, setSending, setSent]);
+  }, [emotion, selectedConfig, setSending, setSent]);
 
   return (
     <View
@@ -74,31 +95,35 @@ export const ShareScreen = (): JSX.Element => {
       ]}
     >
       <ScreenHeader title="Share" />
-      <View style={ShareScreenStyle.inputView}>
-        <TextInput
-          multiline
-          placeholder={`How are you feeling ${name}?`}
-          placeholderTextColor={COLORS.LIGHTGRAY_100}
-          autoFocus
-          autoCorrect={false}
-          value={message}
-          onChangeText={(value) => {
-            setMessage(value);
-            setSent(false);
-          }}
-          selectionColor={COLORS.BUTTON_BLUE}
-          style={[ShareScreenStyle.input, { color: theme.theme.colors.text }]}
-        />
+      <Text
+        style={[ShareScreenStyle.title, { color: theme.theme.colors.text }]}
+      >
+        {title}
+      </Text>
+      <View style={ShareScreenStyle.contentView}>
+        <View style={ShareScreenStyle.clusterView}>
+          {EMOTIONS.map((item, index) => (
+            <EmotionItem
+              key={item.type}
+              emotion={item}
+              selected={emotion === item.type}
+              onPress={() => onEmotionSelect(item.type)}
+              style={[ShareScreenStyle.emotionItem, EMOTION_POSITIONS[index]]}
+            />
+          ))}
+        </View>
       </View>
-      <KeyboardStickyView>
-        <Send
-          onFriendSelect={onFriendSelect}
-          onPressSend={send}
-          sending={sending}
-          sent={sent}
-          style={ShareScreenStyle.send}
-        />
-      </KeyboardStickyView>
+      <View style={ShareScreenStyle.sendView}>
+        <KeyboardStickyView>
+          <Send
+            onFriendSelect={onFriendSelect}
+            onPressSend={send}
+            sending={sending}
+            sent={sent}
+            style={ShareScreenStyle.send}
+          />
+        </KeyboardStickyView>
+      </View>
     </View>
   );
 };

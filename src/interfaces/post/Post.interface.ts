@@ -1,3 +1,5 @@
+import { EmotionType } from '@enums/EmotionType';
+
 export interface UserPostInterface {
   name: string;
   username: string;
@@ -36,6 +38,7 @@ export interface DevicePostInterface {
 export interface EmotionMessagePostInterface {
   ids: number[];
   message: string;
+  emotion: EmotionType;
 }
 
 export interface MessagePostInterface {
