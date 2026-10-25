@@ -1,16 +1,21 @@
-import React, { JSX, useCallback, useMemo } from 'react';
+import React, { JSX, useCallback, useMemo, useState } from 'react';
 import { Image, RefreshControl, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { forkJoin } from 'rxjs';
 import { useNavigation } from '@hooks/useNavigation';
-import { useTheme } from '@hooks/useTheme';
 import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import COLORS from '@constants/COLORS';
-import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
-import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
+import { getRequest } from '@utils/Axios/Axios.service';
+import {
+  ResponseInvitesGetInterface,
+  ResponseUnseenNotificationsGetInterface
+} from '@interfaces/response/Response.interface';
 import { Images } from '@enums/images';
-import { setImageAction } from '@store/UserReducer';
+import {
+  setUnseenInvites,
+  setUnseenNotifications
+} from '@store/NotificationsReducer';
 import { ReducerProps } from '@store/index/index.props';
 import { NotificationsBadge } from '@components/home/NotificationsBadge/NotificationsBadge.tsx';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
@@ -21,19 +26,29 @@ export const HomeContent = (): JSX.Element => {
 
   const { image } = useSelector((state: ReducerProps) => state.user);
 
-  const setNewImage = () => {
-    let value = image;
-    if (value === Images.ROOM) {
-      value = Images.PARK;
-    } else if (value === Images.PARK) {
-      value = Images.SEA;
-    } else if (value === Images.SEA) {
-      value = Images.ROOM;
-    }
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
-    dispatch(setImageAction(value));
-    PersistStorage.setItem(PersistStorageKeys.IMAGE, value.toString()).catch();
-  };
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    forkJoin([
+      getRequest<ResponseUnseenNotificationsGetInterface>(
+        'unseen-notifications'
+      ),
+      getRequest<ResponseInvitesGetInterface>('invites')
+    ]).subscribe(([notificationsResponse, invitesResponse]) => {
+      if (notificationsResponse?.status) {
+        dispatch(
+          setUnseenNotifications(notificationsResponse.unseenNotifications)
+        );
+      }
+      if (invitesResponse?.status) {
+        dispatch(setUnseenInvites(invitesResponse.data?.length ?? 0));
+      }
+
+      setRefreshing(false);
+    });
+  }, [dispatch]);
 
   const imageSource = useMemo(() => {
     if (image === Images.ROOM) {
@@ -60,7 +75,7 @@ export const HomeContent = (): JSX.Element => {
     <View style={HomeContentStyle.container}>
       <ScrollView
         refreshControl={
-          <RefreshControl refreshing={false} onRefresh={setNewImage} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         style={HomeContentStyle.scrollView}
       >

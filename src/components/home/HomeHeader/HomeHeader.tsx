@@ -13,6 +13,7 @@ import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/Frien
 import { Modal } from '@components/general/Modal/Modal';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { InvitesBadge } from '@components/home/InvitesBadge/InvitesBadge';
 
 export const HomeHeader = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
@@ -40,13 +41,16 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <TouchableOpacity
-        onPress={onPressFriends}
-        activeOpacity={0.8}
-        style={HomeHeaderStyle.addFriendsView}
-      >
-        <Icon name={IconEnum.ADD_FRIEND} size={20} />
-      </TouchableOpacity>
+      <View style={HomeHeaderStyle.addFriendsContainer}>
+        <TouchableOpacity
+          onPress={onPressFriends}
+          activeOpacity={0.8}
+          style={HomeHeaderStyle.addFriendsView}
+        >
+          <Icon name={IconEnum.ADD_FRIEND} size={20} />
+        </TouchableOpacity>
+        <InvitesBadge />
+      </View>
       <ProfilePhoto
         name={name}
         photo={profilePhoto}

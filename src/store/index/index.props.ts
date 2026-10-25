@@ -24,4 +24,5 @@ export interface NewAccount {
 
 export interface Notifications {
   unseenNotifications: number;
+  unseenInvites: number;
 }

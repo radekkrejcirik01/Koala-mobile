@@ -8,6 +8,7 @@ export const HomeHeaderStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
+  addFriendsContainer: {},
   addFriendsView: {
     height: 45,
     width: 45,

@@ -3,15 +3,17 @@ import COLORS from '@constants/COLORS';
 
 export const BadgeStyle = StyleSheet.create({
   view: {
-    top: -2,
-    right: 0,
-    paddingTop: 1,
-    paddingHorizontal: 5,
-    paddingBottom: 2,
-    borderRadius: 10,
+    top: -4,
+    right: -2,
+    minWidth: 18,
+    height: 18,
+    paddingHorizontal: 4,
+    borderRadius: 9,
     backgroundColor: COLORS.RED,
     position: 'absolute',
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   text: {
     fontSize: 12,
