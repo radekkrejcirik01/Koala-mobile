@@ -11,6 +11,7 @@ export default {
   TRANSPARENT: 'transparent',
   BLACK: '#050210',
   BUTTON_BLUE: '#0099ff',
+  BUTTON_BLUE_100: '#0099ff1A',
   PURPLE: '#9381ff',
   PASTEL_PURPLE: '#c8b6ff',
   PASTEL_BLUE: '#a2d2ff',

@@ -1,14 +1,6 @@
 import React, { JSX, useCallback, useMemo } from 'react';
-import {
-  Image,
-  RefreshControl,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, RefreshControl, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
 import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
@@ -21,24 +13,7 @@ import { Images } from '@enums/images';
 import { setImageAction } from '@store/UserReducer';
 import { ReducerProps } from '@store/index/index.props';
 import { NotificationsBadge } from '@components/home/NotificationsBadge/NotificationsBadge.tsx';
-
-const BottomButton = ({
-  text,
-  onPress
-}: {
-  text: string;
-  onPress: () => void;
-}) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={onPress}
-      style={HomeContentStyle.bottomButtonView}
-    >
-      <Text style={HomeContentStyle.bottomButtonText}>{text}</Text>
-    </TouchableOpacity>
-  );
-};
+import { HomeButton } from '@components/home/HomeButton/HomeButton';
 
 export const HomeContent = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
@@ -74,12 +49,10 @@ export const HomeContent = (): JSX.Element => {
   }, [image]);
 
   const onPressChats = () => {
-    trigger(HapticFeedbackTypes.impactMedium);
     navigateTo(AccountStackNavigatorEnum.NotificationsScreen);
   };
 
   const onPressShare = useCallback(() => {
-    trigger(HapticFeedbackTypes.impactMedium);
     navigateTo(AccountStackNavigatorEnum.ShareScreen);
   }, [navigateTo]);
 
@@ -98,9 +71,9 @@ export const HomeContent = (): JSX.Element => {
         />
       </ScrollView>
       <View style={HomeContentStyle.footerContainer}>
-        <BottomButton text="Share" onPress={onPressShare} />
+        <HomeButton text="Share" onPress={onPressShare} />
         <View style={HomeContentStyle.footerButtonRow}>
-          <BottomButton text="Chats 💬" onPress={onPressChats} />
+          <HomeButton text="Chats 💬" onPress={onPressChats} />
           <NotificationsBadge />
         </View>
       </View>

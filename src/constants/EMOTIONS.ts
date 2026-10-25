@@ -2,13 +2,26 @@ import { EmotionType } from '@enums/EmotionType';
 
 export interface EmotionConfig {
   type: EmotionType;
+  label: string;
   message: string;
 }
 
 export const EMOTIONS: EmotionConfig[] = [
-  { type: EmotionType.FeelingGood, message: 'I am feeling good! 😊' },
-  { type: EmotionType.FeelingBad, message: 'I am feeling bad... 😔' },
-  { type: EmotionType.Angry, message: "I'm angry! 😠" },
-  { type: EmotionType.Tired, message: "I'm tired... 😴" },
-  { type: EmotionType.HeadHurts, message: 'My head hurts... 🤕' }
+  {
+    type: EmotionType.SuperGood,
+    label: 'Super good',
+    message: 'Super good'
+  },
+  {
+    type: EmotionType.Good,
+    label: 'Good',
+    message: 'Good'
+  },
+  {
+    type: EmotionType.Meh,
+    label: 'Meh',
+    message: 'Meh'
+  },
+  { type: EmotionType.NotGood, label: 'Sad', message: 'Not good' },
+  { type: EmotionType.Angry, label: 'Angry', message: 'Angry' }
 ];

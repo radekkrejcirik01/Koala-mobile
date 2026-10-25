@@ -9,14 +9,18 @@ type ScreenProp =
   | LoginStackNavigatorEnum
   | AccountStackNavigatorEnum;
 
+type NavigateFn = (screen: string, params?: object) => void;
+
 export const useNavigation = (
   stack?: RootStackNavigatorEnum,
   onFocus?: () => void
 ): {
   navigateTo: (screen: ScreenProp, params?: object) => void;
   navigateBack: () => void;
+  dismiss: () => void;
 } => {
   const navigation = useNavigationModule();
+  const navigate = navigation.navigate as unknown as NavigateFn;
 
   useEffect(
     () =>
@@ -28,17 +32,21 @@ export const useNavigation = (
 
   const navigateTo = useCallback(
     (screen: ScreenProp, params: object = {}) =>
-      navigation.navigate(
-        stack as never,
-        {
-          screen,
-          params
-        } as never
-      ),
-    [navigation, stack]
+      stack
+        ? navigate(stack, { screen, params })
+        : navigate(screen, params),
+    [navigate, stack]
   );
 
   const navigateBack = useCallback(() => navigation.goBack(), [navigation]);
 
-  return { navigateTo, navigateBack };
+  // Pops the nearest ANCESTOR navigator instead of the current one -
+  // useful for dismissing a nested flow (e.g. a modal containing its own
+  // stack) back to whatever screen presented it.
+  const dismiss = useCallback(() => {
+    const parent = navigation.getParent();
+    (parent ?? navigation).goBack();
+  }, [navigation]);
+
+  return { navigateTo, navigateBack, dismiss };
 };

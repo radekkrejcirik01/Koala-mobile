@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import ModalComponent from 'react-native-modal';
 import { ModalProps } from '@components/general/Modal/Modal.props';
 import { ModalStyle } from '@components/general/Modal/Modal.style';

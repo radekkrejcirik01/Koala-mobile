@@ -3,7 +3,7 @@ import { EmotionConfig } from '@constants/EMOTIONS';
 
 export interface EmotionItemProps {
   emotion: EmotionConfig;
-  selected: boolean;
+  selected?: boolean;
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
 }

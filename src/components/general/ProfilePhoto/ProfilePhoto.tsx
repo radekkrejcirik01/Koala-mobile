@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {
@@ -15,6 +15,7 @@ export const ProfilePhoto = ({
   textBackgroundColor,
   onPhotoPress,
   style,
+  imageStyle,
   acronymStyle
 }: ProfilePhotoProps): JSX.Element => (
   <TouchableOpacity
@@ -33,7 +34,8 @@ export const ProfilePhoto = ({
           {
             width: size,
             height: size
-          }
+          },
+          imageStyle
         ]}
       />
     ) : (

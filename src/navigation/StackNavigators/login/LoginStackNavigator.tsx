@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 import {
@@ -17,7 +17,7 @@ import { ForgotPasswordScreen } from '@screens/login/ForgotPasswordScreen/Forgot
 const Login = createNativeStackNavigator<ParamListBase>();
 
 export const LoginStackNavigator = (): JSX.Element => (
-  <Login.Navigator screenOptions={NavigatorScreenOptions}>
+  <Login.Navigator id="loginStack" screenOptions={NavigatorScreenOptions}>
     <Login.Screen
       name={LoginStackNavigatorEnum.FirstScreen}
       component={FirstScreen}

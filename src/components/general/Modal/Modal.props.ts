@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { ModalProps as DefaultModalProps } from 'react-native-modal';
 
 export interface ModalProps extends Partial<DefaultModalProps> {

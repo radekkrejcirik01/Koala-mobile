@@ -1,7 +1,7 @@
 export enum EmotionType {
-  FeelingGood = '😊',
-  FeelingBad = '😔',
-  Angry = '😠',
-  Tired = '😴',
-  HeadHurts = '🤕'
+  SuperGood = '🤩',
+  Good = '😌',
+  Meh = '😐',
+  NotGood = '😞',
+  Angry = '😠'
 }

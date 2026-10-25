@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
 import { BadgeProps } from '@components/general/Badge/Badge.props';
 import { BadgeStyle } from '@components/general/Badge/Badge.style';

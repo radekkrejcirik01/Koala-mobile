@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const HomeContentStyle = StyleSheet.create({
   container: {
@@ -21,25 +20,7 @@ export const HomeContentStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  bottomButtonView: {
-    width: 110,
-    height: 52,
-    borderRadius: 70,
-    backgroundColor: COLORS.WHITE,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84
-  },
   footerButtonRow: {
     flexDirection: 'row'
-  },
-  bottomButtonText: {
-    color: COLORS.BLACK,
-    fontSize: 16,
-    fontWeight: 'bold'
   }
 });

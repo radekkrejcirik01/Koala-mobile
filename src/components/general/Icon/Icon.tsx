@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { IconStyle } from '@components/general/Icon/Icon.style';

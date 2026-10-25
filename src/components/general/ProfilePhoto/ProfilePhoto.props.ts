@@ -1,4 +1,5 @@
 import { StyleProp, ViewStyle } from 'react-native';
+import { ImageStyle } from 'react-native-fast-image';
 
 export interface ProfilePhotoProps {
   name: string;
@@ -7,6 +8,7 @@ export interface ProfilePhotoProps {
   onPhotoPress?: () => void;
   textBackgroundColor?: string;
   style?: StyleProp<ViewStyle>;
+  imageStyle?: StyleProp<ImageStyle>;
   acronymStyle?: StyleProp<ViewStyle>;
 }
 

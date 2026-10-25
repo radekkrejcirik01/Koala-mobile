@@ -15,12 +15,13 @@ import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/Chan
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
-import { ShareScreen } from '@screens/account/ShareScreen/ShareScreen';
+import { ShareStackNavigator } from '@navigation/StackNavigators/share/ShareStackNavigator';
 
 const Account = createNativeStackNavigator<ParamListBase>();
 
 export const AccountStackNavigator = (): React.JSX.Element => (
   <Account.Navigator
+    id="accountStack"
     initialRouteName={AccountStackNavigatorEnum.HomeScreen}
     screenOptions={NavigatorScreenOptions}
   >
@@ -46,11 +47,10 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.ShareScreen}
-      component={ShareScreen}
+      component={ShareStackNavigator}
       options={{
         ...NoHeader,
-        presentation: 'transparentModal',
-        gestureEnabled: false
+        presentation: 'modal'
       }}
     />
     <Account.Screen
@@ -70,7 +70,7 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.ChatScreen}
-      component={ChatScreen}
+      component={ChatScreen as unknown as React.ComponentType}
       options={NoHeader}
     />
     <Account.Screen
