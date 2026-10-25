@@ -15,6 +15,7 @@ import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/Chan
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
+import { ThemeScreen } from '@screens/account/ThemeScreen/ThemeScreen';
 import { ShareStackNavigator } from '@navigation/StackNavigators/share/ShareStackNavigator';
 
 const Account = createNativeStackNavigator<ParamListBase>();
@@ -76,6 +77,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     <Account.Screen
       name={AccountStackNavigatorEnum.SupportScreen}
       component={SupportScreen}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ThemeScreen}
+      component={ThemeScreen}
       options={NoHeader}
     />
   </Account.Navigator>

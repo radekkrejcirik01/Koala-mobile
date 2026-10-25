@@ -8,7 +8,11 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage.ts';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum.ts';
 import { ThemeSelectStyle } from '@components/profile/ThemeSelect/ThemeSelect.style.ts';
 
-const THEMES = [Images.ROOM, Images.PARK, Images.SEA];
+const THEMES = [
+  { value: Images.ROOM, name: 'Home' },
+  { value: Images.PARK, name: 'Nature' },
+  { value: Images.SEA, name: 'Sea' }
+];
 
 export const ThemeSelect = () => {
   const dispatch = useDispatch();
@@ -47,33 +51,42 @@ export const ThemeSelect = () => {
 
   return (
     <View style={ThemeSelectStyle.container}>
-      <View style={ThemeSelectStyle.imagesRow}>
-        {THEMES.map((theme) => {
-          return (
-            <TouchableOpacity
-              key={theme}
-              activeOpacity={0.8}
+      <View>
+        {THEMES.map((theme) => (
+          <TouchableOpacity
+            key={theme.value}
+            activeOpacity={0.8}
+            style={[
+              ThemeSelectStyle.themeRow,
+              {
+                borderColor:
+                  theme.value === image
+                    ? COLORS.BUTTON_BLUE
+                    : COLORS.LIGHTGRAY
+              }
+            ]}
+            onPress={() => onSelect(theme.value)}
+          >
+            <View
               style={[
                 ThemeSelectStyle.imageContainer,
-                {
-                  borderColor:
-                    theme === image ? COLORS.BUTTON_BLUE : COLORS.LIGHTGRAY,
-                  backgroundColor: getBackgroundColor(theme)
-                }
+                { backgroundColor: getBackgroundColor(theme.value) }
               ]}
-              onPress={() => onSelect(theme)}
             >
               <Image
-                source={getImageSource(theme)}
+                source={getImageSource(theme.value)}
                 style={ThemeSelectStyle.image}
                 resizeMode="contain"
               />
-            </TouchableOpacity>
-          );
-        })}
+            </View>
+            <Text style={ThemeSelectStyle.name}>{theme.name}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
-      <Text style={ThemeSelectStyle.title}>Illustrations by Jana Polak</Text>
-      <Text style={ThemeSelectStyle.description}>@janapolak</Text>
+      <View>
+        <Text style={ThemeSelectStyle.title}>Illustrations by Jana Polak</Text>
+        <Text style={ThemeSelectStyle.description}>@janapolak</Text>
+      </View>
     </View>
   );
 };
