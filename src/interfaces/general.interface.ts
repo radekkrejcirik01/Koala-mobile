@@ -1,4 +1,5 @@
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
+import { EmotionType } from '@enums/EmotionType';
 
 export interface UserInterface {
   id?: number;
@@ -24,6 +25,8 @@ export interface NotificationInterface {
   time: number;
   seen: number;
   conversationId?: number;
+  supportedAt?: number;
+  emotion?: EmotionType;
 }
 
 export interface ConversationInterface {
@@ -35,6 +38,8 @@ export interface ConversationInterface {
   replyMessage?: string;
   audioMessage?: string;
   reaction?: string;
+  supportedAt?: number;
+  emotion?: EmotionType;
 }
 
 export interface HistoryInterface {

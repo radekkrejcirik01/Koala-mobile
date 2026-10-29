@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Dimensions, Keyboard, View } from 'react-native';
+import { Dimensions, Keyboard, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
@@ -30,14 +30,29 @@ import { ReducerProps } from '@store/index/index.props';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
+import { SupportButton } from '@components/chat/SupportButton/SupportButton';
+import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 const CHAT_HEADER_HEIGHT = 45;
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-  const { id, chatUserId, name, profilePhoto, username, conversationId } =
-    route.params;
+  const {
+    id,
+    chatUserId,
+    name,
+    profilePhoto,
+    username,
+    conversationId,
+    type,
+    supportedAt: initialSupportedAt,
+    emotion,
+    message: emotionMessage
+  } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
+
+  const isDirectEmotion =
+    type === NotificationItemEnum.DirectEmotionNotificationType;
 
   const { top, bottom } = useSafeAreaInsets();
 
@@ -47,6 +62,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [audioRecord, setAudioRecord] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean>();
+  const [supportedAt, setSupportedAt] = useState<number | undefined>(
+    initialSupportedAt
+  );
+  const [supporting, setSupporting] = useState<boolean>(false);
 
   const listRef = useRef(null);
   const inputRef = useRef(null);
@@ -207,6 +226,27 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     scrollToEnd();
   }, [send]);
 
+  const onPressSupport = useCallback(() => {
+    if (supporting || supportedAt) {
+      return;
+    }
+
+    setSupporting(true);
+    setSupportedAt(Math.floor(Date.now() / 1000));
+
+    putRequest<ResponseInterface, never>(
+      `notification-support/${id}`
+    ).subscribe((response: ResponseInterface) => {
+      setSupporting(false);
+
+      if (response?.status !== 'success') {
+        setSupportedAt(undefined);
+      }
+    });
+  }, [id, supporting, supportedAt]);
+
+  const showSupportGate = isDirectEmotion && !supportedAt;
+
   return (
     <View style={[ChatScreenStyle.container, { paddingTop: top || 10 }]}>
       <ChatHeader
@@ -215,40 +255,56 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         name={name}
         profilePhoto={profilePhoto}
       />
-      <KeyboardAwareScrollView
-        bottomOffset={20}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="always"
-        onScrollBeginDrag={Keyboard.dismiss}
-      >
+      {showSupportGate ? (
         <View
-          style={{
-            height:
-              Dimensions.get('window').height -
-              (top || 10) -
-              CHAT_HEADER_HEIGHT -
-              bottom
-          }}
+          style={[ChatScreenStyle.supportView, { paddingBottom: bottom || 30 }]}
         >
-          <ChatList
-            listRef={listRef}
-            conversation={conversation}
-            onSelectReaction={sendReaction}
-          />
-          <ChatInput
-            message={message}
-            onChangeText={setMessage}
-            onPressSend={onPressSend}
-            onPressReply={onPressReply}
-            onAudioRecord={setAudioRecord}
-            replyMessage={replyMessage}
-            inputRef={inputRef}
-            onFocus={scrollToEnd}
-            onDismissReply={() => setReplyMessage('')}
-            showReplies={showReplies}
-          />
+          <View style={ChatScreenStyle.emotionView}>
+            <Text style={ChatScreenStyle.emotionText}>{emotion}</Text>
+            <Text style={ChatScreenStyle.emotionMessageText}>
+              {emotionMessage}
+            </Text>
+          </View>
+          <View style={ChatScreenStyle.supportButtonView}>
+            <SupportButton supporting={supporting} onPress={onPressSupport} />
+          </View>
         </View>
-      </KeyboardAwareScrollView>
+      ) : (
+        <KeyboardAwareScrollView
+          bottomOffset={20}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="always"
+          onScrollBeginDrag={Keyboard.dismiss}
+        >
+          <View
+            style={{
+              height:
+                Dimensions.get('window').height -
+                (top || 10) -
+                CHAT_HEADER_HEIGHT -
+                bottom
+            }}
+          >
+            <ChatList
+              listRef={listRef}
+              conversation={conversation}
+              onSelectReaction={sendReaction}
+            />
+            <ChatInput
+              message={message}
+              onChangeText={setMessage}
+              onPressSend={onPressSend}
+              onPressReply={onPressReply}
+              onAudioRecord={setAudioRecord}
+              replyMessage={replyMessage}
+              inputRef={inputRef}
+              onFocus={scrollToEnd}
+              onDismissReply={() => setReplyMessage('')}
+              showReplies={showReplies}
+            />
+          </View>
+        </KeyboardAwareScrollView>
+      )}
     </View>
   );
 };

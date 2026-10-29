@@ -85,7 +85,11 @@ export const NotificationsScreen = (): React.JSX.Element => {
             name: item.name,
             profilePhoto: item?.profilePhoto,
             username: item.sender,
-            conversationId: item?.conversationId
+            conversationId: item?.conversationId,
+            type: item.type,
+            supportedAt: item?.supportedAt,
+            emotion: item?.emotion,
+            message: item.message
           })
         }
       />
