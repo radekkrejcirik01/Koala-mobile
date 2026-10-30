@@ -26,7 +26,6 @@ export interface NotificationInterface {
   time: number;
   seen: number;
   conversationId?: number;
-  supportedAt?: number;
   emotion?: EmotionType;
 }
 
@@ -39,7 +38,6 @@ export interface ConversationInterface {
   replyMessage?: string;
   audioMessage?: string;
   reaction?: string;
-  supportedAt?: number;
   emotion?: EmotionType;
 }
 

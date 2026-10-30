@@ -31,16 +31,12 @@ export const NotificationItem = ({
     type: NotificationItemEnum,
     isUnseen: boolean,
     message: string,
-    messageSenderId?: number,
-    supportedAt?: number
+    messageSenderId?: number
   ): string {
-    if (
-      type === NotificationItemEnum.DirectEmotionNotificationType &&
-      supportedAt
-    ) {
+    if (type === NotificationItemEnum.SupportNotificationType) {
       return messageSenderId === userId
-        ? `${item.name} sent support 🫶`
-        : 'You sent your support 🫶';
+        ? 'You sent your support 🫶'
+        : `Sent support 🫶`;
     }
     if (type === NotificationItemEnum.VoiceMessageNotificationType) {
       if (isUnseen) {
@@ -98,8 +94,7 @@ export const NotificationItem = ({
                 item.type,
                 isUnseen,
                 item?.message,
-                item?.messageSenderId,
-                item?.supportedAt
+                item?.messageSenderId
               )}{' '}
               ∙ {getNotificationTime(item?.time)}
             </Text>

@@ -56,7 +56,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [audioRecord, setAudioRecord] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean>();
-  const [supportedAt, setSupportedAt] = useState<number | undefined>();
   const [supporting, setSupporting] = useState<boolean>(false);
   const [emotion, setEmotion] = useState<ConversationInterface>();
 
@@ -226,29 +225,49 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     scrollToEnd();
   }, [send]);
 
+  const supportMessage = conversation.find(
+    (item) => item.type === NotificationItemEnum.SupportNotificationType
+  );
+
   const onPressSupport = useCallback(() => {
-    if (supporting || supportedAt) {
+    if (supporting || supportMessage) {
       return;
     }
 
     setSupporting(true);
-    setSupportedAt(Math.floor(Date.now() / 1000));
+
+    setConversation((prevState) => [
+      {
+        id: prevState[prevState?.length - 1]?.id + 1 || 1,
+        senderId: userId,
+        message: '🫶',
+        time: moment().unix(),
+        type: NotificationItemEnum.SupportNotificationType
+      },
+      ...prevState
+    ]);
 
     putRequest<ResponseInterface, never>(
       `notification-support/${id}`
     ).subscribe((response: ResponseInterface) => {
       setSupporting(false);
 
-      if (response?.status !== 'success') {
-        setSupportedAt(undefined);
+      if (response?.status === 'success') {
+        getConversation();
+      } else {
+        setConversation((prevState) =>
+          prevState.filter(
+            (item) => item.type !== NotificationItemEnum.SupportNotificationType
+          )
+        );
       }
     });
-  }, [id, supporting, supportedAt]);
+  }, [getConversation, id, supportMessage, supporting, userId]);
 
   const isOwnEmotion = !!emotion && emotion.senderId !== chatUserId;
-  const supportSentAt = supportedAt ?? emotion?.supportedAt;
-  const showSupportButton = !!emotion && !isOwnEmotion && !supportSentAt;
-  const showSupportConfirmation = !showSupportButton && !!supportSentAt;
+  const showSupportButton = !!emotion && !isOwnEmotion && !supportMessage;
+  const showSupportConfirmation = !showSupportButton && !!supportMessage;
+  const isSupporter = supportMessage?.senderId !== chatUserId;
 
   return (
     <View style={[ChatScreenStyle.container, { paddingTop: top }]}>
@@ -266,7 +285,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         </Text>
         {showSupportConfirmation && (
           <Text style={ChatScreenStyle.supportHintText}>
-            {isOwnEmotion ? `${name} sent support` : 'You sent your support'} 🫶
+            {isSupporter ? 'You sent your support' : `${name} sent support`} 🫶
           </Text>
         )}
       </View>
@@ -303,7 +322,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
               listRef={listRef}
               conversation={conversation.filter(
                 (item) =>
-                  item.type !== NotificationItemEnum.DirectEmotionNotificationType
+                  item.type !== NotificationItemEnum.DirectEmotionNotificationType &&
+                  item.type !== NotificationItemEnum.SupportNotificationType
               )}
               onSelectReaction={sendReaction}
             />

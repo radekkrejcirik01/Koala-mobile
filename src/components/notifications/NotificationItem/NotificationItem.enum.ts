@@ -5,5 +5,6 @@ export enum NotificationItemEnum {
   MessageNotificationType = 'message',
   VoiceMessageNotificationType = 'audio',
   CheckOnMessageNotificationType = 'check_on',
-  DirectEmotionNotificationType = 'direct_emotion'
+  DirectEmotionNotificationType = 'direct_emotion',
+  SupportNotificationType = 'support'
 }
