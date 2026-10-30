@@ -17,6 +17,7 @@ export interface InviteInterface {
 export interface NotificationInterface {
   id: number;
   senderId?: number;
+  messageSenderId?: number;
   sender?: string;
   name: string;
   profilePhoto?: string;

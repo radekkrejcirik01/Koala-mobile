@@ -85,11 +85,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
             name: item.name,
             profilePhoto: item?.profilePhoto,
             username: item.sender,
-            conversationId: item?.conversationId,
-            type: item.type,
-            supportedAt: item?.supportedAt,
-            emotion: item?.emotion,
-            message: item.message
+            conversationId: item?.conversationId
           })
         }
       />
@@ -109,7 +105,12 @@ export const NotificationsScreen = (): React.JSX.Element => {
   }, [hideModal]);
 
   return (
-    <View style={[NotificationsScreenStyle.container, { marginTop: top }]}>
+    <View
+      style={[
+        NotificationsScreenStyle.container,
+        { marginTop: Math.max(top - 6, 0) }
+      ]}
+    >
       <ScreenHeader
         title="Chats"
         rightComponent={<AddButton onPress={showModal} />}

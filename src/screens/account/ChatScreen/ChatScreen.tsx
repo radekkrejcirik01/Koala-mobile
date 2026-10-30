@@ -34,6 +34,7 @@ import { SupportButton } from '@components/chat/SupportButton/SupportButton';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 const CHAT_HEADER_HEIGHT = 45;
+const EMOTION_HEADER_HEIGHT = 280;
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const {
@@ -42,17 +43,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     name,
     profilePhoto,
     username,
-    conversationId,
-    type,
-    supportedAt: initialSupportedAt,
-    emotion,
-    message: emotionMessage
+    conversationId
   } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
-
-  const isDirectEmotion =
-    type === NotificationItemEnum.DirectEmotionNotificationType;
 
   const { top, bottom } = useSafeAreaInsets();
 
@@ -62,10 +56,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [audioRecord, setAudioRecord] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean>();
-  const [supportedAt, setSupportedAt] = useState<number | undefined>(
-    initialSupportedAt
-  );
+  const [supportedAt, setSupportedAt] = useState<number | undefined>();
   const [supporting, setSupporting] = useState<boolean>(false);
+  const [emotion, setEmotion] = useState<ConversationInterface>();
 
   const listRef = useRef(null);
   const inputRef = useRef(null);
@@ -105,6 +98,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     ).subscribe((response: ResponseConversationGetInterface) => {
       if (response?.status && !!response?.data?.length) {
         const data = response?.data;
+
+        setEmotion(
+          data.find(
+            (item) =>
+              item.type === NotificationItemEnum.DirectEmotionNotificationType
+          )
+        );
 
         setConversation(data.reverse());
         setShowReplies(checkShowReplies(data));
@@ -245,29 +245,42 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     });
   }, [id, supporting, supportedAt]);
 
-  const showSupportGate = isDirectEmotion && !supportedAt;
+  const isOwnEmotion = !!emotion && emotion.senderId !== chatUserId;
+  const supportSentAt = supportedAt ?? emotion?.supportedAt;
+  const showSupportButton = !!emotion && !isOwnEmotion && !supportSentAt;
+  const showSupportConfirmation = !showSupportButton && !!supportSentAt;
 
   return (
-    <View style={[ChatScreenStyle.container, { paddingTop: top || 10 }]}>
+    <View style={[ChatScreenStyle.container, { paddingTop: top }]}>
       <ChatHeader
         chatUserId={chatUserId}
         username={username}
         name={name}
         profilePhoto={profilePhoto}
       />
-      {showSupportGate ? (
+      <View style={ChatScreenStyle.emotionView}>
+        <Text style={ChatScreenStyle.emotionText}>{emotion?.emotion}</Text>
+        <Text style={ChatScreenStyle.emotionMessageText}>
+          {isOwnEmotion ? 'You are' : `${name} is`} feeling{' '}
+          {emotion?.message?.toLowerCase()}
+        </Text>
+        {showSupportConfirmation && (
+          <Text style={ChatScreenStyle.supportHintText}>
+            {isOwnEmotion ? `${name} sent support` : 'You sent your support'} 🫶
+          </Text>
+        )}
+      </View>
+      {showSupportButton ? (
         <View
-          style={[ChatScreenStyle.supportView, { paddingBottom: bottom || 30 }]}
+          style={[
+            ChatScreenStyle.supportButtonView,
+            { paddingBottom: bottom || 30 }
+          ]}
         >
-          <View style={ChatScreenStyle.emotionView}>
-            <Text style={ChatScreenStyle.emotionText}>{emotion}</Text>
-            <Text style={ChatScreenStyle.emotionMessageText}>
-              {emotionMessage}
-            </Text>
-          </View>
-          <View style={ChatScreenStyle.supportButtonView}>
-            <SupportButton supporting={supporting} onPress={onPressSupport} />
-          </View>
+          <SupportButton supporting={supporting} onPress={onPressSupport} />
+          <Text style={ChatScreenStyle.supportHintText}>
+            Send support to start a chat
+          </Text>
         </View>
       ) : (
         <KeyboardAwareScrollView
@@ -282,12 +295,16 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 Dimensions.get('window').height -
                 (top || 10) -
                 CHAT_HEADER_HEIGHT -
-                bottom
+                bottom -
+                EMOTION_HEADER_HEIGHT
             }}
           >
             <ChatList
               listRef={listRef}
-              conversation={conversation}
+              conversation={conversation.filter(
+                (item) =>
+                  item.type !== NotificationItemEnum.DirectEmotionNotificationType
+              )}
               onSelectReaction={sendReaction}
             />
             <ChatInput

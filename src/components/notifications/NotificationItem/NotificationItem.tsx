@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
@@ -7,12 +8,15 @@ import { NotificationItemStyle } from '@components/notifications/NotificationIte
 import { NotificationItemProps } from '@components/notifications/NotificationItem/NotificationItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getShortMessage } from '@functions/getShortMessage';
+import { ReducerProps } from '@store/index/index.props';
 
 export const NotificationItem = ({
   item,
   onPress
 }: NotificationItemProps): React.JSX.Element => {
   const theme = useTheme();
+
+  const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
   const [pressed, setPressed] = useState<boolean>(false);
 
@@ -26,8 +30,18 @@ export const NotificationItem = ({
   function getMessage(
     type: NotificationItemEnum,
     isUnseen: boolean,
-    message: string
+    message: string,
+    messageSenderId?: number,
+    supportedAt?: number
   ): string {
+    if (
+      type === NotificationItemEnum.DirectEmotionNotificationType &&
+      supportedAt
+    ) {
+      return messageSenderId === userId
+        ? `${item.name} sent support 🫶`
+        : 'You sent your support 🫶';
+    }
     if (type === NotificationItemEnum.VoiceMessageNotificationType) {
       if (isUnseen) {
         return 'New voice message';
@@ -80,8 +94,14 @@ export const NotificationItem = ({
                 }
               ]}
             >
-              {getMessage(item.type, isUnseen, item?.message)} ∙{' '}
-              {getNotificationTime(item?.time)}
+              {getMessage(
+                item.type,
+                isUnseen,
+                item?.message,
+                item?.messageSenderId,
+                item?.supportedAt
+              )}{' '}
+              ∙ {getNotificationTime(item?.time)}
             </Text>
           </TouchableOpacity>
           {isUnseen && <View style={NotificationItemStyle.newItem} />}

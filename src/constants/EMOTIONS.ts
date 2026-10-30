@@ -23,5 +23,5 @@ export const EMOTIONS: EmotionConfig[] = [
     message: 'Meh'
   },
   { type: EmotionType.NotGood, label: 'Sad', message: 'Not good' },
-  { type: EmotionType.Angry, label: 'Angry', message: 'Angry' }
+  { type: EmotionType.Miserable, label: 'Miserable', message: 'Miserable' }
 ];
