@@ -21,6 +21,37 @@ export const ChatScreenStyle = StyleSheet.create({
     textAlign: 'center',
     marginTop: 16
   },
+  emotionBadgeOuter: {
+    position: 'absolute',
+    alignSelf: 'center',
+    maxWidth: '90%',
+    padding: 3,
+    borderRadius: 23,
+    backgroundColor: COLORS.BEIGE,
+    elevation: 10,
+    zIndex: 9999
+  },
+  emotionBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    overflow: 'hidden',
+    paddingVertical: 7,
+    paddingHorizontal: 13,
+    borderRadius: 20
+  },
+  emotionBadgeTint: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: COLORS.WHITE_200
+  },
+  emotionBadgeEmoji: {
+    fontSize: 19,
+    marginRight: 7
+  },
+  emotionBadgeText: {
+    flexShrink: 1,
+    fontSize: 13,
+    color: COLORS.GRAY_200
+  },
   supportButtonView: {
     flex: 1,
     alignItems: 'center',

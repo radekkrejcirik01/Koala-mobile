@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useReactionBar } from '@hooks/useReactionBar';
@@ -10,11 +10,13 @@ import { InboundMessageItem } from '@components/chat/InboundMessageItem/InboundM
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { ConversationInterface } from '@interfaces/general.interface';
 import { ReactionBar } from '@components/chat/ReactionBar/ReactionBar';
+import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 export const ChatList = ({
   listRef,
   conversation,
-  onSelectReaction
+  onSelectReaction,
+  name
 }: ChatListProps): React.JSX.Element => {
   const { id } = useSelector((state: ReducerProps) => state.user.user);
 
@@ -38,6 +40,16 @@ export const ChatList = ({
     item: value,
     index
   }: ListRenderItemInfo<ConversationInterface>) => {
+    if (value.type === NotificationItemEnum.SupportNotificationType) {
+      return (
+        <Text style={ChatListStyle.supportText}>
+          {isOutbound(value.senderId)
+            ? 'You sent your support 🫶'
+            : `${name} sent support 🫶`}
+        </Text>
+      );
+    }
+
     return (
       <View ref={registerMessageRef(value.id)} collapsable={false}>
         {isOutbound(value.senderId) ? (

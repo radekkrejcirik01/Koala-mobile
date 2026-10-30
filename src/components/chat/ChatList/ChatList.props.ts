@@ -6,4 +6,5 @@ export interface ChatListProps {
   listRef: RefObject<FlashList<ConversationInterface>>;
   conversation: ConversationInterface[];
   onSelectReaction: (reaction: string, messageId: number) => void;
+  name: string;
 }

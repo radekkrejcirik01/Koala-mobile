@@ -37,14 +37,8 @@ const CHAT_HEADER_HEIGHT = 45;
 const EMOTION_HEADER_HEIGHT = 280;
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-  const {
-    id,
-    chatUserId,
-    name,
-    profilePhoto,
-    username,
-    conversationId
-  } = route.params;
+  const { id, chatUserId, name, profilePhoto, username, conversationId } =
+    route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
@@ -225,12 +219,12 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     scrollToEnd();
   }, [send]);
 
-  const supportMessage = conversation.find(
+  const hasSupportMessage = conversation.some(
     (item) => item.type === NotificationItemEnum.SupportNotificationType
   );
 
   const onPressSupport = useCallback(() => {
-    if (supporting || supportMessage) {
+    if (supporting || hasSupportMessage) {
       return;
     }
 
@@ -262,12 +256,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         );
       }
     });
-  }, [getConversation, id, supportMessage, supporting, userId]);
+  }, [getConversation, hasSupportMessage, id, supporting, userId]);
 
   const isOwnEmotion = !!emotion && emotion.senderId !== chatUserId;
-  const showSupportButton = !!emotion && !isOwnEmotion && !supportMessage;
-  const showSupportConfirmation = !showSupportButton && !!supportMessage;
-  const isSupporter = supportMessage?.senderId !== chatUserId;
+  const showSupportButton = !!emotion && !isOwnEmotion && !hasSupportMessage;
 
   return (
     <View style={[ChatScreenStyle.container, { paddingTop: top }]}>
@@ -277,18 +269,33 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         name={name}
         profilePhoto={profilePhoto}
       />
-      <View style={ChatScreenStyle.emotionView}>
-        <Text style={ChatScreenStyle.emotionText}>{emotion?.emotion}</Text>
-        <Text style={ChatScreenStyle.emotionMessageText}>
-          {isOwnEmotion ? 'You are' : `${name} is`} feeling{' '}
-          {emotion?.message?.toLowerCase()}
-        </Text>
-        {showSupportConfirmation && (
-          <Text style={ChatScreenStyle.supportHintText}>
-            {isSupporter ? 'You sent your support' : `${name} sent support`} 🫶
+      {hasSupportMessage ? (
+        <View
+          style={[
+            ChatScreenStyle.emotionBadgeOuter,
+            { top: top + CHAT_HEADER_HEIGHT + 28 }
+          ]}
+        >
+          <View style={ChatScreenStyle.emotionBadge}>
+            <View style={ChatScreenStyle.emotionBadgeTint} />
+            <Text style={ChatScreenStyle.emotionBadgeEmoji}>
+              {emotion?.emotion}
+            </Text>
+            <Text style={ChatScreenStyle.emotionBadgeText} numberOfLines={1}>
+              {isOwnEmotion ? 'You are' : `${name} is`} feeling{' '}
+              {emotion?.message?.toLowerCase()}
+            </Text>
+          </View>
+        </View>
+      ) : (
+        <View style={ChatScreenStyle.emotionView}>
+          <Text style={ChatScreenStyle.emotionText}>{emotion?.emotion}</Text>
+          <Text style={ChatScreenStyle.emotionMessageText}>
+            {isOwnEmotion ? 'You are' : `${name} is`} feeling{' '}
+            {emotion?.message?.toLowerCase()}
           </Text>
-        )}
-      </View>
+        </View>
+      )}
       {showSupportButton ? (
         <View
           style={[
@@ -315,17 +322,18 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
                 (top || 10) -
                 CHAT_HEADER_HEIGHT -
                 bottom -
-                EMOTION_HEADER_HEIGHT
+                (hasSupportMessage ? 0 : EMOTION_HEADER_HEIGHT)
             }}
           >
             <ChatList
               listRef={listRef}
               conversation={conversation.filter(
                 (item) =>
-                  item.type !== NotificationItemEnum.DirectEmotionNotificationType &&
-                  item.type !== NotificationItemEnum.SupportNotificationType
+                  item.type !==
+                  NotificationItemEnum.DirectEmotionNotificationType
               )}
               onSelectReaction={sendReaction}
+              name={name}
             />
             <ChatInput
               message={message}
