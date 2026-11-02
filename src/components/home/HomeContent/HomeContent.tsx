@@ -68,7 +68,7 @@ export const HomeContent = (): JSX.Element => {
   };
 
   const onPressShare = useCallback(() => {
-    navigateTo(AccountStackNavigatorEnum.ShareScreen);
+    navigateTo(AccountStackNavigatorEnum.ShareStack);
   }, [navigateTo]);
 
   return (

@@ -47,7 +47,7 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       options={NoHeader}
     />
     <Account.Screen
-      name={AccountStackNavigatorEnum.ShareScreen}
+      name={AccountStackNavigatorEnum.ShareStack}
       component={ShareStackNavigator}
       options={{
         ...NoHeader,

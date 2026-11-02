@@ -4,6 +4,7 @@ export enum AccountStackNavigatorEnum {
   FeedbackScreen = 'FeedbackScreen',
   HomeScreen = 'HomeScreen',
   ShareScreen = 'ShareScreen',
+  ShareStack = 'ShareStack',
   ShareSendScreen = 'ShareSendScreen',
   ChangePasswordScreen = 'ChangePasswordScreen',
   ChatScreen = 'ChatScreen',
