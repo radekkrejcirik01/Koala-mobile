@@ -16,9 +16,5 @@ export const HomeHeaderStyle = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  modal: {
-    margin: 0,
-    justifyContent: 'flex-end'
   }
 });

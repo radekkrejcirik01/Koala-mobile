@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const InviteItemStyle = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
-    marginBottom: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
@@ -14,7 +14,7 @@ export const InviteItemStyle = StyleSheet.create({
     alignItems: 'center'
   },
   usernameText: {
-    marginLeft: 5,
+    marginLeft: 14,
     fontSize: 16,
     fontWeight: '500'
   },

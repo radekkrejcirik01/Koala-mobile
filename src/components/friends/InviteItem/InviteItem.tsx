@@ -21,7 +21,7 @@ export const InviteItem = ({
         <ProfilePhoto
           name={item.username}
           photo={item?.profilePhoto}
-          size={40}
+          size={48}
         />
         <Text
           style={[

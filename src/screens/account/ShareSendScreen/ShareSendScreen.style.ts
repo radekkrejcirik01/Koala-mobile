@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const ShareSendScreenStyle = StyleSheet.create({
   container: {
@@ -13,6 +14,13 @@ export const ShareSendScreenStyle = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  listEmptyText: {
+    marginHorizontal: 40,
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.GRAY_200
   },
   sendButtonView: {
     alignItems: 'flex-end',

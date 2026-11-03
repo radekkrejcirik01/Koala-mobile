@@ -12,8 +12,7 @@ export const ChatScreenStyle = StyleSheet.create({
   },
   emotionText: {
     fontSize: 80,
-    textAlign: 'center',
-    opacity: 0.85
+    textAlign: 'center'
   },
   emotionMessageText: {
     fontSize: 15,

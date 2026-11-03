@@ -13,6 +13,7 @@ import { ProfileScreen } from '@screens/account/ProfileScreen/ProfileScreen';
 import { AccountScreen } from '@screens/account/AccountScreen/AccountScreen';
 import { ChangePasswordScreen } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen';
 import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
+import { FriendsScreen } from '@screens/account/FriendsScreen/FriendsScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
 import { ThemeScreen } from '@screens/account/ThemeScreen/ThemeScreen';
@@ -39,6 +40,11 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     <Account.Screen
       name={AccountStackNavigatorEnum.FeedbackScreen}
       component={FeedbackScreen}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.FriendsScreen}
+      component={FriendsScreen}
       options={NoHeader}
     />
     <Account.Screen

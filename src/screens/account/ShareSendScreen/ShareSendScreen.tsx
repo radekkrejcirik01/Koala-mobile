@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useMemo, useRef } from 'react';
-import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import { ActivityIndicator, Alert, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useSending } from '@hooks/useSending';
@@ -8,11 +8,11 @@ import { useFriends } from '@hooks/useFriends';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
+import { UserInterface } from '@interfaces/general.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import { filterSelected } from '@functions/filterSelected';
 import COLORS from '@constants/COLORS';
 import { FriendListItem } from '@components/friends/FriendListItem/FriendListItem';
-import { AddFriendsDescriptionButton } from '@components/friends/AddFriendsDescriptionButton/AddFriendsDescriptionButton';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ShareSendScreenProps } from '@screens/account/ShareSendScreen/ShareSendScreen.props';
@@ -27,7 +27,9 @@ export const ShareSendScreen = ({
   const theme = useTheme();
   const { dismiss } = useNavigation();
   const { sending, sent, setSending, setSent } = useSending();
-  const { friends, loaded } = useFriends();
+  const { loaded } = useFriends();
+  // TODO: remove mock (empty friends state preview)
+  const friends: UserInterface[] = [];
 
   const selectedFriends = useRef<number[]>([]);
 
@@ -106,7 +108,9 @@ export const ShareSendScreen = ({
             </ScrollView>
           ) : (
             <View style={ShareSendScreenStyle.centerView}>
-              <AddFriendsDescriptionButton />
+              <Text style={ShareSendScreenStyle.listEmptyText}>
+                Add friends to start sharing
+              </Text>
             </View>
           )
         ) : (

@@ -18,9 +18,5 @@ export const NotificationsScreenStyle = StyleSheet.create({
   },
   activityIndicator: {
     marginTop: 100
-  },
-  modal: {
-    margin: 0,
-    justifyContent: 'flex-end'
   }
 });

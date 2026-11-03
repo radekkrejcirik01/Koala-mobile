@@ -1,11 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import {
-  ActivityIndicator,
-  Keyboard,
-  RefreshControl,
-  Text,
-  View
-} from 'react-native';
+import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
@@ -22,16 +16,12 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AddButton } from '@components/general/AddButton/AddButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
-import { FriendsModalScreen } from '@components/friends/FriendsModalScreen/FriendsModalScreen';
-import { Modal } from '@components/general/Modal/Modal';
-import { useModal } from '@hooks/useModal';
 
 export const NotificationsScreen = (): React.JSX.Element => {
   const dispatch = useDispatch();
 
   const { top } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
-  const { modalVisible, showModal, hideModal } = useModal();
 
   const [notifications, setNotifications] = useState<NotificationInterface[]>(
     []
@@ -99,11 +89,6 @@ export const NotificationsScreen = (): React.JSX.Element => {
     }
   }, [loadNotifications, notifications]);
 
-  const hideModalAndKeyboard = useCallback(() => {
-    Keyboard.dismiss();
-    hideModal();
-  }, [hideModal]);
-
   return (
     <View
       style={[
@@ -113,7 +98,11 @@ export const NotificationsScreen = (): React.JSX.Element => {
     >
       <ScreenHeader
         title="Chats"
-        rightComponent={<AddButton onPress={showModal} />}
+        rightComponent={
+          <AddButton
+            onPress={() => navigateTo(AccountStackNavigatorEnum.FriendsScreen)}
+          />
+        }
       />
       <FlashList
         data={notifications}
@@ -148,12 +137,6 @@ export const NotificationsScreen = (): React.JSX.Element => {
             />
           )
         }
-      />
-      <Modal
-        isVisible={modalVisible}
-        content={<FriendsModalScreen />}
-        onClose={hideModalAndKeyboard}
-        style={NotificationsScreenStyle.modal}
       />
     </View>
   );
