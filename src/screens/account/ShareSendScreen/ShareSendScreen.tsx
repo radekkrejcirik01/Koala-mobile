@@ -8,7 +8,6 @@ import { useFriends } from '@hooks/useFriends';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
-import { UserInterface } from '@interfaces/general.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import { filterSelected } from '@functions/filterSelected';
 import COLORS from '@constants/COLORS';
@@ -27,9 +26,7 @@ export const ShareSendScreen = ({
   const theme = useTheme();
   const { dismiss } = useNavigation();
   const { sending, sent, setSending, setSent } = useSending();
-  const { loaded } = useFriends();
-  // TODO: remove mock (empty friends state preview)
-  const friends: UserInterface[] = [];
+  const { friends, loaded } = useFriends();
 
   const selectedFriends = useRef<number[]>([]);
 
