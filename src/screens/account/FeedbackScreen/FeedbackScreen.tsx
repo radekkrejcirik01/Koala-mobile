@@ -57,7 +57,6 @@ export const FeedbackScreen = (): JSX.Element => {
           emoji="⭐️"
           emojiBackgroundColor={COLORS.PASTEL_YELLOW}
           title="Tell us what you think"
-          description="Share what you like or don't like about Koala. We read every message."
         />
         <ProfileSection title="Feedback">
           <TextInput

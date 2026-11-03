@@ -82,11 +82,9 @@ export const ChangePasswordScreen = (): JSX.Element => {
           emoji="🔒"
           emojiBackgroundColor={COLORS.PASTEL_YELLOW}
           title="Change your password"
-          description="Enter your current password, then choose a new one."
         />
         <ProfileSection title="Current password">
           <TextInput
-            autoFocus
             secureTextEntry
             autoCorrect={false}
             autoCapitalize="none"

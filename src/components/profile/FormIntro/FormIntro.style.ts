@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const FormIntroStyle = StyleSheet.create({
   container: {
     marginTop: 10,
+    marginBottom: 50,
     paddingHorizontal: 30,
     alignItems: 'center'
   },
@@ -22,12 +22,5 @@ export const FormIntroStyle = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
     textAlign: 'center'
-  },
-  description: {
-    marginTop: 6,
-    fontSize: 14,
-    lineHeight: 20,
-    textAlign: 'center',
-    color: COLORS.GRAY_200
   }
 });

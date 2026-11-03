@@ -61,7 +61,7 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   footerText: {
     marginTop: 30,
-    fontSize: 12,
+    fontSize: 14,
     textAlign: 'center',
     color: COLORS.LIGHTGRAY_100
   }

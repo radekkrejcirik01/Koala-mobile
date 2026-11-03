@@ -8,10 +8,11 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage.ts';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum.ts';
 import { ThemeSelectStyle } from '@components/profile/ThemeSelect/ThemeSelect.style.ts';
 import { useTheme } from '@hooks/useTheme.ts';
+import { FormIntro } from '@components/profile/FormIntro/FormIntro';
 
 const THEMES = [
   { value: Images.ROOM, name: 'Home' },
-  { value: Images.PARK, name: 'Nature' },
+  { value: Images.PARK, name: 'Park' },
   { value: Images.SEA, name: 'Sea' }
 ];
 
@@ -54,56 +55,60 @@ export const ThemeSelect = () => {
   return (
     <ScrollView contentContainerStyle={ThemeSelectStyle.container}>
       <View>
-        <Text style={ThemeSelectStyle.description}>
-          Pick the illustration and colors for your home screen
-        </Text>
-        {THEMES.map((theme) => {
-          const selected = theme.value === image;
-          return (
-            <TouchableOpacity
-              key={theme.value}
-              activeOpacity={0.8}
-              style={[
-                ThemeSelectStyle.themeCard,
-                {
-                  backgroundColor: colors.surface,
-                  borderColor: selected
-                    ? COLORS.BUTTON_BLUE
-                    : COLORS.TRANSPARENT
-                }
-              ]}
-              onPress={() => onSelect(theme.value)}
-            >
-              <View
+        <FormIntro
+          emoji="🎨"
+          emojiBackgroundColor={COLORS.PASTEL_BLUE}
+          title="Choose your theme"
+        />
+        <View style={ThemeSelectStyle.themes}>
+          {THEMES.map((theme) => {
+            const selected = theme.value === image;
+            return (
+              <TouchableOpacity
+                key={theme.value}
+                activeOpacity={0.8}
                 style={[
-                  ThemeSelectStyle.imageContainer,
-                  { backgroundColor: getBackgroundColor(theme.value) }
+                  ThemeSelectStyle.themeCard,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: selected
+                      ? COLORS.BUTTON_BLUE
+                      : COLORS.TRANSPARENT
+                  }
                 ]}
+                onPress={() => onSelect(theme.value)}
               >
-                <Image
-                  source={getImageSource(theme.value)}
-                  style={ThemeSelectStyle.image}
-                  resizeMode="contain"
-                />
-              </View>
-              <View style={ThemeSelectStyle.footerRow}>
-                <Text style={[ThemeSelectStyle.name, { color: colors.text }]}>
-                  {theme.name}
-                </Text>
                 <View
                   style={[
-                    ThemeSelectStyle.radio,
-                    selected && ThemeSelectStyle.radioSelected
+                    ThemeSelectStyle.imageContainer,
+                    { backgroundColor: getBackgroundColor(theme.value) }
                   ]}
                 >
-                  {selected && (
-                    <Text style={ThemeSelectStyle.radioCheck}>✓</Text>
-                  )}
+                  <Image
+                    source={getImageSource(theme.value)}
+                    style={ThemeSelectStyle.image}
+                    resizeMode="contain"
+                  />
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
+                <View style={ThemeSelectStyle.footerRow}>
+                  <Text style={[ThemeSelectStyle.name, { color: colors.text }]}>
+                    {theme.name}
+                  </Text>
+                  <View
+                    style={[
+                      ThemeSelectStyle.radio,
+                      selected && ThemeSelectStyle.radioSelected
+                    ]}
+                  >
+                    {selected && (
+                      <Text style={ThemeSelectStyle.radioCheck}>✓</Text>
+                    )}
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
       <View style={ThemeSelectStyle.credits}>
         <Text style={ThemeSelectStyle.creditsText}>

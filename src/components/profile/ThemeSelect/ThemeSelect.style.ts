@@ -7,26 +7,21 @@ export const ThemeSelectStyle = StyleSheet.create({
     paddingHorizontal: 16,
     justifyContent: 'space-between'
   },
-  description: {
-    marginTop: 10,
-    marginBottom: 18,
-    marginHorizontal: 14,
-    fontSize: 14,
-    lineHeight: 20,
-    textAlign: 'center',
-    color: COLORS.GRAY_200
+  themes: {
+    marginTop: 26
   },
   themeCard: {
-    marginBottom: 14,
-    padding: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+    padding: 8,
     borderWidth: 2,
-    borderRadius: 20
+    borderRadius: 14
   },
   imageContainer: {
-    height: 130,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: 84,
+    height: 84,
+    borderRadius: 10,
     overflow: 'hidden'
   },
   image: {
@@ -34,21 +29,21 @@ export const ThemeSelectStyle = StyleSheet.create({
     height: '100%'
   },
   footerRow: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 10,
-    paddingBottom: 6,
-    paddingHorizontal: 8
+    paddingLeft: 15,
+    paddingRight: 6
   },
   name: {
     fontSize: 16,
     fontWeight: '600'
   },
   radio: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
     borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
@@ -59,7 +54,7 @@ export const ThemeSelectStyle = StyleSheet.create({
     backgroundColor: COLORS.BUTTON_BLUE
   },
   radioCheck: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '800',
     color: COLORS.WHITE
   },
@@ -68,12 +63,12 @@ export const ThemeSelectStyle = StyleSheet.create({
     alignItems: 'center'
   },
   creditsText: {
-    fontSize: 12,
+    fontSize: 14,
     color: COLORS.LIGHTGRAY_100
   },
   creditsHandle: {
     marginTop: 2,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '600',
     color: COLORS.GRAY_200
   }

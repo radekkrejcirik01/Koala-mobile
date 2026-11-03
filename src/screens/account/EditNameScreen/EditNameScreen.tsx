@@ -70,7 +70,6 @@ export const EditNameScreen = (): JSX.Element => {
           footer="This is how your friends will see you in Koala."
         >
           <TextInput
-            autoFocus
             autoCorrect={false}
             autoCapitalize="words"
             placeholder="Your name"

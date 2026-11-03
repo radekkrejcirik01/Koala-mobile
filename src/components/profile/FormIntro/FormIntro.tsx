@@ -7,8 +7,7 @@ import { FormIntroStyle } from '@components/profile/FormIntro/FormIntro.style';
 export const FormIntro = ({
   emoji,
   emojiBackgroundColor,
-  title,
-  description
+  title
 }: FormIntroProps): JSX.Element => {
   const theme = useTheme();
   return (
@@ -24,7 +23,6 @@ export const FormIntro = ({
       <Text style={[FormIntroStyle.title, { color: theme.theme.colors.text }]}>
         {title}
       </Text>
-      <Text style={FormIntroStyle.description}>{description}</Text>
     </View>
   );
 };

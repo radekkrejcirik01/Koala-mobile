@@ -64,7 +64,6 @@ export const SupportScreen = (): JSX.Element => {
           emoji="💬"
           emojiBackgroundColor={COLORS.GREEN}
           title="How can we help?"
-          description="Describe your problem and we will get back to you as soon as possible."
         />
         <ProfileSection title="Message">
           <TextInput
