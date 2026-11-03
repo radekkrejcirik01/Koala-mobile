@@ -1,30 +1,28 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const FeedbackScreenStyle = StyleSheet.create({
   container: {
     flex: 1
   },
-  title: {
-    marginTop: 20,
-    marginHorizontal: 20,
-    fontWeight: '600'
+  contentContainer: {
+    paddingBottom: 30
   },
   input: {
-    height: 150,
-    width: '90%',
-    marginTop: 10,
-    paddingTop: 15,
-    padding: 15,
+    minHeight: 150,
+    padding: 14,
+    paddingTop: 14,
     fontSize: 16,
-    borderRadius: 10,
-    textAlignVertical: 'top',
-    alignSelf: 'center'
+    textAlignVertical: 'top'
   },
   button: {
-    alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'stretch'
   },
   thankText: {
-    marginTop: 10
+    marginTop: 12,
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.GRAY_200
   }
 });

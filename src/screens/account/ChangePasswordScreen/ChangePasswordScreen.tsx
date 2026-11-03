@@ -1,13 +1,7 @@
 import React, { JSX, useCallback, useState } from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Alert, Keyboard, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ChangePasswordScreenStyle } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen.style';
@@ -15,6 +9,9 @@ import COLORS from '@constants/COLORS';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangePasswordPostInterface } from '@interfaces/post/Post.interface';
+import { Button } from '@components/general/Button/Button';
+import { FormIntro } from '@components/profile/FormIntro/FormIntro';
+import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 
 export const ChangePasswordScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
@@ -67,91 +64,75 @@ export const ChangePasswordScreen = (): JSX.Element => {
     });
   }, [confirmPassword, newPassword, oldPassword]);
 
+  const inputStyle = [
+    ChangePasswordScreenStyle.input,
+    { color: theme.theme.colors.text }
+  ];
+
   return (
-    <View
-      style={[
-        ChangePasswordScreenStyle.container,
-        { paddingTop: top, paddingBottom: bottom + 10 }
-      ]}
-    >
-      <ScreenHeader title="New password" />
-      <View style={ChangePasswordScreenStyle.contentView}>
-        <Text
-          style={[
-            ChangePasswordScreenStyle.inputTitleText,
-            { color: theme.theme.colors.text }
-          ]}
-        >
-          Old password
-        </Text>
-        <TextInput
-          autoFocus
-          autoCorrect={false}
-          autoCapitalize="none"
-          value={oldPassword}
-          onChangeText={setOldPassword}
-          style={[
-            ChangePasswordScreenStyle.input,
-            {
-              backgroundColor: theme.theme.colors.surface,
-              color: theme.theme.colors.text
-            }
-          ]}
+    <View style={[ChangePasswordScreenStyle.container, { paddingTop: top }]}>
+      <ScreenHeader title="Change password" />
+      <KeyboardAwareScrollView
+        bottomOffset={20}
+        keyboardShouldPersistTaps="handled"
+        onScrollBeginDrag={Keyboard.dismiss}
+        contentContainerStyle={{ paddingBottom: bottom + 30 }}
+      >
+        <FormIntro
+          emoji="🔒"
+          emojiBackgroundColor={COLORS.PASTEL_YELLOW}
+          title="Change your password"
+          description="Enter your current password, then choose a new one."
         />
-        <Text
-          style={[
-            ChangePasswordScreenStyle.inputTitleText,
-            { color: theme.theme.colors.text }
-          ]}
-        >
-          New password
-        </Text>
-        <TextInput
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={setNewPassword}
-          value={newPassword}
-          style={[
-            ChangePasswordScreenStyle.input,
-            {
-              backgroundColor: theme.theme.colors.surface,
-              color: theme.theme.colors.text
-            }
-          ]}
-        />
-        <Text
-          style={[
-            ChangePasswordScreenStyle.inputTitleText,
-            { color: theme.theme.colors.text }
-          ]}
-        >
-          Confirm new password
-        </Text>
-        <TextInput
-          autoCorrect={false}
-          autoCapitalize="none"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          style={[
-            ChangePasswordScreenStyle.input,
-            {
-              backgroundColor: theme.theme.colors.surface,
-              color: theme.theme.colors.text
-            }
-          ]}
-        />
-        <TouchableOpacity
-          activeOpacity={0.9}
+        <ProfileSection title="Current password">
+          <TextInput
+            autoFocus
+            secureTextEntry
+            autoCorrect={false}
+            autoCapitalize="none"
+            textContentType="password"
+            placeholder="Current password"
+            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            selectionColor={COLORS.BUTTON_BLUE}
+            value={oldPassword}
+            onChangeText={setOldPassword}
+            style={inputStyle}
+          />
+        </ProfileSection>
+        <ProfileSection title="New password">
+          <TextInput
+            secureTextEntry
+            autoCorrect={false}
+            autoCapitalize="none"
+            textContentType="newPassword"
+            placeholder="New password"
+            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            selectionColor={COLORS.BUTTON_BLUE}
+            value={newPassword}
+            onChangeText={setNewPassword}
+            style={inputStyle}
+          />
+          <View style={ChangePasswordScreenStyle.separator} />
+          <TextInput
+            secureTextEntry
+            autoCorrect={false}
+            autoCapitalize="none"
+            textContentType="newPassword"
+            placeholder="Confirm new password"
+            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            selectionColor={COLORS.BUTTON_BLUE}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={inputStyle}
+          />
+        </ProfileSection>
+        <Button
+          title="Save"
+          posting={posting}
           onPress={changePassword}
-          style={ChangePasswordScreenStyle.saveView}
-        >
-          {posting ? (
-            <ActivityIndicator color={COLORS.WHITE} />
-          ) : (
-            <Text style={ChangePasswordScreenStyle.saveText}>Save it</Text>
-          )}
-        </TouchableOpacity>
-      </View>
+          style={ChangePasswordScreenStyle.button}
+        />
+      </KeyboardAwareScrollView>
     </View>
   );
 };

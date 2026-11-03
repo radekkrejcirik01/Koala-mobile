@@ -1,4 +1,4 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index/index.props.ts';
 import { Images } from '@enums/images.ts';
@@ -7,6 +7,7 @@ import { setImageAction } from '@store/UserReducer.ts';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage.ts';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum.ts';
 import { ThemeSelectStyle } from '@components/profile/ThemeSelect/ThemeSelect.style.ts';
+import { useTheme } from '@hooks/useTheme.ts';
 
 const THEMES = [
   { value: Images.ROOM, name: 'Home' },
@@ -16,6 +17,7 @@ const THEMES = [
 
 export const ThemeSelect = () => {
   const dispatch = useDispatch();
+  const { colors } = useTheme().theme;
 
   const { image } = useSelector((state: ReducerProps) => state.user);
 
@@ -50,43 +52,65 @@ export const ThemeSelect = () => {
   };
 
   return (
-    <View style={ThemeSelectStyle.container}>
+    <ScrollView contentContainerStyle={ThemeSelectStyle.container}>
       <View>
-        {THEMES.map((theme) => (
-          <TouchableOpacity
-            key={theme.value}
-            activeOpacity={0.8}
-            style={[
-              ThemeSelectStyle.themeRow,
-              {
-                borderColor:
-                  theme.value === image
-                    ? COLORS.BUTTON_BLUE
-                    : COLORS.LIGHTGRAY
-              }
-            ]}
-            onPress={() => onSelect(theme.value)}
-          >
-            <View
+        <Text style={ThemeSelectStyle.description}>
+          Pick the illustration and colors for your home screen
+        </Text>
+        {THEMES.map((theme) => {
+          const selected = theme.value === image;
+          return (
+            <TouchableOpacity
+              key={theme.value}
+              activeOpacity={0.8}
               style={[
-                ThemeSelectStyle.imageContainer,
-                { backgroundColor: getBackgroundColor(theme.value) }
+                ThemeSelectStyle.themeCard,
+                {
+                  backgroundColor: colors.surface,
+                  borderColor: selected
+                    ? COLORS.BUTTON_BLUE
+                    : COLORS.TRANSPARENT
+                }
               ]}
+              onPress={() => onSelect(theme.value)}
             >
-              <Image
-                source={getImageSource(theme.value)}
-                style={ThemeSelectStyle.image}
-                resizeMode="contain"
-              />
-            </View>
-            <Text style={ThemeSelectStyle.name}>{theme.name}</Text>
-          </TouchableOpacity>
-        ))}
+              <View
+                style={[
+                  ThemeSelectStyle.imageContainer,
+                  { backgroundColor: getBackgroundColor(theme.value) }
+                ]}
+              >
+                <Image
+                  source={getImageSource(theme.value)}
+                  style={ThemeSelectStyle.image}
+                  resizeMode="contain"
+                />
+              </View>
+              <View style={ThemeSelectStyle.footerRow}>
+                <Text style={[ThemeSelectStyle.name, { color: colors.text }]}>
+                  {theme.name}
+                </Text>
+                <View
+                  style={[
+                    ThemeSelectStyle.radio,
+                    selected && ThemeSelectStyle.radioSelected
+                  ]}
+                >
+                  {selected && (
+                    <Text style={ThemeSelectStyle.radioCheck}>✓</Text>
+                  )}
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
       </View>
-      <View>
-        <Text style={ThemeSelectStyle.title}>Illustrations by Jana Polak</Text>
-        <Text style={ThemeSelectStyle.description}>@janapolak</Text>
+      <View style={ThemeSelectStyle.credits}>
+        <Text style={ThemeSelectStyle.creditsText}>
+          Illustrations by Jana Polak
+        </Text>
+        <Text style={ThemeSelectStyle.creditsHandle}>@janapolak</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };

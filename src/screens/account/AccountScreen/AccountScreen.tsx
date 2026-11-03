@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
@@ -13,6 +13,9 @@ import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
+import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
+import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
+import COLORS from '@constants/COLORS';
 
 export const AccountScreen = (): React.JSX.Element => {
   const dispatch = useDispatch();
@@ -60,88 +63,54 @@ export const AccountScreen = (): React.JSX.Element => {
     <View
       style={[
         AccountScreenStyle.container,
-        { paddingTop: top, paddingBottom: bottom + 10 }
+        { paddingTop: top, paddingBottom: bottom || 10 }
       ]}
     >
       <ScreenHeader title="Account" />
-      <View style={AccountScreenStyle.contentContainer}>
+      <ScrollView contentContainerStyle={AccountScreenStyle.contentContainer}>
         <View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => navigateTo(AccountStackNavigatorEnum.EditNameScreen)}
-            style={[
-              AccountScreenStyle.buttonView,
-              { backgroundColor: theme.theme.colors.surface }
-            ]}
-          >
-            <Text
-              style={[
-                AccountScreenStyle.buttonText,
-                { color: theme.theme.colors.text }
-              ]}
-            >
-              Edit name
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() =>
-              navigateTo(AccountStackNavigatorEnum.ChangePasswordScreen)
-            }
-            style={[
-              AccountScreenStyle.buttonView,
-              { backgroundColor: theme.theme.colors.surface }
-            ]}
-          >
-            <Text
-              style={[
-                AccountScreenStyle.buttonText,
-                { color: theme.theme.colors.text }
-              ]}
-            >
-              Change password
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={onPressDeleteAccount}
-            style={[
-              AccountScreenStyle.buttonView,
-              { backgroundColor: theme.theme.colors.surface }
-            ]}
-          >
-            <Text
-              style={[
-                AccountScreenStyle.buttonText,
-                { color: theme.theme.colors.text }
-              ]}
-            >
-              Delete account
-            </Text>
-          </TouchableOpacity>
-          <Text style={AccountScreenStyle.descriptionText}>
-            By deleting account you will lose all your messages and sharing
-            history.
-          </Text>
+          <ProfileSection title="Personal">
+            <ProfileItem
+              onPress={() =>
+                navigateTo(AccountStackNavigatorEnum.EditNameScreen)
+              }
+              icon="✏️"
+              iconBackgroundColor={COLORS.PASTEL_BLUE}
+              title="Edit name"
+            />
+            <ProfileItem
+              onPress={() =>
+                navigateTo(AccountStackNavigatorEnum.ChangePasswordScreen)
+              }
+              icon="🔒"
+              iconBackgroundColor={COLORS.PASTEL_YELLOW}
+              title="Change password"
+              isLast
+            />
+          </ProfileSection>
+          <ProfileSection footer="By deleting account you will lose all your messages and sharing history.">
+            <ProfileItem
+              onPress={onPressDeleteAccount}
+              icon="🗑️"
+              iconBackgroundColor={COLORS.WHITE_200}
+              title="Delete account"
+              destructive
+              showChevron={false}
+              isLast
+            />
+          </ProfileSection>
         </View>
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={logout}
           style={[
-            AccountScreenStyle.buttonView,
+            AccountScreenStyle.logoutButton,
             { backgroundColor: theme.theme.colors.surface }
           ]}
         >
-          <Text
-            style={[
-              AccountScreenStyle.buttonText,
-              { color: theme.theme.colors.text }
-            ]}
-          >
-            Logout
-          </Text>
+          <Text style={AccountScreenStyle.logoutText}>Log out</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import React, { JSX } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
+import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ProfileItemProps } from '@components/profile/ProfileItem/ProfileItem.props';
@@ -9,7 +10,11 @@ import { ProfileItemStyle } from '@components/profile/ProfileItem/ProfileItem.st
 export const ProfileItem = ({
   onPress,
   icon,
-  title
+  iconBackgroundColor,
+  title,
+  destructive = false,
+  showChevron = true,
+  isLast = false
 }: ProfileItemProps): JSX.Element => {
   const theme = useTheme();
   return (
@@ -18,19 +23,43 @@ export const ProfileItem = ({
       onPress={onPress}
       style={ProfileItemStyle.view}
     >
-      <View style={ProfileItemStyle.row}>
-        {!!icon && <Text style={ProfileItemStyle.icon}>{icon}</Text>}
+      {!!icon && (
+        <View
+          style={[
+            ProfileItemStyle.iconView,
+            !!iconBackgroundColor && { backgroundColor: iconBackgroundColor }
+          ]}
+        >
+          <Text style={ProfileItemStyle.icon}>{icon}</Text>
+        </View>
+      )}
+      <View
+        style={[
+          ProfileItemStyle.content,
+          !icon && { marginLeft: 0 },
+          isLast && ProfileItemStyle.noBorder
+        ]}
+      >
         <Text
-          style={[ProfileItemStyle.title, { color: theme.theme.colors.text }]}
+          style={[
+            ProfileItemStyle.title,
+            {
+              color: destructive
+                ? COLORS.NOTIFICATION_DOT
+                : theme.theme.colors.text
+            }
+          ]}
         >
           {title}
         </Text>
+        {showChevron && (
+          <Icon
+            name={IconEnum.BACK}
+            size={14}
+            style={ProfileItemStyle.chevron}
+          />
+        )}
       </View>
-      <Icon
-        name={IconEnum.BACK}
-        size={16}
-        style={{ transform: [{ rotate: '180deg' }] }}
-      />
     </TouchableOpacity>
   );
 };

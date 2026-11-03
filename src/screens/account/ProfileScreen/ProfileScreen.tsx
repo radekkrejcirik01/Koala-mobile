@@ -4,24 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagePicker from 'react-native-image-crop-picker';
 import fs from 'react-native-fs';
-import Share from 'react-native-share';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
 import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
-import { ProfileScreenStyle } from '@screens/account/ProfileScreen/ProfileScreen.style';
+import {
+  PHOTO_SIZE,
+  ProfileScreenStyle
+} from '@screens/account/ProfileScreen/ProfileScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
+import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { setProfilePhotoAction } from '@store/UserReducer';
 import { ProfilePhotoPostInterface } from '@interfaces/post/Post.interface';
 import { ResponseProfilePhotoPostInterface } from '@interfaces/response/Response.interface';
-import {
-  ImagePickerOptions,
-  ShareOptions
-} from '@screens/account/ProfileScreen/ProfileScreen.options';
+import { ImagePickerOptions } from '@screens/account/ProfileScreen/ProfileScreen.options';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import COLORS from '@constants/COLORS';
+import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
   const { username, name, profilePhoto } = useSelector(
@@ -54,74 +56,95 @@ export const ProfileScreen = (): React.JSX.Element => {
     });
   }, [dispatch]);
 
-  const share = async () => {
-    await Share.shareSingle(ShareOptions);
-  };
-
   return (
-    <ScrollView
-      style={{ marginTop: top, paddingBottom: bottom || 10 }}
-      contentContainerStyle={ProfileScreenStyle.contentContainerStyle}
-    >
-      <View>
-        <ScreenHeader title="Profile" />
-        <View style={ProfileScreenStyle.container}>
-          <View style={ProfileScreenStyle.photoContainer}>
-            <ProfilePhoto name={name} photo={profilePhoto} size={80} />
+    <View style={[ProfileScreenStyle.screen, { paddingTop: top }]}>
+      <ScreenHeader title="Profile" />
+      <ScrollView
+        contentContainerStyle={[
+          ProfileScreenStyle.contentContainerStyle,
+          { paddingBottom: bottom || 10 }
+        ]}
+      >
+        <View>
+          <View style={ProfileScreenStyle.container}>
             <TouchableOpacity
-              activeOpacity={0.9}
+              activeOpacity={0.8}
               onPress={addPhoto}
-              style={[
-                ProfileScreenStyle.photoButton,
-                { backgroundColor: theme.theme.colors.surface }
-              ]}
+              style={ProfileScreenStyle.photoContainer}
             >
-              <Text style={ProfileScreenStyle.photoText}>Add photo</Text>
+              <ProfilePhoto
+                name={name}
+                photo={profilePhoto}
+                size={PHOTO_SIZE}
+                textBackgroundColor={COLORS.PASTEL_PURPLE}
+                style={ProfileScreenStyle.photo}
+                imageStyle={ProfileScreenStyle.photo}
+                acronymStyle={ProfileScreenStyle.photo}
+              />
+              <View
+                style={[
+                  ProfileScreenStyle.photoBadge,
+                  { borderColor: theme.theme.colors.background }
+                ]}
+              >
+                <Text style={ProfileScreenStyle.photoBadgeText}>📷</Text>
+              </View>
             </TouchableOpacity>
+            <View style={ProfileScreenStyle.namesView}>
+              <Text
+                style={[
+                  ProfileScreenStyle.name,
+                  { color: theme.theme.colors.text }
+                ]}
+              >
+                {name}
+              </Text>
+              <View style={ProfileScreenStyle.usernamePill}>
+                <Text style={ProfileScreenStyle.username}>@{username}</Text>
+              </View>
+            </View>
           </View>
-          <View style={ProfileScreenStyle.namesView}>
-            <Text
-              style={[
-                ProfileScreenStyle.name,
-                { color: theme.theme.colors.text }
-              ]}
-            >
-              {name}
-            </Text>
-            <Text style={ProfileScreenStyle.username}>{username}</Text>
-          </View>
+
+          <ProfileSection title="Settings">
+            <ProfileItem
+              onPress={() =>
+                navigateTo(AccountStackNavigatorEnum.AccountScreen)
+              }
+              icon="👤"
+              iconBackgroundColor={COLORS.PASTEL_BLUE}
+              title="Account"
+            />
+            <ProfileItem
+              onPress={() => navigateTo(AccountStackNavigatorEnum.ThemeScreen)}
+              icon="🎨"
+              iconBackgroundColor={COLORS.BEIGE}
+              title="Theme"
+              isLast
+            />
+          </ProfileSection>
+
+          <ProfileSection title="Help">
+            <ProfileItem
+              onPress={() =>
+                navigateTo(AccountStackNavigatorEnum.SupportScreen)
+              }
+              icon="💬"
+              iconBackgroundColor={COLORS.GREEN}
+              title="Support"
+            />
+            <ProfileItem
+              onPress={() =>
+                navigateTo(AccountStackNavigatorEnum.FeedbackScreen)
+              }
+              icon="⭐️"
+              iconBackgroundColor={COLORS.PASTEL_YELLOW}
+              title="Feedback"
+              isLast
+            />
+          </ProfileSection>
         </View>
-        <View
-          style={[
-            ProfileScreenStyle.buttonsContainer,
-            { backgroundColor: theme.theme.colors.surface }
-          ]}
-        >
-          <ProfileItem
-            onPress={() => navigateTo(AccountStackNavigatorEnum.AccountScreen)}
-            title="Account"
-          />
-          <ProfileItem
-            onPress={() => navigateTo(AccountStackNavigatorEnum.ThemeScreen)}
-            title="Theme"
-          />
-        </View>
-        <View
-          style={[
-            ProfileScreenStyle.buttonsContainer,
-            { backgroundColor: theme.theme.colors.surface }
-          ]}
-        >
-          <ProfileItem
-            onPress={() => navigateTo(AccountStackNavigatorEnum.SupportScreen)}
-            title="Support"
-          />
-          <ProfileItem
-            onPress={() => navigateTo(AccountStackNavigatorEnum.FeedbackScreen)}
-            title="Feedback"
-          />
-        </View>
-      </View>
-    </ScrollView>
+        <Text style={ProfileScreenStyle.footerText}>Koala {version}</Text>
+      </ScrollView>
+    </View>
   );
 };

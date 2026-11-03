@@ -5,8 +5,6 @@ export const ThemeScreenStyle = StyleSheet.create({
     flex: 1
   },
   contentView: {
-    flex: 1,
-    paddingTop: 15,
-    paddingHorizontal: 15
+    flex: 1
   }
 });

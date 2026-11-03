@@ -1,5 +1,6 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Alert, Text, TextInput, View } from 'react-native';
+import { Alert, Keyboard, Text, TextInput, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
@@ -10,9 +11,11 @@ import { SendButton } from '@components/home/SendButton/SendButton';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { FeedbackPostInterface } from '@interfaces/post/Post.interface';
+import { FormIntro } from '@components/profile/FormIntro/FormIntro';
+import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 
 export const FeedbackScreen = (): JSX.Element => {
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { sending, setSending, sent, setSent } = useSending();
 
@@ -39,39 +42,46 @@ export const FeedbackScreen = (): JSX.Element => {
   }, [message, setSending, setSent]);
 
   return (
-    <View style={[FeedbackScreenStyle.container, { top }]}>
+    <View style={[FeedbackScreenStyle.container, { paddingTop: top }]}>
       <ScreenHeader title="Feedback" />
-      <Text
-        style={[FeedbackScreenStyle.title, { color: theme.theme.colors.text }]}
-      >{`Share with us what you like or don't like about our app`}</Text>
-      <TextInput
-        placeholder="Message..."
-        placeholderTextColor={COLORS.LIGHTGRAY_100}
-        value={message}
-        onChangeText={setMessage}
-        multiline
-        selectionColor={COLORS.BUTTON_BLUE}
-        style={[
-          FeedbackScreenStyle.input,
-          {
-            backgroundColor: theme.theme.colors.surface,
-            color: theme.theme.colors.text
-          }
+      <KeyboardAwareScrollView
+        bottomOffset={20}
+        keyboardShouldPersistTaps="handled"
+        onScrollBeginDrag={Keyboard.dismiss}
+        contentContainerStyle={[
+          FeedbackScreenStyle.contentContainer,
+          { paddingBottom: bottom + 30 }
         ]}
-      />
-      <View style={FeedbackScreenStyle.button}>
-        <SendButton onPress={send} sending={sending} sent={sent} />
-        {sent && (
-          <Text
+      >
+        <FormIntro
+          emoji="⭐️"
+          emojiBackgroundColor={COLORS.PASTEL_YELLOW}
+          title="Tell us what you think"
+          description="Share what you like or don't like about Koala. We read every message."
+        />
+        <ProfileSection title="Feedback">
+          <TextInput
+            placeholder="Your thoughts..."
+            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            value={message}
+            onChangeText={setMessage}
+            multiline
+            selectionColor={COLORS.BUTTON_BLUE}
             style={[
-              FeedbackScreenStyle.thankText,
+              FeedbackScreenStyle.input,
               { color: theme.theme.colors.text }
             ]}
-          >
-            Thank you! We got your feedback
-          </Text>
-        )}
-      </View>
+          />
+        </ProfileSection>
+        <View style={FeedbackScreenStyle.button}>
+          <SendButton onPress={send} sending={sending} sent={sent} />
+          {sent && (
+            <Text style={FeedbackScreenStyle.thankText}>
+              Thank you! We got your feedback.
+            </Text>
+          )}
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };

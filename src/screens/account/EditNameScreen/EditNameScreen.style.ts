@@ -4,27 +4,21 @@ export const EditNameScreenStyle = StyleSheet.create({
   container: {
     flex: 1
   },
-  contentView: {
-    paddingTop: 5,
-    paddingHorizontal: 15
-  },
-  inputTitleText: {
-    marginTop: 15,
-    fontWeight: '600'
+  photoView: {
+    marginTop: 16,
+    alignItems: 'center'
   },
   input: {
-    marginTop: 5,
-    height: 45,
-    paddingHorizontal: 15,
-    borderRadius: 10,
+    height: 50,
+    paddingHorizontal: 14,
     fontSize: 16,
     fontWeight: '500'
   },
   button: {
-    height: 45,
-    width: 110,
-    marginTop: 50,
-    borderRadius: 18,
-    alignSelf: 'center'
+    width: 'auto',
+    height: 50,
+    marginTop: 30,
+    marginHorizontal: 16,
+    borderRadius: 14
   }
 });

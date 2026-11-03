@@ -3,17 +3,16 @@ import COLORS from '@constants/COLORS';
 
 export const SendButtonStyle = StyleSheet.create({
   view: {
-    width: 110,
-    height: 45,
-    marginTop: 20,
-    marginHorizontal: 20,
-    borderRadius: 18,
+    height: 50,
+    marginTop: 30,
+    marginHorizontal: 16,
+    borderRadius: 14,
     backgroundColor: COLORS.BUTTON_BLUE,
     alignItems: 'center',
     justifyContent: 'center'
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     color: COLORS.WHITE,
     fontWeight: 'bold'
   }

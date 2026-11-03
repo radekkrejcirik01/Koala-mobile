@@ -1,5 +1,6 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Alert, Text, TextInput, View } from 'react-native';
+import { Alert, Keyboard, Text, TextInput, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
@@ -10,9 +11,11 @@ import { SendButton } from '@components/home/SendButton/SendButton';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { SupportPostInterface } from '@interfaces/post/Post.interface';
+import { FormIntro } from '@components/profile/FormIntro/FormIntro';
+import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 
 export const SupportScreen = (): JSX.Element => {
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { sending, setSending, sent, setSent } = useSending();
 
@@ -46,58 +49,62 @@ export const SupportScreen = (): JSX.Element => {
   }, [email, message, setSending, setSent]);
 
   return (
-    <View style={[SupportScreenStyle.container, { top }]}>
+    <View style={[SupportScreenStyle.container, { paddingTop: top }]}>
       <ScreenHeader title="Support" />
-      <Text
-        style={[SupportScreenStyle.title, { color: theme.theme.colors.text }]}
+      <KeyboardAwareScrollView
+        bottomOffset={20}
+        keyboardShouldPersistTaps="handled"
+        onScrollBeginDrag={Keyboard.dismiss}
+        contentContainerStyle={[
+          SupportScreenStyle.contentContainer,
+          { paddingBottom: bottom + 30 }
+        ]}
       >
-        Share with us your problem and we will get to you
-      </Text>
-      <TextInput
-        placeholder="Message..."
-        placeholderTextColor={COLORS.LIGHTGRAY_100}
-        value={message}
-        onChangeText={setMessage}
-        multiline
-        selectionColor={COLORS.BUTTON_BLUE}
-        style={[
-          SupportScreenStyle.input,
-          {
-            backgroundColor: theme.theme.colors.surface,
-            color: theme.theme.colors.text
-          }
-        ]}
-      />
-      <TextInput
-        placeholder="Email"
-        placeholderTextColor={COLORS.LIGHTGRAY_100}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={email}
-        onChangeText={setEmail}
-        selectionColor={COLORS.BUTTON_BLUE}
-        style={[
-          SupportScreenStyle.emailInput,
-          {
-            backgroundColor: theme.theme.colors.surface,
-            color: theme.theme.colors.text
-          }
-        ]}
-      />
-      <View style={SupportScreenStyle.button}>
-        <SendButton onPress={send} sending={sending} sent={sent} />
-        {sent && (
-          <Text
+        <FormIntro
+          emoji="💬"
+          emojiBackgroundColor={COLORS.GREEN}
+          title="How can we help?"
+          description="Describe your problem and we will get back to you as soon as possible."
+        />
+        <ProfileSection title="Message">
+          <TextInput
+            placeholder="What's going on..."
+            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            value={message}
+            onChangeText={setMessage}
+            multiline
+            selectionColor={COLORS.BUTTON_BLUE}
             style={[
-              SupportScreenStyle.thankText,
+              SupportScreenStyle.input,
               { color: theme.theme.colors.text }
             ]}
-          >
-            We got your message.
-          </Text>
-        )}
-      </View>
+          />
+        </ProfileSection>
+        <ProfileSection title="Email" footer="We will reply to this address.">
+          <TextInput
+            placeholder="you@example.com"
+            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={email}
+            onChangeText={setEmail}
+            selectionColor={COLORS.BUTTON_BLUE}
+            style={[
+              SupportScreenStyle.emailInput,
+              { color: theme.theme.colors.text }
+            ]}
+          />
+        </ProfileSection>
+        <View style={SupportScreenStyle.button}>
+          <SendButton onPress={send} sending={sending} sent={sent} />
+          {sent && (
+            <Text style={SupportScreenStyle.thankText}>
+              We got your message and will reply soon.
+            </Text>
+          )}
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };

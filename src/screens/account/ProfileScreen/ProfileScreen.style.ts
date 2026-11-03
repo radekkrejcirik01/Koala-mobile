@@ -1,47 +1,68 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
+export const PHOTO_SIZE = 104;
+
 export const ProfileScreenStyle = StyleSheet.create({
+  screen: {
+    flex: 1
+  },
   contentContainerStyle: {
     flexGrow: 1,
     paddingBottom: 10,
     justifyContent: 'space-between'
   },
   container: {
-    paddingVertical: 20,
+    paddingTop: 16,
+    paddingBottom: 8,
     alignItems: 'center'
   },
   photoContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  photoButton: {
-    marginVertical: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
+  photo: {
+    borderRadius: PHOTO_SIZE / 2
+  },
+  photoBadge: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 3,
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'flex-end'
+    backgroundColor: COLORS.WHITE
   },
-  photoText: {
-    fontSize: 16,
-    color: COLORS.PURPLE
+  photoBadgeText: {
+    fontSize: 14
   },
   namesView: {
+    marginTop: 14,
     alignItems: 'center'
   },
   name: {
-    fontSize: 25,
-    fontWeight: '600'
+    fontSize: 26,
+    fontWeight: '700'
+  },
+  usernamePill: {
+    marginTop: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    backgroundColor: COLORS.WHITE_200
   },
   username: {
-    fontSize: 16,
+    fontSize: 14,
     color: COLORS.GRAY_200,
-    fontWeight: '500'
+    fontWeight: '600'
   },
-  buttonsContainer: {
-    marginTop: 20,
-    marginHorizontal: 15,
-    borderRadius: 10
+  footerText: {
+    marginTop: 30,
+    fontSize: 12,
+    textAlign: 'center',
+    color: COLORS.LIGHTGRAY_100
   }
 });

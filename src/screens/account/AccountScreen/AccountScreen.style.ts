@@ -6,26 +6,20 @@ export const AccountScreenStyle = StyleSheet.create({
     flex: 1
   },
   contentContainer: {
-    flex: 1,
-    paddingTop: 5,
-    paddingHorizontal: 15,
-    paddingBottom: 25,
+    flexGrow: 1,
     justifyContent: 'space-between'
   },
-  buttonView: {
-    marginTop: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+  logoutButton: {
+    marginTop: 30,
+    marginHorizontal: 16,
+    paddingVertical: 15,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  buttonText: {
+  logoutText: {
     fontSize: 16,
-    fontWeight: '600'
-  },
-  descriptionText: {
-    marginTop: 10,
-    color: COLORS.GRAY_200
+    fontWeight: '600',
+    color: COLORS.NOTIFICATION_DOT
   }
 });
