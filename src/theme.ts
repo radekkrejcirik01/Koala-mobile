@@ -22,17 +22,6 @@ export const lightTheme: Theme = {
   }
 };
 
-export const darkTheme: Theme = {
-  colors: {
-    primary: '#bb86fc',
-    background: '#1e1e1e',
-    surface: '#121212',
-    surface_200: '#1e1e1e',
-    text: '#ffffff',
-    error: '#cf6679'
-  }
-};
-
 export const beigeTheme: Theme = {
   colors: {
     primary: '#6200ee',

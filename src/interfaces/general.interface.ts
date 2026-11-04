@@ -40,10 +40,3 @@ export interface ConversationInterface {
   reaction?: string;
   emotion?: EmotionType;
 }
-
-export interface HistoryInterface {
-  id: number;
-  receiversNames: string[];
-  message: string;
-  time: number;
-}

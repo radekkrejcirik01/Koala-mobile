@@ -11,7 +11,6 @@ import fs from 'react-native-fs';
 import { useTheme } from '@hooks/useTheme';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { Replies } from '@components/chat/Replies/Replies';
 import { ChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
 import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
@@ -24,19 +23,16 @@ export const ChatInput = ({
   message,
   onChangeText,
   onPressSend,
-  onPressReply,
   onAudioRecord,
   replyMessage,
   inputRef,
   onFocus,
-  onDismissReply,
-  showReplies
+  onDismissReply
 }: ChatInputProps): React.JSX.Element => {
   const theme = useTheme();
 
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [record, setRecord] = useState<string>();
-  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const startRecording = useCallback(async () => {
     await checkAndroidRecordingPermission();
@@ -138,13 +134,9 @@ export const ChatInput = ({
               ref={inputRef}
               autoCorrect={false}
               multiline
-              onFocus={() => {
-                setIsFocused(true);
-                onFocus();
-              }}
+              onFocus={onFocus}
               placeholder="New message..."
               placeholderTextColor={COLORS.LIGHTGRAY_100}
-              onBlur={() => setIsFocused(false)}
               value={message}
               onChangeText={onChangeText}
               selectionColor={COLORS.PURPLE}

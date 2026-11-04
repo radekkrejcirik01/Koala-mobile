@@ -1,11 +1,9 @@
 import {
   ConversationInterface,
-  HistoryInterface,
   InviteInterface,
   NotificationInterface,
   UserInterface
 } from '@interfaces/general.interface';
-import { ReplyInterface } from '@components/chat/Replies/Replies.props';
 
 export interface ResponseInterface {
   status: string;
@@ -54,22 +52,10 @@ export interface ResponseConversationGetInterface {
   data?: ConversationInterface[];
 }
 
-export interface ResponseHistoryGetInterface {
-  status: string;
-  message: string;
-  data?: HistoryInterface[];
-}
-
 export interface ResponseUnseenNotificationsGetInterface {
   status: string;
   message: string;
   unseenNotifications?: number;
-}
-
-export interface ResponseRepliesGetInterface {
-  status: string;
-  message: string;
-  data: ReplyInterface[];
 }
 
 export interface ResponseProfilePhotoPostInterface {

@@ -46,7 +46,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
   const [message, setMessage] = useState<string>('');
   const [conversation, setConversation] = useState<ConversationInterface[]>([]);
-  const [showReplies, setShowReplies] = useState<boolean>(false);
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [audioRecord, setAudioRecord] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean>();
@@ -61,22 +60,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       listRef?.current?.scrollToIndex({ index: 0 });
     }, 50);
   };
-
-  // Helper function to check replies visibility
-  // Return true when first messages is inbound and number of inbound messages is 1
-  const checkShowReplies = useCallback(
-    (data: ConversationInterface[]) => {
-      if (data[data?.length - 1]?.senderId === userId) {
-        return false;
-      }
-
-      const receivedMessages = data?.filter(
-        (e: ConversationInterface) => e?.senderId !== userId
-      );
-      return receivedMessages?.length === 1;
-    },
-    [userId]
-  );
 
   const updateSeenNotification = useCallback(() => {
     putRequest<ResponseInterface, never>(
@@ -100,14 +83,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         );
 
         setConversation(data.reverse());
-        setShowReplies(checkShowReplies(data));
 
         updateSeenNotification();
 
         setLoaded(true);
       }
     });
-  }, [checkShowReplies, conversationId, id, updateSeenNotification]);
+  }, [conversationId, id, updateSeenNotification]);
 
   useEffect(() => {
     getConversation();
@@ -201,13 +183,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       );
     },
     [getConversation, loaded]
-  );
-
-  const onPressReply = useCallback(
-    (value: string) => {
-      send(value).catch();
-    },
-    [send]
   );
 
   const onPressSend = useCallback(() => {
@@ -339,13 +314,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
               message={message}
               onChangeText={setMessage}
               onPressSend={onPressSend}
-              onPressReply={onPressReply}
               onAudioRecord={setAudioRecord}
               replyMessage={replyMessage}
               inputRef={inputRef}
               onFocus={scrollToEnd}
               onDismissReply={() => setReplyMessage('')}
-              showReplies={showReplies}
             />
           </View>
         </KeyboardAwareScrollView>

@@ -55,10 +55,6 @@ export interface PasswordResetPostInterface {
   friendUsername: string;
 }
 
-export interface ReplyPostInterface {
-  message: string;
-}
-
 export interface SupportPostInterface {
   message: string;
   email: string;
