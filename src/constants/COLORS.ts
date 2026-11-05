@@ -19,5 +19,10 @@ export default {
   NOTIFICATION_DOT: '#ED4956',
   GREEN: '#e7f4c6',
   BLUE: '#c0dbee',
-  BEIGE: '#fbefd7'
+  BEIGE: '#fbefd7',
+  EMOTION_SUPER_GOOD: '#6fcf97',
+  EMOTION_GOOD: '#7cc4fa',
+  EMOTION_MEH: '#f2cc8f',
+  EMOTION_NOT_GOOD: '#f4a261',
+  EMOTION_MISERABLE: '#e5737f'
 };

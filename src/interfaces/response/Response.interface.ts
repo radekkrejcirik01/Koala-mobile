@@ -2,6 +2,7 @@ import {
   ConversationInterface,
   InviteInterface,
   NotificationInterface,
+  SharedEmotionInterface,
   UserInterface
 } from '@interfaces/general.interface';
 
@@ -62,4 +63,10 @@ export interface ResponseProfilePhotoPostInterface {
   status: string;
   message: string;
   data: string;
+}
+
+export interface ResponseEmotionsGetInterface {
+  status: string;
+  message: string;
+  data?: SharedEmotionInterface[];
 }

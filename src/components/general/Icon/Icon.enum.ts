@@ -12,6 +12,7 @@ import Reply from '@assets/webp/Reply.webp';
 import Play from '@assets/webp/Play.webp';
 import Plus from '@assets/webp/Plus.webp';
 import Send from '@assets/webp/Send.webp';
+import Stats from '@assets/webp/Stats.webp';
 import Stop from '@assets/webp/Stop.webp';
 
 export enum IconEnum {
@@ -29,6 +30,7 @@ export enum IconEnum {
   PLAY = 'Play',
   PLUS = 'Plus',
   SEND = 'Send',
+  STATS = 'Stats',
   STOP = 'Stop'
 }
 
@@ -47,5 +49,6 @@ export const ICONS = {
   [IconEnum.PLAY]: Play,
   [IconEnum.PLUS]: Plus,
   [IconEnum.SEND]: Send,
+  [IconEnum.STATS]: Stats,
   [IconEnum.STOP]: Stop
 };

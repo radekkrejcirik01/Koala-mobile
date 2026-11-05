@@ -24,6 +24,11 @@ export const HomeHeader = (): JSX.Element => {
     navigateTo(AccountStackNavigatorEnum.FriendsScreen);
   };
 
+  const onPressSharedEmotions = () => {
+    trigger(HapticFeedbackTypes.impactLight);
+    navigateTo(AccountStackNavigatorEnum.SharedEmotionsScreen);
+  };
+
   const onPressProfile = () => {
     trigger(HapticFeedbackTypes.impactLight);
     navigateTo(AccountStackNavigatorEnum.ProfileScreen);
@@ -31,15 +36,24 @@ export const HomeHeader = (): JSX.Element => {
 
   return (
     <View style={HomeHeaderStyle.container}>
-      <View style={HomeHeaderStyle.addFriendsContainer}>
+      <View style={HomeHeaderStyle.buttonsRow}>
+        <View style={HomeHeaderStyle.addFriendsContainer}>
+          <TouchableOpacity
+            onPress={onPressFriends}
+            activeOpacity={0.8}
+            style={HomeHeaderStyle.addFriendsView}
+          >
+            <Icon name={IconEnum.ADD_FRIEND} size={20} />
+          </TouchableOpacity>
+          <InvitesBadge />
+        </View>
         <TouchableOpacity
-          onPress={onPressFriends}
+          onPress={onPressSharedEmotions}
           activeOpacity={0.8}
-          style={HomeHeaderStyle.addFriendsView}
+          style={HomeHeaderStyle.sharedEmotionsView}
         >
-          <Icon name={IconEnum.ADD_FRIEND} size={20} />
+          <Icon name={IconEnum.STATS} size={18} />
         </TouchableOpacity>
-        <InvitesBadge />
       </View>
       <ProfilePhoto
         name={name}

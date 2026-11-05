@@ -40,3 +40,10 @@ export interface ConversationInterface {
   reaction?: string;
   emotion?: EmotionType;
 }
+
+export interface SharedEmotionInterface {
+  id: number;
+  emotion?: string;
+  message: string;
+  time: number;
+}
