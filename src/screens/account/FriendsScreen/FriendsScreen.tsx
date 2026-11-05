@@ -177,7 +177,7 @@ export const FriendsScreen = (): JSX.Element => {
               <TouchableOpacity
                 key={friend.id ?? friend.username}
                 activeOpacity={0.7}
-                onPress={() => openFriendActions(friend.id, friend.name)}
+                onLongPress={() => openFriendActions(friend.id, friend.name)}
                 style={FriendsScreenStyle.friendRow}
               >
                 <ProfilePhoto
