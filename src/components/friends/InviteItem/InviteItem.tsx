@@ -45,7 +45,8 @@ export const InviteItem = ({
           )}
         </TouchableOpacity>
         <TouchableOpacity
-          activeOpacity={0.9}
+          activeOpacity={0.6}
+          hitSlop={8}
           onPress={onRemove}
           style={InviteItemStyle.removeButtonView}
         >

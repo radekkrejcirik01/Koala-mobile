@@ -17,6 +17,7 @@ export const HomeScreen = (): React.JSX.Element => {
 
   useAppState(() => {
     NotificationsService.getUnseenNotifications();
+    NotificationsService.getUnseenInvites();
     MessagingService.initMessaging().catch();
     OnlineService.update();
     if (Platform.OS === 'ios') {

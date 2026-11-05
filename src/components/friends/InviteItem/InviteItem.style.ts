@@ -35,6 +35,10 @@ export const InviteItemStyle = StyleSheet.create({
     fontWeight: 'bold'
   },
   removeButtonView: {
-    marginLeft: 12
+    height: 35,
+    width: 35,
+    marginLeft: 6,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

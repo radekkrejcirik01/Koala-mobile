@@ -34,6 +34,7 @@ class PreloadServiceSingleton {
         if (response?.status) {
           store.dispatch(setUserStateAction(response.data));
           NotificationsService.getUnseenNotifications();
+          NotificationsService.getUnseenInvites();
           if (launching) {
             await BootSplash.hide({ fade: true });
           }
