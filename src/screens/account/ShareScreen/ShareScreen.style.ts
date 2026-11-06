@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const ShareScreenStyle = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ export const ShareScreenStyle = StyleSheet.create({
     marginBottom: 210
   },
   selectedEmoji: {
+    color: COLORS.BLACK,
     fontSize: 64,
     textAlign: 'center',
     marginBottom: 16

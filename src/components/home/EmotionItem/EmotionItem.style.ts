@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const EmotionItemStyle = StyleSheet.create({
   container: {
@@ -9,6 +10,7 @@ export const EmotionItemStyle = StyleSheet.create({
     borderRadius: 38
   },
   emoji: {
+    color: COLORS.BLACK,
     fontSize: 36
   }
 });

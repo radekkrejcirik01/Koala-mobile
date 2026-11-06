@@ -11,6 +11,7 @@ export const ChatScreenStyle = StyleSheet.create({
     paddingTop: 110
   },
   emotionText: {
+    color: COLORS.BLACK,
     fontSize: 80,
     textAlign: 'center'
   },
@@ -43,6 +44,7 @@ export const ChatScreenStyle = StyleSheet.create({
     backgroundColor: COLORS.WHITE_200
   },
   emotionBadgeEmoji: {
+    color: COLORS.BLACK,
     fontSize: 19,
     marginRight: 7
   },

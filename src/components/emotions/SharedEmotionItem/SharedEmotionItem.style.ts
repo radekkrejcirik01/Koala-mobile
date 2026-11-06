@@ -17,6 +17,7 @@ export const SharedEmotionItemStyle = StyleSheet.create({
     backgroundColor: COLORS.WHITE_200
   },
   emojiText: {
+    color: COLORS.BLACK,
     fontSize: 22
   },
   textView: {

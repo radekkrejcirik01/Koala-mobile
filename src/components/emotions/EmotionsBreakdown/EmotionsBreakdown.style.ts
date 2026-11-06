@@ -8,6 +8,7 @@ export const EmotionsBreakdownStyle = StyleSheet.create({
     alignItems: 'center'
   },
   emojiText: {
+    color: COLORS.BLACK,
     width: 30,
     fontSize: 20
   },

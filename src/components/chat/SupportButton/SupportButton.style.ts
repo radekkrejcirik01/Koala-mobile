@@ -14,6 +14,7 @@ export const SupportButtonStyle = StyleSheet.create({
     backgroundColor: COLORS.WHITE_300
   },
   emoji: {
+    color: COLORS.BLACK,
     fontSize: 36
   }
 });

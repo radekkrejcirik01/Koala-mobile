@@ -37,6 +37,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     backgroundColor: COLORS.WHITE
   },
   photoBadgeText: {
+    color: COLORS.BLACK,
     fontSize: 14
   },
   namesView: {

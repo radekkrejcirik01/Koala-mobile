@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const FormIntroStyle = StyleSheet.create({
   container: {
@@ -15,6 +16,7 @@ export const FormIntroStyle = StyleSheet.create({
     justifyContent: 'center'
   },
   emoji: {
+    color: COLORS.BLACK,
     fontSize: 30
   },
   title: {

@@ -16,6 +16,7 @@ export const ProfileItemStyle = StyleSheet.create({
     backgroundColor: COLORS.WHITE_200
   },
   icon: {
+    color: COLORS.BLACK,
     fontSize: 17
   },
   content: {

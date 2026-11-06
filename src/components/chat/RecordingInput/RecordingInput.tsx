@@ -39,7 +39,7 @@ export const RecordingInput = ({
             hitSlop={10}
             onPress={onPressClean}
           >
-            <Text>🗑️</Text>
+            <Text style={RecordingInputStyle.emoji}>🗑️</Text>
           </TouchableOpacity>
         ) : (
           <AnimatedCircularProgress

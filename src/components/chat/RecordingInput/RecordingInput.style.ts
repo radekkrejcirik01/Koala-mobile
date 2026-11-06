@@ -23,7 +23,11 @@ export const RecordingInputStyle = StyleSheet.create({
   titleView: {
     marginLeft: 10
   },
+  emoji: {
+    color: COLORS.BLACK
+  },
   titleText: {
+    color: COLORS.BLACK,
     fontWeight: '500'
   },
   sendButtonView: {
