@@ -1,5 +1,12 @@
 import React, { JSX, useCallback, useMemo, useRef } from 'react';
-import { ActivityIndicator, Alert, ScrollView, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Platform,
+  ScrollView,
+  Text,
+  View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useSending } from '@hooks/useSending';
@@ -22,7 +29,7 @@ export const ShareSendScreen = ({
 }: ShareSendScreenProps): JSX.Element => {
   const { emotion } = route.params;
 
-  const { bottom } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { dismiss } = useNavigation();
   const { sending, sent, setSending, setSent } = useSending();
@@ -84,7 +91,8 @@ export const ShareSendScreen = ({
         ShareSendScreenStyle.container,
         {
           backgroundColor: theme.theme.colors.background,
-          paddingTop: 10,
+          // The modal is a sheet on iOS but full screen on Android
+          paddingTop: Platform.OS === 'android' ? Math.max(top - 6, 0) : 10,
           paddingBottom: bottom || 10
         }
       ]}

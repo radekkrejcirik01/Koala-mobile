@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useMemo, useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert, Platform, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
@@ -12,7 +12,7 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
 
 export const ShareScreen = (): JSX.Element => {
-  const { bottom } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { navigateTo } = useNavigation();
 
@@ -44,7 +44,8 @@ export const ShareScreen = (): JSX.Element => {
         ShareScreenStyle.container,
         {
           backgroundColor: theme.theme.colors.background,
-          paddingTop: 10,
+          // The modal is a sheet on iOS but full screen on Android
+          paddingTop: Platform.OS === 'android' ? Math.max(top - 6, 0) : 10,
           paddingBottom: bottom || 10
         }
       ]}
