@@ -1,7 +1,6 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { useNotifications } from '@hooks/useNotifications';
 import { useAppState } from '@hooks/useAppState';
 import { HomeHeader } from '@components/home/HomeHeader/HomeHeader';
@@ -16,13 +15,10 @@ export const HomeScreen = (): React.JSX.Element => {
   const { top } = useSafeAreaInsets();
 
   useAppState(() => {
-    NotificationsService.getUnseenNotifications();
+    NotificationsService.getUnreadChats();
     NotificationsService.getUnseenInvites();
     MessagingService.initMessaging().catch();
     OnlineService.update();
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.setApplicationIconBadgeNumber(0);
-    }
   });
 
   return (

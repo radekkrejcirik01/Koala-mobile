@@ -7,7 +7,7 @@ import {
 } from '@navigation/RootNavigator/RootStackNavigator.options';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { HomeScreen } from '@screens/account/HomeScreen/HomeScreen';
-import { NotificationsScreen } from '@screens/account/NotificationsScreen/NotificationsScreen';
+import { ChatsScreen } from '@screens/account/ChatsScreen/ChatsScreen';
 import { ChatScreen } from '@screens/account/ChatScreen/ChatScreen';
 import { ProfileScreen } from '@screens/account/ProfileScreen/ProfileScreen';
 import { AccountScreen } from '@screens/account/AccountScreen/AccountScreen';
@@ -67,8 +67,8 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       options={NoHeader}
     />
     <Account.Screen
-      name={AccountStackNavigatorEnum.NotificationsScreen}
-      component={NotificationsScreen}
+      name={AccountStackNavigatorEnum.ChatsScreen}
+      component={ChatsScreen}
       options={NoHeader}
     />
     <Account.Screen

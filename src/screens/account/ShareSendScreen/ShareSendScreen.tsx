@@ -56,7 +56,7 @@ export const ShareSendScreen = ({
     setSending(true);
 
     postRequest<ResponseInterface, EmotionMessagePostInterface>(
-      'emotion-message/direct',
+      'chats/emotion',
       {
         ids: selected,
         message: config?.message,

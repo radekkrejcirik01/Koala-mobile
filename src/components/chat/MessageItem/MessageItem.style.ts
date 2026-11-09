@@ -22,23 +22,6 @@ export const MessageItemStyle = StyleSheet.create({
   outboundContainer: {
     backgroundColor: COLORS.PURPLE
   },
-  audioMessage: {
-    paddingVertical: 0,
-    paddingHorizontal: 0
-  },
-  outboundAudioMessage: {
-    backgroundColor: COLORS.WHITE
-  },
-  replyMessageView: {
-    marginTop: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 20
-  },
-  replyMessageText: {
-    color: COLORS.GRAY_200,
-    fontWeight: '500'
-  },
   messageText: {
     fontSize: 15.5
   },

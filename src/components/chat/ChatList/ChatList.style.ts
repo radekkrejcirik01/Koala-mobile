@@ -17,12 +17,16 @@ export const ChatListStyle = StyleSheet.create({
     fontWeight: '500',
     color: COLORS.GRAY_200
   },
-  supportText: {
-    alignSelf: 'center',
-    marginTop: 10,
-    marginBottom: 26,
-    fontSize: 13,
-    color: COLORS.GRAY_200,
-    textAlign: 'center'
+  // Its time always sits right above it, the gap is kept below
+  emotionView: {
+    marginBottom: 12
+  },
+  // A text message right under it gets more room
+  emotionViewBeforeMessage: {
+    marginBottom: 0,
+    paddingBottom: 30
+  },
+  lastItem: {
+    paddingBottom: 20
   }
 });

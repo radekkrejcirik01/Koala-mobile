@@ -1,12 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
+import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
   FirebaseMessagingTypes
 } from '@react-native-firebase/messaging';
 import moment from 'moment';
-import fs from 'react-native-fs';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { useAppState } from '@hooks/useAppState';
@@ -19,28 +24,30 @@ import {
   postRequest,
   putRequest
 } from '@utils/Axios/Axios.service';
+import { NotificationsService } from '@utils/general/NotificationsService';
 import {
-  ResponseConversationGetInterface,
-  ResponseInterface
+  ResponseFriendsGetInterface,
+  ResponseInterface,
+  ResponseMessagePostInterface,
+  ResponseMessagesGetInterface
 } from '@interfaces/response/Response.interface';
 import {
   MessagePostInterface,
   ReactionPostInterface
 } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
-import { ConversationInterface } from '@interfaces/general.interface';
+import { MessageInterface } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
-import { SupportButton } from '@components/chat/SupportButton/SupportButton';
-import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
+import { MessageType } from '@enums/MessageType';
+import { PAGE_SIZE } from '@constants/PAGE_SIZE';
+import { mergeLatestMessages } from '@functions/mergeLatestMessages';
 
-const CHAT_HEADER_HEIGHT = 45;
 // Gap between the input and the open keyboard
 const KEYBOARD_INPUT_GAP = 5;
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-  const { id, chatUserId, name, profilePhoto, username, conversationId } =
-    route.params;
+  const { id: friendId } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
@@ -58,16 +65,35 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     [bottom]
   );
 
+  const [friend, setFriend] = useState(route.params);
   const [message, setMessage] = useState<string>('');
-  const [conversation, setConversation] = useState<ConversationInterface[]>([]);
-  const [replyMessage, setReplyMessage] = useState<string>('');
-  const [audioRecord, setAudioRecord] = useState<string>('');
-  const [loaded, setLoaded] = useState<boolean>();
-  const [supporting, setSupporting] = useState<boolean>(false);
-  const [emotion, setEmotion] = useState<ConversationInterface>();
+  // Newest first, the list is inverted
+  const [messages, setMessages] = useState<MessageInterface[]>([]);
+
+  const firstLoad = useRef<boolean>(true);
+  const hasOlder = useRef<boolean>(false);
+  const loadingOlder = useRef<boolean>(false);
+  // Emotions whose support is still being sent, a refresh keeps them supported
+  const supportingIds = useRef<Set<number>>(new Set());
 
   const listRef = useRef(null);
   const inputRef = useRef(null);
+
+  // Opened from a push, the header needs the friend's name and photo
+  useEffect(() => {
+    if (friend.name) {
+      return;
+    }
+
+    getRequest<ResponseFriendsGetInterface>('friends').subscribe(
+      (response: ResponseFriendsGetInterface) => {
+        const value = response?.data?.find((item) => item.id === friendId);
+        if (value) {
+          setFriend({ ...value, id: friendId });
+        }
+      }
+    );
+  }, [friend.name, friendId]);
 
   const scrollToEnd = () => {
     setTimeout(() => {
@@ -75,254 +101,244 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     }, 50);
   };
 
-  const updateSeenNotification = useCallback(() => {
-    putRequest<ResponseInterface, never>(
-      `notification/${conversationId || id}`
-    ).subscribe();
-  }, [conversationId, id]);
+  const markAsRead = useCallback(() => {
+    putRequest<ResponseInterface, never>(`chats/${friendId}/read`).subscribe(
+      () => NotificationsService.getUnreadChats()
+    );
+  }, [friendId]);
 
-  const getConversation = useCallback(() => {
-    setLoaded(false);
-    getRequest<ResponseConversationGetInterface>(
-      `conversation/${conversationId || id}`
-    ).subscribe((response: ResponseConversationGetInterface) => {
-      if (response?.status && !!response?.data?.length) {
-        const data = response?.data;
+  const loadMessages = useCallback(() => {
+    getRequest<ResponseMessagesGetInterface>(
+      `chats/${friendId}/messages`
+    ).subscribe((response: ResponseMessagesGetInterface) => {
+      if (response?.status) {
+        const data = response.data ?? [];
 
-        setEmotion(
-          data.find(
-            (item) =>
-              item.type === NotificationItemEnum.DirectEmotionNotificationType
+        // Only the first load decides, later ones keep the older pages
+        if (firstLoad.current) {
+          firstLoad.current = false;
+          hasOlder.current = data.length >= PAGE_SIZE;
+        }
+
+        setMessages((prevState) =>
+          mergeLatestMessages(data, prevState).map((item) =>
+            supportingIds.current.has(item.id)
+              ? { ...item, supported: true }
+              : item
           )
         );
 
-        setConversation(data.reverse());
-
-        updateSeenNotification();
-
-        setLoaded(true);
+        markAsRead();
       }
     });
-  }, [conversationId, id, updateSeenNotification]);
+  }, [friendId, markAsRead]);
 
   useEffect(() => {
-    getConversation();
-  }, [getConversation]);
+    loadMessages();
+  }, [loadMessages]);
 
   useEffect(
     () =>
-      // On new message
+      // On new message, reloading for any push as it may not carry the friend
       messaging().onMessage(
         (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
           if (remoteMessage) {
-            getConversation();
+            loadMessages();
           }
         }
       ),
-    [getConversation]
+    [loadMessages]
   );
 
-  useAppState(() => getConversation());
+  useAppState(loadMessages);
 
-  const send = useCallback(
-    async (text?: string) => {
-      setConversation((prevState) => [
-        {
-          id: prevState[prevState?.length - 1].id + 1,
-          senderId: userId,
-          message: text || message,
-          time: moment().unix(),
-          replyMessage,
-          audioMessage: audioRecord
-        },
-        ...prevState
-      ]);
+  const loadOlder = useCallback(() => {
+    const oldest = messages[messages.length - 1];
 
-      let base64Buffer;
-      if (audioRecord) {
-        base64Buffer = await fs.readFile(audioRecord, 'base64');
+    if (!hasOlder.current || loadingOlder.current || !oldest) {
+      return;
+    }
+
+    loadingOlder.current = true;
+    getRequest<ResponseMessagesGetInterface>(
+      `chats/${friendId}/messages?lastId=${oldest.id}`
+    ).subscribe((response: ResponseMessagesGetInterface) => {
+      loadingOlder.current = false;
+
+      if (response?.status) {
+        const data = response.data ?? [];
+        hasOlder.current = data.length >= PAGE_SIZE;
+
+        setMessages((prevState) =>
+          prevState.concat(
+            data.filter((item) => !prevState.some(({ id }) => id === item.id))
+          )
+        );
+      }
+    });
+  }, [friendId, messages]);
+
+  // Support shows on its emotion only, never as a message of its own
+  const visibleMessages = useMemo(
+    () => messages.filter((item) => item.type !== MessageType.Support),
+    [messages]
+  );
+
+  const onPressSend = useCallback(() => {
+    const text = message.trim();
+    if (!text) {
+      return;
+    }
+
+    // Shown right away under a temporary id until the server returns it
+    const tempId = -moment().valueOf();
+    setMessages((prevState) => [
+      {
+        id: tempId,
+        senderId: userId,
+        type: MessageType.Message,
+        message: text,
+        time: moment().unix()
+      },
+      ...prevState
+    ]);
+    setMessage('');
+    scrollToEnd();
+
+    postRequest<ResponseMessagePostInterface, MessagePostInterface>(
+      `chats/${friendId}/messages`,
+      { message: text }
+    ).subscribe((response: ResponseMessagePostInterface) => {
+      const sent = response?.data;
+
+      if (sent) {
+        // A refresh may have brought it already
+        setMessages((prevState) =>
+          prevState
+            .filter((item) => item.id !== sent.id)
+            .map((item) => (item.id === tempId ? sent : item))
+        );
+        return;
       }
 
-      setLoaded(false);
-      postRequest<ResponseInterface, MessagePostInterface>('message', {
-        conversationId: conversationId || id,
-        receiverId: chatUserId,
-        message: text || message,
-        replyMessage,
-        audioBuffer: text ? '' : base64Buffer
-      }).subscribe((response) => {
-        if (response?.status) {
-          getConversation();
-        }
-      });
-    },
-    [
-      audioRecord,
-      chatUserId,
-      conversationId,
-      getConversation,
-      id,
-      message,
-      replyMessage,
-      userId
-    ]
-  );
+      setMessages((prevState) =>
+        prevState.filter((item) => item.id !== tempId)
+      );
+      setMessage((value) => value || text);
+      Alert.alert('Failed to send. Please try again.');
+    });
+  }, [friendId, message, userId]);
 
   const sendReaction = useCallback(
     (reaction: string, messageId: number) => {
-      // Show the reaction right away, the reload then syncs it with the server
-      setConversation((prevState) =>
+      // Picking the current reaction again removes it
+      const current = messages.find((item) => item.id === messageId)?.reaction;
+      const value = current === reaction ? null : reaction;
+
+      // Show the reaction right away, a failure reloads the server state
+      setMessages((prevState) =>
         prevState.map((item) =>
-          item.id === messageId ? { ...item, reaction } : item
+          item.id === messageId
+            ? { ...item, reaction: value ?? undefined }
+            : item
         )
       );
 
       putRequest<ResponseInterface, ReactionPostInterface>(
-        `notification-reaction/${messageId}`,
-        { reaction }
-      ).subscribe(() => getConversation());
+        `chats/messages/${messageId}/reaction`,
+        { reaction: value }
+      ).subscribe((response: ResponseInterface) => {
+        if (!response?.status) {
+          loadMessages();
+        }
+      });
     },
-    [getConversation]
+    [loadMessages, messages]
   );
+
+  const sendSupport = useCallback((emotionId: number) => {
+    const setSupported = (supported: boolean) =>
+      setMessages((prevState) =>
+        prevState.map((item) =>
+          item.id === emotionId ? { ...item, supported } : item
+        )
+      );
+
+    // Shown as supported right away, which also hides the button so it
+    // can't be sent twice, a failure takes it back
+    supportingIds.current.add(emotionId);
+    setSupported(true);
+
+    postRequest<ResponseMessagePostInterface, null>(
+      `chats/messages/${emotionId}/support`,
+      null
+    ).subscribe((response: ResponseMessagePostInterface) => {
+      supportingIds.current.delete(emotionId);
+
+      if (!response?.data) {
+        setSupported(false);
+        Alert.alert('Failed to send support. Please try again.');
+      }
+    });
+  }, []);
 
   const deleteMessage = useCallback(
     (messageId: number) => {
-      if (!loaded) {
+      // Still being sent, there is nothing to delete yet
+      if (messageId < 0) {
         return;
       }
 
-      deleteRequest<ResponseInterface>(`message/${messageId}`).subscribe(
-        (response: ResponseInterface) => {
-          if (response?.status) {
-            getConversation();
+      Alert.alert('Delete message?', 'It will be deleted for both of you.', [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            setMessages((prevState) =>
+              prevState.filter((item) => item.id !== messageId)
+            );
+
+            deleteRequest<ResponseInterface>(
+              `chats/messages/${messageId}`
+            ).subscribe((response: ResponseInterface) => {
+              if (!response?.status) {
+                loadMessages();
+              }
+            });
           }
         }
-      );
+      ]);
     },
-    [getConversation, loaded]
+    [loadMessages]
   );
-
-  const onPressSend = useCallback(() => {
-    send().catch();
-    setMessage('');
-    setReplyMessage('');
-    setAudioRecord('');
-
-    scrollToEnd();
-  }, [send]);
-
-  const hasSupportMessage = conversation.some(
-    (item) => item.type === NotificationItemEnum.SupportNotificationType
-  );
-
-  const onPressSupport = useCallback(() => {
-    if (supporting || hasSupportMessage) {
-      return;
-    }
-
-    setSupporting(true);
-
-    setConversation((prevState) => [
-      {
-        id: prevState[prevState?.length - 1]?.id + 1 || 1,
-        senderId: userId,
-        message: '🫶',
-        time: moment().unix(),
-        type: NotificationItemEnum.SupportNotificationType
-      },
-      ...prevState
-    ]);
-
-    putRequest<ResponseInterface, never>(
-      `notification-support/${id}`
-    ).subscribe((response: ResponseInterface) => {
-      setSupporting(false);
-
-      if (response?.status === 'success') {
-        getConversation();
-      } else {
-        setConversation((prevState) =>
-          prevState.filter(
-            (item) => item.type !== NotificationItemEnum.SupportNotificationType
-          )
-        );
-      }
-    });
-  }, [getConversation, hasSupportMessage, id, supporting, userId]);
-
-  const isOwnEmotion = !!emotion && emotion.senderId !== chatUserId;
-  const showSupportButton = !!emotion && !isOwnEmotion && !hasSupportMessage;
 
   return (
     <View style={[ChatScreenStyle.container, { paddingTop: top }]}>
       <ChatHeader
-        chatUserId={chatUserId}
-        username={username}
-        name={name}
-        profilePhoto={profilePhoto}
+        chatUserId={friendId}
+        username={friend.username ?? ''}
+        name={friend.name ?? ''}
+        profilePhoto={friend.profilePhoto}
       />
-      {hasSupportMessage ? (
-        <View
-          style={[
-            ChatScreenStyle.emotionBadgeOuter,
-            { top: top + CHAT_HEADER_HEIGHT + 28 }
-          ]}
-        >
-          <View style={ChatScreenStyle.emotionBadge}>
-            <View style={ChatScreenStyle.emotionBadgeTint} />
-            <Text style={ChatScreenStyle.emotionBadgeEmoji}>
-              {emotion?.emotion}
-            </Text>
-            <Text style={ChatScreenStyle.emotionBadgeText} numberOfLines={1}>
-              {isOwnEmotion ? 'You are' : `${name} is`} feeling{' '}
-              {emotion?.message?.toLowerCase()}
-            </Text>
-          </View>
-        </View>
-      ) : (
-        <View style={ChatScreenStyle.emotionView}>
-          <Text style={ChatScreenStyle.emotionText}>{emotion?.emotion}</Text>
-          <Text style={ChatScreenStyle.emotionMessageText}>
-            {isOwnEmotion ? 'You are' : `${name} is`} feeling{' '}
-            {emotion?.message?.toLowerCase()}
-          </Text>
-        </View>
-      )}
-      {showSupportButton ? (
-        <View
-          style={[
-            ChatScreenStyle.supportButtonView,
-            { paddingBottom: bottom || 30 }
-          ]}
-        >
-          <SupportButton supporting={supporting} onPress={onPressSupport} />
-          <Text style={ChatScreenStyle.supportHintText}>
-            Send support to start a chat
-          </Text>
-        </View>
-      ) : (
-        <Animated.View style={[ChatScreenStyle.chatView, chatViewStyle]}>
-          <ChatList
-            listRef={listRef}
-            conversation={conversation.filter(
-              (item) =>
-                item.type !== NotificationItemEnum.DirectEmotionNotificationType
-            )}
-            onSelectReaction={sendReaction}
-            name={name}
-          />
-          <ChatInput
-            message={message}
-            onChangeText={setMessage}
-            onPressSend={onPressSend}
-            onAudioRecord={setAudioRecord}
-            replyMessage={replyMessage}
-            inputRef={inputRef}
-            onFocus={scrollToEnd}
-            onDismissReply={() => setReplyMessage('')}
-          />
-        </Animated.View>
-      )}
+      <Animated.View style={[ChatScreenStyle.chatView, chatViewStyle]}>
+        <ChatList
+          listRef={listRef}
+          messages={visibleMessages}
+          onSelectReaction={sendReaction}
+          onPressSupport={sendSupport}
+          onDeleteMessage={deleteMessage}
+          onLoadOlder={loadOlder}
+          name={friend.name ?? ''}
+        />
+        <ChatInput
+          message={message}
+          onChangeText={setMessage}
+          onPressSend={onPressSend}
+          inputRef={inputRef}
+          onFocus={scrollToEnd}
+        />
+      </Animated.View>
     </View>
   );
 };

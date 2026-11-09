@@ -5,9 +5,6 @@ export interface ChatInputProps {
   message: string;
   onChangeText: (value: string) => void;
   onPressSend: () => void;
-  onAudioRecord: (value: string) => void;
-  replyMessage: string;
   inputRef: RefObject<TextInput>;
   onFocus: () => void;
-  onDismissReply: () => void;
 }

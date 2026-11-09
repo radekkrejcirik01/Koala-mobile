@@ -7,13 +7,9 @@ import Clean from '@assets/webp/Clean.webp';
 import Direct from '@assets/webp/Direct.webp';
 import Mail from '@assets/webp/Mail.webp';
 import Menu from '@assets/webp/Menu.webp';
-import Microphone from '@assets/webp/Microphone.webp';
-import Reply from '@assets/webp/Reply.webp';
-import Play from '@assets/webp/Play.webp';
 import Plus from '@assets/webp/Plus.webp';
 import Send from '@assets/webp/Send.webp';
 import Stats from '@assets/webp/Stats.webp';
-import Stop from '@assets/webp/Stop.webp';
 
 export enum IconEnum {
   ADD_FRIEND = 'AddFriend',
@@ -25,13 +21,9 @@ export enum IconEnum {
   DIRECT = 'Direct',
   MAIL = 'Mail',
   MENU = 'Menu',
-  MICROPHONE = 'Microphone',
-  REPLY = 'Reply',
-  PLAY = 'Play',
   PLUS = 'Plus',
   SEND = 'Send',
-  STATS = 'Stats',
-  STOP = 'Stop'
+  STATS = 'Stats'
 }
 
 export const ICONS = {
@@ -43,12 +35,8 @@ export const ICONS = {
   [IconEnum.CLEAN]: Clean,
   [IconEnum.DIRECT]: Direct,
   [IconEnum.MENU]: Menu,
-  [IconEnum.MICROPHONE]: Microphone,
   [IconEnum.MAIL]: Mail,
-  [IconEnum.REPLY]: Reply,
-  [IconEnum.PLAY]: Play,
   [IconEnum.PLUS]: Plus,
   [IconEnum.SEND]: Send,
-  [IconEnum.STATS]: Stats,
-  [IconEnum.STOP]: Stop
+  [IconEnum.STATS]: Stats
 };

@@ -42,11 +42,7 @@ export interface EmotionMessagePostInterface {
 }
 
 export interface MessagePostInterface {
-  conversationId: number;
-  receiverId: number;
   message: string;
-  replyMessage?: string;
-  audioBuffer?: string;
 }
 
 export interface PasswordResetPostInterface {
@@ -70,5 +66,6 @@ export interface ProfilePhotoPostInterface {
 }
 
 export interface ReactionPostInterface {
-  reaction: string;
+  // Null removes the reaction
+  reaction: string | null;
 }

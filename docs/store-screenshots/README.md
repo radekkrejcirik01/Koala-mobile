@@ -169,20 +169,17 @@ returns `success`.
 | `INVITES` | Friend invites, and the badge on the add-friend button |
 | `CHATS` | Chats list and every conversation |
 | `MOOD_PATTERN` | Analytics charts and history |
-| `unseenNotifications` in `route` | The badge on the Chats button |
+| `unread` in `CHAT_LIST` | The unread dots, and the badge on the Chats button |
 
 Keep these in mind when changing them:
 
-- **Every chat needs a mood and a support message.** A chat only shows its
-  messages after someone sent support for the shared mood, otherwise it shows
-  just the "Send support to start a chat" button. `getConversation` builds
-  that start for you: `sharedBy` shared the mood and the other person sent
-  support.
+- **Every chat starts with a mood and a support message.** `getMessages`
+  builds that start for you: `sharedBy` shared the mood and the other person
+  sent support. Set `unsupported: true` to leave the friend's mood without
+  support, so the chat shows the support button on it.
 - **The Chats preview comes from the last message** of each chat, so the list
   and the conversation always match.
-- **No voice messages.** The voice message type looks bad in the list.
-- **Keep `unseenNotifications` equal to the number of unread chats**
-  (`seen: 0`).
+- **Unread chats are the ones with `seen: 0`.** The badge counts them.
 - **Moods have no custom text.** The app sends the mood's own label
   ("Super good", "Meh", …), so the generator uses the label from `EMOTIONS`.
 - **Keep the moods balanced.** `MOOD_PATTERN` mixes good and bad moods on

@@ -20,6 +20,7 @@ export default {
   GREEN: '#e7f4c6',
   BLUE: '#c0dbee',
   BEIGE: '#fbefd7',
+  BEIGE_100: '#fef9ee',
   EMOTION_SUPER_GOOD: '#6fcf97',
   EMOTION_GOOD: '#7cc4fa',
   EMOTION_MEH: '#f2cc8f',

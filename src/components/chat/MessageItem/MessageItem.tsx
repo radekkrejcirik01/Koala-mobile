@@ -13,7 +13,6 @@ import {
   MessageItemStyle,
   TIME_WIDTH
 } from '@components/chat/MessageItem/MessageItem.style';
-import { AudioMessageItem } from '@components/chat/AudioMessageItem/AudioMessageItem';
 
 export const MessageItem = ({
   children,
@@ -21,8 +20,6 @@ export const MessageItem = ({
   time,
   offset,
   onLongPress,
-  replyMessage,
-  audioMessage,
   showSpace,
   isLast,
   reaction
@@ -54,11 +51,6 @@ export const MessageItem = ({
     <Animated.View
       style={[isLast && MessageItemStyle.lastItemPadding, contentStyle]}
     >
-      {!!replyMessage && (
-        <View style={[MessageItemStyle.replyMessageView, align]}>
-          <Text style={MessageItemStyle.replyMessageText}>{replyMessage}</Text>
-        </View>
-      )}
       <View style={MessageItemStyle.bubbleRow}>
         <View
           style={[
@@ -66,9 +58,7 @@ export const MessageItem = ({
             align,
             outbound
               ? MessageItemStyle.outboundContainer
-              : { backgroundColor: colors.surface },
-            !!audioMessage && MessageItemStyle.audioMessage,
-            !!audioMessage && outbound && MessageItemStyle.outboundAudioMessage
+              : { backgroundColor: colors.surface }
           ]}
         >
           <TouchableOpacity
@@ -76,21 +66,17 @@ export const MessageItem = ({
             delayLongPress={120}
             onLongPress={onLongPress}
           >
-            {audioMessage ? (
-              <AudioMessageItem audioMessage={audioMessage} />
-            ) : (
-              <Text
-                style={[
-                  MessageItemStyle.messageText,
-                  outbound
-                    ? MessageItemStyle.outboundMessageText
-                    : { color: colors.text },
-                  isTextEmoji(children) && MessageItemStyle.largeText
-                ]}
-              >
-                {children}
-              </Text>
-            )}
+            <Text
+              style={[
+                MessageItemStyle.messageText,
+                outbound
+                  ? MessageItemStyle.outboundMessageText
+                  : { color: colors.text },
+                isTextEmoji(children) && MessageItemStyle.largeText
+              ]}
+            >
+              {children}
+            </Text>
           </TouchableOpacity>
         </View>
         <Animated.View

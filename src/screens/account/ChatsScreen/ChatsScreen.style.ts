@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const NotificationsScreenStyle = StyleSheet.create({
+export const ChatsScreenStyle = StyleSheet.create({
   container: {
     flex: 1
   },

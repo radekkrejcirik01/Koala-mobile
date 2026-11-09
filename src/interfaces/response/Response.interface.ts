@@ -1,7 +1,7 @@
 import {
-  ConversationInterface,
+  ChatInterface,
   InviteInterface,
-  NotificationInterface,
+  MessageInterface,
   SharedEmotionInterface,
   UserInterface
 } from '@interfaces/general.interface';
@@ -41,22 +41,28 @@ export interface ResponseInvitesGetInterface {
   data?: InviteInterface[];
 }
 
-export interface ResponseNotificationsGetInterface {
+export interface ResponseChatsGetInterface {
   status: string;
   message: string;
-  data?: NotificationInterface[];
+  data?: ChatInterface[];
 }
 
-export interface ResponseConversationGetInterface {
+export interface ResponseMessagesGetInterface {
   status: string;
   message: string;
-  data?: ConversationInterface[];
+  data?: MessageInterface[];
 }
 
-export interface ResponseUnseenNotificationsGetInterface {
+export interface ResponseMessagePostInterface {
   status: string;
   message: string;
-  unseenNotifications?: number;
+  data?: MessageInterface;
+}
+
+export interface ResponseUnreadChatsGetInterface {
+  status: string;
+  message: string;
+  unreadChats?: number;
 }
 
 export interface ResponseProfilePhotoPostInterface {

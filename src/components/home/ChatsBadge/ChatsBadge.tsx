@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { Badge } from '@components/general/Badge/Badge';
 import { ReducerProps } from '@store/index/index.props';
 
-export const NotificationsBadge = (): JSX.Element => {
-  const { unseenNotifications } = useSelector(
+export const ChatsBadge = (): JSX.Element => {
+  const { unreadChats } = useSelector(
     (state: ReducerProps) => state.notifications
   );
 
-  return <Badge value={unseenNotifications} />;
+  return <Badge value={unreadChats} />;
 };

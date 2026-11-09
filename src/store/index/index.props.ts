@@ -23,6 +23,6 @@ export interface NewAccount {
 }
 
 export interface Notifications {
-  unseenNotifications: number;
+  unreadChats: number;
   unseenInvites: number;
 }

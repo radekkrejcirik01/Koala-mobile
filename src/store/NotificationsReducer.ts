@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Notifications } from '@store/index/index.props';
 
 const initialState: Notifications = {
-  unseenNotifications: 0,
+  unreadChats: 0,
   unseenInvites: 0
 };
 
@@ -10,8 +10,8 @@ export const NotificationsReducer = createSlice({
   name: 'notifications',
   initialState,
   reducers: {
-    setUnseenNotifications: (state, action) => {
-      state.unseenNotifications = action.payload;
+    setUnreadChats: (state, action) => {
+      state.unreadChats = action.payload;
     },
     setUnseenInvites: (state, action) => {
       state.unseenInvites = action.payload;
@@ -19,7 +19,7 @@ export const NotificationsReducer = createSlice({
   }
 });
 
-export const { setUnseenNotifications, setUnseenInvites } =
+export const { setUnreadChats, setUnseenInvites } =
   NotificationsReducer.actions;
 
 export default NotificationsReducer.reducer;

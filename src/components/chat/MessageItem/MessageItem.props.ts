@@ -7,8 +7,6 @@ export interface MessageItemProps {
   // Swipe offset of the chat, revealing the time
   offset: SharedValue<number>;
   onLongPress: () => void;
-  replyMessage: string;
-  audioMessage: string;
   showSpace: boolean;
   isLast: boolean;
   reaction?: string;

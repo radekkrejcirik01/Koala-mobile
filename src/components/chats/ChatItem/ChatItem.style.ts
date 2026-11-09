@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const NotificationItemStyle = StyleSheet.create({
+export const ChatItemStyle = StyleSheet.create({
   container: {
     marginVertical: 12,
     marginLeft: 10

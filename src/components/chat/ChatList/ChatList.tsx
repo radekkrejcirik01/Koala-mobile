@@ -9,17 +9,21 @@ import { ReducerProps } from '@store/index/index.props';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 import { MessageItem } from '@components/chat/MessageItem/MessageItem';
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
-import { ConversationInterface } from '@interfaces/general.interface';
+import { MessageInterface } from '@interfaces/general.interface';
 import { ReactionBar } from '@components/chat/ReactionBar/ReactionBar';
-import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
+import { MessageType } from '@enums/MessageType';
+import { EmotionMessageItem } from '@components/chat/EmotionMessageItem/EmotionMessageItem';
 import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
 import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
 
 export const ChatList = ({
   listRef,
-  conversation,
+  messages,
   onSelectReaction,
+  onPressSupport,
+  onDeleteMessage,
+  onLoadOlder,
   name
 }: ChatListProps): React.JSX.Element => {
   const { id } = useSelector((state: ReducerProps) => state.user.user);
@@ -65,27 +69,51 @@ export const ChatList = ({
   const renderItem = ({
     item: value,
     index
-  }: ListRenderItemInfo<ConversationInterface>) => {
-    // The list is inverted, the previous message is the next item
-    const separator = shouldShowChatSeparator(
-      value.time,
-      conversation[index + 1]?.time
-    ) && (
+  }: ListRenderItemInfo<MessageInterface>) => {
+    // The list is inverted, the previous message is the next item, an
+    // emotion always shows its time
+    const hasSeparator =
+      value.type === MessageType.Emotion ||
+      shouldShowChatSeparator(value.time, messages[index + 1]?.time);
+    const separator = hasSeparator && (
       <Text style={ChatListStyle.separatorText}>
         {getChatSeparatorTime(value.time)}
       </Text>
     );
 
-    if (value.type === NotificationItemEnum.SupportNotificationType) {
+    // Friend's messages get reactions, own ones can be deleted
+    const onLongPress = isOutbound(value.senderId)
+      ? () => onDeleteMessage(value.id)
+      : () => openReactions(value.id);
+
+    const isLast = index === 0;
+
+    if (value.type === MessageType.Emotion) {
       return (
-        <>
+        <View style={isLast && ChatListStyle.lastItem}>
           {separator}
-          <Text style={ChatListStyle.supportText}>
-            {isOutbound(value.senderId)
-              ? 'You sent your support 🫶'
-              : `${name} sent support 🫶`}
-          </Text>
-        </>
+          <View
+            ref={registerMessageRef(value.id)}
+            collapsable={false}
+            style={[
+              ChatListStyle.emotionView,
+              // The list is inverted, the message under it is the previous item
+              messages[index - 1]?.type === MessageType.Message &&
+                ChatListStyle.emotionViewBeforeMessage
+            ]}
+          >
+            <EmotionMessageItem
+              emotion={value.emotion}
+              message={value.message}
+              outbound={isOutbound(value.senderId)}
+              name={name}
+              supported={!!value.supported}
+              onPressSupport={() => onPressSupport(value.id)}
+              onLongPress={onLongPress}
+              reaction={value.reaction}
+            />
+          </View>
+        </View>
       );
     }
 
@@ -98,19 +126,13 @@ export const ChatList = ({
             outbound={isOutbound(value.senderId)}
             time={value.time}
             offset={timeOffset}
-            replyMessage={value?.replyMessage}
-            audioMessage={value?.audioMessage}
             showSpace={
               isOutbound(value.senderId)
-                ? conversation[index - 1]?.senderId !== id
-                : conversation[index - 1]?.senderId === id
+                ? messages[index - 1]?.senderId !== id
+                : messages[index - 1]?.senderId === id
             }
-            isLast={conversation[0]?.id === value.id}
-            onLongPress={
-              isOutbound(value.senderId)
-                ? () => {}
-                : () => openReactions(value.id)
-            }
+            isLast={messages[0]?.id === value.id}
+            onLongPress={onLongPress}
             reaction={value?.reaction}
           >
             {value.message}
@@ -127,7 +149,10 @@ export const ChatList = ({
           <FlashList
             ref={listRef}
             inverted
-            data={conversation}
+            data={messages}
+            keyExtractor={(item) => item.id.toString()}
+            // The list is inverted, its end is the oldest message
+            onEndReached={onLoadOlder}
             estimatedItemSize={100}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={ChatListStyle.scrollViewContainer}

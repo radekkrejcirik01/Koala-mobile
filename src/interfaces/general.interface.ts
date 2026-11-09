@@ -1,5 +1,4 @@
-import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
-import { EmotionType } from '@enums/EmotionType';
+import { MessageType } from '@enums/MessageType';
 
 export interface UserInterface {
   id?: number;
@@ -14,31 +13,25 @@ export interface InviteInterface {
   profilePhoto?: string;
 }
 
-export interface NotificationInterface {
+export interface MessageInterface {
   id: number;
-  senderId?: number;
-  messageSenderId?: number;
-  sender?: string;
-  name: string;
-  profilePhoto?: string;
+  senderId: number;
+  type: MessageType;
   message: string;
-  type: NotificationItemEnum;
+  emotion?: string;
+  reaction?: string;
+  // Support only, the emotion it answers
+  parentId?: number;
+  // Emotion only, true once the friend sent support
+  supported?: boolean;
   time: number;
-  seen: number;
-  conversationId?: number;
-  emotion?: EmotionType;
 }
 
-export interface ConversationInterface {
+export interface ChatInterface {
   id: number;
-  type?: NotificationItemEnum;
-  senderId: number;
-  message: string;
-  time: number;
-  replyMessage?: string;
-  audioMessage?: string;
-  reaction?: string;
-  emotion?: EmotionType;
+  friend: UserInterface;
+  lastMessage: MessageInterface;
+  unread: boolean;
 }
 
 export interface SharedEmotionInterface {

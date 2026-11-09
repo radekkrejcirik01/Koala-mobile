@@ -1,13 +1,10 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { SupportButtonProps } from '@components/chat/SupportButton/SupportButton.props';
 import { SupportButtonStyle } from '@components/chat/SupportButton/SupportButton.style';
 
-export const SupportButton = ({
-  supporting,
-  onPress
-}: SupportButtonProps): JSX.Element => {
+export const SupportButton = ({ onPress }: SupportButtonProps): JSX.Element => {
   const onButtonPress = () => {
     trigger(HapticFeedbackTypes.impactMedium);
     onPress();
@@ -16,14 +13,12 @@ export const SupportButton = ({
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      disabled={supporting}
       onPress={onButtonPress}
-      style={[
-        SupportButtonStyle.button,
-        supporting && SupportButtonStyle.buttonSupporting
-      ]}
+      style={SupportButtonStyle.buttonOuter}
     >
-      <Text style={SupportButtonStyle.emoji}>🫶</Text>
+      <View style={SupportButtonStyle.button}>
+        <Text style={SupportButtonStyle.emoji}>🫶</Text>
+      </View>
     </TouchableOpacity>
   );
 };

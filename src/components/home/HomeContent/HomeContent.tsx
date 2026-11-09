@@ -9,15 +9,12 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { getRequest } from '@utils/Axios/Axios.service';
 import {
   ResponseInvitesGetInterface,
-  ResponseUnseenNotificationsGetInterface
+  ResponseUnreadChatsGetInterface
 } from '@interfaces/response/Response.interface';
 import { Images } from '@enums/images';
-import {
-  setUnseenInvites,
-  setUnseenNotifications
-} from '@store/NotificationsReducer';
+import { setUnreadChats, setUnseenInvites } from '@store/NotificationsReducer';
 import { ReducerProps } from '@store/index/index.props';
-import { NotificationsBadge } from '@components/home/NotificationsBadge/NotificationsBadge.tsx';
+import { ChatsBadge } from '@components/home/ChatsBadge/ChatsBadge';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 
 export const HomeContent = (): JSX.Element => {
@@ -32,15 +29,11 @@ export const HomeContent = (): JSX.Element => {
     setRefreshing(true);
 
     forkJoin([
-      getRequest<ResponseUnseenNotificationsGetInterface>(
-        'unseen-notifications'
-      ),
+      getRequest<ResponseUnreadChatsGetInterface>('chats/unread'),
       getRequest<ResponseInvitesGetInterface>('invites')
-    ]).subscribe(([notificationsResponse, invitesResponse]) => {
-      if (notificationsResponse?.status) {
-        dispatch(
-          setUnseenNotifications(notificationsResponse.unseenNotifications)
-        );
+    ]).subscribe(([chatsResponse, invitesResponse]) => {
+      if (chatsResponse?.status) {
+        dispatch(setUnreadChats(chatsResponse.unreadChats ?? 0));
       }
       if (invitesResponse?.status) {
         dispatch(setUnseenInvites(invitesResponse.data?.length ?? 0));
@@ -64,7 +57,7 @@ export const HomeContent = (): JSX.Element => {
   }, [image]);
 
   const onPressChats = () => {
-    navigateTo(AccountStackNavigatorEnum.NotificationsScreen);
+    navigateTo(AccountStackNavigatorEnum.ChatsScreen);
   };
 
   const onPressShare = useCallback(() => {
@@ -89,7 +82,7 @@ export const HomeContent = (): JSX.Element => {
         <HomeButton text="Share" onPress={onPressShare} />
         <View style={HomeContentStyle.footerButtonRow}>
           <HomeButton text="Chats 💬" onPress={onPressChats} />
-          <NotificationsBadge />
+          <ChatsBadge />
         </View>
       </View>
     </View>

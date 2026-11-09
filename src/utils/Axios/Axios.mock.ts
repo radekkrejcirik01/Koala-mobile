@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import moment from 'moment';
 import { EmotionType } from '@enums/EmotionType';
 import { EMOTIONS } from '@constants/EMOTIONS';
-import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
+import { MessageType } from '@enums/MessageType';
 
 // Fake backend for App Store screenshots, enable via MOCK_DATA in Axios.instance
 const BASE_URL =
@@ -14,7 +14,12 @@ const avatar = (seed: string): string =>
 const ago = (minutes: number): number =>
   moment().subtract(minutes, 'minutes').unix();
 
-const ME = { id: 1, name: 'Ema', username: 'ema', profilePhoto: avatar('women/3') };
+const ME = {
+  id: 1,
+  name: 'Ema',
+  username: 'ema',
+  profilePhoto: avatar('women/3')
+};
 
 const FRIENDS = [
   { id: 2, name: 'Lucas', username: 'lucas', profilePhoto: avatar('men/4') },
@@ -22,7 +27,12 @@ const FRIENDS = [
   { id: 4, name: 'Noah', username: 'noah', profilePhoto: avatar('men/22') },
   { id: 5, name: 'Mia', username: 'mia', profilePhoto: avatar('women/19') },
   { id: 6, name: 'Oliver', username: 'oliver', profilePhoto: avatar('men/1') },
-  { id: 7, name: 'Hannah', username: 'hannah', profilePhoto: avatar('women/2') },
+  {
+    id: 7,
+    name: 'Hannah',
+    username: 'hannah',
+    profilePhoto: avatar('women/2')
+  },
   { id: 8, name: 'Leo', username: 'leo', profilePhoto: avatar('men/18') },
   { id: 9, name: 'Clara', username: 'clara', profilePhoto: avatar('women/30') }
 ];
@@ -36,6 +46,8 @@ interface Chat {
   friendId: number;
   // Who shared the mood that started the chat, the other one sent support
   sharedBy: number;
+  // Leaves the mood without support, showing the support button
+  unsupported?: boolean;
   emotion: EmotionType;
   feeling: string;
   minutesAgo: number;
@@ -92,6 +104,7 @@ const CHATS: Chat[] = [
     id: 4,
     friendId: 9,
     sharedBy: 9,
+    unsupported: true,
     emotion: EmotionType.SuperGood,
     feeling: 'Super good',
     minutesAgo: 180,
@@ -154,31 +167,38 @@ const CHATS: Chat[] = [
   }
 ];
 
-// Oldest first, the chat screen reverses it
-const getConversation = (chat: Chat) => {
+// Oldest first, the endpoint reverses it
+const getMessages = (chat: Chat) => {
   const supporter = chat.sharedBy === 1 ? chat.friendId : 1;
   const start = chat.minutesAgo + chat.messages.length + 2;
+  const emotionId = chat.id * 100;
 
   return [
     {
-      id: chat.id * 100,
-      type: NotificationItemEnum.DirectEmotionNotificationType,
+      id: emotionId,
+      type: MessageType.Emotion,
       senderId: chat.sharedBy,
       emotion: chat.emotion,
       message: chat.feeling,
+      supported: !chat.unsupported,
       time: ago(start)
     },
-    {
-      id: chat.id * 100 + 1,
-      type: NotificationItemEnum.SupportNotificationType,
-      senderId: supporter,
-      message: '🫶',
-      time: ago(start - 1)
-    },
+    ...(chat.unsupported
+      ? []
+      : [
+          {
+            id: emotionId + 1,
+            type: MessageType.Support,
+            senderId: supporter,
+            message: '',
+            parentId: emotionId,
+            time: ago(start - 1)
+          }
+        ]),
     ...chat.messages.map(
       ([senderId, message, reaction]: Message, index: number) => ({
-        id: chat.id * 100 + 2 + index,
-        type: NotificationItemEnum.MessageNotificationType,
+        id: emotionId + 2 + index,
+        type: MessageType.Message,
         senderId,
         message,
         reaction,
@@ -188,26 +208,20 @@ const getConversation = (chat: Chat) => {
   ];
 };
 
-const NOTIFICATIONS = CHATS.map((chat: Chat) => {
-  const [messageSenderId, message] = chat.messages[chat.messages.length - 1];
-  const { name, username, profilePhoto } = friend(chat.friendId);
+const CHAT_LIST = CHATS.map((chat: Chat) => {
+  const messages = getMessages(chat);
 
   return {
     id: chat.id,
-    conversationId: chat.id,
-    senderId: chat.friendId,
-    messageSenderId,
-    message,
-    type: NotificationItemEnum.MessageNotificationType,
-    time: ago(chat.minutesAgo),
-    seen: chat.seen,
-    name,
-    sender: username,
-    profilePhoto
+    friend: friend(chat.friendId),
+    lastMessage: messages[messages.length - 1],
+    unread: !chat.seen
   };
 });
 
-const INVITES = [{ id: 10, username: 'charlie', profilePhoto: avatar('men/32') }];
+const INVITES = [
+  { id: 10, username: 'charlie', profilePhoto: avatar('men/32') }
+];
 
 // Deterministic, balanced moods so stats look the same on every capture
 const MOOD_PATTERN = [
@@ -288,20 +302,22 @@ const route = (method: string, endpoint: string) => {
   if (path === 'invites') {
     return success({ data: INVITES });
   }
-  if (path === 'unseen-notifications') {
-    return success({ unseenNotifications: 3 });
+  if (path === 'chats/unread') {
+    return success({
+      unreadChats: CHAT_LIST.filter((item) => item.unread).length
+    });
   }
-  if (path === 'notifications') {
-    return success({ data: NOTIFICATIONS });
+  // Everything fits the first page, a later page is empty
+  if (path === 'chats') {
+    return success(params.lastId ? {} : { data: CHAT_LIST });
   }
-  if (path.startsWith('notifications/')) {
-    return success({ data: [] });
-  }
-  if (path.startsWith('conversation/')) {
+  if (/^chats\/\d+\/messages$/.test(path)) {
     const chat = CHATS.find(
-      (item: Chat) => item.id === Number(path.split('/')[1])
+      (item: Chat) => item.friendId === Number(path.split('/')[1])
     );
-    return success({ data: chat ? getConversation(chat) : [] });
+    return success(
+      chat && !params.lastId ? { data: getMessages(chat).reverse() } : {}
+    );
   }
   if (path.startsWith('last-online/')) {
     return success({ time: ago(1) });

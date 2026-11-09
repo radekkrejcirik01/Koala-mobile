@@ -33,7 +33,7 @@ class PreloadServiceSingleton {
       async (response: ResponseUserGetInterface) => {
         if (response?.status) {
           store.dispatch(setUserStateAction(response.data));
-          NotificationsService.getUnseenNotifications();
+          NotificationsService.getUnreadChats();
           NotificationsService.getUnseenInvites();
           if (launching) {
             await BootSplash.hide({ fade: true });
