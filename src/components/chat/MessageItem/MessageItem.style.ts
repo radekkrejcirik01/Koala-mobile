@@ -1,37 +1,48 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const OutboundMessageItemStyle = StyleSheet.create({
-  container: {
-    maxWidth: '70%',
-    marginTop: 2,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-    backgroundColor: COLORS.PURPLE,
+export const TIME_WIDTH = 60;
+
+export const MessageItemStyle = StyleSheet.create({
+  alignEnd: {
     alignSelf: 'flex-end'
   },
-  marginTop: {
-    marginTop: 15
+  alignStart: {
+    alignSelf: 'flex-start'
+  },
+  bubbleRow: {
+    marginTop: 2
+  },
+  container: {
+    maxWidth: '70%',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 20
+  },
+  outboundContainer: {
+    backgroundColor: COLORS.PURPLE
   },
   audioMessage: {
     paddingVertical: 0,
-    paddingHorizontal: 0,
+    paddingHorizontal: 0
+  },
+  outboundAudioMessage: {
     backgroundColor: COLORS.WHITE
   },
   replyMessageView: {
     marginTop: 5,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderRadius: 20,
-    alignSelf: 'flex-end'
+    borderRadius: 20
   },
   replyMessageText: {
     color: COLORS.GRAY_200,
     fontWeight: '500'
   },
   messageText: {
-    fontSize: 15.5,
+    fontSize: 15.5
+  },
+  outboundMessageText: {
     color: COLORS.WHITE
   },
   largeText: {
@@ -44,7 +55,6 @@ export const OutboundMessageItemStyle = StyleSheet.create({
     paddingBottom: 20
   },
   reactionView: {
-    alignSelf: 'flex-end',
     backgroundColor: COLORS.WHITE,
     padding: 5,
     borderRadius: 20,
@@ -54,5 +64,20 @@ export const OutboundMessageItemStyle = StyleSheet.create({
   },
   reactionText: {
     color: COLORS.BLACK
+  },
+  timeView: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: TIME_WIDTH,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingBottom: 5
+  },
+  timeText: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: COLORS.GRAY_200
   }
 });

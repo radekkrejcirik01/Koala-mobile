@@ -9,6 +9,14 @@ export const ChatListStyle = StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 10
   },
+  separatorText: {
+    alignSelf: 'center',
+    marginTop: 16,
+    marginBottom: 8,
+    fontSize: 12,
+    fontWeight: '500',
+    color: COLORS.GRAY_200
+  },
   supportText: {
     alignSelf: 'center',
     marginTop: 10,
