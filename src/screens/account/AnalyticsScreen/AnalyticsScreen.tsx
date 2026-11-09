@@ -1,6 +1,5 @@
 import React, { JSX, useCallback, useMemo, useState } from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   RefreshControl,
   Text,
@@ -16,13 +15,13 @@ import {
   getSharedEmotionsCounts,
   getSharedEmotionsTitle
 } from '@functions/getSharedEmotionsStats';
-import COLORS from '@constants/COLORS';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { Loader } from '@components/general/Loader/Loader';
 import { PeriodSelector } from '@components/emotions/PeriodSelector/PeriodSelector';
 import { EmotionsChart } from '@components/emotions/EmotionsChart/EmotionsChart';
 import { EmotionsBreakdown } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown';
 import { SharedEmotionItem } from '@components/emotions/SharedEmotionItem/SharedEmotionItem';
-import { SharedEmotionsScreenStyle } from '@screens/account/SharedEmotionsScreen/SharedEmotionsScreen.style';
+import { AnalyticsScreenStyle } from '@screens/account/AnalyticsScreen/AnalyticsScreen.style';
 
 const TOTAL_LABELS: Record<SharedEmotionsPeriod, string> = {
   [SharedEmotionsPeriod.Week]: 'this week',
@@ -30,7 +29,7 @@ const TOTAL_LABELS: Record<SharedEmotionsPeriod, string> = {
   [SharedEmotionsPeriod.Year]: 'this year'
 };
 
-export const SharedEmotionsScreen = (): JSX.Element => {
+export const AnalyticsScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const { colors } = useTheme().theme;
 
@@ -86,54 +85,49 @@ export const SharedEmotionsScreen = (): JSX.Element => {
         onNext={() => setOffset((value: number) => Math.min(value + 1, 0))}
       />
       {data ? (
-        <View style={loading && SharedEmotionsScreenStyle.stale}>
-          <View style={SharedEmotionsScreenStyle.card}>
+        <View style={loading && AnalyticsScreenStyle.stale}>
+          <View style={AnalyticsScreenStyle.card}>
             <Text
               style={[
-                SharedEmotionsScreenStyle.totalText,
+                AnalyticsScreenStyle.totalText,
                 { color: colors.text }
               ]}
             >
               {emotions.length}
             </Text>
-            <Text style={SharedEmotionsScreenStyle.totalLabelText}>
+            <Text style={AnalyticsScreenStyle.totalLabelText}>
               {emotions.length === 1 ? 'emotion' : 'emotions'} {totalLabel}
             </Text>
             <EmotionsChart buckets={buckets} />
           </View>
-          <View style={SharedEmotionsScreenStyle.card}>
+          <View style={AnalyticsScreenStyle.card}>
             <EmotionsBreakdown counts={counts} total={emotions.length} />
           </View>
           {!!emotions.length && (
-            <Text style={SharedEmotionsScreenStyle.sectionTitle}>History</Text>
+            <Text style={AnalyticsScreenStyle.sectionTitle}>History</Text>
           )}
         </View>
-      ) : (
-        <ActivityIndicator
-          color={COLORS.BUTTON_BLUE}
-          style={SharedEmotionsScreenStyle.activityIndicator}
-        />
-      )}
+      ) : null}
     </>
   );
 
   return (
-    <View style={[SharedEmotionsScreenStyle.container, { paddingTop: top }]}>
+    <View style={[AnalyticsScreenStyle.container, { paddingTop: top }]}>
       <ScreenHeader title="Analytics" />
       <FlatList
         data={emotions}
         extraData={loading}
         keyExtractor={(item: SharedEmotionInterface) => String(item.id)}
         renderItem={({ item }) => (
-          <View style={loading && SharedEmotionsScreenStyle.stale}>
+          <View style={loading && AnalyticsScreenStyle.stale}>
             <SharedEmotionItem item={item} />
           </View>
         )}
         ListHeaderComponent={header}
         ListEmptyComponent={
           data && !loading ? (
-            <Text style={SharedEmotionsScreenStyle.listEmptyText}>
-              You haven&apos;t shared any emotions in this period yet.
+            <Text style={AnalyticsScreenStyle.listEmptyText}>
+              You haven&apos;t shared any emotions in this period.
             </Text>
           ) : null
         }
@@ -141,10 +135,11 @@ export const SharedEmotionsScreen = (): JSX.Element => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         contentContainerStyle={[
-          SharedEmotionsScreenStyle.contentContainer,
+          AnalyticsScreenStyle.contentContainer,
           { paddingBottom: bottom + 30 }
         ]}
       />
+      {!data && <Loader />}
     </View>
   );
 };

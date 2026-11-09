@@ -72,5 +72,5 @@ capture 1_home HomeScreen
 capture 2_share ShareStack
 # "Last online" only shows for 7 seconds after the chat opens
 capture 3_chat ChatScreen "$SOFIA" 4
-capture 5_stats SharedEmotionsScreen '{}' 7
+capture 5_stats AnalyticsScreen '{}' 7
 capture 4_chats NotificationsScreen

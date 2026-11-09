@@ -57,7 +57,7 @@ export const ThemeSelect = () => {
       <View>
         <FormIntro
           emoji="🎨"
-          emojiBackgroundColor={COLORS.PASTEL_BLUE}
+          emojiBackgroundColor={COLORS.PASTEL_PURPLE}
           title="Choose your theme"
         />
         <View style={ThemeSelectStyle.themes}>

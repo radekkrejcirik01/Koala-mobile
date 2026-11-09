@@ -156,14 +156,17 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
   const sendReaction = useCallback(
     (reaction: string, messageId: number) => {
+      // Show the reaction right away, the reload then syncs it with the server
+      setConversation((prevState) =>
+        prevState.map((item) =>
+          item.id === messageId ? { ...item, reaction } : item
+        )
+      );
+
       putRequest<ResponseInterface, ReactionPostInterface>(
         `notification-reaction/${messageId}`,
         { reaction }
-      ).subscribe((response: ResponseInterface) => {
-        if (response?.status) {
-          getConversation();
-        }
-      });
+      ).subscribe(() => getConversation());
     },
     [getConversation]
   );

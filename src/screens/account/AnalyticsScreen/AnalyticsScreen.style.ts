@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const SharedEmotionsScreenStyle = StyleSheet.create({
+export const AnalyticsScreenStyle = StyleSheet.create({
   container: {
     flex: 1
   },
@@ -38,9 +38,6 @@ export const SharedEmotionsScreenStyle = StyleSheet.create({
   },
   stale: {
     opacity: 0.5
-  },
-  activityIndicator: {
-    marginTop: 40
   },
   listEmptyText: {
     marginTop: 30,

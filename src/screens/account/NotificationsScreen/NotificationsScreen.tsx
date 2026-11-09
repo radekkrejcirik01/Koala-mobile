@@ -1,8 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
+import { RefreshControl, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import messaging, {
+  FirebaseMessagingTypes
+} from '@react-native-firebase/messaging';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { useNavigation } from '@hooks/useNavigation';
 import { getRequest } from '@utils/Axios/Axios.service';
@@ -11,11 +15,11 @@ import { NotificationInterface } from '@interfaces/general.interface';
 import { NotificationsScreenStyle } from '@screens/account/NotificationsScreen/NotificationsScreen.style';
 import { NotificationItem } from '@components/notifications/NotificationItem/NotificationItem';
 import { setUnseenNotifications } from '@store/NotificationsReducer';
-import COLORS from '@constants/COLORS';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AddButton } from '@components/general/AddButton/AddButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { Loader } from '@components/general/Loader/Loader';
 
 export const NotificationsScreen = (): React.JSX.Element => {
   const dispatch = useDispatch();
@@ -62,13 +66,29 @@ export const NotificationsScreen = (): React.JSX.Element => {
 
   useFocusEffect(loadNotifications);
 
+  // On new message, only while focused as loading clears the unseen badge
+  useFocusEffect(
+    useCallback(
+      () =>
+        messaging().onMessage(
+          (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
+            if (remoteMessage) {
+              trigger(HapticFeedbackTypes.impactMedium);
+              loadNotifications();
+            }
+          }
+        ),
+      [loadNotifications]
+    )
+  );
+
   const renderItem = useCallback(
     ({
       item
     }: ListRenderItemInfo<NotificationInterface>): React.JSX.Element => (
       <NotificationItem
         item={item}
-        onPress={() =>
+        onPress={() => {
           navigateTo(AccountStackNavigatorEnum.ChatScreen, {
             id: item.id,
             chatUserId: item.senderId,
@@ -76,8 +96,19 @@ export const NotificationsScreen = (): React.JSX.Element => {
             profilePhoto: item?.profilePhoto,
             username: item.sender,
             conversationId: item?.conversationId
-          })
-        }
+          });
+          // Mark as seen once the chat covers the list, the next load
+          // replaces it with the server state
+          setTimeout(() => {
+            setNotifications((value) =>
+              value.map((notification) =>
+                notification.id === item.id
+                  ? { ...notification, seen: 1 }
+                  : notification
+              )
+            );
+          }, 500);
+        }}
       />
     ),
     [navigateTo]
@@ -93,7 +124,7 @@ export const NotificationsScreen = (): React.JSX.Element => {
     <View
       style={[
         NotificationsScreenStyle.container,
-        { marginTop: Math.max(top - 6, 0) }
+        { paddingTop: Math.max(top - 6, 0) }
       ]}
     >
       <ScreenHeader
@@ -130,14 +161,10 @@ export const NotificationsScreen = (): React.JSX.Element => {
             <Text style={NotificationsScreenStyle.listEmptyText}>
               No messages yet
             </Text>
-          ) : (
-            <ActivityIndicator
-              color={COLORS.LIGHTGRAY}
-              style={NotificationsScreenStyle.activityIndicator}
-            />
-          )
+          ) : null
         }
       />
+      {!loaded && <Loader />}
     </View>
   );
 };

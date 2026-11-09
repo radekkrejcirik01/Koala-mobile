@@ -1,7 +1,7 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
   Alert,
+  RefreshControl,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -29,8 +29,8 @@ import {
 } from '@interfaces/response/Response.interface';
 import { InvitePostInterface } from '@interfaces/post/Post.interface';
 import { InviteInterface, UserInterface } from '@interfaces/general.interface';
-import COLORS from '@constants/COLORS';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { Loader } from '@components/general/Loader/Loader';
 import { AddButton } from '@components/general/AddButton/AddButton';
 import { Prompt } from '@components/general/Prompt/Prompt';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
@@ -46,6 +46,7 @@ export const FriendsScreen = (): JSX.Element => {
 
   const [invites, setInvites] = useState<InviteInterface[]>([]);
   const [accepting, setAccepting] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const { friends, loadFriends, loaded } = useFriends();
 
@@ -63,6 +64,15 @@ export const FriendsScreen = (): JSX.Element => {
   useEffect(() => {
     loadInvites();
   }, [loadInvites]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      loadFriends();
+      loadInvites();
+    }, 750);
+  }, [loadFriends, loadInvites]);
 
   const sendInvite = useCallback((text: string) => {
     const receiver = text.trim();
@@ -149,12 +159,15 @@ export const FriendsScreen = (): JSX.Element => {
         rightComponent={<AddButton onPress={showPrompt} />}
       />
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         contentContainerStyle={[
           FriendsScreenStyle.contentContainer,
           { paddingBottom: bottom + 30 }
         ]}
       >
-        {!!invites?.length && (
+        {loaded && !!invites?.length && (
           <>
             <Text style={FriendsScreenStyle.sectionTitle}>
               Invites · {invites.length}
@@ -211,13 +224,9 @@ export const FriendsScreen = (): JSX.Element => {
               </Text>
             </View>
           )
-        ) : (
-          <ActivityIndicator
-            color={COLORS.BUTTON_BLUE}
-            style={FriendsScreenStyle.activityIndicator}
-          />
-        )}
+        ) : null}
       </ScrollView>
+      {!loaded && <Loader />}
       <Prompt
         title="Add friend by username"
         isVisible={promptVisible}

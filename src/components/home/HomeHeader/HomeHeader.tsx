@@ -26,7 +26,7 @@ export const HomeHeader = (): JSX.Element => {
 
   const onPressSharedEmotions = () => {
     trigger(HapticFeedbackTypes.impactLight);
-    navigateTo(AccountStackNavigatorEnum.SharedEmotionsScreen);
+    navigateTo(AccountStackNavigatorEnum.AnalyticsScreen);
   };
 
   const onPressProfile = () => {

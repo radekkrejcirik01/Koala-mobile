@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagePicker from 'react-native-image-crop-picker';
 import fs from 'react-native-fs';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Toast from 'react-native-toast-message';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
 import { ReducerProps } from '@store/index/index.props';
@@ -34,6 +37,12 @@ export const ProfileScreen = (): React.JSX.Element => {
   const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
+
+  const copyUsername = useCallback(() => {
+    Clipboard.setString(username);
+    trigger(HapticFeedbackTypes.impactLight);
+    Toast.show({ type: 'success', text1: 'Copied!' });
+  }, [username]);
 
   const addPhoto = useCallback(() => {
     ImagePicker.openPicker(ImagePickerOptions).then(async (image) => {
@@ -99,9 +108,13 @@ export const ProfileScreen = (): React.JSX.Element => {
               >
                 {name}
               </Text>
-              <View style={ProfileScreenStyle.usernamePill}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={copyUsername}
+                style={ProfileScreenStyle.usernamePill}
+              >
                 <Text style={ProfileScreenStyle.username}>@{username}</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -117,7 +130,7 @@ export const ProfileScreen = (): React.JSX.Element => {
             <ProfileItem
               onPress={() => navigateTo(AccountStackNavigatorEnum.ThemeScreen)}
               icon="🎨"
-              iconBackgroundColor={COLORS.BEIGE}
+              iconBackgroundColor={COLORS.PASTEL_PURPLE}
               title="Theme"
               isLast
             />

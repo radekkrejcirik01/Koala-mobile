@@ -15,8 +15,5 @@ export const NotificationsScreenStyle = StyleSheet.create({
     color: COLORS.GRAY_200,
     alignSelf: 'center',
     fontWeight: '500'
-  },
-  activityIndicator: {
-    marginTop: 100
   }
 });

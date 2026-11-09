@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@hooks/useTheme';
@@ -17,15 +17,6 @@ export const NotificationItem = ({
   const theme = useTheme();
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
-
-  const [pressed, setPressed] = useState<boolean>(false);
-
-  const press = useCallback(() => {
-    onPress();
-    setTimeout(() => {
-      setPressed(true);
-    }, 500);
-  }, [onPress]);
 
   function getMessage(
     type: NotificationItemEnum,
@@ -50,10 +41,7 @@ export const NotificationItem = ({
     return getShortMessage(message);
   }
 
-  const isUnseen = useMemo(
-    (): boolean => !item?.seen && !pressed,
-    [item?.seen, pressed]
-  );
+  const isUnseen = !item?.seen;
 
   return (
     <View style={NotificationItemStyle.container}>
@@ -67,7 +55,7 @@ export const NotificationItem = ({
           />
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={press}
+            onPress={onPress}
             style={NotificationItemStyle.contentView}
           >
             <Text

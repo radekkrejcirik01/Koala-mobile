@@ -1,12 +1,5 @@
 import React, { JSX, useCallback, useMemo, useRef } from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  Platform,
-  ScrollView,
-  Text,
-  View
-} from 'react-native';
+import { Alert, Platform, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useSending } from '@hooks/useSending';
@@ -17,10 +10,10 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import { filterSelected } from '@functions/filterSelected';
-import COLORS from '@constants/COLORS';
 import { FriendListItem } from '@components/friends/FriendListItem/FriendListItem';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
+import { Loader } from '@components/general/Loader/Loader';
 import { ShareSendScreenProps } from '@screens/account/ShareSendScreen/ShareSendScreen.props';
 import { ShareSendScreenStyle } from '@screens/account/ShareSendScreen/ShareSendScreen.style';
 
@@ -118,11 +111,7 @@ export const ShareSendScreen = ({
               </Text>
             </View>
           )
-        ) : (
-          <View style={ShareSendScreenStyle.centerView}>
-            <ActivityIndicator color={COLORS.BUTTON_BLUE} />
-          </View>
-        )}
+        ) : null}
       </View>
       <View style={ShareSendScreenStyle.sendButtonView}>
         <HomeButton
@@ -130,6 +119,7 @@ export const ShareSendScreen = ({
           onPress={send}
         />
       </View>
+      {!loaded && <Loader />}
     </View>
   );
 };

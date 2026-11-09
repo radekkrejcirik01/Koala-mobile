@@ -17,7 +17,7 @@ import { FriendsScreen } from '@screens/account/FriendsScreen/FriendsScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
 import { ThemeScreen } from '@screens/account/ThemeScreen/ThemeScreen';
-import { SharedEmotionsScreen } from '@screens/account/SharedEmotionsScreen/SharedEmotionsScreen';
+import { AnalyticsScreen } from '@screens/account/AnalyticsScreen/AnalyticsScreen';
 import { ShareStackNavigator } from '@navigation/StackNavigators/share/ShareStackNavigator';
 
 const Account = createNativeStackNavigator<ParamListBase>();
@@ -62,8 +62,8 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       }}
     />
     <Account.Screen
-      name={AccountStackNavigatorEnum.SharedEmotionsScreen}
-      component={SharedEmotionsScreen}
+      name={AccountStackNavigatorEnum.AnalyticsScreen}
+      component={AnalyticsScreen}
       options={NoHeader}
     />
     <Account.Screen

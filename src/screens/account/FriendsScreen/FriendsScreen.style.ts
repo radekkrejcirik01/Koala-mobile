@@ -40,9 +40,6 @@ export const FriendsScreenStyle = StyleSheet.create({
     fontSize: 14,
     color: COLORS.GRAY_200
   },
-  activityIndicator: {
-    marginTop: 40
-  },
   listEmptyView: {
     flex: 1,
     justifyContent: 'center',

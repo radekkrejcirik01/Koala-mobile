@@ -16,7 +16,8 @@ export const useNotifications = () => {
           const currentScreen = getCurrentRouteName();
           if (
             remoteMessage &&
-            currentScreen !== AccountStackNavigatorEnum.ChatScreen
+            currentScreen !== AccountStackNavigatorEnum.ChatScreen &&
+            currentScreen !== AccountStackNavigatorEnum.NotificationsScreen
           ) {
             Toast.show({
               type: 'success',
