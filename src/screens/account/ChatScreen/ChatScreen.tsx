@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Dimensions, Keyboard, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import messaging, {
@@ -7,7 +7,8 @@ import messaging, {
 } from '@react-native-firebase/messaging';
 import moment from 'moment';
 import fs from 'react-native-fs';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { useAppState } from '@hooks/useAppState';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
@@ -34,7 +35,8 @@ import { SupportButton } from '@components/chat/SupportButton/SupportButton';
 import { NotificationItemEnum } from '@components/notifications/NotificationItem/NotificationItem.enum';
 
 const CHAT_HEADER_HEIGHT = 45;
-const EMOTION_HEADER_HEIGHT = 280;
+// Gap between the input and the open keyboard
+const KEYBOARD_INPUT_GAP = 5;
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const { id, chatUserId, name, profilePhoto, username, conversationId } =
@@ -43,6 +45,18 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
   const { top, bottom } = useSafeAreaInsets();
+
+  // Follows the keyboard frame by frame, height is negative while it is open
+  const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+  const chatViewStyle = useAnimatedStyle(
+    () => ({
+      paddingBottom: Math.max(
+        bottom,
+        -keyboardHeight.value + KEYBOARD_INPUT_GAP
+      )
+    }),
+    [bottom]
+  );
 
   const [message, setMessage] = useState<string>('');
   const [conversation, setConversation] = useState<ConversationInterface[]>([]);
@@ -287,44 +301,27 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           </Text>
         </View>
       ) : (
-        <KeyboardAwareScrollView
-          bottomOffset={20}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="always"
-          onScrollBeginDrag={Keyboard.dismiss}
-        >
-          <View
-            style={{
-              height:
-                Dimensions.get('window').height -
-                (top || 10) -
-                CHAT_HEADER_HEIGHT -
-                bottom -
-                (hasSupportMessage ? 0 : EMOTION_HEADER_HEIGHT)
-            }}
-          >
-            <ChatList
-              listRef={listRef}
-              conversation={conversation.filter(
-                (item) =>
-                  item.type !==
-                  NotificationItemEnum.DirectEmotionNotificationType
-              )}
-              onSelectReaction={sendReaction}
-              name={name}
-            />
-            <ChatInput
-              message={message}
-              onChangeText={setMessage}
-              onPressSend={onPressSend}
-              onAudioRecord={setAudioRecord}
-              replyMessage={replyMessage}
-              inputRef={inputRef}
-              onFocus={scrollToEnd}
-              onDismissReply={() => setReplyMessage('')}
-            />
-          </View>
-        </KeyboardAwareScrollView>
+        <Animated.View style={[ChatScreenStyle.chatView, chatViewStyle]}>
+          <ChatList
+            listRef={listRef}
+            conversation={conversation.filter(
+              (item) =>
+                item.type !== NotificationItemEnum.DirectEmotionNotificationType
+            )}
+            onSelectReaction={sendReaction}
+            name={name}
+          />
+          <ChatInput
+            message={message}
+            onChangeText={setMessage}
+            onPressSend={onPressSend}
+            onAudioRecord={setAudioRecord}
+            replyMessage={replyMessage}
+            inputRef={inputRef}
+            onFocus={scrollToEnd}
+            onDismissReply={() => setReplyMessage('')}
+          />
+        </Animated.View>
       )}
     </View>
   );

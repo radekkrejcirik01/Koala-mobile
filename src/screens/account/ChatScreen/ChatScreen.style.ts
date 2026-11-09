@@ -6,6 +6,9 @@ export const ChatScreenStyle = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between'
   },
+  chatView: {
+    flex: 1
+  },
   emotionView: {
     alignItems: 'center',
     paddingTop: 110
