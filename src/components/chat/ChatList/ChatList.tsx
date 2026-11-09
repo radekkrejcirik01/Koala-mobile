@@ -93,8 +93,6 @@ export const ChatList = ({
         <View style={isLast && ChatListStyle.lastItem}>
           {separator}
           <View
-            ref={registerMessageRef(value.id)}
-            collapsable={false}
             style={[
               ChatListStyle.emotionView,
               // The list is inverted, the message under it is the previous item
@@ -109,8 +107,6 @@ export const ChatList = ({
               name={name}
               supported={!!value.supported}
               onPressSupport={() => onPressSupport(value.id)}
-              onLongPress={onLongPress}
-              reaction={value.reaction}
             />
           </View>
         </View>

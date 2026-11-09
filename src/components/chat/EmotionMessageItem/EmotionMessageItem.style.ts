@@ -52,17 +52,5 @@ export const EmotionMessageItemStyle = StyleSheet.create({
   },
   supportedText: {
     fontSize: 12
-  },
-  reactionView: {
-    position: 'absolute',
-    left: 8,
-    bottom: -14,
-    padding: 4,
-    borderRadius: 20,
-    backgroundColor: COLORS.WHITE
-  },
-  reactionText: {
-    color: COLORS.BLACK,
-    fontSize: 12
   }
 });

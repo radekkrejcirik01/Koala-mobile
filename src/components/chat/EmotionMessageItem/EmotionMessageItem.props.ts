@@ -5,6 +5,4 @@ export interface EmotionMessageItemProps {
   name: string;
   supported: boolean;
   onPressSupport: () => void;
-  onLongPress: () => void;
-  reaction?: string;
 }

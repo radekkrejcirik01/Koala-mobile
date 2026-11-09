@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { EmotionMessageItemProps } from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
 import { EmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
 import { SupportButton } from '@components/chat/SupportButton/SupportButton';
@@ -11,17 +11,10 @@ export const EmotionMessageItem = ({
   outbound,
   name,
   supported,
-  onPressSupport,
-  onLongPress,
-  reaction
+  onPressSupport
 }: EmotionMessageItemProps): React.JSX.Element => (
   <View style={EmotionMessageItemStyle.container}>
-    <TouchableOpacity
-      activeOpacity={1}
-      delayLongPress={120}
-      onLongPress={onLongPress}
-      style={EmotionMessageItemStyle.badgeOuter}
-    >
+    <View style={EmotionMessageItemStyle.badgeOuter}>
       <View style={EmotionMessageItemStyle.badge}>
         {!!emotion && (
           <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
@@ -35,12 +28,7 @@ export const EmotionMessageItem = ({
           <Text style={EmotionMessageItemStyle.supportedText}>❤️</Text>
         </View>
       )}
-      {!!reaction && (
-        <View style={EmotionMessageItemStyle.reactionView}>
-          <Text style={EmotionMessageItemStyle.reactionText}>{reaction}</Text>
-        </View>
-      )}
-    </TouchableOpacity>
+    </View>
     {/* Only the friend's emotions can be supported */}
     {!outbound && !supported && (
       <View style={EmotionMessageItemStyle.supportView}>
