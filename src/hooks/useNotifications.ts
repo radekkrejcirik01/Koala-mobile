@@ -8,6 +8,10 @@ import { NotificationsService } from '@utils/general/NotificationsService';
 import { getCurrentRouteName } from '@utils/getCurrentRouteName.ts';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum.ts';
 
+// The push the app was opened from, getInitialNotification keeps returning
+// it, so it opens its chat only once
+let openedMessageId: string | undefined;
+
 export const useNotifications = () => {
   const { navigateTo } = useNavigation();
 
@@ -22,11 +26,14 @@ export const useNotifications = () => {
             currentScreen !== AccountStackNavigatorEnum.ChatScreen &&
             currentScreen !== AccountStackNavigatorEnum.ChatsScreen
           ) {
-            Toast.show({
-              type: 'success',
-              text1: remoteMessage.notification.title,
-              text2: remoteMessage.notification.body
-            });
+            // A data only push has nothing to show
+            if (remoteMessage.notification) {
+              Toast.show({
+                type: 'success',
+                text1: remoteMessage.notification.title,
+                text2: remoteMessage.notification.body
+              });
+            }
             NotificationsService.getUnreadChats();
           }
         }
@@ -40,7 +47,8 @@ export const useNotifications = () => {
       remoteMessage: FirebaseMessagingTypes.RemoteMessage | null
     ) => {
       const friendId = Number(remoteMessage?.data?.friendId);
-      if (friendId) {
+      if (friendId && remoteMessage.messageId !== openedMessageId) {
+        openedMessageId = remoteMessage.messageId;
         navigateTo(AccountStackNavigatorEnum.ChatScreen, { id: friendId });
       }
     };

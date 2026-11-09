@@ -85,6 +85,9 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       name={AccountStackNavigatorEnum.ChatScreen}
       component={ChatScreen as unknown as React.ComponentType}
       options={NoHeader}
+      // A chat per friend, opening another friend's chat from a push pushes
+      // a new screen instead of reusing the open one with new params
+      getId={({ params }) => String((params as { id?: number })?.id)}
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.SupportScreen}

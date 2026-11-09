@@ -70,7 +70,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   // Newest first, the list is inverted
   const [messages, setMessages] = useState<MessageInterface[]>([]);
 
-  const firstLoad = useRef<boolean>(true);
   const hasOlder = useRef<boolean>(false);
   const loadingOlder = useRef<boolean>(false);
   // Emotions whose support is still being sent, a refresh keeps them supported
@@ -114,19 +113,19 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       if (response?.status) {
         const data = response.data ?? [];
 
-        // Only the first load decides, later ones keep the older pages
-        if (firstLoad.current) {
-          firstLoad.current = false;
-          hasOlder.current = data.length >= PAGE_SIZE;
-        }
+        setMessages((prevState) => {
+          const merged = mergeLatestMessages(data, prevState);
+          // Safe in the updater, a rerun assigns the same value
+          if (merged.hasOlder !== undefined) {
+            hasOlder.current = merged.hasOlder;
+          }
 
-        setMessages((prevState) =>
-          mergeLatestMessages(data, prevState).map((item) =>
+          return merged.messages.map((item) =>
             supportingIds.current.has(item.id)
               ? { ...item, supported: true }
               : item
-          )
-        );
+          );
+        });
 
         markAsRead();
       }
@@ -167,13 +166,20 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
       if (response?.status) {
         const data = response.data ?? [];
-        hasOlder.current = data.length >= PAGE_SIZE;
 
-        setMessages((prevState) =>
-          prevState.concat(
+        setMessages((prevState) => {
+          // A refresh reset the list meanwhile, this page no longer connects
+          if (prevState[prevState.length - 1]?.id !== oldest.id) {
+            return prevState;
+          }
+
+          // Safe in the updater, a rerun assigns the same value
+          hasOlder.current = data.length >= PAGE_SIZE;
+
+          return prevState.concat(
             data.filter((item) => !prevState.some(({ id }) => id === item.id))
-          )
-        );
+          );
+        });
       }
     });
   }, [friendId, messages]);
@@ -284,8 +290,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
   const deleteMessage = useCallback(
     (messageId: number) => {
+      const deleted = messages.find((item) => item.id === messageId);
       // Still being sent, there is nothing to delete yet
-      if (messageId < 0) {
+      if (!deleted || messageId < 0) {
         return;
       }
 
@@ -303,14 +310,32 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
               `chats/messages/${messageId}`
             ).subscribe((response: ResponseInterface) => {
               if (!response?.status) {
-                loadMessages();
+                // Back in its place, newest first by id
+                setMessages((prevState) => {
+                  // A refresh may have brought it back already
+                  if (prevState.some((item) => item.id === messageId)) {
+                    return prevState;
+                  }
+
+                  const index = prevState.findIndex(
+                    (item) => item.id > 0 && item.id < messageId
+                  );
+                  return index < 0
+                    ? prevState.concat(deleted)
+                    : [
+                        ...prevState.slice(0, index),
+                        deleted,
+                        ...prevState.slice(index)
+                      ];
+                });
+                Alert.alert('Failed to delete. Please try again.');
               }
             });
           }
         }
       ]);
     },
-    [loadMessages]
+    [messages]
   );
 
   return (

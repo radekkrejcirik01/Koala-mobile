@@ -19,11 +19,10 @@ export const ChatListStyle = StyleSheet.create({
   },
   // Its time always sits right above it, the gap is kept below
   emotionView: {
-    marginBottom: 12
+    paddingBottom: 12
   },
   // A text message right under it gets more room
   emotionViewBeforeMessage: {
-    marginBottom: 0,
     paddingBottom: 30
   },
   lastItem: {
