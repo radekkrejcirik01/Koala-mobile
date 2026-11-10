@@ -6,7 +6,7 @@ export function getChatSeparatorTime(time: number): string {
   const localHour = local.format('HH:mm');
 
   if (local.isSame(moment(), 'day')) {
-    return localHour;
+    return `Today ${localHour}`;
   }
   if (local.isSame(moment().subtract(1, 'days'), 'day')) {
     return `Yesterday ${localHour}`;

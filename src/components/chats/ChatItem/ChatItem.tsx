@@ -35,6 +35,7 @@ export const ChatItem = ({
             style={ChatItemStyle.contentView}
           >
             <Text
+              numberOfLines={1}
               style={[
                 ChatItemStyle.titleText,
                 unread && {
@@ -45,18 +46,33 @@ export const ChatItem = ({
             >
               {friend.name}
             </Text>
-            <Text
-              style={[
-                ChatItemStyle.messageText,
-                unread && {
-                  ...ChatItemStyle.newItemText,
-                  color: theme.theme.colors.text
-                }
-              ]}
-            >
-              {getChatPreview(item, userId)} ∙{' '}
-              {getNotificationTime(Math.floor(lastActivity.timeMs / 1000))}
-            </Text>
+            <View style={ChatItemStyle.messageView}>
+              <Text
+                numberOfLines={1}
+                style={[
+                  ChatItemStyle.messageText,
+                  ChatItemStyle.previewText,
+                  unread && {
+                    ...ChatItemStyle.newItemText,
+                    color: theme.theme.colors.text
+                  }
+                ]}
+              >
+                {getChatPreview(item, userId)}
+              </Text>
+              <Text
+                style={[
+                  ChatItemStyle.messageText,
+                  unread && {
+                    ...ChatItemStyle.newItemText,
+                    color: theme.theme.colors.text
+                  }
+                ]}
+              >
+                {' '}
+                ∙ {getNotificationTime(Math.floor(lastActivity.timeMs / 1000))}
+              </Text>
+            </View>
           </TouchableOpacity>
           {unread && <View style={ChatItemStyle.newItem} />}
         </View>

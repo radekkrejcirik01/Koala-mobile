@@ -17,6 +17,9 @@ export const ChatListStyle = StyleSheet.create({
     fontWeight: '500',
     color: COLORS.GRAY_200
   },
+  separatorTextAfterMessage: {
+    marginTop: 30
+  },
   // Its time always sits right above it, the gap is kept below
   emotionView: {
     paddingBottom: 12

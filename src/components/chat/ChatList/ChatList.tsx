@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSharedValue, withTiming } from 'react-native-reanimated';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useReactionBar } from '@hooks/useReactionBar';
 import { ReducerProps } from '@store/index/index.props';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
@@ -76,14 +77,24 @@ export const ChatList = ({
       value.type === MessageType.Emotion ||
       shouldShowChatSeparator(value.time, messages[index + 1]?.time);
     const separator = hasSeparator && (
-      <Text style={ChatListStyle.separatorText}>
+      <Text
+        style={[
+          ChatListStyle.separatorText,
+          value.type === MessageType.Emotion &&
+            messages[index + 1]?.type === MessageType.Message &&
+            ChatListStyle.separatorTextAfterMessage
+        ]}
+      >
         {getChatSeparatorTime(value.time)}
       </Text>
     );
 
     // Friend's messages get reactions, own ones can be deleted
     const onLongPress = isOutbound(value.senderId)
-      ? () => onDeleteMessage(value.id)
+      ? () => {
+          trigger(HapticFeedbackTypes.impactMedium);
+          onDeleteMessage(value.id);
+        }
       : () => openReactions(value.id);
 
     const isLast = index === 0;
@@ -96,7 +107,7 @@ export const ChatList = ({
             style={[
               ChatListStyle.emotionView,
               // The list is inverted, the message under it is the previous item
-              messages[index - 1]?.type === MessageType.Message &&
+              (isLast || messages[index - 1]?.type === MessageType.Message) &&
                 ChatListStyle.emotionViewBeforeMessage
             ]}
           >

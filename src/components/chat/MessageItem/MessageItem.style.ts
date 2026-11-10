@@ -15,6 +15,8 @@ export const MessageItemStyle = StyleSheet.create({
   },
   container: {
     maxWidth: '70%',
+    minWidth: 40,
+    alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 20
@@ -23,13 +25,15 @@ export const MessageItemStyle = StyleSheet.create({
     backgroundColor: COLORS.PURPLE
   },
   messageText: {
-    fontSize: 15.5
+    fontSize: 15.5,
+    lineHeight: 20
   },
   outboundMessageText: {
     color: COLORS.WHITE
   },
   largeText: {
-    fontSize: 35
+    fontSize: 35,
+    lineHeight: 42
   },
   spaceHeight: {
     height: 10
@@ -38,14 +42,18 @@ export const MessageItemStyle = StyleSheet.create({
     paddingBottom: 20
   },
   reactionView: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: COLORS.WHITE,
-    padding: 5,
-    borderRadius: 20,
-    marginLeft: 8,
+    marginHorizontal: 8,
     marginTop: -10,
     marginBottom: 5
   },
   reactionText: {
+    fontSize: 12,
     color: COLORS.BLACK
   },
   timeView: {

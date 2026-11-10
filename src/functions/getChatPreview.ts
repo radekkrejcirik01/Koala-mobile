@@ -13,9 +13,9 @@ export function getChatPreview(chat: ChatInterface, userId: number): string {
     // A reaction on an emotion is support
     return message.type === MessageType.Emotion
       ? `${who} sent support 🫶`
-      : `${who} reacted ${message.reaction} to: ${getShortMessage(
+      : `${who} reacted ${message.reaction} to "${getShortMessage(
           message.message
-        )}`;
+        )}"`;
   }
 
   const text =

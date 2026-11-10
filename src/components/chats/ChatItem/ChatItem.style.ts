@@ -11,6 +11,7 @@ export const ChatItemStyle = StyleSheet.create({
     alignItems: 'center'
   },
   centerView: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -19,17 +20,24 @@ export const ChatItemStyle = StyleSheet.create({
   },
   contentView: {
     flex: 1,
-    marginLeft: 15
+    marginLeft: 15,
+    marginRight: 15
   },
   titleText: {
     fontSize: 15,
     color: COLORS.GRAY_200,
     fontWeight: '500'
   },
+  messageView: {
+    flexDirection: 'row',
+    marginTop: 2
+  },
   messageText: {
-    marginTop: 2,
     color: COLORS.GRAY_200,
     fontWeight: '500'
+  },
+  previewText: {
+    flexShrink: 1
   },
   newItemText: {
     fontWeight: 'bold'
