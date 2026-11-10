@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -42,6 +36,7 @@ import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { MessageType } from '@enums/MessageType';
 import { PAGE_SIZE } from '@constants/PAGE_SIZE';
 import { mergeLatestMessages } from '@functions/mergeLatestMessages';
+import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
 
 // Gap between the input and the open keyboard
 const KEYBOARD_INPUT_GAP = 5;
@@ -122,7 +117,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
           return merged.messages.map((item) =>
             supportingIds.current.has(item.id)
-              ? { ...item, supported: true }
+              ? { ...item, reaction: SUPPORT_REACTION }
               : item
           );
         });
@@ -183,12 +178,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       }
     });
   }, [friendId, messages]);
-
-  // Support shows on its emotion only, never as a message of its own
-  const visibleMessages = useMemo(
-    () => messages.filter((item) => item.type !== MessageType.Support),
-    [messages]
-  );
 
   const onPressSend = useCallback(() => {
     const text = message.trim();
@@ -266,7 +255,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     const setSupported = (supported: boolean) =>
       setMessages((prevState) =>
         prevState.map((item) =>
-          item.id === emotionId ? { ...item, supported } : item
+          item.id === emotionId
+            ? { ...item, reaction: supported ? SUPPORT_REACTION : undefined }
+            : item
         )
       );
 
@@ -275,13 +266,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     supportingIds.current.add(emotionId);
     setSupported(true);
 
-    postRequest<ResponseMessagePostInterface, null>(
-      `chats/messages/${emotionId}/support`,
-      null
-    ).subscribe((response: ResponseMessagePostInterface) => {
+    putRequest<ResponseInterface, ReactionPostInterface>(
+      `chats/messages/${emotionId}/reaction`,
+      { reaction: SUPPORT_REACTION }
+    ).subscribe((response: ResponseInterface) => {
       supportingIds.current.delete(emotionId);
 
-      if (!response?.data) {
+      if (!response?.status) {
         setSupported(false);
         Alert.alert('Failed to send support. Please try again.');
       }
@@ -349,7 +340,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       <Animated.View style={[ChatScreenStyle.chatView, chatViewStyle]}>
         <ChatList
           listRef={listRef}
-          messages={visibleMessages}
+          messages={messages}
           onSelectReaction={sendReaction}
           onPressSupport={sendSupport}
           onDeleteMessage={deleteMessage}

@@ -3,6 +3,8 @@ import moment from 'moment';
 import { EmotionType } from '@enums/EmotionType';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import { MessageType } from '@enums/MessageType';
+import { ChatActivityType } from '@enums/ChatActivityType';
+import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
 
 // Fake backend for App Store screenshots, enable via MOCK_DATA in Axios.instance
 const BASE_URL =
@@ -44,7 +46,7 @@ type Message = [senderId: number, message: string, reaction?: string];
 interface Chat {
   id: number;
   friendId: number;
-  // Who shared the mood that started the chat, the other one sent support
+  // Who shared the mood that started the chat, the other one supported it
   sharedBy: number;
   // Leaves the mood without support, showing the support button
   unsupported?: boolean;
@@ -169,7 +171,6 @@ const CHATS: Chat[] = [
 
 // Oldest first, the endpoint reverses it
 const getMessages = (chat: Chat) => {
-  const supporter = chat.sharedBy === 1 ? chat.friendId : 1;
   const start = chat.minutesAgo + chat.messages.length + 2;
   const emotionId = chat.id * 100;
 
@@ -180,21 +181,9 @@ const getMessages = (chat: Chat) => {
       senderId: chat.sharedBy,
       emotion: chat.emotion,
       message: chat.feeling,
-      supported: !chat.unsupported,
+      reaction: chat.unsupported ? undefined : SUPPORT_REACTION,
       time: ago(start)
     },
-    ...(chat.unsupported
-      ? []
-      : [
-          {
-            id: emotionId + 1,
-            type: MessageType.Support,
-            senderId: supporter,
-            message: '',
-            parentId: emotionId,
-            time: ago(start - 1)
-          }
-        ]),
     ...chat.messages.map(
       ([senderId, message, reaction]: Message, index: number) => ({
         id: emotionId + 2 + index,
@@ -210,11 +199,17 @@ const getMessages = (chat: Chat) => {
 
 const CHAT_LIST = CHATS.map((chat: Chat) => {
   const messages = getMessages(chat);
+  const message = messages[messages.length - 1];
 
   return {
     id: chat.id,
     friend: friend(chat.friendId),
-    lastMessage: messages[messages.length - 1],
+    lastActivity: {
+      type: ChatActivityType.Message,
+      userId: message.senderId,
+      timeMs: message.time * 1000,
+      message
+    },
     unread: !chat.seen
   };
 });

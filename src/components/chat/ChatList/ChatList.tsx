@@ -105,7 +105,7 @@ export const ChatList = ({
               message={value.message}
               outbound={isOutbound(value.senderId)}
               name={name}
-              supported={!!value.supported}
+              supported={!!value.reaction}
               onPressSupport={() => onPressSupport(value.id)}
             />
           </View>

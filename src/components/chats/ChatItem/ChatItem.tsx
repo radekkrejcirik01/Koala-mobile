@@ -17,7 +17,7 @@ export const ChatItem = ({
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
 
-  const { friend, lastMessage, unread } = item;
+  const { friend, lastActivity, unread } = item;
 
   return (
     <View style={ChatItemStyle.container}>
@@ -54,8 +54,8 @@ export const ChatItem = ({
                 }
               ]}
             >
-              {getChatPreview(lastMessage, lastMessage.senderId === userId)} ∙{' '}
-              {getNotificationTime(lastMessage.time)}
+              {getChatPreview(item, userId)} ∙{' '}
+              {getNotificationTime(Math.floor(lastActivity.timeMs / 1000))}
             </Text>
           </TouchableOpacity>
           {unread && <View style={ChatItemStyle.newItem} />}

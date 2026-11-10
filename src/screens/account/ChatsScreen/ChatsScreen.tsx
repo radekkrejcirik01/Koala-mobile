@@ -31,22 +31,25 @@ export const ChatsScreen = (): React.JSX.Element => {
 
   const hasMore = useRef<boolean>(false);
 
-  const loadChats = useCallback((lastId?: number) => {
+  // The next page starts after the given chat
+  const loadChats = useCallback((last?: ChatInterface) => {
     // Chats move to the top on new activity, so a refresh starts over
     getRequest<ResponseChatsGetInterface>(
-      lastId ? `chats?lastId=${lastId}` : 'chats'
+      last
+        ? `chats?lastTimeMs=${last.lastActivity.timeMs}&lastId=${last.id}`
+        : 'chats'
     ).subscribe((response: ResponseChatsGetInterface) => {
       if (response?.status) {
         const data = response.data ?? [];
         hasMore.current = data.length >= PAGE_SIZE;
 
-        setChats((value) => (lastId ? value.concat(data) : data));
+        setChats((value) => (last ? value.concat(data) : data));
       }
 
       setLoaded(true);
     });
 
-    if (!lastId) {
+    if (!last) {
       NotificationsService.getUnreadChats();
     }
   }, []);
@@ -93,7 +96,7 @@ export const ChatsScreen = (): React.JSX.Element => {
   const onEndReached = useCallback(() => {
     if (hasMore.current) {
       hasMore.current = false;
-      loadChats(chats[chats.length - 1].lastMessage.id);
+      loadChats(chats[chats.length - 1]);
     }
   }, [chats, loadChats]);
 

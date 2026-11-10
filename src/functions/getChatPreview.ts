@@ -1,19 +1,27 @@
-import { MessageInterface } from '@interfaces/general.interface';
+import { ChatInterface } from '@interfaces/general.interface';
 import { MessageType } from '@enums/MessageType';
+import { ChatActivityType } from '@enums/ChatActivityType';
 import { getShortMessage } from '@functions/getShortMessage';
 
-export function getChatPreview(
-  lastMessage: MessageInterface,
-  outbound: boolean
-): string {
-  if (lastMessage.type === MessageType.Support) {
-    return outbound ? 'You sent your support 🫶' : 'Sent support 🫶';
+export function getChatPreview(chat: ChatInterface, userId: number): string {
+  const { type, userId: activityUserId, message } = chat.lastActivity;
+  const outbound = activityUserId === userId;
+
+  if (type === ChatActivityType.Reaction) {
+    const who = outbound ? 'You' : chat.friend.name;
+
+    // A reaction on an emotion is support
+    return message.type === MessageType.Emotion
+      ? `${who} sent support 🫶`
+      : `${who} reacted ${message.reaction} to: ${getShortMessage(
+          message.message
+        )}`;
   }
 
   const text =
-    lastMessage.type === MessageType.Emotion
-      ? [lastMessage.emotion, lastMessage.message].filter(Boolean).join(' ')
-      : lastMessage.message;
+    message.type === MessageType.Emotion
+      ? [message.emotion, message.message].filter(Boolean).join(' ')
+      : message.message;
 
   return `${outbound ? 'You: ' : ''}${getShortMessage(text)}`;
 }
