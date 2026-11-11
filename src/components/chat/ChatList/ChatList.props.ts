@@ -1,9 +1,9 @@
 import { RefObject } from 'react';
 import { MessageInterface } from '@interfaces/general.interface';
-import { FlashList } from '@shopify/flash-list';
+import { FlashListRef } from '@shopify/flash-list';
 
 export interface ChatListProps {
-  listRef: RefObject<FlashList<MessageInterface>>;
+  listRef: RefObject<FlashListRef<MessageInterface> | null>;
   messages: MessageInterface[];
   onSelectReaction: (reaction: string, messageId: number) => void;
   onPressSupport: (emotionId: number) => void;

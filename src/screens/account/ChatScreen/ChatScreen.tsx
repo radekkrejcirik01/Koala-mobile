@@ -8,6 +8,7 @@ import messaging, {
 import moment from 'moment';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
+import { FlashListRef } from '@shopify/flash-list';
 import { useAppState } from '@hooks/useAppState';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
@@ -70,7 +71,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   // Emotions whose support is still being sent, a refresh keeps them supported
   const supportingIds = useRef<Set<number>>(new Set());
 
-  const listRef = useRef(null);
+  const listRef = useRef<FlashListRef<MessageInterface>>(null);
   const inputRef = useRef(null);
 
   // Opened from a push, the header needs the friend's name and photo

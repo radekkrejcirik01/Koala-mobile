@@ -129,7 +129,6 @@ export const ChatList = ({
         {separator}
         <View ref={registerMessageRef(value.id)} collapsable={false}>
           <MessageItem
-            key={value.id}
             outbound={isOutbound(value.senderId)}
             time={value.time}
             offset={timeOffset}
@@ -160,7 +159,9 @@ export const ChatList = ({
             keyExtractor={(item) => item.id.toString()}
             // The list is inverted, its end is the oldest message
             onEndReached={onLoadOlder}
-            estimatedItemSize={100}
+            // Emotions and text messages differ a lot, only reuse rows of the
+            // same kind
+            getItemType={(item) => item.type}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={ChatListStyle.scrollViewContainer}
             renderItem={renderItem}

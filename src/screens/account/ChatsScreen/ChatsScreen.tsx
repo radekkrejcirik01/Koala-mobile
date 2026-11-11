@@ -115,7 +115,6 @@ export const ChatsScreen = (): React.JSX.Element => {
       <FlashList
         data={chats}
         renderItem={renderItem}
-        estimatedItemSize={80}
         keyExtractor={(item) => item.id.toString()}
         onEndReached={onEndReached}
         contentContainerStyle={ChatsScreenStyle.listContainer}
