@@ -51,6 +51,7 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     backgroundColor: COLORS.BEIGE_100
   },
   supportedText: {
+    color: COLORS.BLACK,
     fontSize: 12
   }
 });
