@@ -24,6 +24,13 @@ const START_OF: Record<SharedEmotionsPeriod, moment.unitOfTime.StartOf> = {
   [SharedEmotionsPeriod.Year]: 'year'
 };
 
+// Each chart bar is a day, or a month in the year view
+export function getSharedEmotionsBucketUnit(
+  period: SharedEmotionsPeriod
+): 'day' | 'month' {
+  return period === SharedEmotionsPeriod.Year ? 'month' : 'day';
+}
+
 export function getEmotionKey(emotion?: string): string {
   return EMOTIONS.some((item) => item.type === emotion)
     ? emotion
@@ -55,13 +62,35 @@ export function getSharedEmotionsTitle(
   return start.format('YYYY');
 }
 
+// Title of a single chart bar, e.g. "on 12. 11. 2026" or "in March 2026"
+export function getSharedEmotionsBucketTitle(
+  period: SharedEmotionsPeriod,
+  key: number
+): string {
+  const date = moment(key);
+  return period === SharedEmotionsPeriod.Year
+    ? `in ${date.format('MMMM YYYY')}`
+    : `on ${date.format('D. M. YYYY')}`;
+}
+
+export function getSharedEmotionsInBucket(
+  emotions: SharedEmotionInterface[],
+  period: SharedEmotionsPeriod,
+  key: number
+): SharedEmotionInterface[] {
+  const unit = getSharedEmotionsBucketUnit(period);
+  return emotions.filter((item: SharedEmotionInterface) =>
+    moment.unix(item.time).isSame(key, unit)
+  );
+}
+
 export function getSharedEmotionsBuckets(
   emotions: SharedEmotionInterface[],
   period: SharedEmotionsPeriod,
   start: Moment
 ): SharedEmotionsBucket[] {
   const isYear = period === SharedEmotionsPeriod.Year;
-  const unit = isYear ? 'month' : 'day';
+  const unit = getSharedEmotionsBucketUnit(period);
 
   let count = 12;
   if (period === SharedEmotionsPeriod.Week) {

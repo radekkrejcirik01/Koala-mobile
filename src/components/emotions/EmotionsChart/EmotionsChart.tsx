@@ -1,5 +1,6 @@
 import React, { JSX, useMemo } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import COLORS from '@constants/COLORS';
 import {
@@ -22,7 +23,11 @@ const SEGMENTS = [
 const MAX_LABELLED_COLUMNS = 12;
 const COUNT_LABEL_HEIGHT = 18;
 
-export const EmotionsChart = ({ buckets }: EmotionsChartProps): JSX.Element => {
+export const EmotionsChart = ({
+  buckets,
+  selectedKey,
+  onPressBucket
+}: EmotionsChartProps): JSX.Element => {
   const max = useMemo(
     () => Math.max(1, ...buckets.map((bucket) => bucket.total)),
     [buckets]
@@ -31,43 +36,72 @@ export const EmotionsChart = ({ buckets }: EmotionsChartProps): JSX.Element => {
   const showCounts = buckets.length <= MAX_LABELLED_COLUMNS;
   const barMaxHeight = CHART_HEIGHT - (showCounts ? COUNT_LABEL_HEIGHT : 0);
 
+  const onPress = (key: number) => {
+    trigger(HapticFeedbackTypes.selection);
+    onPressBucket(key);
+  };
+
   return (
     <View style={EmotionsChartStyle.container}>
-      {buckets.map((bucket: SharedEmotionsBucket) => (
-        <View key={bucket.key} style={EmotionsChartStyle.column}>
-          <View style={EmotionsChartStyle.barArea}>
-            {showCounts && !!bucket.total && (
-              <Text style={EmotionsChartStyle.countText}>{bucket.total}</Text>
-            )}
-            {bucket.total ? (
-              <View
-                style={[
-                  EmotionsChartStyle.bar,
-                  { height: (bucket.total / max) * barMaxHeight }
-                ]}
-              >
-                {SEGMENTS.map(
-                  (segment) =>
-                    !!bucket.counts[segment.key] && (
-                      <View
-                        key={segment.key}
-                        style={{
-                          flex: bucket.counts[segment.key],
-                          backgroundColor: segment.color
-                        }}
-                      />
-                    )
-                )}
-              </View>
-            ) : (
-              <View style={EmotionsChartStyle.emptyBar} />
-            )}
-          </View>
-          <Text numberOfLines={1} style={EmotionsChartStyle.labelText}>
-            {bucket.label}
-          </Text>
-        </View>
-      ))}
+      {buckets.map((bucket: SharedEmotionsBucket) => {
+        const selected = bucket.key === selectedKey;
+        // While a bar is selected, the others are dimmed
+        const dimmed = selectedKey !== undefined && !selected;
+
+        return (
+          <TouchableOpacity
+            key={bucket.key}
+            activeOpacity={0.7}
+            // Empty bars have nothing to filter
+            disabled={!bucket.total}
+            onPress={() => onPress(bucket.key)}
+            style={EmotionsChartStyle.column}
+          >
+            <View
+              style={[
+                EmotionsChartStyle.barArea,
+                dimmed && EmotionsChartStyle.unselected
+              ]}
+            >
+              {showCounts && !!bucket.total && (
+                <Text style={EmotionsChartStyle.countText}>{bucket.total}</Text>
+              )}
+              {bucket.total ? (
+                <View
+                  style={[
+                    EmotionsChartStyle.bar,
+                    { height: (bucket.total / max) * barMaxHeight }
+                  ]}
+                >
+                  {SEGMENTS.map(
+                    (segment) =>
+                      !!bucket.counts[segment.key] && (
+                        <View
+                          key={segment.key}
+                          style={{
+                            flex: bucket.counts[segment.key],
+                            backgroundColor: segment.color
+                          }}
+                        />
+                      )
+                  )}
+                </View>
+              ) : (
+                <View style={EmotionsChartStyle.emptyBar} />
+              )}
+            </View>
+            <Text
+              numberOfLines={1}
+              style={[
+                EmotionsChartStyle.labelText,
+                selected && EmotionsChartStyle.selectedLabelText
+              ]}
+            >
+              {bucket.label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };

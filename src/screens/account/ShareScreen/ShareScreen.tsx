@@ -81,6 +81,9 @@ export const ShareScreen = (): JSX.Element => {
         </View>
       </View>
       <View style={ShareScreenStyle.nextButtonView}>
+        <Text style={ShareScreenStyle.infoText}>
+          Shared emotions are logged in your Analytics
+        </Text>
         <HomeButton text="Next" onPress={onNext} />
       </View>
     </View>

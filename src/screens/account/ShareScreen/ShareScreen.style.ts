@@ -42,8 +42,16 @@ export const ShareScreenStyle = StyleSheet.create({
     marginBottom: 40
   },
   nextButtonView: {
-    alignItems: 'flex-end',
-    paddingRight: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+    paddingHorizontal: 30,
     marginBottom: 30
+  },
+  infoText: {
+    flex: 1,
+    fontSize: 13,
+    fontWeight: '500',
+    color: COLORS.GRAY_200
   }
 });

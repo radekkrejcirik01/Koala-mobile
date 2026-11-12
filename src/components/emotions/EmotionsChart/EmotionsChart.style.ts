@@ -25,6 +25,9 @@ export const EmotionsChartStyle = StyleSheet.create({
     overflow: 'hidden',
     flexDirection: 'column-reverse'
   },
+  unselected: {
+    opacity: 0.3
+  },
   emptyBar: {
     width: '70%',
     maxWidth: 28,
@@ -44,5 +47,8 @@ export const EmotionsChartStyle = StyleSheet.create({
     fontSize: 11,
     fontWeight: '500',
     color: COLORS.GRAY_200
+  },
+  selectedLabelText: {
+    fontWeight: '700'
   }
 });

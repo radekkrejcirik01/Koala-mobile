@@ -25,7 +25,7 @@ export const EmotionMessageItem = ({
       </View>
       {supported && (
         <View style={EmotionMessageItemStyle.supportedView}>
-          <Text style={EmotionMessageItemStyle.supportedText}>❤️</Text>
+          <Text style={EmotionMessageItemStyle.supportedText}>🫶</Text>
         </View>
       )}
     </View>

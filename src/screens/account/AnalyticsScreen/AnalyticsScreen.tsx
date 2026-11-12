@@ -1,18 +1,15 @@
 import React, { JSX, useCallback, useMemo, useState } from 'react';
-import {
-  FlatList,
-  RefreshControl,
-  Text,
-  View
-} from 'react-native';
+import { FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@hooks/useTheme';
 import { useSharedEmotions } from '@hooks/useSharedEmotions';
 import { SharedEmotionInterface } from '@interfaces/general.interface';
 import { SharedEmotionsPeriod } from '@enums/SharedEmotionsPeriod';
 import {
+  getSharedEmotionsBucketTitle,
   getSharedEmotionsBuckets,
   getSharedEmotionsCounts,
+  getSharedEmotionsInBucket,
   getSharedEmotionsTitle
 } from '@functions/getSharedEmotionsStats';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
@@ -38,6 +35,8 @@ export const AnalyticsScreen = (): JSX.Element => {
   );
   // 0 is the current period, -1 the previous one and so on
   const [offset, setOffset] = useState<number>(0);
+  // Start of the chart bar the list is filtered to, a day or a month
+  const [selectedKey, setSelectedKey] = useState<number>();
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const { data, range, loading, loadEmotions } = useSharedEmotions(
@@ -55,11 +54,36 @@ export const AnalyticsScreen = (): JSX.Element => {
         : [],
     [data]
   );
-  const counts = useMemo(() => getSharedEmotionsCounts(emotions), [emotions]);
+
+  // Ignored once the bar is no longer in the chart, e.g. after a refresh
+  const selectedBucket = buckets.find((bucket) => bucket.key === selectedKey);
+
+  const filteredEmotions = useMemo(
+    () =>
+      data && selectedBucket
+        ? getSharedEmotionsInBucket(emotions, data.period, selectedBucket.key)
+        : emotions,
+    [data, emotions, selectedBucket]
+  );
+  const counts = useMemo(
+    () => getSharedEmotionsCounts(filteredEmotions),
+    [filteredEmotions]
+  );
 
   const onPeriodChange = useCallback((value: SharedEmotionsPeriod) => {
     setPeriod(value);
     setOffset(0);
+    setSelectedKey(undefined);
+  }, []);
+
+  const onChangeOffset = useCallback((value: number) => {
+    setOffset((current: number) => Math.min(current + value, 0));
+    setSelectedKey(undefined);
+  }, []);
+
+  // Pressing the selected bar again shows the whole period
+  const onPressBucket = useCallback((key: number) => {
+    setSelectedKey((current?: number) => (current === key ? undefined : key));
   }, []);
 
   const onRefresh = useCallback(() => {
@@ -68,7 +92,12 @@ export const AnalyticsScreen = (): JSX.Element => {
   }, [loadEmotions]);
 
   let totalLabel = '';
-  if (data) {
+  if (data && selectedBucket) {
+    totalLabel = `shared ${getSharedEmotionsBucketTitle(
+      data.period,
+      selectedBucket.key
+    )}`;
+  } else if (data) {
     totalLabel = data.offset
       ? `shared in ${getSharedEmotionsTitle(data.period, data.range)}`
       : `shared ${TOTAL_LABELS[data.period]}`;
@@ -81,29 +110,40 @@ export const AnalyticsScreen = (): JSX.Element => {
         title={getSharedEmotionsTitle(period, range)}
         canGoNext={offset < 0}
         onPeriodChange={onPeriodChange}
-        onPrevious={() => setOffset((value: number) => value - 1)}
-        onNext={() => setOffset((value: number) => Math.min(value + 1, 0))}
+        onPrevious={() => onChangeOffset(-1)}
+        onNext={() => onChangeOffset(1)}
       />
       {data ? (
         <View style={loading && AnalyticsScreenStyle.stale}>
-          <View style={AnalyticsScreenStyle.card}>
+          {/* Pressing the card outside of the bars shows the whole period */}
+          <Pressable
+            accessible={false}
+            disabled={!selectedBucket}
+            onPress={() => setSelectedKey(undefined)}
+            style={AnalyticsScreenStyle.card}
+          >
             <Text
-              style={[
-                AnalyticsScreenStyle.totalText,
-                { color: colors.text }
-              ]}
+              style={[AnalyticsScreenStyle.totalText, { color: colors.text }]}
             >
-              {emotions.length}
+              {filteredEmotions.length}
             </Text>
             <Text style={AnalyticsScreenStyle.totalLabelText}>
-              {emotions.length === 1 ? 'emotion' : 'emotions'} {totalLabel}
+              {filteredEmotions.length === 1 ? 'emotion' : 'emotions'}{' '}
+              {totalLabel}
             </Text>
-            <EmotionsChart buckets={buckets} />
-          </View>
+            <EmotionsChart
+              buckets={buckets}
+              selectedKey={selectedBucket?.key}
+              onPressBucket={onPressBucket}
+            />
+          </Pressable>
           <View style={AnalyticsScreenStyle.card}>
-            <EmotionsBreakdown counts={counts} total={emotions.length} />
+            <EmotionsBreakdown
+              counts={counts}
+              total={filteredEmotions.length}
+            />
           </View>
-          {!!emotions.length && (
+          {!!filteredEmotions.length && (
             <Text style={AnalyticsScreenStyle.sectionTitle}>History</Text>
           )}
         </View>
@@ -115,7 +155,7 @@ export const AnalyticsScreen = (): JSX.Element => {
     <View style={[AnalyticsScreenStyle.container, { paddingTop: top }]}>
       <ScreenHeader title="Analytics" />
       <FlatList
-        data={emotions}
+        data={filteredEmotions}
         extraData={loading}
         keyExtractor={(item: SharedEmotionInterface) => String(item.id)}
         renderItem={({ item }) => (
