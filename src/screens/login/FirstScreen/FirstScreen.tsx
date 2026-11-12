@@ -21,7 +21,7 @@ export const FirstScreen = (): JSX.Element => {
       <Text
         style={[FirstScreenStyle.titleText, { color: theme.theme.colors.text }]}
       >
-        Koala: Mental Health Sharing
+        Koala: Emotions & Chat
       </Text>
       <Button
         title="Let's start!"
