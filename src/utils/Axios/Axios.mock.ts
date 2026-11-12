@@ -5,10 +5,9 @@ import { EMOTIONS } from '@constants/EMOTIONS';
 import { MessageType } from '@enums/MessageType';
 import { ChatActivityType } from '@enums/ChatActivityType';
 import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
+import { API_URL } from '@utils/Axios/Axios.config';
 
 // Fake backend for App Store screenshots, enable via MOCK_DATA in Axios.instance
-const BASE_URL =
-  'https://f8g89472ta.execute-api.eu-central-1.amazonaws.com/koala/';
 
 const avatar = (seed: string): string =>
   `https://randomuser.me/api/portraits/${seed}.jpg`;
@@ -329,7 +328,7 @@ export const mockAdapter = (
   config: AxiosRequestConfig
 ): Promise<AxiosResponse> =>
   Promise.resolve({
-    data: route(config.method, config.url.replace(BASE_URL, '')),
+    data: route(config.method, config.url.replace(API_URL, '')),
     status: 200,
     statusText: 'OK',
     headers: {},
