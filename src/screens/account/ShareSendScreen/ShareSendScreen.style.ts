@@ -31,6 +31,7 @@ export const ShareSendScreenStyle = StyleSheet.create({
   },
   infoText: {
     flex: 1,
+    paddingRight: 20,
     fontSize: 13,
     fontWeight: '500',
     color: COLORS.GRAY_200

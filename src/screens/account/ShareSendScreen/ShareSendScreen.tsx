@@ -115,7 +115,7 @@ export const ShareSendScreen = ({
       </View>
       <View style={ShareSendScreenStyle.sendButtonView}>
         <Text style={ShareSendScreenStyle.infoText}>
-          Emotion will be sent to the chat with your friends
+          Emotion will be sent to your friend&apos;s chat
         </Text>
         <HomeButton
           text={sent ? 'Done' : sending ? 'Sending...' : 'Send'}
