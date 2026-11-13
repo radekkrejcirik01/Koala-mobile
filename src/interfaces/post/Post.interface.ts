@@ -45,12 +45,6 @@ export interface MessagePostInterface {
   message: string;
 }
 
-export interface PasswordResetPostInterface {
-  username: string;
-  email: string;
-  friendUsername: string;
-}
-
 export interface SupportPostInterface {
   message: string;
   email: string;

@@ -17,6 +17,12 @@ export interface AuthResponseInterface {
   token: string;
 }
 
+export interface ChangePasswordResponseInterface {
+  status: string;
+  message: string;
+  token?: string;
+}
+
 export interface ResponseUserGetInterface {
   status: string;
   message: string;

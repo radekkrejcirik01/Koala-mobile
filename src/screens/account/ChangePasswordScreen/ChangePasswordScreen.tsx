@@ -7,8 +7,12 @@ import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ChangePasswordScreenStyle } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen.style';
 import COLORS from '@constants/COLORS';
 import { putRequest } from '@utils/Axios/Axios.service';
-import { ResponseInterface } from '@interfaces/response/Response.interface';
+import { useDispatch } from 'react-redux';
+import { ChangePasswordResponseInterface } from '@interfaces/response/Response.interface';
 import { ChangePasswordPostInterface } from '@interfaces/post/Post.interface';
+import { setUserToken } from '@store/UserReducer';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { Button } from '@components/general/Button/Button';
 import { FormIntro } from '@components/profile/FormIntro/FormIntro';
 import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
@@ -16,6 +20,7 @@ import { ProfileSection } from '@components/profile/ProfileSection/ProfileSectio
 export const ChangePasswordScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const [oldPassword, setOldPassword] = useState<string>();
   const [newPassword, setNewPassword] = useState<string>();
@@ -43,16 +48,25 @@ export const ChangePasswordScreen = (): JSX.Element => {
 
     setPosting(true);
 
-    putRequest<ResponseInterface, ChangePasswordPostInterface>(
+    putRequest<ChangePasswordResponseInterface, ChangePasswordPostInterface>(
       'user-password',
       {
         oldPassword,
         newPassword
       }
-    ).subscribe((response: ResponseInterface) => {
+    ).subscribe((response: ChangePasswordResponseInterface) => {
       setPosting(false);
 
-      if (response?.status) {
+      if (response?.status === 'success') {
+        // Changing the password revokes other sessions; keep this one alive
+        if (response.token) {
+          dispatch(setUserToken(response.token));
+          PersistStorage.setItem(
+            PersistStorageKeys.TOKEN,
+            response.token
+          ).catch();
+        }
+
         Alert.alert('Successfully changed password');
 
         setOldPassword('');
@@ -62,7 +76,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
         Alert.alert('Incorrect old password');
       }
     });
-  }, [confirmPassword, newPassword, oldPassword]);
+  }, [confirmPassword, dispatch, newPassword, oldPassword]);
 
   const inputStyle = [
     ChangePasswordScreenStyle.input,
