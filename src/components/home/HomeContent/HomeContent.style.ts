@@ -9,6 +9,9 @@ export const HomeContentStyle = StyleSheet.create({
     paddingTop: '10%',
     overflow: 'visible'
   },
+  scrollViewContainer: {
+    flexGrow: 1
+  },
   image: {
     marginTop: 20,
     width: '95%',

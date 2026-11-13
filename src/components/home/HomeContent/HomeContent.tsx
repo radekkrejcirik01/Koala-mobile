@@ -71,6 +71,7 @@ export const HomeContent = (): JSX.Element => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         style={HomeContentStyle.scrollView}
+        contentContainerStyle={HomeContentStyle.scrollViewContainer}
       >
         <Image
           source={imageSource}

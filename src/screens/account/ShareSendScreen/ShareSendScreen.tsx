@@ -69,7 +69,7 @@ export const ShareSendScreen = ({
 
         selectedFriends.current = [];
 
-        setTimeout(dismiss, 1000);
+        setTimeout(dismiss, 750);
         return;
       }
 

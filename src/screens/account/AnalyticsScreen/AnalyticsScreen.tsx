@@ -88,7 +88,13 @@ export const AnalyticsScreen = (): JSX.Element => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    loadEmotions(() => setRefreshing(false));
+    const start = Date.now();
+    loadEmotions(() =>
+      setTimeout(
+        () => setRefreshing(false),
+        Math.max(0, 750 - (Date.now() - start))
+      )
+    );
   }, [loadEmotions]);
 
   let totalLabel = '';
