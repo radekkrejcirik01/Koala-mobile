@@ -16,7 +16,7 @@ export const EmotionsBreakdown = ({
   const rows = EMOTIONS.map((item) => ({
     key: item.type as string,
     emoji: item.type as string,
-    label: item.label,
+    label: item.message,
     color: item.color
   }));
 
