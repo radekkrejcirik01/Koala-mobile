@@ -19,7 +19,7 @@ export const SharedEmotionItem = ({
       </View>
       <View style={SharedEmotionItemStyle.textView}>
         <Text
-          numberOfLines={2}
+          numberOfLines={1}
           style={[SharedEmotionItemStyle.messageText, { color: colors.text }]}
         >
           {item.message || 'No message'}

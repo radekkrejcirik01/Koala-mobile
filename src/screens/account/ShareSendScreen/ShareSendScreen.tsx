@@ -20,7 +20,7 @@ import { ShareSendScreenStyle } from '@screens/account/ShareSendScreen/ShareSend
 export const ShareSendScreen = ({
   route
 }: ShareSendScreenProps): JSX.Element => {
-  const { emotion } = route.params;
+  const { emotion, message } = route.params;
 
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
@@ -59,7 +59,7 @@ export const ShareSendScreen = ({
       'chats/emotion',
       {
         ids: selected,
-        message: config?.message,
+        message: message ?? config?.message,
         emotion
       }
     ).subscribe((response: ResponseInterface) => {
@@ -76,7 +76,7 @@ export const ShareSendScreen = ({
       setSending(false);
       Alert.alert('Failed to send. Please try again.');
     });
-  }, [config, dismiss, emotion, sending, setSending, setSent]);
+  }, [config, dismiss, emotion, message, sending, setSending, setSent]);
 
   return (
     <View

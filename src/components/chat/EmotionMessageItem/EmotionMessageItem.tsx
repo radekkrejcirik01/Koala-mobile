@@ -19,7 +19,7 @@ export const EmotionMessageItem = ({
         {!!emotion && (
           <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
         )}
-        <Text style={EmotionMessageItemStyle.messageText} numberOfLines={2}>
+        <Text style={EmotionMessageItemStyle.messageText}>
           {getEmotionText(message, outbound, name)}
         </Text>
       </View>

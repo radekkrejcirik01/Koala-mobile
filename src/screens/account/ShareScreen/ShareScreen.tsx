@@ -1,15 +1,25 @@
 import React, { JSX, useCallback, useMemo, useState } from 'react';
-import { Alert, Platform, Text, View } from 'react-native';
+import {
+  Alert,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
 import { EmotionType } from '@enums/EmotionType';
 import { EMOTIONS } from '@constants/EMOTIONS';
+import COLORS from '@constants/COLORS';
 import { EmotionItem } from '@components/home/EmotionItem/EmotionItem';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
+
+const MESSAGE_MAX_LENGTH = 128;
 
 export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
@@ -17,6 +27,8 @@ export const ShareScreen = (): JSX.Element => {
   const { navigateTo } = useNavigation();
 
   const [emotion, setEmotion] = useState<EmotionType>();
+  const [message, setMessage] = useState<string>('');
+  const [editingMessage, setEditingMessage] = useState<boolean>(false);
 
   const selectedConfig = useMemo(
     () => EMOTIONS.find((item) => item.type === emotion),
@@ -24,6 +36,7 @@ export const ShareScreen = (): JSX.Element => {
   );
 
   const title = selectedConfig?.message ?? 'How are we feeling?';
+  const trimmedMessage = message.trim();
 
   const onEmotionSelect = useCallback((type: EmotionType) => {
     setEmotion((current) => (current === type ? undefined : type));
@@ -35,8 +48,11 @@ export const ShareScreen = (): JSX.Element => {
       return;
     }
 
-    navigateTo(AccountStackNavigatorEnum.ShareSendScreen, { emotion });
-  }, [emotion, navigateTo]);
+    navigateTo(AccountStackNavigatorEnum.ShareSendScreen, {
+      emotion,
+      message: trimmedMessage || undefined
+    });
+  }, [emotion, navigateTo, trimmedMessage]);
 
   return (
     <View
@@ -58,14 +74,35 @@ export const ShareScreen = (): JSX.Element => {
               {selectedConfig.type}
             </Text>
           )}
-          <Text
-            style={[
-              ShareScreenStyle.title,
-              { color: theme.theme.colors.text }
-            ]}
-          >
-            {title}
-          </Text>
+          {editingMessage && emotion ? (
+            <TextInput
+              autoFocus
+              multiline
+              submitBehavior="blurAndSubmit"
+              returnKeyType="done"
+              maxLength={MESSAGE_MAX_LENGTH}
+              placeholder={title}
+              placeholderTextColor={COLORS.LIGHTGRAY_100}
+              value={message}
+              onChangeText={setMessage}
+              onBlur={() => setEditingMessage(false)}
+              selectionColor={COLORS.BUTTON_BLUE}
+              style={[
+                ShareScreenStyle.title,
+                ShareScreenStyle.messageInput,
+                { color: theme.theme.colors.text }
+              ]}
+            />
+          ) : (
+            <Text
+              style={[
+                ShareScreenStyle.title,
+                { color: theme.theme.colors.text }
+              ]}
+            >
+              {(emotion && trimmedMessage) || title}
+            </Text>
+          )}
         </View>
         <View style={ShareScreenStyle.contentView}>
           <View style={ShareScreenStyle.emotionsView}>
@@ -81,9 +118,21 @@ export const ShareScreen = (): JSX.Element => {
         </View>
       </View>
       <View style={ShareScreenStyle.nextButtonView}>
-        <Text style={ShareScreenStyle.infoText}>
-          Shared emotions are logged in your Analytics
-        </Text>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          disabled={!emotion}
+          onPress={() => setEditingMessage(true)}
+          style={ShareScreenStyle.messageButton}
+        >
+          <Text
+            style={[
+              ShareScreenStyle.messageButtonText,
+              !emotion && ShareScreenStyle.messageButtonTextDisabled
+            ]}
+          >
+            Add message
+          </Text>
+        </TouchableOpacity>
         <HomeButton text="Next" onPress={onNext} />
       </View>
     </View>

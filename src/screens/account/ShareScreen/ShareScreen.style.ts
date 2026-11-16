@@ -41,6 +41,11 @@ export const ShareScreenStyle = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 40
   },
+  messageInput: {
+    alignSelf: 'stretch',
+    paddingTop: 0,
+    paddingBottom: 0
+  },
   nextButtonView: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -48,11 +53,16 @@ export const ShareScreenStyle = StyleSheet.create({
     paddingHorizontal: 30,
     marginBottom: 30
   },
-  infoText: {
+  messageButton: {
     flex: 1,
-    paddingRight: 20,
-    fontSize: 13,
-    fontWeight: '500',
+    paddingRight: 20
+  },
+  messageButtonText: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: COLORS.BUTTON_BLUE
+  },
+  messageButtonTextDisabled: {
     color: COLORS.GRAY_200
   }
 });
