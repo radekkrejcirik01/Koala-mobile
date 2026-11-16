@@ -1,16 +1,8 @@
 import React, { JSX, useCallback, useState } from 'react';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
-import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
 import { UserPostInterface } from '@interfaces/post/Post.interface';
@@ -23,6 +15,9 @@ import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.styl
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
+import { AuthLayout } from '@components/login/AuthLayout/AuthLayout';
+import { AuthInput } from '@components/login/AuthInput/AuthInput';
+import { PasswordStrength } from '@components/login/PasswordStrength/PasswordStrength';
 
 export const FourthScreen = (): JSX.Element => {
   const { name, username } = useSelector(
@@ -31,14 +26,18 @@ export const FourthScreen = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
-  const theme = useTheme();
 
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>();
   const [posting, setPosting] = useState<boolean>(false);
 
+  const onChangePassword = useCallback((value: string) => {
+    setPassword(value);
+    setError(undefined);
+  }, []);
+
   const createAccount = useCallback(() => {
-    if (!password) {
-      Alert.alert('Please enter password');
+    if (!password || posting) {
       return;
     }
 
@@ -51,73 +50,71 @@ export const FourthScreen = (): JSX.Element => {
     }).subscribe((response: AuthResponseInterface) => {
       setPosting(false);
 
-      if (response?.status) {
-        if (response?.message?.includes('exists')) {
-          Alert.alert('This username is already taken');
-        } else {
-          dispatch(setUserToken(response?.token));
-
-          PersistStorage.setItem(
-            PersistStorageKeys.TOKEN,
-            response?.token
-          ).catch();
-
-          PreloadService.loadUserObject();
-        }
+      if (!response?.status) {
+        setError('Something went wrong. Please try again.');
+        return;
       }
+
+      if (response?.message?.includes('exists')) {
+        trigger(HapticFeedbackTypes.notificationError);
+        setError('This username was just taken. Go back and choose another.');
+        return;
+      }
+
+      trigger(HapticFeedbackTypes.notificationSuccess);
+      dispatch(setUserToken(response?.token));
+
+      PersistStorage.setItem(PersistStorageKeys.TOKEN, response?.token).catch();
+
+      PreloadService.loadUserObject();
     });
-  }, [dispatch, name, password, username]);
+  }, [dispatch, name, password, posting, username]);
 
   const openPrivacyPolicy = useCallback(() => {
     navigateTo(LoginStackNavigatorEnum.PrivacyPolicyScreen);
   }, [navigateTo]);
 
   return (
-    <View style={FourthScreenStyle.container}>
-      <View>
-        <Text
-          style={[FourthScreenStyle.title, { color: theme.theme.colors.text }]}
-        >
-          Finish with safe password
-        </Text>
-        <TextInput
-          autoFocus
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={setPassword}
-          style={[
-            FourthScreenStyle.input,
-            {
-              backgroundColor: theme.theme.colors.surface,
-              color: theme.theme.colors.text
-            }
-          ]}
-        />
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={openPrivacyPolicy}
-          style={FourthScreenStyle.margin5}
-        >
-          <Text
-            style={[
-              FourthScreenStyle.privacyPolicyText,
-              { color: theme.theme.colors.text }
-            ]}
-          >
-            By creating account you agree with our privacy policy
+    <AuthLayout
+      title="Create a password"
+      step={3}
+      totalSteps={3}
+      footer={
+        <>
+          <Text style={FourthScreenStyle.privacyPolicyText}>
+            By creating an account you agree to our{' '}
+            <Text
+              suppressHighlighting
+              onPress={openPrivacyPolicy}
+              style={FourthScreenStyle.privacyPolicyLink}
+            >
+              Privacy Policy
+            </Text>
           </Text>
-        </TouchableOpacity>
-      </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-        keyboardVerticalOffset={15}
-      >
-        <Button
-          title="Create account"
-          onPress={createAccount}
-          posting={posting}
-        />
-      </KeyboardAvoidingView>
-    </View>
+          <Button
+            title="Create account"
+            disabled={!password}
+            posting={posting}
+            onPress={createAccount}
+            style={FourthScreenStyle.button}
+          />
+        </>
+      }
+    >
+      <AuthInput
+        autoFocus
+        password
+        placeholder="Password"
+        autoCapitalize="none"
+        textContentType="newPassword"
+        autoComplete="password-new"
+        returnKeyType="done"
+        value={password}
+        error={error}
+        onChangeText={onChangePassword}
+        onSubmitEditing={createAccount}
+      />
+      <PasswordStrength password={password} />
+    </AuthLayout>
   );
 };

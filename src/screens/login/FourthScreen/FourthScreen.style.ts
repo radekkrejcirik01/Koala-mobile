@@ -1,27 +1,20 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const FourthScreenStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 40,
-    justifyContent: 'space-evenly'
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-  input: {
-    height: 50,
-    marginTop: 20,
-    paddingLeft: 15,
-    borderRadius: 10,
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-  margin5: {
-    margin: 5
+  button: {
+    height: 54,
+    borderRadius: 16
   },
   privacyPolicyText: {
-    fontSize: 12
+    marginBottom: 14,
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: 'center',
+    color: COLORS.LIGHTGRAY_200
+  },
+  privacyPolicyLink: {
+    fontWeight: '600',
+    color: COLORS.BUTTON_BLUE
   }
 });

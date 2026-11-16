@@ -1,30 +1,33 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const FirstScreenStyle = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    paddingTop: '20%',
-    paddingHorizontal: 40,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: COLORS.BEIGE
   },
-  image: {
-    width: 75,
-    height: 75
+  container: {
+    flex: 1
+  },
+  // Same height as HomeHeader so the buttons sit where they do on home
+  header: {
+    height: 55,
+    paddingTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   titleText: {
     fontSize: 26,
-    fontWeight: 'bold',
-    textAlign: 'center'
+    fontWeight: '800',
+    color: COLORS.BLACK
   },
-  startButton: {
-    marginTop: '80%'
-  },
-  loginButtonView: {
-    marginTop: '20%'
-  },
-  loginButtonText: {
+  subtitleText: {
+    marginTop: 20,
+    paddingHorizontal: 40,
     fontSize: 16,
-    fontWeight: '600'
+    lineHeight: 22,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: COLORS.LIGHTGRAY_200
   }
 });

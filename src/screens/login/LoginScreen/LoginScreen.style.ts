@@ -2,28 +2,29 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const LoginScreenStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: '50%',
-    paddingHorizontal: 40
-  },
-  input: {
-    height: 50,
-    marginTop: 20,
-    paddingLeft: 15,
-    borderRadius: 10,
-    fontSize: 16,
-    fontWeight: 'bold'
-  },
-  buttonView: {
-    marginTop: 50
+  button: {
+    height: 54,
+    borderRadius: 16
   },
   forgotPasswordView: {
-    marginTop: 25,
-    alignSelf: 'center'
+    marginTop: 14,
+    marginRight: 4,
+    alignSelf: 'flex-end'
   },
   forgotPasswordText: {
-    color: COLORS.BUTTON_BLUE,
-    fontWeight: '500'
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.BUTTON_BLUE
+  },
+  signUpText: {
+    marginTop: 16,
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: COLORS.LIGHTGRAY_200
+  },
+  signUpLink: {
+    fontWeight: '600',
+    color: COLORS.BUTTON_BLUE
   }
 });

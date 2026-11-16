@@ -88,28 +88,28 @@ export const AccountScreen = (): React.JSX.Element => {
               isLast
             />
           </ProfileSection>
-          <ProfileSection footer="By deleting account you will lose all your messages and sharing history.">
-            <ProfileItem
-              onPress={onPressDeleteAccount}
-              icon="🗑️"
-              iconBackgroundColor={COLORS.WHITE_200}
-              title="Delete account"
-              destructive
-              showChevron={false}
-              isLast
-            />
-          </ProfileSection>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={logout}
+            style={[
+              AccountScreenStyle.logoutButton,
+              { backgroundColor: theme.theme.colors.surface }
+            ]}
+          >
+            <Text style={AccountScreenStyle.logoutText}>Log out</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={logout}
-          style={[
-            AccountScreenStyle.logoutButton,
-            { backgroundColor: theme.theme.colors.surface }
-          ]}
-        >
-          <Text style={AccountScreenStyle.logoutText}>Log out</Text>
-        </TouchableOpacity>
+        <ProfileSection footer="By deleting account you will lose all your messages and sharing history.">
+          <ProfileItem
+            onPress={onPressDeleteAccount}
+            icon="🗑️"
+            iconBackgroundColor={COLORS.WHITE_200}
+            title="Delete account"
+            destructive
+            showChevron={false}
+            isLast
+          />
+        </ProfileSection>
       </ScrollView>
     </View>
   );

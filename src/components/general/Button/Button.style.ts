@@ -10,6 +10,9 @@ export const ButtonStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  disabled: {
+    opacity: 0.4
+  },
   text: {
     fontSize: 16,
     color: COLORS.WHITE,

@@ -11,13 +11,15 @@ export const Button = ({
   title,
   onPress,
   posting,
+  disabled,
   style
 }: ButtonProps): JSX.Element => (
   <TouchableOpacity
     hitSlop={10}
     activeOpacity={0.9}
+    disabled={disabled || posting}
     onPress={onPress}
-    style={[ButtonStyle.view, style]}
+    style={[ButtonStyle.view, style, disabled && ButtonStyle.disabled]}
   >
     {posting ? (
       <ActivityIndicator color={COLORS.WHITE} />

@@ -1,48 +1,59 @@
 import React, { JSX } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image, ScrollView, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { useNavigation } from '@hooks/useNavigation';
-import { useTheme } from '@hooks/useTheme';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { FirstScreenStyle } from '@screens/login/FirstScreen/FirstScreen.style';
-import { Button } from '@components/general/Button/Button';
+import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
+import { HomeButton } from '@components/home/HomeButton/HomeButton';
 
+// Previews the home screen: same layout, with Sign up / Log in as the buttons
 export const FirstScreen = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
-  const theme = useTheme();
+  const { top } = useSafeAreaInsets();
 
   return (
-    <View style={FirstScreenStyle.container}>
-      <FastImage
-        source={require('@assets/images/koala.png')}
-        style={FirstScreenStyle.image}
-      />
-      <Text
-        style={[FirstScreenStyle.titleText, { color: theme.theme.colors.text }]}
-      >
-        Koala: Emotions & Chat
-      </Text>
-      <Button
-        title="Let's start!"
-        onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
-        style={FirstScreenStyle.startButton}
-      />
-      <TouchableOpacity
-        hitSlop={15}
-        activeOpacity={0.9}
-        onPress={() => navigateTo(LoginStackNavigatorEnum.LoginScreen)}
-        style={FirstScreenStyle.loginButtonView}
-      >
-        <Text
-          style={[
-            FirstScreenStyle.loginButtonText,
-            { color: theme.theme.colors.text }
-          ]}
+    <View style={FirstScreenStyle.background}>
+      <View style={[FirstScreenStyle.container, { marginTop: top || 10 }]}>
+        <Animated.View
+          entering={FadeIn.duration(500)}
+          style={FirstScreenStyle.header}
         >
-          Login
-        </Text>
-      </TouchableOpacity>
+          <Text style={FirstScreenStyle.titleText}>Koala</Text>
+        </Animated.View>
+        <View style={HomeContentStyle.container}>
+          <ScrollView
+            style={HomeContentStyle.scrollView}
+            contentContainerStyle={HomeContentStyle.scrollViewContainer}
+          >
+            <Animated.View entering={FadeIn.duration(700)}>
+              <Image
+                source={require('@assets/illustrations/room.jpg')}
+                style={HomeContentStyle.image}
+                resizeMode="contain"
+              />
+              <Text style={FirstScreenStyle.subtitleText}>
+                Share how you feel with your friends
+              </Text>
+            </Animated.View>
+          </ScrollView>
+          <Animated.View
+            entering={FadeInDown.duration(500).delay(200)}
+            style={HomeContentStyle.footerContainer}
+          >
+            <HomeButton
+              text="Sign up"
+              onPress={() => navigateTo(LoginStackNavigatorEnum.SecondScreen)}
+            />
+            <HomeButton
+              text="Log in"
+              onPress={() => navigateTo(LoginStackNavigatorEnum.LoginScreen)}
+            />
+          </Animated.View>
+        </View>
+      </View>
     </View>
   );
 };

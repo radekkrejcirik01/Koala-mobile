@@ -1,66 +1,57 @@
 import React, { JSX, useCallback, useState } from 'react';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TextInput,
-  View
-} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@hooks/useNavigation';
-import { useTheme } from '@hooks/useTheme';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { setNameAction } from '@store/NewAccountReducer';
 import { SecondScreenStyle } from '@screens/login/SecondScreen/SecondScreen.style';
 import { Button } from '@components/general/Button/Button';
+import { AuthLayout } from '@components/login/AuthLayout/AuthLayout';
+import { AuthInput } from '@components/login/AuthInput/AuthInput';
 
 export const SecondScreen = (): JSX.Element => {
   const dispatch = useDispatch();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
-  const theme = useTheme();
 
-  const [name, setName] = useState<string>();
+  const [name, setName] = useState<string>('');
+
+  const trimmedName = name.trim();
 
   const onPressNext = useCallback(() => {
-    if (!name) {
-      Alert.alert('Please enter name');
+    if (!trimmedName) {
       return;
     }
 
-    dispatch(setNameAction(name));
+    dispatch(setNameAction(trimmedName));
 
     navigateTo(LoginStackNavigatorEnum.ThirdScreen);
-  }, [dispatch, name, navigateTo]);
+  }, [dispatch, navigateTo, trimmedName]);
 
   return (
-    <View style={SecondScreenStyle.container}>
-      <View>
-        <Text
-          style={[SecondScreenStyle.title, { color: theme.theme.colors.text }]}
-        >
-          Your name
-        </Text>
-        <TextInput
-          autoFocus
-          autoCorrect={false}
-          onChangeText={setName}
-          style={[
-            SecondScreenStyle.input,
-            {
-              backgroundColor: theme.theme.colors.surface,
-              color: theme.theme.colors.text
-            }
-          ]}
+    <AuthLayout
+      title="What's your name?"
+      step={1}
+      totalSteps={3}
+      footer={
+        <Button
+          title="Continue"
+          disabled={!trimmedName}
+          onPress={onPressNext}
+          style={SecondScreenStyle.button}
         />
-      </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-        keyboardVerticalOffset={15}
-      >
-        <Button title="Next" onPress={onPressNext} />
-      </KeyboardAvoidingView>
-    </View>
+      }
+    >
+      <AuthInput
+        autoFocus
+        placeholder="Your name"
+        autoCapitalize="words"
+        textContentType="givenName"
+        autoComplete="name-given"
+        returnKeyType="next"
+        value={name}
+        onChangeText={setName}
+        onSubmitEditing={onPressNext}
+      />
+    </AuthLayout>
   );
 };

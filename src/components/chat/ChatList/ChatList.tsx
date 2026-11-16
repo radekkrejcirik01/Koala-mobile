@@ -71,11 +71,11 @@ export const ChatList = ({
     item: value,
     index
   }: ListRenderItemInfo<MessageInterface>) => {
-    // The list is inverted, the previous message is the next item
-    const hasSeparator = shouldShowChatSeparator(
-      value.time,
-      messages[index + 1]?.time
-    );
+    // The list is inverted, the previous message is the next item, an
+    // emotion always shows its time
+    const hasSeparator =
+      value.type === MessageType.Emotion ||
+      shouldShowChatSeparator(value.time, messages[index + 1]?.time);
     const separator = hasSeparator && (
       <Text
         style={[
