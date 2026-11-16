@@ -1,17 +1,22 @@
 import React, { JSX } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import moment from 'moment';
 import { useTheme } from '@hooks/useTheme';
 import { SharedEmotionItemProps } from '@components/emotions/SharedEmotionItem/SharedEmotionItem.props';
 import { SharedEmotionItemStyle } from '@components/emotions/SharedEmotionItem/SharedEmotionItem.style';
 
 export const SharedEmotionItem = ({
-  item
+  item,
+  onPress
 }: SharedEmotionItemProps): JSX.Element => {
   const { colors } = useTheme().theme;
 
   return (
-    <View style={SharedEmotionItemStyle.container}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={onPress}
+      style={SharedEmotionItemStyle.container}
+    >
       <View style={SharedEmotionItemStyle.emojiView}>
         <Text style={SharedEmotionItemStyle.emojiText}>
           {item.emotion || '•'}
@@ -28,6 +33,6 @@ export const SharedEmotionItem = ({
           {moment.unix(item.time).format('ddd D. M. YYYY · HH:mm')}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

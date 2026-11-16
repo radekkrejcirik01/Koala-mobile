@@ -3,6 +3,7 @@ import { FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@hooks/useTheme';
 import { useSharedEmotions } from '@hooks/useSharedEmotions';
+import { useNavigation } from '@hooks/useNavigation';
 import { SharedEmotionInterface } from '@interfaces/general.interface';
 import { SharedEmotionsPeriod } from '@enums/SharedEmotionsPeriod';
 import {
@@ -18,6 +19,7 @@ import { PeriodSelector } from '@components/emotions/PeriodSelector/PeriodSelect
 import { EmotionsChart } from '@components/emotions/EmotionsChart/EmotionsChart';
 import { EmotionsBreakdown } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown';
 import { SharedEmotionItem } from '@components/emotions/SharedEmotionItem/SharedEmotionItem';
+import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { AnalyticsScreenStyle } from '@screens/account/AnalyticsScreen/AnalyticsScreen.style';
 
 const TOTAL_LABELS: Record<SharedEmotionsPeriod, string> = {
@@ -29,6 +31,7 @@ const TOTAL_LABELS: Record<SharedEmotionsPeriod, string> = {
 export const AnalyticsScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const { colors } = useTheme().theme;
+  const { navigateTo } = useNavigation();
 
   const [period, setPeriod] = useState<SharedEmotionsPeriod>(
     SharedEmotionsPeriod.Week
@@ -85,6 +88,12 @@ export const AnalyticsScreen = (): JSX.Element => {
   const onPressBucket = useCallback((key: number) => {
     setSelectedKey((current?: number) => (current === key ? undefined : key));
   }, []);
+
+  const onPressEmotion = useCallback(
+    (item: SharedEmotionInterface) =>
+      navigateTo(AccountStackNavigatorEnum.SharedEmotionScreen, { item }),
+    [navigateTo]
+  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -166,7 +175,10 @@ export const AnalyticsScreen = (): JSX.Element => {
         keyExtractor={(item: SharedEmotionInterface) => String(item.id)}
         renderItem={({ item }) => (
           <View style={loading && AnalyticsScreenStyle.stale}>
-            <SharedEmotionItem item={item} />
+            <SharedEmotionItem
+              item={item}
+              onPress={() => onPressEmotion(item)}
+            />
           </View>
         )}
         ListHeaderComponent={header}

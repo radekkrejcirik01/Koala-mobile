@@ -260,7 +260,10 @@ const getEmotions = (from: number, to: number) => {
           emotion,
           // The app sends the emotion's label, there are no custom messages
           message: EMOTIONS.find((item) => item.type === emotion).message,
-          time
+          time,
+          recipients: FRIENDS.filter(
+            (_, friendIndex) => (seed + i + friendIndex) % 3 === 0
+          )
         });
         index += 1;
       }

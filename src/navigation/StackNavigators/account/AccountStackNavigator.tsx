@@ -18,6 +18,7 @@ import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
 import { ThemeScreen } from '@screens/account/ThemeScreen/ThemeScreen';
 import { AnalyticsScreen } from '@screens/account/AnalyticsScreen/AnalyticsScreen';
+import { SharedEmotionScreen } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen';
 import { ShareStackNavigator } from '@navigation/StackNavigators/share/ShareStackNavigator';
 
 const Account = createNativeStackNavigator<ParamListBase>();
@@ -65,6 +66,14 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       name={AccountStackNavigatorEnum.AnalyticsScreen}
       component={AnalyticsScreen}
       options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.SharedEmotionScreen}
+      component={SharedEmotionScreen as unknown as React.ComponentType}
+      options={{
+        ...NoHeader,
+        presentation: 'modal'
+      }}
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.ChatsScreen}

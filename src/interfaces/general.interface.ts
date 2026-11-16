@@ -48,4 +48,6 @@ export interface SharedEmotionInterface {
   emotion?: string;
   message: string;
   time: number;
+  // Empty for emotions shared before recipients were recorded
+  recipients?: UserInterface[];
 }
