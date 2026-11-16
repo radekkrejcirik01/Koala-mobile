@@ -71,11 +71,11 @@ export const ChatList = ({
     item: value,
     index
   }: ListRenderItemInfo<MessageInterface>) => {
-    // The list is inverted, the previous message is the next item, an
-    // emotion always shows its time
-    const hasSeparator =
-      value.type === MessageType.Emotion ||
-      shouldShowChatSeparator(value.time, messages[index + 1]?.time);
+    // The list is inverted, the previous message is the next item
+    const hasSeparator = shouldShowChatSeparator(
+      value.time,
+      messages[index + 1]?.time
+    );
     const separator = hasSeparator && (
       <Text
         style={[
@@ -115,6 +115,8 @@ export const ChatList = ({
               emotion={value.emotion}
               message={value.message}
               outbound={isOutbound(value.senderId)}
+              time={value.time}
+              offset={timeOffset}
               name={name}
               supported={!!value.reaction}
               onPressSupport={() => onPressSupport(value.id)}
@@ -162,6 +164,9 @@ export const ChatList = ({
             // Emotions and text messages differ a lot, only reuse rows of the
             // same kind
             getItemType={(item) => item.type}
+            // On by default in FlashList 2, in an inverted list it keeps the old
+            // messages in place and pushes a new one below the screen
+            maintainVisibleContentPosition={{ disabled: true }}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={ChatListStyle.scrollViewContainer}
             renderItem={renderItem}

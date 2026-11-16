@@ -10,9 +10,9 @@ export function getEmotionText(
     return `${outbound ? 'You' : name} shared a feeling`;
   }
 
-  // A custom message written on the Share screen is shown as is
+  // A custom message written on the Share screen, prefixed with who wrote it
   if (!EMOTIONS.some((item) => item.message === message)) {
-    return message;
+    return `${outbound ? 'You' : name}: ${message}`;
   }
 
   const subject = outbound ? 'You are' : `${name} is`;

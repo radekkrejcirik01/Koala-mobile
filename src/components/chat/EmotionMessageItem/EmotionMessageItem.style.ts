@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
 
 export const EmotionMessageItemStyle = StyleSheet.create({
   container: {
@@ -32,6 +33,19 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     flexShrink: 1,
     fontSize: 13,
     color: COLORS.GRAY_200
+  },
+  // Fills the row so the time sits at the right edge, like on messages
+  row: {
+    alignSelf: 'stretch'
+  },
+  timeView: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: TIME_WIDTH,
+    alignItems: 'flex-end',
+    justifyContent: 'center'
   },
   supportView: {
     marginLeft: 6

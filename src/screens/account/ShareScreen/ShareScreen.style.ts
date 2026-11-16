@@ -55,10 +55,11 @@ export const ShareScreenStyle = StyleSheet.create({
   },
   messageButton: {
     flex: 1,
+    paddingLeft: 5,
     paddingRight: 20
   },
   messageButtonText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
     color: COLORS.BUTTON_BLUE
   },

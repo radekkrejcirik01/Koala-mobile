@@ -1,12 +1,16 @@
 import React, { JSX, useCallback, useMemo, useState } from 'react';
 import {
   Alert,
+  Keyboard,
   Platform,
+  Pressable,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
@@ -25,6 +29,13 @@ export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { navigateTo } = useNavigation();
+
+  // Dims the emotions together with the keyboard while the message is typed,
+  // progress goes from 0 (closed) to 1 (open)
+  const { progress: keyboardProgress } = useReanimatedKeyboardAnimation();
+  const emotionsStyle = useAnimatedStyle(() => ({
+    opacity: 1 - keyboardProgress.value * 0.7
+  }));
 
   const [emotion, setEmotion] = useState<EmotionType>();
   const [message, setMessage] = useState<string>('');
@@ -67,7 +78,12 @@ export const ShareScreen = (): JSX.Element => {
       ]}
     >
       <ScreenHeader title="Share" />
-      <View style={ShareScreenStyle.mainView}>
+      {/* Tapping anywhere outside the message closes the keyboard */}
+      <Pressable
+        accessible={false}
+        onPress={Keyboard.dismiss}
+        style={ShareScreenStyle.mainView}
+      >
         <View style={ShareScreenStyle.titleView}>
           {selectedConfig && (
             <Text style={ShareScreenStyle.selectedEmoji}>
@@ -94,18 +110,29 @@ export const ShareScreen = (): JSX.Element => {
               ]}
             />
           ) : (
-            <Text
-              style={[
-                ShareScreenStyle.title,
-                { color: theme.theme.colors.text }
-              ]}
+            // Pressing the text opens the message for editing, like Add message
+            <Pressable
+              disabled={!emotion}
+              hitSlop={15}
+              onPress={() => setEditingMessage(true)}
             >
-              {(emotion && trimmedMessage) || title}
-            </Text>
+              <Text
+                style={[
+                  ShareScreenStyle.title,
+                  { color: theme.theme.colors.text }
+                ]}
+              >
+                {(emotion && trimmedMessage) || title}
+              </Text>
+            </Pressable>
           )}
         </View>
         <View style={ShareScreenStyle.contentView}>
-          <View style={ShareScreenStyle.emotionsView}>
+          <Animated.View
+            // While typing, taps on the emotions fall through and close the keyboard
+            pointerEvents={editingMessage ? 'none' : 'auto'}
+            style={[ShareScreenStyle.emotionsView, emotionsStyle]}
+          >
             {EMOTIONS.map((item) => (
               <EmotionItem
                 key={item.type}
@@ -114,13 +141,14 @@ export const ShareScreen = (): JSX.Element => {
                 onPress={() => onEmotionSelect(item.type)}
               />
             ))}
-          </View>
+          </Animated.View>
         </View>
-      </View>
+      </Pressable>
       <View style={ShareScreenStyle.nextButtonView}>
         <TouchableOpacity
           activeOpacity={0.7}
           disabled={!emotion}
+          hitSlop={15}
           onPress={() => setEditingMessage(true)}
           style={ShareScreenStyle.messageButton}
         >
