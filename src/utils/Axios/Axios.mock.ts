@@ -224,7 +224,7 @@ const MOOD_PATTERN = [
   EmotionType.Good,
   EmotionType.Meh,
   EmotionType.SuperGood,
-  EmotionType.Miserable,
+  EmotionType.ReallyBad,
   EmotionType.Good,
   EmotionType.Meh,
   EmotionType.NotGood,
@@ -233,7 +233,7 @@ const MOOD_PATTERN = [
   EmotionType.Meh,
   EmotionType.NotGood,
   EmotionType.Good,
-  EmotionType.Miserable,
+  EmotionType.ReallyBad,
   EmotionType.SuperGood,
   EmotionType.Good
 ];

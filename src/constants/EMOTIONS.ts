@@ -34,9 +34,9 @@ export const EMOTIONS: EmotionConfig[] = [
     color: COLORS.EMOTION_NOT_GOOD
   },
   {
-    type: EmotionType.Miserable,
-    label: 'Miserable',
-    message: 'Miserable',
+    type: EmotionType.ReallyBad,
+    label: 'Really bad',
+    message: 'Really bad',
     color: COLORS.EMOTION_MISERABLE
   }
 ];
