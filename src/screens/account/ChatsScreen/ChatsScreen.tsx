@@ -117,6 +117,7 @@ export const ChatsScreen = (): React.JSX.Element => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         onEndReached={onEndReached}
+        maintainVisibleContentPosition={{ disabled: true }}
         contentContainerStyle={ChatsScreenStyle.listContainer}
         showsVerticalScrollIndicator={false}
         refreshControl={
