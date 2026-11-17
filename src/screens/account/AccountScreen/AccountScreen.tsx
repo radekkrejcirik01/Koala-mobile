@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
@@ -25,31 +25,6 @@ export const AccountScreen = (): React.JSX.Element => {
   const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
-
-  const deleteAccount = useCallback(() => {
-    deleteRequest<ResponseInterface>('account').subscribe(
-      (response: ResponseInterface) => {
-        if (response?.status) {
-          dispatch(resetUserState());
-          PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
-        }
-      }
-    );
-  }, [dispatch]);
-
-  const onPressDeleteAccount = useCallback(() => {
-    Alert.alert('Are you sure you want to delete account?', '', [
-      {
-        text: 'Cancel',
-        style: 'cancel'
-      },
-      {
-        text: 'Confirm',
-        onPress: deleteAccount,
-        style: 'destructive'
-      }
-    ]);
-  }, [deleteAccount]);
 
   const logout = useCallback(() => {
     deleteRequest<ResponseInterface>('device').subscribe(
@@ -116,14 +91,15 @@ export const AccountScreen = (): React.JSX.Element => {
             <Text style={AccountScreenStyle.logoutText}>Log out</Text>
           </TouchableOpacity>
         </View>
-        <ProfileSection footer="By deleting account you will lose all your messages and sharing history.">
+        <ProfileSection>
           <ProfileItem
-            onPress={onPressDeleteAccount}
+            onPress={() =>
+              navigateTo(AccountStackNavigatorEnum.DeleteAccountScreen)
+            }
             icon="🗑️"
             iconBackgroundColor={COLORS.WHITE_200}
             title="Delete account"
             destructive
-            showChevron={false}
             isLast
           />
         </ProfileSection>

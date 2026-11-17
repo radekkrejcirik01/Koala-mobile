@@ -1,5 +1,6 @@
 export enum AccountStackNavigatorEnum {
   AccountScreen = 'AccountScreen',
+  DeleteAccountScreen = 'DeleteAccountScreen',
   EditNameScreen = 'EditNameScreen',
   EmailScreen = 'EmailScreen',
   VerifyEmailScreen = 'VerifyEmailScreen',
