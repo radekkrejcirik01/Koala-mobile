@@ -18,6 +18,7 @@ import { Button } from '@components/general/Button/Button';
 import { AuthLayout } from '@components/login/AuthLayout/AuthLayout';
 import { AuthInput } from '@components/login/AuthInput/AuthInput';
 import { PasswordStrength } from '@components/login/PasswordStrength/PasswordStrength';
+import { PASSWORD_MAX_LENGTH } from '@constants/AUTH';
 
 export const FourthScreen = (): JSX.Element => {
   const { name, username } = useSelector(
@@ -78,7 +79,7 @@ export const FourthScreen = (): JSX.Element => {
     <AuthLayout
       title="Create a password"
       step={3}
-      totalSteps={3}
+      totalSteps={4}
       footer={
         <>
           <Text style={FourthScreenStyle.privacyPolicyText}>
@@ -109,6 +110,7 @@ export const FourthScreen = (): JSX.Element => {
         textContentType="newPassword"
         autoComplete="password-new"
         returnKeyType="done"
+        maxLength={PASSWORD_MAX_LENGTH}
         value={password}
         error={error}
         onChangeText={onChangePassword}

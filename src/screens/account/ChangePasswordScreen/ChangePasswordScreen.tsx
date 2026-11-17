@@ -6,6 +6,7 @@ import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ChangePasswordScreenStyle } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen.style';
 import COLORS from '@constants/COLORS';
+import { PASSWORD_MAX_LENGTH } from '@constants/AUTH';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { useDispatch } from 'react-redux';
 import { ChangePasswordResponseInterface } from '@interfaces/response/Response.interface';
@@ -58,7 +59,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
       setPosting(false);
 
       if (response?.status === 'success') {
-        // Changing the password revokes other sessions; keep this one alive
+        // Not returned yet, it will be once a change logs out other devices
         if (response.token) {
           dispatch(setUserToken(response.token));
           PersistStorage.setItem(
@@ -106,6 +107,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             placeholder="Current password"
             placeholderTextColor={COLORS.LIGHTGRAY_100}
             selectionColor={COLORS.BUTTON_BLUE}
+            maxLength={PASSWORD_MAX_LENGTH}
             value={oldPassword}
             onChangeText={setOldPassword}
             style={inputStyle}
@@ -120,6 +122,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             placeholder="New password"
             placeholderTextColor={COLORS.LIGHTGRAY_100}
             selectionColor={COLORS.BUTTON_BLUE}
+            maxLength={PASSWORD_MAX_LENGTH}
             value={newPassword}
             onChangeText={setNewPassword}
             style={inputStyle}
@@ -133,6 +136,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             placeholder="Confirm new password"
             placeholderTextColor={COLORS.LIGHTGRAY_100}
             selectionColor={COLORS.BUTTON_BLUE}
+            maxLength={PASSWORD_MAX_LENGTH}
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             style={inputStyle}

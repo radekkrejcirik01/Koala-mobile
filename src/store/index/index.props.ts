@@ -13,6 +13,8 @@ export interface User {
     name: string;
     username: string;
     profilePhoto: string;
+    // Left out until an email is confirmed
+    email?: string;
   };
   image: Images;
 }

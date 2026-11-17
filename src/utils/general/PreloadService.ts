@@ -29,6 +29,11 @@ class PreloadServiceSingleton {
   };
 
   public loadUserObject = (launching = false) => {
+    // A fresh login or sign up asks for a missing email again
+    if (!launching) {
+      PersistStorage.setItem(PersistStorageKeys.EMAIL_PROMPTED, '').catch();
+    }
+
     getRequest<ResponseUserGetInterface>('user').subscribe(
       async (response: ResponseUserGetInterface) => {
         if (response?.status) {

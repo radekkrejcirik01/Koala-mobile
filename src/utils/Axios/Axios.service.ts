@@ -3,7 +3,14 @@ import { catchError, defer, map, Observable, of } from 'rxjs';
 import { axiosInstance } from '@utils/Axios/Axios.instance';
 import { API_URL } from '@utils/Axios/Axios.config';
 
-const catchErrorFunction = (error: AxiosError) => {
+// The account email and password reset endpoints answer wrong input with 400
+// and the reason in the body, `errorBody` passes that body on instead of null
+type RequestConfig = AxiosRequestConfig & { errorBody?: boolean };
+
+const catchErrorFunction = (error: AxiosError, config?: RequestConfig) => {
+  if (config?.errorBody && error.response?.status === 400) {
+    return of(error.response.data);
+  }
   console.error(error);
   return of(null);
 };
@@ -20,21 +27,21 @@ export const getRequest = <T>(
 export const postRequest = <T, B>(
   endpoint: string,
   data: B,
-  config?: AxiosRequestConfig
+  config?: RequestConfig
 ): Observable<T> =>
   defer(() => axiosInstance.post(`${API_URL}${endpoint}`, data, config)).pipe(
     map((result: AxiosResponse<T>) => result.data),
-    catchError((err: AxiosError) => catchErrorFunction(err))
+    catchError((err: AxiosError) => catchErrorFunction(err, config))
   );
 
 export const putRequest = <T, B>(
   endpoint: string,
   data?: B,
-  config?: AxiosRequestConfig
+  config?: RequestConfig
 ): Observable<T> =>
   defer(() => axiosInstance.put(`${API_URL}${endpoint}`, data, config)).pipe(
     map((result: AxiosResponse<T>) => result.data),
-    catchError((err: AxiosError) => catchErrorFunction(err))
+    catchError((err: AxiosError) => catchErrorFunction(err, config))
   );
 
 export const deleteRequest = <T>(

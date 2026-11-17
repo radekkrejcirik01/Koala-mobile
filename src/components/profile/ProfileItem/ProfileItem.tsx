@@ -12,6 +12,7 @@ export const ProfileItem = ({
   icon,
   iconBackgroundColor,
   title,
+  value,
   destructive = false,
   showChevron = true,
   isLast = false
@@ -52,6 +53,11 @@ export const ProfileItem = ({
         >
           {title}
         </Text>
+        {!!value && (
+          <Text numberOfLines={1} style={ProfileItemStyle.value}>
+            {value}
+          </Text>
+        )}
         {showChevron && (
           <Icon
             name={IconEnum.BACK}

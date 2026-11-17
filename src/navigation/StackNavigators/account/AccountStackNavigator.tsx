@@ -16,6 +16,8 @@ import { FeedbackScreen } from '@screens/account/FeedbackScreen/FeedbackScreen';
 import { FriendsScreen } from '@screens/account/FriendsScreen/FriendsScreen';
 import { SupportScreen } from '@screens/account/SupportScreen/SupportScreen';
 import { EditNameScreen } from '@screens/account/EditNameScreen/EditNameScreen';
+import { EmailScreen } from '@screens/account/EmailScreen/EmailScreen';
+import { VerifyEmailScreen } from '@screens/account/VerifyEmailScreen/VerifyEmailScreen';
 import { ThemeScreen } from '@screens/account/ThemeScreen/ThemeScreen';
 import { AnalyticsScreen } from '@screens/account/AnalyticsScreen/AnalyticsScreen';
 import { SharedEmotionScreen } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen';
@@ -37,6 +39,16 @@ export const AccountStackNavigator = (): React.JSX.Element => (
     <Account.Screen
       name={AccountStackNavigatorEnum.EditNameScreen}
       component={EditNameScreen}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.EmailScreen}
+      component={EmailScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.VerifyEmailScreen}
+      component={VerifyEmailScreen as unknown as React.ComponentType}
       options={NoHeader}
     />
     <Account.Screen

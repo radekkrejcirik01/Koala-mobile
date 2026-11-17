@@ -37,6 +37,14 @@ export const ProfileItemStyle = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500'
   },
+  value: {
+    flex: 1,
+    marginLeft: 12,
+    marginRight: 8,
+    textAlign: 'right',
+    fontSize: 15,
+    color: COLORS.LIGHTGRAY_200
+  },
   chevron: {
     opacity: 0.4,
     transform: [{ rotate: '180deg' }]

@@ -16,6 +16,7 @@ import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/Login
 import { Button } from '@components/general/Button/Button';
 import { AuthLayout } from '@components/login/AuthLayout/AuthLayout';
 import { AuthInput } from '@components/login/AuthInput/AuthInput';
+import { PASSWORD_MAX_LENGTH } from '@constants/AUTH';
 
 export const LoginScreen = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -71,8 +72,8 @@ export const LoginScreen = (): JSX.Element => {
   }, [canLogin, dispatch, password, posting, username]);
 
   const onPressForgotPassword = useCallback(() => {
-    navigateTo(LoginStackNavigatorEnum.ForgotPasswordScreen);
-  }, [navigateTo]);
+    navigateTo(LoginStackNavigatorEnum.ForgotPasswordScreen, { username });
+  }, [navigateTo, username]);
 
   const onPressSignUp = useCallback(() => {
     navigateTo(LoginStackNavigatorEnum.SecondScreen);
@@ -122,6 +123,7 @@ export const LoginScreen = (): JSX.Element => {
         textContentType="password"
         autoComplete="password"
         returnKeyType="go"
+        maxLength={PASSWORD_MAX_LENGTH}
         value={password}
         error={error}
         onChangeText={onChangePassword}

@@ -2,20 +2,17 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ForgotPasswordScreenStyle = StyleSheet.create({
-  card: {
+  supportText: {
     marginTop: 20,
-    padding: 16,
-    borderRadius: 16
-  },
-  cardLabel: {
-    fontSize: 13,
-    fontWeight: '600',
+    marginHorizontal: 4,
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '500',
     color: COLORS.LIGHTGRAY_200
   },
-  email: {
-    marginTop: 4,
-    fontSize: 17,
-    fontWeight: '700'
+  supportLink: {
+    fontWeight: '600',
+    color: COLORS.BUTTON_BLUE
   },
   button: {
     height: 54,

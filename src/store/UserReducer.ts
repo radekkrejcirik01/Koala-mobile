@@ -28,6 +28,9 @@ export const UserReducer = createSlice({
     setNameAction: (state, action) => {
       state.user.name = action.payload;
     },
+    setEmailAction: (state, action) => {
+      state.user.email = action.payload;
+    },
     setImageAction: (state, action) => {
       state.image = action.payload;
     },
@@ -43,6 +46,7 @@ export const {
   setUserStateAction,
   setProfilePhotoAction,
   setNameAction,
+  setEmailAction,
   setImageAction,
   resetUserState
 } = UserReducer.actions;

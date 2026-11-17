@@ -15,6 +15,25 @@ export interface UsernamePostInterface {
   username: string;
 }
 
+export interface EmailPostInterface {
+  email: string;
+}
+
+export interface EmailVerifyPostInterface {
+  // A string, so leading zeros are kept
+  code: string;
+}
+
+export interface PasswordResetRequestPostInterface {
+  username: string;
+}
+
+export interface PasswordResetConfirmPostInterface {
+  username: string;
+  code: string;
+  newPassword: string;
+}
+
 export interface ChangeNamePostInterface {
   name: string;
 }

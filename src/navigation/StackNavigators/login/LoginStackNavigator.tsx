@@ -13,6 +13,7 @@ import { FourthScreen } from '@screens/login/FourthScreen/FourthScreen';
 import { PrivacyPolicyScreen } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen';
 import { LoginScreen } from '@screens/login/LoginScreen/LoginScreen';
 import { ForgotPasswordScreen } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen';
+import { ResetPasswordScreen } from '@screens/login/ResetPasswordScreen/ResetPasswordScreen';
 
 const Login = createNativeStackNavigator<ParamListBase>();
 
@@ -50,7 +51,12 @@ export const LoginStackNavigator = (): JSX.Element => (
     />
     <Login.Screen
       name={LoginStackNavigatorEnum.ForgotPasswordScreen}
-      component={ForgotPasswordScreen}
+      component={ForgotPasswordScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Login.Screen
+      name={LoginStackNavigatorEnum.ResetPasswordScreen}
+      component={ResetPasswordScreen as unknown as React.ComponentType}
       options={NoHeader}
     />
   </Login.Navigator>

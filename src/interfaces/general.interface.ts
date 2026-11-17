@@ -6,6 +6,8 @@ export interface UserInterface {
   name: string;
   username: string;
   profilePhoto: string;
+  // The confirmed account email, only on the logged in user
+  email?: string;
 }
 
 export interface InviteInterface {

@@ -31,7 +31,7 @@ export const SecondScreen = (): JSX.Element => {
     <AuthLayout
       title="What's your name?"
       step={1}
-      totalSteps={3}
+      totalSteps={4}
       footer={
         <Button
           title="Continue"

@@ -5,5 +5,6 @@ export enum LoginStackNavigatorEnum {
   FourthScreen = 'FourthScreen',
   LoginScreen = 'LoginScreen',
   PrivacyPolicyScreen = 'PrivacyPolicyScreen',
-  ForgotPasswordScreen = 'ForgotPasswordScreen'
+  ForgotPasswordScreen = 'ForgotPasswordScreen',
+  ResetPasswordScreen = 'ResetPasswordScreen'
 }

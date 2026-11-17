@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
 import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useTheme } from '@hooks/useTheme';
 import { deleteRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { resetUserState } from '@store/UserReducer';
+import { ReducerProps } from '@store/index/index.props';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen.style';
@@ -18,6 +19,8 @@ import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
 import COLORS from '@constants/COLORS';
 
 export const AccountScreen = (): React.JSX.Element => {
+  const { email } = useSelector((state: ReducerProps) => state.user.user);
+
   const dispatch = useDispatch();
   const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
@@ -69,7 +72,14 @@ export const AccountScreen = (): React.JSX.Element => {
       <ScreenHeader title="Account" />
       <ScrollView contentContainerStyle={AccountScreenStyle.contentContainer}>
         <View>
-          <ProfileSection title="Personal">
+          <ProfileSection
+            title="Personal"
+            footer={
+              email
+                ? undefined
+                : 'Add an email so you can reset your password if you forget it.'
+            }
+          >
             <ProfileItem
               onPress={() =>
                 navigateTo(AccountStackNavigatorEnum.EditNameScreen)
@@ -77,6 +87,13 @@ export const AccountScreen = (): React.JSX.Element => {
               icon="✏️"
               iconBackgroundColor={COLORS.PASTEL_BLUE}
               title="Edit name"
+            />
+            <ProfileItem
+              onPress={() => navigateTo(AccountStackNavigatorEnum.EmailScreen)}
+              icon="✉️"
+              iconBackgroundColor={COLORS.PASTEL_PURPLE}
+              title={email ? 'Email' : 'Add email'}
+              value={email}
             />
             <ProfileItem
               onPress={() =>

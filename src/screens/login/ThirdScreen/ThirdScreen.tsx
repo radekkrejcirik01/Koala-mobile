@@ -63,7 +63,7 @@ export const ThirdScreen = (): JSX.Element => {
       title={name ? `Nice to meet you, ${name}` : 'Choose a username'}
       subtitle="Choose a username. Friends will use it to find and add you."
       step={2}
-      totalSteps={3}
+      totalSteps={4}
       footer={
         <Button
           title="Continue"
