@@ -109,7 +109,7 @@ export function getSharedEmotionsBuckets(
         label = date.format('MMM').charAt(0);
       } else if (period === SharedEmotionsPeriod.Month) {
         // Label every 7th day, the full month would not fit
-        label = index % 7 === 0 ? date.format('D') : '';
+        label = index % 7 === 0 ? date.format('D.') : '';
       }
 
       return { key: date.valueOf(), label, counts: {}, total: 0 };

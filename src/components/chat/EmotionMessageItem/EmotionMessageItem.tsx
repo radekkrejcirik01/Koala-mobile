@@ -45,19 +45,21 @@ export const EmotionMessageItem = ({
   return (
     <View style={EmotionMessageItemStyle.row}>
       <Animated.View style={[EmotionMessageItemStyle.container, contentStyle]}>
-        <View style={EmotionMessageItemStyle.badgeOuter}>
-          <View style={EmotionMessageItemStyle.badge}>
-            {!!emotion && (
-              <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
-            )}
-            <Text style={EmotionMessageItemStyle.messageText}>
-              {getEmotionText(message, outbound, name)}
-            </Text>
+        <View style={EmotionMessageItemStyle.content}>
+          <View style={EmotionMessageItemStyle.badgeOuter}>
+            <View style={EmotionMessageItemStyle.badge}>
+              {!!emotion && (
+                <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
+              )}
+              <Text style={EmotionMessageItemStyle.messageText}>
+                {getEmotionText(message, outbound, name)}
+              </Text>
+            </View>
           </View>
           {supported && (
-            <View style={EmotionMessageItemStyle.supportedView}>
-              <Text style={EmotionMessageItemStyle.supportedText}>🫶</Text>
-            </View>
+            <Text style={EmotionMessageItemStyle.supportedText}>
+              {outbound ? `${name} sent support` : 'You sent your support'} 🫶
+            </Text>
           )}
         </View>
         {/* Only the friend's emotions can be supported */}

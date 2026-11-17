@@ -9,9 +9,13 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     alignSelf: 'center',
     maxWidth: '90%'
   },
+  // The badge with the support confirmation under it
+  content: {
+    flexShrink: 1,
+    alignItems: 'center'
+  },
   // A beige ring around a darker beige, like the old emotion badge
   badgeOuter: {
-    flexShrink: 1,
     padding: 3,
     borderRadius: 23,
     backgroundColor: COLORS.BEIGE
@@ -50,22 +54,11 @@ export const EmotionMessageItemStyle = StyleSheet.create({
   supportView: {
     marginLeft: 6
   },
-  // Sits on the badge's top right corner, a lighter beige than the chat
-  supportedView: {
-    position: 'absolute',
-    top: -8,
-    right: -6,
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: COLORS.WHITE_200,
-    backgroundColor: COLORS.BEIGE_100
-  },
+  // The support confirmation under the badge, as it was before
   supportedText: {
-    color: COLORS.BLACK,
-    fontSize: 12
+    marginTop: 10,
+    fontSize: 12,
+    color: COLORS.GRAY_200,
+    textAlign: 'center'
   }
 });

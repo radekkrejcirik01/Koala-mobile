@@ -41,9 +41,13 @@ export const EmotionsChartStyle = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.GRAY_200
   },
+  // Wider than a month's narrow day columns so two digit days are not cut,
+  // it overflows the column centered under the bar
   labelText: {
     marginTop: 6,
+    width: 24,
     height: 14,
+    textAlign: 'center',
     fontSize: 11,
     fontWeight: '500',
     color: COLORS.GRAY_200
