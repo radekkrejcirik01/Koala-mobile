@@ -6,6 +6,8 @@ export interface AuthLayoutProps {
   subtitle?: string;
   step?: number;
   totalSteps?: number;
+  // For a required step that can't be left
+  hideBack?: boolean;
   footer: ReactNode;
   children: ReactNode;
 }

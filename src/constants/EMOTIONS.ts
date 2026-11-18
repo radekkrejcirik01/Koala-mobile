@@ -9,28 +9,33 @@ export interface EmotionConfig {
 
 export const EMOTIONS: EmotionConfig[] = [
   {
-    type: EmotionType.SuperGood,
-    message: 'Super good',
-    color: COLORS.EMOTION_SUPER_GOOD
-  },
-  {
-    type: EmotionType.Good,
+    type: EmotionType.SuperHappy,
     message: 'Good',
-    color: COLORS.EMOTION_GOOD
+    color: COLORS.EMOTION_SUPER_HAPPY
   },
   {
-    type: EmotionType.Meh,
-    message: 'Meh',
-    color: COLORS.EMOTION_MEH
-  },
-  {
-    type: EmotionType.NotGood,
+    type: EmotionType.Sad,
     message: 'Not good',
-    color: COLORS.EMOTION_NOT_GOOD
+    color: COLORS.EMOTION_SAD
   },
   {
-    type: EmotionType.ReallyBad,
-    message: 'Really bad',
-    color: COLORS.EMOTION_MISERABLE
+    type: EmotionType.Anxious,
+    message: 'Anxious',
+    color: COLORS.EMOTION_ANXIOUS
+  },
+  {
+    type: EmotionType.Depressed,
+    message: 'Depressed',
+    color: COLORS.EMOTION_DEPRESSED
+  },
+  {
+    type: EmotionType.Angry,
+    message: 'Angry',
+    color: COLORS.EMOTION_ANGRY
+  },
+  {
+    type: EmotionType.Tired,
+    message: 'Tired',
+    color: COLORS.EMOTION_TIRED
   }
 ];

@@ -79,9 +79,10 @@ export const SharedEmotionScreen = ({
             </View>
           ))
         ) : (
-          // Shares from before recipients were recorded have none
+          // Private logs have none, and so do shares from before recipients
+          // were recorded, the backend can't tell them apart
           <Text style={SharedEmotionScreenStyle.emptyText}>
-            Not available for this emotion
+            Emotion was not shared with anyone
           </Text>
         )}
       </ScrollView>

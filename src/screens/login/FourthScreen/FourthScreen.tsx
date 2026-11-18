@@ -6,7 +6,7 @@ import { useNavigation } from '@hooks/useNavigation';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
 import { UserPostInterface } from '@interfaces/post/Post.interface';
-import { setUserToken } from '@store/UserReducer';
+import { setEmailRequiredAction, setUserToken } from '@store/UserReducer';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PreloadService } from '@utils/general/PreloadService';
@@ -63,6 +63,8 @@ export const FourthScreen = (): JSX.Element => {
       }
 
       trigger(HapticFeedbackTypes.notificationSuccess);
+      // Set before the token, so the app opens the email step and not Home
+      dispatch(setEmailRequiredAction(true));
       dispatch(setUserToken(response?.token));
 
       PersistStorage.setItem(PersistStorageKeys.TOKEN, response?.token).catch();

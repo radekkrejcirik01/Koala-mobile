@@ -24,14 +24,14 @@ export const ShareScreenStyle = StyleSheet.create({
   arrowsView: {
     flexDirection: 'row',
     gap: 48,
-    marginBottom: 130
+    marginBottom: 100
   },
   arrowButton: {
-    width: 84,
-    height: 84,
+    width: 74,
+    height: 74,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 42,
+    borderRadius: 37,
     backgroundColor: COLORS.WHITE_200
   },
   arrowLeftIcon: {
@@ -42,7 +42,7 @@ export const ShareScreenStyle = StyleSheet.create({
     transform: [{ rotate: '180deg' }]
   },
   title: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 40

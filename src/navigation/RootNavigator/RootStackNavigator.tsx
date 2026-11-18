@@ -10,12 +10,27 @@ import {
   NoHeader
 } from '@navigation/RootNavigator/RootStackNavigator.options';
 import { AccountStackNavigator } from '@navigation/StackNavigators/account/AccountStackNavigator';
+import { OnboardingStackNavigator } from '@navigation/StackNavigators/onboarding/OnboardingStackNavigator';
 
 const Root = createNativeStackNavigator<ParamListBase>();
 
 export const RootStackNavigator = (): JSX.Element => {
-  const { token } = useSelector((state: ReducerProps) => state.user);
+  const { token, emailRequired } = useSelector(
+    (state: ReducerProps) => state.user
+  );
 
+  // Home only opens once the email, the last step of sign up, is confirmed
+  if (token && emailRequired) {
+    return (
+      <Root.Navigator id="onboarding" screenOptions={NavigatorScreenOptions}>
+        <Root.Screen
+          name={RootStackNavigatorEnum.OnboardingStack}
+          component={OnboardingStackNavigator}
+          options={NoHeader}
+        />
+      </Root.Navigator>
+    );
+  }
   if (token) {
     return (
       <Root.Navigator id="account" screenOptions={NavigatorScreenOptions}>

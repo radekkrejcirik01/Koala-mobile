@@ -16,6 +16,7 @@ export const AuthLayout = ({
   subtitle,
   step,
   totalSteps,
+  hideBack,
   footer,
   children
 }: AuthLayoutProps): JSX.Element => {
@@ -45,7 +46,11 @@ export const AuthLayout = ({
             </Text>
           </View>
         )}
-        <BackButton />
+        {hideBack ? (
+          <View style={AuthLayoutStyle.backSpacer} />
+        ) : (
+          <BackButton />
+        )}
         {!!step && !!totalSteps && (
           <>
             <View style={AuthLayoutStyle.progress}>

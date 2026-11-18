@@ -1,4 +1,5 @@
 export enum RootStackNavigatorEnum {
   AccountStack = 'AccountStack',
-  LoginStack = 'LoginStack'
+  LoginStack = 'LoginStack',
+  OnboardingStack = 'OnboardingStack'
 }

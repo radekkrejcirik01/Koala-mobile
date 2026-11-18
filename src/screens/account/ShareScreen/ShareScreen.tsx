@@ -1,5 +1,6 @@
 import React, { JSX, useCallback, useState } from 'react';
 import {
+  Alert,
   Keyboard,
   Platform,
   Pressable,
@@ -18,7 +19,11 @@ import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
+import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
+import { postRequest } from '@utils/Axios/Axios.service';
+import { ResponseInterface } from '@interfaces/response/Response.interface';
+import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import COLORS from '@constants/COLORS';
 import { EmotionCarousel } from '@components/emotions/EmotionCarousel/EmotionCarousel';
@@ -30,11 +35,13 @@ import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/A
 import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
 
 const MESSAGE_MAX_LENGTH = 128;
+const LOGGING_MIN_DURATION = 800;
 
 export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
-  const { navigateTo } = useNavigation();
+  const { navigateTo, dismiss } = useNavigation();
+  const { sending, sent, setSending, setSent } = useSending();
 
   // Dims the arrows together with the keyboard while the message is typed,
   // progress goes from 0 (closed) to 1 (open)
@@ -45,12 +52,15 @@ export const ShareScreen = (): JSX.Element => {
 
   // Unbounded so the carousel keeps rolling the same way when it wraps around
   const [position, setPosition] = useState<number>(0);
+  // Emotion currently in the centre, which changes during a drag or roll
+  // before the position settles
+  const [centerPosition, setCenterPosition] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
   const [editingMessage, setEditingMessage] = useState<boolean>(false);
 
   const selectedConfig =
     EMOTIONS[
-      ((position % EMOTIONS.length) + EMOTIONS.length) % EMOTIONS.length
+      ((centerPosition % EMOTIONS.length) + EMOTIONS.length) % EMOTIONS.length
     ];
   const trimmedMessage = message.trim();
 
@@ -67,6 +77,48 @@ export const ShareScreen = (): JSX.Element => {
     });
   }, [navigateTo, selectedConfig.type, trimmedMessage]);
 
+  // Saves the emotion only to the user's own history, without sharing it
+  const onLogOnly = useCallback(() => {
+    if (sending || sent) {
+      return;
+    }
+
+    setSending(true);
+    const startedAt = Date.now();
+
+    postRequest<ResponseInterface, EmotionMessagePostInterface>(
+      'chats/emotion',
+      {
+        ids: [],
+        message: trimmedMessage || selectedConfig.message,
+        emotion: selectedConfig.type
+      }
+    ).subscribe((response: ResponseInterface) => {
+      // Keeps Logging... and then Done! on screen for a moment each, so
+      // the close doesn't feel abrupt when the request is quick
+      if (response?.status === 'success') {
+        const elapsed = Date.now() - startedAt;
+        setTimeout(() => {
+          setSending(false);
+          setSent(true);
+          setTimeout(dismiss, 600);
+        }, Math.max(LOGGING_MIN_DURATION - elapsed, 0));
+        return;
+      }
+
+      setSending(false);
+      Alert.alert('Failed to log. Please try again.');
+    });
+  }, [
+    dismiss,
+    selectedConfig,
+    sending,
+    sent,
+    setSending,
+    setSent,
+    trimmedMessage
+  ]);
+
   return (
     <View
       style={[
@@ -79,7 +131,7 @@ export const ShareScreen = (): JSX.Element => {
         }
       ]}
     >
-      <ScreenHeader title="Share" />
+      <ScreenHeader title="How are you feeling?" />
       {/* Tapping anywhere outside the message closes the keyboard */}
       <Pressable
         accessible={false}
@@ -87,7 +139,11 @@ export const ShareScreen = (): JSX.Element => {
         style={ShareScreenStyle.mainView}
       >
         <View style={ShareScreenStyle.titleView}>
-          <EmotionCarousel position={position} />
+          <EmotionCarousel
+            position={position}
+            onSwipe={onEmotionChange}
+            onCenterChange={setCenterPosition}
+          />
           {editingMessage ? (
             <TextInput
               autoFocus
@@ -108,7 +164,7 @@ export const ShareScreen = (): JSX.Element => {
               ]}
             />
           ) : (
-            // Pressing the text opens the message for editing, like Add message
+            // Pressing the text opens the message for editing
             // Skips the fade when the label swaps with the message input
             <LayoutAnimationConfig skipEntering skipExiting>
               <Pressable hitSlop={15} onPress={() => setEditingMessage(true)}>
@@ -141,7 +197,7 @@ export const ShareScreen = (): JSX.Element => {
             >
               <Icon
                 name={IconEnum.BACK}
-                size={30}
+                size={27}
                 style={ShareScreenStyle.arrowLeftIcon}
               />
             </TouchableOpacity>
@@ -153,7 +209,7 @@ export const ShareScreen = (): JSX.Element => {
             >
               <Icon
                 name={IconEnum.BACK}
-                size={30}
+                size={27}
                 style={ShareScreenStyle.arrowRightIcon}
               />
             </TouchableOpacity>
@@ -164,10 +220,12 @@ export const ShareScreen = (): JSX.Element => {
         <TouchableOpacity
           activeOpacity={0.7}
           hitSlop={15}
-          onPress={() => setEditingMessage(true)}
+          onPress={onLogOnly}
           style={ShareScreenStyle.messageButton}
         >
-          <Text style={ShareScreenStyle.messageButtonText}>Add message</Text>
+          <Text style={ShareScreenStyle.messageButtonText}>
+            {sent ? 'Done!' : sending ? 'Logging...' : 'Log only'}
+          </Text>
         </TouchableOpacity>
         <HomeButton text="Next" onPress={onNext} />
       </View>

@@ -3,6 +3,7 @@ import { User } from '@store/index/index.props';
 
 const initialState: User = {
   token: null,
+  emailRequired: false,
   user: {
     id: null,
     name: null,
@@ -31,6 +32,9 @@ export const UserReducer = createSlice({
     setEmailAction: (state, action) => {
       state.user.email = action.payload;
     },
+    setEmailRequiredAction: (state, action) => {
+      state.emailRequired = action.payload;
+    },
     setImageAction: (state, action) => {
       state.image = action.payload;
     },
@@ -47,6 +51,7 @@ export const {
   setProfilePhotoAction,
   setNameAction,
   setEmailAction,
+  setEmailRequiredAction,
   setImageAction,
   resetUserState
 } = UserReducer.actions;

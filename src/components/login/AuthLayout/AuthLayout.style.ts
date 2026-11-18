@@ -11,6 +11,10 @@ export const AuthLayoutStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+  // Keeps the header height of the hidden back button
+  backSpacer: {
+    height: 46
+  },
   headerTitleView: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',

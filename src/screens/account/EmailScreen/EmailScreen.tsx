@@ -1,5 +1,4 @@
 import React, { JSX, useCallback, useState } from 'react';
-import { Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
@@ -18,14 +17,16 @@ import { AuthInput } from '@components/login/AuthInput/AuthInput';
 
 // Sends a code to the new email, it's saved once VerifyEmailScreen confirms it
 export const EmailScreen = ({ route }: EmailScreenProps): JSX.Element => {
-  const { prompt, onboarding } = route.params ?? {};
+  const { onboarding } = route.params ?? {};
 
   const { email: currentEmail } = useSelector(
     (state: ReducerProps) => state.user.user
   );
 
-  const { navigateTo, navigateBack } = useNavigation(
-    RootStackNavigatorEnum.AccountStack
+  const { navigateTo } = useNavigation(
+    onboarding
+      ? RootStackNavigatorEnum.OnboardingStack
+      : RootStackNavigatorEnum.AccountStack
   );
 
   const [email, setEmail] = useState<string>('');
@@ -67,7 +68,7 @@ export const EmailScreen = ({ route }: EmailScreenProps): JSX.Element => {
   }, [navigateTo, onboarding, posting, trimmedEmail]);
 
   const getTitle = () => {
-    if (prompt) {
+    if (onboarding) {
       return 'Add your email';
     }
     return currentEmail ? 'Change email' : 'Add email';
@@ -83,25 +84,16 @@ export const EmailScreen = ({ route }: EmailScreenProps): JSX.Element => {
       }
       step={onboarding ? 4 : undefined}
       totalSteps={onboarding ? 4 : undefined}
+      // The first screen of the onboarding stack, there's nothing to go back to
+      hideBack={onboarding}
       footer={
-        <>
-          <Button
-            title="Continue"
-            disabled={!trimmedEmail}
-            posting={posting}
-            onPress={sendCode}
-            style={EmailScreenStyle.button}
-          />
-          {prompt && (
-            <Text
-              suppressHighlighting
-              onPress={navigateBack}
-              style={EmailScreenStyle.notNowText}
-            >
-              Not now
-            </Text>
-          )}
-        </>
+        <Button
+          title="Continue"
+          disabled={!trimmedEmail}
+          posting={posting}
+          onPress={sendCode}
+          style={EmailScreenStyle.button}
+        />
       }
     >
       <AuthInput

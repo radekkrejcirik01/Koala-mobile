@@ -23,17 +23,25 @@ export const ShareSendScreenStyle = StyleSheet.create({
     color: COLORS.GRAY_200
   },
   sendButtonView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 20,
     paddingHorizontal: 30,
     marginBottom: 30
   },
-  infoText: {
-    flex: 1,
-    paddingRight: 20,
-    fontSize: 13,
-    fontWeight: '500',
-    color: COLORS.GRAY_200
+  // Same look as HomeButton, but full width
+  sendButton: {
+    height: 52,
+    borderRadius: 70,
+    backgroundColor: COLORS.WHITE,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  sendButtonText: {
+    color: COLORS.BLACK,
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 });

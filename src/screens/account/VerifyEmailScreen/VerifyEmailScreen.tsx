@@ -11,7 +11,7 @@ import {
   EmailPostInterface,
   EmailVerifyPostInterface
 } from '@interfaces/post/Post.interface';
-import { setEmailAction } from '@store/UserReducer';
+import { setEmailAction, setEmailRequiredAction } from '@store/UserReducer';
 import { CODE_LENGTH } from '@constants/AUTH';
 import { VerifyEmailScreenProps } from '@screens/account/VerifyEmailScreen/VerifyEmailScreen.props';
 import { VerifyEmailScreenStyle } from '@screens/account/VerifyEmailScreen/VerifyEmailScreen.style';
@@ -60,11 +60,17 @@ export const VerifyEmailScreen = ({
         dispatch(setEmailAction(email));
         Toast.show({ type: 'success', text1: 'Email confirmed' });
 
+        // Sign up is done, the app switches from the onboarding stack to Home
+        if (onboarding) {
+          dispatch(setEmailRequiredAction(false));
+          return;
+        }
+
         // Back past EmailScreen to wherever it was opened from
         navigation.dispatch(StackActions.pop(2));
       });
     },
-    [dispatch, email, navigation, posting]
+    [dispatch, email, navigation, onboarding, posting]
   );
 
   const onChangeCode = useCallback((value: string) => {

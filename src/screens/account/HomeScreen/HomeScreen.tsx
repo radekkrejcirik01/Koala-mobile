@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNotifications } from '@hooks/useNotifications';
-import { useEmailPrompt } from '@hooks/useEmailPrompt';
 import { useAppState } from '@hooks/useAppState';
 import { HomeHeader } from '@components/home/HomeHeader/HomeHeader';
 import { HomeContent } from '@components/home/HomeContent/HomeContent';
@@ -13,7 +12,6 @@ import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 
 export const HomeScreen = (): React.JSX.Element => {
   useNotifications();
-  useEmailPrompt();
   const { top } = useSafeAreaInsets();
 
   useAppState(() => {

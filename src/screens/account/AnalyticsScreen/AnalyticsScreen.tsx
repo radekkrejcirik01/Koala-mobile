@@ -168,7 +168,7 @@ export const AnalyticsScreen = (): JSX.Element => {
 
   return (
     <View style={[AnalyticsScreenStyle.container, { paddingTop: top }]}>
-      <ScreenHeader title="Analytics" />
+      <ScreenHeader title="Mood tracker" />
       <FlatList
         data={filteredEmotions}
         extraData={loading}

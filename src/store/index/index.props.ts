@@ -8,6 +8,10 @@ export interface ReducerProps {
 
 export interface User {
   token: string;
+  // Just signed up and hasn't confirmed an email yet, the required last step.
+  // Not persisted, closing the app skips it and the email can be added later
+  // from Account
+  emailRequired: boolean;
   user: {
     id: number;
     name: string;
