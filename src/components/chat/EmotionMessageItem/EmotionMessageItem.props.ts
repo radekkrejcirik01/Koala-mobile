@@ -1,6 +1,8 @@
 import { SharedValue } from 'react-native-reanimated';
 
 export interface EmotionMessageItemProps {
+  // Tells a change of this emotion from a recycled row showing another one
+  id: number;
   emotion?: string;
   message: string;
   outbound: boolean;
@@ -9,5 +11,16 @@ export interface EmotionMessageItemProps {
   offset: SharedValue<number>;
   name: string;
   supported: boolean;
-  onPressSupport: () => void;
+  // Hidden while its lifted copy is shown above the chat
+  lifted?: boolean;
+  // Only for the friend's emotions that aren't supported yet, with where the
+  // pill sits on screen
+  onPressEmotion?: (layout: EmotionPillLayout) => void;
+}
+
+export interface EmotionPillLayout {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }

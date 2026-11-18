@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -14,6 +14,9 @@ import { MessageInterface } from '@interfaces/general.interface';
 import { ReactionBar } from '@components/chat/ReactionBar/ReactionBar';
 import { MessageType } from '@enums/MessageType';
 import { EmotionMessageItem } from '@components/chat/EmotionMessageItem/EmotionMessageItem';
+import { SupportOverlay } from '@components/chat/SupportOverlay/SupportOverlay';
+import { SupportTarget } from '@components/chat/SupportOverlay/SupportOverlay.props';
+import { getEmotionText } from '@functions/getEmotionText';
 import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
 import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
@@ -40,6 +43,13 @@ export const ChatList = ({
     hideReactions,
     selectReaction
   } = useReactionBar(onSelectReaction);
+
+  // The friend's emotion lifted above the dimmed chat to send support
+  const [supportTarget, setSupportTarget] = useState<SupportTarget | null>(
+    null
+  );
+  // Stays hidden until the lifted copy settled back onto it
+  const [liftedId, setLiftedId] = useState<number | null>(null);
 
   // Swiping the chat left reveals the message times
   const timeOffset = useSharedValue(0);
@@ -146,6 +156,7 @@ export const ChatList = ({
             ]}
           >
             <EmotionMessageItem
+              id={value.id}
               emotion={value.emotion}
               message={value.message}
               outbound={isOutbound(value.senderId)}
@@ -153,7 +164,22 @@ export const ChatList = ({
               offset={timeOffset}
               name={name}
               supported={!!value.reaction}
-              onPressSupport={() => onPressSupport(value.id)}
+              lifted={liftedId === value.id}
+              // Only the friend's emotions can be supported, and only once
+              onPressEmotion={
+                isOutbound(value.senderId) || value.reaction
+                  ? undefined
+                  : (layout) => {
+                      trigger(HapticFeedbackTypes.impactLight);
+                      setLiftedId(value.id);
+                      setSupportTarget({
+                        id: value.id,
+                        emotion: value.emotion,
+                        text: getEmotionText(value.message, false, name),
+                        ...layout
+                      });
+                    }
+              }
             />
           </View>
           {markerBelow}
@@ -218,6 +244,13 @@ export const ChatList = ({
         translateY={translateY}
         onClose={hideReactions}
         onSelect={selectReaction}
+      />
+
+      <SupportOverlay
+        target={supportTarget}
+        onSend={onPressSupport}
+        onClose={() => setSupportTarget(null)}
+        onHidden={() => setLiftedId(null)}
       />
     </View>
   );

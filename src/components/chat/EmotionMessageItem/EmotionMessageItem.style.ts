@@ -28,6 +28,13 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: COLORS.WHITE_200
   },
+  // Plain white without the ring, a touch smaller than the beige pill
+  badgeOuterWhite: {
+    backgroundColor: COLORS.TRANSPARENT
+  },
+  badgeWhite: {
+    backgroundColor: COLORS.WHITE
+  },
   emojiText: {
     color: COLORS.BLACK,
     fontSize: 19,
@@ -51,8 +58,8 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center'
   },
-  supportView: {
-    marginLeft: 6
+  lifted: {
+    opacity: 0
   },
   // The support confirmation under the badge, as it was before
   supportedText: {

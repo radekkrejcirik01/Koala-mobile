@@ -1,13 +1,28 @@
-import React, { useMemo } from 'react';
-import { Text, View } from 'react-native';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef
+} from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
+  Easing,
+  FadeIn,
   interpolate,
-  useAnimatedStyle
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withSequence,
+  withSpring,
+  withTiming
 } from 'react-native-reanimated';
 import moment from 'moment';
 import { EmotionMessageItemProps } from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
 import { EmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
-import { SupportButton } from '@components/chat/SupportButton/SupportButton';
+import { EmotionPill } from '@components/chat/EmotionPill/EmotionPill';
 import { getEmotionText } from '@functions/getEmotionText';
 import { getLocalTime } from '@functions/getLocalTime';
 import {
@@ -15,7 +30,13 @@ import {
   TIME_WIDTH
 } from '@components/chat/MessageItem/MessageItem.style';
 
+// The pulse of the white pill waiting for support
+const PULSE_SCALE = 1.04;
+const PULSE_PAUSE = 2500;
+const PULSE_FIRST_DELAY = 400;
+
 export const EmotionMessageItem = ({
+  id,
   emotion,
   message,
   outbound,
@@ -23,8 +44,88 @@ export const EmotionMessageItem = ({
   offset,
   name,
   supported,
-  onPressSupport
+  lifted,
+  onPressEmotion
 }: EmotionMessageItemProps): React.JSX.Element => {
+  const pillRef = useRef<View>(null);
+
+  // The friend's emotion still waiting for your support is white, sending it
+  // fades the white away to the beige pill
+  const supportable = !!onPressEmotion;
+  const white = useSharedValue<number>(supportable ? 1 : 0);
+  const shownId = useRef<number>(id);
+  const wasSupported = useRef<boolean>(supported);
+
+  // Support was just sent to this emotion, not loaded with the chat or shown
+  // in a recycled row
+  const justSupported =
+    supported && !wasSupported.current && shownId.current === id;
+
+  // Before paint, so a recycled row never flashes the previous emotion's state
+  useLayoutEffect(() => {
+    const value = supportable ? 1 : 0;
+    wasSupported.current = supported;
+
+    // Another emotion in a recycled row, nothing changed for this one
+    if (shownId.current !== id) {
+      shownId.current = id;
+      white.value = value;
+      return;
+    }
+
+    white.value = withTiming(value, { duration: 400 });
+  }, [id, supportable, supported, white]);
+
+  const whiteStyle = useAnimatedStyle(() => ({
+    opacity: white.value
+  }));
+  // The white pill has no ring, the beige one under it would show around it
+  const beigeStyle = useAnimatedStyle(() => ({
+    opacity: 1 - white.value
+  }));
+
+  // Pressing the white pill shrinks it a little, like a button
+  const pressScale = useSharedValue<number>(1);
+
+  // While it waits for support, the white pill gently grows and settles back
+  // every few seconds
+  const pulse = useSharedValue<number>(1);
+  useEffect(() => {
+    if (!supportable || lifted) {
+      cancelAnimation(pulse);
+      pulse.value = withTiming(1, { duration: 200 });
+      return undefined;
+    }
+
+    const easing = Easing.inOut(Easing.quad);
+    const grow = () => withTiming(PULSE_SCALE, { duration: 450, easing });
+    const settle = () => withTiming(1, { duration: 450, easing });
+
+    // The first pulse comes right after the chat opens, then every few seconds
+    pulse.value = withSequence(
+      withDelay(PULSE_FIRST_DELAY, grow()),
+      settle(),
+      withRepeat(withSequence(withDelay(PULSE_PAUSE, grow()), settle()), -1)
+    );
+    return () => cancelAnimation(pulse);
+  }, [id, lifted, pulse, supportable]);
+
+  const pressStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: pressScale.value * pulse.value }]
+  }));
+  const onPressIn = useCallback(() => {
+    pressScale.value = withSpring(0.96, { damping: 15, stiffness: 300 });
+  }, [pressScale]);
+  const onPressOut = useCallback(() => {
+    pressScale.value = withSpring(1, { damping: 12, stiffness: 300 });
+  }, [pressScale]);
+
+  const onPressPill = useCallback(() => {
+    pillRef.current?.measureInWindow((x, y, width, height) =>
+      onPressEmotion?.({ x, y, width, height })
+    );
+  }, [onPressEmotion]);
+
   const localTime = useMemo(
     () => moment(getLocalTime(time)).format('HH:mm'),
     [time]
@@ -46,28 +147,43 @@ export const EmotionMessageItem = ({
     <View style={EmotionMessageItemStyle.row}>
       <Animated.View style={[EmotionMessageItemStyle.container, contentStyle]}>
         <View style={EmotionMessageItemStyle.content}>
-          <View style={EmotionMessageItemStyle.badgeOuter}>
-            <View style={EmotionMessageItemStyle.badge}>
-              {!!emotion && (
-                <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
-              )}
-              <Text style={EmotionMessageItemStyle.messageText}>
-                {getEmotionText(message, outbound, name)}
-              </Text>
-            </View>
-          </View>
+          <Pressable
+            ref={pillRef}
+            disabled={!onPressEmotion}
+            onPress={onPressPill}
+            onPressIn={onPressIn}
+            onPressOut={onPressOut}
+            style={lifted && EmotionMessageItemStyle.lifted}
+          >
+            {/* Scaled inside, so the measured pill keeps its real size */}
+            <Animated.View style={pressStyle}>
+              <Animated.View style={beigeStyle}>
+                <EmotionPill
+                  emotion={emotion}
+                  text={getEmotionText(message, outbound, name)}
+                />
+              </Animated.View>
+              <Animated.View
+                pointerEvents="none"
+                style={[StyleSheet.absoluteFill, whiteStyle]}
+              >
+                <EmotionPill
+                  white
+                  emotion={emotion}
+                  text={getEmotionText(message, outbound, name)}
+                />
+              </Animated.View>
+            </Animated.View>
+          </Pressable>
           {supported && (
-            <Text style={EmotionMessageItemStyle.supportedText}>
+            <Animated.Text
+              entering={justSupported ? FadeIn.duration(400) : undefined}
+              style={EmotionMessageItemStyle.supportedText}
+            >
               {outbound ? `${name} sent support` : 'You sent your support'} 🫶
-            </Text>
+            </Animated.Text>
           )}
         </View>
-        {/* Only the friend's emotions can be supported */}
-        {!outbound && !supported && (
-          <View style={EmotionMessageItemStyle.supportView}>
-            <SupportButton onPress={onPressSupport} />
-          </View>
-        )}
       </Animated.View>
       <Animated.View
         style={[EmotionMessageItemStyle.timeView, timeStyle]}
