@@ -313,9 +313,16 @@ const route = (method: string, endpoint: string) => {
     const chat = CHATS.find(
       (item: Chat) => item.friendId === Number(path.split('/')[1])
     );
-    return success(
-      chat && !params.lastId ? { data: getMessages(chat).reverse() } : {}
-    );
+    if (!chat || params.lastId) {
+      return success();
+    }
+
+    // An unread chat was last read before its newest message
+    const messages = getMessages(chat);
+    return success({
+      data: messages.slice().reverse(),
+      lastReadId: chat.seen ? undefined : messages[messages.length - 2]?.id
+    });
   }
   if (path.startsWith('last-online/')) {
     return success({ time: ago(1) });

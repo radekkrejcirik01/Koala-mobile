@@ -21,6 +21,7 @@ import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
 export const ChatList = ({
   listRef,
   messages,
+  lastReadId,
   onSelectReaction,
   onPressSupport,
   onDeleteMessage,
@@ -62,6 +63,28 @@ export const ChatList = ({
     [timeOffset]
   );
 
+  // Where the Last read marker goes, only when the friend wrote after it. It's
+  // under the last read message, or the nearest older one if that's deleted,
+  // or above everything loaded when it's further back than the loaded pages
+  const lastReadMarker = useMemo(() => {
+    if (lastReadId === undefined) {
+      return null;
+    }
+
+    const hasNew = messages.some(
+      (item) => item.id > lastReadId && item.senderId !== id
+    );
+    if (!hasNew) {
+      return null;
+    }
+
+    // Unsent messages have negative ids, they're newer than anything read
+    const read = messages.find((item) => item.id > 0 && item.id <= lastReadId);
+    return read
+      ? { belowId: read.id }
+      : { aboveId: messages[messages.length - 1]?.id };
+  }, [id, lastReadId, messages]);
+
   const isOutbound = useCallback(
     (senderId: number): boolean => senderId === id,
     [id]
@@ -99,9 +122,20 @@ export const ChatList = ({
 
     const isLast = index === 0;
 
+    const marker = (
+      <View style={ChatListStyle.lastReadView}>
+        <View style={ChatListStyle.lastReadLine} />
+        <Text style={ChatListStyle.lastReadText}>Last read</Text>
+        <View style={ChatListStyle.lastReadLine} />
+      </View>
+    );
+    const markerAbove = lastReadMarker?.aboveId === value.id && marker;
+    const markerBelow = lastReadMarker?.belowId === value.id && marker;
+
     if (value.type === MessageType.Emotion) {
       return (
         <View style={isLast && ChatListStyle.lastItem}>
+          {markerAbove}
           {separator}
           <View
             style={[
@@ -122,12 +156,14 @@ export const ChatList = ({
               onPressSupport={() => onPressSupport(value.id)}
             />
           </View>
+          {markerBelow}
         </View>
       );
     }
 
     return (
       <>
+        {markerAbove}
         {separator}
         <View ref={registerMessageRef(value.id)} collapsable={false}>
           <MessageItem
@@ -146,6 +182,7 @@ export const ChatList = ({
             {value.message}
           </MessageItem>
         </View>
+        {markerBelow}
       </>
     );
   };

@@ -65,8 +65,12 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const [message, setMessage] = useState<string>('');
   // Newest first, the list is inverted
   const [messages, setMessages] = useState<MessageInterface[]>([]);
+  // Read position from before the chat was opened, kept while it stays open
+  // as later loads already return the position moved by markAsRead
+  const [lastReadId, setLastReadId] = useState<number>();
 
   const hasOlder = useRef<boolean>(false);
+  const lastReadLoaded = useRef<boolean>(false);
   const loadingOlder = useRef<boolean>(false);
   // Emotions whose support is still being sent, a refresh keeps them supported
   const supportingIds = useRef<Set<number>>(new Set());
@@ -108,6 +112,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     ).subscribe((response: ResponseMessagesGetInterface) => {
       if (response?.status) {
         const data = response.data ?? [];
+
+        if (!lastReadLoaded.current) {
+          lastReadLoaded.current = true;
+          setLastReadId(response.lastReadId);
+        }
 
         setMessages((prevState) => {
           const merged = mergeLatestMessages(data, prevState);
@@ -342,6 +351,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         <ChatList
           listRef={listRef}
           messages={messages}
+          lastReadId={lastReadId}
           onSelectReaction={sendReaction}
           onPressSupport={sendSupport}
           onDeleteMessage={deleteMessage}

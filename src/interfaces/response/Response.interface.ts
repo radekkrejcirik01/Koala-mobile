@@ -57,6 +57,8 @@ export interface ResponseMessagesGetInterface {
   status: string;
   message: string;
   data?: MessageInterface[];
+  // Last message read before this load, left out when none was read
+  lastReadId?: number;
 }
 
 export interface ResponseMessagePostInterface {
