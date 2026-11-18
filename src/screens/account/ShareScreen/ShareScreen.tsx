@@ -141,7 +141,7 @@ export const ShareScreen = (): JSX.Element => {
         <View style={ShareScreenStyle.titleView}>
           <EmotionCarousel
             position={position}
-            onSwipe={onEmotionChange}
+            onStep={onEmotionChange}
             onCenterChange={setCenterPosition}
           />
           {editingMessage ? (

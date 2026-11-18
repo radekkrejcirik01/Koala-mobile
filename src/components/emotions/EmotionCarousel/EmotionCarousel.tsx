@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useEffect, useMemo, useRef } from 'react';
-import { View, ViewStyle } from 'react-native';
+import { LayoutChangeEvent, View, ViewStyle } from 'react-native';
 import Animated, {
   cancelAnimation,
   Extrapolation,
@@ -68,11 +68,19 @@ const EmotionCarouselItem = ({
 
 export const EmotionCarousel = ({
   position,
-  onSwipe,
+  onStep,
   onCenterChange
 }: EmotionCarouselProps): JSX.Element => {
   const progress = useSharedValue<number>(position);
   const dragStart = useSharedValue<number>(position);
+  const width = useSharedValue<number>(0);
+
+  const onLayout = useCallback(
+    (event: LayoutChangeEvent) => {
+      width.value = event.nativeEvent.layout.width;
+    },
+    [width]
+  );
 
   useAnimatedReaction(
     () => Math.round(progress.value),
@@ -105,9 +113,9 @@ export const EmotionCarousel = ({
       }
 
       swipedTo.current = target;
-      onSwipe(step);
+      onStep(step);
     },
-    [onSwipe, position]
+    [onStep, position]
   );
 
   const swipeGesture = useMemo(
@@ -136,9 +144,26 @@ export const EmotionCarousel = ({
     [dragStart, onSwipeEnd, progress]
   );
 
+  // Tapping a side emotion rolls to it, like the arrow on that side
+  const tapGesture = useMemo(
+    () =>
+      Gesture.Tap().onEnd((event) => {
+        const step = Math.round((event.x - width.value / 2) / ITEM_SPACING);
+        if (Math.abs(step) === 1) {
+          runOnJS(onStep)(step);
+        }
+      }),
+    [onStep, width]
+  );
+
+  const gesture = useMemo(
+    () => Gesture.Race(swipeGesture, tapGesture),
+    [swipeGesture, tapGesture]
+  );
+
   return (
-    <GestureDetector gesture={swipeGesture}>
-      <View style={EmotionCarouselStyle.container}>
+    <GestureDetector gesture={gesture}>
+      <View onLayout={onLayout} style={EmotionCarouselStyle.container}>
         {EMOTIONS.map((emotion, index) => (
           <EmotionCarouselItem
             key={emotion.type}
