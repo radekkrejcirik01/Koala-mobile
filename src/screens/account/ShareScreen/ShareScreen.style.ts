@@ -12,6 +12,7 @@ export const ShareScreenStyle = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 80,
     paddingHorizontal: 20
   },
   contentView: {
@@ -20,23 +21,28 @@ export const ShareScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20
   },
-  emotionsView: {
+  arrowsView: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    maxWidth: 300,
-    gap: 24,
-    rowGap: 24,
-    marginBottom: 210
+    gap: 48,
+    marginBottom: 130
   },
-  selectedEmoji: {
-    color: COLORS.BLACK,
-    fontSize: 64,
-    textAlign: 'center',
-    marginBottom: 16
+  arrowButton: {
+    width: 84,
+    height: 84,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 42,
+    backgroundColor: COLORS.WHITE_200
+  },
+  arrowLeftIcon: {
+    marginRight: 2
+  },
+  arrowRightIcon: {
+    marginLeft: 2,
+    transform: [{ rotate: '180deg' }]
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 40
@@ -62,8 +68,5 @@ export const ShareScreenStyle = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: COLORS.BUTTON_BLUE
-  },
-  messageButtonTextDisabled: {
-    color: COLORS.GRAY_200
   }
 });
