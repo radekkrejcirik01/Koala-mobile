@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const TIME_WIDTH = 60;
+export const PHOTO_SIZE = 28;
+const PHOTO_GAP = 8;
 
 export const MessageItemStyle = StyleSheet.create({
   alignEnd: {
@@ -13,6 +15,15 @@ export const MessageItemStyle = StyleSheet.create({
   bubbleRow: {
     marginTop: 2
   },
+  // The photo sits at the bottom of the bubble
+  inboundRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  photoView: {
+    width: PHOTO_SIZE,
+    marginRight: PHOTO_GAP
+  },
   container: {
     maxWidth: '70%',
     minWidth: 40,
@@ -23,6 +34,9 @@ export const MessageItemStyle = StyleSheet.create({
   },
   outboundContainer: {
     backgroundColor: COLORS.PURPLE
+  },
+  inboundContainer: {
+    backgroundColor: COLORS.BEIGE_200
   },
   messageText: {
     fontSize: 15.5,
@@ -39,7 +53,7 @@ export const MessageItemStyle = StyleSheet.create({
     height: 10
   },
   lastItemPadding: {
-    paddingBottom: 20
+    paddingBottom: 45
   },
   reactionView: {
     width: 26,
@@ -51,6 +65,9 @@ export const MessageItemStyle = StyleSheet.create({
     marginHorizontal: 8,
     marginTop: -10,
     marginBottom: 5
+  },
+  inboundReactionView: {
+    marginLeft: PHOTO_SIZE + PHOTO_GAP + 8
   },
   reactionText: {
     fontSize: 12,

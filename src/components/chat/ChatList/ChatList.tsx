@@ -29,7 +29,8 @@ export const ChatList = ({
   onPressSupport,
   onDeleteMessage,
   onLoadOlder,
-  name
+  name,
+  profilePhoto
 }: ChatListProps): React.JSX.Element => {
   const { id } = useSelector((state: ReducerProps) => state.user.user);
 
@@ -175,8 +176,10 @@ export const ChatList = ({
                       setSupportTarget({
                         id: value.id,
                         emotion: value.emotion,
-                        text: getEmotionText(value.message, false, name),
-                        ...layout
+                        ...layout,
+                        text:
+                          layout.text ??
+                          getEmotionText(value.message, false, name)
                       });
                     }
               }
@@ -204,6 +207,13 @@ export const ChatList = ({
             isLast={messages[0]?.id === value.id}
             onLongPress={onLongPress}
             reaction={value?.reaction}
+            name={name}
+            profilePhoto={profilePhoto}
+            // The list is inverted, the next message is the previous item
+            showPhoto={
+              messages[index - 1]?.senderId !== value.senderId ||
+              messages[index - 1]?.type !== MessageType.Message
+            }
           >
             {value.message}
           </MessageItem>

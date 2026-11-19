@@ -113,9 +113,17 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       if (response?.status) {
         const data = response.data ?? [];
 
+        // Only kept when the friend wrote something unread before opening,
+        // replies arriving while the chat is open are read right away
         if (!lastReadLoaded.current) {
           lastReadLoaded.current = true;
-          setLastReadId(response.lastReadId);
+          const { lastReadId: readId } = response;
+          const hasUnread =
+            readId !== undefined &&
+            data.some((item) => item.id > readId && item.senderId === friendId);
+          if (hasUnread) {
+            setLastReadId(readId);
+          }
         }
 
         setMessages((prevState) => {
@@ -357,6 +365,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           onDeleteMessage={deleteMessage}
           onLoadOlder={loadOlder}
           name={friend.name ?? ''}
+          profilePhoto={friend.profilePhoto}
         />
         <ChatInput
           message={message}

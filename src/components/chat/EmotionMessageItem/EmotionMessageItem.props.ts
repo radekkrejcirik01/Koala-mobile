@@ -23,4 +23,6 @@ export interface EmotionPillLayout {
   y: number;
   width: number;
   height: number;
+  // The text as the pill broke it into lines, so the lifted copy matches it
+  text?: string;
 }

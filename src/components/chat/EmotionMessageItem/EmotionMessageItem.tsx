@@ -3,9 +3,17 @@ import React, {
   useEffect,
   useLayoutEffect,
   useMemo,
-  useRef
+  useRef,
+  useState
 } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  NativeSyntheticEvent,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextLayoutEventData,
+  View
+} from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -120,9 +128,43 @@ export const EmotionMessageItem = ({
     pressScale.value = withSpring(1, { damping: 12, stiffness: 300 });
   }, [pressScale]);
 
+  // The lines the pill's text wrapped into, the lifted copy keeps them as
+  // they are instead of wrapping the text again
+  const textLines = useRef<string[]>([]);
+  const pillText = getEmotionText(message, outbound, name);
+  // Wrapped text keeps the whole available width, leaving room right of its
+  // longest line, so it's narrowed to that line. Kept with its text, a
+  // recycled row with another emotion lays it out again first
+  const [fittedText, setFittedText] = useState<{
+    text: string;
+    width: number;
+  } | null>(null);
+  const onTextLayout = useCallback(
+    (event: NativeSyntheticEvent<TextLayoutEventData>) => {
+      const { lines } = event.nativeEvent;
+      textLines.current = lines.map((line) => line.text.trimEnd());
+
+      if (lines.length < 2) {
+        return;
+      }
+      const width = Math.ceil(Math.max(...lines.map((line) => line.width)));
+      setFittedText((prevState) =>
+        prevState?.text === pillText && prevState.width === width
+          ? prevState
+          : { text: pillText, width }
+      );
+    },
+    [pillText]
+  );
+  const textWidth =
+    fittedText?.text === pillText ? fittedText.width : undefined;
+
   const onPressPill = useCallback(() => {
+    const text = textLines.current.length
+      ? textLines.current.join('\n')
+      : undefined;
     pillRef.current?.measureInWindow((x, y, width, height) =>
-      onPressEmotion?.({ x, y, width, height })
+      onPressEmotion?.({ x, y, width, height, text })
     );
   }, [onPressEmotion]);
 
@@ -160,7 +202,8 @@ export const EmotionMessageItem = ({
               <Animated.View style={beigeStyle}>
                 <EmotionPill
                   emotion={emotion}
-                  text={getEmotionText(message, outbound, name)}
+                  text={pillText}
+                  textWidth={textWidth}
                 />
               </Animated.View>
               <Animated.View
@@ -170,7 +213,9 @@ export const EmotionMessageItem = ({
                 <EmotionPill
                   white
                   emotion={emotion}
-                  text={getEmotionText(message, outbound, name)}
+                  text={pillText}
+                  textWidth={textWidth}
+                  onTextLayout={onTextLayout}
                 />
               </Animated.View>
             </Animated.View>

@@ -41,12 +41,12 @@ export const ChatListStyle = StyleSheet.create({
   lastReadLine: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
-    backgroundColor: COLORS.GRAY_200,
+    backgroundColor: COLORS.PURPLE,
     opacity: 0.5
   },
   lastReadText: {
     fontSize: 12,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: COLORS.PURPLE
   }
 });

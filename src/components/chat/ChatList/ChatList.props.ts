@@ -12,4 +12,5 @@ export interface ChatListProps {
   onDeleteMessage: (messageId: number) => void;
   onLoadOlder: () => void;
   name: string;
+  profilePhoto?: string;
 }

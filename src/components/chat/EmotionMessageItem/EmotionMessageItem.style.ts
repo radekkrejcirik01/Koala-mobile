@@ -7,7 +7,7 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    maxWidth: '90%'
+    maxWidth: '75%'
   },
   // The badge with the support confirmation under it
   content: {

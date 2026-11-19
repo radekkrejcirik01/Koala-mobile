@@ -27,10 +27,7 @@ export const ChatInput = ({
         activeOpacity={1}
         hitSlop={10}
         onPress={() => inputRef.current.focus()}
-        style={[
-          ChatInputStyle.inputView,
-          { backgroundColor: theme.theme.colors.surface }
-        ]}
+        style={ChatInputStyle.inputView}
       >
         <TextInput
           ref={inputRef}
@@ -41,7 +38,7 @@ export const ChatInput = ({
           placeholderTextColor={COLORS.LIGHTGRAY_100}
           value={message}
           onChangeText={onChangeText}
-          selectionColor={COLORS.PURPLE}
+          selectionColor={COLORS.BUTTON_BLUE}
           style={[ChatInputStyle.input, { color: theme.theme.colors.text }]}
         />
         <TouchableOpacity

@@ -37,7 +37,10 @@ import { SupportOverlayStyle } from '@components/chat/SupportOverlay/SupportOver
 const LIFT = 14;
 const LIFT_SCALE = 1.08;
 // Room kept between a pill near the bottom and the support button
-const BUTTON_GAP = 24;
+const BUTTON_GAP = 40;
+// Extra room on each side of the measured pill, its rounded width can come
+// out a hair narrower and wrap the last word onto another line
+const WIDTH_SLACK = 1;
 
 // Dims the chat, lifts the tapped emotion above it and offers to send support
 export const SupportOverlay = ({
@@ -167,14 +170,18 @@ export const SupportOverlay = ({
             SupportOverlayStyle.pill,
             {
               top: shown.y,
-              left: shown.x,
-              width: shown.width,
+              left: shown.x - WIDTH_SLACK,
+              width: shown.width + WIDTH_SLACK * 2,
               height: shown.height
             },
             pillStyle
           ]}
         >
-          <EmotionPill white emotion={shown.emotion} text={shown.text} />
+          {/* As wide as the pill in the chat, which can keep some room right
+              of its longest line */}
+          <View style={{ minWidth: shown.width }}>
+            <EmotionPill white emotion={shown.emotion} text={shown.text} />
+          </View>
         </Animated.View>
         <Animated.View
           onLayout={onButtonLayout}

@@ -8,7 +8,9 @@ import { EmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/Emo
 export const EmotionPill = ({
   emotion,
   text,
-  white
+  white,
+  textWidth,
+  onTextLayout
 }: EmotionPillProps): JSX.Element => (
   <View
     style={[
@@ -25,7 +27,15 @@ export const EmotionPill = ({
       {!!emotion && (
         <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
       )}
-      <Text style={EmotionMessageItemStyle.messageText}>{text}</Text>
+      <Text
+        style={[
+          EmotionMessageItemStyle.messageText,
+          textWidth !== undefined && { width: textWidth }
+        ]}
+        onTextLayout={onTextLayout}
+      >
+        {text}
+      </Text>
     </View>
   </View>
 );

@@ -10,4 +10,8 @@ export interface MessageItemProps {
   showSpace: boolean;
   isLast: boolean;
   reaction?: string;
+  // The friend's photo next to inbound messages, only on the last of a group
+  name: string;
+  profilePhoto?: string;
+  showPhoto: boolean;
 }

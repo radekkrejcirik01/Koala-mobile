@@ -11,8 +11,10 @@ import { isTextEmoji } from '@functions/isTextEmoji';
 import { MessageItemProps } from '@components/chat/MessageItem/MessageItem.props';
 import {
   MessageItemStyle,
+  PHOTO_SIZE,
   TIME_WIDTH
 } from '@components/chat/MessageItem/MessageItem.style';
+import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 
 export const MessageItem = ({
   children,
@@ -22,7 +24,10 @@ export const MessageItem = ({
   onLongPress,
   showSpace,
   isLast,
-  reaction
+  reaction,
+  name,
+  profilePhoto,
+  showPhoto
 }: MessageItemProps): React.JSX.Element => {
   const { colors } = useTheme().theme;
 
@@ -51,14 +56,31 @@ export const MessageItem = ({
     <Animated.View
       style={[isLast && MessageItemStyle.lastItemPadding, contentStyle]}
     >
-      <View style={MessageItemStyle.bubbleRow}>
+      <View
+        style={[
+          MessageItemStyle.bubbleRow,
+          !outbound && MessageItemStyle.inboundRow
+        ]}
+      >
+        {/* Inbound bubbles keep the photo's room so they stay aligned */}
+        {!outbound && (
+          <View style={MessageItemStyle.photoView}>
+            {showPhoto && (
+              <ProfilePhoto
+                name={name}
+                photo={profilePhoto}
+                size={PHOTO_SIZE}
+              />
+            )}
+          </View>
+        )}
         <View
           style={[
             MessageItemStyle.container,
-            align,
+            outbound && align,
             outbound
               ? MessageItemStyle.outboundContainer
-              : { backgroundColor: colors.surface }
+              : MessageItemStyle.inboundContainer
           ]}
         >
           <TouchableOpacity
@@ -87,7 +109,13 @@ export const MessageItem = ({
         </Animated.View>
       </View>
       {!!reaction && (
-        <View style={[MessageItemStyle.reactionView, align]}>
+        <View
+          style={[
+            MessageItemStyle.reactionView,
+            align,
+            !outbound && MessageItemStyle.inboundReactionView
+          ]}
+        >
           <Text style={MessageItemStyle.reactionText}>{reaction}</Text>
         </View>
       )}
