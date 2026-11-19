@@ -76,8 +76,18 @@ navigation to the requested screen. Create `src/utils/ScreenshotDriver.ts`:
 
 ```ts
 // TEMPORARY: drives navigation from a local server for store screenshots
+import { LogBox } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import { navigationRef } from '@utils/getCurrentRouteName';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
+
+// Hides the dev warning toast at the bottom of the screen
+LogBox.ignoreAllLogs();
+
+// Keeps the onboarding hints out of the screenshots
+PersistStorage.setItem(PersistStorageKeys.SWIPE_HINT_SEEN, '1').catch();
+PersistStorage.setItem(PersistStorageKeys.SUPPORT_HINT_SEEN, '1').catch();
 
 let last = '';
 
@@ -91,6 +101,8 @@ setInterval(() => {
         return;
       }
       last = key;
+      // Opens the support overlay on the chat's first supportable emotion
+      (global as { openSupport?: boolean }).openSupport = !!params?.openSupport;
       const routes: Array<{ name: string; params?: object }> = [
         { name: 'HomeScreen' }
       ];
@@ -119,6 +131,22 @@ And import it in `src/navigation/index.tsx`, below the `navigationRef` import:
 import '@utils/ScreenshotDriver';
 ```
 
+The support overlay only opens on a tap, so for the `3_support` capture add
+this to `EmotionMessageItem.tsx`, above `localTime`:
+
+```ts
+// TEMPORARY: store screenshots, see ScreenshotDriver.ts
+useEffect(() => {
+  const screenshot = global as { openSupport?: boolean };
+  if (!supportable || !screenshot.openSupport) {
+    return undefined;
+  }
+  screenshot.openSupport = false;
+  const timeout = setTimeout(onPressPill, 1500);
+  return () => clearTimeout(timeout);
+}, [onPressPill, supportable]);
+```
+
 ## 3. Capture
 
 ```bash
@@ -129,7 +157,8 @@ Use `ios` or `android` instead of `both` to capture one platform. The script:
 
 - sets a clean status bar (9:41, full battery and signal) and resets it when
   done
-- relaunches the app and waits 20 s for the bundle to load
+- relaunches the app and waits 20 s for the bundle to load (set `LOAD_WAIT=40`
+  if the first captures still show the previous screen)
 - opens every screen and saves `<name>.png` to `raw/ios` and `raw/android`
 
 Look through the raw captures before composing. Images load from the network,
@@ -154,6 +183,7 @@ Don't commit or release with the screenshot setup on:
 - [ ] `MOCK_DATA` back to `__DEV__ && false`
 - [ ] delete `src/utils/ScreenshotDriver.ts`
 - [ ] remove `import '@utils/ScreenshotDriver';` from `src/navigation/index.tsx`
+- [ ] remove the `TEMPORARY` effect from `EmotionMessageItem.tsx`
 - [ ] close the emulator (`adb emu kill`)
 
 ## Editing the mock data
@@ -173,10 +203,15 @@ returns `success`.
 
 Keep these in mind when changing them:
 
-- **Every chat starts with a mood and a support message.** `getMessages`
-  builds that start for you: `sharedBy` shared the mood and the other person
-  sent support. Set `unsupported: true` to leave the friend's mood without
-  support, so the chat shows the support button on it.
+- **Chats are a list of episodes, oldest first.** Each episode is a mood,
+  the support for it and the messages after it. `getMessages` builds them:
+  `sharedBy` shared the mood and the other person sent support. Older
+  episodes give the chat some history, so it doesn't look like it just
+  started. Set `unsupported: true` on the last episode to leave the friend's
+  mood without support, so the chat shows the support button on it.
+- **Keep it everyday.** Koala is about how people are really doing, so most
+  moods are ordinary struggles (sleep, work, rent, family) with a few good
+  days in between, not only good news.
 - **The Chats preview comes from the last message** of each chat, so the list
   and the conversation always match.
 - **Unread chats are the ones with `seen: 0`.** The badge counts them.

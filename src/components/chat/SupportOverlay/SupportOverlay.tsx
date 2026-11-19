@@ -47,6 +47,7 @@ export const SupportOverlay = ({
   target,
   onSend,
   onClose,
+  onShown,
   onHidden
 }: SupportOverlayProps): JSX.Element | null => {
   const { bottom } = useSafeAreaInsets();
@@ -59,11 +60,24 @@ export const SupportOverlay = ({
   // change the emotion under the pill while it settles back
   const sendingId = useRef<number | null>(null);
   // Latest callbacks, the close animation finishes after a few renders
-  const callbacks = useRef({ onSend, onHidden });
-  callbacks.current = { onSend, onHidden };
+  const callbacks = useRef({ onSend, onShown, onHidden });
+  callbacks.current = { onSend, onShown, onHidden };
+
+  // Where the overlay starts on the page, the pill is placed relative to it.
+  // Measured once the modal is shown, Android shows it a few frames late and
+  // lays it out below the status bar first, an animation started before would
+  // lose its start and jump
+  const rootRef = useRef<View>(null);
+  const [origin, setOrigin] = useState<{ x: number; y: number } | null>(null);
+  const onShow = useCallback(() => {
+    rootRef.current?.measure((_x, _y, _width, _height, pageX, pageY) =>
+      setOrigin({ x: pageX, y: pageY })
+    );
+  }, []);
 
   const onCloseFinished = useCallback(() => {
     setShown(null);
+    setOrigin(null);
     callbacks.current.onHidden();
 
     if (sendingId.current !== null) {
@@ -86,14 +100,16 @@ export const SupportOverlay = ({
 
     // The pill grows around its centre, its bottom moves down by half of it
     const pillBottom =
-      shown.y + shown.height + (shown.height * (LIFT_SCALE - 1)) / 2;
+      shown.y -
+      (origin?.y ?? 0) +
+      shown.height +
+      (shown.height * (LIFT_SCALE - 1)) / 2;
     return Math.max(LIFT, pillBottom - (buttonTop - BUTTON_GAP));
-  }, [buttonTop, shown]);
+  }, [buttonTop, origin, shown]);
 
   useEffect(() => {
     if (target) {
       setShown(target);
-      progress.value = withSpring(1, { damping: 16, stiffness: 180 });
       return;
     }
 
@@ -114,6 +130,17 @@ export const SupportOverlay = ({
     // Only the target opens or closes it
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progress, target]);
+
+  // Lifts the pill once the overlay is on screen, the emotion in the chat
+  // hides at the same moment so it never blinks out before its copy shows
+  useEffect(() => {
+    if (!target || !origin) {
+      return;
+    }
+
+    callbacks.current.onShown();
+    progress.value = withSpring(1, { damping: 16, stiffness: 180 });
+  }, [origin, progress, target]);
 
   const backdropStyle = useAnimatedStyle(() => ({
     opacity: progress.value
@@ -156,10 +183,16 @@ export const SupportOverlay = ({
       animationType="none"
       visible
       onRequestClose={onClose}
+      onShow={onShow}
     >
       {/* The whole screen closes it, only the support button catches its own
           taps */}
-      <Pressable style={StyleSheet.absoluteFill} onPress={onClose}>
+      <Pressable
+        ref={rootRef}
+        collapsable={false}
+        style={StyleSheet.absoluteFill}
+        onPress={onClose}
+      >
         <Animated.View
           pointerEvents="none"
           style={[SupportOverlayStyle.backdrop, backdropStyle]}
@@ -169,10 +202,12 @@ export const SupportOverlay = ({
           style={[
             SupportOverlayStyle.pill,
             {
-              top: shown.y,
-              left: shown.x - WIDTH_SLACK,
+              top: shown.y - (origin?.y ?? 0),
+              left: shown.x - (origin?.x ?? 0) - WIDTH_SLACK,
               width: shown.width + WIDTH_SLACK * 2,
-              height: shown.height
+              height: shown.height,
+              // Hidden until the overlay knows where it sits
+              opacity: origin ? 1 : 0
             },
             pillStyle
           ]}

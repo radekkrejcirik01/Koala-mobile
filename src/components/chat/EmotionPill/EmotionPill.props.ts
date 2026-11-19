@@ -1,4 +1,8 @@
-import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
+import {
+  LayoutChangeEvent,
+  NativeSyntheticEvent,
+  TextLayoutEventData
+} from 'react-native';
 
 export interface EmotionPillProps {
   emotion?: string;
@@ -8,4 +12,6 @@ export interface EmotionPillProps {
   // Narrows wrapped text to its longest line
   textWidth?: number;
   onTextLayout?: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;
+  // The size the text was laid out at
+  onTextSize?: (event: LayoutChangeEvent) => void;
 }

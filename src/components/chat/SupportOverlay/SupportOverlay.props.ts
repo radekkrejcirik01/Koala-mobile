@@ -14,6 +14,9 @@ export interface SupportOverlayProps {
   // Called once the overlay is gone, so the emotion changes after it settled
   onSend: (emotionId: number) => void;
   onClose: () => void;
+  // The overlay is on screen with the lifted copy, the emotion in the chat
+  // can hide
+  onShown: () => void;
   // The close animation finished, the emotion in the chat can show again
   onHidden: () => void;
 }

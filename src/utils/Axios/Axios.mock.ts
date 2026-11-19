@@ -42,159 +42,299 @@ const friend = (id: number) => FRIENDS.find((item) => item.id === id);
 
 type Message = [senderId: number, message: string, reaction?: string];
 
-interface Chat {
-  id: number;
-  friendId: number;
-  // Who shared the mood that started the chat, the other one supported it
+// A mood one of you shared, the support for it and the talk that followed
+interface Episode {
+  // Who shared the mood, the other one supported it
   sharedBy: number;
   // Leaves the mood without support, showing the support button
   unsupported?: boolean;
   emotion: EmotionType;
   feeling: string;
+  // When the last message of the episode was sent
   minutesAgo: number;
-  seen: number;
   messages: Message[];
 }
+
+interface Chat {
+  id: number;
+  friendId: number;
+  seen: number;
+  // Oldest first, the last one is the latest mood
+  episodes: Episode[];
+}
+
+const DAY = 60 * 24;
 
 const CHATS: Chat[] = [
   {
     id: 1,
     friendId: 3,
-    sharedBy: 3,
-    emotion: EmotionType.SuperGood,
-    feeling: 'Super good',
-    minutesAgo: 4,
     seen: 0,
-    messages: [
-      [3, 'Guess what...'],
-      [3, 'Got the job!!! 🎉', '❤️'],
-      [1, 'NO WAY 😍 I knew you would nail it!'],
-      [1, 'We are celebrating this weekend, no excuses'],
-      [3, 'Deal 🥂 thank you for believing in me']
+    episodes: [
+      {
+        sharedBy: 3,
+        emotion: EmotionType.Good,
+        feeling: 'Good',
+        minutesAgo: DAY * 6,
+        messages: [
+          [1, 'Nice! What happened?'],
+          [3, 'Finally a calm weekend, cooked and read all day'],
+          [1, 'You needed that']
+        ]
+      },
+      {
+        sharedBy: 1,
+        emotion: EmotionType.Meh,
+        feeling: 'Meh',
+        minutesAgo: DAY * 3,
+        messages: [
+          [3, 'Monday got you too?'],
+          [1, 'Back to back meetings, no lunch'],
+          [3, 'Same. Let us survive till Friday 😅']
+        ]
+      },
+      {
+        sharedBy: 3,
+        emotion: EmotionType.Bad,
+        feeling: 'Bad',
+        minutesAgo: 4,
+        messages: [
+          [3, 'Could not sleep again, my brain was so loud at 3am'],
+          [1, 'Ugh, the worst. The work stuff?'],
+          [3, 'Yeah, they moved the deadline up', '😢'],
+          [1, 'Want me to bring you coffee at lunch?'],
+          [3, 'You are the best, yes please ☕️']
+        ]
+      }
     ]
   },
   {
     id: 2,
     friendId: 2,
-    sharedBy: 1,
-    emotion: EmotionType.Good,
-    feeling: 'Good',
-    minutesAgo: 38,
     seen: 0,
-    messages: [
-      [2, 'Love to see it! What made your day?'],
-      [1, 'Finally finished the big project 🙌'],
-      [2, 'Coffee tomorrow? ☕️']
+    episodes: [
+      {
+        sharedBy: 2,
+        emotion: EmotionType.Bad,
+        feeling: 'Bad',
+        minutesAgo: DAY * 4,
+        messages: [
+          [1, 'What is going on?'],
+          [2, 'Car broke down on the highway'],
+          [1, 'Are you ok?? Need a ride?'],
+          [2, 'All sorted, just an expensive day 😮‍💨']
+        ]
+      },
+      {
+        sharedBy: 1,
+        emotion: EmotionType.Meh,
+        feeling: 'Meh',
+        minutesAgo: 38,
+        messages: [
+          [2, 'Still the landlord thing?'],
+          [1, 'Yeah, rent is going up again in March'],
+          [2, 'Want to look at flats together this weekend?'],
+          [1, 'Honestly that would help'],
+          [2, 'Coffee on Saturday and we make a list ☕️']
+        ]
+      }
     ]
   },
   {
     id: 3,
     friendId: 5,
-    sharedBy: 5,
-    emotion: EmotionType.Bad,
-    feeling: 'Bad',
-    minutesAgo: 95,
     seen: 1,
-    messages: [
-      [5, 'Thank you 🥹 rough day at work'],
-      [1, 'Want to go for a walk later? I am free after 6'],
-      [5, 'Yes please, that would help a lot', '🫶']
+    episodes: [
+      {
+        sharedBy: 1,
+        emotion: EmotionType.Good,
+        feeling: 'Good',
+        minutesAgo: DAY * 2,
+        messages: [
+          [5, 'How did the interview go?'],
+          [1, 'Better than I thought, fingers crossed 🤞']
+        ]
+      },
+      {
+        sharedBy: 5,
+        emotion: EmotionType.ReallyBad,
+        feeling: 'Really bad',
+        minutesAgo: 95,
+        messages: [
+          [5, 'Thank you for checking in'],
+          [5, 'Mum is in the hospital again'],
+          [1, 'I am so sorry. Want some company tonight?'],
+          [5, 'Yes please, that would help a lot', '❤️']
+        ]
+      }
     ]
   },
   {
     id: 4,
     friendId: 9,
-    sharedBy: 9,
-    unsupported: true,
-    emotion: EmotionType.SuperGood,
-    feeling: 'Super good',
-    minutesAgo: 180,
     seen: 0,
-    messages: [
-      [9, 'Just landed in Lisbon ✈️'],
-      [9, 'The weather is unreal ☀️']
+    episodes: [
+      {
+        sharedBy: 9,
+        emotion: EmotionType.Good,
+        feeling: 'Good',
+        minutesAgo: DAY * 5,
+        messages: [
+          [1, 'Congrats on the new job!! 🎉'],
+          [9, 'Thank you! Nervous but excited']
+        ]
+      },
+      {
+        sharedBy: 9,
+        unsupported: true,
+        emotion: EmotionType.Bad,
+        feeling: 'Bad',
+        minutesAgo: 180,
+        messages: [
+          [9, 'First week at the new job and I feel so lost'],
+          [9, 'Everyone seems to know what they are doing'],
+          [9, 'Is it normal to feel this way?']
+        ]
+      }
     ]
   },
   {
     id: 5,
     friendId: 4,
-    sharedBy: 4,
-    emotion: EmotionType.Meh,
-    feeling: 'Meh',
-    minutesAgo: 60 * 26,
     seen: 1,
-    messages: [
-      [1, 'Hey, everything ok?'],
-      [4, 'Just tired, exam week 😮‍💨'],
-      [1, 'You have got this. Dinner on me after?'],
-      [4, 'Thanks for checking on me, means a lot 💛']
+    episodes: [
+      {
+        sharedBy: 1,
+        emotion: EmotionType.Bad,
+        feeling: 'Bad',
+        minutesAgo: DAY * 7,
+        messages: [
+          [4, 'Rough one?'],
+          [1, 'Missed my train, then spilled coffee on my laptop'],
+          [4, 'Peak Monday 😂 hope the laptop survived']
+        ]
+      },
+      {
+        sharedBy: 4,
+        emotion: EmotionType.Meh,
+        feeling: 'Meh',
+        minutesAgo: DAY + 120,
+        messages: [
+          [1, 'Hey, everything ok?'],
+          [4, 'Just tired, exam week 😮‍💨'],
+          [1, 'You have got this. Dinner on me after?'],
+          [4, 'Thanks for checking on me, means a lot 💛']
+        ]
+      }
     ]
   },
   {
     id: 6,
     friendId: 7,
-    sharedBy: 7,
-    emotion: EmotionType.Good,
-    feeling: 'Good',
-    minutesAgo: 60 * 30,
     seen: 1,
-    messages: [
-      [7, 'Ran my first half marathon today 🏃‍♀️'],
-      [1, 'Proud of you, seriously']
+    episodes: [
+      {
+        sharedBy: 7,
+        emotion: EmotionType.Bad,
+        feeling: 'Bad',
+        minutesAgo: DAY * 4,
+        messages: [
+          [1, 'Here for you, want to talk?'],
+          [7, 'Just feeling stuck lately'],
+          [1, 'Call tonight?'],
+          [7, 'Yes please 💛']
+        ]
+      },
+      {
+        sharedBy: 7,
+        emotion: EmotionType.Good,
+        feeling: 'Good',
+        minutesAgo: DAY + 360,
+        messages: [
+          [7, 'Went to my first therapy session today'],
+          [1, 'That takes courage. How do you feel?'],
+          [7, 'Lighter, honestly'],
+          [1, 'Proud of you, seriously']
+        ]
+      }
     ]
   },
   {
     id: 7,
     friendId: 6,
-    sharedBy: 6,
-    emotion: EmotionType.Meh,
-    feeling: 'Meh',
-    minutesAgo: 60 * 52,
     seen: 1,
-    messages: [[6, 'Long day but the sunset made up for it 🌅']]
+    episodes: [
+      {
+        sharedBy: 6,
+        emotion: EmotionType.Meh,
+        feeling: 'Meh',
+        minutesAgo: DAY * 2 + 240,
+        messages: [
+          [6, 'The baby was up all night with a fever'],
+          [1, 'Oh no. Want me to drop off dinner?'],
+          [6, 'You are a lifesaver 🙏']
+        ]
+      }
+    ]
   },
   {
     id: 8,
     friendId: 8,
-    sharedBy: 1,
-    emotion: EmotionType.SuperGood,
-    feeling: 'Super good',
-    minutesAgo: 60 * 75,
     seen: 1,
-    messages: [
-      [8, 'Love seeing you this happy!'],
-      [1, 'See you on Saturday!']
+    episodes: [
+      {
+        sharedBy: 1,
+        emotion: EmotionType.ReallyBad,
+        feeling: 'Really bad',
+        minutesAgo: DAY * 6,
+        messages: [
+          [8, 'Want to talk about it?'],
+          [1, 'One of those weeks where everything goes wrong'],
+          [8, 'Call me after work, I mean it']
+        ]
+      },
+      {
+        sharedBy: 1,
+        emotion: EmotionType.Good,
+        feeling: 'Good',
+        minutesAgo: DAY * 3 + 180,
+        messages: [
+          [8, 'Glad the week ended better than it started'],
+          [1, 'Me too. See you on Saturday!']
+        ]
+      }
     ]
   }
 ];
 
 // Oldest first, the endpoint reverses it
-const getMessages = (chat: Chat) => {
-  const start = chat.minutesAgo + chat.messages.length + 2;
-  const emotionId = chat.id * 100;
+const getMessages = (chat: Chat) =>
+  chat.episodes.flatMap((episode: Episode, episodeIndex: number) => {
+    const start = episode.minutesAgo + episode.messages.length + 2;
+    const emotionId = chat.id * 1000 + episodeIndex * 100;
 
-  return [
-    {
-      id: emotionId,
-      type: MessageType.Emotion,
-      senderId: chat.sharedBy,
-      emotion: chat.emotion,
-      message: chat.feeling,
-      reaction: chat.unsupported ? undefined : SUPPORT_REACTION,
-      time: ago(start)
-    },
-    ...chat.messages.map(
-      ([senderId, message, reaction]: Message, index: number) => ({
-        id: emotionId + 2 + index,
-        type: MessageType.Message,
-        senderId,
-        message,
-        reaction,
-        time: ago(start - 2 - index)
-      })
-    )
-  ];
-};
+    return [
+      {
+        id: emotionId,
+        type: MessageType.Emotion,
+        senderId: episode.sharedBy,
+        emotion: episode.emotion,
+        message: episode.feeling,
+        reaction: episode.unsupported ? undefined : SUPPORT_REACTION,
+        time: ago(start)
+      },
+      ...episode.messages.map(
+        ([senderId, message, reaction]: Message, index: number) => ({
+          id: emotionId + 2 + index,
+          type: MessageType.Message,
+          senderId,
+          message,
+          reaction,
+          time: ago(start - 2 - index)
+        })
+      )
+    ];
+  });
 
 const CHAT_LIST = CHATS.map((chat: Chat) => {
   const messages = getMessages(chat);

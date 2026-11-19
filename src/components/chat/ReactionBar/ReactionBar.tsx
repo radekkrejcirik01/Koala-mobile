@@ -7,8 +7,10 @@ const REACTIONS: string[] = ['👍', '❤️', '😂', '😮', '😢', '👏'];
 
 export interface ReactionState {
   visible: boolean;
-  x: number;
-  y: number;
+  left: number;
+  // One of them is set, relative to the view the bar is placed in
+  top?: number;
+  bottom?: number;
 }
 
 interface ReactionBarProps {
@@ -48,8 +50,9 @@ export const ReactionBar = ({
         style={[
           ReactionBarStyle.container,
           {
-            top: reactionState.y - 60,
-            left: reactionState.x - 140
+            top: reactionState.top,
+            bottom: reactionState.bottom,
+            left: reactionState.left
           },
           animatedStyle
         ]}

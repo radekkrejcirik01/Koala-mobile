@@ -38,6 +38,7 @@ export const SupportOverlayStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   buttonEmoji: {
+    color: COLORS.BLACK,
     fontSize: 32
   },
   buttonText: {

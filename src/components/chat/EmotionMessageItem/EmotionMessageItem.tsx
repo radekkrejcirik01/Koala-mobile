@@ -7,11 +7,13 @@ import React, {
   useState
 } from 'react';
 import {
+  LayoutChangeEvent,
   NativeSyntheticEvent,
   Pressable,
   StyleSheet,
   Text,
   TextLayoutEventData,
+  TextLayoutLine,
   View,
   ViewStyle
 } from 'react-native';
@@ -178,32 +180,71 @@ export const EmotionMessageItem = ({
     text: string;
     width: number;
   } | null>(null);
+
+  // Android can report the lines of an earlier, narrower measure, so they
+  // only count when they don't fit on one line at the width the text got
+  const layoutLines = useRef<{
+    text: string;
+    lines: TextLayoutLine[];
+  } | null>(null);
+  const naturalWidth = useRef<{ text: string; width: number } | null>(null);
+  const fitText = useCallback(() => {
+    const lines = layoutLines.current;
+    const natural = naturalWidth.current;
+    if (lines?.text !== pillText || natural?.text !== pillText) {
+      return;
+    }
+
+    const total = lines.lines.reduce((sum, line) => sum + line.width, 0);
+    const wraps = lines.lines.length > 1 && total > natural.width + 1;
+    textLines.current = wraps
+      ? lines.lines.map((line) => line.text.trimEnd())
+      : [];
+    if (!wraps) {
+      return;
+    }
+
+    const width = Math.ceil(Math.max(...lines.lines.map((line) => line.width)));
+    setFittedText((prevState) =>
+      prevState?.text === pillText && prevState.width === width
+        ? prevState
+        : { text: pillText, width }
+    );
+  }, [pillText]);
+
   const onTextLayout = useCallback(
     (event: NativeSyntheticEvent<TextLayoutEventData>) => {
-      const { lines } = event.nativeEvent;
-      textLines.current = lines.map((line) => line.text.trimEnd());
-
-      if (lines.length < 2) {
-        return;
-      }
-      const width = Math.ceil(Math.max(...lines.map((line) => line.width)));
-      setFittedText((prevState) =>
-        prevState?.text === pillText && prevState.width === width
-          ? prevState
-          : { text: pillText, width }
-      );
+      layoutLines.current = { text: pillText, lines: event.nativeEvent.lines };
+      fitText();
     },
-    [pillText]
+    [fitText, pillText]
   );
   const textWidth =
     fittedText?.text === pillText ? fittedText.width : undefined;
+
+  // The width the text gets before it's narrowed
+  const onTextSize = useCallback(
+    (event: LayoutChangeEvent) => {
+      if (textWidth !== undefined) {
+        return;
+      }
+      naturalWidth.current = {
+        text: pillText,
+        width: event.nativeEvent.layout.width
+      };
+      fitText();
+    },
+    [fitText, pillText, textWidth]
+  );
 
   const onPressPill = useCallback(() => {
     const text = textLines.current.length
       ? textLines.current.join('\n')
       : undefined;
-    pillRef.current?.measureInWindow((x, y, width, height) =>
-      onPressEmotion?.({ x, y, width, height, text })
+    // Page coordinates, on Android the window ones leave out the status bar
+    // that the overlay covers
+    pillRef.current?.measure((_x, _y, width, height, pageX, pageY) =>
+      onPressEmotion?.({ x: pageX, y: pageY, width, height, text })
     );
   }, [onPressEmotion]);
 
@@ -243,6 +284,7 @@ export const EmotionMessageItem = ({
                   emotion={emotion}
                   text={pillText}
                   textWidth={textWidth}
+                  onTextSize={onTextSize}
                 />
               </Animated.View>
               <Animated.View

@@ -53,24 +53,30 @@ if android; then
   "$ADB" shell am start -n $BUNDLE/$BUNDLE.MainActivity >/dev/null
 fi
 
-# Give both apps time to load the bundle from Metro
-sleep 20
+# Give both apps time to load the bundle from Metro, raise LOAD_WAIT if the
+# first captures still show the previous screen
+sleep "${LOAD_WAIT:-20}"
 
 # capture <name> <screen> [params json] [seconds to wait]
 capture() {
-  echo "{\"key\":\"$(date +%s)$1\",\"screen\":\"$2\",\"params\":${3:-{\}}}" >"$SERVER_DIR/command"
+  local params=$3
+  [ -n "$params" ] || params='{}'
+  echo "{\"key\":\"$(date +%s)$1\",\"screen\":\"$2\",\"params\":$params}" >"$SERVER_DIR/command"
   sleep "${4:-6}"
   if ios; then xcrun simctl io booted screenshot "$RAW/ios/$1.png" >/dev/null 2>&1; fi
   if android; then "$ADB" exec-out screencap -p >"$RAW/android/$1.png"; fi
   echo "captured $1"
 }
 
-SOFIA='{"id":1,"chatUserId":3,"name":"Sofia","username":"sofia","profilePhoto":"https://randomuser.me/api/portraits/women/27.jpg","conversationId":1}'
+# The chat opens by the friend's id
+CLARA='{"id":9,"name":"Clara","username":"clara","profilePhoto":"https://randomuser.me/api/portraits/women/30.jpg","openSupport":true}'
+SOFIA='{"id":3,"name":"Sofia","username":"sofia","profilePhoto":"https://randomuser.me/api/portraits/women/27.jpg"}'
 
 # Home first, opening Chats clears the unread badge
 capture 1_home HomeScreen
 capture 2_share ShareStack
 # "Last online" only shows for 7 seconds after the chat opens
 capture 3_chat ChatScreen "$SOFIA" 4
+capture 3_support ChatScreen "$CLARA"
 capture 5_stats AnalyticsScreen '{}' 7
-capture 4_chats NotificationsScreen
+capture 4_chats ChatsScreen

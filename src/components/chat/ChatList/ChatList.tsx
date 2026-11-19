@@ -37,6 +37,7 @@ export const ChatList = ({
   const { id } = useSelector((state: ReducerProps) => state.user.user);
 
   const {
+    containerRef,
     reactionState,
     scale,
     opacity,
@@ -51,7 +52,7 @@ export const ChatList = ({
   const [supportTarget, setSupportTarget] = useState<SupportTarget | null>(
     null
   );
-  // Stays hidden until the lifted copy settled back onto it
+  // Hidden while its lifted copy is on screen, until it settled back onto it
   const [liftedId, setLiftedId] = useState<number | null>(null);
 
   // Until support is opened for the first time, a finger taps the newest
@@ -204,7 +205,6 @@ export const ChatList = ({
                           '1'
                         ).catch();
                       }
-                      setLiftedId(value.id);
                       setSupportTarget({
                         id: value.id,
                         emotion: value.emotion,
@@ -256,7 +256,7 @@ export const ChatList = ({
   };
 
   return (
-    <View style={ChatListStyle.container}>
+    <View ref={containerRef} style={ChatListStyle.container}>
       <GestureDetector gesture={timeGesture}>
         <View style={ChatListStyle.container}>
           <FlashList
@@ -292,6 +292,7 @@ export const ChatList = ({
         target={supportTarget}
         onSend={onPressSupport}
         onClose={() => setSupportTarget(null)}
+        onShown={() => setLiftedId(supportTarget?.id ?? null)}
         onHidden={() => setLiftedId(null)}
       />
     </View>

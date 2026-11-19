@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import {
   useSharedValue,
   withSpring,
@@ -7,21 +7,24 @@ import {
 } from 'react-native-reanimated';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 
-interface ReactionState {
-  visible: boolean;
-  x: number;
-  y: number;
-}
+import { ReactionState } from '@components/chat/ReactionBar/ReactionBar';
+
+// Room between the bar and the message it's for
+const BAR_GAP = 8;
+// Taller than the bar, a message closer to the top gets the bar below it
+const BAR_ROOM = 70;
 
 export const useReactionBar = (
   onSelectReaction: (reaction: string, messageId: number) => void
 ) => {
   const [reactionState, setReactionState] = useState<ReactionState>({
     visible: false,
-    x: 0,
-    y: 0
+    left: 0
   });
 
+  // The view the bar is placed in, messages are measured relative to it so
+  // nothing depends on the header or how each platform counts the status bar
+  const containerRef = useRef<View>(null);
   const messageRefs = useRef(new Map());
   const messageIdRef = useRef<number>(0);
 
@@ -41,23 +44,43 @@ export const useReactionBar = (
     const node = messageRefs.current.get(messageId);
     messageIdRef.current = messageId;
 
-    if (!node) return;
+    const container = containerRef.current;
+    if (!node || !container) return;
 
-    node.measureInWindow((x: number, y: number) => {
-      setReactionState({
-        visible: true,
-        x: x + 150,
-        y: Platform.OS === 'ios' ? y - 95 : y - 40
-      });
+    // Page coordinates of both, they include the flip of the inverted list
+    container.measure(
+      (_cx, _cy, _width, containerHeight, containerX, containerY) => {
+        node.measure(
+          (
+            _nx: number,
+            _ny: number,
+            _w: number,
+            height: number,
+            pageX: number,
+            pageY: number
+          ) => {
+            const x = pageX - containerX;
+            const y = pageY - containerY;
+            setReactionState({
+              visible: true,
+              left: x + 10,
+              // Above the message, or below it when there's no room above
+              ...(y < BAR_ROOM
+                ? { top: y + height + BAR_GAP }
+                : { bottom: containerHeight - y + BAR_GAP })
+            });
 
-      scale.value = withSpring(1, {
-        damping: 14,
-        stiffness: 180
-      });
+            scale.value = withSpring(1, {
+              damping: 14,
+              stiffness: 180
+            });
 
-      opacity.value = withTiming(1, { duration: 100 });
-      translateY.value = withSpring(0);
-    });
+            opacity.value = withTiming(1, { duration: 100 });
+            translateY.value = withSpring(0);
+          }
+        );
+      }
+    );
   };
 
   const hideReactions = () => {
@@ -77,6 +100,7 @@ export const useReactionBar = (
   };
 
   return {
+    containerRef,
     reactionState,
     scale,
     opacity,

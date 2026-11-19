@@ -33,9 +33,12 @@ os.makedirs(PHONE, exist_ok=True)
 frames = []
 for name, title, sub in SLIDES:
     shot = Image.open(os.path.join(RAW, f'{name}.png')).convert('RGB')
-    # Hide the system "no screen lock" icon next to the clock
-    ImageDraw.Draw(shot).rectangle((170, 30, 255, 115),
-                                   fill=shot.getpixel((300, 72)))
+    # Hide the system "no screen lock" icon next to the clock, measured on a
+    # 1344 px wide Pixel 8 Pro and scaled for other emulators
+    k = shot.width / 1344
+    ImageDraw.Draw(shot).rectangle(
+        (round(170 * k), round(30 * k), round(255 * k), round(115 * k)),
+        fill=shot.getpixel((round(300 * k), round(72 * k))))
 
     canvas = Image.new('RGB', (W, H), BG)
     sh = round(shot.height * SCREEN_W / shot.width)

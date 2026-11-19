@@ -10,7 +10,8 @@ export const EmotionPill = ({
   text,
   white,
   textWidth,
-  onTextLayout
+  onTextLayout,
+  onTextSize
 }: EmotionPillProps): JSX.Element => (
   <View
     style={[
@@ -33,6 +34,7 @@ export const EmotionPill = ({
           textWidth !== undefined && { width: textWidth }
         ]}
         onTextLayout={onTextLayout}
+        onLayout={onTextSize}
       >
         {text}
       </Text>
