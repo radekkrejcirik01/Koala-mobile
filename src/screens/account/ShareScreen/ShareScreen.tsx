@@ -1,4 +1,4 @@
-import React, { JSX, useCallback, useState } from 'react';
+import React, { JSX, useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   Keyboard,
@@ -6,7 +6,6 @@ import {
   Pressable,
   Text,
   TextInput,
-  TouchableOpacity,
   View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -15,6 +14,8 @@ import { useNavigation } from '@hooks/useNavigation';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
@@ -45,6 +46,38 @@ export const ShareScreen = (): JSX.Element => {
     useState<number>(DEFAULT_POSITION);
   const [message, setMessage] = useState<string>('');
   const [editingMessage, setEditingMessage] = useState<boolean>(false);
+  const [showSwipeHint, setShowSwipeHint] = useState<boolean>(false);
+
+  // Shows how to pick an emotion until the user swipes once or closes the
+  // screen
+  useEffect(() => {
+    PersistStorage.getItem(PersistStorageKeys.SWIPE_HINT_SEEN)
+      .then((seen) => {
+        if (seen) {
+          return;
+        }
+
+        setShowSwipeHint(true);
+      })
+      .catch();
+  }, []);
+
+  // Closing the screen with the hint shown counts as seen
+  useEffect(() => {
+    if (!showSwipeHint) {
+      return undefined;
+    }
+
+    return () => {
+      PersistStorage.setItem(PersistStorageKeys.SWIPE_HINT_SEEN, '1').catch();
+    };
+  }, [showSwipeHint]);
+
+  const onSwipeStart = useCallback(() => {
+    if (showSwipeHint) {
+      PersistStorage.setItem(PersistStorageKeys.SWIPE_HINT_SEEN, '1').catch();
+    }
+  }, [showSwipeHint]);
 
   const selectedConfig = EMOTIONS[centerPosition];
   const trimmedMessage = message.trim();
@@ -128,21 +161,8 @@ export const ShareScreen = (): JSX.Element => {
           onStep={onEmotionChange}
           onCenterChange={setCenterPosition}
           style={ShareScreenStyle.titleView}
-          footer={
-            // Hidden rather than removed while typing, so nothing jumps
-            <TouchableOpacity
-              activeOpacity={0.7}
-              hitSlop={15}
-              disabled={editingMessage}
-              onPress={() => setEditingMessage(true)}
-              style={[
-                ShareScreenStyle.addMessageButton,
-                editingMessage && ShareScreenStyle.addMessageHidden
-              ]}
-            >
-              <Text style={ShareScreenStyle.addMessageText}>Edit message</Text>
-            </TouchableOpacity>
-          }
+          showSwipeHint={showSwipeHint}
+          onSwipeStart={onSwipeStart}
         >
           <Text style={ShareScreenStyle.selectedEmoji}>
             {selectedConfig.type}

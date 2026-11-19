@@ -45,6 +45,14 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     fontSize: 13,
     color: COLORS.GRAY_200
   },
+  // Over the pill's lower right corner, pointing at it
+  tapHint: {
+    position: 'absolute',
+    right: -14,
+    bottom: -22,
+    color: COLORS.BLACK,
+    fontSize: 30
+  },
   // Fills the row so the time sits at the right edge, like on messages
   row: {
     alignSelf: 'stretch'

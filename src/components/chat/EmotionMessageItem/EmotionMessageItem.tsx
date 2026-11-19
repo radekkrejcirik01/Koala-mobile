@@ -12,7 +12,8 @@ import {
   StyleSheet,
   Text,
   TextLayoutEventData,
-  View
+  View,
+  ViewStyle
 } from 'react-native';
 import Animated, {
   cancelAnimation,
@@ -42,6 +43,9 @@ import {
 const PULSE_SCALE = 1.04;
 const PULSE_PAUSE = 2500;
 const PULSE_FIRST_DELAY = 400;
+// The finger hint taps toward the pill, then waits before tapping again
+const TAP_HINT_DELAY = 600;
+const TAP_HINT_PAUSE = 900;
 
 export const EmotionMessageItem = ({
   id,
@@ -53,6 +57,7 @@ export const EmotionMessageItem = ({
   name,
   supported,
   lifted,
+  showTapHint,
   onPressEmotion
 }: EmotionMessageItemProps): React.JSX.Element => {
   const pillRef = useRef<View>(null);
@@ -127,6 +132,40 @@ export const EmotionMessageItem = ({
   const onPressOut = useCallback(() => {
     pressScale.value = withSpring(1, { damping: 12, stiffness: 300 });
   }, [pressScale]);
+
+  const tapHint = useSharedValue<number>(0);
+  useEffect(() => {
+    if (!showTapHint || lifted) {
+      cancelAnimation(tapHint);
+      tapHint.value = 0;
+      return undefined;
+    }
+
+    const easing = Easing.inOut(Easing.quad);
+    tapHint.value = withDelay(
+      TAP_HINT_DELAY,
+      withRepeat(
+        withSequence(
+          withTiming(1, { duration: 250, easing }),
+          withTiming(0, { duration: 250, easing }),
+          withTiming(0, { duration: TAP_HINT_PAUSE })
+        ),
+        -1
+      )
+    );
+    return () => cancelAnimation(tapHint);
+  }, [lifted, showTapHint, tapHint]);
+
+  // Moves up onto the pill and presses in a little, like a tap
+  const tapHintStyle = useAnimatedStyle(
+    (): ViewStyle => ({
+      transform: [
+        { translateX: -4 * tapHint.value },
+        { translateY: -6 * tapHint.value },
+        { scale: 1 - 0.12 * tapHint.value }
+      ]
+    })
+  );
 
   // The lines the pill's text wrapped into, the lifted copy keeps them as
   // they are instead of wrapping the text again
@@ -219,6 +258,14 @@ export const EmotionMessageItem = ({
                 />
               </Animated.View>
             </Animated.View>
+            {showTapHint && !lifted && (
+              <Animated.Text
+                pointerEvents="none"
+                style={[EmotionMessageItemStyle.tapHint, tapHintStyle]}
+              >
+                👆
+              </Animated.Text>
+            )}
           </Pressable>
           {supported && (
             <Animated.Text

@@ -13,6 +13,8 @@ export interface EmotionMessageItemProps {
   supported: boolean;
   // Hidden while its lifted copy is shown above the chat
   lifted?: boolean;
+  // A finger taps the pill, until support is opened for the first time
+  showTapHint?: boolean;
   // Only for the friend's emotions that aren't supported yet, with where the
   // pill sits on screen
   onPressEmotion?: (layout: EmotionPillLayout) => void;

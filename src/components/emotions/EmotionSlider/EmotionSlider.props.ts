@@ -15,8 +15,11 @@ export interface EmotionSliderProps {
   // Style of the swipe area, which wraps the row and the children above it
   style?: StyleProp<ViewStyle>;
   children?: ReactNode;
-  // Rendered below the row
-  footer?: ReactNode;
+  // Slides a finger across the row once the screen opens, to show it can be
+  // swiped
+  showSwipeHint?: boolean;
+  // Called when a swipe starts
+  onSwipeStart?: () => void;
 }
 
 export interface EmotionIndicatorItemProps {

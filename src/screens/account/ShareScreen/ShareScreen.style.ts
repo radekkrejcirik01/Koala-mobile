@@ -13,8 +13,9 @@ export const ShareScreenStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    // Lifts the emotions a little above the middle
-    paddingBottom: 55
+    // Lifts the emotions above the middle, by about where the removed
+    // Edit message button used to keep them
+    paddingBottom: 122
   },
   selectedEmoji: {
     color: COLORS.BLACK,
@@ -26,17 +27,6 @@ export const ShareScreenStyle = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     color: COLORS.LIGHTGRAY_200
-  },
-  addMessageButton: {
-    marginTop: 50
-  },
-  addMessageHidden: {
-    opacity: 0
-  },
-  addMessageText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
   },
   messageInput: {
     alignSelf: 'stretch',

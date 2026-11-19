@@ -1,4 +1,6 @@
 export enum PersistStorageKeys {
   TOKEN = 'TOKEN',
-  IMAGE = 'IMAGE'
+  IMAGE = 'IMAGE',
+  SWIPE_HINT_SEEN = 'SWIPE_HINT_SEEN',
+  SUPPORT_HINT_SEEN = 'SUPPORT_HINT_SEEN'
 }

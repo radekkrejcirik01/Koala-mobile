@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
@@ -20,6 +20,8 @@ import { getEmotionText } from '@functions/getEmotionText';
 import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
 import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 
 export const ChatList = ({
   listRef,
@@ -51,6 +53,28 @@ export const ChatList = ({
   );
   // Stays hidden until the lifted copy settled back onto it
   const [liftedId, setLiftedId] = useState<number | null>(null);
+
+  // Until support is opened for the first time, a finger taps the newest
+  // emotion waiting for it
+  const [showTapHint, setShowTapHint] = useState<boolean>(false);
+  useEffect(() => {
+    PersistStorage.getItem(PersistStorageKeys.SUPPORT_HINT_SEEN)
+      .then((seen) => setShowTapHint(!seen))
+      .catch();
+  }, []);
+
+  const tapHintId = useMemo(
+    () =>
+      showTapHint
+        ? messages.find(
+            (item) =>
+              item.type === MessageType.Emotion &&
+              item.senderId !== id &&
+              !item.reaction
+          )?.id
+        : undefined,
+    [id, messages, showTapHint]
+  );
 
   // Swiping the chat left reveals the message times
   const timeOffset = useSharedValue(0);
@@ -166,12 +190,20 @@ export const ChatList = ({
               name={name}
               supported={!!value.reaction}
               lifted={liftedId === value.id}
+              showTapHint={tapHintId === value.id}
               // Only the friend's emotions can be supported, and only once
               onPressEmotion={
                 isOutbound(value.senderId) || value.reaction
                   ? undefined
                   : (layout) => {
                       trigger(HapticFeedbackTypes.impactLight);
+                      if (showTapHint) {
+                        setShowTapHint(false);
+                        PersistStorage.setItem(
+                          PersistStorageKeys.SUPPORT_HINT_SEEN,
+                          '1'
+                        ).catch();
+                      }
                       setLiftedId(value.id);
                       setSupportTarget({
                         id: value.id,
