@@ -185,7 +185,7 @@ export const AnalyticsScreen = (): JSX.Element => {
         ListEmptyComponent={
           data && !loading ? (
             <Text style={AnalyticsScreenStyle.listEmptyText}>
-              You haven&apos;t shared any emotions in this period.
+              You haven&apos;t shared any emotions in this period
             </Text>
           ) : null
         }

@@ -91,7 +91,7 @@ export const DeleteAccountScreen = (): JSX.Element => {
         />
         <ProfileSection
           title="What will be deleted"
-          footer="Your friends won't be able to find you or send you anything anymore. This can't be undone."
+          footer="Your friends won't be able to find you or send you anything anymore. This can't be undone"
         >
           {DELETED_DATA.map((item, index) => (
             <View key={item.title} style={DeleteAccountScreenStyle.item}>

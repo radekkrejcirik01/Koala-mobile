@@ -79,8 +79,8 @@ export const EmailScreen = ({ route }: EmailScreenProps): JSX.Element => {
       title={getTitle()}
       subtitle={
         currentEmail
-          ? `Your email is ${currentEmail}. We'll send a code to the new one to confirm it.`
-          : "If you ever forget your password, we'll send a code to this email so you can reset it."
+          ? `Your email is ${currentEmail}. We'll send a code to the new one to confirm it`
+          : "If you ever forget your password, we'll send a code to this email so you can reset it"
       }
       step={onboarding ? 4 : undefined}
       totalSteps={onboarding ? 4 : undefined}

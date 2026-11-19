@@ -52,7 +52,7 @@ export const AccountScreen = (): React.JSX.Element => {
             footer={
               email
                 ? undefined
-                : 'Add an email so you can reset your password if you forget it.'
+                : 'Add an email so you can reset your password if you forget it'
             }
           >
             <ProfileItem

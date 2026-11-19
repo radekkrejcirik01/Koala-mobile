@@ -12,40 +12,31 @@ export const ShareScreenStyle = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 80,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    // Lifts the emotions a little above the middle
+    paddingBottom: 55
   },
-  contentView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20
-  },
-  arrowsView: {
-    flexDirection: 'row',
-    gap: 48,
-    marginBottom: 100
-  },
-  arrowButton: {
-    width: 74,
-    height: 74,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 37,
-    backgroundColor: COLORS.WHITE_200
-  },
-  arrowLeftIcon: {
-    marginRight: 2
-  },
-  arrowRightIcon: {
-    marginLeft: 2,
-    transform: [{ rotate: '180deg' }]
+  selectedEmoji: {
+    color: COLORS.BLACK,
+    fontSize: 72,
+    marginBottom: 12
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
-    marginBottom: 40
+    color: COLORS.LIGHTGRAY_200
+  },
+  addMessageButton: {
+    marginTop: 50
+  },
+  addMessageHidden: {
+    opacity: 0
+  },
+  addMessageText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.BUTTON_BLUE
   },
   messageInput: {
     alignSelf: 'stretch',
@@ -55,18 +46,13 @@ export const ShareScreenStyle = StyleSheet.create({
   nextButtonView: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
+    gap: 15,
     paddingHorizontal: 30,
     marginBottom: 30
   },
-  messageButton: {
+  // Takes the rest of the row next to Log only
+  nextButton: {
     flex: 1,
-    paddingLeft: 5,
-    paddingRight: 20
-  },
-  messageButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
+    width: undefined
   }
 });

@@ -100,7 +100,7 @@ export const VerifyEmailScreen = ({
   return (
     <AuthLayout
       title="Enter the code"
-      subtitle={`We sent a ${CODE_LENGTH}-digit code to ${email}. It's valid for 15 minutes.`}
+      subtitle={`We sent a ${CODE_LENGTH}-digit code to ${email}. It's valid for 15 minutes`}
       step={onboarding ? 4 : undefined}
       totalSteps={onboarding ? 4 : undefined}
       footer={

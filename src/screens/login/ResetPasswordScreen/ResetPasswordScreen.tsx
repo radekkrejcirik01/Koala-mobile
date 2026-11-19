@@ -117,7 +117,7 @@ export const ResetPasswordScreen = ({
   return (
     <AuthLayout
       title="Reset password"
-      subtitle={`${message}. Enter it below with your new password.`}
+      subtitle={`${message}. Enter it below with your new password`}
       footer={
         <Button
           title="Reset password"

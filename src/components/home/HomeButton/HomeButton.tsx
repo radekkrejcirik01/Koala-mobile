@@ -6,7 +6,8 @@ import { HomeButtonStyle } from '@components/home/HomeButton/HomeButton.style';
 
 export const HomeButton = ({
   text,
-  onPress
+  onPress,
+  style
 }: HomeButtonProps): JSX.Element => {
   const onButtonPress = useCallback(() => {
     trigger(HapticFeedbackTypes.impactMedium);
@@ -17,7 +18,7 @@ export const HomeButton = ({
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={onButtonPress}
-      style={HomeButtonStyle.container}
+      style={[HomeButtonStyle.container, style]}
     >
       <Text style={HomeButtonStyle.text}>{text}</Text>
     </TouchableOpacity>

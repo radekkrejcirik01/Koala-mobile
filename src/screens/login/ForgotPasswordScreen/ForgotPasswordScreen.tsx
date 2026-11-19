@@ -72,7 +72,7 @@ export const ForgotPasswordScreen = ({
   return (
     <AuthLayout
       title="Forgot password?"
-      subtitle="Enter your username and we'll email you a code to reset your password."
+      subtitle="Enter your username and we'll email you a code to reset your password"
       footer={
         <Button
           title="Send code"

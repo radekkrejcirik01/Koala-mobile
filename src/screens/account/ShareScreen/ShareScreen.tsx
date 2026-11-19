@@ -9,13 +9,6 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import Animated, {
-  FadeIn,
-  FadeOut,
-  LayoutAnimationConfig,
-  useAnimatedStyle
-} from 'react-native-reanimated';
-import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
@@ -25,10 +18,9 @@ import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
+import { EmotionType } from '@enums/EmotionType';
 import COLORS from '@constants/COLORS';
-import { EmotionCarousel } from '@components/emotions/EmotionCarousel/EmotionCarousel';
-import { Icon } from '@components/general/Icon/Icon';
-import { IconEnum } from '@components/general/Icon/Icon.enum';
+import { EmotionSlider } from '@components/emotions/EmotionSlider/EmotionSlider';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
@@ -36,6 +28,9 @@ import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style
 
 const MESSAGE_MAX_LENGTH = 128;
 const LOGGING_MIN_DURATION = 800;
+const DEFAULT_POSITION = EMOTIONS.findIndex(
+  (item) => item.type === EmotionType.Good
+);
 
 export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
@@ -43,28 +38,18 @@ export const ShareScreen = (): JSX.Element => {
   const { navigateTo, dismiss } = useNavigation();
   const { sending, sent, setSending, setSent } = useSending();
 
-  // Dims the arrows together with the keyboard while the message is typed,
-  // progress goes from 0 (closed) to 1 (open)
-  const { progress: keyboardProgress } = useReanimatedKeyboardAnimation();
-  const arrowsStyle = useAnimatedStyle(() => ({
-    opacity: 1 - keyboardProgress.value * 0.7
-  }));
-
-  // Unbounded so the carousel keeps rolling the same way when it wraps around
-  const [position, setPosition] = useState<number>(0);
-  // Emotion currently in the centre, which changes during a drag or roll
-  // before the position settles
-  const [centerPosition, setCenterPosition] = useState<number>(0);
+  const [position, setPosition] = useState<number>(DEFAULT_POSITION);
+  // Emotion currently highlighted, which changes during a drag before the
+  // position settles
+  const [centerPosition, setCenterPosition] =
+    useState<number>(DEFAULT_POSITION);
   const [message, setMessage] = useState<string>('');
   const [editingMessage, setEditingMessage] = useState<boolean>(false);
 
-  const selectedConfig =
-    EMOTIONS[
-      ((centerPosition % EMOTIONS.length) + EMOTIONS.length) % EMOTIONS.length
-    ];
+  const selectedConfig = EMOTIONS[centerPosition];
   const trimmedMessage = message.trim();
 
-  // Moves through the emotions, wrapping around at both ends
+  // Moves through the emotions, stopping at both ends
   const onEmotionChange = useCallback((step: number) => {
     trigger(HapticFeedbackTypes.impactLight);
     setPosition((current) => current + step);
@@ -131,19 +116,37 @@ export const ShareScreen = (): JSX.Element => {
         }
       ]}
     >
-      <ScreenHeader title="How are you feeling?" />
+      <ScreenHeader title="Emotions" />
       {/* Tapping anywhere outside the message closes the keyboard */}
       <Pressable
         accessible={false}
         onPress={Keyboard.dismiss}
         style={ShareScreenStyle.mainView}
       >
-        <View style={ShareScreenStyle.titleView}>
-          <EmotionCarousel
-            position={position}
-            onStep={onEmotionChange}
-            onCenterChange={setCenterPosition}
-          />
+        <EmotionSlider
+          position={position}
+          onStep={onEmotionChange}
+          onCenterChange={setCenterPosition}
+          style={ShareScreenStyle.titleView}
+          footer={
+            // Hidden rather than removed while typing, so nothing jumps
+            <TouchableOpacity
+              activeOpacity={0.7}
+              hitSlop={15}
+              disabled={editingMessage}
+              onPress={() => setEditingMessage(true)}
+              style={[
+                ShareScreenStyle.addMessageButton,
+                editingMessage && ShareScreenStyle.addMessageHidden
+              ]}
+            >
+              <Text style={ShareScreenStyle.addMessageText}>Edit message</Text>
+            </TouchableOpacity>
+          }
+        >
+          <Text style={ShareScreenStyle.selectedEmoji}>
+            {selectedConfig.type}
+          </Text>
           {editingMessage ? (
             <TextInput
               autoFocus
@@ -157,77 +160,28 @@ export const ShareScreen = (): JSX.Element => {
               onChangeText={setMessage}
               onBlur={() => setEditingMessage(false)}
               selectionColor={COLORS.BUTTON_BLUE}
-              style={[
-                ShareScreenStyle.title,
-                ShareScreenStyle.messageInput,
-                { color: theme.theme.colors.text }
-              ]}
+              style={[ShareScreenStyle.title, ShareScreenStyle.messageInput]}
             />
           ) : (
             // Pressing the text opens the message for editing
-            // Skips the fade when the label swaps with the message input
-            <LayoutAnimationConfig skipEntering skipExiting>
-              <Pressable hitSlop={15} onPress={() => setEditingMessage(true)}>
-                <Animated.Text
-                  key={selectedConfig.type}
-                  entering={FadeIn.duration(200)}
-                  exiting={FadeOut.duration(120)}
-                  style={[
-                    ShareScreenStyle.title,
-                    { color: theme.theme.colors.text }
-                  ]}
-                >
-                  {trimmedMessage || selectedConfig.message}
-                </Animated.Text>
-              </Pressable>
-            </LayoutAnimationConfig>
+            <Pressable hitSlop={15} onPress={() => setEditingMessage(true)}>
+              <Text style={ShareScreenStyle.title}>
+                {trimmedMessage || selectedConfig.message}
+              </Text>
+            </Pressable>
           )}
-        </View>
-        <View style={ShareScreenStyle.contentView}>
-          <Animated.View
-            // While typing, taps on the arrows fall through and close the keyboard
-            pointerEvents={editingMessage ? 'none' : 'auto'}
-            style={[ShareScreenStyle.arrowsView, arrowsStyle]}
-          >
-            <TouchableOpacity
-              activeOpacity={0.7}
-              hitSlop={15}
-              onPress={() => onEmotionChange(-1)}
-              style={ShareScreenStyle.arrowButton}
-            >
-              <Icon
-                name={IconEnum.BACK}
-                size={27}
-                style={ShareScreenStyle.arrowLeftIcon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              hitSlop={15}
-              onPress={() => onEmotionChange(1)}
-              style={ShareScreenStyle.arrowButton}
-            >
-              <Icon
-                name={IconEnum.BACK}
-                size={27}
-                style={ShareScreenStyle.arrowRightIcon}
-              />
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
+        </EmotionSlider>
       </Pressable>
       <View style={ShareScreenStyle.nextButtonView}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          hitSlop={15}
+        <HomeButton
+          text={sent ? 'Done!' : sending ? 'Logging...' : 'Log only'}
           onPress={onLogOnly}
-          style={ShareScreenStyle.messageButton}
-        >
-          <Text style={ShareScreenStyle.messageButtonText}>
-            {sent ? 'Done!' : sending ? 'Logging...' : 'Log only'}
-          </Text>
-        </TouchableOpacity>
-        <HomeButton text="Next" onPress={onNext} />
+        />
+        <HomeButton
+          text="Next"
+          onPress={onNext}
+          style={ShareScreenStyle.nextButton}
+        />
       </View>
     </View>
   );

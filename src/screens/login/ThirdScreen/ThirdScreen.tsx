@@ -61,7 +61,7 @@ export const ThirdScreen = (): JSX.Element => {
   return (
     <AuthLayout
       title={name ? `Nice to meet you, ${name}` : 'Choose a username'}
-      subtitle="Choose a username. Friends will use it to find and add you."
+      subtitle="Choose a username. Friends will use it to find and add you"
       step={2}
       totalSteps={4}
       footer={

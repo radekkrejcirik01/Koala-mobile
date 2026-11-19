@@ -67,7 +67,7 @@ export const EditNameScreen = (): JSX.Element => {
         </View>
         <ProfileSection
           title="Name"
-          footer="This is how your friends will see you in Koala."
+          footer="This is how your friends will see you in Koala"
         >
           <TextInput
             autoCorrect={false}

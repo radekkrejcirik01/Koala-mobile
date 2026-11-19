@@ -79,7 +79,7 @@ export const SupportScreen = (): JSX.Element => {
             ]}
           />
         </ProfileSection>
-        <ProfileSection title="Email" footer="We will reply to this address.">
+        <ProfileSection title="Email" footer="We will reply to this address">
           <TextInput
             placeholder="you@example.com"
             placeholderTextColor={COLORS.LIGHTGRAY_100}
@@ -99,7 +99,7 @@ export const SupportScreen = (): JSX.Element => {
           <SendButton onPress={send} sending={sending} sent={sent} />
           {sent && (
             <Text style={SupportScreenStyle.thankText}>
-              We got your message and will reply soon.
+              We got your message and will reply soon
             </Text>
           )}
         </View>

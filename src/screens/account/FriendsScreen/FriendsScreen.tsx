@@ -220,7 +220,7 @@ export const FriendsScreen = (): JSX.Element => {
           ) : (
             <View style={FriendsScreenStyle.listEmptyView}>
               <Text style={FriendsScreenStyle.listEmptyText}>
-                No friends yet. Add someone by their username.
+                No friends yet. Add someone by their username
               </Text>
             </View>
           )

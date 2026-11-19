@@ -76,7 +76,7 @@ export const FeedbackScreen = (): JSX.Element => {
           <SendButton onPress={send} sending={sending} sent={sent} />
           {sent && (
             <Text style={FeedbackScreenStyle.thankText}>
-              Thank you! We got your feedback.
+              Thank you! We got your feedback
             </Text>
           )}
         </View>
