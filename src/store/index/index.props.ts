@@ -4,6 +4,7 @@ export interface ReducerProps {
   user: User;
   newAccount: NewAccount;
   notifications: Notifications;
+  live: Live;
 }
 
 export interface User {
@@ -31,4 +32,9 @@ export interface NewAccount {
 export interface Notifications {
   unreadChats: number;
   unseenInvites: number;
+}
+
+export interface Live {
+  // Friends typing to the user right now
+  typingIds: number[];
 }

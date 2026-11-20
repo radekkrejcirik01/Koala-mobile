@@ -11,7 +11,6 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseUserGetInterface } from '@interfaces/response/Response.interface';
 import { MessagingService } from '@utils/general/MessagingService';
 import { NotificationsService } from '@utils/general/NotificationsService';
-import { OnlineService } from '@utils/general/OnlineService';
 import { Images } from '@enums/images';
 
 class PreloadServiceSingleton {
@@ -39,7 +38,6 @@ class PreloadServiceSingleton {
             await BootSplash.hide({ fade: true });
           }
           MessagingService.initMessaging().catch();
-          OnlineService.update();
         }
       }
     );

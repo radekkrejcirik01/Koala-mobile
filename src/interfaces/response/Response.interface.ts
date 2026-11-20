@@ -33,6 +33,7 @@ export interface ResponseLastOnlineGetInterface {
   status: string;
   message: string;
   time?: number;
+  online?: boolean;
 }
 
 export interface ResponseFriendsGetInterface {

@@ -11,12 +11,14 @@ import store from '@store/index/index';
 import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
 import { AnalyticsService } from '@utils/general/AnalyticsService';
+import { LiveService } from '@utils/general/LiveService';
 import { TOAST_CONFIG } from '@constants/TOAST_CONFIG';
 
 const App = () => {
   useEffect(() => {
     AnalyticsService.init();
     PreloadService.init().catch();
+    LiveService.init();
     if (Platform.OS === 'ios') {
       PushNotificationIOS.setApplicationIconBadgeNumber(0);
     }

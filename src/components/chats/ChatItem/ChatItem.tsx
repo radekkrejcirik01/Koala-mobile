@@ -11,6 +11,7 @@ import { ReducerProps } from '@store/index/index.props';
 
 export const ChatItem = ({
   item,
+  typing,
   onPress
 }: ChatItemProps): React.JSX.Element => {
   const theme = useTheme();
@@ -58,20 +59,23 @@ export const ChatItem = ({
                   }
                 ]}
               >
-                {getChatPreview(item, userId)}
+                {typing ? 'typing…' : getChatPreview(item, userId)}
               </Text>
-              <Text
-                style={[
-                  ChatItemStyle.messageText,
-                  unread && {
-                    ...ChatItemStyle.newItemText,
-                    color: theme.theme.colors.text
-                  }
-                ]}
-              >
-                {' '}
-                ∙ {getNotificationTime(Math.floor(lastActivity.timeMs / 1000))}
-              </Text>
+              {!typing && (
+                <Text
+                  style={[
+                    ChatItemStyle.messageText,
+                    unread && {
+                      ...ChatItemStyle.newItemText,
+                      color: theme.theme.colors.text
+                    }
+                  ]}
+                >
+                  {' '}
+                  ∙{' '}
+                  {getNotificationTime(Math.floor(lastActivity.timeMs / 1000))}
+                </Text>
+              )}
             </View>
           </TouchableOpacity>
           {unread && <View style={ChatItemStyle.newItem} />}

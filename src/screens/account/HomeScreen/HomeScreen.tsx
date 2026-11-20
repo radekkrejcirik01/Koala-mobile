@@ -7,18 +7,17 @@ import { HomeHeader } from '@components/home/HomeHeader/HomeHeader';
 import { HomeContent } from '@components/home/HomeContent/HomeContent';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
-import { OnlineService } from '@utils/general/OnlineService';
 import { HomeScreenStyle } from '@screens/account/HomeScreen/HomeScreen.style';
 
 export const HomeScreen = (): React.JSX.Element => {
   useNotifications();
   const { top } = useSafeAreaInsets();
 
+  // The unread chats badge refreshes as the socket reconnects, invites have
+  // no live event
   useAppState(() => {
-    NotificationsService.getUnreadChats();
     NotificationsService.getUnseenInvites();
     MessagingService.initMessaging().catch();
-    OnlineService.update();
   });
 
   return (

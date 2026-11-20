@@ -1,6 +1,5 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { useAppState } from '@hooks/useAppState';
 import { useTheme } from '@hooks/useTheme';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import {
@@ -9,9 +8,17 @@ import {
 } from '@components/chat/ChatHeader/ChatHeader.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { getRequest } from '@utils/Axios/Axios.service';
+import { LiveService } from '@utils/general/LiveService';
 import { ResponseLastOnlineGetInterface } from '@interfaces/response/Response.interface';
 import { getChatOnlineStatus } from '@functions/getChatOnlineStatus';
 import { BackButton } from '@components/general/BackButton/BackButton';
+import { LiveEventType } from '@enums/LiveEventType';
+
+interface OnlineStatus {
+  online: boolean;
+  // Last online in seconds
+  time?: number;
+}
 
 export const ChatHeader = ({
   chatUserId,
@@ -21,29 +28,43 @@ export const ChatHeader = ({
 }: ChatHeaderProps): JSX.Element => {
   const theme = useTheme();
 
-  const [showUsername, setShowUsername] = useState<boolean>(true);
-  const [lastOnline, setLastOnline] = useState<number>(0);
+  // Not loaded yet while undefined
+  const [status, setStatus] = useState<OnlineStatus>();
 
-  const getLastOnlineTime = useCallback(() => {
+  const getOnlineStatus = useCallback(() => {
     getRequest<ResponseLastOnlineGetInterface>(
       `last-online/${chatUserId}`
     ).subscribe((response: ResponseLastOnlineGetInterface) => {
-      if (response?.status && !!response?.time) {
-        setShowUsername(false);
-        setLastOnline(response?.time);
-
-        setTimeout(() => {
-          setShowUsername(true);
-        }, 7000);
-      }
+      // Fails for an ex-friend (403), whose status is hidden. Any failure
+      // keeps a status already shown
+      setStatus((prevState) =>
+        response?.status
+          ? { online: !!response.online, time: response.time }
+          : prevState ?? { online: false }
+      );
     });
   }, [chatUserId]);
 
-  useAppState(getLastOnlineTime);
-
   useEffect(() => {
-    getLastOnlineTime();
-  }, [getLastOnlineTime]);
+    getOnlineStatus();
+  }, [getOnlineStatus]);
+
+  // Presence may have changed while disconnected, also covers returning to
+  // the foreground as the socket reconnects then
+  useEffect(() => LiveService.onConnect(getOnlineStatus), [getOnlineStatus]);
+
+  useEffect(
+    () =>
+      LiveService.subscribe((event) => {
+        if (
+          event.type === LiveEventType.Presence &&
+          event.data.userId === chatUserId
+        ) {
+          setStatus({ online: event.data.online, time: event.data.lastOnline });
+        }
+      }),
+    [chatUserId]
+  );
 
   return (
     <View style={ChatHeaderStyle.container}>
@@ -66,7 +87,13 @@ export const ChatHeader = ({
               {name}
             </Text>
             <Text style={ChatHeaderStyle.usernameText}>
-              {showUsername ? username : getChatOnlineStatus(lastOnline)}
+              {
+                // Without a status the username fills the line, a space keeps
+                // its height until loaded
+                status
+                  ? getChatOnlineStatus(status.online, status.time) || username
+                  : ' '
+              }
             </Text>
           </View>
         </View>

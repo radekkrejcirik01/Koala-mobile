@@ -16,6 +16,7 @@ import { MessageType } from '@enums/MessageType';
 import { EmotionMessageItem } from '@components/chat/EmotionMessageItem/EmotionMessageItem';
 import { SupportOverlay } from '@components/chat/SupportOverlay/SupportOverlay';
 import { SupportTarget } from '@components/chat/SupportOverlay/SupportOverlay.props';
+import { TypingIndicator } from '@components/chat/TypingIndicator/TypingIndicator';
 import { getEmotionText } from '@functions/getEmotionText';
 import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
@@ -27,6 +28,7 @@ export const ChatList = ({
   listRef,
   messages,
   lastReadId,
+  typing,
   onSelectReaction,
   onPressSupport,
   onDeleteMessage,
@@ -156,7 +158,8 @@ export const ChatList = ({
         }
       : () => openReactions(value.id);
 
-    const isLast = index === 0;
+    // The typing indicator takes over the last message's bottom padding
+    const isLast = index === 0 && !typing;
 
     const marker = (
       <View style={ChatListStyle.lastReadView}>
@@ -177,7 +180,8 @@ export const ChatList = ({
             style={[
               ChatListStyle.emotionView,
               // The list is inverted, the message under it is the previous item
-              (isLast || messages[index - 1]?.type === MessageType.Message) &&
+              (index === 0 ||
+                messages[index - 1]?.type === MessageType.Message) &&
                 ChatListStyle.emotionViewBeforeMessage
             ]}
           >
@@ -236,7 +240,7 @@ export const ChatList = ({
                 ? messages[index - 1]?.senderId !== id
                 : messages[index - 1]?.senderId === id
             }
-            isLast={messages[0]?.id === value.id}
+            isLast={isLast}
             onLongPress={onLongPress}
             reaction={value?.reaction}
             name={name}
@@ -275,6 +279,12 @@ export const ChatList = ({
             showsVerticalScrollIndicator={false}
             contentContainerStyle={ChatListStyle.scrollViewContainer}
             renderItem={renderItem}
+            // The list is inverted, its header is under the last message
+            ListHeaderComponent={
+              typing ? (
+                <TypingIndicator name={name} profilePhoto={profilePhoto} />
+              ) : null
+            }
           />
         </View>
       </GestureDetector>

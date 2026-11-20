@@ -2,14 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import messaging, {
-  FirebaseMessagingTypes
-} from '@react-native-firebase/messaging';
 import moment from 'moment';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { FlashListRef } from '@shopify/flash-list';
-import { useAppState } from '@hooks/useAppState';
+import { useTypingSender } from '@hooks/useTypingSender';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
@@ -20,6 +17,7 @@ import {
   putRequest
 } from '@utils/Axios/Axios.service';
 import { NotificationsService } from '@utils/general/NotificationsService';
+import { LiveService } from '@utils/general/LiveService';
 import {
   ResponseFriendsGetInterface,
   ResponseInterface,
@@ -38,6 +36,7 @@ import { MessageType } from '@enums/MessageType';
 import { PAGE_SIZE } from '@constants/PAGE_SIZE';
 import { mergeLatestMessages } from '@functions/mergeLatestMessages';
 import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
+import { LiveEventType } from '@enums/LiveEventType';
 
 // Gap between the input and the open keyboard
 const KEYBOARD_INPUT_GAP = 5;
@@ -46,6 +45,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const { id: friendId } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
+  const typing = useSelector((state: ReducerProps) =>
+    state.live.typingIds.includes(friendId)
+  );
 
   const { top, bottom } = useSafeAreaInsets();
 
@@ -77,6 +79,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
   const listRef = useRef<FlashListRef<MessageInterface>>(null);
   const inputRef = useRef(null);
+
+  // The server ignores typing to an ex-friend
+  const { onTyping, stopTyping } = useTypingSender(friendId);
 
   // Opened from a push, the header needs the friend's name and photo
   useEffect(() => {
@@ -149,20 +154,81 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     loadMessages();
   }, [loadMessages]);
 
-  useEffect(
-    () =>
-      // On new message, reloading for any push as it may not carry the friend
-      messaging().onMessage(
-        (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-          if (remoteMessage) {
-            loadMessages();
-          }
+  // Changes may have been missed while disconnected, also covers returning
+  // to the foreground as the socket reconnects then
+  useEffect(() => LiveService.onConnect(loadMessages), [loadMessages]);
+
+  const addMessage = useCallback(
+    (received: MessageInterface) => {
+      setMessages((prevState) => {
+        if (prevState.some((item) => item.id === received.id)) {
+          return prevState;
         }
-      ),
-    [loadMessages]
+
+        const sending = prevState.filter((item) => item.id < 0);
+        const loaded = prevState.filter((item) => item.id > 0);
+
+        // Sent from this device before its response came, it replaces the
+        // oldest bubble with the same text
+        const tempId =
+          received.senderId === userId
+            ? sending
+                .slice()
+                .reverse()
+                .find((item) => item.message === received.message)?.id
+            : undefined;
+
+        return [
+          ...sending.filter((item) => item.id !== tempId),
+          received,
+          ...loaded
+        ];
+      });
+
+      // Read right away so they don't show as unread the next time the chat
+      // opens
+      if (received.senderId === friendId) {
+        markAsRead();
+      }
+    },
+    [friendId, markAsRead, userId]
   );
 
-  useAppState(loadMessages);
+  // Changes in this chat arrive live, from the friend and the user's devices
+  useEffect(
+    () =>
+      LiveService.subscribe((event) => {
+        if (!('friendId' in event.data) || event.data.friendId !== friendId) {
+          return;
+        }
+
+        switch (event.type) {
+          case LiveEventType.MessageNew:
+            addMessage(event.data.message);
+            break;
+          case LiveEventType.MessageDeleted: {
+            const { id } = event.data;
+            setMessages((prevState) =>
+              prevState.filter((item) => item.id !== id)
+            );
+            break;
+          }
+          case LiveEventType.MessageReaction: {
+            const { id, reaction } = event.data;
+            setMessages((prevState) =>
+              prevState.map((item) =>
+                item.id === id
+                  ? { ...item, reaction: reaction ?? undefined }
+                  : item
+              )
+            );
+            break;
+          }
+          default:
+        }
+      }),
+    [addMessage, friendId]
+  );
 
   const loadOlder = useCallback(() => {
     const oldest = messages[messages.length - 1];
@@ -197,11 +263,21 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     });
   }, [friendId, messages]);
 
+  const onChangeText = useCallback(
+    (value: string) => {
+      setMessage(value);
+      onTyping(value);
+    },
+    [onTyping]
+  );
+
   const onPressSend = useCallback(() => {
     const text = message.trim();
     if (!text) {
       return;
     }
+
+    stopTyping();
 
     // Shown right away under a temporary id until the server returns it
     const tempId = -moment().valueOf();
@@ -225,11 +301,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       const sent = response?.data;
 
       if (sent) {
-        // A refresh may have brought it already
+        // A refresh or the live event may have brought it already
         setMessages((prevState) =>
-          prevState
-            .filter((item) => item.id !== sent.id)
-            .map((item) => (item.id === tempId ? sent : item))
+          prevState.some((item) => item.id === sent.id)
+            ? prevState.filter((item) => item.id !== tempId)
+            : prevState.map((item) => (item.id === tempId ? sent : item))
         );
         return;
       }
@@ -240,7 +316,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       setMessage((value) => value || text);
       Alert.alert('Failed to send. Please try again.');
     });
-  }, [friendId, message, userId]);
+  }, [friendId, message, stopTyping, userId]);
 
   const sendReaction = useCallback(
     (reaction: string, messageId: number) => {
@@ -360,6 +436,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           listRef={listRef}
           messages={messages}
           lastReadId={lastReadId}
+          typing={typing}
           onSelectReaction={sendReaction}
           onPressSupport={sendSupport}
           onDeleteMessage={deleteMessage}
@@ -369,7 +446,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         />
         <ChatInput
           message={message}
-          onChangeText={setMessage}
+          onChangeText={onChangeText}
           onPressSend={onPressSend}
           inputRef={inputRef}
           onFocus={scrollToEnd}
