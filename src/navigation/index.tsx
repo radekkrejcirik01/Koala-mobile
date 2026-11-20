@@ -2,7 +2,11 @@ import React, { JSX } from 'react';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useTheme } from '@hooks/useTheme.ts';
 import { RootStackNavigator } from '@navigation/RootNavigator/RootStackNavigator';
-import { navigationRef } from '@utils/getCurrentRouteName.ts';
+import {
+  getCurrentRouteName,
+  navigationRef
+} from '@utils/getCurrentRouteName.ts';
+import { AnalyticsService } from '@utils/general/AnalyticsService';
 
 export const Navigation = (): JSX.Element => {
   const theme = useTheme();
@@ -15,8 +19,15 @@ export const Navigation = (): JSX.Element => {
     }
   };
 
+  const logScreen = () => AnalyticsService.logScreen(getCurrentRouteName());
+
   return (
-    <NavigationContainer ref={navigationRef} theme={THEME}>
+    <NavigationContainer
+      ref={navigationRef}
+      theme={THEME}
+      onReady={logScreen}
+      onStateChange={logScreen}
+    >
       <RootStackNavigator />
     </NavigationContainer>
   );

@@ -10,10 +10,12 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import store from '@store/index/index';
 import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
+import { AnalyticsService } from '@utils/general/AnalyticsService';
 import { TOAST_CONFIG } from '@constants/TOAST_CONFIG';
 
 const App = () => {
   useEffect(() => {
+    AnalyticsService.init();
     PreloadService.init().catch();
     if (Platform.OS === 'ios') {
       PushNotificationIOS.setApplicationIconBadgeNumber(0);
