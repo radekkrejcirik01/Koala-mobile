@@ -23,7 +23,8 @@
       android:supportsRtl="true">
       <meta-data
         android:name="google_analytics_automatic_screen_reporting_enabled"
-        android:value="false" />
+        android:value="false"
+        tools:replace="android:value" />
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
