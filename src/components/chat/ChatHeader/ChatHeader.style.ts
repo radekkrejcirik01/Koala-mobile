@@ -3,10 +3,10 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
   container: {
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingHorizontal: 16,
+    // Starts as far below the safe area as the Chats screen header
     paddingTop: 4,
-    paddingBottom: 5,
+    paddingBottom: 8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'

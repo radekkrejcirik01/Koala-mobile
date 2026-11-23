@@ -5,37 +5,38 @@ export const ChatListStyle = StyleSheet.create({
   container: {
     flex: 1
   },
+  // Bubbles sit close to the edges, like in other chat apps, sent ones the
+  // closest
   scrollViewContainer: {
-    paddingLeft: 12,
-    paddingRight: 10
+    paddingLeft: 14,
+    paddingRight: 8
   },
   separatorText: {
     alignSelf: 'center',
-    marginTop: 16,
+    marginTop: 24,
     marginBottom: 8,
     fontSize: 12,
     fontWeight: '500',
     color: COLORS.GRAY_200
   },
-  separatorTextAfterMessage: {
-    marginTop: 30
-  },
-  // Its time always sits right above it, the gap is kept below
+  // Its time always sits right above it, the gap is kept below, as much as
+  // above the time
   emotionView: {
-    paddingBottom: 12
+    paddingBottom: 24
   },
-  // A text message right under it gets more room
-  emotionViewBeforeMessage: {
-    paddingBottom: 30
+  // The time under it already has its room above
+  emotionViewBeforeTime: {
+    paddingBottom: 0
   },
-  lastItem: {
-    paddingBottom: 20
+  // The pill stands apart from the input, more room than under a message
+  lastEmotionView: {
+    paddingBottom: 40
   },
   lastReadView: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    marginVertical: 16,
+    marginVertical: 24,
     paddingHorizontal: 8
   },
   lastReadLine: {

@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const EmotionSliderStyle = StyleSheet.create({
   indicator: {
-    // Really bad on the left, Super good on the right
+    // Awful on the left, Super good on the right
     flexDirection: 'row-reverse',
     gap: 16,
     marginTop: 100

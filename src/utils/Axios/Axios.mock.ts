@@ -158,7 +158,7 @@ const CHATS: Chat[] = [
       {
         sharedBy: 5,
         emotion: EmotionType.ReallyBad,
-        feeling: 'Really bad',
+        feeling: 'Awful',
         minutesAgo: 95,
         messages: [
           [5, 'Thank you for checking in'],
@@ -285,7 +285,7 @@ const CHATS: Chat[] = [
       {
         sharedBy: 1,
         emotion: EmotionType.ReallyBad,
-        feeling: 'Really bad',
+        feeling: 'Awful',
         minutesAgo: DAY * 6,
         messages: [
           [8, 'Want to talk about it?'],

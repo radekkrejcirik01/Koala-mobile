@@ -9,13 +9,17 @@ export const ChatInputStyle = StyleSheet.create({
   },
   inputView: {
     flex: 1,
-    minHeight: 42,
-    marginLeft: 8,
-    marginRight: 6,
-    paddingVertical: 8,
+    // The smallest comfortable tap height, close to a one line message
+    minHeight: 44,
+    // With the container's margin, lined up with the bubbles of the list
+    marginLeft: 5,
+    marginRight: 1,
+    paddingVertical: 6,
     paddingLeft: 16,
-    paddingRight: 14,
-    borderRadius: 25,
+    // Keeps the send button 21 from the screen edge
+    paddingRight: 15,
+    // Rounded like the message bubbles
+    borderRadius: 22,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.BEIGE_200
@@ -31,7 +35,8 @@ export const ChatInputStyle = StyleSheet.create({
   sendButtonView: {
     padding: 5,
     borderRadius: 20,
-    backgroundColor: COLORS.BUTTON_BLUE
+    // Same as the own message bubbles
+    backgroundColor: COLORS.PURPLE
   },
   sendButtonIcon: {
     right: -1

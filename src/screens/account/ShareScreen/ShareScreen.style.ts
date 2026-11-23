@@ -33,14 +33,35 @@ export const ShareScreenStyle = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0
   },
+  // Under the emotion's message, opens it for editing
+  addMessageText: {
+    marginTop: 16,
+    // Takes back the extra room above, so the emotion stays where it was
+    marginBottom: -8,
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.BUTTON_BLUE
+  },
+  addMessageHidden: {
+    opacity: 0
+  },
   nextButtonView: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
-    paddingHorizontal: 30,
-    marginBottom: 30
+    paddingHorizontal: 20
   },
-  // Takes the rest of the row next to Log only
+  // Explains the two buttons above it
+  descriptionText: {
+    marginTop: 20,
+    marginBottom: 8,
+    paddingHorizontal: 20,
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: 'center',
+    color: COLORS.GRAY_200
+  },
+  // Takes the rest of the row next to Save
   nextButton: {
     flex: 1,
     width: undefined

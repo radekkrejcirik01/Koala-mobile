@@ -24,12 +24,16 @@ export const MessageItem = ({
   onLongPress,
   showSpace,
   isLast,
+  joinedAbove,
+  joinedBelow,
   reaction,
   name,
   profilePhoto,
   showPhoto
 }: MessageItemProps): React.JSX.Element => {
   const { colors } = useTheme().theme;
+
+  const isEmoji = isTextEmoji(children);
 
   const align = outbound
     ? MessageItemStyle.alignEnd
@@ -80,7 +84,16 @@ export const MessageItem = ({
             outbound && align,
             outbound
               ? MessageItemStyle.outboundContainer
-              : MessageItemStyle.inboundContainer
+              : MessageItemStyle.inboundContainer,
+            joinedAbove &&
+              (outbound
+                ? MessageItemStyle.joinedTopRight
+                : MessageItemStyle.joinedTopLeft),
+            joinedBelow &&
+              (outbound
+                ? MessageItemStyle.joinedBottomRight
+                : MessageItemStyle.joinedBottomLeft),
+            isEmoji && MessageItemStyle.emojiContainer
           ]}
         >
           <TouchableOpacity
@@ -94,7 +107,7 @@ export const MessageItem = ({
                 outbound
                   ? MessageItemStyle.outboundMessageText
                   : { color: colors.text },
-                isTextEmoji(children) && MessageItemStyle.largeText
+                isEmoji && MessageItemStyle.largeText
               ]}
             >
               {children}

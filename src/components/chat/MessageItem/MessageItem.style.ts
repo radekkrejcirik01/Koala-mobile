@@ -2,8 +2,10 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const TIME_WIDTH = 60;
-export const PHOTO_SIZE = 28;
+export const PHOTO_SIZE = 32;
 const PHOTO_GAP = 8;
+// Corners between messages of a group, on the sender's side
+const JOINED_RADIUS = 4;
 
 export const MessageItemStyle = StyleSheet.create({
   alignEnd: {
@@ -30,7 +32,7 @@ export const MessageItemStyle = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderRadius: 20
+    borderRadius: 22
   },
   outboundContainer: {
     backgroundColor: COLORS.PURPLE
@@ -38,22 +40,40 @@ export const MessageItemStyle = StyleSheet.create({
   inboundContainer: {
     backgroundColor: COLORS.BEIGE_200
   },
+  joinedTopRight: {
+    borderTopRightRadius: JOINED_RADIUS
+  },
+  joinedBottomRight: {
+    borderBottomRightRadius: JOINED_RADIUS
+  },
+  joinedTopLeft: {
+    borderTopLeftRadius: JOINED_RADIUS
+  },
+  joinedBottomLeft: {
+    borderBottomLeftRadius: JOINED_RADIUS
+  },
+  // A standalone emoji shows on its own, without the bubble and its padding
+  emojiContainer: {
+    backgroundColor: 'transparent',
+    paddingVertical: 0,
+    paddingHorizontal: 0
+  },
   messageText: {
-    fontSize: 15.5,
-    lineHeight: 20
+    fontSize: 15.75,
+    lineHeight: 20.5
   },
   outboundMessageText: {
     color: COLORS.WHITE
   },
   largeText: {
-    fontSize: 35,
-    lineHeight: 42
+    fontSize: 44,
+    lineHeight: 52
   },
   spaceHeight: {
     height: 10
   },
   lastItemPadding: {
-    paddingBottom: 45
+    paddingBottom: 8
   },
   reactionView: {
     width: 26,

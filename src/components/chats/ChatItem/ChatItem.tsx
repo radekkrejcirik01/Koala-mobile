@@ -21,7 +21,12 @@ export const ChatItem = ({
   const { friend, lastActivity, unread } = item;
 
   return (
-    <View style={ChatItemStyle.container}>
+    // The whole row opens the chat, with the photo and the room around it
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={onPress}
+      style={ChatItemStyle.container}
+    >
       <View style={ChatItemStyle.profileView}>
         <View style={ChatItemStyle.centerView}>
           <ProfilePhoto
@@ -30,11 +35,7 @@ export const ChatItem = ({
             size={48}
             acronymStyle={ChatItemStyle.profilePhoto}
           />
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={onPress}
-            style={ChatItemStyle.contentView}
-          >
+          <View style={ChatItemStyle.contentView}>
             <Text
               numberOfLines={1}
               style={[
@@ -77,10 +78,10 @@ export const ChatItem = ({
                 </Text>
               )}
             </View>
-          </TouchableOpacity>
+          </View>
           {unread && <View style={ChatItemStyle.newItem} />}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

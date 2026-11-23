@@ -2,9 +2,10 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ChatItemStyle = StyleSheet.create({
+  // Padding rather than margin, so the room between rows can be tapped too
   container: {
-    marginVertical: 12,
-    marginLeft: 10
+    paddingVertical: 12,
+    paddingLeft: 10
   },
   profileView: {
     flexDirection: 'row',

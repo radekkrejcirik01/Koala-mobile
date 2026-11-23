@@ -23,7 +23,7 @@ export const ShareSendScreenStyle = StyleSheet.create({
     color: COLORS.GRAY_200
   },
   sendButtonView: {
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     marginBottom: 30
   },
   // Same look as HomeButton, but full width

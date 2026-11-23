@@ -25,7 +25,7 @@ export const ChatInput = ({
     >
       <TouchableOpacity
         activeOpacity={1}
-        hitSlop={10}
+        hitSlop={20}
         onPress={() => inputRef.current.focus()}
         style={ChatInputStyle.inputView}
       >
@@ -34,7 +34,7 @@ export const ChatInput = ({
           autoCorrect={false}
           multiline
           onFocus={onFocus}
-          placeholder="New message..."
+          placeholder="Message..."
           placeholderTextColor={COLORS.LIGHTGRAY_100}
           value={message}
           onChangeText={onChangeText}

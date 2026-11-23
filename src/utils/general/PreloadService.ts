@@ -23,7 +23,7 @@ class PreloadServiceSingleton {
     if (token) {
       this.loadUserObject(true);
     } else {
-      await BootSplash.hide({ fade: true });
+      BootSplash.hide({ fade: true }).catch();
     }
   };
 

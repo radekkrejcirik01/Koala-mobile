@@ -112,7 +112,7 @@ export const ShareScreen = (): JSX.Element => {
         emotion: selectedConfig.type
       }
     ).subscribe((response: ResponseInterface) => {
-      // Keeps Logging... and then Done! on screen for a moment each, so
+      // Keeps Saving... and then Done! on screen for a moment each, so
       // the close doesn't feel abrupt when the request is quick
       if (response?.status === 'success') {
         const elapsed = Date.now() - startedAt;
@@ -125,7 +125,7 @@ export const ShareScreen = (): JSX.Element => {
       }
 
       setSending(false);
-      Alert.alert('Failed to log. Please try again.');
+      Alert.alert('Failed to save. Please try again.');
     });
   }, [
     dismiss,
@@ -149,7 +149,7 @@ export const ShareScreen = (): JSX.Element => {
         }
       ]}
     >
-      <ScreenHeader title="Emotions" />
+      <ScreenHeader title="How are we feeling?" />
       {/* Tapping anywhere outside the message closes the keyboard */}
       <Pressable
         accessible={false}
@@ -190,11 +190,23 @@ export const ShareScreen = (): JSX.Element => {
               </Text>
             </Pressable>
           )}
+          {/* Hidden while typing, it keeps its room so the emotion doesn't
+              move */}
+          <Pressable
+            hitSlop={20}
+            disabled={editingMessage}
+            onPress={() => setEditingMessage(true)}
+            style={editingMessage && ShareScreenStyle.addMessageHidden}
+          >
+            <Text style={ShareScreenStyle.addMessageText}>
+              {trimmedMessage ? 'Edit message' : 'Add message'}
+            </Text>
+          </Pressable>
         </EmotionSlider>
       </Pressable>
       <View style={ShareScreenStyle.nextButtonView}>
         <HomeButton
-          text={sent ? 'Done!' : sending ? 'Logging...' : 'Log only'}
+          text={sent ? 'Done!' : sending ? 'Saving...' : 'Save'}
           onPress={onLogOnly}
         />
         <HomeButton
@@ -203,6 +215,9 @@ export const ShareScreen = (): JSX.Element => {
           style={ShareScreenStyle.nextButton}
         />
       </View>
+      <Text style={ShareScreenStyle.descriptionText}>
+        Check mood tracker for your sharing history
+      </Text>
     </View>
   );
 };

@@ -21,6 +21,7 @@ import { getEmotionText } from '@functions/getEmotionText';
 import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
 import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
+import { isTextEmoji } from '@functions/isTextEmoji';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 
@@ -128,6 +129,19 @@ export const ChatList = ({
     [id]
   );
 
+  // Text messages of the same sender in a row read as one group, a big emoji
+  // has no bubble and breaks it
+  const isGrouped = (
+    message: MessageInterface,
+    other?: MessageInterface
+  ): boolean =>
+    !!other &&
+    message.type === MessageType.Message &&
+    other.type === MessageType.Message &&
+    message.senderId === other.senderId &&
+    !isTextEmoji(message.message) &&
+    !isTextEmoji(other.message);
+
   const renderItem = ({
     item: value,
     index
@@ -138,14 +152,7 @@ export const ChatList = ({
       value.type === MessageType.Emotion ||
       shouldShowChatSeparator(value.time, messages[index + 1]?.time);
     const separator = hasSeparator && (
-      <Text
-        style={[
-          ChatListStyle.separatorText,
-          value.type === MessageType.Emotion &&
-            messages[index + 1]?.type === MessageType.Message &&
-            ChatListStyle.separatorTextAfterMessage
-        ]}
-      >
+      <Text style={ChatListStyle.separatorText}>
         {getChatSeparatorTime(value.time)}
       </Text>
     );
@@ -173,16 +180,22 @@ export const ChatList = ({
 
     if (value.type === MessageType.Emotion) {
       return (
-        <View style={isLast && ChatListStyle.lastItem}>
+        <View>
           {markerAbove}
           {separator}
           <View
             style={[
               ChatListStyle.emotionView,
-              // The list is inverted, the message under it is the previous item
-              (index === 0 ||
-                messages[index - 1]?.type === MessageType.Message) &&
-                ChatListStyle.emotionViewBeforeMessage
+              // The list is inverted, the item under it is the previous one.
+              // A time under it, an emotion always has one, brings its own room
+              !!messages[index - 1] &&
+                (messages[index - 1].type === MessageType.Emotion ||
+                  shouldShowChatSeparator(
+                    messages[index - 1].time,
+                    value.time
+                  )) &&
+                ChatListStyle.emotionViewBeforeTime,
+              isLast && ChatListStyle.lastEmotionView
             ]}
           >
             <EmotionMessageItem
@@ -226,6 +239,22 @@ export const ChatList = ({
       );
     }
 
+    // The list is inverted, the message above is the next item. A time or the
+    // last read marker between them splits the group
+    const above = messages[index + 1];
+    const below = messages[index - 1];
+    const joinedAbove = isGrouped(value, above) && !separator && !markerAbove;
+    const timeBelow = !!below && shouldShowChatSeparator(below.time, value.time);
+    const joinedBelow = isGrouped(value, below) && !timeBelow && !markerBelow;
+
+    // Room when the sender changes. An emotion or a time under it has its own
+    // room, the typing indicator below the last message is the friend's
+    const showSpace = below
+      ? below.type === MessageType.Message &&
+        below.senderId !== value.senderId &&
+        !timeBelow
+      : typing && isOutbound(value.senderId);
+
     return (
       <>
         {markerAbove}
@@ -235,12 +264,10 @@ export const ChatList = ({
             outbound={isOutbound(value.senderId)}
             time={value.time}
             offset={timeOffset}
-            showSpace={
-              isOutbound(value.senderId)
-                ? messages[index - 1]?.senderId !== id
-                : messages[index - 1]?.senderId === id
-            }
+            showSpace={showSpace}
             isLast={isLast}
+            joinedAbove={joinedAbove}
+            joinedBelow={joinedBelow}
             onLongPress={onLongPress}
             reaction={value?.reaction}
             name={name}

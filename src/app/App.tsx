@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform, StatusBar, useColorScheme } from 'react-native';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -15,9 +15,15 @@ import { LiveService } from '@utils/general/LiveService';
 import { TOAST_CONFIG } from '@constants/TOAST_CONFIG';
 
 const App = () => {
+  // Navigation waits for the stored token so the right stack is the first
+  // one rendered, otherwise the switch from login to home animates on launch
+  const [ready, setReady] = useState<boolean>(false);
+
   useEffect(() => {
     AnalyticsService.init();
-    PreloadService.init().catch();
+    PreloadService.init()
+      .finally(() => setReady(true))
+      .catch();
     LiveService.init();
     if (Platform.OS === 'ios') {
       PushNotificationIOS.setApplicationIconBadgeNumber(0);
@@ -32,7 +38,7 @@ const App = () => {
             <SafeAreaProvider>
               <StatusBar barStyle="dark-content" translucent />
               <Provider store={store}>
-                <Navigation />
+                {ready && <Navigation />}
               </Provider>
             </SafeAreaProvider>
           </ActionSheetProvider>

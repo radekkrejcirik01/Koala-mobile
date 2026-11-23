@@ -30,7 +30,7 @@ export const EMOTIONS: EmotionConfig[] = [
   },
   {
     type: EmotionType.ReallyBad,
-    message: 'Really bad',
+    message: 'Awful',
     color: COLORS.EMOTION_MISERABLE
   }
 ];

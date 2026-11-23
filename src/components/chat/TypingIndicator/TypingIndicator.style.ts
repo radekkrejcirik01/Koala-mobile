@@ -5,12 +5,13 @@ import { PHOTO_SIZE } from '@components/chat/MessageItem/MessageItem.style';
 export const DOT_SIZE = 7;
 
 export const TypingIndicatorStyle = StyleSheet.create({
-  // Takes over the bottom padding of the last message
+  // Takes over the bottom padding of the last message. Spaced like a message
+  // of the friend, the room after an own message comes from that message
   container: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    marginTop: 10,
-    paddingBottom: 45
+    marginTop: 2,
+    paddingBottom: 8
   },
   photoView: {
     width: PHOTO_SIZE,
@@ -20,9 +21,10 @@ export const TypingIndicatorStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    height: 40,
+    // As tall and round as a one line message, the message replaces it
+    height: 40.5,
     paddingHorizontal: 14,
-    borderRadius: 20,
+    borderRadius: 22,
     backgroundColor: COLORS.BEIGE_200
   },
   dot: {
