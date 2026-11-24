@@ -9,7 +9,6 @@ import { ResponseChatEmotionsGetInterface } from '@interfaces/response/Response.
 import { MessageInterface } from '@interfaces/general.interface';
 import { ReducerProps } from '@store/index/index.props';
 import { PAGE_SIZE } from '@constants/PAGE_SIZE';
-import { getFriendName } from '@functions/getFriendName';
 import { ChatEmotionsScreenProps } from '@screens/account/ChatEmotionsScreen/ChatEmotionsScreen.props';
 import { ChatEmotionsScreenStyle } from '@screens/account/ChatEmotionsScreen/ChatEmotionsScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
@@ -96,7 +95,7 @@ export const ChatEmotionsScreen = ({
     },
     {
       senderId: friend.id,
-      label: getFriendName(friend),
+      label: friend.name,
       count: counts?.friend
     },
     { senderId: userId, label: 'You', count: counts?.user }
