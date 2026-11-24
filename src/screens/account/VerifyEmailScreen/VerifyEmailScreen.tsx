@@ -58,13 +58,14 @@ export const VerifyEmailScreen = ({
 
         trigger(HapticFeedbackTypes.notificationSuccess);
         dispatch(setEmailAction(email));
-        Toast.show({ type: 'success', text1: 'Email confirmed' });
 
         // Sign up is done, the app switches from the onboarding stack to Home
         if (onboarding) {
           dispatch(setEmailRequiredAction(false));
           return;
         }
+
+        Toast.show({ type: 'success', text1: 'Email confirmed' });
 
         // Back past EmailScreen to wherever it was opened from
         navigation.dispatch(StackActions.pop(2));

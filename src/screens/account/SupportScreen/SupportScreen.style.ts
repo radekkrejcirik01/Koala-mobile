@@ -15,11 +15,6 @@ export const SupportScreenStyle = StyleSheet.create({
     fontSize: 16,
     textAlignVertical: 'top'
   },
-  emailInput: {
-    height: 50,
-    paddingHorizontal: 14,
-    fontSize: 16
-  },
   button: {
     alignItems: 'stretch'
   },
