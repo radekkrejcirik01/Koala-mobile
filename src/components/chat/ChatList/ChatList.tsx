@@ -29,11 +29,15 @@ export const ChatList = ({
   listRef,
   messages,
   lastReadId,
+  highlightId,
+  bubbleColor,
+  backgroundColor,
   typing,
   onSelectReaction,
   onPressSupport,
   onDeleteMessage,
   onLoadOlder,
+  onLoadNewer,
   name,
   profilePhoto
 }: ChatListProps): React.JSX.Element => {
@@ -198,41 +202,45 @@ export const ChatList = ({
               isLast && ChatListStyle.lastEmotionView
             ]}
           >
-            <EmotionMessageItem
-              id={value.id}
-              emotion={value.emotion}
-              message={value.message}
-              outbound={isOutbound(value.senderId)}
-              time={value.time}
-              offset={timeOffset}
-              name={name}
-              supported={!!value.reaction}
-              lifted={liftedId === value.id}
-              showTapHint={tapHintId === value.id}
-              // Only the friend's emotions can be supported, and only once
-              onPressEmotion={
-                isOutbound(value.senderId) || value.reaction
-                  ? undefined
-                  : (layout) => {
-                      trigger(HapticFeedbackTypes.impactLight);
-                      if (showTapHint) {
-                        setShowTapHint(false);
-                        PersistStorage.setItem(
-                          PersistStorageKeys.SUPPORT_HINT_SEEN,
-                          '1'
-                        ).catch();
+            {/* Inside the padding, only the emotion itself is highlighted */}
+            <View style={highlightId === value.id && ChatListStyle.highlight}>
+              <EmotionMessageItem
+                id={value.id}
+                emotion={value.emotion}
+                message={value.message}
+                outbound={isOutbound(value.senderId)}
+                time={value.time}
+                offset={timeOffset}
+                name={name}
+                supported={!!value.reaction}
+                lifted={liftedId === value.id}
+                showTapHint={tapHintId === value.id}
+                backgroundColor={backgroundColor}
+                // Only the friend's emotions can be supported, and only once
+                onPressEmotion={
+                  isOutbound(value.senderId) || value.reaction
+                    ? undefined
+                    : (layout) => {
+                        trigger(HapticFeedbackTypes.impactLight);
+                        if (showTapHint) {
+                          setShowTapHint(false);
+                          PersistStorage.setItem(
+                            PersistStorageKeys.SUPPORT_HINT_SEEN,
+                            '1'
+                          ).catch();
+                        }
+                        setSupportTarget({
+                          id: value.id,
+                          emotion: value.emotion,
+                          ...layout,
+                          text:
+                            layout.text ??
+                            getEmotionText(value.message, false, name)
+                        });
                       }
-                      setSupportTarget({
-                        id: value.id,
-                        emotion: value.emotion,
-                        ...layout,
-                        text:
-                          layout.text ??
-                          getEmotionText(value.message, false, name)
-                      });
-                    }
-              }
-            />
+                }
+              />
+            </View>
           </View>
           {markerBelow}
         </View>
@@ -259,7 +267,11 @@ export const ChatList = ({
       <>
         {markerAbove}
         {separator}
-        <View ref={registerMessageRef(value.id)} collapsable={false}>
+        <View
+          ref={registerMessageRef(value.id)}
+          collapsable={false}
+          style={highlightId === value.id && ChatListStyle.highlight}
+        >
           <MessageItem
             outbound={isOutbound(value.senderId)}
             time={value.time}
@@ -272,6 +284,7 @@ export const ChatList = ({
             reaction={value?.reaction}
             name={name}
             profilePhoto={profilePhoto}
+            bubbleColor={bubbleColor}
             // The list is inverted, the next message is the previous item
             showPhoto={
               messages[index - 1]?.senderId !== value.senderId ||
@@ -294,9 +307,12 @@ export const ChatList = ({
             ref={listRef}
             inverted
             data={messages}
+            extraData={highlightId}
             keyExtractor={(item) => item.id.toString()}
             // The list is inverted, its end is the oldest message
             onEndReached={onLoadOlder}
+            // And its start the newest one
+            onStartReached={onLoadNewer}
             // Emotions and text messages differ a lot, only reuse rows of the
             // same kind
             getItemType={(item) => item.type}

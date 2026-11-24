@@ -24,6 +24,11 @@ export const ChatListStyle = StyleSheet.create({
   emotionView: {
     paddingBottom: 24
   },
+  // The message opened from search or shared emotions
+  highlight: {
+    borderRadius: 12,
+    backgroundColor: COLORS.BUTTON_BLUE_100
+  },
   // The time under it already has its room above
   emotionViewBeforeTime: {
     paddingBottom: 0

@@ -60,6 +60,7 @@ export const EmotionMessageItem = ({
   supported,
   lifted,
   showTapHint,
+  backgroundColor,
   onPressEmotion
 }: EmotionMessageItemProps): React.JSX.Element => {
   const pillRef = useRef<View>(null);
@@ -283,6 +284,7 @@ export const EmotionMessageItem = ({
                 <EmotionPill
                   emotion={emotion}
                   text={pillText}
+                  ringColor={backgroundColor}
                   textWidth={textWidth}
                   onTextSize={onTextSize}
                 />

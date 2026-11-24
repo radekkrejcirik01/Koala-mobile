@@ -4,6 +4,7 @@ import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { FriendListItemProps } from '@components/friends/FriendListItem/FriendListItem.props';
 import { FriendListItemStyle } from '@components/friends/FriendListItem/FriendListItem.style';
+import { getFriendName } from '@functions/getFriendName';
 
 export const FriendListItem = ({
   item,
@@ -46,7 +47,7 @@ export const FriendListItem = ({
           { color: theme.theme.colors.text }
         ]}
       >
-        {item.name}
+        {getFriendName(item)}
       </Text>
       <View
         style={[

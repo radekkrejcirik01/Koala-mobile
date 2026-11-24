@@ -8,6 +8,8 @@ export interface UserInterface {
   profilePhoto: string;
   // The confirmed account email, only on the logged in user
   email?: string;
+  // The logged in user's private nickname for a friend
+  nickname?: string;
 }
 
 export interface InviteInterface {
@@ -52,4 +54,11 @@ export interface SharedEmotionInterface {
   time: number;
   // Empty for emotions shared before recipients were recorded
   recipients?: UserInterface[];
+}
+
+// The logged in user's private settings for the chat with one friend
+export interface ChatSettingsInterface {
+  nickname?: string;
+  // A key of CHAT_THEMES
+  theme?: string;
 }

@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import {
@@ -24,7 +24,8 @@ export const ChatHeader = ({
   chatUserId,
   username,
   name,
-  profilePhoto
+  profilePhoto,
+  onPress
 }: ChatHeaderProps): JSX.Element => {
   const theme = useTheme();
 
@@ -70,7 +71,12 @@ export const ChatHeader = ({
     <View style={ChatHeaderStyle.container}>
       <View style={ChatHeaderStyle.centerRow}>
         <BackButton />
-        <View style={ChatHeaderStyle.contentContainer}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          disabled={!onPress}
+          onPress={onPress}
+          style={ChatHeaderStyle.contentContainer}
+        >
           <ProfilePhoto
             name={name}
             photo={profilePhoto}
@@ -96,7 +102,7 @@ export const ChatHeader = ({
               }
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

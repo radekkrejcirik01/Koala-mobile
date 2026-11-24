@@ -82,3 +82,9 @@ export interface ReactionPostInterface {
   // Null removes the reaction
   reaction: string | null;
 }
+
+// A missing field stays as it is, null removes it
+export interface ChatSettingsPostInterface {
+  nickname?: string | null;
+  theme?: string | null;
+}

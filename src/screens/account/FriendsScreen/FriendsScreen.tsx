@@ -36,6 +36,7 @@ import { Prompt } from '@components/general/Prompt/Prompt';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { InviteItem } from '@components/friends/InviteItem/InviteItem';
 import { setUnseenInvites } from '@store/NotificationsReducer';
+import { getFriendName } from '@functions/getFriendName';
 
 export const FriendsScreen = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -190,7 +191,9 @@ export const FriendsScreen = (): JSX.Element => {
               <TouchableOpacity
                 key={friend.id ?? friend.username}
                 activeOpacity={0.7}
-                onLongPress={() => openFriendActions(friend.id, friend.name)}
+                onLongPress={() =>
+                  openFriendActions(friend.id, getFriendName(friend))
+                }
                 style={FriendsScreenStyle.friendRow}
               >
                 <ProfilePhoto
@@ -206,7 +209,7 @@ export const FriendsScreen = (): JSX.Element => {
                       { color: colors.text }
                     ]}
                   >
-                    {friend.name}
+                    {getFriendName(friend)}
                   </Text>
                   <Text
                     numberOfLines={1}

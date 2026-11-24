@@ -9,6 +9,8 @@ export interface EmotionPillProps {
   text: string;
   // The friend's emotion that you haven't supported yet
   white?: boolean;
+  // The ring around the pill, matching the chat theme's background
+  ringColor?: string;
   // Narrows wrapped text to its longest line
   textWidth?: number;
   onTextLayout?: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;

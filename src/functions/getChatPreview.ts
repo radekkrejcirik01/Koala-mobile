@@ -2,6 +2,7 @@ import { ChatInterface } from '@interfaces/general.interface';
 import { MessageType } from '@enums/MessageType';
 import { ChatActivityType } from '@enums/ChatActivityType';
 import { getShortMessage } from '@functions/getShortMessage';
+import { getFriendName } from '@functions/getFriendName';
 
 export function getChatPreview(chat: ChatInterface, userId: number): string {
   const { type, userId: activityUserId, message } = chat.lastActivity;
@@ -12,7 +13,7 @@ export function getChatPreview(chat: ChatInterface, userId: number): string {
       : message.message;
 
   if (type === ChatActivityType.Reaction) {
-    const who = outbound ? 'You' : chat.friend.name;
+    const who = outbound ? 'You' : getFriendName(chat.friend);
 
     // A reaction on an emotion is support
     return message.type === MessageType.Emotion

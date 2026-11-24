@@ -9,6 +9,7 @@ export const EmotionPill = ({
   emotion,
   text,
   white,
+  ringColor,
   textWidth,
   onTextLayout,
   onTextSize
@@ -16,6 +17,7 @@ export const EmotionPill = ({
   <View
     style={[
       EmotionMessageItemStyle.badgeOuter,
+      !!ringColor && { backgroundColor: ringColor },
       white && EmotionMessageItemStyle.badgeOuterWhite
     ]}
   >

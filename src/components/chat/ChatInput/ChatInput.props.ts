@@ -7,4 +7,7 @@ export interface ChatInputProps {
   onPressSend: () => void;
   inputRef: RefObject<TextInput>;
   onFocus: () => void;
+  // The chat theme's colors, the app's defaults when not set
+  backgroundColor?: string;
+  sendButtonColor?: string;
 }

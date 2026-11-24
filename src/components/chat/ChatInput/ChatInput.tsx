@@ -12,7 +12,9 @@ export const ChatInput = ({
   onChangeText,
   onPressSend,
   inputRef,
-  onFocus
+  onFocus,
+  backgroundColor,
+  sendButtonColor
 }: ChatInputProps): React.JSX.Element => {
   const theme = useTheme();
 
@@ -20,7 +22,7 @@ export const ChatInput = ({
     <View
       style={[
         ChatInputStyle.inputContainer,
-        { backgroundColor: theme.theme.colors.background }
+        { backgroundColor: backgroundColor ?? theme.theme.colors.background }
       ]}
     >
       <TouchableOpacity
@@ -46,7 +48,10 @@ export const ChatInput = ({
           disabled={!message.trim()}
           hitSlop={10}
           onPress={onPressSend}
-          style={ChatInputStyle.sendButtonView}
+          style={[
+            ChatInputStyle.sendButtonView,
+            !!sendButtonColor && { backgroundColor: sendButtonColor }
+          ]}
         >
           <Icon
             name={IconEnum.SEND}

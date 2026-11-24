@@ -7,6 +7,7 @@ import { ChatItemStyle } from '@components/chats/ChatItem/ChatItem.style';
 import { ChatItemProps } from '@components/chats/ChatItem/ChatItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getChatPreview } from '@functions/getChatPreview';
+import { getFriendName } from '@functions/getFriendName';
 import { ReducerProps } from '@store/index/index.props';
 
 export const ChatItem = ({
@@ -46,7 +47,7 @@ export const ChatItem = ({
                 }
               ]}
             >
-              {friend.name}
+              {getFriendName(friend)}
             </Text>
             <View style={ChatItemStyle.messageView}>
               <Text

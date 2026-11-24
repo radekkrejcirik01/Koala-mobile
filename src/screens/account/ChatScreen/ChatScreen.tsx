@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import moment from 'moment';
@@ -7,6 +7,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { FlashListRef } from '@shopify/flash-list';
 import { useTypingSender } from '@hooks/useTypingSender';
+import { useNavigation } from '@hooks/useNavigation';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
@@ -19,6 +20,7 @@ import {
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { LiveService } from '@utils/general/LiveService';
 import {
+  ResponseChatSettingsGetInterface,
   ResponseFriendsGetInterface,
   ResponseInterface,
   ResponseMessagePostInterface,
@@ -29,7 +31,10 @@ import {
   ReactionPostInterface
 } from '@interfaces/post/Post.interface';
 import { ReducerProps } from '@store/index/index.props';
-import { MessageInterface } from '@interfaces/general.interface';
+import {
+  ChatSettingsInterface,
+  MessageInterface
+} from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { MessageType } from '@enums/MessageType';
@@ -37,12 +42,18 @@ import { PAGE_SIZE } from '@constants/PAGE_SIZE';
 import { mergeLatestMessages } from '@functions/mergeLatestMessages';
 import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
 import { LiveEventType } from '@enums/LiveEventType';
+import { getChatTheme } from '@constants/CHAT_THEMES';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 
 // Gap between the input and the open keyboard
 const KEYBOARD_INPUT_GAP = 5;
 
+// How long a message opened from search stays highlighted
+const HIGHLIGHT_DURATION = 2000;
+
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
-  const { id: friendId } = route.params;
+  const { id: friendId, jump } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
   const typing = useSelector((state: ReducerProps) =>
@@ -70,10 +81,18 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   // Read position from before the chat was opened, kept while it stays open
   // as later loads already return the position moved by markAsRead
   const [lastReadId, setLastReadId] = useState<number>();
+  // Nickname and theme, undefined until loaded
+  const [settings, setSettings] = useState<ChatSettingsInterface>();
+  // Opened at an older message, newer ones load when scrolling down
+  const [atLatest, setAtLatest] = useState<boolean>(!jump);
+  const [highlightId, setHighlightId] = useState<number>();
 
   const hasOlder = useRef<boolean>(false);
   const lastReadLoaded = useRef<boolean>(false);
   const loadingOlder = useRef<boolean>(false);
+  const loadingNewer = useRef<boolean>(false);
+  // Read in callbacks that shouldn't change with it
+  const atLatestRef = useRef<boolean>(!jump);
   // Emotions whose support is still being sent, a refresh keeps them supported
   const supportingIds = useRef<Set<number>>(new Set());
 
@@ -82,6 +101,31 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
   // The server ignores typing to an ex-friend
   const { onTyping, stopTyping } = useTypingSender(friendId);
+
+  // Changed in the chat settings, reloaded when coming back from them
+  const loadSettings = useCallback(() => {
+    getRequest<ResponseChatSettingsGetInterface>(
+      `chats/${friendId}/settings`
+    ).subscribe((response: ResponseChatSettingsGetInterface) => {
+      if (response?.status) {
+        setSettings(response.data ?? {});
+      }
+    });
+  }, [friendId]);
+
+  const { navigateTo } = useNavigation(
+    RootStackNavigatorEnum.AccountStack,
+    loadSettings
+  );
+
+  const name =
+    (settings ? settings.nickname : friend.nickname) || friend.name || '';
+  const chatTheme = getChatTheme(settings?.theme);
+
+  const setLatest = useCallback((value: boolean) => {
+    atLatestRef.current = value;
+    setAtLatest(value);
+  }, []);
 
   // Opened from a push, the header needs the friend's name and photo
   useEffect(() => {
@@ -112,6 +156,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   }, [friendId]);
 
   const loadMessages = useCallback(() => {
+    // Opened at an older message, the newest page doesn't connect to it
+    if (!atLatestRef.current) {
+      return;
+    }
+
     getRequest<ResponseMessagesGetInterface>(
       `chats/${friendId}/messages`
     ).subscribe((response: ResponseMessagesGetInterface) => {
@@ -194,6 +243,47 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     [friendId, markAsRead, userId]
   );
 
+  // Shows the messages around the one opened from search or shared emotions
+  useEffect(() => {
+    if (!jump) {
+      return undefined;
+    }
+
+    // Newest first, the messages before it are newer
+    const index = Math.max(
+      jump.messages.findIndex((item) => item.id === jump.id),
+      0
+    );
+    hasOlder.current = jump.messages.length - index - 1 >= PAGE_SIZE;
+    setLatest(index < PAGE_SIZE);
+    setMessages(jump.messages);
+    setHighlightId(jump.id);
+    markAsRead();
+
+    setTimeout(() => {
+      listRef?.current?.scrollToIndex({
+        index,
+        viewPosition: 0.5,
+        animated: false
+      });
+    }, 100);
+
+    const timer = setTimeout(
+      () => setHighlightId(undefined),
+      HIGHLIGHT_DURATION
+    );
+    return () => clearTimeout(timer);
+  }, [jump, markAsRead, setLatest]);
+
+  const jumpToLatest = useCallback(() => {
+    setLatest(true);
+    setHighlightId(undefined);
+    // Messages still being sent stay, the newest page goes under them
+    setMessages((prevState) => prevState.filter((item) => item.id < 0));
+    loadMessages();
+    scrollToEnd();
+  }, [loadMessages, setLatest]);
+
   // Changes in this chat arrive live, from the friend and the user's devices
   useEffect(
     () =>
@@ -204,7 +294,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
         switch (event.type) {
           case LiveEventType.MessageNew:
-            addMessage(event.data.message);
+            // Opened at an older message, it waits behind Jump to latest
+            if (atLatestRef.current) {
+              addMessage(event.data.message);
+            }
             break;
           case LiveEventType.MessageDeleted: {
             const { id } = event.data;
@@ -263,6 +356,41 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     });
   }, [friendId, messages]);
 
+  // Opened at an older message, scrolling down loads the newer ones
+  const loadNewer = useCallback(() => {
+    const newest = messages.find((item) => item.id > 0);
+
+    if (atLatestRef.current || loadingNewer.current || !newest) {
+      return;
+    }
+
+    loadingNewer.current = true;
+    getRequest<ResponseMessagesGetInterface>(
+      `chats/${friendId}/messages?firstId=${newest.id}`
+    ).subscribe((response: ResponseMessagesGetInterface) => {
+      loadingNewer.current = false;
+
+      if (response?.status) {
+        const data = response.data ?? [];
+
+        setMessages((prevState) => {
+          // Jumped elsewhere meanwhile, this page no longer connects
+          if (prevState.find((item) => item.id > 0)?.id !== newest.id) {
+            return prevState;
+          }
+
+          return data
+            .filter((item) => !prevState.some(({ id }) => id === item.id))
+            .concat(prevState);
+        });
+
+        if (data.length < PAGE_SIZE) {
+          setLatest(true);
+        }
+      }
+    });
+  }, [friendId, messages, setLatest]);
+
   const onChangeText = useCallback(
     (value: string) => {
       setMessage(value);
@@ -278,6 +406,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     }
 
     stopTyping();
+
+    // Sent from an older part of the chat, it shows under the newest messages
+    if (!atLatestRef.current) {
+      jumpToLatest();
+    }
 
     // Shown right away under a temporary id until the server returns it
     const tempId = -moment().valueOf();
@@ -316,7 +449,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       setMessage((value) => value || text);
       Alert.alert('Failed to send. Please try again.');
     });
-  }, [friendId, message, stopTyping, userId]);
+  }, [friendId, jumpToLatest, message, stopTyping, userId]);
 
   const sendReaction = useCallback(
     (reaction: string, messageId: number) => {
@@ -424,32 +557,70 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   );
 
   return (
-    <View style={[ChatScreenStyle.container, { paddingTop: top }]}>
+    <View
+      style={[
+        ChatScreenStyle.container,
+        { paddingTop: top },
+        !!chatTheme.background && { backgroundColor: chatTheme.background }
+      ]}
+    >
       <ChatHeader
         chatUserId={friendId}
         username={friend.username ?? ''}
-        name={friend.name ?? ''}
+        name={name}
         profilePhoto={friend.profilePhoto}
+        onPress={
+          friend.name
+            ? () =>
+                navigateTo(AccountStackNavigatorEnum.ChatSettingsScreen, {
+                  friend: {
+                    id: friendId,
+                    name: friend.name,
+                    username: friend.username,
+                    profilePhoto: friend.profilePhoto
+                  }
+                })
+            : undefined
+        }
       />
       <Animated.View style={[ChatScreenStyle.chatView, chatViewStyle]}>
-        <ChatList
-          listRef={listRef}
-          messages={messages}
-          lastReadId={lastReadId}
-          typing={typing}
-          onSelectReaction={sendReaction}
-          onPressSupport={sendSupport}
-          onDeleteMessage={deleteMessage}
-          onLoadOlder={loadOlder}
-          name={friend.name ?? ''}
-          profilePhoto={friend.profilePhoto}
-        />
+        <View style={ChatScreenStyle.chatView}>
+          <ChatList
+            listRef={listRef}
+            messages={messages}
+            lastReadId={lastReadId}
+            highlightId={highlightId}
+            bubbleColor={chatTheme.bubble}
+            backgroundColor={chatTheme.background}
+            // Newer messages show only once the newest ones are loaded
+            typing={typing && atLatest}
+            onSelectReaction={sendReaction}
+            onPressSupport={sendSupport}
+            onDeleteMessage={deleteMessage}
+            onLoadOlder={loadOlder}
+            onLoadNewer={loadNewer}
+            name={name}
+            profilePhoto={friend.profilePhoto}
+          />
+          {!atLatest && (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={jumpToLatest}
+              accessibilityLabel="Jump to latest"
+              style={ChatScreenStyle.latestButton}
+            >
+              <Text style={ChatScreenStyle.latestText}>↓</Text>
+            </TouchableOpacity>
+          )}
+        </View>
         <ChatInput
           message={message}
           onChangeText={onChangeText}
           onPressSend={onPressSend}
           inputRef={inputRef}
           onFocus={scrollToEnd}
+          backgroundColor={chatTheme.background}
+          sendButtonColor={chatTheme.bubble}
         />
       </Animated.View>
     </View>

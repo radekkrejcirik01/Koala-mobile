@@ -22,6 +22,12 @@ import { VerifyEmailScreen } from '@screens/account/VerifyEmailScreen/VerifyEmai
 import { ThemeScreen } from '@screens/account/ThemeScreen/ThemeScreen';
 import { AnalyticsScreen } from '@screens/account/AnalyticsScreen/AnalyticsScreen';
 import { SharedEmotionScreen } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen';
+import { ChatSettingsScreen } from '@screens/account/ChatSettingsScreen/ChatSettingsScreen';
+import { ChatNicknameScreen } from '@screens/account/ChatNicknameScreen/ChatNicknameScreen';
+import { ChatThemeScreen } from '@screens/account/ChatThemeScreen/ChatThemeScreen';
+import { ChatSearchScreen } from '@screens/account/ChatSearchScreen/ChatSearchScreen';
+import { ChatEmotionsScreen } from '@screens/account/ChatEmotionsScreen/ChatEmotionsScreen';
+import { ChatMoodScreen } from '@screens/account/ChatMoodScreen/ChatMoodScreen';
 import { ShareStackNavigator } from '@navigation/StackNavigators/share/ShareStackNavigator';
 
 const Account = createNativeStackNavigator<ParamListBase>();
@@ -115,6 +121,36 @@ export const AccountStackNavigator = (): React.JSX.Element => (
       // A chat per friend, opening another friend's chat from a push pushes
       // a new screen instead of reusing the open one with new params
       getId={({ params }) => String((params as { id?: number })?.id)}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ChatSettingsScreen}
+      component={ChatSettingsScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ChatNicknameScreen}
+      component={ChatNicknameScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ChatThemeScreen}
+      component={ChatThemeScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ChatSearchScreen}
+      component={ChatSearchScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ChatEmotionsScreen}
+      component={ChatEmotionsScreen as unknown as React.ComponentType}
+      options={NoHeader}
+    />
+    <Account.Screen
+      name={AccountStackNavigatorEnum.ChatMoodScreen}
+      component={ChatMoodScreen as unknown as React.ComponentType}
+      options={NoHeader}
     />
     <Account.Screen
       name={AccountStackNavigatorEnum.SupportScreen}

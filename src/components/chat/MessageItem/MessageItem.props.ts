@@ -18,4 +18,6 @@ export interface MessageItemProps {
   name: string;
   profilePhoto?: string;
   showPhoto: boolean;
+  // The chat theme's color of outbound bubbles, the default purple when not set
+  bubbleColor?: string;
 }

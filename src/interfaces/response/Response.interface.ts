@@ -1,5 +1,6 @@
 import {
   ChatInterface,
+  ChatSettingsInterface,
   InviteInterface,
   MessageInterface,
   SharedEmotionInterface,
@@ -84,4 +85,19 @@ export interface ResponseEmotionsGetInterface {
   status: string;
   message: string;
   data?: SharedEmotionInterface[];
+}
+
+export interface ResponseChatSettingsGetInterface {
+  status: string;
+  message: string;
+  data?: ChatSettingsInterface;
+}
+
+export interface ResponseChatEmotionsGetInterface {
+  status: string;
+  message: string;
+  data?: MessageInterface[];
+  // Only on the first page, whatever the sender filter
+  userCount?: number;
+  friendCount?: number;
 }

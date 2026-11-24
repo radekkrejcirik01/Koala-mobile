@@ -29,7 +29,8 @@ export const MessageItem = ({
   reaction,
   name,
   profilePhoto,
-  showPhoto
+  showPhoto,
+  bubbleColor
 }: MessageItemProps): React.JSX.Element => {
   const { colors } = useTheme().theme;
 
@@ -85,6 +86,7 @@ export const MessageItem = ({
             outbound
               ? MessageItemStyle.outboundContainer
               : MessageItemStyle.inboundContainer,
+            outbound && !!bubbleColor && { backgroundColor: bubbleColor },
             joinedAbove &&
               (outbound
                 ? MessageItemStyle.joinedTopRight
