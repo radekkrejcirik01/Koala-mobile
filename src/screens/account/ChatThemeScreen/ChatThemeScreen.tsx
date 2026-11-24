@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useTheme } from '@hooks/useTheme';
 import { getRequest, putRequest } from '@utils/Axios/Axios.service';
+import { ChatThemeCache } from '@utils/general/ChatThemeCache';
 import {
   ResponseChatSettingsGetInterface,
   ResponseInterface
@@ -60,7 +61,13 @@ export const ChatThemeScreen = ({
         if (!response?.status) {
           setSelectedKey(previousKey);
           Alert.alert('Failed to change the theme. Please try again.');
+          return;
         }
+
+        ChatThemeCache.set(
+          friend.id,
+          key === DEFAULT_CHAT_THEME.key ? undefined : key
+        );
       });
     },
     [friend.id, selectedKey]

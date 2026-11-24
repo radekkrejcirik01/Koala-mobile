@@ -19,6 +19,7 @@ import {
 } from '@utils/Axios/Axios.service';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { LiveService } from '@utils/general/LiveService';
+import { ChatThemeCache } from '@utils/general/ChatThemeCache';
 import {
   ResponseChatSettingsGetInterface,
   ResponseFriendsGetInterface,
@@ -109,6 +110,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     ).subscribe((response: ResponseChatSettingsGetInterface) => {
       if (response?.status) {
         setSettings(response.data ?? {});
+        ChatThemeCache.set(friendId, response.data?.theme);
       }
     });
   }, [friendId]);
@@ -120,7 +122,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
   const name =
     (settings ? settings.nickname : friend.nickname) || friend.name || '';
-  const chatTheme = getChatTheme(settings?.theme);
+  // The cached theme until the settings load, so the chat doesn't flicker
+  const chatTheme = getChatTheme(
+    settings ? settings.theme : ChatThemeCache.get(friendId)
+  );
 
   const setLatest = useCallback((value: boolean) => {
     atLatestRef.current = value;

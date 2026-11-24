@@ -11,12 +11,14 @@ import { getRequest } from '@utils/Axios/Axios.service';
 import { ResponseUserGetInterface } from '@interfaces/response/Response.interface';
 import { MessagingService } from '@utils/general/MessagingService';
 import { NotificationsService } from '@utils/general/NotificationsService';
+import { ChatThemeCache } from '@utils/general/ChatThemeCache';
 import { Images } from '@enums/images';
 
 class PreloadServiceSingleton {
   init = async () => {
     const token = await PersistStorage.getItem(PersistStorageKeys.TOKEN);
     const image = await PersistStorage.getItem(PersistStorageKeys.IMAGE);
+    await ChatThemeCache.load();
     store.dispatch(setUserToken(token));
     store.dispatch(setImageAction(image || Images.ROOM));
 
