@@ -8,6 +8,7 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { SharedEmotionScreenProps } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen.props';
 import { SharedEmotionScreenStyle } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen.style';
+import { getFriendName } from '@functions/getFriendName';
 
 // Presented as a modal from the Analytics history, like the Share screen
 export const SharedEmotionScreen = ({
@@ -60,7 +61,7 @@ export const SharedEmotionScreen = ({
               style={SharedEmotionScreenStyle.recipientView}
             >
               <ProfilePhoto
-                name={recipient.name}
+                name={getFriendName(recipient)}
                 photo={recipient.profilePhoto}
                 size={40}
                 style={SharedEmotionScreenStyle.profilePhoto}
@@ -74,7 +75,7 @@ export const SharedEmotionScreen = ({
                   { color: colors.text }
                 ]}
               >
-                {recipient.name}
+                {getFriendName(recipient)}
               </Text>
             </View>
           ))
