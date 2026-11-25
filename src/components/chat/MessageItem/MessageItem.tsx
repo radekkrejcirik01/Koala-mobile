@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedStyle
@@ -8,6 +8,7 @@ import moment from 'moment';
 import { useTheme } from '@hooks/useTheme';
 import { getLocalTime } from '@functions/getLocalTime';
 import { isTextEmoji } from '@functions/isTextEmoji';
+import { getReplyText } from '@functions/getReplyText';
 import { MessageItemProps } from '@components/chat/MessageItem/MessageItem.props';
 import {
   MessageItemStyle,
@@ -15,6 +16,9 @@ import {
   TIME_WIDTH
 } from '@components/chat/MessageItem/MessageItem.style';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
+
+// Messages of a group sit 2pt apart, so it reaches further to the free sides
+const BUBBLE_HIT_SLOP = { top: 4, bottom: 4, left: 16, right: 16 };
 
 export const MessageItem = ({
   children,
@@ -30,7 +34,11 @@ export const MessageItem = ({
   name,
   profilePhoto,
   showPhoto,
-  bubbleColor
+  bubbleColor,
+  replyTo,
+  replyName,
+  onPressReply,
+  contentRef
 }: MessageItemProps): React.JSX.Element => {
   const { colors } = useTheme().theme;
 
@@ -61,47 +69,91 @@ export const MessageItem = ({
     <Animated.View
       style={[isLast && MessageItemStyle.lastItemPadding, contentStyle]}
     >
-      <View
-        style={[
-          MessageItemStyle.bubbleRow,
-          !outbound && MessageItemStyle.inboundRow
-        ]}
-      >
-        {/* Inbound bubbles keep the photo's room so they stay aligned */}
-        {!outbound && (
-          <View style={MessageItemStyle.photoView}>
-            {showPhoto && (
-              <ProfilePhoto
-                name={name}
-                photo={profilePhoto}
-                size={PHOTO_SIZE}
-              />
+      {/* The bubble with its reaction, without the room around them */}
+      <View ref={contentRef} collapsable={false}>
+        {/* The quoted message, a faded bubble tucked under the reply */}
+        {!!replyTo && (
+          <Pressable
+            disabled={replyTo.deleted}
+            delayLongPress={120}
+            onPress={onPressReply}
+            onLongPress={onLongPress}
+            style={[
+              MessageItemStyle.quoteView,
+              outbound ? align : MessageItemStyle.inboundQuoteView,
+              !isEmoji && MessageItemStyle.quoteViewTucked
+            ]}
+          >
+            {replyTo.deleted ? (
+              <Text
+                style={[
+                  MessageItemStyle.quoteText,
+                  MessageItemStyle.quoteDeletedText,
+                  { color: colors.text }
+                ]}
+              >
+                Original message deleted
+              </Text>
+            ) : (
+              <>
+                <Text
+                  numberOfLines={1}
+                  style={[MessageItemStyle.quoteName, { color: colors.text }]}
+                >
+                  {replyName}
+                </Text>
+                <Text
+                  numberOfLines={2}
+                  style={[MessageItemStyle.quoteText, { color: colors.text }]}
+                >
+                  {getReplyText(replyTo)}
+                </Text>
+              </>
             )}
-          </View>
+          </Pressable>
         )}
         <View
           style={[
-            MessageItemStyle.container,
-            outbound && align,
-            outbound
-              ? MessageItemStyle.outboundContainer
-              : MessageItemStyle.inboundContainer,
-            outbound && !!bubbleColor && { backgroundColor: bubbleColor },
-            joinedAbove &&
-              (outbound
-                ? MessageItemStyle.joinedTopRight
-                : MessageItemStyle.joinedTopLeft),
-            joinedBelow &&
-              (outbound
-                ? MessageItemStyle.joinedBottomRight
-                : MessageItemStyle.joinedBottomLeft),
-            isEmoji && MessageItemStyle.emojiContainer
+            MessageItemStyle.bubbleRow,
+            !outbound && MessageItemStyle.inboundRow
           ]}
         >
+          {/* Inbound bubbles keep the photo's room so they stay aligned */}
+          {!outbound && (
+            <View style={MessageItemStyle.photoView}>
+              {showPhoto && (
+                <ProfilePhoto
+                  name={name}
+                  photo={profilePhoto}
+                  size={PHOTO_SIZE}
+                />
+              )}
+            </View>
+          )}
+          {/* The whole bubble and a little around it can be long-pressed, not
+            just its text */}
           <TouchableOpacity
             activeOpacity={1}
             delayLongPress={120}
             onLongPress={onLongPress}
+            hitSlop={BUBBLE_HIT_SLOP}
+            style={[
+              MessageItemStyle.container,
+              outbound && align,
+              outbound
+                ? MessageItemStyle.outboundContainer
+                : MessageItemStyle.inboundContainer,
+              outbound && !!bubbleColor && { backgroundColor: bubbleColor },
+              joinedAbove &&
+                (outbound
+                  ? MessageItemStyle.joinedTopRight
+                  : MessageItemStyle.joinedTopLeft),
+              joinedBelow &&
+                (outbound
+                  ? MessageItemStyle.joinedBottomRight
+                  : MessageItemStyle.joinedBottomLeft),
+              isEmoji && MessageItemStyle.emojiContainer
+            ]}
           >
             <Text
               style={[
@@ -115,25 +167,25 @@ export const MessageItem = ({
               {children}
             </Text>
           </TouchableOpacity>
+          <Animated.View
+            style={[MessageItemStyle.timeView, timeStyle]}
+            pointerEvents="none"
+          >
+            <Text style={MessageItemStyle.timeText}>{localTime}</Text>
+          </Animated.View>
         </View>
-        <Animated.View
-          style={[MessageItemStyle.timeView, timeStyle]}
-          pointerEvents="none"
-        >
-          <Text style={MessageItemStyle.timeText}>{localTime}</Text>
-        </Animated.View>
+        {!!reaction && (
+          <View
+            style={[
+              MessageItemStyle.reactionView,
+              align,
+              !outbound && MessageItemStyle.inboundReactionView
+            ]}
+          >
+            <Text style={MessageItemStyle.reactionText}>{reaction}</Text>
+          </View>
+        )}
       </View>
-      {!!reaction && (
-        <View
-          style={[
-            MessageItemStyle.reactionView,
-            align,
-            !outbound && MessageItemStyle.inboundReactionView
-          ]}
-        >
-          <Text style={MessageItemStyle.reactionText}>{reaction}</Text>
-        </View>
-      )}
       {showSpace && <View style={MessageItemStyle.spaceHeight} />}
     </Animated.View>
   );

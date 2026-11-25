@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const TIME_WIDTH = 60;
 export const PHOTO_SIZE = 32;
-const PHOTO_GAP = 8;
+export const PHOTO_GAP = 8;
 // Corners between messages of a group, on the sender's side
 const JOINED_RADIUS = 4;
 
@@ -57,6 +57,39 @@ export const MessageItemStyle = StyleSheet.create({
     backgroundColor: 'transparent',
     paddingVertical: 0,
     paddingHorizontal: 0
+  },
+  // The quoted message above the reply, faded so the reply stands out
+  quoteView: {
+    maxWidth: '65%',
+    marginTop: 4,
+    paddingTop: 7,
+    paddingBottom: 7,
+    paddingHorizontal: 12,
+    borderRadius: 18,
+    backgroundColor: COLORS.BEIGE_200,
+    opacity: 0.6
+  },
+  // Lined up with the inbound bubble, after the photo's room
+  inboundQuoteView: {
+    alignSelf: 'flex-start',
+    marginLeft: PHOTO_SIZE + PHOTO_GAP
+  },
+  // The reply's bubble covers its bottom edge, a big emoji has no bubble
+  quoteViewTucked: {
+    marginBottom: -10,
+    paddingBottom: 17
+  },
+  quoteName: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '600'
+  },
+  quoteText: {
+    fontSize: 14,
+    lineHeight: 18
+  },
+  quoteDeletedText: {
+    fontStyle: 'italic'
   },
   messageText: {
     fontSize: 15.75,

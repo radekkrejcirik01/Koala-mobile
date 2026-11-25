@@ -31,7 +31,10 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated';
 import moment from 'moment';
-import { EmotionMessageItemProps } from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
+import {
+  EmotionMessageItemProps,
+  EmotionPillLayout
+} from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
 import { EmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
 import { EmotionPill } from '@components/chat/EmotionPill/EmotionPill';
 import { getEmotionText } from '@functions/getEmotionText';
@@ -61,7 +64,8 @@ export const EmotionMessageItem = ({
   lifted,
   showTapHint,
   backgroundColor,
-  onPressEmotion
+  onPressEmotion,
+  onLongPress
 }: EmotionMessageItemProps): React.JSX.Element => {
   const pillRef = useRef<View>(null);
 
@@ -238,16 +242,27 @@ export const EmotionMessageItem = ({
     [fitText, pillText, textWidth]
   );
 
-  const onPressPill = useCallback(() => {
-    const text = textLines.current.length
-      ? textLines.current.join('\n')
-      : undefined;
-    // Page coordinates, on Android the window ones leave out the status bar
-    // that the overlay covers
-    pillRef.current?.measure((_x, _y, width, height, pageX, pageY) =>
-      onPressEmotion?.({ x: pageX, y: pageY, width, height, text })
-    );
-  }, [onPressEmotion]);
+  const measurePill = useCallback(
+    (callback?: (layout: EmotionPillLayout) => void) => {
+      const text = textLines.current.length
+        ? textLines.current.join('\n')
+        : undefined;
+      // Page coordinates, on Android the window ones leave out the status bar
+      // that the overlay covers
+      pillRef.current?.measure((_x, _y, width, height, pageX, pageY) =>
+        callback?.({ x: pageX, y: pageY, width, height, text })
+      );
+    },
+    []
+  );
+  const onPressPill = useCallback(
+    () => measurePill(onPressEmotion),
+    [measurePill, onPressEmotion]
+  );
+  const onLongPressPill = useCallback(
+    () => measurePill(onLongPress),
+    [measurePill, onLongPress]
+  );
 
   const localTime = useMemo(
     () => moment(getLocalTime(time)).format('HH:mm'),
@@ -272,8 +287,10 @@ export const EmotionMessageItem = ({
         <View style={EmotionMessageItemStyle.content}>
           <Pressable
             ref={pillRef}
-            disabled={!onPressEmotion}
-            onPress={onPressPill}
+            disabled={!onPressEmotion && !onLongPress}
+            onPress={onPressEmotion ? onPressPill : undefined}
+            onLongPress={onLongPress ? onLongPressPill : undefined}
+            delayLongPress={300}
             onPressIn={onPressIn}
             onPressOut={onPressOut}
             style={lifted && EmotionMessageItemStyle.lifted}

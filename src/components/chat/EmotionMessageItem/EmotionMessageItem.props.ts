@@ -20,6 +20,9 @@ export interface EmotionMessageItemProps {
   // Only for the friend's emotions that aren't supported yet, with where the
   // pill sits on screen
   onPressEmotion?: (layout: EmotionPillLayout) => void;
+  // Opens the menu, with where the pill sits on screen. Not for an emotion
+  // still being sent
+  onLongPress?: (layout: EmotionPillLayout) => void;
 }
 
 export interface EmotionPillLayout {

@@ -1,24 +1,43 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Toast from 'react-native-toast-message';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSharedValue, withTiming } from 'react-native-reanimated';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
-import { useReactionBar } from '@hooks/useReactionBar';
 import { ReducerProps } from '@store/index/index.props';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 import { MessageItem } from '@components/chat/MessageItem/MessageItem';
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { MessageInterface } from '@interfaces/general.interface';
-import { ReactionBar } from '@components/chat/ReactionBar/ReactionBar';
+import { MessageMenu } from '@components/chat/MessageMenu/MessageMenu';
+import {
+  MessageMenuAction,
+  MessageMenuTarget
+} from '@components/chat/MessageMenu/MessageMenu.props';
 import { MessageType } from '@enums/MessageType';
 import { EmotionMessageItem } from '@components/chat/EmotionMessageItem/EmotionMessageItem';
 import { SupportOverlay } from '@components/chat/SupportOverlay/SupportOverlay';
 import { SupportTarget } from '@components/chat/SupportOverlay/SupportOverlay.props';
 import { TypingIndicator } from '@components/chat/TypingIndicator/TypingIndicator';
 import { getEmotionText } from '@functions/getEmotionText';
-import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
+import {
+  PHOTO_GAP,
+  PHOTO_SIZE,
+  TIME_WIDTH
+} from '@components/chat/MessageItem/MessageItem.style';
+import { EmotionPill } from '@components/chat/EmotionPill/EmotionPill';
+import { EmotionPillLayout } from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
+import { getReplyText } from '@functions/getReplyText';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
 import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
 import { isTextEmoji } from '@functions/isTextEmoji';
@@ -36,6 +55,8 @@ export const ChatList = ({
   onSelectReaction,
   onPressSupport,
   onDeleteMessage,
+  onReply,
+  onPressReply,
   onLoadOlder,
   onLoadNewer,
   name,
@@ -43,17 +64,18 @@ export const ChatList = ({
 }: ChatListProps): React.JSX.Element => {
   const { id } = useSelector((state: ReducerProps) => state.user.user);
 
-  const {
-    containerRef,
-    reactionState,
-    scale,
-    opacity,
-    translateY,
-    registerMessageRef,
-    openReactions,
-    hideReactions,
-    selectReaction
-  } = useReactionBar(onSelectReaction);
+  // Text messages, measured to lift them into the menu
+  const messageRefs = useRef(new Map<number, View>());
+  const registerMessageRef = (messageId: number) => (ref: View | null) => {
+    if (ref) {
+      messageRefs.current.set(messageId, ref);
+    } else {
+      messageRefs.current.delete(messageId);
+    }
+  };
+
+  // The long-pressed message lifted above the dimmed chat with its actions
+  const [menuTarget, setMenuTarget] = useState<MessageMenuTarget | null>(null);
 
   // The friend's emotion lifted above the dimmed chat to send support
   const [supportTarget, setSupportTarget] = useState<SupportTarget | null>(
@@ -61,6 +83,10 @@ export const ChatList = ({
   );
   // Hidden while its lifted copy is on screen, until it settled back onto it
   const [liftedId, setLiftedId] = useState<number | null>(null);
+  const listExtraData = useMemo(
+    () => ({ highlightId, liftedId }),
+    [highlightId, liftedId]
+  );
 
   // Until support is opened for the first time, a finger taps the newest
   // emotion waiting for it
@@ -86,6 +112,8 @@ export const ChatList = ({
 
   // Swiping the chat left reveals the message times
   const timeOffset = useSharedValue(0);
+  // The lifted copy in the menu never shows the time
+  const noOffset = useSharedValue(0);
 
   const timeGesture = useMemo(
     () =>
@@ -133,6 +161,113 @@ export const ChatList = ({
     [id]
   );
 
+  const copy = (text: string) => {
+    Clipboard.setString(text);
+    trigger(HapticFeedbackTypes.impactLight);
+    Toast.show({ type: 'success', text1: 'Copied!' });
+  };
+
+  // Everything can be replied to and copied, the friend's emotion supported
+  // and own text messages deleted
+  const getActions = (value: MessageInterface): MessageMenuAction[] => {
+    const outbound = isOutbound(value.senderId);
+    const isEmotion = value.type === MessageType.Emotion;
+
+    const actions: MessageMenuAction[] = [
+      { label: 'Reply', icon: 'reply', onPress: () => onReply(value.id) }
+    ];
+    if (isEmotion && !outbound && !value.reaction) {
+      actions.push({
+        label: 'Send support',
+        icon: 'support',
+        onPress: () => onPressSupport(value.id)
+      });
+    }
+    actions.push({
+      label: 'Copy',
+      icon: 'copy',
+      onPress: () => copy(isEmotion ? getReplyText(value) : value.message)
+    });
+    if (outbound && !isEmotion) {
+      actions.push({
+        label: 'Delete',
+        icon: 'delete',
+        destructive: true,
+        onPress: () => onDeleteMessage(value.id)
+      });
+    }
+    return actions;
+  };
+
+  // Messages still being sent have no menu, they can't be quoted or deleted
+  // yet. The friend's text messages also get the reactions
+  const openMessageMenu = (value: MessageInterface, preview: ReactNode) => {
+    const node = messageRefs.current.get(value.id);
+    if (!node || value.id < 0) {
+      return;
+    }
+
+    trigger(HapticFeedbackTypes.impactMedium);
+    const outbound = isOutbound(value.senderId);
+
+    // Page coordinates, the menu measures where it starts on the page
+    node.measure((_x, _y, width, height, pageX, pageY) =>
+      setMenuTarget({
+        id: value.id,
+        preview,
+        x: pageX,
+        y: pageY,
+        width,
+        height,
+        align: outbound ? 'right' : 'left',
+        inset: outbound ? 0 : PHOTO_SIZE + PHOTO_GAP,
+        time: value.time,
+        reactions: outbound
+          ? undefined
+          : {
+              current: value.reaction,
+              onSelect: (emoji) => onSelectReaction(emoji, value.id)
+            },
+        actions: getActions(value)
+      })
+    );
+  };
+
+  const openEmotionMenu = (
+    value: MessageInterface,
+    layout: EmotionPillLayout
+  ) => {
+    if (value.id < 0) {
+      return;
+    }
+
+    trigger(HapticFeedbackTypes.impactMedium);
+    const outbound = isOutbound(value.senderId);
+
+    // Extra room on each side, like in the support overlay, so the copy
+    // doesn't wrap its last word
+    setMenuTarget({
+      id: value.id,
+      preview: (
+        <View style={ChatListStyle.menuEmotion}>
+          <EmotionPill
+            white={!outbound && !value.reaction}
+            emotion={value.emotion}
+            text={layout.text ?? getEmotionText(value.message, outbound, name)}
+            ringColor={backgroundColor}
+          />
+        </View>
+      ),
+      x: layout.x - 1,
+      y: layout.y,
+      width: layout.width + 2,
+      height: layout.height,
+      align: 'center',
+      time: value.time,
+      actions: getActions(value)
+    });
+  };
+
   // Text messages of the same sender in a row read as one group, a big emoji
   // has no bubble and breaks it
   const isGrouped = (
@@ -160,14 +295,6 @@ export const ChatList = ({
         {getChatSeparatorTime(value.time)}
       </Text>
     );
-
-    // Friend's messages get reactions, own ones can be deleted
-    const onLongPress = isOutbound(value.senderId)
-      ? () => {
-          trigger(HapticFeedbackTypes.impactMedium);
-          onDeleteMessage(value.id);
-        }
-      : () => openReactions(value.id);
 
     // The typing indicator takes over the last message's bottom padding
     const isLast = index === 0 && !typing;
@@ -216,6 +343,11 @@ export const ChatList = ({
                 lifted={liftedId === value.id}
                 showTapHint={tapHintId === value.id}
                 backgroundColor={backgroundColor}
+                onLongPress={
+                  value.id > 0
+                    ? (layout) => openEmotionMenu(value, layout)
+                    : undefined
+                }
                 // Only the friend's emotions can be supported, and only once
                 onPressEmotion={
                   isOutbound(value.senderId) || value.reaction
@@ -251,9 +383,15 @@ export const ChatList = ({
     // last read marker between them splits the group
     const above = messages[index + 1];
     const below = messages[index - 1];
-    const joinedAbove = isGrouped(value, above) && !separator && !markerAbove;
-    const timeBelow = !!below && shouldShowChatSeparator(below.time, value.time);
-    const joinedBelow = isGrouped(value, below) && !timeBelow && !markerBelow;
+    // A reply's quote sits above its bubble and splits the group too
+    const joinedAbove =
+      isGrouped(value, above) && !separator && !markerAbove && !value.replyTo;
+    const timeBelow =
+      !!below && shouldShowChatSeparator(below.time, value.time);
+    const joinedBelow =
+      isGrouped(value, below) && !timeBelow && !markerBelow && !below?.replyTo;
+
+    const { replyTo } = value;
 
     // Room when the sender changes. An emotion or a time under it has its own
     // room, the typing indicator below the last message is the friend's
@@ -263,36 +401,48 @@ export const ChatList = ({
         !timeBelow
       : typing && isOutbound(value.senderId);
 
+    // The same in the chat and lifted into the menu
+    const renderMessage = (lifted: boolean): React.JSX.Element => (
+      <MessageItem
+        outbound={isOutbound(value.senderId)}
+        time={value.time}
+        offset={lifted ? noOffset : timeOffset}
+        // Measured from the bubble, the room around it would push the actions
+        // away from it
+        contentRef={lifted ? undefined : registerMessageRef(value.id)}
+        showSpace={showSpace}
+        isLast={isLast}
+        joinedAbove={joinedAbove}
+        joinedBelow={joinedBelow}
+        onLongPress={() => openMessageMenu(value, renderMessage(true))}
+        reaction={value?.reaction}
+        name={name}
+        profilePhoto={profilePhoto}
+        bubbleColor={bubbleColor}
+        replyTo={replyTo}
+        replyName={replyTo?.senderId === id ? 'You' : name}
+        onPressReply={replyTo ? () => onPressReply(replyTo.id) : undefined}
+        // The list is inverted, the next message is the previous item
+        showPhoto={
+          messages[index - 1]?.senderId !== value.senderId ||
+          messages[index - 1]?.type !== MessageType.Message
+        }
+      >
+        {value.message}
+      </MessageItem>
+    );
+
     return (
       <>
         {markerAbove}
         {separator}
         <View
-          ref={registerMessageRef(value.id)}
-          collapsable={false}
-          style={highlightId === value.id && ChatListStyle.highlight}
+          style={[
+            highlightId === value.id && ChatListStyle.highlight,
+            liftedId === value.id && ChatListStyle.lifted
+          ]}
         >
-          <MessageItem
-            outbound={isOutbound(value.senderId)}
-            time={value.time}
-            offset={timeOffset}
-            showSpace={showSpace}
-            isLast={isLast}
-            joinedAbove={joinedAbove}
-            joinedBelow={joinedBelow}
-            onLongPress={onLongPress}
-            reaction={value?.reaction}
-            name={name}
-            profilePhoto={profilePhoto}
-            bubbleColor={bubbleColor}
-            // The list is inverted, the next message is the previous item
-            showPhoto={
-              messages[index - 1]?.senderId !== value.senderId ||
-              messages[index - 1]?.type !== MessageType.Message
-            }
-          >
-            {value.message}
-          </MessageItem>
+          {renderMessage(false)}
         </View>
         {markerBelow}
       </>
@@ -300,14 +450,14 @@ export const ChatList = ({
   };
 
   return (
-    <View ref={containerRef} style={ChatListStyle.container}>
+    <View style={ChatListStyle.container}>
       <GestureDetector gesture={timeGesture}>
         <View style={ChatListStyle.container}>
           <FlashList
             ref={listRef}
             inverted
             data={messages}
-            extraData={highlightId}
+            extraData={listExtraData}
             keyExtractor={(item) => item.id.toString()}
             // The list is inverted, its end is the oldest message
             onEndReached={onLoadOlder}
@@ -332,13 +482,12 @@ export const ChatList = ({
         </View>
       </GestureDetector>
 
-      <ReactionBar
-        reactionState={reactionState}
-        scale={scale}
-        opacity={opacity}
-        translateY={translateY}
-        onClose={hideReactions}
-        onSelect={selectReaction}
+      <MessageMenu
+        target={menuTarget}
+        onClose={() => setMenuTarget(null)}
+        onShown={() => setLiftedId(menuTarget?.id ?? null)}
+        onHidden={() => setLiftedId(null)}
+        tintColor={bubbleColor}
       />
 
       <SupportOverlay

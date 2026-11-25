@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import moment from 'moment';
@@ -34,13 +34,15 @@ import {
 import { ReducerProps } from '@store/index/index.props';
 import {
   ChatSettingsInterface,
-  MessageInterface
+  MessageInterface,
+  ReplyInterface
 } from '@interfaces/general.interface';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { MessageType } from '@enums/MessageType';
 import { PAGE_SIZE } from '@constants/PAGE_SIZE';
 import { mergeLatestMessages } from '@functions/mergeLatestMessages';
+import { getReplyText } from '@functions/getReplyText';
 import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
 import { LiveEventType } from '@enums/LiveEventType';
 import { getChatTheme } from '@constants/CHAT_THEMES';
@@ -52,6 +54,21 @@ const KEYBOARD_INPUT_GAP = 5;
 
 // How long a message opened from search stays highlighted
 const HIGHLIGHT_DURATION = 2000;
+
+// The quote of a message, as the server sends it on replies
+const toReply = ({
+  id,
+  senderId,
+  type,
+  message,
+  emotion
+}: MessageInterface): ReplyInterface => ({
+  id,
+  senderId,
+  type,
+  message,
+  emotion
+});
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const { id: friendId, jump } = route.params;
@@ -87,6 +104,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   // Opened at an older message, newer ones load when scrolling down
   const [atLatest, setAtLatest] = useState<boolean>(!jump);
   const [highlightId, setHighlightId] = useState<number>();
+  // The message quoted by the one being written
+  const [replyTo, setReplyTo] = useState<MessageInterface>();
 
   const hasOlder = useRef<boolean>(false);
   const lastReadLoaded = useRef<boolean>(false);
@@ -97,8 +116,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   // Emotions whose support is still being sent, a refresh keeps them supported
   const supportingIds = useRef<Set<number>>(new Set());
 
+  const highlightTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
   const listRef = useRef<FlashListRef<MessageInterface>>(null);
-  const inputRef = useRef(null);
+  const inputRef = useRef<TextInput>(null);
 
   // The server ignores typing to an ex-friend
   const { onTyping, stopTyping } = useTypingSender(friendId);
@@ -248,37 +269,74 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     [friendId, markAsRead, userId]
   );
 
-  // Shows the messages around the one opened from search or shared emotions
-  useEffect(() => {
-    if (!jump) {
-      return undefined;
-    }
-
-    // Newest first, the messages before it are newer
-    const index = Math.max(
-      jump.messages.findIndex((item) => item.id === jump.id),
-      0
-    );
-    hasOlder.current = jump.messages.length - index - 1 >= PAGE_SIZE;
-    setLatest(index < PAGE_SIZE);
-    setMessages(jump.messages);
-    setHighlightId(jump.id);
-    markAsRead();
-
-    setTimeout(() => {
-      listRef?.current?.scrollToIndex({
-        index,
-        viewPosition: 0.5,
-        animated: false
-      });
-    }, 100);
-
-    const timer = setTimeout(
+  // Briefly marks the message opened from search, shared emotions or a quote
+  const highlight = useCallback((messageId: number) => {
+    setHighlightId(messageId);
+    clearTimeout(highlightTimer.current);
+    highlightTimer.current = setTimeout(
       () => setHighlightId(undefined),
       HIGHLIGHT_DURATION
     );
-    return () => clearTimeout(timer);
-  }, [jump, markAsRead, setLatest]);
+  }, []);
+
+  useEffect(() => () => clearTimeout(highlightTimer.current), []);
+
+  // Shows the loaded messages around one, newest first, scrolled to it
+  const showAround = useCallback(
+    (messageId: number, around: MessageInterface[]) => {
+      // Newest first, the messages before it are newer
+      const index = Math.max(
+        around.findIndex((item) => item.id === messageId),
+        0
+      );
+      hasOlder.current = around.length - index - 1 >= PAGE_SIZE;
+      setLatest(index < PAGE_SIZE);
+      setMessages(around);
+      highlight(messageId);
+      markAsRead();
+
+      setTimeout(() => {
+        listRef?.current?.scrollToIndex({
+          index,
+          viewPosition: 0.5,
+          animated: false
+        });
+      }, 100);
+    },
+    [highlight, markAsRead, setLatest]
+  );
+
+  // Opened at a message from search or shared emotions
+  useEffect(() => {
+    if (jump) {
+      showAround(jump.id, jump.messages);
+    }
+  }, [jump, showAround]);
+
+  // Tapped the quote on a reply, scrolls to the original when it's loaded,
+  // otherwise opens the chat around it
+  const goToMessage = useCallback(
+    (messageId: number) => {
+      const index = messages.findIndex((item) => item.id === messageId);
+      if (index >= 0) {
+        listRef?.current?.scrollToIndex({ index, viewPosition: 0.5 });
+        highlight(messageId);
+        return;
+      }
+
+      getRequest<ResponseMessagesGetInterface>(
+        `chats/${friendId}/messages?aroundId=${messageId}`
+      ).subscribe((response: ResponseMessagesGetInterface) => {
+        if (!response?.data?.length) {
+          Alert.alert('This message is no longer available');
+          return;
+        }
+
+        showAround(messageId, response.data);
+      });
+    },
+    [friendId, highlight, messages, showAround]
+  );
 
   const jumpToLatest = useCallback(() => {
     setLatest(true);
@@ -288,6 +346,21 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
     loadMessages();
     scrollToEnd();
   }, [loadMessages, setLatest]);
+
+  // Replies to it stay with their quote marked as deleted, and it can't be
+  // quoted anymore
+  const removeMessage = useCallback((messageId: number) => {
+    setMessages((prevState) =>
+      prevState
+        .filter((item) => item.id !== messageId)
+        .map((item) =>
+          item.replyTo?.id === messageId
+            ? { ...item, replyTo: { id: messageId, deleted: true } }
+            : item
+        )
+    );
+    setReplyTo((value) => (value?.id === messageId ? undefined : value));
+  }, []);
 
   // Changes in this chat arrive live, from the friend and the user's devices
   useEffect(
@@ -304,13 +377,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
               addMessage(event.data.message);
             }
             break;
-          case LiveEventType.MessageDeleted: {
-            const { id } = event.data;
-            setMessages((prevState) =>
-              prevState.filter((item) => item.id !== id)
-            );
+          case LiveEventType.MessageDeleted:
+            removeMessage(event.data.id);
             break;
-          }
           case LiveEventType.MessageReaction: {
             const { id, reaction } = event.data;
             setMessages((prevState) =>
@@ -325,7 +394,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           default:
         }
       }),
-    [addMessage, friendId]
+    [addMessage, friendId, removeMessage]
   );
 
   const loadOlder = useCallback(() => {
@@ -412,6 +481,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
 
     stopTyping();
 
+    const quoted = replyTo;
+
     // Sent from an older part of the chat, it shows under the newest messages
     if (!atLatestRef.current) {
       jumpToLatest();
@@ -425,16 +496,18 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         senderId: userId,
         type: MessageType.Message,
         message: text,
+        ...(quoted && { replyTo: toReply(quoted) }),
         time: moment().unix()
       },
       ...prevState
     ]);
     setMessage('');
+    setReplyTo(undefined);
     scrollToEnd();
 
     postRequest<ResponseMessagePostInterface, MessagePostInterface>(
       `chats/${friendId}/messages`,
-      { message: text }
+      { message: text, ...(quoted && { replyToId: quoted.id }) }
     ).subscribe((response: ResponseMessagePostInterface) => {
       const sent = response?.data;
 
@@ -452,9 +525,21 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         prevState.filter((item) => item.id !== tempId)
       );
       setMessage((value) => value || text);
+      setReplyTo((value) => value ?? quoted);
       Alert.alert('Failed to send. Please try again.');
     });
-  }, [friendId, jumpToLatest, message, stopTyping, userId]);
+  }, [friendId, jumpToLatest, message, replyTo, stopTyping, userId]);
+
+  const startReply = useCallback(
+    (messageId: number) => {
+      const quoted = messages.find((item) => item.id === messageId);
+      if (quoted && messageId > 0) {
+        setReplyTo(quoted);
+        inputRef.current?.focus();
+      }
+    },
+    [messages]
+  );
 
   const sendReaction = useCallback(
     (reaction: string, messageId: number) => {
@@ -532,7 +617,9 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             deleteRequest<ResponseInterface>(
               `chats/messages/${messageId}`
             ).subscribe((response: ResponseInterface) => {
-              if (!response?.status) {
+              if (response?.status) {
+                removeMessage(messageId);
+              } else {
                 // Back in its place, newest first by id
                 setMessages((prevState) => {
                   // A refresh may have brought it back already
@@ -558,7 +645,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
         }
       ]);
     },
-    [messages]
+    [messages, removeMessage]
   );
 
   return (
@@ -602,6 +689,8 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             onSelectReaction={sendReaction}
             onPressSupport={sendSupport}
             onDeleteMessage={deleteMessage}
+            onReply={startReply}
+            onPressReply={goToMessage}
             onLoadOlder={loadOlder}
             onLoadNewer={loadNewer}
             name={name}
@@ -626,6 +715,13 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           onFocus={scrollToEnd}
           backgroundColor={chatTheme.background}
           sendButtonColor={chatTheme.bubble}
+          reply={
+            replyTo && {
+              name: replyTo.senderId === userId ? 'yourself' : name,
+              text: getReplyText(toReply(replyTo))
+            }
+          }
+          onCancelReply={() => setReplyTo(undefined)}
         />
       </Animated.View>
     </View>

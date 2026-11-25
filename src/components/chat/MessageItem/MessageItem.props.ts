@@ -1,4 +1,6 @@
+import { View } from 'react-native';
 import { SharedValue } from 'react-native-reanimated';
+import { ReplyInterface } from '@interfaces/general.interface';
 
 export interface MessageItemProps {
   children: string;
@@ -20,4 +22,11 @@ export interface MessageItemProps {
   showPhoto: boolean;
   // The chat theme's color of outbound bubbles, the default purple when not set
   bubbleColor?: string;
+  // The quoted message on a reply, with who sent it
+  replyTo?: ReplyInterface;
+  replyName?: string;
+  // Scrolls to the quoted message
+  onPressReply?: () => void;
+  // The bubble with its reaction, measured to lift it into the menu
+  contentRef?: (ref: View | null) => void;
 }

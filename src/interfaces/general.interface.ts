@@ -26,7 +26,20 @@ export interface MessageInterface {
   emotion?: string;
   // On an emotion, the friend's support
   reaction?: string;
+  // The quoted message, only on replies
+  replyTo?: ReplyInterface;
   time: number;
+}
+
+// A quoted message, its text cut by the server. Only the id is left once
+// it's deleted
+export interface ReplyInterface {
+  id: number;
+  senderId?: number;
+  type?: MessageType;
+  message?: string;
+  emotion?: string;
+  deleted?: boolean;
 }
 
 export interface ChatInterface {

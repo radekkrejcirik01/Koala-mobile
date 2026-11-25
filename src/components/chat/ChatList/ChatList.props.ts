@@ -18,6 +18,10 @@ export interface ChatListProps {
   onSelectReaction: (reaction: string, messageId: number) => void;
   onPressSupport: (emotionId: number) => void;
   onDeleteMessage: (messageId: number) => void;
+  // Starts a reply quoting this message
+  onReply: (messageId: number) => void;
+  // Tapped the quote on a reply, goes to the quoted message
+  onPressReply: (messageId: number) => void;
   onLoadOlder: () => void;
   // Opened at an older message, loads the newer ones when scrolling down
   onLoadNewer?: () => void;

@@ -10,4 +10,7 @@ export interface ChatInputProps {
   // The chat theme's colors, the app's defaults when not set
   backgroundColor?: string;
   sendButtonColor?: string;
+  // The message being replied to, shown above the input
+  reply?: { name: string; text: string };
+  onCancelReply: () => void;
 }

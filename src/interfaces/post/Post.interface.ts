@@ -62,6 +62,8 @@ export interface EmotionMessagePostInterface {
 
 export interface MessagePostInterface {
   message: string;
+  // Quotes this message
+  replyToId?: number;
 }
 
 export interface SupportPostInterface {

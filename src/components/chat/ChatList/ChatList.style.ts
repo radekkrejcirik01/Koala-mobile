@@ -29,6 +29,14 @@ export const ChatListStyle = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: COLORS.BUTTON_BLUE_100
   },
+  // Hidden while its copy is lifted into the menu
+  lifted: {
+    opacity: 0
+  },
+  // The emotion's copy in the menu, centred like in the chat
+  menuEmotion: {
+    alignItems: 'center'
+  },
   // The time under it already has its room above
   emotionViewBeforeTime: {
     paddingBottom: 0
