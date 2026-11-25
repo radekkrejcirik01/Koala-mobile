@@ -33,13 +33,17 @@ export const ShareScreenStyle = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0
   },
-  // Under the emotion's message, opens it for editing
+  // Halfway between the emotion's message and the row of emotions under it,
+  // opens the message for editing
+  addMessageButton: {
+    marginTop: 52,
+    // Takes back the room above, so the emotion and the row stay where they
+    // were
+    marginBottom: -44
+  },
   addMessageText: {
-    marginTop: 16,
-    // Takes back the extra room above, so the emotion stays where it was
-    marginBottom: -8,
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '700',
     color: COLORS.BUTTON_BLUE
   },
   addMessageHidden: {
@@ -49,17 +53,9 @@ export const ShareScreenStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
-    paddingHorizontal: 20
-  },
-  // Explains the two buttons above it
-  descriptionText: {
-    marginTop: 20,
-    marginBottom: 8,
     paddingHorizontal: 20,
-    fontSize: 13,
-    lineHeight: 18,
-    textAlign: 'center',
-    color: COLORS.GRAY_200
+    // Above the safe area, so the buttons don't sit on the bottom edge
+    paddingBottom: 20
   },
   // Takes the rest of the row next to Save
   nextButton: {

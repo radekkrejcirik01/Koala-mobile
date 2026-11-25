@@ -15,6 +15,12 @@ import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import {
+  clearShareDrafts,
+  DraftCache,
+  SHARE_DRAFT,
+  SHARE_EMOTION_DRAFT
+} from '@utils/general/DraftCache';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
@@ -33,18 +39,29 @@ const DEFAULT_POSITION = EMOTIONS.findIndex(
   (item) => item.type === EmotionType.Good
 );
 
+// The emotion picked before leaving the screen, or Good
+const getStartPosition = (): number => {
+  const index = EMOTIONS.findIndex(
+    (item) => item.type === DraftCache.get(SHARE_EMOTION_DRAFT)
+  );
+  return index < 0 ? DEFAULT_POSITION : index;
+};
+
 export const ShareScreen = (): JSX.Element => {
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { navigateTo, dismiss } = useNavigation();
   const { sending, sent, setSending, setSent } = useSending();
 
-  const [position, setPosition] = useState<number>(DEFAULT_POSITION);
+  const [position, setPosition] = useState<number>(getStartPosition);
   // Emotion currently highlighted, which changes during a drag before the
   // position settles
   const [centerPosition, setCenterPosition] =
-    useState<number>(DEFAULT_POSITION);
-  const [message, setMessage] = useState<string>('');
+    useState<number>(getStartPosition);
+  // What was written before leaving the screen, until it's saved or sent
+  const [message, setMessage] = useState<string>(() =>
+    DraftCache.get(SHARE_DRAFT)
+  );
   const [editingMessage, setEditingMessage] = useState<boolean>(false);
   const [showSwipeHint, setShowSwipeHint] = useState<boolean>(false);
 
@@ -72,6 +89,14 @@ export const ShareScreen = (): JSX.Element => {
       PersistStorage.setItem(PersistStorageKeys.SWIPE_HINT_SEEN, '1').catch();
     };
   }, [showSwipeHint]);
+
+  useEffect(() => {
+    DraftCache.set(SHARE_DRAFT, message);
+  }, [message]);
+
+  useEffect(() => {
+    DraftCache.set(SHARE_EMOTION_DRAFT, EMOTIONS[centerPosition].type);
+  }, [centerPosition]);
 
   const onSwipeStart = useCallback(() => {
     if (showSwipeHint) {
@@ -119,6 +144,7 @@ export const ShareScreen = (): JSX.Element => {
         setTimeout(() => {
           setSending(false);
           setSent(true);
+          clearShareDrafts();
           setTimeout(dismiss, 600);
         }, Math.max(LOGGING_MIN_DURATION - elapsed, 0));
         return;
@@ -196,7 +222,10 @@ export const ShareScreen = (): JSX.Element => {
             hitSlop={20}
             disabled={editingMessage}
             onPress={() => setEditingMessage(true)}
-            style={editingMessage && ShareScreenStyle.addMessageHidden}
+            style={[
+              ShareScreenStyle.addMessageButton,
+              editingMessage && ShareScreenStyle.addMessageHidden
+            ]}
           >
             <Text style={ShareScreenStyle.addMessageText}>
               {trimmedMessage ? 'Edit message' : 'Add message'}
@@ -215,9 +244,6 @@ export const ShareScreen = (): JSX.Element => {
           style={ShareScreenStyle.nextButton}
         />
       </View>
-      <Text style={ShareScreenStyle.descriptionText}>
-        Check mood tracker for your sharing history
-      </Text>
     </View>
   );
 };

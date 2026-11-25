@@ -12,6 +12,7 @@ import { ResponseUserGetInterface } from '@interfaces/response/Response.interfac
 import { MessagingService } from '@utils/general/MessagingService';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { ChatThemeCache } from '@utils/general/ChatThemeCache';
+import { DraftCache } from '@utils/general/DraftCache';
 import { Images } from '@enums/images';
 
 class PreloadServiceSingleton {
@@ -19,6 +20,7 @@ class PreloadServiceSingleton {
     const token = await PersistStorage.getItem(PersistStorageKeys.TOKEN);
     const image = await PersistStorage.getItem(PersistStorageKeys.IMAGE);
     await ChatThemeCache.load();
+    await DraftCache.load();
     store.dispatch(setUserToken(token));
     store.dispatch(setImageAction(image || Images.ROOM));
 

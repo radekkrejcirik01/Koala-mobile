@@ -20,6 +20,7 @@ import {
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { LiveService } from '@utils/general/LiveService';
 import { ChatThemeCache } from '@utils/general/ChatThemeCache';
+import { chatDraft, DraftCache } from '@utils/general/DraftCache';
 import {
   ResponseChatSettingsGetInterface,
   ResponseFriendsGetInterface,
@@ -93,7 +94,10 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   );
 
   const [friend, setFriend] = useState(route.params);
-  const [message, setMessage] = useState<string>('');
+  // What was written before leaving the chat
+  const [message, setMessage] = useState<string>(() =>
+    DraftCache.get(chatDraft(friendId))
+  );
   // Newest first, the list is inverted
   const [messages, setMessages] = useState<MessageInterface[]>([]);
   // Read position from before the chat was opened, kept while it stays open
@@ -147,6 +151,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const chatTheme = getChatTheme(
     settings ? settings.theme : ChatThemeCache.get(friendId)
   );
+
+  // Kept until it's sent, sending empties it
+  useEffect(() => {
+    DraftCache.set(chatDraft(friendId), message);
+  }, [friendId, message]);
 
   const setLatest = useCallback((value: boolean) => {
     atLatestRef.current = value;

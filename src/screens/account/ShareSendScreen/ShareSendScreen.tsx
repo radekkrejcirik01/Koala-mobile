@@ -21,6 +21,7 @@ import { filterSelected } from '@functions/filterSelected';
 import { FriendListItem } from '@components/friends/FriendListItem/FriendListItem';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Loader } from '@components/general/Loader/Loader';
+import { clearShareDrafts } from '@utils/general/DraftCache';
 import { ShareSendScreenProps } from '@screens/account/ShareSendScreen/ShareSendScreen.props';
 import { ShareSendScreenStyle } from '@screens/account/ShareSendScreen/ShareSendScreen.style';
 
@@ -77,6 +78,7 @@ export const ShareSendScreen = ({
         setSent(true);
 
         selectedFriends.current = [];
+        clearShareDrafts();
 
         setTimeout(dismiss, 750);
         return;
