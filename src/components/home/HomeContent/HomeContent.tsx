@@ -12,7 +12,8 @@ import {
   ResponseUnreadChatsGetInterface
 } from '@interfaces/response/Response.interface';
 import { Images } from '@enums/images';
-import { setUnreadChats, setUnseenInvites } from '@store/NotificationsReducer';
+import { setUnseenInvites } from '@store/NotificationsReducer';
+import { NotificationsService } from '@utils/general/NotificationsService';
 import { ReducerProps } from '@store/index/index.props';
 import { ChatsBadge } from '@components/home/ChatsBadge/ChatsBadge';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
@@ -33,7 +34,7 @@ export const HomeContent = (): JSX.Element => {
       getRequest<ResponseInvitesGetInterface>('invites')
     ]).subscribe(([chatsResponse, invitesResponse]) => {
       if (chatsResponse?.status) {
-        dispatch(setUnreadChats(chatsResponse.unreadChats ?? 0));
+        NotificationsService.setUnreadChats(chatsResponse.unreadChats ?? 0);
       }
       if (invitesResponse?.status) {
         dispatch(setUnseenInvites(invitesResponse.data?.length ?? 0));

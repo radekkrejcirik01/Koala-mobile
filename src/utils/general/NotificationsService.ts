@@ -14,16 +14,19 @@ class NotificationsServiceClass {
       getRequest<ResponseUnreadChatsGetInterface>('chats/unread').subscribe(
         (response: ResponseUnreadChatsGetInterface) => {
           if (response?.status) {
-            const unreadChats = response?.unreadChats ?? 0;
-
-            store.dispatch(setUnreadChats(unreadChats));
-            // A push sets the icon badge to 1, this sets the real count
-            if (Platform.OS === 'ios') {
-              PushNotificationIOS.setApplicationIconBadgeNumber(unreadChats);
-            }
+            this.setUnreadChats(response?.unreadChats ?? 0);
           }
         }
       );
+    }
+  };
+
+  // Keeps the icon badge in sync with the in app one
+  public setUnreadChats = (unreadChats: number) => {
+    store.dispatch(setUnreadChats(unreadChats));
+    // A push sets the icon badge to 1, this sets the real count
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.setApplicationIconBadgeNumber(unreadChats);
     }
   };
 
