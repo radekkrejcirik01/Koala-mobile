@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const BackButtonStyle = StyleSheet.create({
+export const useBackButtonStyle = createStyles((colors) => ({
   container: {
     width: 46,
     height: 46,
@@ -9,9 +8,9 @@ export const BackButtonStyle = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 23,
     marginLeft: 5,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   icon: {
     marginRight: 2
   }
-});
+}));

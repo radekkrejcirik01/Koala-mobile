@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { ChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
+import { useChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
 import { ChatInputProps } from '@components/chat/ChatInput/ChatInput.props';
 import COLORS from '@constants/COLORS';
 
@@ -18,6 +18,7 @@ export const ChatInput = ({
   reply,
   onCancelReply
 }: ChatInputProps): React.JSX.Element => {
+  const ChatInputStyle = useChatInputStyle();
   const theme = useTheme();
 
   return (
@@ -78,7 +79,7 @@ export const ChatInput = ({
             multiline
             onFocus={onFocus}
             placeholder="Message..."
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             value={message}
             onChangeText={onChangeText}
             // The chat theme's color, like the send button

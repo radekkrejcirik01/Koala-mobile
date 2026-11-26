@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatsScreenStyle = StyleSheet.create({
+export const useChatsScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -13,8 +12,8 @@ export const ChatsScreenStyle = StyleSheet.create({
   },
   listEmptyText: {
     marginTop: 100,
-    color: COLORS.GRAY_200,
+    color: colors.textSecondary,
     alignSelf: 'center',
     fontWeight: '500'
   }
-});
+}));

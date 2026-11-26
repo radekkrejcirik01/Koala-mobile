@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const PasswordStrengthStyle = StyleSheet.create({
+export const usePasswordStrengthStyle = createStyles((colors) => ({
   container: {
     marginTop: 12,
     marginHorizontal: 4,
@@ -17,13 +16,14 @@ export const PasswordStrengthStyle = StyleSheet.create({
     flex: 1,
     height: 5,
     borderRadius: 3,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   label: {
+    color: colors.text,
     width: 70,
     marginLeft: 12,
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'right'
   }
-});
+}));

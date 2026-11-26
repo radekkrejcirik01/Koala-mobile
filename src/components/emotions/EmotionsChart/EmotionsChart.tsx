@@ -10,7 +10,7 @@ import {
 import { EmotionsChartProps } from '@components/emotions/EmotionsChart/EmotionsChart.props';
 import {
   CHART_HEIGHT,
-  EmotionsChartStyle
+  useEmotionsChartStyle
 } from '@components/emotions/EmotionsChart/EmotionsChart.style';
 
 // Stack order from the bottom, best emotion first
@@ -28,6 +28,7 @@ export const EmotionsChart = ({
   selectedKey,
   onPressBucket
 }: EmotionsChartProps): JSX.Element => {
+  const EmotionsChartStyle = useEmotionsChartStyle();
   const max = useMemo(
     () => Math.max(1, ...buckets.map((bucket) => bucket.total)),
     [buckets]

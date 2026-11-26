@@ -12,7 +12,7 @@ import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { PHOTO_SIZE } from '@components/chat/MessageItem/MessageItem.style';
 import {
   DOT_SIZE,
-  TypingIndicatorStyle
+  useTypingIndicatorStyle
 } from '@components/chat/TypingIndicator/TypingIndicator.style';
 import { TypingIndicatorProps } from '@components/chat/TypingIndicator/TypingIndicator.props';
 
@@ -22,6 +22,7 @@ const DOT_DELAY = 150;
 const BOUNCE_PAUSE = 400;
 
 const Dot = ({ index }: { index: number }): React.JSX.Element => {
+  const TypingIndicatorStyle = useTypingIndicatorStyle();
   const offset = useSharedValue(0);
 
   useEffect(() => {
@@ -52,15 +53,19 @@ const Dot = ({ index }: { index: number }): React.JSX.Element => {
 export const TypingIndicator = ({
   name,
   profilePhoto
-}: TypingIndicatorProps): React.JSX.Element => (
-  <View style={TypingIndicatorStyle.container}>
-    <View style={TypingIndicatorStyle.photoView}>
-      <ProfilePhoto name={name} photo={profilePhoto} size={PHOTO_SIZE} />
+}: TypingIndicatorProps): React.JSX.Element => {
+  const TypingIndicatorStyle = useTypingIndicatorStyle();
+
+  return (
+    <View style={TypingIndicatorStyle.container}>
+      <View style={TypingIndicatorStyle.photoView}>
+        <ProfilePhoto name={name} photo={profilePhoto} size={PHOTO_SIZE} />
+      </View>
+      <View style={TypingIndicatorStyle.bubble}>
+        <Dot index={0} />
+        <Dot index={1} />
+        <Dot index={2} />
+      </View>
     </View>
-    <View style={TypingIndicatorStyle.bubble}>
-      <Dot index={0} />
-      <Dot index={1} />
-      <Dot index={2} />
-    </View>
-  </View>
-);
+  );
+};

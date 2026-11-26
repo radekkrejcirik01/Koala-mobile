@@ -7,13 +7,14 @@ import { UserInterface } from '@interfaces/general.interface';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { SharedEmotionScreenProps } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen.props';
-import { SharedEmotionScreenStyle } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen.style';
+import { useSharedEmotionScreenStyle } from '@screens/account/SharedEmotionScreen/SharedEmotionScreen.style';
 import { getFriendName } from '@functions/getFriendName';
 
 // Presented as a modal from the Analytics history, like the Share screen
 export const SharedEmotionScreen = ({
   route
 }: SharedEmotionScreenProps): JSX.Element => {
+  const SharedEmotionScreenStyle = useSharedEmotionScreenStyle();
   const { item } = route.params;
 
   const { top, bottom } = useSafeAreaInsets();

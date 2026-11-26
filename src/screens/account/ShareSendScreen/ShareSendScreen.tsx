@@ -23,11 +23,12 @@ import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Loader } from '@components/general/Loader/Loader';
 import { clearShareDrafts } from '@utils/general/DraftCache';
 import { ShareSendScreenProps } from '@screens/account/ShareSendScreen/ShareSendScreen.props';
-import { ShareSendScreenStyle } from '@screens/account/ShareSendScreen/ShareSendScreen.style';
+import { useShareSendScreenStyle } from '@screens/account/ShareSendScreen/ShareSendScreen.style';
 
 export const ShareSendScreen = ({
   route
 }: ShareSendScreenProps): JSX.Element => {
+  const ShareSendScreenStyle = useShareSendScreenStyle();
   const { emotion, message } = route.params;
 
   const { top, bottom } = useSafeAreaInsets();

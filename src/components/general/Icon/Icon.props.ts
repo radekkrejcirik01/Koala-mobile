@@ -5,6 +5,8 @@ export interface IconProps {
   name: IconEnum;
   size?: number;
   style?: StyleProp<ViewStyle>;
+  // Tints a single color icon, e.g. black icons in dark mode
+  color?: string;
 }
 
 export const IconDefaultProps: Omit<IconProps, 'name'> = {

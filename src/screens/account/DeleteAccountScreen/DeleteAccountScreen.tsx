@@ -8,12 +8,11 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { resetUserState } from '@store/UserReducer';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
-import { DeleteAccountScreenStyle } from '@screens/account/DeleteAccountScreen/DeleteAccountScreen.style';
+import { useDeleteAccountScreenStyle } from '@screens/account/DeleteAccountScreen/DeleteAccountScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Button } from '@components/general/Button/Button';
 import { FormIntro } from '@components/profile/FormIntro/FormIntro';
 import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
-import COLORS from '@constants/COLORS';
 
 const DELETED_DATA = [
   {
@@ -39,6 +38,7 @@ const DELETED_DATA = [
 ];
 
 export const DeleteAccountScreen = (): JSX.Element => {
+  const DeleteAccountScreenStyle = useDeleteAccountScreenStyle();
   const dispatch = useDispatch();
   const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
@@ -86,7 +86,7 @@ export const DeleteAccountScreen = (): JSX.Element => {
       <ScrollView contentContainerStyle={{ paddingBottom: bottom + 30 }}>
         <FormIntro
           emoji="🗑️"
-          emojiBackgroundColor={COLORS.WHITE_200}
+          emojiBackgroundColor={theme.theme.colors.surface_200}
           title="Deleting your account removes everything"
         />
         <ProfileSection

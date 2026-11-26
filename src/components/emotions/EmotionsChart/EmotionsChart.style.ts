@@ -1,9 +1,8 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
 export const CHART_HEIGHT = 140;
 
-export const EmotionsChartStyle = StyleSheet.create({
+export const useEmotionsChartStyle = createStyles((colors) => ({
   container: {
     flexDirection: 'row',
     alignItems: 'flex-end'
@@ -33,13 +32,13 @@ export const EmotionsChartStyle = StyleSheet.create({
     maxWidth: 28,
     height: 3,
     borderRadius: 2,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   countText: {
     marginBottom: 3,
     fontSize: 11,
     fontWeight: '600',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   // Wider than a month's narrow day columns so two digit days are not cut,
   // it overflows the column centered under the bar
@@ -50,9 +49,10 @@ export const EmotionsChartStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 11,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   selectedLabelText: {
+    color: colors.text,
     fontWeight: '700'
   }
-});
+}));

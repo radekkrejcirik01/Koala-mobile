@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 import { PHOTO_SIZE } from '@components/chat/MessageItem/MessageItem.style';
+import { createStyles } from '@utils/general/createStyles';
 
 export const DOT_SIZE = 7;
 
-export const TypingIndicatorStyle = StyleSheet.create({
+export const useTypingIndicatorStyle = createStyles((colors) => ({
   // Takes over the bottom padding of the last message. Spaced like a message
   // of the friend, the room after an own message comes from that message
   container: {
@@ -25,12 +24,12 @@ export const TypingIndicatorStyle = StyleSheet.create({
     height: 40.5,
     paddingHorizontal: 14,
     borderRadius: 22,
-    backgroundColor: COLORS.BEIGE_200
+    backgroundColor: colors.bubble
   },
   dot: {
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-    backgroundColor: COLORS.GRAY_200
+    backgroundColor: colors.textSecondary
   }
-});
+}));

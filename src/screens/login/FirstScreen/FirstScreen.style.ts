@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const FirstScreenStyle = StyleSheet.create({
+export const useFirstScreenStyle = createStyles((colors) => ({
   background: {
     flex: 1,
-    backgroundColor: COLORS.BEIGE
+    backgroundColor: colors.background
   },
   container: {
     flex: 1
@@ -19,7 +18,7 @@ export const FirstScreenStyle = StyleSheet.create({
   titleText: {
     fontSize: 26,
     fontWeight: '800',
-    color: COLORS.BLACK
+    color: colors.text
   },
   subtitleText: {
     marginTop: 20,
@@ -28,6 +27,6 @@ export const FirstScreenStyle = StyleSheet.create({
     lineHeight: 22,
     fontWeight: '500',
     textAlign: 'center',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   }
-});
+}));

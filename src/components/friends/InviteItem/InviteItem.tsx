@@ -4,7 +4,7 @@ import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { InviteItemProps } from '@components/friends/InviteItem/InviteItem.props';
 import COLORS from '@constants/COLORS';
-import { InviteItemStyle } from '@components/friends/InviteItem/InviteItem.style';
+import { useInviteItemStyle } from '@components/friends/InviteItem/InviteItem.style';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 
@@ -14,6 +14,7 @@ export const InviteItem = ({
   onAcceptInvite,
   onRemove
 }: InviteItemProps): JSX.Element => {
+  const InviteItemStyle = useInviteItemStyle();
   const theme = useTheme();
   return (
     <View style={InviteItemStyle.container}>

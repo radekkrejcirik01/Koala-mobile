@@ -5,12 +5,17 @@ import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
-import { FirstScreenStyle } from '@screens/login/FirstScreen/FirstScreen.style';
+import { useFirstScreenStyle } from '@screens/login/FirstScreen/FirstScreen.style';
 import { HomeContentStyle } from '@components/home/HomeContent/HomeContent.style';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
+import { useTheme } from '@hooks/useTheme';
+import { getIllustration } from '@functions/getIllustration';
+import { Images } from '@enums/images';
 
 // Previews the home screen: same layout, with Sign up / Log in as the buttons
 export const FirstScreen = (): JSX.Element => {
+  const FirstScreenStyle = useFirstScreenStyle();
+  const { isDark } = useTheme();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
   const { top } = useSafeAreaInsets();
 
@@ -30,7 +35,7 @@ export const FirstScreen = (): JSX.Element => {
           >
             <Animated.View entering={FadeIn.duration(700)}>
               <Image
-                source={require('@assets/illustrations/room.jpg')}
+                source={getIllustration(Images.ROOM, isDark)}
                 style={HomeContentStyle.image}
                 resizeMode="contain"
               />

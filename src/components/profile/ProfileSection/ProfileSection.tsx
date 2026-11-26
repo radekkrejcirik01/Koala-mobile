@@ -2,13 +2,14 @@ import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
 import { ProfileSectionProps } from '@components/profile/ProfileSection/ProfileSection.props';
-import { ProfileSectionStyle } from '@components/profile/ProfileSection/ProfileSection.style';
+import { useProfileSectionStyle } from '@components/profile/ProfileSection/ProfileSection.style';
 
 export const ProfileSection = ({
   title,
   footer,
   children
 }: ProfileSectionProps): JSX.Element => {
+  const ProfileSectionStyle = useProfileSectionStyle();
   const theme = useTheme();
   return (
     <View style={ProfileSectionStyle.container}>

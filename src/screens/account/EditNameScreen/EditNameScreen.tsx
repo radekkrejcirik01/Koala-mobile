@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
-import { EditNameScreenStyle } from '@screens/account/EditNameScreen/EditNameScreen.style';
+import { useEditNameScreenStyle } from '@screens/account/EditNameScreen/EditNameScreen.style';
 import { ReducerProps } from '@store/index/index.props';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
@@ -17,6 +17,7 @@ import { ProfileSection } from '@components/profile/ProfileSection/ProfileSectio
 import COLORS from '@constants/COLORS';
 
 export const EditNameScreen = (): JSX.Element => {
+  const EditNameScreenStyle = useEditNameScreenStyle();
   const { name: firstname, profilePhoto } = useSelector(
     (state: ReducerProps) => state.user.user
   );
@@ -73,7 +74,7 @@ export const EditNameScreen = (): JSX.Element => {
             autoCorrect={false}
             autoCapitalize="words"
             placeholder="Your name"
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             selectionColor={COLORS.BUTTON_BLUE}
             returnKeyType="done"
             onSubmitEditing={save}

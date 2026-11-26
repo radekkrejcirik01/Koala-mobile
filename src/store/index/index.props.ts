@@ -1,4 +1,5 @@
 import { Images } from '@enums/images';
+import { Appearances } from '@enums/appearance';
 
 export interface ReducerProps {
   user: User;
@@ -22,6 +23,8 @@ export interface User {
     email?: string;
   };
   image: Images;
+  // Device setting, kept on logout like the image
+  appearance: Appearances;
 }
 
 export interface NewAccount {

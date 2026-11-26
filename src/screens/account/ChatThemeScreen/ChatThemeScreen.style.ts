@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatThemeScreenStyle = StyleSheet.create({
+export const useChatThemeScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -25,7 +26,7 @@ export const ChatThemeScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     gap: 6,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: COLORS.WHITE_200
+    borderColor: colors.surface_200
   },
   previewBubble: {
     height: 14,
@@ -34,7 +35,7 @@ export const ChatThemeScreenStyle = StyleSheet.create({
   previewInbound: {
     width: '60%',
     alignSelf: 'flex-start',
-    backgroundColor: COLORS.BEIGE_200
+    backgroundColor: colors.bubble
   },
   previewOutbound: {
     width: '70%',
@@ -49,6 +50,7 @@ export const ChatThemeScreenStyle = StyleSheet.create({
     paddingRight: 6
   },
   name: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: '600'
   },
@@ -59,7 +61,7 @@ export const ChatThemeScreenStyle = StyleSheet.create({
     borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: COLORS.LIGHTGRAY
+    borderColor: colors.border
   },
   radioSelected: {
     borderColor: COLORS.BUTTON_BLUE,
@@ -70,4 +72,4 @@ export const ChatThemeScreenStyle = StyleSheet.create({
     fontWeight: '800',
     color: COLORS.WHITE
   }
-});
+}));

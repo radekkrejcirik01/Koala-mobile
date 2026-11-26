@@ -13,7 +13,7 @@ import { ReducerProps } from '@store/index/index.props';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import {
   PHOTO_SIZE,
-  ProfileScreenStyle
+  useProfileScreenStyle
 } from '@screens/account/ProfileScreen/ProfileScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
@@ -29,6 +29,7 @@ import COLORS from '@constants/COLORS';
 import { version } from '../../../../package.json';
 
 export const ProfileScreen = (): React.JSX.Element => {
+  const ProfileScreenStyle = useProfileScreenStyle();
   const { username, name, profilePhoto } = useSelector(
     (state: ReducerProps) => state.user.user
   );

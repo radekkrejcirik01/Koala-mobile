@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ProfileSectionStyle = StyleSheet.create({
+export const useProfileSectionStyle = createStyles((colors) => ({
   container: {
     marginTop: 26
   },
@@ -12,7 +11,7 @@ export const ProfileSectionStyle = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0.4,
     textTransform: 'uppercase',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   card: {
     marginHorizontal: 16,
@@ -24,6 +23,6 @@ export const ProfileSectionStyle = StyleSheet.create({
     marginHorizontal: 30,
     fontSize: 13,
     lineHeight: 18,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
 import { PasswordStrengthProps } from '@components/login/PasswordStrength/PasswordStrength.props';
-import { PasswordStrengthStyle } from '@components/login/PasswordStrength/PasswordStrength.style';
+import { usePasswordStrengthStyle } from '@components/login/PasswordStrength/PasswordStrength.style';
 import COLORS from '@constants/COLORS';
 
 const LEVELS = [
@@ -26,6 +26,7 @@ const getScore = (password: string): number => {
 export const PasswordStrength = ({
   password
 }: PasswordStrengthProps): JSX.Element | null => {
+  const PasswordStrengthStyle = usePasswordStrengthStyle();
   if (!password) {
     return null;
   }

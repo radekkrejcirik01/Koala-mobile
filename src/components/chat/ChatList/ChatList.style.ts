@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatListStyle = StyleSheet.create({
+export const useChatListStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -17,7 +18,7 @@ export const ChatListStyle = StyleSheet.create({
     marginBottom: 8,
     fontSize: 12,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   // Its time always sits right above it, the gap is kept below, as much as
   // above the time
@@ -63,4 +64,4 @@ export const ChatListStyle = StyleSheet.create({
     fontWeight: '500',
     color: COLORS.PURPLE
   }
-});
+}));

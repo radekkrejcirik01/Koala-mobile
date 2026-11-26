@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatNicknameScreenStyle = StyleSheet.create({
+export const useChatNicknameScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -9,6 +9,7 @@ export const ChatNicknameScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
+    color: colors.text,
     height: 50,
     paddingHorizontal: 14,
     fontSize: 16,
@@ -21,4 +22,4 @@ export const ChatNicknameScreenStyle = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 14
   }
-});
+}));

@@ -3,13 +3,14 @@ import { Button, Keyboard, Text, TextInput, View } from 'react-native';
 import { useModal } from '@hooks/useModal';
 import { Modal } from '@components/general/Modal/Modal';
 import { AndroidPromptContentProps } from '@components/general/AndroidPrompt/AndroidPrompt.props';
-import { AndroidPromptStyle } from '@components/general/AndroidPrompt/AndroidPrompt.style';
+import { useAndroidPromptStyle } from '@components/general/AndroidPrompt/AndroidPrompt.style';
 
 export const AndroidPrompt = ({
   title,
   onPressOK,
   onClose
 }: AndroidPromptContentProps): JSX.Element => {
+  const AndroidPromptStyle = useAndroidPromptStyle();
   const { modalVisible, showModal, hideModal } = useModal();
 
   const [inputValue, setInputValue] = useState<string>();

@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PrivacyPolicyScreenStyle } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen.style';
+import { usePrivacyPolicyScreenStyle } from '@screens/login/PrivacyPolicyScreen/PrivacyPolicyScreen.style';
 import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 
@@ -89,6 +89,7 @@ const SECTIONS: PolicySection[] = [
 ];
 
 export const PrivacyPolicyScreen = (): JSX.Element => {
+  const PrivacyPolicyScreenStyle = usePrivacyPolicyScreenStyle();
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
 

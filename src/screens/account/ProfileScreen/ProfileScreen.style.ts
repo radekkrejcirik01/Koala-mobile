@@ -1,9 +1,8 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
 export const PHOTO_SIZE = 104;
 
-export const ProfileScreenStyle = StyleSheet.create({
+export const useProfileScreenStyle = createStyles((colors) => ({
   screen: {
     flex: 1
   },
@@ -34,10 +33,10 @@ export const ProfileScreenStyle = StyleSheet.create({
     borderWidth: 3,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE
+    backgroundColor: colors.card
   },
   photoBadgeText: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 14
   },
   namesView: {
@@ -45,6 +44,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   name: {
+    color: colors.text,
     fontSize: 26,
     fontWeight: '700'
   },
@@ -53,17 +53,17 @@ export const ProfileScreenStyle = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 12,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   username: {
     fontSize: 14,
-    color: COLORS.GRAY_200,
+    color: colors.textSecondary,
     fontWeight: '600'
   },
   footerText: {
     marginTop: 30,
     fontSize: 14,
     textAlign: 'center',
-    color: COLORS.LIGHTGRAY_100
+    color: colors.placeholder
   }
-});
+}));

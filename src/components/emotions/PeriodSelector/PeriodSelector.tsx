@@ -4,7 +4,7 @@ import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useTheme } from '@hooks/useTheme';
 import { SharedEmotionsPeriod } from '@enums/SharedEmotionsPeriod';
 import { PeriodSelectorProps } from '@components/emotions/PeriodSelector/PeriodSelector.props';
-import { PeriodSelectorStyle } from '@components/emotions/PeriodSelector/PeriodSelector.style';
+import { usePeriodSelectorStyle } from '@components/emotions/PeriodSelector/PeriodSelector.style';
 
 const PERIODS = [
   { period: SharedEmotionsPeriod.Week, label: 'Week' },
@@ -20,6 +20,7 @@ export const PeriodSelector = ({
   onPrevious,
   onNext
 }: PeriodSelectorProps): JSX.Element => {
+  const PeriodSelectorStyle = usePeriodSelectorStyle();
   const { colors } = useTheme().theme;
 
   const onSegmentPress = (value: SharedEmotionsPeriod) => {

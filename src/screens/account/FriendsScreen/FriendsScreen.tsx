@@ -15,7 +15,7 @@ import { useTheme } from '@hooks/useTheme';
 import { usePrompt } from '@hooks/usePrompt';
 import {
   AVATAR_SIZE,
-  FriendsScreenStyle
+  useFriendsScreenStyle
 } from '@screens/account/FriendsScreen/FriendsScreen.style';
 import {
   deleteRequest,
@@ -39,10 +39,12 @@ import { setUnseenInvites } from '@store/NotificationsReducer';
 import { getFriendName } from '@functions/getFriendName';
 
 export const FriendsScreen = (): JSX.Element => {
+  const FriendsScreenStyle = useFriendsScreenStyle();
   const dispatch = useDispatch();
   const { top, bottom } = useSafeAreaInsets();
-  const { colors } = useTheme().theme;
   const { showActionSheetWithOptions } = useActionSheet();
+  const { theme, isDark } = useTheme();
+  const { colors } = theme;
   const { promptVisible, showPrompt, hidePrompt } = usePrompt();
 
   const [invites, setInvites] = useState<InviteInterface[]>([]);
@@ -140,7 +142,11 @@ export const FriendsScreen = (): JSX.Element => {
           options: ['Remove friend', 'Cancel'],
           cancelButtonIndex: 1,
           destructiveButtonIndex: 0,
-          userInterfaceStyle: 'light',
+          userInterfaceStyle: isDark ? 'dark' : 'light',
+          // Android draws its own sheet, the style above is iOS only
+          containerStyle: { backgroundColor: colors.card },
+          textStyle: { color: colors.text },
+          titleTextStyle: { color: colors.textSecondary },
           title: name
         },
         (selectedIndex: number) => {
@@ -150,7 +156,7 @@ export const FriendsScreen = (): JSX.Element => {
         }
       );
     },
-    [removeFriend, showActionSheetWithOptions]
+    [colors, isDark, removeFriend, showActionSheetWithOptions]
   );
 
   return (

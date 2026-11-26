@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const EmotionSliderStyle = StyleSheet.create({
+export const useEmotionSliderStyle = createStyles((colors) => ({
   indicator: {
     // Awful on the left, Super good on the right
     flexDirection: 'row-reverse',
@@ -16,11 +15,11 @@ export const EmotionSliderStyle = StyleSheet.create({
     right: 0,
     textAlign: 'center',
     marginTop: 45,
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 36
   },
   indicatorEmoji: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 40
   }
-});
+}));

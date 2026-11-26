@@ -9,7 +9,7 @@ import { FlashListRef } from '@shopify/flash-list';
 import { useTypingSender } from '@hooks/useTypingSender';
 import { useNavigation } from '@hooks/useNavigation';
 import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
-import { ChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
+import { useChatScreenStyle } from '@screens/account/ChatScreen/ChatScreen.style';
 import { ChatScreenProps } from '@screens/account/ChatScreen/ChatScreen.props';
 import {
   deleteRequest,
@@ -46,7 +46,8 @@ import { mergeLatestMessages } from '@functions/mergeLatestMessages';
 import { getReplyText } from '@functions/getReplyText';
 import { SUPPORT_REACTION } from '@constants/SUPPORT_REACTION';
 import { LiveEventType } from '@enums/LiveEventType';
-import { getChatTheme } from '@constants/CHAT_THEMES';
+import { getChatBackground, getChatTheme } from '@constants/CHAT_THEMES';
+import { useTheme } from '@hooks/useTheme';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 
@@ -72,6 +73,8 @@ const toReply = ({
 });
 
 export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
+  const ChatScreenStyle = useChatScreenStyle();
+  const { isDark } = useTheme();
   const { id: friendId, jump } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
@@ -151,6 +154,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
   const chatTheme = getChatTheme(
     settings ? settings.theme : ChatThemeCache.get(friendId)
   );
+  const chatBackground = getChatBackground(chatTheme, isDark);
 
   // Kept until it's sent, sending empties it
   useEffect(() => {
@@ -662,7 +666,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
       style={[
         ChatScreenStyle.container,
         { paddingTop: top },
-        !!chatTheme.background && { backgroundColor: chatTheme.background }
+        !!chatBackground && { backgroundColor: chatBackground }
       ]}
     >
       <ChatHeader
@@ -692,7 +696,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
             lastReadId={lastReadId}
             highlightId={highlightId}
             bubbleColor={chatTheme.bubble}
-            backgroundColor={chatTheme.background}
+            backgroundColor={chatBackground}
             // Newer messages show only once the newest ones are loaded
             typing={typing && atLatest}
             onSelectReaction={sendReaction}
@@ -722,7 +726,7 @@ export const ChatScreen = ({ route }: ChatScreenProps): React.JSX.Element => {
           onPressSend={onPressSend}
           inputRef={inputRef}
           onFocus={scrollToEnd}
-          backgroundColor={chatTheme.background}
+          backgroundColor={chatBackground}
           sendButtonColor={chatTheme.bubble}
           reply={
             replyTo && {

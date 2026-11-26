@@ -22,7 +22,7 @@ import COLORS from '@constants/COLORS';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { ChatSettingsScreenProps } from '@screens/account/ChatSettingsScreen/ChatSettingsScreen.props';
-import { ChatSettingsScreenStyle } from '@screens/account/ChatSettingsScreen/ChatSettingsScreen.style';
+import { useChatSettingsScreenStyle } from '@screens/account/ChatSettingsScreen/ChatSettingsScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
@@ -31,6 +31,7 @@ import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
 export const ChatSettingsScreen = ({
   route
 }: ChatSettingsScreenProps): JSX.Element => {
+  const ChatSettingsScreenStyle = useChatSettingsScreenStyle();
   const { friend } = route.params;
 
   const { colors } = useTheme().theme;

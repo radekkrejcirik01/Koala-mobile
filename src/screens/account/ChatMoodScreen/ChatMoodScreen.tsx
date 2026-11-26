@@ -9,7 +9,7 @@ import { MessageInterface } from '@interfaces/general.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import { getSharedEmotionsCounts } from '@functions/getSharedEmotionsStats';
 import { ChatMoodScreenProps } from '@screens/account/ChatMoodScreen/ChatMoodScreen.props';
-import { ChatMoodScreenStyle } from '@screens/account/ChatMoodScreen/ChatMoodScreen.style';
+import { useChatMoodScreenStyle } from '@screens/account/ChatMoodScreen/ChatMoodScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Loader } from '@components/general/Loader/Loader';
 import { EmotionsBreakdown } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown';
@@ -20,6 +20,7 @@ const WEEKDAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 const DAY_FORMAT = 'YYYY-MM-DD';
 
 export const ChatMoodScreen = ({ route }: ChatMoodScreenProps): JSX.Element => {
+  const ChatMoodScreenStyle = useChatMoodScreenStyle();
   const { friend } = route.params;
 
   const { top, bottom } = useSafeAreaInsets();
@@ -159,8 +160,8 @@ export const ChatMoodScreen = ({ route }: ChatMoodScreenProps): JSX.Element => {
         ListEmptyComponent={
           emotions ? (
             <Text style={ChatMoodScreenStyle.listEmptyText}>
-              {friend.name} hasn&apos;t shared any emotions with you
-              in the last {DAYS} days
+              {friend.name} hasn&apos;t shared any emotions with you in the last{' '}
+              {DAYS} days
             </Text>
           ) : null
         }

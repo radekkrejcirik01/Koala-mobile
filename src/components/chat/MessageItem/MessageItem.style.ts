@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
 export const TIME_WIDTH = 60;
 export const PHOTO_SIZE = 32;
@@ -7,7 +7,7 @@ export const PHOTO_GAP = 8;
 // Corners between messages of a group, on the sender's side
 const JOINED_RADIUS = 4;
 
-export const MessageItemStyle = StyleSheet.create({
+export const useMessageItemStyle = createStyles((colors, isDark) => ({
   alignEnd: {
     alignSelf: 'flex-end'
   },
@@ -38,7 +38,7 @@ export const MessageItemStyle = StyleSheet.create({
     backgroundColor: COLORS.PURPLE
   },
   inboundContainer: {
-    backgroundColor: COLORS.BEIGE_200
+    backgroundColor: colors.bubble
   },
   joinedTopRight: {
     borderTopRightRadius: JOINED_RADIUS
@@ -66,8 +66,9 @@ export const MessageItemStyle = StyleSheet.create({
     paddingBottom: 7,
     paddingHorizontal: 12,
     borderRadius: 18,
-    backgroundColor: COLORS.BEIGE_200,
-    opacity: 0.6
+    backgroundColor: colors.quote,
+    // A fade reads as a full bubble on dark, it gets its own darker color
+    opacity: isDark ? 1 : 0.6
   },
   // Lined up with the inbound bubble, after the photo's room
   inboundQuoteView: {
@@ -80,11 +81,13 @@ export const MessageItemStyle = StyleSheet.create({
     paddingBottom: 17
   },
   quoteName: {
+    color: colors.text,
     fontSize: 12,
     lineHeight: 16,
     fontWeight: '600'
   },
   quoteText: {
+    color: colors.text,
     fontSize: 14,
     lineHeight: 18
   },
@@ -92,6 +95,7 @@ export const MessageItemStyle = StyleSheet.create({
     fontStyle: 'italic'
   },
   messageText: {
+    color: colors.text,
     fontSize: 15.75,
     lineHeight: 20.5
   },
@@ -99,6 +103,7 @@ export const MessageItemStyle = StyleSheet.create({
     color: COLORS.WHITE
   },
   largeText: {
+    color: colors.text,
     fontSize: 44,
     lineHeight: 52
   },
@@ -114,7 +119,7 @@ export const MessageItemStyle = StyleSheet.create({
     borderRadius: 13,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     marginHorizontal: 8,
     marginTop: -10,
     marginBottom: 5
@@ -124,7 +129,7 @@ export const MessageItemStyle = StyleSheet.create({
   },
   reactionText: {
     fontSize: 12,
-    color: COLORS.BLACK
+    color: colors.text
   },
   timeView: {
     position: 'absolute',
@@ -139,6 +144,6 @@ export const MessageItemStyle = StyleSheet.create({
   timeText: {
     fontSize: 12,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

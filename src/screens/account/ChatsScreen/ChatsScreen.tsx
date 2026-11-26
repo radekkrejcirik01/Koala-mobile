@@ -11,7 +11,7 @@ import { NotificationsService } from '@utils/general/NotificationsService';
 import { LiveService } from '@utils/general/LiveService';
 import { ResponseChatsGetInterface } from '@interfaces/response/Response.interface';
 import { ChatInterface } from '@interfaces/general.interface';
-import { ChatsScreenStyle } from '@screens/account/ChatsScreen/ChatsScreen.style';
+import { useChatsScreenStyle } from '@screens/account/ChatsScreen/ChatsScreen.style';
 import { ChatItem } from '@components/chats/ChatItem/ChatItem';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -24,6 +24,7 @@ import { LiveEventType } from '@enums/LiveEventType';
 import { ChatActivityType } from '@enums/ChatActivityType';
 
 export const ChatsScreen = (): React.JSX.Element => {
+  const ChatsScreenStyle = useChatsScreenStyle();
   const { top } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 

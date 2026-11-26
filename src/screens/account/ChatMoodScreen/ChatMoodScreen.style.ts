@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatMoodScreenStyle = StyleSheet.create({
+export const useChatMoodScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -13,14 +13,14 @@ export const ChatMoodScreenStyle = StyleSheet.create({
     marginHorizontal: 20,
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   card: {
     marginTop: 16,
     marginHorizontal: 20,
     padding: 12,
     borderRadius: 18,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   weekRow: {
     flexDirection: 'row'
@@ -31,7 +31,7 @@ export const ChatMoodScreenStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     fontWeight: '600',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   daysView: {
     flexDirection: 'row',
@@ -49,22 +49,23 @@ export const ChatMoodScreenStyle = StyleSheet.create({
     borderColor: COLORS.TRANSPARENT,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   daySelected: {
     borderColor: COLORS.BUTTON_BLUE
   },
   dayEmoji: {
+    color: colors.text,
     fontSize: 18
   },
   dayNumber: {
     fontSize: 12,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   todayNumber: {
     fontWeight: '800',
-    color: COLORS.BLACK
+    color: colors.text
   },
   sectionTitle: {
     marginTop: 24,
@@ -74,7 +75,7 @@ export const ChatMoodScreenStyle = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0.4,
     textTransform: 'uppercase',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   listEmptyText: {
     marginTop: 30,
@@ -82,6 +83,6 @@ export const ChatMoodScreenStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

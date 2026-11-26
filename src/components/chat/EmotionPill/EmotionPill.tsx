@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
 import { EmotionPillProps } from '@components/chat/EmotionPill/EmotionPill.props';
-import { EmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
+import { useEmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
 
 // The emotion badge of a chat emotion, also lifted above the chat when it's
 // tapped to send support
@@ -13,33 +13,38 @@ export const EmotionPill = ({
   textWidth,
   onTextLayout,
   onTextSize
-}: EmotionPillProps): JSX.Element => (
-  <View
-    style={[
-      EmotionMessageItemStyle.badgeOuter,
-      !!ringColor && { backgroundColor: ringColor },
-      white && EmotionMessageItemStyle.badgeOuterWhite
-    ]}
-  >
+}: EmotionPillProps): JSX.Element => {
+  const EmotionMessageItemStyle = useEmotionMessageItemStyle();
+
+  return (
     <View
       style={[
-        EmotionMessageItemStyle.badge,
-        white && EmotionMessageItemStyle.badgeWhite
+        EmotionMessageItemStyle.badgeOuter,
+        !!ringColor && { backgroundColor: ringColor },
+        white && EmotionMessageItemStyle.badgeOuterWhite
       ]}
     >
-      {!!emotion && (
-        <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
-      )}
-      <Text
+      <View
         style={[
-          EmotionMessageItemStyle.messageText,
-          textWidth !== undefined && { width: textWidth }
+          EmotionMessageItemStyle.badge,
+          white && EmotionMessageItemStyle.badgeWhite
         ]}
-        onTextLayout={onTextLayout}
-        onLayout={onTextSize}
       >
-        {text}
-      </Text>
+        {!!emotion && (
+          <Text style={EmotionMessageItemStyle.emojiText}>{emotion}</Text>
+        )}
+        <Text
+          style={[
+            EmotionMessageItemStyle.messageText,
+            white && EmotionMessageItemStyle.messageTextWhite,
+            textWidth !== undefined && { width: textWidth }
+          ]}
+          onTextLayout={onTextLayout}
+          onLayout={onTextSize}
+        >
+          {text}
+        </Text>
+      </View>
     </View>
-  </View>
-);
+  );
+};

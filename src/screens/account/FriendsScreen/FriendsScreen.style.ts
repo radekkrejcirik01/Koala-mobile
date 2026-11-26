@@ -1,9 +1,8 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
 export const AVATAR_SIZE = 48;
 
-export const FriendsScreenStyle = StyleSheet.create({
+export const useFriendsScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -19,7 +18,7 @@ export const FriendsScreenStyle = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0.4,
     textTransform: 'uppercase',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   friendRow: {
     paddingVertical: 8,
@@ -32,13 +31,14 @@ export const FriendsScreenStyle = StyleSheet.create({
     marginLeft: 14
   },
   friendName: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: '600'
   },
   friendUsername: {
     marginTop: 2,
     fontSize: 14,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   listEmptyView: {
     flex: 1,
@@ -50,6 +50,6 @@ export const FriendsScreenStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

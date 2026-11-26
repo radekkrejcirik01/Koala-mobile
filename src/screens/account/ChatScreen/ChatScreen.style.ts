@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatScreenStyle = StyleSheet.create({
+export const useChatScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1,
     justifyContent: 'space-between'
@@ -19,7 +18,7 @@ export const ChatScreenStyle = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -29,6 +28,6 @@ export const ChatScreenStyle = StyleSheet.create({
   latestText: {
     fontSize: 20,
     fontWeight: '600',
-    color: COLORS.BLACK
+    color: colors.text
   }
-});
+}));

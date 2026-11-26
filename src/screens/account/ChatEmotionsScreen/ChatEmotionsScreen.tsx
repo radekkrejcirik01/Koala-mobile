@@ -10,7 +10,7 @@ import { MessageInterface } from '@interfaces/general.interface';
 import { ReducerProps } from '@store/index/index.props';
 import { PAGE_SIZE } from '@constants/PAGE_SIZE';
 import { ChatEmotionsScreenProps } from '@screens/account/ChatEmotionsScreen/ChatEmotionsScreen.props';
-import { ChatEmotionsScreenStyle } from '@screens/account/ChatEmotionsScreen/ChatEmotionsScreen.style';
+import { useChatEmotionsScreenStyle } from '@screens/account/ChatEmotionsScreen/ChatEmotionsScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Loader } from '@components/general/Loader/Loader';
 import { SharedEmotionItem } from '@components/emotions/SharedEmotionItem/SharedEmotionItem';
@@ -18,6 +18,7 @@ import { SharedEmotionItem } from '@components/emotions/SharedEmotionItem/Shared
 export const ChatEmotionsScreen = ({
   route
 }: ChatEmotionsScreenProps): JSX.Element => {
+  const ChatEmotionsScreenStyle = useChatEmotionsScreenStyle();
   const { friend } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);

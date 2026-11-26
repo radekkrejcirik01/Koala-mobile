@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const AuthLayoutStyle = StyleSheet.create({
+export const useAuthLayoutStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -21,6 +22,7 @@ export const AuthLayoutStyle = StyleSheet.create({
     justifyContent: 'center'
   },
   headerTitle: {
+    color: colors.text,
     fontSize: 18,
     fontWeight: 'bold'
   },
@@ -35,7 +37,7 @@ export const AuthLayoutStyle = StyleSheet.create({
     flex: 1,
     height: 5,
     borderRadius: 3,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   progressSegmentActive: {
     backgroundColor: COLORS.BUTTON_BLUE
@@ -43,13 +45,14 @@ export const AuthLayoutStyle = StyleSheet.create({
   stepText: {
     fontSize: 13,
     fontWeight: '600',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   content: {
     paddingTop: 30,
     paddingHorizontal: 24
   },
   title: {
+    color: colors.text,
     fontSize: 28,
     fontWeight: '800'
   },
@@ -62,10 +65,10 @@ export const AuthLayoutStyle = StyleSheet.create({
     fontSize: 16,
     lineHeight: 22,
     fontWeight: '500',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   footer: {
     paddingTop: 12,
     paddingHorizontal: 24
   }
-});
+}));

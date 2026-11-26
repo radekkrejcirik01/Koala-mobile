@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatInputStyle = StyleSheet.create({
+export const useChatInputStyle = createStyles((colors) => ({
   inputContainer: {
     marginHorizontal: 5,
     paddingBottom: 7,
@@ -22,9 +22,10 @@ export const ChatInputStyle = StyleSheet.create({
     borderRadius: 22,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.BEIGE_200
+    backgroundColor: colors.bubble
   },
   input: {
+    color: colors.text,
     flex: 1,
     paddingLeft: 2,
     paddingRight: 20,
@@ -55,6 +56,7 @@ export const ChatInputStyle = StyleSheet.create({
     borderLeftColor: COLORS.PURPLE
   },
   replyName: {
+    color: colors.text,
     fontSize: 14,
     lineHeight: 19,
     fontWeight: '600'
@@ -63,14 +65,14 @@ export const ChatInputStyle = StyleSheet.create({
     marginTop: 2,
     fontSize: 14,
     lineHeight: 19,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   replyCancelText: {
     marginLeft: 16,
     fontSize: 18,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   sendButtonIcon: {
     right: -1
   }
-});
+}));

@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@hooks/useNavigation';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
-import { SupportScreenStyle } from '@screens/account/SupportScreen/SupportScreen.style';
+import { useSupportScreenStyle } from '@screens/account/SupportScreen/SupportScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import COLORS from '@constants/COLORS';
 import { SendButton } from '@components/home/SendButton/SendButton';
@@ -21,6 +21,7 @@ import { ProfileSection } from '@components/profile/ProfileSection/ProfileSectio
 import { ProfileItem } from '@components/profile/ProfileItem/ProfileItem';
 
 export const SupportScreen = (): JSX.Element => {
+  const SupportScreenStyle = useSupportScreenStyle();
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { sending, setSending, sent, setSent } = useSending();
@@ -79,7 +80,7 @@ export const SupportScreen = (): JSX.Element => {
         >
           <TextInput
             placeholder="What's going on..."
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             value={message}
             onChangeText={setMessage}
             multiline

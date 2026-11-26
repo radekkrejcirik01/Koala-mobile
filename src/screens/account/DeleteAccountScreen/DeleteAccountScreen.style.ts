@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const DeleteAccountScreenStyle = StyleSheet.create({
+export const useDeleteAccountScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -16,10 +17,10 @@ export const DeleteAccountScreenStyle = StyleSheet.create({
     borderRadius: 9,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   icon: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 17
   },
   content: {
@@ -28,12 +29,13 @@ export const DeleteAccountScreenStyle = StyleSheet.create({
     paddingVertical: 12,
     paddingRight: 14,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: COLORS.WHITE_300
+    borderBottomColor: colors.surface_300
   },
   noBorder: {
     borderBottomWidth: 0
   },
   title: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: '500'
   },
@@ -41,7 +43,7 @@ export const DeleteAccountScreenStyle = StyleSheet.create({
     marginTop: 2,
     fontSize: 14,
     lineHeight: 19,
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   button: {
     width: 'auto',
@@ -51,4 +53,4 @@ export const DeleteAccountScreenStyle = StyleSheet.create({
     borderRadius: 14,
     backgroundColor: COLORS.NOTIFICATION_DOT
   }
-});
+}));

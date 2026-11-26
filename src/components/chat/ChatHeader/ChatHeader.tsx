@@ -1,7 +1,7 @@
 import React, { JSX, useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
-import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
+import { useChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import {
   ChatHeaderDefaultProps,
   ChatHeaderProps
@@ -27,6 +27,7 @@ export const ChatHeader = ({
   profilePhoto,
   onPress
 }: ChatHeaderProps): JSX.Element => {
+  const ChatHeaderStyle = useChatHeaderStyle();
   const theme = useTheme();
 
   // Not loaded yet while undefined

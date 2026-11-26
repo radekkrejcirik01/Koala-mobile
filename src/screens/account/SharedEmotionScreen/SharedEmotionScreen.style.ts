@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const SharedEmotionScreenStyle = StyleSheet.create({
+export const useSharedEmotionScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -16,13 +15,14 @@ export const SharedEmotionScreenStyle = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   emojiText: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 32
   },
   messageText: {
+    color: colors.text,
     marginTop: 16,
     fontSize: 20,
     fontWeight: '600',
@@ -32,14 +32,14 @@ export const SharedEmotionScreenStyle = StyleSheet.create({
     marginTop: 6,
     fontSize: 13,
     textAlign: 'center',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   sectionTitle: {
     marginTop: 28,
     marginBottom: 6,
     fontSize: 13,
     fontWeight: '600',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   recipientView: {
     flexDirection: 'row',
@@ -54,6 +54,7 @@ export const SharedEmotionScreenStyle = StyleSheet.create({
     borderRadius: 9
   },
   nameText: {
+    color: colors.text,
     flex: 1,
     fontSize: 16,
     fontWeight: '500'
@@ -61,6 +62,6 @@ export const SharedEmotionScreenStyle = StyleSheet.create({
   emptyText: {
     paddingVertical: 8,
     fontSize: 14,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

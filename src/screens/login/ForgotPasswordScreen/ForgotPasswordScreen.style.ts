@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ForgotPasswordScreenStyle = StyleSheet.create({
+export const useForgotPasswordScreenStyle = createStyles((colors) => ({
   supportText: {
     marginTop: 20,
     marginHorizontal: 4,
     fontSize: 14,
     lineHeight: 20,
     fontWeight: '500',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   supportLink: {
     fontWeight: '600',
@@ -18,4 +18,4 @@ export const ForgotPasswordScreenStyle = StyleSheet.create({
     height: 54,
     borderRadius: 16
   }
-});
+}));

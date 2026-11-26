@@ -10,7 +10,7 @@ import { PasswordResetRequestPostInterface } from '@interfaces/post/Post.interfa
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { ForgotPasswordScreenProps } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen.props';
-import { ForgotPasswordScreenStyle } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen.style';
+import { useForgotPasswordScreenStyle } from '@screens/login/ForgotPasswordScreen/ForgotPasswordScreen.style';
 import { Button } from '@components/general/Button/Button';
 import { AuthLayout } from '@components/login/AuthLayout/AuthLayout';
 import { AuthInput } from '@components/login/AuthInput/AuthInput';
@@ -20,6 +20,7 @@ const SUPPORT_EMAIL = 'support@koalasharing.com';
 export const ForgotPasswordScreen = ({
   route
 }: ForgotPasswordScreenProps): React.JSX.Element => {
+  const ForgotPasswordScreenStyle = useForgotPasswordScreenStyle();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
   const [username, setUsername] = useState<string>(

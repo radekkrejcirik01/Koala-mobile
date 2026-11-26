@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const AuthInputStyle = StyleSheet.create({
+export const useAuthInputStyle = createStyles((colors) => ({
   container: {
     marginTop: 12
   },
@@ -13,6 +13,7 @@ export const AuthInputStyle = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
+    color: colors.text,
     flex: 1,
     height: '100%',
     fontSize: 16,
@@ -29,9 +30,9 @@ export const AuthInputStyle = StyleSheet.create({
     marginLeft: 4,
     fontSize: 13,
     fontWeight: '500',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   errorMessage: {
     color: COLORS.EMOTION_MISERABLE
   }
-});
+}));

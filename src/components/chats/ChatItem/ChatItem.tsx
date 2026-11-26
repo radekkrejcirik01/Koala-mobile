@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
-import { ChatItemStyle } from '@components/chats/ChatItem/ChatItem.style';
+import { useChatItemStyle } from '@components/chats/ChatItem/ChatItem.style';
 import { ChatItemProps } from '@components/chats/ChatItem/ChatItem.props';
 import { getNotificationTime } from '@functions/getNotificationTime';
 import { getChatPreview } from '@functions/getChatPreview';
@@ -15,6 +15,7 @@ export const ChatItem = ({
   typing,
   onPress
 }: ChatItemProps): React.JSX.Element => {
+  const ChatItemStyle = useChatItemStyle();
   const theme = useTheme();
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);

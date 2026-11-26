@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
-import { FeedbackScreenStyle } from '@screens/account/FeedbackScreen/FeedbackScreen.style';
+import { useFeedbackScreenStyle } from '@screens/account/FeedbackScreen/FeedbackScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import COLORS from '@constants/COLORS';
 import { SendButton } from '@components/home/SendButton/SendButton';
@@ -15,6 +15,7 @@ import { FormIntro } from '@components/profile/FormIntro/FormIntro';
 import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 
 export const FeedbackScreen = (): JSX.Element => {
+  const FeedbackScreenStyle = useFeedbackScreenStyle();
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { sending, setSending, sent, setSent } = useSending();
@@ -61,7 +62,7 @@ export const FeedbackScreen = (): JSX.Element => {
         <ProfileSection title="Feedback">
           <TextInput
             placeholder="Your thoughts..."
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             value={message}
             onChangeText={setMessage}
             multiline

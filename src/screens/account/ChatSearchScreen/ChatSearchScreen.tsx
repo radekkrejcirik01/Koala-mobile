@@ -22,7 +22,7 @@ import { PAGE_SIZE } from '@constants/PAGE_SIZE';
 import COLORS from '@constants/COLORS';
 import { getFriendName } from '@functions/getFriendName';
 import { ChatSearchScreenProps } from '@screens/account/ChatSearchScreen/ChatSearchScreen.props';
-import { ChatSearchScreenStyle } from '@screens/account/ChatSearchScreen/ChatSearchScreen.style';
+import { useChatSearchScreenStyle } from '@screens/account/ChatSearchScreen/ChatSearchScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 
 // Waits for a pause in typing before searching
@@ -57,6 +57,7 @@ const splitByMatch = (
 export const ChatSearchScreen = ({
   route
 }: ChatSearchScreenProps): JSX.Element => {
+  const ChatSearchScreenStyle = useChatSearchScreenStyle();
   const { friend } = route.params;
 
   const { id: userId } = useSelector((state: ReducerProps) => state.user.user);
@@ -175,7 +176,7 @@ export const ChatSearchScreen = ({
           autoFocus
           autoCorrect={false}
           placeholder={`Search in chat with ${getFriendName(friend)}`}
-          placeholderTextColor={COLORS.LIGHTGRAY_100}
+          placeholderTextColor={colors.placeholder}
           selectionColor={COLORS.BUTTON_BLUE}
           returnKeyType="search"
           clearButtonMode="while-editing"

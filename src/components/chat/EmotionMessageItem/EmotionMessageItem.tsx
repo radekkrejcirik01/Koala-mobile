@@ -35,12 +35,12 @@ import {
   EmotionMessageItemProps,
   EmotionPillLayout
 } from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
-import { EmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
+import { useEmotionMessageItemStyle } from '@components/chat/EmotionMessageItem/EmotionMessageItem.style';
 import { EmotionPill } from '@components/chat/EmotionPill/EmotionPill';
 import { getEmotionText } from '@functions/getEmotionText';
 import { getLocalTime } from '@functions/getLocalTime';
 import {
-  MessageItemStyle,
+  useMessageItemStyle,
   TIME_WIDTH
 } from '@components/chat/MessageItem/MessageItem.style';
 
@@ -67,6 +67,8 @@ export const EmotionMessageItem = ({
   onPressEmotion,
   onLongPress
 }: EmotionMessageItemProps): React.JSX.Element => {
+  const EmotionMessageItemStyle = useEmotionMessageItemStyle();
+  const MessageItemStyle = useMessageItemStyle();
   const pillRef = useRef<View>(null);
 
   // The friend's emotion still waiting for your support is white, sending it

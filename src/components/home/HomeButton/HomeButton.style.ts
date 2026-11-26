@@ -1,12 +1,11 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const HomeButtonStyle = StyleSheet.create({
+export const useHomeButtonStyle = createStyles((colors) => ({
   container: {
     width: 110,
     height: 52,
     borderRadius: 70,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
@@ -16,8 +15,8 @@ export const HomeButtonStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   text: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 16,
     fontWeight: 'bold'
   }
-});
+}));

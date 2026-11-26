@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Text, TextInput, TouchableOpacity } from 'react-native';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
-import { LoginScreenStyle } from '@screens/login/LoginScreen/LoginScreen.style';
+import { useLoginScreenStyle } from '@screens/login/LoginScreen/LoginScreen.style';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { AuthResponseInterface } from '@interfaces/response/Response.interface';
 import { LoginPostInterface } from '@interfaces/post/Post.interface';
@@ -19,6 +19,7 @@ import { AuthInput } from '@components/login/AuthInput/AuthInput';
 import { PASSWORD_MAX_LENGTH } from '@constants/AUTH';
 
 export const LoginScreen = (): JSX.Element => {
+  const LoginScreenStyle = useLoginScreenStyle();
   const dispatch = useDispatch();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 

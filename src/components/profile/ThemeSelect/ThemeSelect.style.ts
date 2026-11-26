@@ -1,14 +1,50 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ThemeSelectStyle = StyleSheet.create({
+export const useThemeSelectStyle = createStyles((colors) => ({
   container: {
     flexGrow: 1,
     paddingHorizontal: 16,
     justifyContent: 'space-between'
   },
-  themes: {
-    marginTop: 26
+  // Like ProfileSection's title, lined up with the cards' content
+  sectionTitle: {
+    marginTop: 26,
+    marginBottom: 8,
+    marginHorizontal: 14,
+    fontSize: 13,
+    fontWeight: '600',
+    letterSpacing: 0.4,
+    textTransform: 'uppercase',
+    color: colors.textSecondary
+  },
+  appearanceCard: {
+    borderRadius: 14,
+    overflow: 'hidden'
+  },
+  appearanceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: 14,
+    paddingVertical: 15,
+    paddingRight: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.surface_300
+  },
+  noBorder: {
+    borderBottomWidth: 0
+  },
+  appearanceName: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: '500'
+  },
+  appearanceCheck: {
+    color: COLORS.BUTTON_BLUE,
+    fontSize: 17,
+    fontWeight: '700'
   },
   themeCard: {
     flexDirection: 'row',
@@ -37,6 +73,7 @@ export const ThemeSelectStyle = StyleSheet.create({
     paddingRight: 6
   },
   name: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: '600'
   },
@@ -47,7 +84,7 @@ export const ThemeSelectStyle = StyleSheet.create({
     borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: COLORS.LIGHTGRAY
+    borderColor: colors.border
   },
   radioSelected: {
     borderColor: COLORS.BUTTON_BLUE,
@@ -64,12 +101,12 @@ export const ThemeSelectStyle = StyleSheet.create({
   },
   creditsText: {
     fontSize: 14,
-    color: COLORS.LIGHTGRAY_100
+    color: colors.placeholder
   },
   creditsHandle: {
     marginTop: 2,
     fontSize: 14,
     fontWeight: '600',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

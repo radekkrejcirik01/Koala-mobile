@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const LoginScreenStyle = StyleSheet.create({
+export const useLoginScreenStyle = createStyles((colors) => ({
   button: {
     height: 54,
     borderRadius: 16
@@ -21,10 +21,10 @@ export const LoginScreenStyle = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   signUpLink: {
     fontWeight: '600',
     color: COLORS.BUTTON_BLUE
   }
-});
+}));

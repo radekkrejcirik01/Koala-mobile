@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ShareScreenStyle = StyleSheet.create({
+export const useShareScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -18,7 +18,7 @@ export const ShareScreenStyle = StyleSheet.create({
     paddingBottom: 122
   },
   selectedEmoji: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 72,
     marginBottom: 12
   },
@@ -26,7 +26,7 @@ export const ShareScreenStyle = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   messageInput: {
     alignSelf: 'stretch',
@@ -60,6 +60,6 @@ export const ShareScreenStyle = StyleSheet.create({
   // Takes the rest of the row next to Save
   nextButton: {
     flex: 1,
-    width: undefined
+    width: 'auto'
   }
-});
+}));

@@ -1,9 +1,9 @@
 import React, { JSX, useCallback } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
-import COLORS from '@constants/COLORS';
+import { useTheme } from '@hooks/useTheme';
 import { EmotionItemProps } from '@components/home/EmotionItem/EmotionItem.props';
-import { EmotionItemStyle } from '@components/home/EmotionItem/EmotionItem.style';
+import { useEmotionItemStyle } from '@components/home/EmotionItem/EmotionItem.style';
 
 export const EmotionItem = ({
   emotion,
@@ -11,6 +11,9 @@ export const EmotionItem = ({
   onPress,
   style
 }: EmotionItemProps): JSX.Element => {
+  const EmotionItemStyle = useEmotionItemStyle();
+  const { colors } = useTheme().theme;
+
   const onItemPress = useCallback(() => {
     trigger(HapticFeedbackTypes.impactLight);
     onPress();
@@ -23,7 +26,7 @@ export const EmotionItem = ({
       style={[
         EmotionItemStyle.container,
         {
-          backgroundColor: selected ? COLORS.WHITE_300 : COLORS.WHITE_200
+          backgroundColor: selected ? colors.surface_300 : colors.surface_200
         },
         style
       ]}

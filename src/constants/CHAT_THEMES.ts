@@ -8,6 +8,8 @@ export interface ChatThemeConfig {
   bubble: string;
   // The chat background, the app theme's background when not set
   background?: string;
+  // The same hue for dark mode
+  darkBackground?: string;
 }
 
 export const DEFAULT_CHAT_THEME: ChatThemeConfig = {
@@ -18,11 +20,40 @@ export const DEFAULT_CHAT_THEME: ChatThemeConfig = {
 
 export const CHAT_THEMES: ChatThemeConfig[] = [
   DEFAULT_CHAT_THEME,
-  { key: 'ocean', name: 'Ocean', bubble: '#4a90e2', background: '#eaf3fc' },
-  { key: 'sunset', name: 'Sunset', bubble: '#f08a5d', background: '#fdf0ea' },
-  { key: 'forest', name: 'Forest', bubble: '#52b788', background: '#ebf6f0' },
-  { key: 'berry', name: 'Berry', bubble: '#e5739b', background: '#fcedf2' }
+  {
+    key: 'ocean',
+    name: 'Ocean',
+    bubble: '#4a90e2',
+    background: '#eaf3fc',
+    darkBackground: '#183a62'
+  },
+  {
+    key: 'sunset',
+    name: 'Sunset',
+    bubble: '#f08a5d',
+    background: '#fdf0ea',
+    darkBackground: '#622f18'
+  },
+  {
+    key: 'forest',
+    name: 'Forest',
+    bubble: '#52b788',
+    background: '#ebf6f0',
+    darkBackground: '#186240'
+  },
+  {
+    key: 'berry',
+    name: 'Berry',
+    bubble: '#e5739b',
+    background: '#fcedf2',
+    darkBackground: '#621832'
+  }
 ];
 
 export const getChatTheme = (key?: string): ChatThemeConfig =>
   CHAT_THEMES.find((item) => item.key === key) ?? DEFAULT_CHAT_THEME;
+
+export const getChatBackground = (
+  theme: ChatThemeConfig,
+  isDark: boolean
+): string | undefined => (isDark ? theme.darkBackground : theme.background);

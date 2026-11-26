@@ -109,7 +109,7 @@ export const AccountScreen = (): React.JSX.Element => {
               navigateTo(AccountStackNavigatorEnum.DeleteAccountScreen)
             }
             icon="🗑️"
-            iconBackgroundColor={COLORS.WHITE_200}
+            iconBackgroundColor={theme.theme.colors.surface_200}
             title="Delete account"
             destructive
             isLast

@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const PeriodSelectorStyle = StyleSheet.create({
+export const usePeriodSelectorStyle = createStyles((colors) => ({
   container: {
     marginHorizontal: 20
   },
@@ -9,7 +8,7 @@ export const PeriodSelectorStyle = StyleSheet.create({
     padding: 3,
     borderRadius: 12,
     flexDirection: 'row',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   segment: {
     flex: 1,
@@ -18,7 +17,7 @@ export const PeriodSelectorStyle = StyleSheet.create({
     alignItems: 'center'
   },
   segmentActive: {
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -28,10 +27,10 @@ export const PeriodSelectorStyle = StyleSheet.create({
   segmentText: {
     fontSize: 14,
     fontWeight: '600',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   segmentTextActive: {
-    color: COLORS.BLACK
+    color: colors.text
   },
   navigationView: {
     marginTop: 14,
@@ -43,13 +42,14 @@ export const PeriodSelectorStyle = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 26,
     fontWeight: '500',
-    color: COLORS.BLACK
+    color: colors.text
   },
   arrowTextDisabled: {
-    color: COLORS.LIGHTGRAY
+    color: colors.border
   },
   titleText: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: 'bold'
   }
-});
+}));

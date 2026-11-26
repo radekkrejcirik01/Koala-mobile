@@ -6,9 +6,12 @@ import COLORS from '@constants/COLORS.ts';
 import { setImageAction } from '@store/UserReducer.ts';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage.ts';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum.ts';
-import { ThemeSelectStyle } from '@components/profile/ThemeSelect/ThemeSelect.style.ts';
+import { useThemeSelectStyle } from '@components/profile/ThemeSelect/ThemeSelect.style.ts';
 import { useTheme } from '@hooks/useTheme.ts';
 import { FormIntro } from '@components/profile/FormIntro/FormIntro';
+import { getIllustration } from '@functions/getIllustration';
+import { AppearanceService } from '@utils/general/AppearanceService';
+import { APPEARANCES } from '@constants/APPEARANCES';
 
 const THEMES = [
   { value: Images.ROOM, name: 'Home' },
@@ -16,26 +19,23 @@ const THEMES = [
   { value: Images.SEA, name: 'Sea' }
 ];
 
+const DARK_THEMES = THEMES.filter((theme) => theme.value === Images.ROOM);
+
 export const ThemeSelect = () => {
+  const ThemeSelectStyle = useThemeSelectStyle();
   const dispatch = useDispatch();
-  const { colors } = useTheme().theme;
+  const { theme, isDark } = useTheme();
+  const { colors } = theme;
 
-  const { image } = useSelector((state: ReducerProps) => state.user);
-
-  const getImageSource = (value: Images) => {
-    if (value === Images.ROOM) {
-      return require('@assets/illustrations/room.jpg');
-    }
-    if (value === Images.PARK) {
-      return require('@assets/illustrations/park.jpg');
-    }
-    if (value === Images.SEA) {
-      return require('@assets/illustrations/sea.jpg');
-    }
-    return undefined;
-  };
+  const { image, appearance } = useSelector(
+    (state: ReducerProps) => state.user
+  );
 
   const getBackgroundColor = (value: Images) => {
+    // The dark illustrations are cut out, they sit on the app's background
+    if (isDark) {
+      return colors.background;
+    }
     if (value === Images.ROOM) {
       return COLORS.BEIGE;
     }
@@ -60,13 +60,40 @@ export const ThemeSelect = () => {
           emojiBackgroundColor={COLORS.PASTEL_PURPLE}
           title="Choose your theme"
         />
-        <View style={ThemeSelectStyle.themes}>
-          {THEMES.map((theme) => {
-            const selected = theme.value === image;
+        <Text style={ThemeSelectStyle.sectionTitle}>Appearance</Text>
+        <View
+          style={[
+            ThemeSelectStyle.appearanceCard,
+            { backgroundColor: colors.surface }
+          ]}
+        >
+          {APPEARANCES.map((item, index) => (
+            <TouchableOpacity
+              key={item.value}
+              activeOpacity={0.7}
+              onPress={() => AppearanceService.set(item.value)}
+              style={[
+                ThemeSelectStyle.appearanceRow,
+                index === APPEARANCES.length - 1 && ThemeSelectStyle.noBorder
+              ]}
+            >
+              <Text style={ThemeSelectStyle.appearanceName}>{item.name}</Text>
+              {item.value === appearance && (
+                <Text style={ThemeSelectStyle.appearanceCheck}>✓</Text>
+              )}
+            </TouchableOpacity>
+          ))}
+        </View>
+        <Text style={ThemeSelectStyle.sectionTitle}>Background</Text>
+        <View>
+          {/* Dark mode only has the room, the light choice is kept for later */}
+          {(isDark ? DARK_THEMES : THEMES).map((theme) => {
+            const selected = isDark || theme.value === image;
             return (
               <TouchableOpacity
                 key={theme.value}
                 activeOpacity={0.8}
+                disabled={isDark}
                 style={[
                   ThemeSelectStyle.themeCard,
                   {
@@ -85,7 +112,7 @@ export const ThemeSelect = () => {
                   ]}
                 >
                   <Image
-                    source={getImageSource(theme.value)}
+                    source={getIllustration(theme.value, isDark)}
                     style={ThemeSelectStyle.image}
                     resizeMode="contain"
                   />

@@ -6,7 +6,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useTheme } from '@hooks/useTheme';
 import { BackButton } from '@components/general/BackButton/BackButton';
 import { AuthLayoutProps } from '@components/login/AuthLayout/AuthLayout.props';
-import { AuthLayoutStyle } from '@components/login/AuthLayout/AuthLayout.style';
+import { useAuthLayoutStyle } from '@components/login/AuthLayout/AuthLayout.style';
 
 const KEYBOARD_GAP = 12;
 
@@ -20,6 +20,7 @@ export const AuthLayout = ({
   footer,
   children
 }: AuthLayoutProps): JSX.Element => {
+  const AuthLayoutStyle = useAuthLayoutStyle();
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
 

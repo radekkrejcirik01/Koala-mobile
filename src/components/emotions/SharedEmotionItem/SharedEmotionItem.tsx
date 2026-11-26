@@ -3,12 +3,13 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import moment from 'moment';
 import { useTheme } from '@hooks/useTheme';
 import { SharedEmotionItemProps } from '@components/emotions/SharedEmotionItem/SharedEmotionItem.props';
-import { SharedEmotionItemStyle } from '@components/emotions/SharedEmotionItem/SharedEmotionItem.style';
+import { useSharedEmotionItemStyle } from '@components/emotions/SharedEmotionItem/SharedEmotionItem.style';
 
 export const SharedEmotionItem = ({
   item,
   onPress
 }: SharedEmotionItemProps): JSX.Element => {
+  const SharedEmotionItemStyle = useSharedEmotionItemStyle();
   const { colors } = useTheme().theme;
 
   return (

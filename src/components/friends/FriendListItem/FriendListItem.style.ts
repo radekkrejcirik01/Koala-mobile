@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const FriendListItemStyle = StyleSheet.create({
+export const useFriendListItemStyle = createStyles((colors) => ({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -15,6 +15,7 @@ export const FriendListItemStyle = StyleSheet.create({
     borderRadius: 9
   },
   nameText: {
+    color: colors.text,
     flex: 1,
     fontSize: 16,
     fontWeight: '500'
@@ -24,7 +25,7 @@ export const FriendListItemStyle = StyleSheet.create({
     height: 22,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: COLORS.LIGHTGRAY_100,
+    borderColor: colors.placeholder,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -37,4 +38,4 @@ export const FriendListItemStyle = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold'
   }
-});
+}));

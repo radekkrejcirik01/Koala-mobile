@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const AnalyticsScreenStyle = StyleSheet.create({
+export const useAnalyticsScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -14,9 +13,10 @@ export const AnalyticsScreenStyle = StyleSheet.create({
     marginHorizontal: 20,
     padding: 16,
     borderRadius: 18,
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   totalText: {
+    color: colors.text,
     fontSize: 32,
     fontWeight: 'bold'
   },
@@ -24,7 +24,7 @@ export const AnalyticsScreenStyle = StyleSheet.create({
     marginBottom: 16,
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   sectionTitle: {
     marginTop: 24,
@@ -34,7 +34,7 @@ export const AnalyticsScreenStyle = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0.4,
     textTransform: 'uppercase',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   stale: {
     opacity: 0.5
@@ -45,6 +45,6 @@ export const AnalyticsScreenStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

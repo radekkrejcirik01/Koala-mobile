@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const InviteItemStyle = StyleSheet.create({
+export const useInviteItemStyle = createStyles((colors) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 20,
@@ -14,6 +14,7 @@ export const InviteItemStyle = StyleSheet.create({
     alignItems: 'center'
   },
   usernameText: {
+    color: colors.text,
     marginLeft: 14,
     fontSize: 16,
     fontWeight: '500'
@@ -41,4 +42,4 @@ export const InviteItemStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
-});
+}));

@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ResendCodeStyle = StyleSheet.create({
+export const useResendCodeStyle = createStyles((colors) => ({
   view: {
     marginTop: 16,
     marginLeft: 4,
@@ -13,6 +13,6 @@ export const ResendCodeStyle = StyleSheet.create({
     color: COLORS.BUTTON_BLUE
   },
   waitingText: {
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   }
-});
+}));

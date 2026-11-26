@@ -12,12 +12,13 @@ import { Navigation } from '@navigation/index';
 import { PreloadService } from '@utils/general/PreloadService';
 import { AnalyticsService } from '@utils/general/AnalyticsService';
 import { LiveService } from '@utils/general/LiveService';
-import { TOAST_CONFIG } from '@constants/TOAST_CONFIG';
+import { getToastConfig } from '@constants/TOAST_CONFIG';
 
 const App = () => {
   // Navigation waits for the stored token so the right stack is the first
   // one rendered, otherwise the switch from login to home animates on launch
   const [ready, setReady] = useState<boolean>(false);
+  const isDark = useColorScheme() === 'dark';
 
   useEffect(() => {
     AnalyticsService.init();
@@ -36,15 +37,16 @@ const App = () => {
         <KeyboardProvider navigationBarTranslucent>
           <ActionSheetProvider>
             <SafeAreaProvider>
-              <StatusBar barStyle="dark-content" translucent />
-              <Provider store={store}>
-                {ready && <Navigation />}
-              </Provider>
+              <StatusBar
+                barStyle={isDark ? 'light-content' : 'dark-content'}
+                translucent
+              />
+              <Provider store={store}>{ready && <Navigation />}</Provider>
             </SafeAreaProvider>
           </ActionSheetProvider>
         </KeyboardProvider>
       </GestureHandlerRootView>
-      <Toast config={TOAST_CONFIG} />
+      <Toast config={getToastConfig(isDark)} />
     </>
   );
 };

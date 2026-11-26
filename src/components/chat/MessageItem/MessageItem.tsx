@@ -11,7 +11,7 @@ import { isTextEmoji } from '@functions/isTextEmoji';
 import { getReplyText } from '@functions/getReplyText';
 import { MessageItemProps } from '@components/chat/MessageItem/MessageItem.props';
 import {
-  MessageItemStyle,
+  useMessageItemStyle,
   PHOTO_SIZE,
   TIME_WIDTH
 } from '@components/chat/MessageItem/MessageItem.style';
@@ -40,7 +40,11 @@ export const MessageItem = ({
   onPressReply,
   contentRef
 }: MessageItemProps): React.JSX.Element => {
-  const { colors } = useTheme().theme;
+  const MessageItemStyle = useMessageItemStyle();
+  const { theme, isDark } = useTheme();
+  const { colors } = theme;
+  // Quieter on dark, where the quote can't be faded
+  const quoteColor = isDark ? colors.textSecondary : colors.text;
 
   const isEmoji = isTextEmoji(children);
 
@@ -89,7 +93,7 @@ export const MessageItem = ({
                 style={[
                   MessageItemStyle.quoteText,
                   MessageItemStyle.quoteDeletedText,
-                  { color: colors.text }
+                  { color: quoteColor }
                 ]}
               >
                 Original message deleted
@@ -98,13 +102,13 @@ export const MessageItem = ({
               <>
                 <Text
                   numberOfLines={1}
-                  style={[MessageItemStyle.quoteName, { color: colors.text }]}
+                  style={[MessageItemStyle.quoteName, { color: quoteColor }]}
                 >
                   {replyName}
                 </Text>
                 <Text
                   numberOfLines={2}
-                  style={[MessageItemStyle.quoteText, { color: colors.text }]}
+                  style={[MessageItemStyle.quoteText, { color: quoteColor }]}
                 >
                   {getReplyText(replyTo)}
                 </Text>

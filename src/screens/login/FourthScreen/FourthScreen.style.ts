@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const FourthScreenStyle = StyleSheet.create({
+export const useFourthScreenStyle = createStyles((colors) => ({
   button: {
     height: 54,
     borderRadius: 16
@@ -11,10 +11,10 @@ export const FourthScreenStyle = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
     textAlign: 'center',
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   privacyPolicyLink: {
     fontWeight: '600',
     color: COLORS.BUTTON_BLUE
   }
-});
+}));

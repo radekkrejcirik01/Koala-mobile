@@ -14,20 +14,23 @@ import {
   CHAT_THEMES,
   ChatThemeConfig,
   DEFAULT_CHAT_THEME,
+  getChatBackground,
   getChatTheme
 } from '@constants/CHAT_THEMES';
 import COLORS from '@constants/COLORS';
 import { ChatThemeScreenProps } from '@screens/account/ChatThemeScreen/ChatThemeScreen.props';
-import { ChatThemeScreenStyle } from '@screens/account/ChatThemeScreen/ChatThemeScreen.style';
+import { useChatThemeScreenStyle } from '@screens/account/ChatThemeScreen/ChatThemeScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { FormIntro } from '@components/profile/FormIntro/FormIntro';
 
 export const ChatThemeScreen = ({
   route
 }: ChatThemeScreenProps): JSX.Element => {
+  const ChatThemeScreenStyle = useChatThemeScreenStyle();
   const { friend } = route.params;
 
-  const { colors } = useTheme().theme;
+  const { theme, isDark } = useTheme();
+  const { colors } = theme;
   const { top, bottom } = useSafeAreaInsets();
 
   // Undefined until loaded, nothing shows as selected meanwhile
@@ -107,7 +110,10 @@ export const ChatThemeScreen = ({
               <View
                 style={[
                   ChatThemeScreenStyle.preview,
-                  { backgroundColor: item.background ?? colors.background }
+                  {
+                    backgroundColor:
+                      getChatBackground(item, isDark) ?? colors.background
+                  }
                 ]}
               >
                 <View

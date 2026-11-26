@@ -17,7 +17,7 @@ import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { ReducerProps } from '@store/index/index.props';
 import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 import { MessageItem } from '@components/chat/MessageItem/MessageItem';
-import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
+import { useChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { MessageInterface } from '@interfaces/general.interface';
 import { MessageMenu } from '@components/chat/MessageMenu/MessageMenu';
 import {
@@ -62,6 +62,7 @@ export const ChatList = ({
   name,
   profilePhoto
 }: ChatListProps): React.JSX.Element => {
+  const ChatListStyle = useChatListStyle();
   const { id } = useSelector((state: ReducerProps) => state.user.user);
 
   // Text messages, measured to lift them into the menu

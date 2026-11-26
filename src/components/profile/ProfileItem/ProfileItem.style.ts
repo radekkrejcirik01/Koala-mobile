@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ProfileItemStyle = StyleSheet.create({
+export const useProfileItemStyle = createStyles((colors) => ({
   view: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -13,10 +13,10 @@ export const ProfileItemStyle = StyleSheet.create({
     borderRadius: 9,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   icon: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 17
   },
   content: {
@@ -28,12 +28,13 @@ export const ProfileItemStyle = StyleSheet.create({
     paddingVertical: 15,
     paddingRight: 14,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: COLORS.WHITE_300
+    borderBottomColor: colors.surface_300
   },
   noBorder: {
     borderBottomWidth: 0
   },
   title: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: '500'
   },
@@ -43,10 +44,10 @@ export const ProfileItemStyle = StyleSheet.create({
     marginRight: 8,
     textAlign: 'right',
     fontSize: 15,
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   chevron: {
     opacity: 0.4,
     transform: [{ rotate: '180deg' }]
   }
-});
+}));

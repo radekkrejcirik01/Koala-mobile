@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatEmotionsScreenStyle = StyleSheet.create({
+export const useChatEmotionsScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -11,7 +10,7 @@ export const ChatEmotionsScreenStyle = StyleSheet.create({
     padding: 3,
     borderRadius: 12,
     flexDirection: 'row',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   segment: {
     flex: 1,
@@ -20,7 +19,7 @@ export const ChatEmotionsScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   segmentActive: {
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -30,10 +29,10 @@ export const ChatEmotionsScreenStyle = StyleSheet.create({
   segmentText: {
     fontSize: 14,
     fontWeight: '600',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   segmentTextActive: {
-    color: COLORS.BLACK
+    color: colors.text
   },
   contentContainer: {
     flexGrow: 1,
@@ -43,6 +42,6 @@ export const ChatEmotionsScreenStyle = StyleSheet.create({
     marginTop: 40,
     textAlign: 'center',
     fontSize: 15,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

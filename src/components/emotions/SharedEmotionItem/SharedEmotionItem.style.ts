@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const SharedEmotionItemStyle = StyleSheet.create({
+export const useSharedEmotionItemStyle = createStyles((colors) => ({
   container: {
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -14,10 +13,10 @@ export const SharedEmotionItemStyle = StyleSheet.create({
     borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   emojiText: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 22
   },
   textView: {
@@ -25,12 +24,13 @@ export const SharedEmotionItemStyle = StyleSheet.create({
     marginLeft: 14
   },
   messageText: {
+    color: colors.text,
     fontSize: 16,
     fontWeight: '600'
   },
   timeText: {
     marginTop: 2,
     fontSize: 13,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

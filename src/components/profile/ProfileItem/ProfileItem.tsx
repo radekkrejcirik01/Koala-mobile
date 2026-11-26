@@ -5,7 +5,7 @@ import COLORS from '@constants/COLORS';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
 import { ProfileItemProps } from '@components/profile/ProfileItem/ProfileItem.props';
-import { ProfileItemStyle } from '@components/profile/ProfileItem/ProfileItem.style';
+import { useProfileItemStyle } from '@components/profile/ProfileItem/ProfileItem.style';
 
 export const ProfileItem = ({
   onPress,
@@ -17,6 +17,7 @@ export const ProfileItem = ({
   showChevron = true,
   isLast = false
 }: ProfileItemProps): JSX.Element => {
+  const ProfileItemStyle = useProfileItemStyle();
   const theme = useTheme();
   return (
     <TouchableOpacity

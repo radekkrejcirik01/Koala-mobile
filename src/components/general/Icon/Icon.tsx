@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { IconStyle } from '@components/general/Icon/Icon.style';
 import {
@@ -8,9 +8,17 @@ import {
 } from '@components/general/Icon/Icon.props';
 import { ICONS } from '@components/general/Icon/Icon.enum';
 
-export const Icon = ({ name, size, style }: IconProps): JSX.Element => (
+export const Icon = ({ name, size, style, color }: IconProps): JSX.Element => (
   <View style={[{ width: size, height: size }, style]}>
-    <FastImage style={IconStyle.image} source={ICONS[name]} />
+    {color ? (
+      // FastImage's tint crashes on iOS while the image is still 0x0
+      <Image
+        style={[IconStyle.image, { tintColor: color }]}
+        source={ICONS[name]}
+      />
+    ) : (
+      <FastImage style={IconStyle.image} source={ICONS[name]} />
+    )}
   </View>
 );
 

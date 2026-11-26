@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useTheme } from '@hooks/useTheme';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
-import { ChangePasswordScreenStyle } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen.style';
+import { useChangePasswordScreenStyle } from '@screens/account/ChangePasswordScreen/ChangePasswordScreen.style';
 import COLORS from '@constants/COLORS';
 import { PASSWORD_MAX_LENGTH } from '@constants/AUTH';
 import { putRequest } from '@utils/Axios/Axios.service';
@@ -19,6 +19,7 @@ import { FormIntro } from '@components/profile/FormIntro/FormIntro';
 import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 
 export const ChangePasswordScreen = (): JSX.Element => {
+  const ChangePasswordScreenStyle = useChangePasswordScreenStyle();
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -105,7 +106,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             autoCapitalize="none"
             textContentType="password"
             placeholder="Current password"
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             selectionColor={COLORS.BUTTON_BLUE}
             maxLength={PASSWORD_MAX_LENGTH}
             value={oldPassword}
@@ -120,7 +121,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             autoCapitalize="none"
             textContentType="newPassword"
             placeholder="New password"
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             selectionColor={COLORS.BUTTON_BLUE}
             maxLength={PASSWORD_MAX_LENGTH}
             value={newPassword}
@@ -134,7 +135,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             autoCapitalize="none"
             textContentType="newPassword"
             placeholder="Confirm new password"
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             selectionColor={COLORS.BUTTON_BLUE}
             maxLength={PASSWORD_MAX_LENGTH}
             value={confirmPassword}

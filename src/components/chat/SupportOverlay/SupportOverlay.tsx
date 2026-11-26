@@ -31,7 +31,7 @@ import {
   SupportOverlayProps,
   SupportTarget
 } from '@components/chat/SupportOverlay/SupportOverlay.props';
-import { SupportOverlayStyle } from '@components/chat/SupportOverlay/SupportOverlay.style';
+import { useSupportOverlayStyle } from '@components/chat/SupportOverlay/SupportOverlay.style';
 
 // How far the pill rises and grows when it's lifted
 const LIFT = 14;
@@ -50,6 +50,7 @@ export const SupportOverlay = ({
   onShown,
   onHidden
 }: SupportOverlayProps): JSX.Element | null => {
+  const SupportOverlayStyle = useSupportOverlayStyle();
   const { bottom } = useSafeAreaInsets();
 
   // Kept while closing, so the pill can settle back before it's removed

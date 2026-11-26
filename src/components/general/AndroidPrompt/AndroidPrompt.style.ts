@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const AndroidPromptStyle = StyleSheet.create({
+export const useAndroidPromptStyle = createStyles((colors) => ({
   container: {
     width: '80%',
     height: 160,
@@ -9,13 +8,13 @@ export const AndroidPromptStyle = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 12,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     alignSelf: 'center',
     alignItems: 'center'
   },
   titleText: {
     fontSize: 16,
-    color: COLORS.BLACK,
+    color: colors.text,
     fontWeight: '500'
   },
   input: {
@@ -25,8 +24,8 @@ export const AndroidPromptStyle = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 8,
-    color: COLORS.BLACK,
-    backgroundColor: COLORS.WHITE_100
+    color: colors.text,
+    backgroundColor: colors.surface_200
   },
   buttonsView: {
     width: 175,
@@ -37,4 +36,4 @@ export const AndroidPromptStyle = StyleSheet.create({
   modal: {
     margin: 0
   }
-});
+}));

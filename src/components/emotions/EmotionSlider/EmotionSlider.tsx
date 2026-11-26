@@ -22,7 +22,7 @@ import {
   EmotionIndicatorItemProps,
   EmotionSliderProps
 } from '@components/emotions/EmotionSlider/EmotionSlider.props';
-import { EmotionSliderStyle } from '@components/emotions/EmotionSlider/EmotionSlider.style';
+import { useEmotionSliderStyle } from '@components/emotions/EmotionSlider/EmotionSlider.style';
 
 // How far a drag moves to select the next emotion
 const STEP_WIDTH = 60;
@@ -45,6 +45,7 @@ const EmotionIndicatorItem = ({
   progress,
   onSelect
 }: EmotionIndicatorItemProps): JSX.Element => {
+  const EmotionSliderStyle = useEmotionSliderStyle();
   const tapGesture = useMemo(
     () =>
       Gesture.Tap()
@@ -85,6 +86,7 @@ export const EmotionSlider = ({
   showSwipeHint,
   onSwipeStart
 }: EmotionSliderProps): JSX.Element => {
+  const EmotionSliderStyle = useEmotionSliderStyle();
   const progress = useSharedValue<number>(position);
   const dragStart = useSharedValue<number>(position);
   const hintX = useSharedValue<number>(-HINT_SLIDE);

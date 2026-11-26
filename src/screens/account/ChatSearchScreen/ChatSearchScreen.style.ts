@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatSearchScreenStyle = StyleSheet.create({
+export const useChatSearchScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -15,10 +16,12 @@ export const ChatSearchScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   inputIcon: {
+    color: colors.text,
     fontSize: 15,
     marginRight: 8
   },
   input: {
+    color: colors.text,
     flex: 1,
     height: '100%',
     fontSize: 16
@@ -29,7 +32,7 @@ export const ChatSearchScreenStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: COLORS.WHITE_300
+    borderBottomColor: colors.surface_300
   },
   resultContent: {
     flex: 1
@@ -40,16 +43,17 @@ export const ChatSearchScreenStyle = StyleSheet.create({
     marginBottom: 2
   },
   senderText: {
+    color: colors.text,
     fontSize: 14,
     fontWeight: '600'
   },
   timeText: {
     fontSize: 13,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   messageText: {
     fontSize: 15,
-    color: COLORS.LIGHTGRAY_200
+    color: colors.textTertiary
   },
   matchText: {
     fontWeight: '700',
@@ -62,6 +66,6 @@ export const ChatSearchScreenStyle = StyleSheet.create({
     marginTop: 40,
     textAlign: 'center',
     fontSize: 15,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

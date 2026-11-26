@@ -20,7 +20,7 @@ import { EmotionsChart } from '@components/emotions/EmotionsChart/EmotionsChart'
 import { EmotionsBreakdown } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown';
 import { SharedEmotionItem } from '@components/emotions/SharedEmotionItem/SharedEmotionItem';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { AnalyticsScreenStyle } from '@screens/account/AnalyticsScreen/AnalyticsScreen.style';
+import { useAnalyticsScreenStyle } from '@screens/account/AnalyticsScreen/AnalyticsScreen.style';
 
 const TOTAL_LABELS: Record<SharedEmotionsPeriod, string> = {
   [SharedEmotionsPeriod.Week]: 'this week',
@@ -29,6 +29,7 @@ const TOTAL_LABELS: Record<SharedEmotionsPeriod, string> = {
 };
 
 export const AnalyticsScreen = (): JSX.Element => {
+  const AnalyticsScreenStyle = useAnalyticsScreenStyle();
   const { top, bottom } = useSafeAreaInsets();
   const { colors } = useTheme().theme;
   const { navigateTo } = useNavigation();

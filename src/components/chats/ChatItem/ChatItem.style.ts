@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatItemStyle = StyleSheet.create({
+export const useChatItemStyle = createStyles((colors) => ({
   // Padding rather than margin, so the room between rows can be tapped too
   container: {
     paddingVertical: 12,
@@ -26,7 +26,7 @@ export const ChatItemStyle = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    color: COLORS.GRAY_200,
+    color: colors.textSecondary,
     fontWeight: '500'
   },
   messageView: {
@@ -34,13 +34,14 @@ export const ChatItemStyle = StyleSheet.create({
     marginTop: 2
   },
   messageText: {
-    color: COLORS.GRAY_200,
+    color: colors.textSecondary,
     fontWeight: '500'
   },
   previewText: {
     flexShrink: 1
   },
   newItemText: {
+    color: colors.text,
     fontWeight: 'bold'
   },
   newItem: {
@@ -50,4 +51,4 @@ export const ChatItemStyle = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: COLORS.PURPLE
   }
-});
+}));

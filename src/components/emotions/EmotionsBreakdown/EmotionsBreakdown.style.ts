@@ -1,18 +1,18 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const EmotionsBreakdownStyle = StyleSheet.create({
+export const useEmotionsBreakdownStyle = createStyles((colors) => ({
   row: {
     paddingVertical: 7,
     flexDirection: 'row',
     alignItems: 'center'
   },
   emojiText: {
-    color: COLORS.BLACK,
+    color: colors.text,
     width: 30,
     fontSize: 20
   },
   labelText: {
+    color: colors.text,
     width: 80,
     fontSize: 14,
     fontWeight: '600'
@@ -22,13 +22,14 @@ export const EmotionsBreakdownStyle = StyleSheet.create({
     height: 8,
     borderRadius: 4,
     overflow: 'hidden',
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   fill: {
     height: '100%',
     borderRadius: 4
   },
   countText: {
+    color: colors.text,
     width: 44,
     textAlign: 'right',
     fontSize: 14,
@@ -37,4 +38,4 @@ export const EmotionsBreakdownStyle = StyleSheet.create({
   zero: {
     opacity: 0.4
   }
-});
+}));

@@ -4,9 +4,10 @@ import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { Icon } from '@components/general/Icon/Icon';
 import { IconEnum } from '@components/general/Icon/Icon.enum';
-import { BackButtonStyle } from '@components/general/BackButton/BackButton.style';
+import { useBackButtonStyle } from '@components/general/BackButton/BackButton.style';
 
 export const BackButton = (): JSX.Element => {
+  const BackButtonStyle = useBackButtonStyle();
   const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
   return (

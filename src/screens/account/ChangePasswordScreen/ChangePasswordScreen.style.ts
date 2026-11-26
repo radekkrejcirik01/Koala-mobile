@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChangePasswordScreenStyle = StyleSheet.create({
+export const useChangePasswordScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
   input: {
+    color: colors.text,
     height: 50,
     paddingHorizontal: 14,
     fontSize: 16,
@@ -14,7 +15,7 @@ export const ChangePasswordScreenStyle = StyleSheet.create({
   separator: {
     marginLeft: 14,
     height: StyleSheet.hairlineWidth,
-    backgroundColor: COLORS.WHITE_300
+    backgroundColor: colors.surface_300
   },
   button: {
     width: 'auto',
@@ -23,4 +24,4 @@ export const ChangePasswordScreenStyle = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 14
   }
-});
+}));

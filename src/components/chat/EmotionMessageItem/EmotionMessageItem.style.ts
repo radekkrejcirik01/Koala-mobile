@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 import { TIME_WIDTH } from '@components/chat/MessageItem/MessageItem.style';
+import { createStyles } from '@utils/general/createStyles';
 
-export const EmotionMessageItemStyle = StyleSheet.create({
+export const useEmotionMessageItemStyle = createStyles((colors, isDark) => ({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -18,7 +18,7 @@ export const EmotionMessageItemStyle = StyleSheet.create({
   badgeOuter: {
     padding: 3,
     borderRadius: 24,
-    backgroundColor: COLORS.BEIGE
+    backgroundColor: isDark ? COLORS.TRANSPARENT : COLORS.BEIGE
   },
   badge: {
     flexDirection: 'row',
@@ -26,23 +26,28 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 14,
     borderRadius: 21,
-    backgroundColor: COLORS.WHITE_200
+    // A plain pill on dark, the ring would show as a halo
+    backgroundColor: isDark ? colors.bubble : colors.surface_200
   },
   // Plain white without the ring, a touch smaller than the beige pill
   badgeOuterWhite: {
     backgroundColor: COLORS.TRANSPARENT
   },
+  // Stays near white on dark too, so waiting for support stands out
   badgeWhite: {
-    backgroundColor: COLORS.WHITE
+    backgroundColor: isDark ? colors.text : colors.card
   },
   emojiText: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 20,
     marginRight: 7
   },
   messageText: {
     flexShrink: 1,
     fontSize: 13.5,
+    color: colors.textSecondary
+  },
+  messageTextWhite: {
     color: COLORS.GRAY_200
   },
   // Over the pill's lower right corner, pointing at it
@@ -50,7 +55,7 @@ export const EmotionMessageItemStyle = StyleSheet.create({
     position: 'absolute',
     right: -14,
     bottom: -22,
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 30
   },
   // Fills the row so the time sits at the right edge, like on messages
@@ -73,7 +78,7 @@ export const EmotionMessageItemStyle = StyleSheet.create({
   supportedText: {
     marginTop: 10,
     fontSize: 12,
-    color: COLORS.GRAY_200,
+    color: colors.textSecondary,
     textAlign: 'center'
   }
-});
+}));

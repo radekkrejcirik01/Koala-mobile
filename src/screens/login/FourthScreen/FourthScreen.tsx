@@ -11,7 +11,7 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PreloadService } from '@utils/general/PreloadService';
 import { ReducerProps } from '@store/index/index.props';
-import { FourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.style';
+import { useFourthScreenStyle } from '@screens/login/FourthScreen/FourthScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
 import { Button } from '@components/general/Button/Button';
@@ -21,6 +21,7 @@ import { PasswordStrength } from '@components/login/PasswordStrength/PasswordStr
 import { PASSWORD_MAX_LENGTH } from '@constants/AUTH';
 
 export const FourthScreen = (): JSX.Element => {
+  const FourthScreenStyle = useFourthScreenStyle();
   const { name, username } = useSelector(
     (state: ReducerProps) => state.newAccount
   );

@@ -1,5 +1,9 @@
 import React, { JSX } from 'react';
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer
+} from '@react-navigation/native';
 import { useTheme } from '@hooks/useTheme.ts';
 import { RootStackNavigator } from '@navigation/RootNavigator/RootStackNavigator';
 import {
@@ -11,11 +15,14 @@ import { AnalyticsService } from '@utils/general/AnalyticsService';
 export const Navigation = (): JSX.Element => {
   const theme = useTheme();
 
+  const BASE = theme.isDark ? DarkTheme : DefaultTheme;
   const THEME = {
-    ...DefaultTheme,
+    ...BASE,
     colors: {
-      ...DefaultTheme.colors,
-      background: theme.theme.colors.background
+      ...BASE.colors,
+      background: theme.theme.colors.background,
+      card: theme.theme.colors.background,
+      text: theme.theme.colors.text
     }
   };
 

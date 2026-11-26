@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '@store/index/index.props';
+import { Appearances } from '@enums/appearance';
 
 const initialState: User = {
   token: null,
@@ -10,7 +11,8 @@ const initialState: User = {
     username: null,
     profilePhoto: null
   },
-  image: null
+  image: null,
+  appearance: Appearances.SYSTEM
 };
 
 export const UserReducer = createSlice({
@@ -38,9 +40,13 @@ export const UserReducer = createSlice({
     setImageAction: (state, action) => {
       state.image = action.payload;
     },
+    setAppearanceAction: (state, action) => {
+      state.appearance = action.payload;
+    },
     resetUserState: (state) => ({
       ...initialState,
-      image: state.image
+      image: state.image,
+      appearance: state.appearance
     })
   }
 });
@@ -53,6 +59,7 @@ export const {
   setEmailAction,
   setEmailRequiredAction,
   setImageAction,
+  setAppearanceAction,
   resetUserState
 } = UserReducer.actions;
 

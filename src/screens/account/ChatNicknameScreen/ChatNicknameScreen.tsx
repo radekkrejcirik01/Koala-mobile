@@ -9,7 +9,7 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChatSettingsPostInterface } from '@interfaces/post/Post.interface';
 import COLORS from '@constants/COLORS';
 import { ChatNicknameScreenProps } from '@screens/account/ChatNicknameScreen/ChatNicknameScreen.props';
-import { ChatNicknameScreenStyle } from '@screens/account/ChatNicknameScreen/ChatNicknameScreen.style';
+import { useChatNicknameScreenStyle } from '@screens/account/ChatNicknameScreen/ChatNicknameScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Button } from '@components/general/Button/Button';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
@@ -20,6 +20,7 @@ const NICKNAME_MAX_LENGTH = 32;
 export const ChatNicknameScreen = ({
   route
 }: ChatNicknameScreenProps): JSX.Element => {
+  const ChatNicknameScreenStyle = useChatNicknameScreenStyle();
   const { friend } = route.params;
 
   const theme = useTheme();
@@ -64,16 +65,13 @@ export const ChatNicknameScreen = ({
             size={80}
           />
         </View>
-        <ProfileSection
-          title="Name"
-          footer="Only you see the edited name"
-        >
+        <ProfileSection title="Name" footer="Only you see the edited name">
           <TextInput
             autoFocus
             autoCorrect={false}
             autoCapitalize="words"
             placeholder={friend.name}
-            placeholderTextColor={COLORS.LIGHTGRAY_100}
+            placeholderTextColor={theme.theme.colors.placeholder}
             selectionColor={COLORS.BUTTON_BLUE}
             maxLength={NICKNAME_MAX_LENGTH}
             returnKeyType="done"

@@ -26,7 +26,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   DESTRUCTIVE,
-  MessageMenuStyle
+  useMessageMenuStyle
 } from '@components/chat/MessageMenu/MessageMenu.style';
 import { MessageMenuIcon } from '@components/chat/MessageMenu/MessageMenuIcon';
 import COLORS from '@constants/COLORS';
@@ -56,6 +56,7 @@ export const MessageMenu = ({
   onHidden,
   tintColor = COLORS.PURPLE
 }: MessageMenuProps): JSX.Element | null => {
+  const MessageMenuStyle = useMessageMenuStyle();
   const insets = useSafeAreaInsets();
 
   // A light tint of the chat theme's color, every theme's is a #rrggbb hex

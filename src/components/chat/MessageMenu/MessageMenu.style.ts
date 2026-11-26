@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
 // The iOS system red, for Delete
 export const DESTRUCTIVE = '#ff3b30';
@@ -13,7 +14,7 @@ const CARD_SHADOW = {
   elevation: 10
 };
 
-export const MessageMenuStyle = StyleSheet.create({
+export const useMessageMenuStyle = createStyles((colors) => ({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
@@ -34,7 +35,7 @@ export const MessageMenuStyle = StyleSheet.create({
     alignItems: 'center',
     padding: 6,
     borderRadius: 28,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     ...CARD_SHADOW
   },
   reactionButton: {
@@ -45,7 +46,7 @@ export const MessageMenuStyle = StyleSheet.create({
     justifyContent: 'center'
   },
   reaction: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 32
   },
   // As wide as its longest action
@@ -53,7 +54,7 @@ export const MessageMenuStyle = StyleSheet.create({
     minWidth: 168,
     paddingVertical: 6,
     borderRadius: 26,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     ...CARD_SHADOW
   },
   action: {
@@ -68,7 +69,7 @@ export const MessageMenuStyle = StyleSheet.create({
     gap: 12
   },
   actionPressed: {
-    backgroundColor: COLORS.WHITE_200
+    backgroundColor: colors.surface_200
   },
   actionIcon: {
     width: 32,
@@ -80,7 +81,7 @@ export const MessageMenuStyle = StyleSheet.create({
   actionText: {
     fontSize: 15.5,
     fontWeight: '500',
-    color: COLORS.BLACK
+    color: colors.text
   },
   destructiveText: {
     color: DESTRUCTIVE
@@ -96,4 +97,4 @@ export const MessageMenuStyle = StyleSheet.create({
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3
   }
-});
+}));

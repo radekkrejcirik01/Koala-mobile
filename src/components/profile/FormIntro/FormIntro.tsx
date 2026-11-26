@@ -2,13 +2,14 @@ import React, { JSX } from 'react';
 import { Text, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
 import { FormIntroProps } from '@components/profile/FormIntro/FormIntro.props';
-import { FormIntroStyle } from '@components/profile/FormIntro/FormIntro.style';
+import { useFormIntroStyle } from '@components/profile/FormIntro/FormIntro.style';
 
 export const FormIntro = ({
   emoji,
   emojiBackgroundColor,
   title
 }: FormIntroProps): JSX.Element => {
+  const FormIntroStyle = useFormIntroStyle();
   const theme = useTheme();
   return (
     <View style={FormIntroStyle.container}>

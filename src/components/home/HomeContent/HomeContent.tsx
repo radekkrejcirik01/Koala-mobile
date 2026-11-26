@@ -1,4 +1,4 @@
-import React, { JSX, useCallback, useMemo, useState } from 'react';
+import React, { JSX, useCallback, useState } from 'react';
 import { Image, RefreshControl, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { forkJoin } from 'rxjs';
@@ -11,7 +11,8 @@ import {
   ResponseInvitesGetInterface,
   ResponseUnreadChatsGetInterface
 } from '@interfaces/response/Response.interface';
-import { Images } from '@enums/images';
+import { useTheme } from '@hooks/useTheme';
+import { getIllustration } from '@functions/getIllustration';
 import { setUnseenInvites } from '@store/NotificationsReducer';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { ReducerProps } from '@store/index/index.props';
@@ -21,6 +22,7 @@ import { HomeButton } from '@components/home/HomeButton/HomeButton';
 export const HomeContent = (): JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
   const dispatch = useDispatch();
+  const { isDark } = useTheme();
 
   const { image } = useSelector((state: ReducerProps) => state.user);
 
@@ -44,18 +46,7 @@ export const HomeContent = (): JSX.Element => {
     });
   }, [dispatch]);
 
-  const imageSource = useMemo(() => {
-    if (image === Images.ROOM) {
-      return require('@assets/illustrations/room.jpg');
-    }
-    if (image === Images.PARK) {
-      return require('@assets/illustrations/park.jpg');
-    }
-    if (image === Images.SEA) {
-      return require('@assets/illustrations/sea.jpg');
-    }
-    return undefined;
-  }, [image]);
+  const imageSource = getIllustration(image, isDark);
 
   const onPressChats = () => {
     navigateTo(AccountStackNavigatorEnum.ChatsScreen);

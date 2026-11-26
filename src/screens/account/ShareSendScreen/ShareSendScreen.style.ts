@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ShareSendScreenStyle = StyleSheet.create({
+export const useShareSendScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -20,7 +19,7 @@ export const ShareSendScreenStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   sendButtonView: {
     paddingHorizontal: 20,
@@ -31,7 +30,7 @@ export const ShareSendScreenStyle = StyleSheet.create({
   sendButton: {
     height: 52,
     borderRadius: 70,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
@@ -41,8 +40,8 @@ export const ShareSendScreenStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   sendButtonText: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 16,
     fontWeight: 'bold'
   }
-});
+}));

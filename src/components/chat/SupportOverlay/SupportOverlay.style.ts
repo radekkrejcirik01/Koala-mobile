@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const SupportOverlayStyle = StyleSheet.create({
+export const useSupportOverlayStyle = createStyles((colors) => ({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.64)'
@@ -28,7 +29,7 @@ export const SupportOverlayStyle = StyleSheet.create({
     width: 72,
     height: 72,
     borderRadius: 36,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
@@ -38,7 +39,7 @@ export const SupportOverlayStyle = StyleSheet.create({
     shadowRadius: 3.84
   },
   buttonEmoji: {
-    color: COLORS.BLACK,
+    color: colors.text,
     fontSize: 32
   },
   buttonText: {
@@ -51,4 +52,4 @@ export const SupportOverlayStyle = StyleSheet.create({
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3
   }
-});
+}));

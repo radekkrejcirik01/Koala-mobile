@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const ChatSettingsScreenStyle = StyleSheet.create({
+export const useChatSettingsScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -10,6 +10,7 @@ export const ChatSettingsScreenStyle = StyleSheet.create({
     alignItems: 'center'
   },
   nameText: {
+    color: colors.text,
     marginTop: 12,
     fontSize: 22,
     fontWeight: '700'
@@ -17,7 +18,7 @@ export const ChatSettingsScreenStyle = StyleSheet.create({
   usernameText: {
     marginTop: 2,
     fontSize: 14,
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   },
   actionsView: {
     marginTop: 20,
@@ -37,6 +38,7 @@ export const ChatSettingsScreenStyle = StyleSheet.create({
     justifyContent: 'center'
   },
   actionIconText: {
+    color: colors.text,
     fontSize: 22
   },
   // The friend's photo opened over the screen
@@ -60,6 +62,6 @@ export const ChatSettingsScreenStyle = StyleSheet.create({
     marginTop: 6,
     fontSize: 13,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS.ts';
+import { createStyles } from '@utils/general/createStyles';
 
-export const HomeHeaderStyle = StyleSheet.create({
+export const useHomeHeaderStyle = createStyles((colors) => ({
   container: {
     paddingTop: 10,
     paddingHorizontal: 30,
@@ -17,7 +16,7 @@ export const HomeHeaderStyle = StyleSheet.create({
     height: 45,
     width: 45,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -26,8 +25,8 @@ export const HomeHeaderStyle = StyleSheet.create({
     height: 45,
     width: 45,
     borderRadius: 20,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center'
   }
-});
+}));

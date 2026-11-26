@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { FriendListItemProps } from '@components/friends/FriendListItem/FriendListItem.props';
-import { FriendListItemStyle } from '@components/friends/FriendListItem/FriendListItem.style';
+import { useFriendListItemStyle } from '@components/friends/FriendListItem/FriendListItem.style';
 import { getFriendName } from '@functions/getFriendName';
 
 export const FriendListItem = ({
@@ -11,6 +11,7 @@ export const FriendListItem = ({
   onSelect,
   sent
 }: FriendListItemProps): JSX.Element => {
+  const FriendListItemStyle = useFriendListItemStyle();
   const theme = useTheme();
 
   const [selected, setSelected] = useState<boolean>(false);

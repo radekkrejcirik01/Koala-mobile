@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@hooks/useTheme';
 import { useNavigation } from '@hooks/useNavigation';
 import { ScreenHeaderProps } from '@components/general/ScreenHeader/ScreenHeader.props';
-import { ScreenHeaderStyle } from '@components/general/ScreenHeader/ScreenHeader.style';
+import { useScreenHeaderStyle } from '@components/general/ScreenHeader/ScreenHeader.style';
 import { BackButton } from '@components/general/BackButton/BackButton';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 
@@ -13,6 +13,7 @@ export const ScreenHeader = ({
   goBack = true,
   close = false
 }: ScreenHeaderProps): React.JSX.Element => {
+  const ScreenHeaderStyle = useScreenHeaderStyle();
   const theme = useTheme();
   const { navigateBack } = useNavigation(RootStackNavigatorEnum.AccountStack);
 

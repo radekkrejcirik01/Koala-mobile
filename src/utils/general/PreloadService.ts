@@ -13,6 +13,7 @@ import { MessagingService } from '@utils/general/MessagingService';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { ChatThemeCache } from '@utils/general/ChatThemeCache';
 import { DraftCache } from '@utils/general/DraftCache';
+import { AppearanceService } from '@utils/general/AppearanceService';
 import { Images } from '@enums/images';
 
 class PreloadServiceSingleton {
@@ -21,6 +22,7 @@ class PreloadServiceSingleton {
     const image = await PersistStorage.getItem(PersistStorageKeys.IMAGE);
     await ChatThemeCache.load();
     await DraftCache.load();
+    await AppearanceService.load();
     store.dispatch(setUserToken(token));
     store.dispatch(setImageAction(image || Images.ROOM));
 

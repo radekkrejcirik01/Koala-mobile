@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const FeedbackScreenStyle = StyleSheet.create({
+export const useFeedbackScreenStyle = createStyles((colors) => ({
   container: {
     flex: 1
   },
@@ -9,6 +8,7 @@ export const FeedbackScreenStyle = StyleSheet.create({
     paddingBottom: 30
   },
   input: {
+    color: colors.text,
     minHeight: 150,
     padding: 14,
     paddingTop: 14,
@@ -23,6 +23,6 @@ export const FeedbackScreenStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '500',
-    color: COLORS.GRAY_200
+    color: colors.textSecondary
   }
-});
+}));

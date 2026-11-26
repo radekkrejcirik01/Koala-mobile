@@ -31,7 +31,7 @@ import { EmotionSlider } from '@components/emotions/EmotionSlider/EmotionSlider'
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
-import { ShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
+import { useShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
 
 const MESSAGE_MAX_LENGTH = 128;
 const LOGGING_MIN_DURATION = 800;
@@ -48,6 +48,7 @@ const getStartPosition = (): number => {
 };
 
 export const ShareScreen = (): JSX.Element => {
+  const ShareScreenStyle = useShareScreenStyle();
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
   const { navigateTo, dismiss } = useNavigation();
@@ -201,7 +202,7 @@ export const ShareScreen = (): JSX.Element => {
               returnKeyType="done"
               maxLength={MESSAGE_MAX_LENGTH}
               placeholder={selectedConfig.message}
-              placeholderTextColor={COLORS.LIGHTGRAY_100}
+              placeholderTextColor={theme.theme.colors.placeholder}
               value={message}
               onChangeText={setMessage}
               onBlur={() => setEditingMessage(false)}

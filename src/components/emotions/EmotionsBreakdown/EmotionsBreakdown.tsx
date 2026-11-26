@@ -5,12 +5,13 @@ import { EMOTIONS } from '@constants/EMOTIONS';
 import COLORS from '@constants/COLORS';
 import { OTHER_EMOTION } from '@functions/getSharedEmotionsStats';
 import { EmotionsBreakdownProps } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown.props';
-import { EmotionsBreakdownStyle } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown.style';
+import { useEmotionsBreakdownStyle } from '@components/emotions/EmotionsBreakdown/EmotionsBreakdown.style';
 
 export const EmotionsBreakdown = ({
   counts,
   total
 }: EmotionsBreakdownProps): JSX.Element => {
+  const EmotionsBreakdownStyle = useEmotionsBreakdownStyle();
   const { colors } = useTheme().theme;
 
   const rows = EMOTIONS.map((item) => ({
