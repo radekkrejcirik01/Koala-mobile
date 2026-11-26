@@ -10,6 +10,7 @@ import { resetUserState } from '@store/UserReducer';
 import { ReducerProps } from '@store/index/index.props';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { NotificationsService } from '@utils/general/NotificationsService';
+import { MessagingService } from '@utils/general/MessagingService';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
@@ -28,16 +29,24 @@ export const AccountScreen = (): React.JSX.Element => {
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);
 
   const logout = useCallback(() => {
-    deleteRequest<ResponseInterface>('device').subscribe(
-      (response: ResponseInterface) => {
-        if (response?.status) {
-          dispatch(resetUserState());
-          // The logged out account's unread chats stay on the icon otherwise
-          NotificationsService.setUnreadChats(0);
-          PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
-        }
-      }
-    );
+    const clearSession = () => {
+      dispatch(resetUserState());
+      // The logged out account's unread chats stay on the icon otherwise
+      NotificationsService.setUnreadChats(0);
+      PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
+    };
+
+    // Without a token the backend would unregister all of the user's phones
+    const { deviceToken } = MessagingService;
+    if (!deviceToken) {
+      clearSession();
+      return;
+    }
+
+    // Must run before the login token is cleared, a failure doesn't block logout
+    deleteRequest<ResponseInterface>('device', {
+      data: { deviceToken }
+    }).subscribe(clearSession);
   }, [dispatch]);
 
   return (

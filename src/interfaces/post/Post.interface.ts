@@ -49,7 +49,6 @@ export interface InvitePostInterface {
 
 export interface DevicePostInterface {
   deviceToken: string;
-  userId: number;
   platform: string;
   version: string;
 }

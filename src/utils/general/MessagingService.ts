@@ -10,13 +10,18 @@ import { version } from '../../../package.json';
 class MessagingServiceClass {
   private fcmToken: string;
 
+  private tokenRefreshSubscribed = false;
+
+  public get deviceToken(): string | undefined {
+    return this.fcmToken;
+  }
+
   private registerDevice = () => {
     const userId = store.getState().user.user.id;
 
     if (userId) {
       postRequest<ResponseInterface, DevicePostInterface>('device', {
         deviceToken: this.fcmToken,
-        userId,
         platform: Platform.OS,
         version
       }).subscribe();
@@ -33,7 +38,13 @@ class MessagingServiceClass {
       });
   };
 
+  // Runs on every foreground, so the listener is only added once
   private onTokenRefresh = () => {
+    if (this.tokenRefreshSubscribed) {
+      return;
+    }
+    this.tokenRefreshSubscribed = true;
+
     messaging().onTokenRefresh((token: string) => {
       this.fcmToken = token;
 
