@@ -1,6 +1,9 @@
 import { createStyles } from '@utils/general/createStyles';
+import COLORS from '@constants/COLORS';
 
-export const useHomeHeaderStyle = createStyles((colors) => ({
+// The round buttons stay white with dark icons in both themes
+
+export const useHomeHeaderStyle = createStyles(() => ({
   container: {
     paddingTop: 10,
     paddingHorizontal: 30,
@@ -16,7 +19,7 @@ export const useHomeHeaderStyle = createStyles((colors) => ({
     height: 45,
     width: 45,
     borderRadius: 20,
-    backgroundColor: colors.card,
+    backgroundColor: COLORS.WHITE,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -25,7 +28,7 @@ export const useHomeHeaderStyle = createStyles((colors) => ({
     height: 45,
     width: 45,
     borderRadius: 20,
-    backgroundColor: colors.card,
+    backgroundColor: COLORS.WHITE,
     alignItems: 'center',
     justifyContent: 'center'
   }

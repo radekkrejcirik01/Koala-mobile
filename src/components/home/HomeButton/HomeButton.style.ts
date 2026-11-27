@@ -1,11 +1,14 @@
 import { createStyles } from '@utils/general/createStyles';
+import COLORS from '@constants/COLORS';
 
-export const useHomeButtonStyle = createStyles((colors) => ({
+// White with dark text in both themes
+
+export const useHomeButtonStyle = createStyles(() => ({
   container: {
     width: 110,
     height: 52,
     borderRadius: 70,
-    backgroundColor: colors.card,
+    backgroundColor: COLORS.WHITE,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
@@ -15,7 +18,7 @@ export const useHomeButtonStyle = createStyles((colors) => ({
     shadowRadius: 3.84
   },
   text: {
-    color: colors.text,
+    color: COLORS.BLACK,
     fontSize: 16,
     fontWeight: 'bold'
   }

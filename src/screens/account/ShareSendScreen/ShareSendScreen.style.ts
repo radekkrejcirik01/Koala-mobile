@@ -26,22 +26,8 @@ export const useShareSendScreenStyle = createStyles((colors) => ({
     // Same as under the Share screen's buttons
     paddingBottom: 20
   },
-  // Same look as HomeButton, but full width
+  // HomeButton at full width
   sendButton: {
-    height: 52,
-    borderRadius: 70,
-    backgroundColor: colors.card,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84
-  },
-  sendButtonText: {
-    color: colors.text,
-    fontSize: 16,
-    fontWeight: 'bold'
+    width: 'auto'
   }
 }));
