@@ -204,8 +204,6 @@ export const ShareScreen = (): JSX.Element => {
               submitBehavior="blurAndSubmit"
               returnKeyType="done"
               maxLength={NOTE_MAX_LENGTH}
-              placeholder="Add a note"
-              placeholderTextColor={theme.theme.colors.placeholder}
               value={note}
               onChangeText={setNote}
               onFocus={() => setEditingNote(true)}
@@ -219,7 +217,7 @@ export const ShareScreen = (): JSX.Element => {
               onPress={() => setEditingNote(true)}
               style={ShareScreenStyle.addMessageButton}
             >
-              <Text style={ShareScreenStyle.addMessageText}>Add message</Text>
+              <Text style={ShareScreenStyle.addMessageText}>Add note</Text>
             </Pressable>
           )}
         </EmotionSlider>
