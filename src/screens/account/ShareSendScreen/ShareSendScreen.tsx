@@ -1,14 +1,6 @@
 import React, { JSX, useCallback, useMemo, useRef } from 'react';
-import {
-  Alert,
-  Platform,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Alert, Platform, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
 import { useSending } from '@hooks/useSending';
 import { useTheme } from '@hooks/useTheme';
@@ -21,6 +13,7 @@ import { filterSelected } from '@functions/filterSelected';
 import { FriendListItem } from '@components/friends/FriendListItem/FriendListItem';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { Loader } from '@components/general/Loader/Loader';
+import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { clearShareDrafts } from '@utils/general/DraftCache';
 import { ShareSendScreenProps } from '@screens/account/ShareSendScreen/ShareSendScreen.props';
 import { useShareSendScreenStyle } from '@screens/account/ShareSendScreen/ShareSendScreen.style';
@@ -51,8 +44,6 @@ export const ShareSendScreen = ({
   };
 
   const send = useCallback(() => {
-    trigger(HapticFeedbackTypes.impactMedium);
-
     if (sending) {
       return;
     }
@@ -127,15 +118,11 @@ export const ShareSendScreen = ({
         ) : null}
       </View>
       <View style={ShareSendScreenStyle.sendButtonView}>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <HomeButton
+          text={sent ? 'Done' : sending ? 'Sending...' : 'Send'}
           onPress={send}
           style={ShareSendScreenStyle.sendButton}
-        >
-          <Text style={ShareSendScreenStyle.sendButtonText}>
-            {sent ? 'Done' : sending ? 'Sending...' : 'Send'}
-          </Text>
-        </TouchableOpacity>
+        />
       </View>
       {!loaded && <Loader />}
     </View>
