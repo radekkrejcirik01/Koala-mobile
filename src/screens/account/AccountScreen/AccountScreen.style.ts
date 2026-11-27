@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const AccountScreenStyle = StyleSheet.create({
+export const useAccountScreenStyle = createStyles((_colors, isDark) => ({
   container: {
     flex: 1
   },
@@ -20,6 +20,7 @@ export const AccountScreenStyle = StyleSheet.create({
   logoutText: {
     fontSize: 16,
     fontWeight: '600',
-    color: COLORS.NOTIFICATION_DOT
+    // White on dark, the red disappears on the brown card
+    color: isDark ? COLORS.WHITE : COLORS.NOTIFICATION_DOT
   }
-});
+}));

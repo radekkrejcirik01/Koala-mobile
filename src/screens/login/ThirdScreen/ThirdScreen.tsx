@@ -13,6 +13,7 @@ import { AuthInput } from '@components/login/AuthInput/AuthInput';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { UsernamePostInterface } from '@interfaces/post/Post.interface';
+import { removeSpaces } from '@functions/removeSpaces';
 
 export const ThirdScreen = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -25,13 +26,17 @@ export const ThirdScreen = (): JSX.Element => {
   const [posting, setPosting] = useState<boolean>(false);
 
   const onChangeUsername = useCallback((value: string) => {
-    // Usernames can't contain spaces
-    setUsername(value.replace(/\s/g, ''));
+    setUsername(removeSpaces(value));
     setError(undefined);
   }, []);
 
   const onPressNext = useCallback(() => {
-    if (!username || posting) {
+    if (posting) {
+      return;
+    }
+    if (!username) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setError('Choose a username');
       return;
     }
 
@@ -67,7 +72,6 @@ export const ThirdScreen = (): JSX.Element => {
       footer={
         <Button
           title="Continue"
-          disabled={!username}
           posting={posting}
           onPress={onPressNext}
           style={ThirdScreenStyle.button}

@@ -8,7 +8,7 @@ export interface ChatThemeConfig {
   bubble: string;
   // The chat background, the app theme's background when not set
   background?: string;
-  // The same hue for dark mode
+  // The same hue for dark mode, as light and muted as the toffee background
   darkBackground?: string;
 }
 
@@ -25,28 +25,28 @@ export const CHAT_THEMES: ChatThemeConfig[] = [
     name: 'Ocean',
     bubble: '#4a90e2',
     background: '#eaf3fc',
-    darkBackground: '#183a62'
+    darkBackground: '#4a6d96'
   },
   {
     key: 'sunset',
     name: 'Sunset',
     bubble: '#f08a5d',
     background: '#fdf0ea',
-    darkBackground: '#622f18'
+    darkBackground: '#96614a'
   },
   {
     key: 'forest',
     name: 'Forest',
     bubble: '#52b788',
     background: '#ebf6f0',
-    darkBackground: '#186240'
+    darkBackground: '#4a9673'
   },
   {
     key: 'berry',
     name: 'Berry',
     bubble: '#e5739b',
     background: '#fcedf2',
-    darkBackground: '#621832'
+    darkBackground: '#964a65'
   }
 ];
 

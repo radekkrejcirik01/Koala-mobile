@@ -19,7 +19,6 @@ import { MessageInterface } from '@interfaces/general.interface';
 import { ReducerProps } from '@store/index/index.props';
 import { MessageType } from '@enums/MessageType';
 import { PAGE_SIZE } from '@constants/PAGE_SIZE';
-import COLORS from '@constants/COLORS';
 import { getFriendName } from '@functions/getFriendName';
 import { ChatSearchScreenProps } from '@screens/account/ChatSearchScreen/ChatSearchScreen.props';
 import { useChatSearchScreenStyle } from '@screens/account/ChatSearchScreen/ChatSearchScreen.style';
@@ -177,7 +176,7 @@ export const ChatSearchScreen = ({
           autoCorrect={false}
           placeholder={`Search in chat with ${getFriendName(friend)}`}
           placeholderTextColor={colors.placeholder}
-          selectionColor={COLORS.BUTTON_BLUE}
+          selectionColor={colors.accent}
           returnKeyType="search"
           clearButtonMode="while-editing"
           value={query}

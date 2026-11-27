@@ -30,8 +30,6 @@ export const LoginScreen = (): JSX.Element => {
   const [error, setError] = useState<string>();
   const [posting, setPosting] = useState<boolean>(false);
 
-  const canLogin = !!username && !!password;
-
   const onChangeUsername = useCallback((value: string) => {
     setUsername(value);
     setError(undefined);
@@ -43,7 +41,14 @@ export const LoginScreen = (): JSX.Element => {
   }, []);
 
   const login = useCallback(() => {
-    if (!canLogin || posting) {
+    if (posting) {
+      return;
+    }
+    if (!username || !password) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setError(
+        username ? 'Enter your password' : 'Enter your username and password'
+      );
       return;
     }
 
@@ -70,7 +75,7 @@ export const LoginScreen = (): JSX.Element => {
         setError('Incorrect username or password');
       }
     });
-  }, [canLogin, dispatch, password, posting, username]);
+  }, [dispatch, password, posting, username]);
 
   const onPressForgotPassword = useCallback(() => {
     navigateTo(LoginStackNavigatorEnum.ForgotPasswordScreen, { username });
@@ -87,7 +92,6 @@ export const LoginScreen = (): JSX.Element => {
         <>
           <Button
             title="Log in"
-            disabled={!canLogin}
             posting={posting}
             onPress={login}
             style={LoginScreenStyle.button}

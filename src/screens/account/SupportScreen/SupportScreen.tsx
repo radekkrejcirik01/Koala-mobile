@@ -84,7 +84,7 @@ export const SupportScreen = (): JSX.Element => {
             value={message}
             onChangeText={setMessage}
             multiline
-            selectionColor={COLORS.BUTTON_BLUE}
+            selectionColor={theme.theme.colors.accent}
             style={[
               SupportScreenStyle.input,
               { color: theme.theme.colors.text }

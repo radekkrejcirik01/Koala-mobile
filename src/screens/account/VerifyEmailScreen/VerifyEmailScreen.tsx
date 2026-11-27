@@ -37,7 +37,12 @@ export const VerifyEmailScreen = ({
 
   const verify = useCallback(
     (value: string) => {
-      if (value.length !== CODE_LENGTH || posting) {
+      if (posting) {
+        return;
+      }
+      if (value.length !== CODE_LENGTH) {
+        trigger(HapticFeedbackTypes.notificationError);
+        setError(`Enter the ${CODE_LENGTH}-digit code`);
         return;
       }
 
@@ -107,7 +112,6 @@ export const VerifyEmailScreen = ({
       footer={
         <Button
           title="Confirm"
-          disabled={code.length !== CODE_LENGTH}
           posting={posting}
           onPress={() => verify(code)}
           style={VerifyEmailScreenStyle.button}

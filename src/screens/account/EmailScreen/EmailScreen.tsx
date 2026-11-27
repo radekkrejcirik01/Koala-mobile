@@ -41,7 +41,12 @@ export const EmailScreen = ({ route }: EmailScreenProps): JSX.Element => {
   }, []);
 
   const sendCode = useCallback(() => {
-    if (!trimmedEmail || posting) {
+    if (posting) {
+      return;
+    }
+    if (!trimmedEmail) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setError('Enter your email');
       return;
     }
 
@@ -89,7 +94,6 @@ export const EmailScreen = ({ route }: EmailScreenProps): JSX.Element => {
       footer={
         <Button
           title="Continue"
-          disabled={!trimmedEmail}
           posting={posting}
           onPress={sendCode}
           style={EmailScreenStyle.button}

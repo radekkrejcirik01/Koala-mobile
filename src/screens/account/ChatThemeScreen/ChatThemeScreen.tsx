@@ -102,7 +102,7 @@ export const ChatThemeScreen = ({
                 {
                   backgroundColor: colors.surface,
                   borderColor: selected
-                    ? COLORS.BUTTON_BLUE
+                    ? colors.accent
                     : COLORS.TRANSPARENT
                 }
               ]}

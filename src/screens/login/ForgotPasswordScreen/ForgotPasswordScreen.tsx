@@ -37,7 +37,12 @@ export const ForgotPasswordScreen = ({
   }, []);
 
   const sendCode = useCallback(() => {
-    if (!trimmedUsername || posting) {
+    if (posting) {
+      return;
+    }
+    if (!trimmedUsername) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setError('Enter your username');
       return;
     }
 
@@ -77,7 +82,6 @@ export const ForgotPasswordScreen = ({
       footer={
         <Button
           title="Send code"
-          disabled={!trimmedUsername}
           posting={posting}
           onPress={sendCode}
           style={ForgotPasswordScreenStyle.button}

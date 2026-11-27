@@ -52,7 +52,7 @@ export const useChatMoodScreenStyle = createStyles((colors) => ({
     backgroundColor: colors.surface_200
   },
   daySelected: {
-    borderColor: COLORS.BUTTON_BLUE
+    borderColor: colors.accent
   },
   dayEmoji: {
     color: colors.text,

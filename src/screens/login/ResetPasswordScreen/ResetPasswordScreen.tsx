@@ -45,8 +45,6 @@ export const ResetPasswordScreen = ({
   const [passwordError, setPasswordError] = useState<string>();
   const [posting, setPosting] = useState<boolean>(false);
 
-  const canReset = code.length === CODE_LENGTH && !!password;
-
   const onChangeCode = useCallback((value: string) => {
     const digits = value.replace(/\D/g, '').slice(0, CODE_LENGTH);
     setCode(digits);
@@ -63,7 +61,17 @@ export const ResetPasswordScreen = ({
   }, []);
 
   const resetPassword = useCallback(() => {
-    if (!canReset || posting) {
+    if (posting) {
+      return;
+    }
+    if (code.length !== CODE_LENGTH) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setCodeError(`Enter the ${CODE_LENGTH}-digit code`);
+      return;
+    }
+    if (!password) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setPasswordError('Enter a new password');
       return;
     }
 
@@ -94,7 +102,7 @@ export const ResetPasswordScreen = ({
 
       PreloadService.loadUserObject();
     });
-  }, [canReset, code, dispatch, password, posting, username]);
+  }, [code, dispatch, password, posting, username]);
 
   const resend = useCallback(() => {
     start();
@@ -121,7 +129,6 @@ export const ResetPasswordScreen = ({
       footer={
         <Button
           title="Reset password"
-          disabled={!canReset}
           posting={posting}
           onPress={resetPassword}
           style={ResetPasswordScreenStyle.button}

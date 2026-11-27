@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
-export const useChatListStyle = createStyles((colors) => ({
+export const useChatListStyle = createStyles((colors, isDark) => ({
   container: {
     flex: 1
   },
@@ -53,15 +53,16 @@ export const useChatListStyle = createStyles((colors) => ({
     marginVertical: 24,
     paddingHorizontal: 8
   },
+  // White on dark, the purple gets lost on the brown background
   lastReadLine: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
-    backgroundColor: COLORS.PURPLE,
+    backgroundColor: isDark ? COLORS.WHITE : COLORS.PURPLE,
     opacity: 0.5
   },
   lastReadText: {
     fontSize: 12,
     fontWeight: '500',
-    color: COLORS.PURPLE
+    color: isDark ? COLORS.WHITE : COLORS.PURPLE
   }
 }));

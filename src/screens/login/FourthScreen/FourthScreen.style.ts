@@ -1,4 +1,3 @@
-import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
 export const useFourthScreenStyle = createStyles((colors) => ({
@@ -15,6 +14,6 @@ export const useFourthScreenStyle = createStyles((colors) => ({
   },
   privacyPolicyLink: {
     fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
+    color: colors.accent
   }
 }));

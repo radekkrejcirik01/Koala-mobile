@@ -107,7 +107,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             textContentType="password"
             placeholder="Current password"
             placeholderTextColor={theme.theme.colors.placeholder}
-            selectionColor={COLORS.BUTTON_BLUE}
+            selectionColor={theme.theme.colors.accent}
             maxLength={PASSWORD_MAX_LENGTH}
             value={oldPassword}
             onChangeText={setOldPassword}
@@ -122,7 +122,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             textContentType="newPassword"
             placeholder="New password"
             placeholderTextColor={theme.theme.colors.placeholder}
-            selectionColor={COLORS.BUTTON_BLUE}
+            selectionColor={theme.theme.colors.accent}
             maxLength={PASSWORD_MAX_LENGTH}
             value={newPassword}
             onChangeText={setNewPassword}
@@ -136,7 +136,7 @@ export const ChangePasswordScreen = (): JSX.Element => {
             textContentType="newPassword"
             placeholder="Confirm new password"
             placeholderTextColor={theme.theme.colors.placeholder}
-            selectionColor={COLORS.BUTTON_BLUE}
+            selectionColor={theme.theme.colors.accent}
             maxLength={PASSWORD_MAX_LENGTH}
             value={confirmPassword}
             onChangeText={setConfirmPassword}

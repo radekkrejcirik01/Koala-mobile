@@ -1,7 +1,7 @@
 import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
-export const useAuthInputStyle = createStyles((colors) => ({
+export const useAuthInputStyle = createStyles((colors, isDark) => ({
   container: {
     marginTop: 12
   },
@@ -23,7 +23,7 @@ export const useAuthInputStyle = createStyles((colors) => ({
     marginLeft: 10,
     fontSize: 14,
     fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
+    color: colors.accent
   },
   message: {
     marginTop: 10,
@@ -32,7 +32,8 @@ export const useAuthInputStyle = createStyles((colors) => ({
     fontWeight: '500',
     color: colors.textTertiary
   },
+  // White on dark, the red gets lost on the brown background
   errorMessage: {
-    color: COLORS.EMOTION_MISERABLE
+    color: isDark ? COLORS.WHITE : COLORS.EMOTION_MISERABLE
   }
 }));

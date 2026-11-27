@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { createStyles } from '@utils/general/createStyles';
 
-export const useProfileItemStyle = createStyles((colors) => ({
+export const useProfileItemStyle = createStyles((colors, isDark) => ({
   view: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -46,8 +46,9 @@ export const useProfileItemStyle = createStyles((colors) => ({
     fontSize: 15,
     color: colors.textTertiary
   },
+  // Stronger on dark, the white arrow is faint on the brown at 40%
   chevron: {
-    opacity: 0.4,
+    opacity: isDark ? 0.7 : 0.4,
     transform: [{ rotate: '180deg' }]
   }
 }));

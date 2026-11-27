@@ -12,7 +12,7 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { NotificationsService } from '@utils/general/NotificationsService';
 import { MessagingService } from '@utils/general/MessagingService';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
-import { AccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen.style';
+import { useAccountScreenStyle } from '@screens/account/AccountScreen/AccountScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
@@ -24,6 +24,7 @@ export const AccountScreen = (): React.JSX.Element => {
   const { email } = useSelector((state: ReducerProps) => state.user.user);
 
   const dispatch = useDispatch();
+  const AccountScreenStyle = useAccountScreenStyle();
   const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.AccountStack);

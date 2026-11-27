@@ -7,7 +7,6 @@ import { useNavigation } from '@hooks/useNavigation';
 import { putRequest } from '@utils/Axios/Axios.service';
 import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { ChatSettingsPostInterface } from '@interfaces/post/Post.interface';
-import COLORS from '@constants/COLORS';
 import { ChatNicknameScreenProps } from '@screens/account/ChatNicknameScreen/ChatNicknameScreen.props';
 import { useChatNicknameScreenStyle } from '@screens/account/ChatNicknameScreen/ChatNicknameScreen.style';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
@@ -72,7 +71,7 @@ export const ChatNicknameScreen = ({
             autoCapitalize="words"
             placeholder={friend.name}
             placeholderTextColor={theme.theme.colors.placeholder}
-            selectionColor={COLORS.BUTTON_BLUE}
+            selectionColor={theme.theme.colors.accent}
             maxLength={NICKNAME_MAX_LENGTH}
             returnKeyType="done"
             onSubmitEditing={save}

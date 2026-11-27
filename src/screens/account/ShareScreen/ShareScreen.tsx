@@ -26,7 +26,6 @@ import { ResponseInterface } from '@interfaces/response/Response.interface';
 import { EmotionMessagePostInterface } from '@interfaces/post/Post.interface';
 import { EMOTIONS } from '@constants/EMOTIONS';
 import { EmotionType } from '@enums/EmotionType';
-import COLORS from '@constants/COLORS';
 import { EmotionSlider } from '@components/emotions/EmotionSlider/EmotionSlider';
 import { HomeButton } from '@components/home/HomeButton/HomeButton';
 import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
@@ -206,7 +205,7 @@ export const ShareScreen = (): JSX.Element => {
               value={message}
               onChangeText={setMessage}
               onBlur={() => setEditingMessage(false)}
-              selectionColor={COLORS.BUTTON_BLUE}
+              selectionColor={theme.theme.colors.accent}
               style={[ShareScreenStyle.title, ShareScreenStyle.messageInput]}
             />
           ) : (

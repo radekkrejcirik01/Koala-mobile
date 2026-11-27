@@ -30,6 +30,7 @@ import {
 } from '@components/chat/MessageMenu/MessageMenu.style';
 import { MessageMenuIcon } from '@components/chat/MessageMenu/MessageMenuIcon';
 import COLORS from '@constants/COLORS';
+import { useTheme } from '@hooks/useTheme';
 import {
   MessageMenuProps,
   MessageMenuTarget
@@ -57,6 +58,14 @@ export const MessageMenu = ({
   tintColor = COLORS.PURPLE
 }: MessageMenuProps): JSX.Element | null => {
   const MessageMenuStyle = useMessageMenuStyle();
+  const { isDark } = useTheme();
+  // White icons on dark, the theme colors and the red get lost on the brown card
+  const getIconColor = (destructive?: boolean): string => {
+    if (isDark) {
+      return COLORS.WHITE;
+    }
+    return destructive ? DESTRUCTIVE : tintColor;
+  };
   const insets = useSafeAreaInsets();
 
   // A light tint of the chat theme's color, every theme's is a #rrggbb hex
@@ -322,7 +331,7 @@ export const MessageMenu = ({
                 <View style={MessageMenuStyle.actionIcon}>
                   <MessageMenuIcon
                     name={action.icon}
-                    color={action.destructive ? DESTRUCTIVE : tintColor}
+                    color={getIconColor(action.destructive)}
                   />
                 </View>
                 <Text

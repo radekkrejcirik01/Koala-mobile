@@ -1,5 +1,6 @@
 import React, { JSX, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { LoginStackNavigatorEnum } from '@navigation/StackNavigators/login/LoginStackNavigator.enum';
@@ -8,24 +9,31 @@ import { SecondScreenStyle } from '@screens/login/SecondScreen/SecondScreen.styl
 import { Button } from '@components/general/Button/Button';
 import { AuthLayout } from '@components/login/AuthLayout/AuthLayout';
 import { AuthInput } from '@components/login/AuthInput/AuthInput';
+import { removeSpaces } from '@functions/removeSpaces';
 
 export const SecondScreen = (): JSX.Element => {
   const dispatch = useDispatch();
   const { navigateTo } = useNavigation(RootStackNavigatorEnum.LoginStack);
 
   const [name, setName] = useState<string>('');
+  const [error, setError] = useState<string>();
 
-  const trimmedName = name.trim();
+  const onChangeName = useCallback((value: string) => {
+    setName(removeSpaces(value));
+    setError(undefined);
+  }, []);
 
   const onPressNext = useCallback(() => {
-    if (!trimmedName) {
+    if (!name) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setError('Enter your name');
       return;
     }
 
-    dispatch(setNameAction(trimmedName));
+    dispatch(setNameAction(name));
 
     navigateTo(LoginStackNavigatorEnum.ThirdScreen);
-  }, [dispatch, navigateTo, trimmedName]);
+  }, [dispatch, name, navigateTo]);
 
   return (
     <AuthLayout
@@ -35,7 +43,6 @@ export const SecondScreen = (): JSX.Element => {
       footer={
         <Button
           title="Continue"
-          disabled={!trimmedName}
           onPress={onPressNext}
           style={SecondScreenStyle.button}
         />
@@ -49,7 +56,8 @@ export const SecondScreen = (): JSX.Element => {
         autoComplete="name-given"
         returnKeyType="next"
         value={name}
-        onChangeText={setName}
+        error={error}
+        onChangeText={onChangeName}
         onSubmitEditing={onPressNext}
       />
     </AuthLayout>

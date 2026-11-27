@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
+import { createStyles } from '@utils/general/createStyles';
 
-export const AddButtonStyle = StyleSheet.create({
+export const useAddButtonStyle = createStyles((colors) => ({
   text: {
     fontSize: 15,
-    color: COLORS.BUTTON_BLUE,
+    color: colors.accent,
     fontWeight: 'bold'
   }
-});
+}));

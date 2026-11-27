@@ -37,7 +37,6 @@ import {
 } from '@components/chat/MessageItem/MessageItem.style';
 import { EmotionPill } from '@components/chat/EmotionPill/EmotionPill';
 import { EmotionPillLayout } from '@components/chat/EmotionMessageItem/EmotionMessageItem.props';
-import { getReplyText } from '@functions/getReplyText';
 import { shouldShowChatSeparator } from '@functions/shouldShowChatSeparator';
 import { getChatSeparatorTime } from '@functions/getChatSeparatorTime';
 import { isTextEmoji } from '@functions/isTextEmoji';
@@ -168,8 +167,8 @@ export const ChatList = ({
     Toast.show({ type: 'success', text1: 'Copied!' });
   };
 
-  // Everything can be replied to and copied, the friend's emotion supported
-  // and own text messages deleted
+  // Everything can be replied to, text messages copied, the friend's emotion
+  // supported and own text messages deleted
   const getActions = (value: MessageInterface): MessageMenuAction[] => {
     const outbound = isOutbound(value.senderId);
     const isEmotion = value.type === MessageType.Emotion;
@@ -184,11 +183,13 @@ export const ChatList = ({
         onPress: () => onPressSupport(value.id)
       });
     }
-    actions.push({
-      label: 'Copy',
-      icon: 'copy',
-      onPress: () => copy(isEmotion ? getReplyText(value) : value.message)
-    });
+    if (!isEmotion) {
+      actions.push({
+        label: 'Copy',
+        icon: 'copy',
+        onPress: () => copy(value.message)
+      });
+    }
     if (outbound && !isEmotion) {
       actions.push({
         label: 'Delete',

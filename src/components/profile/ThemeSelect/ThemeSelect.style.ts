@@ -42,7 +42,7 @@ export const useThemeSelectStyle = createStyles((colors) => ({
     fontWeight: '500'
   },
   appearanceCheck: {
-    color: COLORS.BUTTON_BLUE,
+    color: colors.accent,
     fontSize: 17,
     fontWeight: '700'
   },

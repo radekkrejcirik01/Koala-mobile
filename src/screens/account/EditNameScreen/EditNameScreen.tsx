@@ -15,6 +15,7 @@ import { Button } from '@components/general/Button/Button';
 import { ProfilePhoto } from '@components/general/ProfilePhoto/ProfilePhoto';
 import { ProfileSection } from '@components/profile/ProfileSection/ProfileSection';
 import COLORS from '@constants/COLORS';
+import { removeSpaces } from '@functions/removeSpaces';
 
 export const EditNameScreen = (): JSX.Element => {
   const EditNameScreenStyle = useEditNameScreenStyle();
@@ -28,6 +29,10 @@ export const EditNameScreen = (): JSX.Element => {
 
   const [name, setName] = useState<string>(firstname);
   const [posting, setPosting] = useState<boolean>(false);
+
+  const onChangeName = useCallback((value: string) => {
+    setName(removeSpaces(value));
+  }, []);
 
   const save = useCallback(() => {
     if (!name) {
@@ -75,11 +80,11 @@ export const EditNameScreen = (): JSX.Element => {
             autoCapitalize="words"
             placeholder="Your name"
             placeholderTextColor={theme.theme.colors.placeholder}
-            selectionColor={COLORS.BUTTON_BLUE}
+            selectionColor={theme.theme.colors.accent}
             returnKeyType="done"
             onSubmitEditing={save}
             value={name}
-            onChangeText={setName}
+            onChangeText={onChangeName}
             style={[
               EditNameScreenStyle.input,
               { color: theme.theme.colors.text }

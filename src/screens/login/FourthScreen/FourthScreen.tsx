@@ -39,7 +39,12 @@ export const FourthScreen = (): JSX.Element => {
   }, []);
 
   const createAccount = useCallback(() => {
-    if (!password || posting) {
+    if (posting) {
+      return;
+    }
+    if (!password) {
+      trigger(HapticFeedbackTypes.notificationError);
+      setError('Enter a password');
       return;
     }
 
@@ -97,7 +102,6 @@ export const FourthScreen = (): JSX.Element => {
           </Text>
           <Button
             title="Create account"
-            disabled={!password}
             posting={posting}
             onPress={createAccount}
             style={FourthScreenStyle.button}

@@ -1,4 +1,3 @@
-import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
 export const useLoginScreenStyle = createStyles((colors) => ({
@@ -14,7 +13,7 @@ export const useLoginScreenStyle = createStyles((colors) => ({
   forgotPasswordText: {
     fontSize: 14,
     fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
+    color: colors.accent
   },
   signUpText: {
     marginTop: 16,
@@ -25,6 +24,6 @@ export const useLoginScreenStyle = createStyles((colors) => ({
   },
   signUpLink: {
     fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
+    color: colors.accent
   }
 }));

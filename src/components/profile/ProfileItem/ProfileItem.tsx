@@ -19,6 +19,10 @@ export const ProfileItem = ({
 }: ProfileItemProps): JSX.Element => {
   const ProfileItemStyle = useProfileItemStyle();
   const theme = useTheme();
+  // White on dark, the red disappears on the brown card
+  const destructiveColor = theme.isDark
+    ? COLORS.WHITE
+    : COLORS.NOTIFICATION_DOT;
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -46,9 +50,7 @@ export const ProfileItem = ({
           style={[
             ProfileItemStyle.title,
             {
-              color: destructive
-                ? COLORS.NOTIFICATION_DOT
-                : theme.theme.colors.text
+              color: destructive ? destructiveColor : theme.theme.colors.text
             }
           ]}
         >
@@ -63,6 +65,8 @@ export const ProfileItem = ({
           <Icon
             name={IconEnum.BACK}
             size={14}
+            // The grey arrow looks muddy on the brown background
+            color={theme.isDark ? COLORS.WHITE : undefined}
             style={ProfileItemStyle.chevron}
           />
         )}

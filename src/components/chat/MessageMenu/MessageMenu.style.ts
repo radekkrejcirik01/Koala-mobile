@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
-// The iOS system red, for Delete
+// The iOS system red, for Delete. White on dark, the red disappears on the
+// brown card
 export const DESTRUCTIVE = '#ff3b30';
 
 // A soft wide shadow, the cards float over the light dim
@@ -14,7 +15,7 @@ const CARD_SHADOW = {
   elevation: 10
 };
 
-export const useMessageMenuStyle = createStyles((colors) => ({
+export const useMessageMenuStyle = createStyles((colors, isDark) => ({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
@@ -84,7 +85,7 @@ export const useMessageMenuStyle = createStyles((colors) => ({
     color: colors.text
   },
   destructiveText: {
-    color: DESTRUCTIVE
+    color: isDark ? COLORS.WHITE : DESTRUCTIVE
   },
   // A caption under the card, readable on the dim over a light chat
   time: {

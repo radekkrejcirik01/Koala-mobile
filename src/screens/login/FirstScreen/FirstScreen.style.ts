@@ -1,6 +1,7 @@
+import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
-export const useFirstScreenStyle = createStyles((colors) => ({
+export const useFirstScreenStyle = createStyles((colors, isDark) => ({
   background: {
     flex: 1,
     backgroundColor: colors.background
@@ -27,6 +28,7 @@ export const useFirstScreenStyle = createStyles((colors) => ({
     lineHeight: 22,
     fontWeight: '500',
     textAlign: 'center',
-    color: colors.textTertiary
+    // White on dark, the beige-grey looks dull on the brown background
+    color: isDark ? COLORS.WHITE : colors.textTertiary
   }
 }));

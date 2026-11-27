@@ -1,4 +1,3 @@
-import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
 export const useForgotPasswordScreenStyle = createStyles((colors) => ({
@@ -12,7 +11,7 @@ export const useForgotPasswordScreenStyle = createStyles((colors) => ({
   },
   supportLink: {
     fontWeight: '600',
-    color: COLORS.BUTTON_BLUE
+    color: colors.accent
   },
   button: {
     height: 54,

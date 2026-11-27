@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
 export const useChatSearchScreenStyle = createStyles((colors) => ({
@@ -57,7 +56,7 @@ export const useChatSearchScreenStyle = createStyles((colors) => ({
   },
   matchText: {
     fontWeight: '700',
-    color: COLORS.BUTTON_BLUE
+    color: colors.accent
   },
   loader: {
     marginLeft: 10
