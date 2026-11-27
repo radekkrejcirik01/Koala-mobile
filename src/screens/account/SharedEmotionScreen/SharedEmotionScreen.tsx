@@ -54,6 +54,19 @@ export const SharedEmotionScreen = ({
         <Text style={SharedEmotionScreenStyle.timeText}>
           {moment.unix(item.time).format('ddd D. M. YYYY · HH:mm')}
         </Text>
+        {!!item.note && (
+          <>
+            <Text style={SharedEmotionScreenStyle.sectionTitle}>Message</Text>
+            <Text
+              style={[
+                SharedEmotionScreenStyle.noteText,
+                { color: colors.text }
+              ]}
+            >
+              {item.note}
+            </Text>
+          </>
+        )}
         <Text style={SharedEmotionScreenStyle.sectionTitle}>Sent to</Text>
         {recipients.length ? (
           recipients.map((recipient: UserInterface) => (

@@ -41,6 +41,11 @@ export const useSharedEmotionScreenStyle = createStyles((colors) => ({
     fontWeight: '600',
     color: colors.textSecondary
   },
+  noteText: {
+    color: colors.text,
+    fontSize: 16,
+    lineHeight: 22
+  },
   recipientView: {
     flexDirection: 'row',
     alignItems: 'center',

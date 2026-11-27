@@ -32,7 +32,8 @@ import { ScreenHeader } from '@components/general/ScreenHeader/ScreenHeader';
 import { AccountStackNavigatorEnum } from '@navigation/StackNavigators/account/AccountStackNavigator.enum';
 import { useShareScreenStyle } from '@screens/account/ShareScreen/ShareScreen.style';
 
-const MESSAGE_MAX_LENGTH = 128;
+// The backend's limit for a note
+const NOTE_MAX_LENGTH = 512;
 const LOGGING_MIN_DURATION = 800;
 const DEFAULT_POSITION = EMOTIONS.findIndex(
   (item) => item.type === EmotionType.Good
@@ -59,10 +60,8 @@ export const ShareScreen = (): JSX.Element => {
   const [centerPosition, setCenterPosition] =
     useState<number>(getStartPosition);
   // What was written before leaving the screen, until it's saved or sent
-  const [message, setMessage] = useState<string>(() =>
-    DraftCache.get(SHARE_DRAFT)
-  );
-  const [editingMessage, setEditingMessage] = useState<boolean>(false);
+  const [note, setNote] = useState<string>(() => DraftCache.get(SHARE_DRAFT));
+  const [editingNote, setEditingNote] = useState<boolean>(false);
   const [showSwipeHint, setShowSwipeHint] = useState<boolean>(false);
 
   // Shows how to pick an emotion until the user swipes once or closes the
@@ -91,8 +90,8 @@ export const ShareScreen = (): JSX.Element => {
   }, [showSwipeHint]);
 
   useEffect(() => {
-    DraftCache.set(SHARE_DRAFT, message);
-  }, [message]);
+    DraftCache.set(SHARE_DRAFT, note);
+  }, [note]);
 
   useEffect(() => {
     DraftCache.set(SHARE_EMOTION_DRAFT, EMOTIONS[centerPosition].type);
@@ -105,7 +104,9 @@ export const ShareScreen = (): JSX.Element => {
   }, [showSwipeHint]);
 
   const selectedConfig = EMOTIONS[centerPosition];
-  const trimmedMessage = message.trim();
+  const trimmedNote = note.trim();
+  // The input stays while there's a note, the button comes back when it's empty
+  const showNote = editingNote || !!trimmedNote;
 
   // Moves through the emotions, stopping at both ends
   const onEmotionChange = useCallback((step: number) => {
@@ -116,9 +117,9 @@ export const ShareScreen = (): JSX.Element => {
   const onNext = useCallback(() => {
     navigateTo(AccountStackNavigatorEnum.ShareSendScreen, {
       emotion: selectedConfig.type,
-      message: trimmedMessage || undefined
+      note: trimmedNote || undefined
     });
-  }, [navigateTo, selectedConfig.type, trimmedMessage]);
+  }, [navigateTo, selectedConfig.type, trimmedNote]);
 
   // Saves the emotion only to the user's own history, without sharing it
   const onLogOnly = useCallback(() => {
@@ -133,8 +134,9 @@ export const ShareScreen = (): JSX.Element => {
       'chats/emotion',
       {
         ids: [],
-        message: trimmedMessage || selectedConfig.message,
-        emotion: selectedConfig.type
+        message: selectedConfig.message,
+        emotion: selectedConfig.type,
+        note: trimmedNote || undefined
       }
     ).subscribe((response: ResponseInterface) => {
       // Keeps Saving... and then Done! on screen for a moment each, so
@@ -160,7 +162,7 @@ export const ShareScreen = (): JSX.Element => {
     sent,
     setSending,
     setSent,
-    trimmedMessage
+    trimmedNote
   ]);
 
   return (
@@ -176,7 +178,7 @@ export const ShareScreen = (): JSX.Element => {
       ]}
     >
       <ScreenHeader title="How are we feeling?" />
-      {/* Tapping anywhere outside the message closes the keyboard */}
+      {/* Tapping anywhere outside the note closes the keyboard */}
       <Pressable
         accessible={false}
         onPress={Keyboard.dismiss}
@@ -193,44 +195,33 @@ export const ShareScreen = (): JSX.Element => {
           <Text style={ShareScreenStyle.selectedEmoji}>
             {selectedConfig.type}
           </Text>
-          {editingMessage ? (
+          <Text style={ShareScreenStyle.title}>{selectedConfig.message}</Text>
+          {/* The button turns into the note input, focused right away */}
+          {showNote ? (
             <TextInput
-              autoFocus
+              autoFocus={editingNote}
               multiline
               submitBehavior="blurAndSubmit"
               returnKeyType="done"
-              maxLength={MESSAGE_MAX_LENGTH}
-              placeholder={selectedConfig.message}
+              maxLength={NOTE_MAX_LENGTH}
+              placeholder="Add a note"
               placeholderTextColor={theme.theme.colors.placeholder}
-              value={message}
-              onChangeText={setMessage}
-              onBlur={() => setEditingMessage(false)}
+              value={note}
+              onChangeText={setNote}
+              onFocus={() => setEditingNote(true)}
+              onBlur={() => setEditingNote(false)}
               selectionColor={theme.theme.colors.accent}
-              style={[ShareScreenStyle.title, ShareScreenStyle.messageInput]}
+              style={ShareScreenStyle.noteInput}
             />
           ) : (
-            // Pressing the text opens the message for editing
-            <Pressable hitSlop={15} onPress={() => setEditingMessage(true)}>
-              <Text style={ShareScreenStyle.title}>
-                {trimmedMessage || selectedConfig.message}
-              </Text>
+            <Pressable
+              hitSlop={20}
+              onPress={() => setEditingNote(true)}
+              style={ShareScreenStyle.addMessageButton}
+            >
+              <Text style={ShareScreenStyle.addMessageText}>Add message</Text>
             </Pressable>
           )}
-          {/* Hidden while typing, it keeps its room so the emotion doesn't
-              move */}
-          <Pressable
-            hitSlop={20}
-            disabled={editingMessage}
-            onPress={() => setEditingMessage(true)}
-            style={[
-              ShareScreenStyle.addMessageButton,
-              editingMessage && ShareScreenStyle.addMessageHidden
-            ]}
-          >
-            <Text style={ShareScreenStyle.addMessageText}>
-              {trimmedMessage ? 'Edit message' : 'Add message'}
-            </Text>
-          </Pressable>
         </EmotionSlider>
       </Pressable>
       <View style={ShareScreenStyle.nextButtonView}>

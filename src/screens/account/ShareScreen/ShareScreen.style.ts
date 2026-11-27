@@ -1,6 +1,7 @@
+import COLORS from '@constants/COLORS';
 import { createStyles } from '@utils/general/createStyles';
 
-export const useShareScreenStyle = createStyles((colors) => ({
+export const useShareScreenStyle = createStyles((colors, isDark) => ({
   container: {
     flex: 1
   },
@@ -25,15 +26,11 @@ export const useShareScreenStyle = createStyles((colors) => ({
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
-    color: colors.textTertiary
-  },
-  messageInput: {
-    alignSelf: 'stretch',
-    paddingTop: 0,
-    paddingBottom: 0
+    // White on dark, the beige-grey looks dull on the brown background
+    color: isDark ? COLORS.WHITE : colors.textTertiary
   },
   // Halfway between the emotion's message and the row of emotions under it,
-  // opens the message for editing
+  // turns into the note input
   addMessageButton: {
     marginTop: 52,
     // Takes back the room above, so the emotion and the row stay where they
@@ -45,8 +42,20 @@ export const useShareScreenStyle = createStyles((colors) => ({
     fontWeight: '700',
     color: colors.accent
   },
-  addMessageHidden: {
-    opacity: 0
+  // In the button's place, a field like the other inputs. Takes back the room
+  // above like the button, so the emotion moves as little as possible
+  noteInput: {
+    alignSelf: 'stretch',
+    maxHeight: 110,
+    marginTop: 24,
+    marginBottom: -36,
+    paddingTop: 11,
+    paddingBottom: 11,
+    paddingHorizontal: 14,
+    borderRadius: 12,
+    fontSize: 16,
+    color: colors.text,
+    backgroundColor: colors.surface
   },
   nextButtonView: {
     flexDirection: 'row',

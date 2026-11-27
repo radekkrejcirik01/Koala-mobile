@@ -64,6 +64,8 @@ export interface SharedEmotionInterface {
   id: number;
   emotion?: string;
   message: string;
+  // What the user wrote with it, left out when there's none
+  note?: string;
   time: number;
   // Empty for emotions shared before recipients were recorded
   recipients?: UserInterface[];

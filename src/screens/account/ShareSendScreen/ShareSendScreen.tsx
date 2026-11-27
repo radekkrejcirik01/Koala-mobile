@@ -29,7 +29,7 @@ export const ShareSendScreen = ({
   route
 }: ShareSendScreenProps): JSX.Element => {
   const ShareSendScreenStyle = useShareSendScreenStyle();
-  const { emotion, message } = route.params;
+  const { emotion, note } = route.params;
 
   const { top, bottom } = useSafeAreaInsets();
   const theme = useTheme();
@@ -70,8 +70,9 @@ export const ShareSendScreen = ({
       'chats/emotion',
       {
         ids: selected,
-        message: message ?? config?.message,
-        emotion
+        message: config?.message,
+        emotion,
+        note
       }
     ).subscribe((response: ResponseInterface) => {
       if (response?.status === 'success') {
@@ -88,7 +89,7 @@ export const ShareSendScreen = ({
       setSending(false);
       Alert.alert('Failed to send. Please try again.');
     });
-  }, [config, dismiss, emotion, message, sending, setSending, setSent]);
+  }, [config, dismiss, emotion, note, sending, setSending, setSent]);
 
   return (
     <View

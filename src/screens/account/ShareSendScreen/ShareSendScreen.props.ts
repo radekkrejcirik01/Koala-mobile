@@ -6,7 +6,7 @@ export interface ShareSendScreenProps {
     {
       params: {
         emotion: EmotionType;
-        message?: string;
+        note?: string;
       };
     },
     'params'

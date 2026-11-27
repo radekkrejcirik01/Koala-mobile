@@ -57,6 +57,8 @@ export interface EmotionMessagePostInterface {
   ids: number[];
   message: string;
   emotion: EmotionType;
+  // The user's own words with the emotion, arrives as a message after it
+  note?: string;
 }
 
 export interface MessagePostInterface {

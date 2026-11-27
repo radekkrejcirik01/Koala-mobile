@@ -59,7 +59,7 @@ export const DraftCache: DraftCacheSingleton = new DraftCacheSingleton();
 // The message in the chat with one friend
 export const chatDraft = (friendId: number): string => `chat:${friendId}`;
 
-// The message on the Share screen
+// The note on the Share screen
 export const SHARE_DRAFT = 'share';
 
 // The emotion picked on the Share screen, its type
